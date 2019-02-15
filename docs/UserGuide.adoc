@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/cs2103-ay1819s2-w15-2/main
 
-By: `CS2103-AY1819S2-W15-2`      Since: `Feb 2019`      
+By: `CS2103-AY1819S2-W15-2`      Since: `Feb 2019`   
 
 == Introduction
 
