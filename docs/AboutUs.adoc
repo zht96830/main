@@ -30,7 +30,7 @@ Responsibilities: History Control
 '''
 
 === Goh Yin Hao
-image::YinHao.jpg[width="150", align="left"]
+image::YinHao.JPG[width="150", align="left"]
 {empty}[http://github.com/gohyinhao[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
