@@ -14,11 +14,11 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/cs2103-ay1819s2-w15-2/main
 
-By: `CS2103-AY1819S2-W15-2`      Since: `Feb 2019`      Licence: `MIT`
+By: `CS2103-AY1819S2-W15-2`      Since: `Feb 2019`      
 
 == Introduction
 
-Personal Finance Tracker is for those who *prefer to use a desktop app for expense tracking*. More importantly, Personal Finance Tracker is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). Whether if you are an expert user or a non tech savvy user, we have commands that cater towards you guys! 
+Personal Finance Tracker is for those who *prefer to use a desktop app for expense tracking*. More importantly, Personal Finance Tracker is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). Whether if you are an expert user or a non tech savvy user, we have commands that cater towards you guys!
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
