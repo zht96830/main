@@ -4,4 +4,4 @@
 
 * *Bug reports, Suggestions* : Post in our https://github.com/cs2103-ay1819s2-w15-2/main/issues[issue tracker] if you noticed bugs or have suggestions on how to improve.
 * *Contributing* : We welcome pull requests. Follow the process described https://github.com/oss-generic/process[here]
-* *Email us* : You can also reach us at `james187@comp.nus.edu.sg`
+* *Email us* : You can also reach us at James - `james187@comp.nus.edu.sg`, Johnson - `jhocx@u.nus.edu`, Jia Hui - `e0035327@u.nus.edu`, Yin Hao - `e0031304@u.nus.edu` or Zhi Hui - `e0200891@u.nus.edu`.
