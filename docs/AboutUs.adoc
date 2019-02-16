@@ -13,16 +13,16 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === James Pang
 image::JamesPang.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/jamessspanggg[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/jamessspanggg[github]]
 
-Role: Team Lead 4+
+Role: Team Lead +
 Responsibilities: List View of expenses
 
 '''
 
 === Johnson Ho
 image::Johnson Photo.jpg[width="150", align="left"]
-{empty}[http://github.com/jhocx[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/jhocx[github]]
 
 Role: Developer +
 Responsibilities: History Control
@@ -31,7 +31,7 @@ Responsibilities: History Control
 
 === Goh Yin Hao
 image::YinHao.jpg[width="150", align="left"]
-{empty}[http://github.com/gohyinhao[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/gohyinhao[github]]
 
 Role: Developer +
 Responsibilities: Debt Control
@@ -40,7 +40,7 @@ Responsibilities: Debt Control
 
 === Lim Jiahui
 image::Jiahui.jpg[width="150", align="left"]
-{empty}[http://github.com/lim-jiahui[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/lim-jiahui[github]]
 
 Role: Developer +
 Responsibilities: Budget Control
@@ -49,7 +49,7 @@ Responsibilities: Budget Control
 
 === Teoh Zhi Hui
 image::ZhiHui.jpg[width="150", align="left"]
-{empty}[http://github.com/zht96830[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/zht96830[github]]
 
 Role: Developer +
 Responsibilities: Expense Statistics
