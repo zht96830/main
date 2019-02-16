@@ -38,8 +38,8 @@ Responsibilities: Debt Control
 
 '''
 
-=== Lim Jia Hui
-image::m133225.jpg[width="150", align="left"]
+=== Lim Jiahui
+image::Jiahui.jpg[width="150", align="left"]
 {empty}[http://github.com/lim-jiahui[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
