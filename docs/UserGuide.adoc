@@ -81,11 +81,11 @@ You can omit the (optional) parameters by leaving it empty.
 
 Examples:
 
-* `add`
-  `Please enter the name of the expense: BKT`
-  `Please enter the cost of the expense: 3.00`
-  `Please enter the category of the expense: food`
-  `Please enter the date of the expense (optional):`
+* `add` +
+  `Please enter the name of the expense: BKT` +
+  `Please enter the cost of the expense: 3.00` +
+  `Please enter the category of the expense: food`+
+  `Please enter the date of the expense (optional):`+
   `Please enter the explanation of the expense (optional):`
 
 === Listing expenses : `list`
@@ -123,11 +123,11 @@ Format 2: `edit INDEX`
 You can omit the (optional) parameters by leaving it empty. If all parameters are empty, no edits will occur.
 
 Examples:
-* `edit 9`
-  `Please enter the name of the expense to be updated (optional):`
-  `Please enter the cost of the expense to be updated (optional): 450`
-  `Please enter the category of the expense to be updated (optional): food`
-  `Please enter the date of the expense to be updated (optional):`
+* `edit 9` +
+  `Please enter the name of the expense to be updated (optional):` +
+  `Please enter the cost of the expense to be updated (optional): 450` +
+  `Please enter the category of the expense to be updated (optional): food` +
+  `Please enter the date of the expense to be updated (optional):` +
   `Please enter the explanation of the expense to be updated (optional):`
 
 
