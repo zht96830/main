@@ -84,8 +84,8 @@ Examples:
 * `add` +
   `Please enter the name of the expense: BKT` +
   `Please enter the cost of the expense: 3.00` +
-  `Please enter the category of the expense: food`+
-  `Please enter the date of the expense (optional):`+
+  `Please enter the category of the expense: food` +
+  `Please enter the date of the expense (optional):` +
   `Please enter the explanation of the expense (optional):`
 
 === Listing expenses : `list`
