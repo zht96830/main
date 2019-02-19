@@ -98,7 +98,7 @@ Format: `list v/VIEW`
 ====
 * The VIEW specifies how the list of expenses are displayed.
 ** v/all: displays entire list of expenses
-** v/day: displays list of expenses added since last month
+** v/day: displays list of expenses added since the day started
 ** v/month: displays list of expenses added since last month
 ** v/year: displays list of expenses added since last year
 ** v/CATEGORY: displays list of expenses with CATEGORY
@@ -338,8 +338,7 @@ Examples:
 
 [NOTE]
 ====
-* If all parameters are empty, stats defaults to showing the result of :
-* stat c/cat vr/pie
+* If all parameters are empty, stats defaults to showing the result of "stat c/cat vr/pie"
 * If MODE is not “cat”, display “User may choose a category with c/<category>” msg
 * If category is selected in MODE, CATEGORY field will be unavailable
 * If START_DATE is empty but END_DATE is specified, statistics will be calculated from the one month before END_DATE
@@ -384,7 +383,7 @@ If VISUAL_REPRESENTATION field is left empty, vr options will be displayed
 
 === Listing entered commands : `history`
 
-Lists all the commands that you have entered in reverse chronological order. +
+Lists all the commands that you have entered, along with its index, in reverse chronological order. +
 Format: `history`
 
 [NOTE]
@@ -400,7 +399,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
 ====
 
 Examples:
@@ -418,6 +417,58 @@ The `undo` command fails as there are no undoable commands executed previously.
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
+
+=== Undoing multiple previous commands : `undoM`
+Restores the address book to the state before multiple previous _undoable_ commands were executed. +
+Format: 'undo' NUMBER
+
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
+====
+
+Examples:
+
+* `delete 1` +
+`list` +
+`undoM 5` (reverses the `delete 1` command) +
+
+* `select 1` +
+`list` +
+`undoM 2` +
+The `undoM` command fails as there are no undoable commands executed previously.
+
+* `delete 1` +
+`list` +
+`clear` +
+`undoM 10` (reverses the `clear` command and reverses the `delete 1` command) +
+
+=== Undoing specific previous command : `undoS`
+Restores the address book to the state before a specific _undoable_ command was executed. +
+Format: 'undo' INDEX
+
+[NOTE]
+====
+* Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
+* Index of commands can be viewed using `history`.
+====
+
+Examples:
+
+* `delete 1`             (index 1) +
+`delete 2`               (index 2) +
+`undoS 1` (reverses the `delete 1` command) +
+
+* `select 1`             (index 1) +
+`list`                   (index 2) +
+`undoS 2` +
+The `undoS` command fails as `list` is not an undoable command.
+
+* `delete 1`             (index 1) +
+`list`                   (index 2) +
+`clear`                  (index 3) +
+`undoS 4` +
+The `undoS` command fails as there is no command with INDEX 4.
 
 === Redoing the previously undone command : `redo`
 
@@ -479,6 +530,8 @@ e.g. `edit 2 n/Bak Kut Teh`
 * *Help* : `help`
 * *History* : `history`
 * *Undo* : `undo`
+* *Undo Multiple* : `undoM NUMBER`
+* *Undo Specific* : `undoS INDEX`
 * *Redo* : `redo`
 * *Add a budget* : `addBudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE` +
 e.g. `addBudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
