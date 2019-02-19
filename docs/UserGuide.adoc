@@ -208,7 +208,7 @@ Deletes a budget from the finance tracker.
 
 Format: `deleteBudget c/CATEGORY`
 
-Examples: 
+Examples:
 
 * `deleteBudget c/food`
 
