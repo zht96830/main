@@ -331,10 +331,10 @@ Format:
 Examples:
 
 * `stats`
-* `stats c/cat`
-* `stats c/cat vr/pie`
-* `stats c/day sd/12-02-2018`
-* `stats c/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
+* `stats m/cat`
+* `stats m/cat vr/pie`
+* `stats m/day sd/12-02-2018`
+* `stats m/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
 
 [NOTE]
 ====
