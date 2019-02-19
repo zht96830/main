@@ -98,9 +98,9 @@ Format: `list v/VIEW`
 ====
 * The VIEW specifies how the list of expenses are displayed.
 ** v/all: displays entire list of expenses
-** v/day: displays list of expenses added since the day started
-** v/month: displays list of expenses added since last month
-** v/year: displays list of expenses added since last year
+** v/day: displays list of expenses added since a day ago
+** v/month: displays list of expenses added since a month ago
+** v/year: displays list of expenses added since a year ago
 ** v/CATEGORY: displays list of expenses with CATEGORY
 ====
 
@@ -394,12 +394,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the finance tracker to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
+Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
 ====
 
 Examples:
@@ -419,12 +419,12 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `delete 1` command) +
 
 === Undoing multiple previous commands : `undoM`
-Restores the address book to the state before multiple previous _undoable_ commands were executed. +
+Restores the finance tracker to the state before multiple previous _undoable_ commands were executed. +
 Format: 'undo' NUMBER
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
+Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
 ====
 
 Examples:
@@ -444,12 +444,12 @@ The `undoM` command fails as there are no undoable commands executed previously.
 `undoM 10` (reverses the `clear` command and reverses the `delete 1` command) +
 
 === Undoing specific previous command : `undoS`
-Restores the address book to the state before a specific _undoable_ command was executed. +
+Restores the finance tracker to the state before a specific _undoable_ command was executed. +
 Format: 'undo' INDEX
 
 [NOTE]
 ====
-* Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
+* Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
 * Index of commands can be viewed using `history`.
 ====
 
@@ -495,7 +495,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the finance tracker. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -505,17 +505,17 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Finance tracker data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 === Email reminders `[coming in v2.0]`
 
-_{Sends an email if the expenses exceed the budget or when debts are due.}_
+_{Sends an email if the expenses are about to exceed the budget or when debts are due.}_
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Financial Tracker folder.
 
 == Command Summary
 
