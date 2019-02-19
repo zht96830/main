@@ -4,53 +4,53 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
-{empty} +
+Personal Finance Tracker was developed by the https://github.com/orgs/cs2103-ay1819s2-w15-2/teams/developers team. +
+
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
-
-Role: Project Advisor
-
-'''
-
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+=== James Pang
+image::JamesPang.jpg[width="150", align="left"]
+{empty}[https://github.com/jamessspanggg[github]]
 
 Role: Team Lead +
-Responsibilities: UI
+Responsibilities: List View of expenses
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Johnson Ho
+image::Johnson Photo.jpg[width="150", align="left"]
+{empty}[http://github.com/jhocx[github]]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: History Control
 
 '''
 
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Goh Yin Hao
+image::YinHao.jpg[width="150", align="left"]
+{empty}[http://github.com/gohyinhao[github]]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
+Responsibilities: Debt Control
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Lim Jiahui
+image::Jiahui.jpg[width="150", align="left"]
+{empty}[http://github.com/lim-jiahui[github]]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: Budget Control
+
+'''
+
+=== Teoh Zhi Hui
+image::ZhiHui.jpg[width="150", align="left"]
+{empty}[http://github.com/zht96830[github]]
+
+Role: Developer +
+Responsibilities: Expense Statistics
 
 '''
