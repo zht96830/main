@@ -98,9 +98,9 @@ Format: `list v/VIEW`
 ====
 * The VIEW specifies how the list of expenses are displayed.
 ** v/all: displays entire list of expenses
-** v/day: displays list of expenses added since last month
-** v/month: displays list of expenses added since last month
-** v/year: displays list of expenses added since last year
+** v/day: displays list of expenses added since a day ago
+** v/month: displays list of expenses added since a month ago
+** v/year: displays list of expenses added since a year ago
 ** v/CATEGORY: displays list of expenses with CATEGORY
 ====
 
@@ -331,15 +331,14 @@ Format:
 Examples:
 
 * `stats`
-* `stats c/cat`
-* `stats c/cat vr/pie`
-* `stats c/day sd/12-02-2018`
-* `stats c/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
+* `stats m/cat`
+* `stats m/cat vr/pie`
+* `stats m/day sd/12-02-2018`
+* `stats m/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
 
 [NOTE]
 ====
-* If all parameters are empty, stats defaults to showing the result of :
-* stat c/cat vr/pie
+* If all parameters are empty, stats defaults to showing the result of "stats c/cat vr/pie"
 * If MODE is not “cat”, display “User may choose a category with c/<category>” msg
 * If category is selected in MODE, CATEGORY field will be unavailable
 * If START_DATE is empty but END_DATE is specified, statistics will be calculated from the one month before END_DATE
@@ -369,7 +368,7 @@ If VISUAL_REPRESENTATION field is left empty, vr options will be displayed.
 === Viewing Macro Statistics Compare: `stats_mc`
 Produces statistics regarding the database for 2 or more time periods
 
-Format: `stats_mt d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
+Format: `stats_mc d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
 
 Examples:
 
@@ -384,7 +383,7 @@ If VISUAL_REPRESENTATION field is left empty, vr options will be displayed
 
 === Listing entered commands : `history`
 
-Lists all the commands that you have entered in reverse chronological order. +
+Lists all the commands that you have entered, along with its index, in reverse chronological order. +
 Format: `history`
 
 [NOTE]
@@ -395,12 +394,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the finance tracker to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
 ====
 
 Examples:
@@ -418,6 +417,58 @@ The `undo` command fails as there are no undoable commands executed previously.
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
+
+=== Undoing multiple previous commands : `undoM`
+Restores the finance tracker to the state before multiple previous _undoable_ commands were executed. +
+Format: 'undo' NUMBER
+
+[NOTE]
+====
+Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
+====
+
+Examples:
+
+* `delete 1` +
+`list` +
+`undoM 5` (reverses the `delete 1` command) +
+
+* `select 1` +
+`list` +
+`undoM 2` +
+The `undoM` command fails as there are no undoable commands executed previously.
+
+* `delete 1` +
+`list` +
+`clear` +
+`undoM 10` (reverses the `clear` command and reverses the `delete 1` command) +
+
+=== Undoing specific previous command : `undoS`
+Restores the finance tracker to the state before a specific _undoable_ command was executed. +
+Format: 'undo' INDEX
+
+[NOTE]
+====
+* Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
+* Index of commands can be viewed using `history`.
+====
+
+Examples:
+
+* `delete 1`             (index 1) +
+`delete 2`               (index 2) +
+`undoS 1` (reverses the `delete 1` command) +
+
+* `select 1`             (index 1) +
+`list`                   (index 2) +
+`undoS 2` +
+The `undoS` command fails as `list` is not an undoable command.
+
+* `delete 1`             (index 1) +
+`list`                   (index 2) +
+`clear`                  (index 3) +
+`undoS 4` +
+The `undoS` command fails as there is no command with INDEX 4.
 
 === Redoing the previously undone command : `redo`
 
@@ -444,7 +495,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the finance tracker. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -454,17 +505,17 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Finance tracker data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 === Email reminders `[coming in v2.0]`
 
-_{Sends an email if the expenses exceed the budget or when debts are due.}_
+_{Sends an email if the expenses are about to exceed the budget or when debts are due.}_
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Financial Tracker folder.
 
 == Command Summary
 
@@ -479,6 +530,8 @@ e.g. `edit 2 n/Bak Kut Teh`
 * *Help* : `help`
 * *History* : `history`
 * *Undo* : `undo`
+* *Undo Multiple* : `undoM NUMBER`
+* *Undo Specific* : `undoS INDEX`
 * *Redo* : `redo`
 * *Add a budget* : `addBudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE` +
 e.g. `addBudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
