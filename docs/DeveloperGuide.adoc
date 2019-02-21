@@ -865,7 +865,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |efficient user |be able to view my command history |easily input a repeated command when needed
 
-|`* * *` |user |undo and redo my actions | 
+|`* * *` |user |undo and redo my actions |
 
 |`* * *` |user |clear all entries |start with an empty finance tracker again when needed
 
