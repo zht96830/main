@@ -57,6 +57,21 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
+=== Listing expenses : `list`
+
+Shows a list of expenses in the finance tracker according to the view specified. +
+Format: `list v/VIEW`
+
+[NOTE]
+====
+* The VIEW specifies how the list of expenses are displayed.
+** v/all: displays entire list of expenses
+** v/day: displays list of expenses added since a day ago
+** v/month: displays list of expenses added since a month ago
+** v/year: displays list of expenses added since a year ago
+** v/CATEGORY: displays list of expenses with CATEGORY
+====
+
 === Adding an expense: `add`
 
 Adds an expense to the finance tracker. +
@@ -72,13 +87,13 @@ Format 1: `add n/NAME $/COST c/CATEGORY [d/DATE] [e/EXPLANATION]`
 
 Examples:
 
-* `add n/BKT $/3.00 c/food d/13-01-1996 e/My weekly bak kut teh intake`
+* `add n/BKT $/3.00 c/food d/13-01-1996 e/My weekly bak kut teh intake.`
 * `add n/Sofa $/200 c/HOME`
 
 Format 2: `add`
 
 [TIP]
-You can omit the (optional) parameters by leaving it empty.
+You can omit (optional) parameters by leaving them empty.
 
 Examples:
 
@@ -88,21 +103,6 @@ Examples:
   `Please enter the category of the expense: food` +
   `Please enter the date of the expense (optional):` +
   `Please enter the explanation of the expense (optional):`
-
-=== Listing expenses : `list`
-
-Shows a list of expenses in the finance tracker according to the view specified. +
-Format: `list v/VIEW`
-
-[NOTE]
-====
-* The VIEW specifies how the list of expenses are displayed.
-** v/all: displays entire list of expenses
-** v/day: displays list of expenses added since a day ago
-** v/month: displays list of expenses added since a month ago
-** v/year: displays list of expenses added since a year ago
-** v/CATEGORY: displays list of expenses with CATEGORY
-====
 
 === Editing an expense : `edit`
 
@@ -124,7 +124,7 @@ Edits the cost and category of the 9th expense to be `450` and `food` respective
 Format 2: `edit INDEX`
 
 [TIP]
-You can omit the (optional) parameters by leaving it empty. If all parameters are empty, no edits will occur.
+You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
 
 Examples:
 `edit 9` +
@@ -153,75 +153,75 @@ Examples:
 `delete 2` +
 Deletes the 2nd expense in the finance tracker.
 
-=== Add a budget : `addBudget`
+=== Adding a budget : `addbudget`
 
 Adds a budget with a time frame to the tracker. +
-Format 1: `addBudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE`
+Format 1: `addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE`
 
 [NOTE]
 ====
 * The categories include: “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”,
 “entertainment” and “others” which are case insensitive.
-* Note that the program only limits one budget for each category.
+* The program only limits one budget for each category.
 ====
 
 Examples:
 
-* `addBudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
-* `addBudget c/all $/12000 sd/1-1-2019 ed/31-12-2019`
+* `addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
+* `addbudget c/all $/12000 sd/1-1-2019 ed/31-12-2019`
 
-Format 2: `addBudget`
+Format 2: `addbudget`
 
 Examples:
 
-* `addBudget` +
+* `addbudget` +
 `Please enter the category of the budget: food` +
 `Please enter the cost of the budget: 400` +
 `Please enter the start date of budget: 1-2-2019` +
 `Please enter the end date of budget: 28-2-2019`
 
-=== Edit a budget: `editBudget`
+=== Editing a budget: `editbudget`
 
 Edits a budget in the finance tracker.
 
-Format 1: `editBudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]`
+Format 1: `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]`
 
 Examples:
 
-* `editBudget c/food $/500`
-* `editBudget c/all ed/31-3-2019`
-* `editBudget c/all $/5000 sd/1-1-2019 ed/31-3-2019`
+* `editbudget c/food $/500`
+* `editbudget c/all ed/31-3-2019`
+* `editbudget c/all $/5000 sd/1-1-2019 ed/31-3-2019`
 
-Format 2: `editBudget`
+Format 2: `editbudget`
 
 Examples:
 
-`editBudget` +
+`editbudget` +
 `Please enter the category of the budget to be updated: food` +
 `Please enter the cost of the budget to be updated (optional):` +
 `Please enter the start date of budget to be updated (optional):` +
 `Please enter the end date of budget to be updated (optional):`
 
-=== Delete a budget: `deleteBudget`
+=== Deleting a budget: `deletebudget`
 
 Deletes a budget from the finance tracker.
 
-Format: `deleteBudget c/CATEGORY`
+Format: `deletebudget c/CATEGORY`
 
 Examples:
 
-* `deleteBudget c/food`
+* `deletebudget c/food`
 
-=== Add a debt: `addDebt`
+=== Adding a debt: `adddebt`
 
 Adds a debt to the finance tracker.
 
-Format 1: `addDebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [d/DEADLINE] [e/EXPLANATION]`
+Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [d/DEADLINE] [e/EXPLANATION]`
 
 Examples:
 
-* `addDebt n/John Doe $/50.00 c/shopping d/25-02-2019 e/Loan from John to finance my new earphones` +
-* `addDebt n/Jane Doe $/200 c/FOOD`
+* `adddebt n/John Doe $/50.00 c/shopping d/25-02-2019 e/Loan from John to finance my new earphones` +
+* `adddebt n/Jane Doe $/200 c/FOOD`
 
 [NOTE]
 ====
@@ -230,23 +230,24 @@ Examples:
 * DEADLINE must be in dd-mm-yyyy format
 ====
 
-Format 2: `addDebt`
+Format 2: `adddebt`
 [TIP]
-You can omit the (optional) parameters by leaving it empty. If all parameters are empty, no edits will occur.
+You can omit (optional) parameters by leaving them empty.
+
 Examples:
 
-* `addDebt` +
+* `adddebt` +
 `Please enter the name of the person you owed: John Doe` +
 `Please enter the amount owed : 50.00` +
 `Please enter the category: shopping` +
 `Please enter the deadline of the debt (optional): 25-02-2019` +
 `Please enter the explanation of the debt (optional): Loan from John to finance my new earphones.`
 
-=== Edit a debt: `editDebt`
+=== Editing a debt: `editdebt`
 
 Edits debt at specified INDEX based on latest debt list shown and updates values of parameters.
 
-Format 1: `editDebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [d/DEADLINE] [e/EXPLANATION]`
+Format 1: `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [d/DEADLINE] [e/EXPLANATION]`
 
 [NOTE]
 ====
@@ -257,25 +258,26 @@ Format 1: `editDebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [d/DEADLI
 
 Examples:
 
-* `editDebt 5 n/Tommy $/60`
+* `editdebt 5 n/Tommy $/60`
 Edits person owed and amount owed of the 5th debt to be `Tommy` and `$60` respectively.
 
-Format 2: `editDebt`
+Format 2: `editdebt`
 [TIP]
-You can omit the (optional) parameters by leaving it empty. If all parameters are empty, no edits will occur.
+You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
+
 Examples:
 
-* `editDebt 5` +
+* `editdebt 5` +
 `Please enter the updated name of the person you owed (optional): Tommy` +
 `Please enter the updated amount owed (optional): 60.00` +
 `Please enter the updated category (optional):` +
 `Please enter the updated deadline of the debt (optional):` +
 `Please enter the updated explanation of the debt (optional):`
 
-=== List debts: `listDebt`
+=== Listing debts: `listdebt`
 Shows a list of debts in the finance tracker according to the view specified.
 
-Format: `listDebt [v/VIEW]`
+Format: `listdebt [v/VIEW]`
 
 [NOTE]
 ====
@@ -284,9 +286,9 @@ Format: `listDebt [v/VIEW]`
 ** v/CATEGORY: displays list of expenses with CATEGORY
 ====
 
-=== Delete a debt: `deleteDebt`
+=== Deleting a debt: `deletedebt`
 Deletes the specified debt from the finance tracker.
-Format: `deleteDebt INDEX`
+Format: `deletedebt INDEX`
 
 [NOTE]
 ====
@@ -297,20 +299,20 @@ Format: `deleteDebt INDEX`
 
 Examples:
 
-* `listDebt` +
- `deleteDebt 5` +
+* `listdebt` +
+ `deletedebt 5` +
  Deletes the 5th debt in the finance tracker.
 
-=== Pay off debt: `paidDebt`
+=== Paying off a debt: `paydebt`
 Convert the debt record to an expense.
 
-Format: `paidDebt INDEX [d/DATE]`
+Format: `paydebt INDEX [d/DATE]`
 
 Examples:
 
-* `listDebt` +
-`paidDebt 3` +
-Converts the 3rd debt in the finance tracker to an expense.
+* `listdebt` +
+`paydebt 3` +
+Converts the 3rd debt in the finance tracker into an expense.
 
 [NOTE]
 ====
@@ -324,7 +326,7 @@ Converts the 3rd debt in the finance tracker to an expense.
 ====
 
 === Viewing Statistics: `stats`
-Produces statistics regarding the database of finance tracker.
+Produces statistics regarding the user's finance.
 Format:
 `stats [m/MODE] [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]`
 
@@ -350,7 +352,7 @@ one month after START_DATE or the current date
 ====
 
 === Viewing Macro Statistics Trend: `stats_mt`
-Produces statistics regarding the database for 2 or more time periods.
+Produces statistics regarding user's finance for 2 or more time periods.
 
 Format: `stats_mt sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
 
@@ -366,7 +368,7 @@ If VISUAL_REPRESENTATION field is left empty, vr options will be displayed.
 ====
 
 === Viewing Macro Statistics Compare: `stats_mc`
-Produces statistics regarding the database for 2 or more time periods
+Produces statistics regarding the user's finance for 2 or more time periods.
 
 Format: `stats_mc d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
 
@@ -399,7 +401,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
+Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addbudget`, `deletedudget` and `editbudget`) and modify debt (`adddebt`, `deletedebt`, `editdebt` and `paydebt`).
 ====
 
 Examples:
@@ -417,58 +419,6 @@ The `undo` command fails as there are no undoable commands executed previously.
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
-
-=== Undoing multiple previous commands : `undoM`
-Restores the finance tracker to the state before multiple previous _undoable_ commands were executed. +
-Format: 'undo' NUMBER
-
-[NOTE]
-====
-Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
-====
-
-Examples:
-
-* `delete 1` +
-`list` +
-`undoM 5` (reverses the `delete 1` command) +
-
-* `select 1` +
-`list` +
-`undoM 2` +
-The `undoM` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`list` +
-`clear` +
-`undoM 10` (reverses the `clear` command and reverses the `delete 1` command) +
-
-=== Undoing specific previous command : `undoS`
-Restores the finance tracker to the state before a specific _undoable_ command was executed. +
-Format: 'undo' INDEX
-
-[NOTE]
-====
-* Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addBudget`, `deleteBudget` and `editBudget`) and modify debt (`addDebt`, `deleteDebt`, `editDebt` and `paidDebt`).
-* Index of commands can be viewed using `history`.
-====
-
-Examples:
-
-* `delete 1`             (index 1) +
-`delete 2`               (index 2) +
-`undoS 1` (reverses the `delete 1` command) +
-
-* `select 1`             (index 1) +
-`list`                   (index 2) +
-`undoS 2` +
-The `undoS` command fails as `list` is not an undoable command.
-
-* `delete 1`             (index 1) +
-`list`                   (index 2) +
-`clear`                  (index 3) +
-`undoS 4` +
-The `undoS` command fails as there is no command with INDEX 4.
 
 === Redoing the previously undone command : `redo`
 
@@ -530,29 +480,27 @@ e.g. `edit 2 n/Bak Kut Teh`
 * *Help* : `help`
 * *History* : `history`
 * *Undo* : `undo`
-* *Undo Multiple* : `undoM NUMBER`
-* *Undo Specific* : `undoS INDEX`
 * *Redo* : `redo`
-* *Add a budget* : `addBudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE` +
-e.g. `addBudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
-* *Edit a budget* : `editBudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]` +
-e.g. `editBudget c/all $/5000 sd/1-1-2019 ed/31-3-2019`
-* *Delete a budget* : `deleteBudget c/CATEGORY` +
-e.g. `deleteBudget c/food`
-* *Add a debt* : `addDebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [d/DEADLINE] [e/EXPLANATION]` +
-e.g. `addDebt n/Jane Doe $/200 c/FOOD`
-* *Edit a debt* : `editDebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [d/DEADLINE] [e/EXPLANATION]` +
-e.g. `editDebt 5 n/Tommy $/60`
-* *List debts* : `listDebt [v/VIEW]`
-* *Delete a debt* : `deleteDebt INDEX` +
-e.g. `deleteDebt 5`
-* *Pay off debt* : `paidDebt INDEX [d/DATE]` +
-e.g. `paidDebt 2`
+* *Add a budget* : `addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE` +
+e.g. `addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
+* *Edit a budget* : `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]` +
+e.g. `editbudget c/all $/5000 sd/1-1-2019 ed/31-3-2019`
+* *Delete a budget* : `deletebudget c/CATEGORY` +
+e.g. `deletebudget c/food`
+* *Add a debt* : `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [d/DEADLINE] [e/EXPLANATION]` +
+e.g. `adddebt n/Jane Doe $/200 c/FOOD`
+* *Edit a debt* : `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [d/DEADLINE] [e/EXPLANATION]` +
+e.g. `editdebt 5 n/Tommy $/60`
+* *List debts* : `listdebt [v/VIEW]`
+* *Delete a debt* : `deletedebt INDEX` +
+e.g. `deletedebt 5`
+* *Pay off debt* : `paydebt INDEX [d/DATE]` +
+e.g. `payDebt 2`
 * *Viewing statistics* : `stats [m/MODE] [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]` +
 e.g. `stats c/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
 * *Viewing Macro Statistic Trend* : `stats_mt sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION]
 [c/CATEGORY]` +
 e.g. `stats_mt sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
-* *Viewing Macro Statistic Comparison* : `stats_mt d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD
+* *Viewing Macro Statistic Comparison* : `stats_mc d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD
 [vr/VISUAL_REPRESENTATION] [c/CATEGORY]` +
 e.g. `stats_mc d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food`
