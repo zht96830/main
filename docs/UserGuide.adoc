@@ -395,7 +395,7 @@ Examples:
 `Please enter the start date of the recurring to be updated (optional):` +
 `Please enter the remark of the expense to be updated (optional):`
 
-=== Deleting a recurring: deleterecurring
+=== Deleting a recurring: `deleterecurring`
 
 Deletes the specified recurring from the finance tracker. +
 Format: `deleterecurring INDEX p/DELETEPAST` +
