@@ -88,7 +88,7 @@ Format 1: `add n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]`
 
 Examples:
 
-* `add n/BKT $/3.00 c/food d/13-01-1996 e/My weekly bak kut teh intake.`
+* `add n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake.`
 * `add n/Sofa $/200 c/HOME`
 
 Format 2: `add`
@@ -213,16 +213,23 @@ Examples:
 
 * `deletebudget c/food`
 
+=== Listing debts: `listdebt`
+Shows a list of debts in the finance tracker according to the view specified.
+
+Format: `listdebt [v/VIEW]`
+
+[NOTE]
+====
+* The VIEW specifies how the list of expenses are displayed.
+** v/DEADLINE: display list of debts showing nearest DEADLINE first. Debts without deadlines will be at the bottom of the list.
+** v/CATEGORY: displays list of expenses with CATEGORY
+====
+
 === Adding a debt: `adddebt`
 
 Adds a debt to the finance tracker.
 
 Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [d/DEADLINE] [r/REMARK]`
-
-Examples:
-
-* `adddebt n/John Doe $/50.00 c/shopping d/25-02-2019 e/Loan from John to finance my new earphones` +
-* `adddebt n/Jane Doe $/200 c/FOOD`
 
 [NOTE]
 ====
@@ -230,6 +237,11 @@ Examples:
 * CATEGORY only consists of “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive.
 * DEADLINE must be in dd-mm-yyyy format.
 ====
+
+Examples:
+
+* `adddebt n/John Doe $/50.00 c/shopping d/25-02-2019 r/Loan from John to finance my new earphones` +
+* `adddebt n/Jane Doe $/200 c/FOOD`
 
 Format 2: `adddebt`
 [TIP]
@@ -275,18 +287,6 @@ Examples:
 `Please enter the updated deadline of the debt (optional):` +
 `Please enter the updated remark of the debt (optional):`
 
-=== Listing debts: `listdebt`
-Shows a list of debts in the finance tracker according to the view specified.
-
-Format: `listdebt [v/VIEW]`
-
-[NOTE]
-====
-* The VIEW specifies how the list of expenses are displayed.
-** v/DEADLINE: display list of debts showing nearest DEADLINE first. Debts without deadlines will be at the bottom of the list.
-** v/CATEGORY: displays list of expenses with CATEGORY
-====
-
 === Deleting a debt: `deletedebt`
 Deletes the specified debt from the finance tracker.
 Format: `deletedebt INDEX`
@@ -309,12 +309,6 @@ Convert the debt record to an expense.
 
 Format: `paydebt INDEX [d/DATE]`
 
-Examples:
-
-* `listdebt` +
-`paydebt 3` +
-Converts the 3rd debt in the finance tracker into an expense.
-
 [NOTE]
 ====
 * Parameters from debt will be carried over to expense
@@ -326,18 +320,106 @@ Converts the 3rd debt in the finance tracker into an expense.
 * If DATE is omitted, current date will be used
 ====
 
+Examples:
+
+* `listdebt` +
+`paydebt 3` +
+Converts the 3rd debt in the finance tracker into an expense.
+
+=== Adding a recurring: `addrecurring`
+Adds a recurring payment to the finance tracker.
+
+Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY f/FREQUENCY o/OCCURENCES [d/STARTDATE] [r/REMARK]`
+
+[NOTE]
+====
+* AMOUNT *must be a positive integer or decimal of max 2 decimal places.*
+* CATEGORY only consists of “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive.
+* FREQUENCY only consists of D, W, M, Y for daily, weekly, monthly and yearly respectively. Any numbers following D, W, M or Y means a multiple of that frequency e.g. W2 means fortnightly (every 2 weeks).
+* STARTDATE must be in dd-mm-yyyy format.
+* If STARTDATE is omitted, current date will be used.
+====
+
+Examples:
+
+* `addrecurring n/Phone Bill $/50.00 c/utilities f/M o/24 d/23-2-2019 r/Signed a new 2 year contract.` +
+* `addrecurring n/Magazine Subscription $/20 c/utilities f/M2 o/12`
+
+Format 2: `addrecurring`
+[TIP]
+You can omit (optional) parameters by leaving them empty.
+
+Examples:
+
+* `addrecurring` +
+  `Please enter the name of the recurring: Magazine Subscription` +
+  `Please enter the amount of the recurring: 20` +
+  `Please enter the category of the recurring: utilities` +
+  `Please enter the frequency of the recurring: M2` +
+  `Please enter the number of occurences of the recurring: 12` +
+  `Please enter the start date of the recurring (optional):` +
+  `Please enter the remark of the expense (optional):`
+
+=== Editing a recurring : `editrecurring`
+
+Edits an existing recurring in the finance tracker. +
+Format 1: `editrecurring INDEX p/EDITPAST [n/NAME] [$/AMOUNT] [c/CATEGORY] [f/FREQUENCY] [o/OCCURENCES] [d/STARTDATE] [r/REMARK]` +
+
+[NOTE]
+====
+* Edits the expense at the specified `INDEX`. The index refers to the index number shown in the displayed expense list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* EDITPAST can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be edited to reflect the new changes.
+* Agreeing (Y) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while also changing old expenses already added by this recurring.
+* Disagreeing (N) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while old expenses already added by this recurring will not be changed.
+* Existing values will be updated to the input values.
+====
+
+Examples:
+
+* `editrecurring 9 p/N $/450 c/food` +
+Edits the amount and category of the 9th recurring to be `450` and `food` respectively. No changes will be made to old expenses already added by this recurring.
+
+Format 2: `editrecurring INDEX p/EDITPAST`
+
+[TIP]
+You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
+
+Examples:
+`editrecurring 9 p/N` +
+`Please enter the name of the recurring to be updated (optional):` +
+`Please enter the amount of the recurring to be updated (optional): 450` +
+`Please enter the category of the recurring to be updated (optional): food` +
+`Please enter the frequency of the recurring to be updated (optional):` +
+`Please enter the number of occurences of the recurring to be updated (optional):` +
+`Please enter the start date of the recurring to be updated (optional):` +
+`Please enter the remark of the expense to be updated (optional):`
+
+=== Deleting a recurring: deleterecurring
+
+Deletes the specified recurring from the finance tracker. +
+Format: `deleterecurring INDEX p/DELETEPAST` +
+
+[NOTE]
+====
+* Deletes the recurring at the specified `INDEX`.
+* The index refers to the index number shown in the displayed recurring list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* DELETEPAST can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be deleted.
+* Agreeing (Y) will delete the recurring, and delete all old expenses already added by this recurring.
+* Disagreeing (N) will delete the recurring, but does not delete old expenses already added by this recurring.
+====
+
+Examples:
+
+* `listrecurring` +
+`deleterecurring 2 p/N` +
+Deletes the 2nd recurring in the finance tracker, without deleting old expenses already added by this recurring.
+
 === Viewing Statistics: `stats`
 Produces statistics regarding the user's finance.
 Format:
 `stats [m/MODE] [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]`
-
-Examples:
-
-* `stats`
-* `stats m/cat`
-* `stats m/cat vr/pie`
-* `stats m/day sd/12-02-2018`
-* `stats m/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
 
 [NOTE]
 ====
@@ -352,10 +434,23 @@ one month after START_DATE or the current date
 * If VISUAL_REPRESENTATION field is left empty, vr options will be displayed
 ====
 
+Examples:
+
+* `stats`
+* `stats m/cat`
+* `stats m/cat vr/pie`
+* `stats m/day sd/12-02-2018`
+* `stats m/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
+
 === Viewing Macro Statistics Trend: `stats_mt`
 Produces statistics regarding user's finance for 2 or more time periods.
 
 Format: `stats_mt sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
+
+[NOTE]
+====
+If VISUAL_REPRESENTATION field is left empty, vr options will be displayed.
+====
 
 Examples:
 
@@ -363,26 +458,21 @@ Examples:
 * `stats_mt sd/01-01-2018 ed/01-01-2018 p/14`
 * `stats_mt sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
 
-[NOTE]
-====
-If VISUAL_REPRESENTATION field is left empty, vr options will be displayed.
-====
-
 === Viewing Macro Statistics Compare: `stats_mc`
 Produces statistics regarding the user's finance for 2 or more time periods.
 
 Format: `stats_mc d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
+
+[NOTE]
+====
+If VISUAL_REPRESENTATION field is left empty, vr options will be displayed
+====
 
 Examples:
 
 * `stats_mc d1/01-01-2019 d2/01-02-2019 p/month`
 * `stats_mc d1/01-01-2019 d2/07-01-2019 d3/07-01-2019 d4/13-02-2019 p/7`
 * `stats_mc d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food`
-
-[NOTE]
-====
-If VISUAL_REPRESENTATION field is left empty, vr options will be displayed
-====
 
 === Listing entered commands : `history`
 
@@ -402,7 +492,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addbudget`, `deletedudget` and `editbudget`) and modify debt (`adddebt`, `deletedebt`, `editdebt` and `paydebt`).
+Undoable commands: those commands that modify the finance tracker's content (`add`, `delete`, `edit` and `clear`), modify budget (`addbudget`, `deletedudget` and `editbudget`), modify debt (`adddebt`, `deletedebt`, `editdebt` and `paydebt`) and modify recurring (`addrecurring`, `deleterecurring` and `editrecurring`).
 ====
 
 Examples:
@@ -471,7 +561,7 @@ _{Sends an email if the expenses are about to exceed the budget or when debts ar
 == Command Summary
 
 * *Add* `add n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]` +
-e.g. `add n/BKT $/3.00 c/food d/13-01-1996 e/My weekly bak kut teh intake`
+e.g. `add n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
@@ -497,6 +587,12 @@ e.g. `editdebt 5 n/Tommy $/60`
 e.g. `deletedebt 5`
 * *Pay off debt* : `paydebt INDEX [d/DATE]` +
 e.g. `payDebt 2`
+* *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY f/FREQUENCY o/OCCURENCES [d/STARTDATE] [r/REMARK]` +
+e.g. `addrecurring n/Phone Bill $/50.00 c/utilities f/M o/24 d/23-2-2019 r/Signed a new 2 year contract.` +
+* *Edit a recurring* : `editrecurring INDEX p/EDITPAST [n/NAME] [$/AMOUNT] [c/CATEGORY] [f/FREQUENCY] [o/OCCURENCES] [d/STARTDATE] [r/REMARK]` +
+e.g. `editrecurring 9 p/N $/450 c/food` +
+* *Delete a recurring* : `deleterecurring INDEX p/DELETEPAST` +
+e.g. `deleterecurring 2 p/N` +
 * *Viewing statistics* : `stats [m/MODE] [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]` +
 e.g. `stats c/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
 * *Viewing Macro Statistic Trend* : `stats_mt sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION]
