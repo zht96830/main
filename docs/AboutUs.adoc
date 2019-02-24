@@ -15,7 +15,9 @@ image::james.png[width="150", align="left"]
 {empty}[https://github.com/jamessspanggg[github]]
 
 Role: Team Lead +
-Responsibilities: List View of expenses
+Responsibilities: List view of expenses. +
+JavaFx Expert +
+In charge of UI.
 
 '''
 
@@ -24,7 +26,9 @@ image::Johnson Photo.png[width="150", align="left"]
 {empty}[http://github.com/jhocx[github]]
 
 Role: Developer +
-Responsibilities: History Control
+Responsibilities: Bill control. +
+Travis Expert +
+In charge of Storage.
 
 '''
 
@@ -33,7 +37,9 @@ image::YinHao.png[width="150", align="left"]
 {empty}[http://github.com/gohyinhao[github]]
 
 Role: Developer +
-Responsibilities: Debt Control
+Responsibilities: Debt control. +
+Gradle Expert +
+In charge of Model.
 
 '''
 
@@ -42,7 +48,9 @@ image::Jiahui.png[width="150", align="left"]
 {empty}[http://github.com/lim-jiahui[github]]
 
 Role: Developer +
-Responsibilities: Budget Control
+Responsibilities: Budget control. +
+Java Expert +
+In charge of Documentation.
 
 '''
 
@@ -51,6 +59,8 @@ image::ZhiHui.png[width="150", align="left"]
 {empty}[http://github.com/zht96830[github]]
 
 Role: Developer +
-Responsibilities: Expense Statistics
+Responsibilities: Expense statistics. +
+Git Expert +
+In charge of Logic.
 
 '''
