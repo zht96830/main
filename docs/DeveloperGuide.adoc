@@ -826,21 +826,54 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
-|Priority |As a ... |I want to ... |So that I can...
+|Priority |As a/an ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |user |add expenses into the finance tracker |record all my expenses
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* *` |user |view a list of my expenses in certain time periods |have a better overview of my expenses
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |user |see the total amount of money I have |see how much money I have left overall and better plan my finances
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |user |make changes to expenses I previously added |correct any mistakes
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |organised user |categorise my expenses |know my spending for each category
+
+|`* * *` |user |delete an expense |remove entries that I no longer need to keep track of
+
+|`* * *` |thrifty user |set a budget |manage my expenses and see how much more I can spend for the remaining part of the day/week/month/year
+
+|`* *` |user | split my budget into different categories |enhance my finance planning further and not spend excessively on a single category, e.g. food
+
+|`* * *` |user |edit my budget |change the amount of budget available or the duration
+
+|`* * *` |user |cancel my budget |
+
+|`* * *` |forgetful user |add my debts |can see who I owe money to
+
+|`* * *` |user |edit my debts |change the amount I owe if any changes occur
+
+|`* *` |user |view a list of my debts and see when they are due |remind myself to pay the people I owe by their due dates
+
+|`* * *` |user |delete my debts |
+
+|`* * *` |user |clear my paid debts |know I have settled them
+
+|`* *` |analytical user |see a breakdown of my expenses |know what I spend the most on
+
+|`* *` |visual user |have charts and graphs to represent my expenditure |have a better picture on the different categories of my expenses
+
+|`* *` |efficient user |be able to view my command history |easily input a repeated command when needed
+
+|`* * *` |user |undo and redo my actions |
+
+|`* * *` |user |clear all entries |start with an empty finance tracker again when needed
+
+|`* *` |non-tech-savvy user |type simple commands step by step |use the programme more easily without having to keep referring to the help menu
+
+|`*` |user |receive reminders regarding my expenditure |know if my spending is about to exceed my budget or when my debts are about to be due
 |=======================================================================
 
-_{More to be added}_
 
 [appendix]
 == Use Cases
