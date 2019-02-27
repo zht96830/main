@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        FinanceTrackerStorage financeTrackerStorage = new JsonFinanceTrackerStorage(userPrefs.getFinanceTrackerFilePath());
+        storage = new StorageManager(financeTrackerStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -69,19 +69,19 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s finance tracker and {@code userPrefs}. <br>
+     * The data from the sample finance tracker will be used instead if {@code storage}'s finance tracker is not found,
+     * or an empty finance tracker will be used instead if errors occur when reading {@code storage}'s finance tracker.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyFinanceTracker> addressBookOptional;
+        Optional<ReadOnlyFinanceTracker> financeTrackerOptional;
         ReadOnlyFinanceTracker initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            financeTrackerOptional = storage.readFinanceTracker();
+            if (!financeTrackerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample FinanceTracker");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = financeTrackerOptional.orElseGet(SampleDataUtil::getSampleFinanceTracker);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty FinanceTracker");
             initialData = new FinanceTracker();
@@ -173,7 +173,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Finance Tracker ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
