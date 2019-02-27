@@ -24,7 +24,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedFinanceTracker versionedFinanceTracker;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
@@ -32,20 +32,20 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyFinanceTracker addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedFinanceTracker = new VersionedFinanceTracker(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredPersons = new FilteredList<>(versionedFinanceTracker.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new FinanceTracker(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -83,32 +83,32 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== FinanceTracker ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        versionedAddressBook.resetData(addressBook);
+    public void setAddressBook(ReadOnlyFinanceTracker addressBook) {
+        versionedFinanceTracker.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyFinanceTracker getAddressBook() {
+        return versionedFinanceTracker;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+        return versionedFinanceTracker.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
+        versionedFinanceTracker.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
+        versionedFinanceTracker.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -116,14 +116,14 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        versionedAddressBook.setPerson(target, editedPerson);
+        versionedFinanceTracker.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedFinanceTracker}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -140,27 +140,27 @@ public class ModelManager implements Model {
 
     @Override
     public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+        return versionedFinanceTracker.canUndo();
     }
 
     @Override
     public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+        return versionedFinanceTracker.canRedo();
     }
 
     @Override
     public void undoAddressBook() {
-        versionedAddressBook.undo();
+        versionedFinanceTracker.undo();
     }
 
     @Override
     public void redoAddressBook() {
-        versionedAddressBook.redo();
+        versionedFinanceTracker.redo();
     }
 
     @Override
     public void commitAddressBook() {
-        versionedAddressBook.commit();
+        versionedFinanceTracker.commit();
     }
 
     //=========== Selected person ===========================================================================
@@ -226,7 +226,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedFinanceTracker.equals(other.versionedFinanceTracker)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
