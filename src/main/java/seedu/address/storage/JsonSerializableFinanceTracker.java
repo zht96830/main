@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.ReadOnlyFinanceTracker;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * An Immutable FinanceTracker that is serializable to JSON format.

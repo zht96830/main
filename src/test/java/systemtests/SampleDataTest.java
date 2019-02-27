@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 import seedu.address.model.FinanceTracker;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 

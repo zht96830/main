@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.expense.Expense;
 
 /**
  * Tests that a {@code Expense}'s {@code Name} matches any of the keywords given.

@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -13,8 +13,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Address;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Email;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.tag.Tag;
@@ -31,20 +33,21 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_CATEGORY,
+                        PREFIX_DATE, PREFIX_REMARKS);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_AMOUNT, PREFIX_CATEGORY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Amount amount = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Amount amount = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_AMOUNT).get());
+        Category category = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_CATEGORY).get());
+        Date date = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_DATE).get());
+        String remarks = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_REMARKS));
 
-        Expense expense = new Expense(name, amount, email, address, tagList);
+        Expense expense = new Expense(name, amount, date, category, remarks);
 
         return new AddCommand(expense);
     }

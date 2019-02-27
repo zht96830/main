@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * Contains helper methods to set up {@code Model} for testing.

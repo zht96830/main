@@ -1,18 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FINANCES;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -20,12 +17,11 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.attributes.Address;
-import seedu.address.model.attributes.Email;
-import seedu.address.model.person.Expense;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Amount;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.attributes.Date;
 
 /**
  * Edits the details of an existing expense in the Finance Tracker.
@@ -39,17 +35,17 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_AMOUNT + "AMOUNT] "
+            + "[" + PREFIX_CATEGORY + "CATEGORY] "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_REMARKS + "REMARKS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_NAME + "Hatyai "
+            + PREFIX_AMOUNT + "400 "
+            + PREFIX_CATEGORY + "travel";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Expense: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This expense already exists in the Finance Tracker.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -78,10 +74,6 @@ public class EditCommand extends Command {
         Expense expenseToEdit = lastShownList.get(index.getZeroBased());
         Expense editedExpense = createEditedPerson(expenseToEdit, editPersonDescriptor);
 
-        if (!expenseToEdit.isSameExpense(editedExpense) && model.hasExpense(editedExpense)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
         model.setExpense(expenseToEdit, editedExpense);
         model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
         model.commitFinanceTracker();
@@ -97,11 +89,11 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(expenseToEdit.getName());
         Amount updatedAmount = editPersonDescriptor.getAmount().orElse(expenseToEdit.getAmount());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(expenseToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(expenseToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(expenseToEdit.getTags());
+        Category updatedCategory = editPersonDescriptor.getCategory().orElse(expenseToEdit.getCategory());
+        Date updatedDate = editPersonDescriptor.getDate().orElse(expenseToEdit.getDate());
+        String updatedRemarks = editPersonDescriptor.getRemarks().orElse(expenseToEdit.getRemarks());
 
-        return new Expense(updatedName, updatedAmount, updatedEmail, updatedAddress, updatedTags);
+        return new Expense(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks);
     }
 
     @Override
@@ -129,9 +121,9 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Amount amount;
-        private Email email;
-        private Address address;
-        private Set<Tag> tags;
+        private Date date;
+        private Category category;
+        private String remarks;
 
         public EditPersonDescriptor() {}
 
@@ -142,16 +134,16 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setAmount(toCopy.amount);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setDate(toCopy.date);
+            setCategory(toCopy.category);
+            setRemarks(toCopy.remarks);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, amount, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, amount, date, category, remarks);
         }
 
         public void setName(Name name) {
@@ -170,38 +162,23 @@ public class EditCommand extends Command {
             return Optional.ofNullable(amount);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setDate(Date date) {
+            this.date = date;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Date> getDate() {
+            return Optional.ofNullable(date);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setCategory(Category category) { this.category = category; }
+
+        public Optional<Category> getCategory() { return Optional.ofNullable(category); }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
+        public Optional<String> getRemarks() { return Optional.ofNullable(remarks); }
 
         @Override
         public boolean equals(Object other) {
@@ -220,9 +197,9 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getAmount().equals(e.getAmount())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getDate().equals(e.getDate())
+                    && getCategory().equals(e.getCategory())
+                    && getRemarks().equals(e.getRemarks());
         }
     }
 }

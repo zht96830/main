@@ -35,7 +35,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Email;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;

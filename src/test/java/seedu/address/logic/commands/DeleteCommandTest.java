@@ -18,7 +18,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -34,7 +34,7 @@ public class DeleteCommandTest {
         Expense expenseToDelete = model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, expenseToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EXPENSE_SUCCESS, expenseToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getFinanceTracker(), new UserPrefs());
         expectedModel.deleteExpense(expenseToDelete);
@@ -58,7 +58,7 @@ public class DeleteCommandTest {
         Expense expenseToDelete = model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, expenseToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EXPENSE_SUCCESS, expenseToDelete);
 
         Model expectedModel = new ModelManager(model.getFinanceTracker(), new UserPrefs());
         expectedModel.deleteExpense(expenseToDelete);
