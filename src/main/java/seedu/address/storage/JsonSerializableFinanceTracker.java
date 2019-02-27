@@ -16,39 +16,39 @@ import seedu.address.model.person.Person;
 /**
  * An Immutable FinanceTracker that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "financetracker")
+class JsonSerializableFinanceTracker {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedExpense> persons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableFinanceTracker} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableFinanceTracker(@JsonProperty("persons") List<JsonAdaptedExpense> persons) {
         this.persons.addAll(persons);
     }
 
     /**
      * Converts a given {@code ReadOnlyFinanceTracker} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableFinanceTracker}.
      */
-    public JsonSerializableAddressBook(ReadOnlyFinanceTracker source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+    public JsonSerializableFinanceTracker(ReadOnlyFinanceTracker source) {
+        persons.addAll(source.getPersonList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code FinanceTracker} object.
+     * Converts this finance tracker into the model's {@code FinanceTracker} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public FinanceTracker toModelType() throws IllegalValueException {
         FinanceTracker financeTracker = new FinanceTracker();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
+        for (JsonAdaptedExpense jsonAdaptedExpense : persons) {
+            Person person = jsonAdaptedExpense.toModelType();
             if (financeTracker.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }

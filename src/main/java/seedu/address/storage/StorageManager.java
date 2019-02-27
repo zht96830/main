@@ -69,9 +69,9 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveFinanceTracker(ReadOnlyFinanceTracker addressBook, Path filePath) throws IOException {
+    public void saveFinanceTracker(ReadOnlyFinanceTracker financeTracker, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        financeTrackerStorage.saveFinanceTracker(addressBook, filePath);
+        financeTrackerStorage.saveFinanceTracker(financeTracker, filePath);
     }
 
 }

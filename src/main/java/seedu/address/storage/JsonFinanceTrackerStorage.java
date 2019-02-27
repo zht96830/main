@@ -45,14 +45,14 @@ public class JsonFinanceTrackerStorage implements FinanceTrackerStorage {
     public Optional<ReadOnlyFinanceTracker> readFinanceTracker(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        Optional<JsonSerializableFinanceTracker> jsonFinanceTracker = JsonUtil.readJsonFile(
+                filePath, JsonSerializableFinanceTracker.class);
+        if (!jsonFinanceTracker.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonFinanceTracker.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -69,12 +69,12 @@ public class JsonFinanceTrackerStorage implements FinanceTrackerStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveFinanceTracker(ReadOnlyFinanceTracker addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveFinanceTracker(ReadOnlyFinanceTracker financeTracker, Path filePath) throws IOException {
+        requireNonNull(financeTracker);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableFinanceTracker(financeTracker), filePath);
     }
 
 }
