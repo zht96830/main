@@ -43,8 +43,8 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.expense = expense;
         id.setText(displayedIndex + ". ");
-        name.setText(expense.getName().fullName);
-        phone.setText(expense.getPhone().value);
+        name.setText(expense.getName().name);
+        phone.setText(expense.getAmount().value);
         address.setText(expense.getAddress().value);
         email.setText(expense.getEmail().value);
         expense.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -16,10 +16,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.attributes.Address;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Email;
+import seedu.address.model.attributes.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
@@ -99,15 +99,15 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+        Amount expectedAmount = new Amount(VALID_PHONE);
+        assertEquals(expectedAmount, ParserUtil.parsePhone(VALID_PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+        Amount expectedAmount = new Amount(VALID_PHONE);
+        assertEquals(expectedAmount, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
     @Test

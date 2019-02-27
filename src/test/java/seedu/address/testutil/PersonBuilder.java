@@ -3,11 +3,11 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.attributes.Address;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Email;
 import seedu.address.model.person.Expense;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.attributes.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,14 +22,14 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
-    private Phone phone;
+    private Amount amount;
     private Email email;
     private Address address;
     private Set<Tag> tags;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
+        amount = new Amount(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
@@ -40,7 +40,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Expense expenseToCopy) {
         name = expenseToCopy.getName();
-        phone = expenseToCopy.getPhone();
+        amount = expenseToCopy.getAmount();
         email = expenseToCopy.getEmail();
         address = expenseToCopy.getAddress();
         tags = new HashSet<>(expenseToCopy.getTags());
@@ -71,10 +71,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Expense} that we are building.
+     * Sets the {@code Amount} of the {@code Expense} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        this.amount = new Amount(phone);
         return this;
     }
 
@@ -87,7 +87,7 @@ public class PersonBuilder {
     }
 
     public Expense build() {
-        return new Expense(name, phone, email, address, tags);
+        return new Expense(name, amount, email, address, tags);
     }
 
 }
