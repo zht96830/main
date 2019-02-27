@@ -26,8 +26,8 @@ public class JsonSerializableFinanceTrackerTest {
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableFinanceTracker dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
+                JsonSerializableFinanceTracker.class).get();
         FinanceTracker financeTrackerFromFile = dataFromFile.toModelType();
         FinanceTracker typicalPersonsFinanceTracker = TypicalPersons.getTypicalAddressBook();
         assertEquals(financeTrackerFromFile, typicalPersonsFinanceTracker);
@@ -35,18 +35,18 @@ public class JsonSerializableFinanceTrackerTest {
 
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableFinanceTracker dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
+                JsonSerializableFinanceTracker.class).get();
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
     }
 
     @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableFinanceTracker dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
+                JsonSerializableFinanceTracker.class).get();
         thrown.expect(IllegalValueException.class);
-        thrown.expectMessage(JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(JsonSerializableFinanceTracker.MESSAGE_DUPLICATE_PERSON);
         dataFromFile.toModelType();
     }
 
