@@ -38,7 +38,7 @@ public class FinanceTrackerParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final FinanceTrackerParser parser = new FinanceTrackerParser();
 
     @Test
     public void parseCommand_add() throws Exception {
