@@ -67,8 +67,10 @@ public class LogicManager implements Logic {
     }
 
     @Override
+
     public ReadOnlyFinanceTracker getFinanceTracker() {
         return model.getFinanceTracker();
+
     }
 
     @Override
