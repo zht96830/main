@@ -53,7 +53,7 @@ class JsonAdaptedExpense {
     /**
      * Converts a given {@code Expense} into this class for Jackson use.
      */
-    public JsonAdaptedExpense(Person source) {
+    public JsonAdaptedExpense(Expense source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
