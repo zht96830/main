@@ -135,7 +135,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredExpenseList().size());
 
         Expense expense = model.getFilteredExpenseList().get(targetIndex.getZeroBased());
-        final String[] splitName = expense.getName().fullName.split("\\s+");
+        final String[] splitName = expense.getName().name.split("\\s+");
         model.updateFilteredExpenseList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredExpenseList().size());

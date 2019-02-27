@@ -20,11 +20,11 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.attributes.Address;
+import seedu.address.model.attributes.Email;
 import seedu.address.model.person.Expense;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Amount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,12 +96,12 @@ public class EditCommand extends Command {
         assert expenseToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(expenseToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(expenseToEdit.getPhone());
+        Amount updatedAmount = editPersonDescriptor.getAmount().orElse(expenseToEdit.getAmount());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(expenseToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(expenseToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(expenseToEdit.getTags());
 
-        return new Expense(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Expense(updatedName, updatedAmount, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Phone phone;
+        private Amount amount;
         private Email email;
         private Address address;
         private Set<Tag> tags;
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
+            setAmount(toCopy.amount);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, amount, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -162,12 +162,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setAmount(Amount amount) {
+            this.amount = amount;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Amount> getAmount() {
+            return Optional.ofNullable(amount);
         }
 
         public void setEmail(Email email) {
@@ -219,7 +219,7 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
+                    && getAmount().equals(e.getAmount())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());

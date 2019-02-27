@@ -17,11 +17,11 @@ import guitests.guihandles.PersonListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.attributes.Address;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Email;
 import seedu.address.model.person.Expense;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.attributes.Name;
 
 public class ExpenseListPanelTest extends GuiUnitTest {
     private static final ObservableList<Expense> TYPICAL_EXPENSES =
@@ -80,10 +80,10 @@ public class ExpenseListPanelTest extends GuiUnitTest {
         ObservableList<Expense> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < personCount; i++) {
             Name name = new Name(i + "a");
-            Phone phone = new Phone("000");
+            Amount amount = new Amount("000");
             Email email = new Email("a@aa");
             Address address = new Address("a");
-            Expense expense = new Expense(name, phone, email, address, Collections.emptySet());
+            Expense expense = new Expense(name, amount, email, address, Collections.emptySet());
             backingList.add(expense);
         }
         return backingList;

@@ -7,6 +7,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.attributes.Address;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Email;
+import seedu.address.model.attributes.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,7 +20,7 @@ import seedu.address.model.tag.Tag;
 public class Expense {
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final Amount amount;
     private final Email email;
 
     // Data fields
@@ -26,10 +30,10 @@ public class Expense {
     /**
      * Every field must be present and not null.
      */
-    public Expense(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Expense(Name name, Amount amount, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, amount, email, address, tags);
         this.name = name;
-        this.phone = phone;
+        this.amount = amount;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
@@ -39,8 +43,8 @@ public class Expense {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Amount getAmount() {
+        return amount;
     }
 
     public Email getEmail() {
@@ -70,7 +74,7 @@ public class Expense {
 
         return otherExpense != null
                 && otherExpense.getName().equals(getName())
-                && (otherExpense.getPhone().equals(getPhone()) || otherExpense.getEmail().equals(getEmail()));
+                && (otherExpense.getAmount().equals(getAmount()) || otherExpense.getEmail().equals(getEmail()));
     }
 
     /**
@@ -89,7 +93,7 @@ public class Expense {
 
         Expense otherExpense = (Expense) other;
         return otherExpense.getName().equals(getName())
-                && otherExpense.getPhone().equals(getPhone())
+                && otherExpense.getAmount().equals(getAmount())
                 && otherExpense.getEmail().equals(getEmail())
                 && otherExpense.getAddress().equals(getAddress())
                 && otherExpense.getTags().equals(getTags());
@@ -98,15 +102,15 @@ public class Expense {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, amount, email, address, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
+                .append(" Amount: ")
+                .append(getAmount())
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")

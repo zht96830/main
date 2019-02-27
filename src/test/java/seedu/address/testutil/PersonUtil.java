@@ -30,8 +30,8 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Expense expense) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + expense.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + expense.getPhone().value + " ");
+        sb.append(PREFIX_NAME + expense.getName().name + " ");
+        sb.append(PREFIX_PHONE + expense.getAmount().value + " ");
         sb.append(PREFIX_EMAIL + expense.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + expense.getAddress().value + " ");
         expense.getTags().stream().forEach(
@@ -45,8 +45,8 @@ public class PersonUtil {
      */
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.name).append(" "));
+        descriptor.getAmount().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {

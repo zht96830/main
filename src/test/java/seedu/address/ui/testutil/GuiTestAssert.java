@@ -30,8 +30,8 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the details of {@code expectedExpense}.
      */
     public static void assertCardDisplaysPerson(Expense expectedExpense, PersonCardHandle actualCard) {
-        assertEquals(expectedExpense.getName().fullName, actualCard.getName());
-        assertEquals(expectedExpense.getPhone().value, actualCard.getPhone());
+        assertEquals(expectedExpense.getName().name, actualCard.getName());
+        assertEquals(expectedExpense.getAmount().value, actualCard.getPhone());
         assertEquals(expectedExpense.getEmail().value, actualCard.getEmail());
         assertEquals(expectedExpense.getAddress().value, actualCard.getAddress());
         assertEquals(expectedExpense.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
