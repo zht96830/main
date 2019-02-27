@@ -10,9 +10,9 @@
    <children>
       <TableView prefHeight="200.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Index" />
-          <TableColumn prefWidth="350.0" text="Name" />
-            <TableColumn prefWidth="174.0" text="Amount" />
+          <TableColumn fx:id="expenseIndex" prefWidth="75.0" text="Index" />
+          <TableColumn fx:id="expenseName" prefWidth="350.0" text="Name" />
+            <TableColumn fx:id="expenseAmount" prefWidth="174.0" text="Amount" />
         </columns>
          <padding>
             <Insets top="25.0" />

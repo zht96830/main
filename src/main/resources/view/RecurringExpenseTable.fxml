@@ -10,15 +10,15 @@
    <children>
       <TableView prefHeight="200.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Index" />
-          <TableColumn prefWidth="350.0" text="Name" />
-            <TableColumn prefWidth="174.0" text="Amount" />
+          <TableColumn fx:id="recurringExpenseIndex" prefWidth="75.0" text="Index" />
+          <TableColumn fx:id="recurringExpenseName" prefWidth="350.0" text="Name" />
+            <TableColumn fx:id="recurringExpenseAmount" prefWidth="174.0" text="Amount" />
         </columns>
          <padding>
             <Insets top="25.0" />
          </padding>
       </TableView>
-      <Label text="Recurring ExpenseTable.fxmlExpense List" StackPane.alignment="TOP_LEFT">
+      <Label text="Recurring Expense List" StackPane.alignment="TOP_LEFT">
          <StackPane.margin>
             <Insets />
          </StackPane.margin>
