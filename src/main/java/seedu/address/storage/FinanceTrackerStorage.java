@@ -5,10 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.FinanceTracker;
 import seedu.address.model.ReadOnlyFinanceTracker;
 
 /**
- * Represents a storage for {@link seedu.address.model.FinanceTracker}.
+ * Represents a storage for {@link FinanceTracker}.
  */
 public interface FinanceTrackerStorage {
 

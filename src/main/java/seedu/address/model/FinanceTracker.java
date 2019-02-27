@@ -8,15 +8,15 @@ import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueFinanceList;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class FinanceTracker implements ReadOnlyFinanceTracker {
 
-    private final UniquePersonList persons;
+    private final UniqueFinanceList persons;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -27,15 +27,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueFinanceList();
     }
 
-    public AddressBook() {}
+    public FinanceTracker() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an FinanceTracker using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public FinanceTracker(ReadOnlyFinanceTracker toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -52,9 +52,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code FinanceTracker} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyFinanceTracker newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
@@ -92,7 +92,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code FinanceTracker}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
@@ -133,8 +133,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                || (other instanceof FinanceTracker // instanceof handles nulls
+                && persons.equals(((FinanceTracker) other).persons));
     }
 
     @Override
