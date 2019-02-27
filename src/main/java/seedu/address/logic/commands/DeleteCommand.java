@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.expense.Expense;
 
 /**
- * Deletes a expense identified using it's displayed index from the Finance Tracker.
+ * Deletes an expense identified using it's displayed index from the Finance Tracker.
  */
 public class DeleteCommand extends Command {
 
