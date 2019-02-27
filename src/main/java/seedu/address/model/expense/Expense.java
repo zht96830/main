@@ -1,17 +1,13 @@
-package seedu.address.model.person;
+package seedu.address.model.expense;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-import seedu.address.model.attributes.Address;
+import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Amount;
-import seedu.address.model.attributes.Email;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Expense in the address book.
@@ -21,22 +17,22 @@ public class Expense {
     // Identity fields
     private final Name name;
     private final Amount amount;
-    private final Email email;
+    private final Date date;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Category category;
+    private final String remarks;
 
     /**
      * Every field must be present and not null.
      */
-    public Expense(Name name, Amount amount, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, amount, email, address, tags);
+    public Expense(Name name, Amount amount, Date date, Category category, String remarks) {
+        requireAllNonNull(name, amount, date, category, remarks);
         this.name = name;
         this.amount = amount;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.date = date;
+        this.category = category;
+        this.remarks = remarks;
     }
 
     public Name getName() {
@@ -47,25 +43,25 @@ public class Expense {
         return amount;
     }
 
-    public Email getEmail() {
-        return email;
+    public Date getDate() { return date; }
+
+    public Category getCategory() {
+        return category;
     }
 
-    public Address getAddress() {
-        return address;
-    }
+    public String getRemarks() { return remarks; }
+
+//    /**
+//     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+//     * if modification is attempted.
+//     */
+//    public Set<Tag> getTags() {
+//        return Collections.unmodifiableSet(tags);
+//    }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both expenses of the same name have the same cost amount and date.
+     * This defines a weaker notion of equality between two expenses.
      */
     public boolean isSameExpense(Expense otherExpense) {
         if (otherExpense == this) {
@@ -74,12 +70,13 @@ public class Expense {
 
         return otherExpense != null
                 && otherExpense.getName().equals(getName())
-                && (otherExpense.getAmount().equals(getAmount()) || otherExpense.getEmail().equals(getEmail()));
+                && otherExpense.getAmount().equals(getAmount())
+                && otherExpense.getDate().equals(getDate());
     }
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two expenses.
      */
     @Override
     public boolean equals(Object other) {
@@ -94,15 +91,15 @@ public class Expense {
         Expense otherExpense = (Expense) other;
         return otherExpense.getName().equals(getName())
                 && otherExpense.getAmount().equals(getAmount())
-                && otherExpense.getEmail().equals(getEmail())
-                && otherExpense.getAddress().equals(getAddress())
-                && otherExpense.getTags().equals(getTags());
+                && otherExpense.getDate().equals(getDate())
+                && otherExpense.getCategory().equals(getCategory())
+                && otherExpense.getRemarks().equals(getRemarks());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, amount, email, address, tags);
+        return Objects.hash(name, amount, date, category, remarks);
     }
 
     @Override
@@ -111,12 +108,14 @@ public class Expense {
         builder.append(getName())
                 .append(" Amount: ")
                 .append(getAmount())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Name: ")
+                .append(getName())
+                .append(" Amount: ")
+                .append(getAmount())
+                .append(" Category: ")
+                .append(getCategory())
+                .append(" Remarks: ")
+                .append(getRemarks());
         return builder.toString();
     }
 
