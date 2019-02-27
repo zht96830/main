@@ -27,9 +27,9 @@ public interface Logic {
     /**
      * Returns the FinanceTracker.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getFinanceTracker()
      */
-    ReadOnlyFinanceTracker getAddressBook();
+    ReadOnlyFinanceTracker getFinanceTracker();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -41,9 +41,9 @@ public interface Logic {
     ObservableList<String> getHistory();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Finance Tracker file path.
      */
-    Path getAddressBookFilePath();
+    Path getFinanceTrackerFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
