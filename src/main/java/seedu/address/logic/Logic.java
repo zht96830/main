@@ -9,7 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFinanceTracker;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Expense;
 
 /**
  * API of the Logic component
@@ -32,7 +32,7 @@ public interface Logic {
     ReadOnlyFinanceTracker getFinanceTracker();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Expense> getFilteredPersonList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -56,17 +56,17 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Selected expense in the filtered expense list.
+     * null if no expense is selected.
      *
-     * @see seedu.address.model.Model#selectedPersonProperty()
+     * @see seedu.address.model.Model#selectedExpenseProperty()
      */
-    ReadOnlyProperty<Person> selectedPersonProperty();
+    ReadOnlyProperty<Expense> selectedPersonProperty();
 
     /**
-     * Sets the selected person in the filtered person list.
+     * Sets the selected expense in the filtered expense list.
      *
-     * @see seedu.address.model.Model#setSelectedPerson(Person)
+     * @see seedu.address.model.Model#setSelectedExpense(Expense)
      */
-    void setSelectedPerson(Person person);
+    void setSelectedPerson(Expense expense);
 }

@@ -84,14 +84,14 @@ public class JsonFinanceTrackerStorageTest {
         assertEquals(original, new FinanceTracker(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addExpense(HOON);
+        original.removeExpense(ALICE);
         jsonAddressBookStorage.saveFinanceTracker(original, filePath);
         readBack = jsonAddressBookStorage.readFinanceTracker(filePath).get();
         assertEquals(original, new FinanceTracker(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addExpense(IDA);
         jsonAddressBookStorage.saveFinanceTracker(original); // file path not specified
         readBack = jsonAddressBookStorage.readFinanceTracker().get(); // file path not specified
         assertEquals(original, new FinanceTracker(readBack));

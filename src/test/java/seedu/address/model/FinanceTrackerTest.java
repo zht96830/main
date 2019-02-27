@@ -21,8 +21,8 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.Expense;
+import seedu.address.model.person.exceptions.DuplicateExpenseException;
 import seedu.address.testutil.PersonBuilder;
 
 public class FinanceTrackerTest {
@@ -34,7 +34,7 @@ public class FinanceTrackerTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), financeTracker.getPersonList());
+        assertEquals(Collections.emptyList(), financeTracker.getFinanceList());
     }
 
     @Test
@@ -52,45 +52,45 @@ public class FinanceTrackerTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        // Two expenses with the same identity fields
+        Expense editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Expense> newExpenses = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newExpenses);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateExpenseException.class);
         financeTracker.resetData(newData);
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        financeTracker.hasPerson(null);
+        financeTracker.hasExpense(null);
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(financeTracker.hasPerson(ALICE));
+        assertFalse(financeTracker.hasExpense(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        financeTracker.addPerson(ALICE);
-        assertTrue(financeTracker.hasPerson(ALICE));
+        financeTracker.addExpense(ALICE);
+        assertTrue(financeTracker.hasExpense(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        financeTracker.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        financeTracker.addExpense(ALICE);
+        Expense editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(financeTracker.hasPerson(editedAlice));
+        assertTrue(financeTracker.hasExpense(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        financeTracker.getPersonList().remove(0);
+        financeTracker.getFinanceList().remove(0);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class FinanceTrackerTest {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         financeTracker.addListener(listener);
-        financeTracker.addPerson(ALICE);
+        financeTracker.addExpense(ALICE);
         assertEquals(1, counter.get());
     }
 
@@ -108,23 +108,23 @@ public class FinanceTrackerTest {
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         financeTracker.addListener(listener);
         financeTracker.removeListener(listener);
-        financeTracker.addPerson(ALICE);
+        financeTracker.addExpense(ALICE);
         assertEquals(0, counter.get());
     }
 
     /**
-     * A stub ReadOnlyFinanceTracker whose persons list can violate interface constraints.
+     * A stub ReadOnlyFinanceTracker whose expenses list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyFinanceTracker {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Expense> expenses = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Expense> expenses) {
+            this.expenses.setAll(expenses);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Expense> getFinanceList() {
+            return expenses;
         }
 
         @Override

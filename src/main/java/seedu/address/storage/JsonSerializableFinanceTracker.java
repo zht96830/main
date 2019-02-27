@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.ReadOnlyFinanceTracker;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Expense;
 
 /**
  * An Immutable FinanceTracker that is serializable to JSON format.
@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "financetracker")
 class JsonSerializableFinanceTracker {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate expense(s).";
 
     private final List<JsonAdaptedExpense> persons = new ArrayList<>();
 
@@ -37,7 +37,7 @@ class JsonSerializableFinanceTracker {
      * @param source future changes to this will not affect the created {@code JsonSerializableFinanceTracker}.
      */
     public JsonSerializableFinanceTracker(ReadOnlyFinanceTracker source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
+        persons.addAll(source.getFinanceList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
     }
 
     /**
@@ -48,11 +48,11 @@ class JsonSerializableFinanceTracker {
     public FinanceTracker toModelType() throws IllegalValueException {
         FinanceTracker financeTracker = new FinanceTracker();
         for (JsonAdaptedExpense jsonAdaptedExpense : persons) {
-            Person person = jsonAdaptedExpense.toModelType();
-            if (financeTracker.hasPerson(person)) {
+            Expense expense = jsonAdaptedExpense.toModelType();
+            if (financeTracker.hasExpense(expense)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            financeTracker.addPerson(person);
+            financeTracker.addExpense(expense);
         }
         return financeTracker;
     }

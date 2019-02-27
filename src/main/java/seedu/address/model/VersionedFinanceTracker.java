@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedFinanceTracker extends FinanceTracker {
 
-    private final List<ReadOnlyFinanceTracker> addressBookStateList;
+    private final List<ReadOnlyFinanceTracker> financeTrackerStateList;
     private int currentStatePointer;
 
     public VersionedFinanceTracker(ReadOnlyFinanceTracker initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new FinanceTracker(initialState));
+        financeTrackerStateList = new ArrayList<>();
+        financeTrackerStateList.add(new FinanceTracker(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,13 +25,13 @@ public class VersionedFinanceTracker extends FinanceTracker {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new FinanceTracker(this));
+        financeTrackerStateList.add(new FinanceTracker(this));
         currentStatePointer++;
         indicateModified();
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        financeTrackerStateList.subList(currentStatePointer + 1, financeTrackerStateList.size()).clear();
     }
 
     /**
@@ -42,7 +42,7 @@ public class VersionedFinanceTracker extends FinanceTracker {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(financeTrackerStateList.get(currentStatePointer));
     }
 
     /**
@@ -53,7 +53,7 @@ public class VersionedFinanceTracker extends FinanceTracker {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(financeTrackerStateList.get(currentStatePointer));
     }
 
     /**
@@ -67,7 +67,7 @@ public class VersionedFinanceTracker extends FinanceTracker {
      * Returns true if {@code redo()} has address book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < financeTrackerStateList.size() - 1;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class VersionedFinanceTracker extends FinanceTracker {
 
         // state check
         return super.equals(otherVersionedFinanceTracker)
-                && addressBookStateList.equals(otherVersionedFinanceTracker.addressBookStateList)
+                && financeTrackerStateList.equals(otherVersionedFinanceTracker.financeTrackerStateList)
                 && currentStatePointer == otherVersionedFinanceTracker.currentStatePointer;
     }
 

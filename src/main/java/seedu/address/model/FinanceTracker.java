@@ -7,16 +7,16 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniqueFinanceList;
+import seedu.address.model.person.Expense;
+import seedu.address.model.person.UniqueExpenseList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameExpense comparison)
  */
 public class FinanceTracker implements ReadOnlyFinanceTracker {
 
-    private final UniqueFinanceList persons;
+    private final UniqueExpenseList expenses;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -27,7 +27,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
      *   among constructors.
      */
     {
-        persons = new UniqueFinanceList();
+        expenses = new UniqueExpenseList();
     }
 
     public FinanceTracker() {}
@@ -43,11 +43,11 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the expense list with {@code expenses}.
+     * {@code expenses} must not contain duplicate expenses.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses.setExpenses(expenses);
         indicateModified();
     }
 
@@ -57,46 +57,47 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     public void resetData(ReadOnlyFinanceTracker newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setExpenses(newData.getFinanceList());
     }
 
-    //// person-level operations
+    //// expense-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a expense with the same identity as {@code expense} exists in the finance tracker.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasExpense(Expense expense) {
+        requireNonNull(expense);
+        return expenses.contains(expense);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a expense to the finance tracker.
+     * The expense must not already exist in the finance tracker.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addExpense(Expense p) {
+        expenses.add(p);
         indicateModified();
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given expense {@code target} in the list with {@code editedExpense}.
+     * {@code target} must exist in the finance tracker.
+     * The expense identity of {@code editedExpense} must not be the same as another existing
+     * expense in the finance tracker.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setExpense(Expense target, Expense editedExpense) {
+        requireNonNull(editedExpense);
 
-        persons.setPerson(target, editedPerson);
+        expenses.setExpense(target, editedExpense);
         indicateModified();
     }
 
     /**
      * Removes {@code key} from this {@code FinanceTracker}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the finance tracker.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeExpense(Expense key) {
+        expenses.remove(key);
         indicateModified();
     }
 
@@ -111,7 +112,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     }
 
     /**
-     * Notifies listeners that the address book has been modified.
+     * Notifies listeners that the finance tracker has been modified.
      */
     protected void indicateModified() {
         invalidationListenerManager.callListeners(this);
@@ -121,24 +122,24 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return expenses.asUnmodifiableObservableList().size() + " expenses";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Expense> getFinanceList() {
+        return expenses.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FinanceTracker // instanceof handles nulls
-                && persons.equals(((FinanceTracker) other).persons));
+                && expenses.equals(((FinanceTracker) other).expenses));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return expenses.hashCode();
     }
 }

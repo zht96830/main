@@ -15,8 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.Expense;
+import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,22 +26,22 @@ public class ModelManager implements Model {
 
     private final VersionedFinanceTracker versionedFinanceTracker;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
-    private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
+    private final FilteredList<Expense> filteredExpenses;
+    private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given financeTracker and userPrefs.
      */
-    public ModelManager(ReadOnlyFinanceTracker addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyFinanceTracker financeTracker, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(financeTracker, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with finance tracker: " + financeTracker + " and user prefs " + userPrefs);
 
-        versionedFinanceTracker = new VersionedFinanceTracker(addressBook);
+        versionedFinanceTracker = new VersionedFinanceTracker(financeTracker);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(versionedFinanceTracker.getPersonList());
-        filteredPersons.addListener(this::ensureSelectedPersonIsValid);
+        filteredExpenses = new FilteredList<>(versionedFinanceTracker.getFinanceList());
+        filteredExpenses.addListener(this::ensureSelectedExpenseIsValid);
     }
 
     public ModelManager() {
@@ -73,141 +73,141 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getFinanceTrackerFilePath() {
+        return userPrefs.getFinanceTrackerFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setFinanceTrackerFilePath(Path financeTrackerFilePath) {
+        requireNonNull(financeTrackerFilePath);
+        userPrefs.setFinanceTrackerFilePath(financeTrackerFilePath);
     }
 
     //=========== FinanceTracker ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyFinanceTracker addressBook) {
-        versionedFinanceTracker.resetData(addressBook);
+    public void setFinanceTracker(ReadOnlyFinanceTracker financeTracker) {
+        versionedFinanceTracker.resetData(financeTracker);
     }
 
     @Override
-    public ReadOnlyFinanceTracker getAddressBook() {
+    public ReadOnlyFinanceTracker getFinanceTracker() {
         return versionedFinanceTracker;
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedFinanceTracker.hasPerson(person);
+    public boolean hasExpense(Expense expense) {
+        requireNonNull(expense);
+        return versionedFinanceTracker.hasExpense(expense);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        versionedFinanceTracker.removePerson(target);
+    public void deleteExpense(Expense target) {
+        versionedFinanceTracker.removeExpense(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        versionedFinanceTracker.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addExpense(Expense expense) {
+        versionedFinanceTracker.addExpense(expense);
+        updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setExpense(Expense target, Expense editedExpense) {
+        requireAllNonNull(target, editedExpense);
 
-        versionedFinanceTracker.setPerson(target, editedPerson);
+        versionedFinanceTracker.setExpense(target, editedExpense);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Expense List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of
      * {@code versionedFinanceTracker}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Expense> getFilteredExpenseList() {
+        return filteredExpenses;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredExpenseList(Predicate<Expense> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredExpenses.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
+    public boolean canUndoFinanceTracker() {
         return versionedFinanceTracker.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
+    public boolean canRedoFinanceTracker() {
         return versionedFinanceTracker.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
+    public void undoFinanceTracker() {
         versionedFinanceTracker.undo();
     }
 
     @Override
-    public void redoAddressBook() {
+    public void redoFinanceTracker() {
         versionedFinanceTracker.redo();
     }
 
     @Override
-    public void commitAddressBook() {
+    public void commitFinanceTracker() {
         versionedFinanceTracker.commit();
     }
 
-    //=========== Selected person ===========================================================================
+    //=========== Selected expense ===========================================================================
 
     @Override
-    public ReadOnlyProperty<Person> selectedPersonProperty() {
-        return selectedPerson;
+    public ReadOnlyProperty<Expense> selectedExpenseProperty() {
+        return selectedExpense;
     }
 
     @Override
-    public Person getSelectedPerson() {
-        return selectedPerson.getValue();
+    public Expense getSelectedExpense() {
+        return selectedExpense.getValue();
     }
 
     @Override
-    public void setSelectedPerson(Person person) {
-        if (person != null && !filteredPersons.contains(person)) {
-            throw new PersonNotFoundException();
+    public void setSelectedExpense(Expense expense) {
+        if (expense != null && !filteredExpenses.contains(expense)) {
+            throw new ExpenseNotFoundException();
         }
-        selectedPerson.setValue(person);
+        selectedExpense.setValue(expense);
     }
 
     /**
-     * Ensures {@code selectedPerson} is a valid person in {@code filteredPersons}.
+     * Ensures {@code selectedExpense} is a valid expense in {@code filteredExpenses}.
      */
-    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends Person> change) {
+    private void ensureSelectedExpenseIsValid(ListChangeListener.Change<? extends Expense> change) {
         while (change.next()) {
-            if (selectedPerson.getValue() == null) {
-                // null is always a valid selected person, so we do not need to check that it is valid anymore.
+            if (selectedExpense.getValue() == null) {
+                // null is always a valid selected expense, so we do not need to check that it is valid anymore.
                 return;
             }
 
-            boolean wasSelectedPersonReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
-                    && change.getRemoved().contains(selectedPerson.getValue());
-            if (wasSelectedPersonReplaced) {
-                // Update selectedPerson to its new value.
-                int index = change.getRemoved().indexOf(selectedPerson.getValue());
-                selectedPerson.setValue(change.getAddedSubList().get(index));
+            boolean wasSelectedExpenseReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
+                    && change.getRemoved().contains(selectedExpense.getValue());
+            if (wasSelectedExpenseReplaced) {
+                // Update selectedExpense to its new value.
+                int index = change.getRemoved().indexOf(selectedExpense.getValue());
+                selectedExpense.setValue(change.getAddedSubList().get(index));
                 continue;
             }
 
-            boolean wasSelectedPersonRemoved = change.getRemoved().stream()
-                    .anyMatch(removedPerson -> selectedPerson.getValue().isSamePerson(removedPerson));
-            if (wasSelectedPersonRemoved) {
-                // Select the person that came before it in the list,
-                // or clear the selection if there is no such person.
-                selectedPerson.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
+            boolean wasSelectedExpenseRemoved = change.getRemoved().stream()
+                    .anyMatch(removedExpense -> selectedExpense.getValue().isSameExpense(removedExpense));
+            if (wasSelectedExpenseRemoved) {
+                // Select the expense that came before it in the list,
+                // or clear the selection if there is no such expense.
+                selectedExpense.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
             }
         }
     }
@@ -228,8 +228,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedFinanceTracker.equals(other.versionedFinanceTracker)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons)
-                && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
+                && filteredExpenses.equals(other.filteredExpenses)
+                && Objects.equals(selectedExpense.get(), other.selectedExpense.get());
     }
 
 }

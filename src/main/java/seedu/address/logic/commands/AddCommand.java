@@ -10,16 +10,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Expense;
 
 /**
- * Adds a person to the Finance Tracker.
+ * Adds a expense to the Finance Tracker.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the Finance Tracker. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a expense to the Finance Tracker. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -34,28 +34,28 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the Finance Tracker";
+    public static final String MESSAGE_SUCCESS = "New expense added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This expense already exists in the Finance Tracker";
 
-    private final Person toAdd;
+    private final Expense toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Expense}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Expense expense) {
+        requireNonNull(expense);
+        toAdd = expense;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasExpense(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addExpense(toAdd);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
