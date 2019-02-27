@@ -36,9 +36,10 @@ public class StatusBarFooter extends UiPart<Region> {
     private Label saveLocationStatus;
 
 
-    public StatusBarFooter(Path saveLocation, ReadOnlyFinanceTracker addressBook) {
+
+    public StatusBarFooter(Path saveLocation, ReadOnlyFinanceTracker FinanceTracker) {
         super(FXML);
-        addressBook.addListener(observable -> updateSyncStatus());
+        FinanceTracker.addListener(observable -> updateSyncStatus());
         syncStatus.setText(SYNC_STATUS_INITIAL);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
