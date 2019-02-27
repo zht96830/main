@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.ReadOnlyFinanceTracker;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Expense;
 
 /**
  * An Immutable FinanceTracker that is serializable to JSON format.
@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate expense(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -37,7 +37,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyFinanceTracker source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(source.getFinanceList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -48,11 +48,11 @@ class JsonSerializableAddressBook {
     public FinanceTracker toModelType() throws IllegalValueException {
         FinanceTracker financeTracker = new FinanceTracker();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (financeTracker.hasPerson(person)) {
+            Expense expense = jsonAdaptedPerson.toModelType();
+            if (financeTracker.hasExpense(expense)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            financeTracker.addPerson(person);
+            financeTracker.addExpense(expense);
         }
         return financeTracker;
     }

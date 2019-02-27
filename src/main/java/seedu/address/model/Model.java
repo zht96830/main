@@ -6,14 +6,14 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Expense;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Expense> PREDICATE_SHOW_ALL_FINANCES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -36,95 +36,95 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' finance tracker file path.
      */
-    Path getAddressBookFilePath();
+    Path getFinanceTrackerFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' finance tracker file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setFinanceTrackerFilePath(Path financeTrackerFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces finance tracker data with the data in {@code financeTracker}.
      */
-    void setAddressBook(ReadOnlyFinanceTracker addressBook);
+    void setFinanceTracker(ReadOnlyFinanceTracker financeTracker);
 
     /** Returns the FinanceTracker */
-    ReadOnlyFinanceTracker getAddressBook();
+    ReadOnlyFinanceTracker getFinanceTracker();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a expense with the same identity as {@code expense} exists in the finance tracker.
      */
-    boolean hasPerson(Person person);
+    boolean hasExpense(Expense expense);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given expense.
+     * The expense must exist in the finance tracker.
      */
-    void deletePerson(Person target);
+    void deleteExpense(Expense target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given expense.
+     * {@code expense} must not already exist in the finance tracker.
      */
-    void addPerson(Person person);
+    void addExpense(Expense expense);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given expense {@code target} with {@code editedExpense}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The expense identity of {@code editedExpense} must not be the same as another existing expense in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setExpense(Expense target, Expense editedExpense);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered expense list */
+    ObservableList<Expense> getFilteredExpenseList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredExpenseList(Predicate<Expense> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous finance tracker states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoFinanceTracker();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone finance tracker states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoFinanceTracker();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's finance tracker to its previous state.
      */
-    void undoAddressBook();
+    void undoFinanceTracker();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's finance tracker to its previously undone state.
      */
-    void redoAddressBook();
+    void redoFinanceTracker();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current finance tracker state for undo/redo.
      */
-    void commitAddressBook();
+    void commitFinanceTracker();
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Selected expense in the filtered expense list.
+     * null if no expense is selected.
      */
-    ReadOnlyProperty<Person> selectedPersonProperty();
+    ReadOnlyProperty<Expense> selectedExpenseProperty();
 
     /**
-     * Returns the selected person in the filtered person list.
-     * null if no person is selected.
+     * Returns the selected expense in the filtered expense list.
+     * null if no expense is selected.
      */
-    Person getSelectedPerson();
+    Expense getSelectedExpense();
 
     /**
-     * Sets the selected person in the filtered person list.
+     * Sets the selected expense in the filtered expense list.
      */
-    void setSelectedPerson(Person person);
+    void setSelectedExpense(Expense expense);
 }

@@ -250,7 +250,7 @@ You can omit (optional) parameters by leaving them empty.
 Examples:
 
 * `adddebt` +
-`Please enter the name of the person you owed: John Doe` +
+`Please enter the name of the expense you owed: John Doe` +
 `Please enter the amount owed : 50.00` +
 `Please enter the category: shopping` +
 `Please enter the deadline of the debt (optional): 25-02-2019` +
@@ -272,7 +272,7 @@ Format 1: `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [d/DEADLI
 Examples:
 
 * `editdebt 5 n/Tommy $/60`
-Edits person owed and amount owed of the 5th debt to be `Tommy` and `$60` respectively.
+Edits expense owed and amount owed of the 5th debt to be `Tommy` and `$60` respectively.
 
 Format 2: `editdebt`
 [TIP]
@@ -281,7 +281,7 @@ You can omit (optional) parameters by leaving them empty. If all parameters are 
 Examples:
 
 * `editdebt 5` +
-`Please enter the updated name of the person you owed (optional): Tommy` +
+`Please enter the updated name of the expense you owed (optional): Tommy` +
 `Please enter the updated amount owed (optional): 60.00` +
 `Please enter the updated category (optional):` +
 `Please enter the updated deadline of the debt (optional):` +

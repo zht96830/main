@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.FinanceTracker;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Expense;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -21,10 +21,10 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code FinanceTracker} that we are building.
+     * Adds a new {@code Expense} to the {@code FinanceTracker} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
-        financeTracker.addPerson(person);
+    public AddressBookBuilder withPerson(Expense expense) {
+        financeTracker.addExpense(expense);
         return this;
     }
 

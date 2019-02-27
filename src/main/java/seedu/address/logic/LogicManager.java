@@ -15,7 +15,7 @@ import seedu.address.logic.parser.FinanceTrackerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFinanceTracker;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Expense;
 import seedu.address.storage.Storage;
 
 /**
@@ -74,8 +74,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Expense> getFilteredPersonList() {
+        return model.getFilteredExpenseList();
     }
 
     @Override
@@ -99,12 +99,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyProperty<Person> selectedPersonProperty() {
-        return model.selectedPersonProperty();
+    public ReadOnlyProperty<Expense> selectedPersonProperty() {
+        return model.selectedExpenseProperty();
     }
 
     @Override
-    public void setSelectedPerson(Person person) {
-        model.setSelectedPerson(person);
+    public void setSelectedPerson(Expense expense) {
+        model.setSelectedExpense(expense);
     }
 }
