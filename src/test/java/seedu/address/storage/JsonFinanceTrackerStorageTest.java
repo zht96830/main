@@ -21,7 +21,7 @@ import seedu.address.model.FinanceTracker;
 import seedu.address.model.ReadOnlyFinanceTracker;
 
 public class JsonFinanceTrackerStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonFinanceTrackerStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
