@@ -9,7 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFinanceTracker;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * API of the Logic component

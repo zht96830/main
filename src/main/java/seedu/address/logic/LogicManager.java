@@ -15,7 +15,7 @@ import seedu.address.logic.parser.FinanceTrackerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFinanceTracker;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.storage.Storage;
 
 /**

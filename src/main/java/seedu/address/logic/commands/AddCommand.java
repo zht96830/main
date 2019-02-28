@@ -1,16 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * Adds a expense to the Finance Tracker.
@@ -22,20 +21,18 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a expense to the Finance Tracker. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_AMOUNT + "AMOUNT "
+            + PREFIX_CATEGORY + "CATEGORY "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_REMARKS + "REMARKS]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_NAME + "Char Kuey Teow "
+            + PREFIX_AMOUNT + "300 "
+            + PREFIX_CATEGORY + "food "
+            + PREFIX_DATE + "13-01-1996 "
+            + PREFIX_REMARKS + "My lunch for tuesday";
 
     public static final String MESSAGE_SUCCESS = "New expense added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This expense already exists in the Finance Tracker";
 
     private final Expense toAdd;
 
@@ -48,12 +45,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-
-        if (model.hasExpense(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
 
         model.addExpense(toAdd);
         model.commitFinanceTracker();

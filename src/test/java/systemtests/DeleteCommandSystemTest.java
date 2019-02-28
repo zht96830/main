@@ -3,7 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_EXPENSE_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getPerson;
@@ -18,7 +18,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 
 public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
 
@@ -33,7 +33,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
         Expense deletedExpense = removePerson(expectedModel, INDEX_FIRST_PERSON);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedExpense);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last expense in the list -> deleted */
@@ -82,7 +82,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         selectPerson(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         deletedExpense = removePerson(expectedModel, selectedIndex);
-        expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedExpense);
+        expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
@@ -129,7 +129,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
         Expense deletedExpense = removePerson(expectedModel, toDelete);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedExpense);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
 
         assertCommandSuccess(
                 DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);

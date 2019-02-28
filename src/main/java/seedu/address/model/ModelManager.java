@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 
 /**

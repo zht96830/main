@@ -16,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.expense.Expense;
 import seedu.address.model.person.exceptions.DuplicateExpenseException;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 import seedu.address.testutil.PersonBuilder;

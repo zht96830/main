@@ -7,8 +7,8 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
-import seedu.address.model.person.Expense;
-import seedu.address.model.person.UniqueExpenseList;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.ExpenseList;
 
 /**
  * Wraps all data at the address-book level
@@ -16,7 +16,7 @@ import seedu.address.model.person.UniqueExpenseList;
  */
 public class FinanceTracker implements ReadOnlyFinanceTracker {
 
-    private final UniqueExpenseList expenses;
+    private final ExpenseList expenses;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -26,14 +26,14 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
-    {
-        expenses = new UniqueExpenseList();
+
+
+    public FinanceTracker() {
+        expenses = new ExpenseList();
     }
 
-    public FinanceTracker() {}
-
     /**
-     * Creates an FinanceTracker using the Persons in the {@code toBeCopied}
+     * Creates an FinanceTracker using the Expenses in the {@code toBeCopied}
      */
     public FinanceTracker(ReadOnlyFinanceTracker toBeCopied) {
         this();

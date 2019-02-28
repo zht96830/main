@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.FinanceTracker;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * A utility class containing a list of {@code Expense} objects to be used in tests.

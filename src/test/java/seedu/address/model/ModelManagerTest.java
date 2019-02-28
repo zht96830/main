@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;

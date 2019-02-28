@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.FinanceTracker;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * A utility class to help with building Addressbook objects.

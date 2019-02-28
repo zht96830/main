@@ -9,10 +9,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
- * Deletes a expense identified using it's displayed index from the Finance Tracker.
+ * Deletes an expense identified using it's displayed index from the Finance Tracker.
  */
 public class DeleteCommand extends Command {
 
@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Expense: %1$s";
+    public static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Deleted Expense: %1$s";
 
     private final Index targetIndex;
 
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
         Expense expenseToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteExpense(expenseToDelete);
         model.commitFinanceTracker();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, expenseToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, expenseToDelete));
     }
 
     @Override
