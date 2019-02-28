@@ -229,7 +229,7 @@ Format: `listdebt [v/VIEW]`
 
 Adds a debt to the finance tracker.
 
-Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [d/DEADLINE] [r/REMARK]`
+Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMARK]`
 
 [NOTE]
 ====
@@ -260,7 +260,7 @@ Examples:
 
 Edits debt at specified INDEX based on latest debt list shown and updates values of parameters.
 
-Format 1: `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [d/DEADLINE] [r/REMARK]`
+Format 1: `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]`
 
 [NOTE]
 ====
@@ -307,7 +307,7 @@ Examples:
 === Paying off a debt: `paydebt`
 Convert the debt record to an expense.
 
-Format: `paydebt INDEX [d/DATE]`
+Format: `paydebt INDEX [due/DATE]`
 
 [NOTE]
 ====
