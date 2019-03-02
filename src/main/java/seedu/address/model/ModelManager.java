@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 
@@ -95,6 +96,8 @@ public class ModelManager implements Model {
         return versionedFinanceTracker;
     }
 
+    //=========== Expenses ======================================================================================
+
     @Override
     public boolean hasExpense(Expense expense) {
         requireNonNull(expense);
@@ -119,7 +122,15 @@ public class ModelManager implements Model {
         versionedFinanceTracker.setExpense(target, editedExpense);
     }
 
-    //=========== Filtered Expense List Accessors =============================================================
+    //=========== Debts ========================================================================================
+
+    @Override
+    public void addDebt(Debt debt) {
+        versionedFinanceTracker.addDebt(debt);
+        updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+    }
+
+    //=========== Filtered Expense List Accessors ==============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of

@@ -229,7 +229,7 @@ Format: `listdebt [v/VIEW]`
 
 Adds a debt to the finance tracker.
 
-Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [d/DEADLINE] [r/REMARK]`
+Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMARK]`
 
 [NOTE]
 ====
@@ -260,7 +260,7 @@ Examples:
 
 Edits debt at specified INDEX based on latest debt list shown and updates values of parameters.
 
-Format 1: `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [d/DEADLINE] [r/REMARK]`
+Format 1: `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]`
 
 [NOTE]
 ====
@@ -578,9 +578,9 @@ e.g. `addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
 e.g. `editbudget c/all $/5000 sd/1-1-2019 ed/31-3-2019`
 * *Delete a budget* : `deletebudget c/CATEGORY` +
 e.g. `deletebudget c/food`
-* *Add a debt* : `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [d/DEADLINE] [r/REMARK]` +
+* *Add a debt* : `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMARK]` +
 e.g. `adddebt n/Jane Doe $/200 c/FOOD`
-* *Edit a debt* : `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [d/DEADLINE] [r/REMARK]` +
+* *Edit a debt* : `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]` +
 e.g. `editdebt 5 n/Tommy $/60`
 * *List debts* : `listdebt [v/VIEW]`
 * *Delete a debt* : `deletedebt INDEX` +

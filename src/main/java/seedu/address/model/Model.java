@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
 /**
@@ -79,6 +80,11 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered expense list */
     ObservableList<Expense> getFilteredExpenseList();
+
+    /**
+     * Adds the given debt.
+     */
+    void addDebt(Debt debt);
 
     /**
      * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
