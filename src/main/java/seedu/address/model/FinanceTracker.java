@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
+import seedu.address.model.debt.Debt;
+import seedu.address.model.debt.DebtList;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.ExpenseList;
 
@@ -17,6 +19,7 @@ import seedu.address.model.expense.ExpenseList;
 public class FinanceTracker implements ReadOnlyFinanceTracker {
 
     private final ExpenseList expenses;
+    private final DebtList debts;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -30,6 +33,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
 
     public FinanceTracker() {
         expenses = new ExpenseList();
+        debts = new DebtList();
     }
 
     /**
@@ -40,16 +44,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
-
-    /**
-     * Replaces the contents of the expense list with {@code expenses}.
-     * {@code expenses} must not contain duplicate expenses.
-     */
-    public void setExpenses(List<Expense> expenses) {
-        this.expenses.setExpenses(expenses);
-        indicateModified();
-    }
+    //// list overwrite operations =================================================================
 
     /**
      * Resets the existing data of this {@code FinanceTracker} with {@code newData}.
@@ -60,10 +55,27 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
         setExpenses(newData.getFinanceList());
     }
 
-    //// expense-level operations
+    /**
+     * Replaces the contents of the expense list with {@code expenses}.
+     */
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses.setExpenses(expenses);
+        indicateModified();
+    }
 
     /**
-     * Returns true if a expense with the same identity as {@code expense} exists in the finance tracker.
+     * Replaces the contents of the debt list with {@code debts}.
+     */
+    public void setDebts(List<Debt> debts) {
+        this.debts.setDebts(debts);
+        indicateModified();
+    }
+
+    //// expense-level operations ==================================================================
+
+    /**
+     * Returns true if a expense with the same identity as {@code expense} exists in the
+     * expense list in the finance tracker.
      */
     public boolean hasExpense(Expense expense) {
         requireNonNull(expense);
@@ -71,8 +83,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     }
 
     /**
-     * Adds a expense to the finance tracker.
-     * The expense must not already exist in the finance tracker.
+     * Adds a expense to the expense list in the finance tracker.
      */
     public void addExpense(Expense p) {
         expenses.add(p);
@@ -81,9 +92,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
 
     /**
      * Replaces the given expense {@code target} in the list with {@code editedExpense}.
-     * {@code target} must exist in the finance tracker.
-     * The expense identity of {@code editedExpense} must not be the same as another existing
-     * expense in the finance tracker.
+     * {@code target} must exist in the expense list in the finance tracker.
      */
     public void setExpense(Expense target, Expense editedExpense) {
         requireNonNull(editedExpense);
@@ -94,12 +103,53 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
 
     /**
      * Removes {@code key} from this {@code FinanceTracker}.
-     * {@code key} must exist in the finance tracker.
+     * {@code key} must exist in the expense list in the finance tracker.
      */
     public void removeExpense(Expense key) {
         expenses.remove(key);
         indicateModified();
     }
+
+    //// debt-level operations =====================================================================
+
+    /**
+     * Returns true if a debt with the same identity as {@code debt} exists in the
+     * debt list in the finance tracker.
+     */
+    public boolean hasDebt(Debt debt) {
+        requireNonNull(debt);
+        return debts.contains(debt);
+    }
+
+    /**
+     * Adds a debt to the debt list in the finance tracker.
+     */
+    public void addDebt(Debt debt) {
+        debts.add(debt);
+        indicateModified();
+    }
+
+    /**
+     * Replaces the given debt {@code target} in the list with {@code editedDebt}.
+     * {@code target} must exist in the debt list in the finance tracker.
+     */
+    public void setDebt(Debt target, Debt editedDebt) {
+        requireNonNull(editedDebt);
+
+        debts.setDebt(target, editedDebt);
+        indicateModified();
+    }
+
+    /**
+     * Removes {@code key} from this {@code FinanceTracker}.
+     * {@code key} must exist in the debt list in the finance tracker.
+     */
+    public void removeDebt(Debt key) {
+        debts.remove(key);
+        indicateModified();
+    }
+
+    //// listener methods ==========================================================================
 
     @Override
     public void addListener(InvalidationListener listener) {
