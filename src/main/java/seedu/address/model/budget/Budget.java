@@ -104,14 +104,14 @@ public class Budget {
         final StringBuilder builder = new StringBuilder();
         builder.append("Category: ")
                 .append(category)
-                .append("Amount: ")
+                .append(" Amount: ")
                 .append(amount);
         if (startDate != null) {
-            builder.append("Start date: ").append(startDate);
+            builder.append(" Start date: ").append(startDate);
         }
-        builder.append("End date: ").append(endDate);
+        builder.append(" End date: ").append(endDate);
         if (remarks != null) {
-            builder.append("Remarks: ").append(remarks);
+            builder.append(" Remarks: ").append(remarks);
         }
         return builder.toString();
     }

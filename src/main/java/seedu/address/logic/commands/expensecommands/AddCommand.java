@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_DATE + "13-01-1996 "
             + PREFIX_REMARKS + "My lunch for tuesday";
 
-    public static final String MESSAGE_SUCCESS = "New expense added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New expense added:\n%1$s";
 
     private final Expense toAdd;
 

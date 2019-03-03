@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
 import seedu.address.logic.commands.debtcommands.AddDebtCommand;
 import seedu.address.logic.commands.debtcommands.DeleteDebtCommand;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.generalcommands.*;
 import seedu.address.logic.commands.recurringcommands.AddRecurringCommand;
 import seedu.address.logic.commands.recurringcommands.DeleteRecurringCommand;
 import seedu.address.logic.commands.recurringcommands.EditRecurringCommand;
+import seedu.address.logic.parser.budgetparsers.AddBudgetCommandParser;
 import seedu.address.logic.parser.debtparsers.AddDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.DeleteDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.EditDebtCommandParser;
@@ -63,6 +65,9 @@ public class FinanceTrackerParser {
 
         case AddRecurringCommand.COMMAND_WORD:
             return new AddRecurringCommandParser().parse(arguments);
+
+        case AddBudgetCommand.COMMAND_WORD:
+            return new AddBudgetCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

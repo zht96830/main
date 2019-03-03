@@ -47,7 +47,7 @@ public class EditDebtCommand extends Command {
             + PREFIX_CATEGORY + "travel"
             + PREFIX_DUE + "21-02-2019";
 
-    public static final String MESSAGE_EDIT_DEBT_SUCCESS = "Edited debt: %1$s";
+    public static final String MESSAGE_EDIT_DEBT_SUCCESS = "Edited debt:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;

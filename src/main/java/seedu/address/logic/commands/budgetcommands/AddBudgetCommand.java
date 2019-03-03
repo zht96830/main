@@ -1,6 +1,8 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.budgetcommands;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.budget.Budget;
 
@@ -29,7 +31,7 @@ public class AddBudgetCommand extends Command {
             + PREFIX_ENDDATE + "31-05-2019 "
             + PREFIX_REMARKS + "i eat too much";
 
-    public static final String MESSAGE_SUCCESS = "New budget added!";
+    public static final String MESSAGE_SUCCESS =  "New budget added:\n%1$s";
 
     private final Budget toAdd;
 
