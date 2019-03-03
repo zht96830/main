@@ -30,6 +30,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Expense> filteredExpenses;
     private final FilteredList<Debt> filteredDebts;
+    private final FilteredList<Recurring> filteredRecurring;
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
@@ -46,6 +47,7 @@ public class ModelManager implements Model {
         filteredExpenses = new FilteredList<>(versionedFinanceTracker.getExpenseList());
         filteredExpenses.addListener(this::ensureSelectedExpenseIsValid);
         filteredDebts = new FilteredList<>(versionedFinanceTracker.getDebtList());
+        filteredRecurring = new FilteredList<>(versionedFinanceTracker.getRecurringList());
     }
 
     public ModelManager() {
@@ -209,6 +211,23 @@ public class ModelManager implements Model {
     public void updateFilteredDebtList(Predicate<Debt> predicate) {
         requireNonNull(predicate);
         filteredDebts.setPredicate(predicate);
+    }
+
+    //=========== Filtered Recurring List Accessors ==============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Recurring} backed by the internal list of
+     * {@code versionedFinanceTracker}
+     */
+    @Override
+    public ObservableList<Recurring> getFilteredRecurringList() {
+        return filteredRecurring;
+    }
+
+    @Override
+    public void updateFilteredRecurringList(Predicate<Recurring> predicate) {
+        requireNonNull(predicate);
+        filteredRecurring.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
