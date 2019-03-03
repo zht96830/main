@@ -48,7 +48,9 @@ public class AddDebtCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
+        System.out.println("got here (A)");
         model.addDebt(toAdd);
+        System.out.println("got here (B)");
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

@@ -27,7 +27,7 @@ public class SampleDataUtil {
                 Category.FOOD, null),
             new Expense(new Name("Japan Ticket"), new Amount("62040"), new Date("21-01-2019"),
                 Category.TRAVEL, null),
-            new Expense(new Name("Top-up EZ-link card"), new Amount("2000"), new Date("03-03-2019"),
+            new Expense(new Name("Top up EZ link card"), new Amount("2000"), new Date("03-03-2019"),
                 Category.TRANSPORT, "Topped up at KR MRT"),
             new Expense(new Name("See doctor"), new Amount("6520"), new Date("26-02-2019"),
                 Category.HEALTHCARE, "For fever at UHC"),
