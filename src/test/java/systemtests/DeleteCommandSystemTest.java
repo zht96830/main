@@ -1,7 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_EXPENSE_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
@@ -70,7 +70,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getFinanceTracker().getFinanceList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* --------------------- Performing delete operation while a expense card is selected ------------------------ */
 
@@ -99,7 +99,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         Index outOfBoundsIndex = Index.fromOneBased(
                 getModel().getFinanceTracker().getFinanceList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(DeleteCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
