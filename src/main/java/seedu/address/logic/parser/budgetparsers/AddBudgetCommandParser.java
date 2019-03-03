@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.budgetparsers;
 
+import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
 import seedu.address.logic.commands.debtcommands.AddDebtCommand;
 import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
