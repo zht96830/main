@@ -4,6 +4,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -15,7 +16,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
-public class EditDebtCommandParser {
+public class EditDebtCommandParser implements Parser<EditDebtCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -60,4 +61,5 @@ public class EditDebtCommandParser {
         }
 
         return new EditDebtCommand(index, editDebtDescriptor);
-    }}
+    }
+}
