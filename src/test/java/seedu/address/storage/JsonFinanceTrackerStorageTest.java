@@ -2,10 +2,10 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
+import static seedu.address.testutil.TypicalExpenses.JAPAN;
+import static seedu.address.testutil.TypicalExpenses.STOCKS;
+import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -75,7 +75,7 @@ public class JsonFinanceTrackerStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.json");
-        FinanceTracker original = getTypicalAddressBook();
+        FinanceTracker original = getTypicalFinanceTrackerWithExpenses();
         JsonFinanceTrackerStorage jsonAddressBookStorage = new JsonFinanceTrackerStorage(filePath);
 
         // Save in new file and read back
@@ -84,14 +84,14 @@ public class JsonFinanceTrackerStorageTest {
         assertEquals(original, new FinanceTracker(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addExpense(HOON);
-        original.removeExpense(ALICE);
+        original.addExpense(JAPAN);
+        original.removeExpense(DUCK_RICE);
         jsonAddressBookStorage.saveFinanceTracker(original, filePath);
         readBack = jsonAddressBookStorage.readFinanceTracker(filePath).get();
         assertEquals(original, new FinanceTracker(readBack));
 
         // Save and read without specifying file path
-        original.addExpense(IDA);
+        original.addExpense(STOCKS);
         jsonAddressBookStorage.saveFinanceTracker(original); // file path not specified
         readBack = jsonAddressBookStorage.readFinanceTracker().get(); // file path not specified
         assertEquals(original, new FinanceTracker(readBack));

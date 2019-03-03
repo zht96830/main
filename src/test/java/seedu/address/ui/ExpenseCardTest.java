@@ -9,20 +9,20 @@ import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.model.expense.Expense;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ExpenseBuilder;
 
 public class ExpenseCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
         // no tags
-        Expense expenseWithNoTags = new PersonBuilder().withTags(new String[0]).build();
+        Expense expenseWithNoTags = new ExpenseBuilder().withTags(new String[0]).build();
         PersonCard personCard = new PersonCard(expenseWithNoTags, 1);
         uiPartRule.setUiPart(personCard);
         assertCardDisplay(personCard, expenseWithNoTags, 1);
 
         // with tags
-        Expense expenseWithTags = new PersonBuilder().build();
+        Expense expenseWithTags = new ExpenseBuilder().build();
         personCard = new PersonCard(expenseWithTags, 2);
         uiPartRule.setUiPart(personCard);
         assertCardDisplay(personCard, expenseWithTags, 2);
@@ -30,7 +30,7 @@ public class ExpenseCardTest extends GuiUnitTest {
 
     @Test
     public void equals() {
-        Expense expense = new PersonBuilder().build();
+        Expense expense = new ExpenseBuilder().build();
         PersonCard personCard = new PersonCard(expense, 0);
 
         // same expense, same index -> returns true
@@ -47,7 +47,7 @@ public class ExpenseCardTest extends GuiUnitTest {
         assertFalse(personCard.equals(0));
 
         // different expense, same index -> returns false
-        Expense differentExpense = new PersonBuilder().withName("differentName").build();
+        Expense differentExpense = new ExpenseBuilder().withName("differentName").build();
         assertFalse(personCard.equals(new PersonCard(differentExpense, 0)));
 
         // same expense, different index -> returns false

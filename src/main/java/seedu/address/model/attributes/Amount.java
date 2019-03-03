@@ -11,19 +11,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Amount {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Amount should only contain numbers, reflect the value in cents and it should be at least 1 digit long.";
-    public static final String VALIDATION_REGEX = "\\d{1,}";
+            "Amount should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.";
+    public static final String VALIDATION_REGEX = "\\d{1,}(\\.\\d{2})?";
     public final int value;
 
     /**
      * Constructs a {@code Amount}.
      *
-     * @param amount A valid amount number.
+     * @param amount A valid amount number in dollars.
      */
     public Amount(String amount) {
         requireNonNull(amount);
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
-        value = Integer.parseInt(amount);
+        BigDecimal valueInDollars = new BigDecimal(amount);
+        value = valueInDollars.multiply(new BigDecimal("100")).intValue();
     }
 
     /**

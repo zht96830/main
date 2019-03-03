@@ -29,9 +29,9 @@ import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.EditExpenseDescriptorBuilder;
+import seedu.address.testutil.ExpenseBuilder;
+import seedu.address.testutil.ExpenseUtil;
 
 public class FinanceTrackerParserTest {
     @Rule
@@ -41,8 +41,8 @@ public class FinanceTrackerParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Expense expense = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(expense));
+        Expense expense = new ExpenseBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(ExpenseUtil.getAddCommand(expense));
         assertEquals(new AddCommand(expense), command);
     }
 
@@ -61,10 +61,10 @@ public class FinanceTrackerParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Expense expense = new PersonBuilder().build();
-        EditCommand.EditRecurringDescriptor descriptor = new EditPersonDescriptorBuilder(expense).build();
+        Expense expense = new ExpenseBuilder().build();
+        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder(expense).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + ExpenseUtil.getEditExpenseDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

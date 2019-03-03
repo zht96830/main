@@ -50,18 +50,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
-    private final EditRecurringDescriptor editRecurringDescriptor;
+    private final EditExpenseDescriptor editExpenseDescriptor;
 
     /**
      * @param index of the expense in the filtered expense list to edit
-     * @param editRecurringDescriptor details to edit the expense with
+     * @param editExpenseDescriptor details to edit the expense with
      */
-    public EditCommand(Index index, EditRecurringDescriptor editRecurringDescriptor) {
+    public EditCommand(Index index, EditExpenseDescriptor editExpenseDescriptor) {
         requireNonNull(index);
-        requireNonNull(editRecurringDescriptor);
+        requireNonNull(editExpenseDescriptor);
 
         this.index = index;
-        this.editRecurringDescriptor = new EditRecurringDescriptor(editRecurringDescriptor);
+        this.editExpenseDescriptor = new EditExpenseDescriptor(editExpenseDescriptor);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class EditCommand extends Command {
         }
 
         Expense expenseToEdit = lastShownList.get(index.getZeroBased());
-        Expense editedExpense = createEditedExpense(expenseToEdit, editRecurringDescriptor);
+        Expense editedExpense = createEditedExpense(expenseToEdit, editExpenseDescriptor);
 
         model.setExpense(expenseToEdit, editedExpense);
         model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
@@ -86,14 +86,14 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Expense} with the details of {@code expenseToEdit}
      * edited with {@code editRecurringDescriptor}.
      */
-    private static Expense createEditedExpense(Expense expenseToEdit, EditRecurringDescriptor editRecurringDescriptor) {
+    private static Expense createEditedExpense(Expense expenseToEdit, EditExpenseDescriptor editExpenseDescriptor) {
         assert expenseToEdit != null;
 
-        Name updatedName = editRecurringDescriptor.getName().orElse(expenseToEdit.getName());
-        Amount updatedAmount = editRecurringDescriptor.getAmount().orElse(expenseToEdit.getAmount());
-        Category updatedCategory = editRecurringDescriptor.getCategory().orElse(expenseToEdit.getCategory());
-        Date updatedDate = editRecurringDescriptor.getDate().orElse(expenseToEdit.getDate());
-        String updatedRemarks = editRecurringDescriptor.getRemarks().orElse(expenseToEdit.getRemarks());
+        Name updatedName = editExpenseDescriptor.getName().orElse(expenseToEdit.getName());
+        Amount updatedAmount = editExpenseDescriptor.getAmount().orElse(expenseToEdit.getAmount());
+        Category updatedCategory = editExpenseDescriptor.getCategory().orElse(expenseToEdit.getCategory());
+        Date updatedDate = editExpenseDescriptor.getDate().orElse(expenseToEdit.getDate());
+        String updatedRemarks = editExpenseDescriptor.getRemarks().orElse(expenseToEdit.getRemarks());
 
         return new Expense(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks);
     }
@@ -113,27 +113,27 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editRecurringDescriptor.equals(e.editRecurringDescriptor);
+                && editExpenseDescriptor.equals(e.editExpenseDescriptor);
     }
 
     /**
      * Stores the details to edit the expense with. Each non-empty field value will replace the
      * corresponding field value of the expense.
      */
-    public static class EditRecurringDescriptor {
+    public static class EditExpenseDescriptor {
         private Name name;
         private Amount amount;
         private Date date;
         private Category category;
         private String remarks;
 
-        public EditRecurringDescriptor() {}
+        public EditExpenseDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditRecurringDescriptor(EditRecurringDescriptor toCopy) {
+        public EditExpenseDescriptor(EditExpenseDescriptor toCopy) {
             setName(toCopy.name);
             setAmount(toCopy.amount);
             setDate(toCopy.date);
@@ -190,12 +190,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditRecurringDescriptor)) {
+            if (!(other instanceof EditExpenseDescriptor)) {
                 return false;
             }
 
             // state check
-            EditRecurringDescriptor e = (EditRecurringDescriptor) other;
+            EditExpenseDescriptor e = (EditExpenseDescriptor) other;
 
             return getName().equals(e.getName())
                     && getAmount().equals(e.getAmount())

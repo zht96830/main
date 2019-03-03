@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
 /**
@@ -49,7 +50,14 @@ public class TestUtil {
     /**
      * Returns the expense in the {@code model}'s expense list at {@code index}.
      */
-    public static Expense getPerson(Model model, Index index) {
+    public static Expense getExpense(Model model, Index index) {
         return model.getFilteredExpenseList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns the debt in the {@code model}'s debt list at {@code index}.
+     */
+    public static Debt getDebt(Model model, Index index) {
+        return model.getFilteredDebtList().get(index.getZeroBased());
     }
 }
