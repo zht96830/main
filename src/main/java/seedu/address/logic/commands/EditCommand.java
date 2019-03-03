@@ -48,18 +48,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditExpenseDescriptor editExpenseDescriptor;
 
     /**
      * @param index of the expense in the filtered expense list to edit
-     * @param editPersonDescriptor details to edit the expense with
+     * @param editExpenseDescriptor details to edit the expense with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditExpenseDescriptor editExpenseDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editExpenseDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editExpenseDescriptor = new EditExpenseDescriptor(editExpenseDescriptor);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class EditCommand extends Command {
         }
 
         Expense expenseToEdit = lastShownList.get(index.getZeroBased());
-        Expense editedExpense = createEditedPerson(expenseToEdit, editPersonDescriptor);
+        Expense editedExpense = createEditedExpense(expenseToEdit, editExpenseDescriptor);
 
         model.setExpense(expenseToEdit, editedExpense);
         model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
@@ -82,16 +82,16 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Expense} with the details of {@code expenseToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editExpenseDescriptor}.
      */
-    private static Expense createEditedPerson(Expense expenseToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Expense createEditedExpense(Expense expenseToEdit, EditExpenseDescriptor editExpenseDescriptor) {
         assert expenseToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(expenseToEdit.getName());
-        Amount updatedAmount = editPersonDescriptor.getAmount().orElse(expenseToEdit.getAmount());
-        Category updatedCategory = editPersonDescriptor.getCategory().orElse(expenseToEdit.getCategory());
-        Date updatedDate = editPersonDescriptor.getDate().orElse(expenseToEdit.getDate());
-        String updatedRemarks = editPersonDescriptor.getRemarks().orElse(expenseToEdit.getRemarks());
+        Name updatedName = editExpenseDescriptor.getName().orElse(expenseToEdit.getName());
+        Amount updatedAmount = editExpenseDescriptor.getAmount().orElse(expenseToEdit.getAmount());
+        Category updatedCategory = editExpenseDescriptor.getCategory().orElse(expenseToEdit.getCategory());
+        Date updatedDate = editExpenseDescriptor.getDate().orElse(expenseToEdit.getDate());
+        String updatedRemarks = editExpenseDescriptor.getRemarks().orElse(expenseToEdit.getRemarks());
 
         return new Expense(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks);
     }
@@ -111,27 +111,27 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editExpenseDescriptor.equals(e.editExpenseDescriptor);
     }
 
     /**
      * Stores the details to edit the expense with. Each non-empty field value will replace the
      * corresponding field value of the expense.
      */
-    public static class EditPersonDescriptor {
+    public static class EditExpenseDescriptor {
         private Name name;
         private Amount amount;
         private Date date;
         private Category category;
         private String remarks;
 
-        public EditPersonDescriptor() {}
+        public EditExpenseDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditExpenseDescriptor(EditExpenseDescriptor toCopy) {
             setName(toCopy.name);
             setAmount(toCopy.amount);
             setDate(toCopy.date);
@@ -188,12 +188,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditExpenseDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditExpenseDescriptor e = (EditExpenseDescriptor) other;
 
             return getName().equals(e.getName())
                     && getAmount().equals(e.getAmount())
