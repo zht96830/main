@@ -39,7 +39,7 @@ public class AddDebtCommandParser implements Parser<AddDebtCommand> {
         Name personOwed = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-        Date deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Date deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUE).get());
         String remarks = null;
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             remarks = argMultimap.getValue(PREFIX_REMARKS).get();

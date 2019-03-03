@@ -22,7 +22,7 @@ public class EditDebtCommandParser {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_CATEGORY,
-                        PREFIX_DATE, PREFIX_REMARKS);
+                        PREFIX_DUE, PREFIX_REMARKS);
 
         Index index;
 
@@ -42,8 +42,8 @@ public class EditDebtCommandParser {
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
             editDebtDescriptor.setCategory(ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
         }
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editDebtDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+        if (argMultimap.getValue(PREFIX_DUE).isPresent()) {
+            editDebtDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUE).get()));
         }
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             editDebtDescriptor.setRemarks(argMultimap.getValue(PREFIX_REMARKS).get());
