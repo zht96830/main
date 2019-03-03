@@ -62,7 +62,7 @@ public class FinanceTrackerParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Expense expense = new PersonBuilder().build();
-        EditCommand.EditExpenseDescriptor descriptor = new EditPersonDescriptorBuilder(expense).build();
+        EditCommand.EditRecurringDescriptor descriptor = new EditPersonDescriptorBuilder(expense).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);

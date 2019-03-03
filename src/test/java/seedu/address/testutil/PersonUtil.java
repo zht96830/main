@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.expensecommands.AddCommand;
-import seedu.address.logic.commands.expensecommands.EditCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.expensecommands.EditCommand;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.tag.Tag;
 
@@ -41,9 +41,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditExpenseDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditRecurringDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditExpenseDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditCommand.EditRecurringDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.name).append(" "));
         descriptor.getAmount().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
