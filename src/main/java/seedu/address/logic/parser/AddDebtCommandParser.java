@@ -8,14 +8,13 @@ import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.debt.Debt;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 /**
  * Parses input arguments and creates a new AddDebtCommand object
@@ -40,10 +39,22 @@ public class AddDebtCommandParser implements Parser<AddDebtCommand> {
         Name personOwed = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-        Date deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUE).get());
-        String remarks = ParserUtil.parseRemarks(argMultimap.getAllValues(PREFIX_REMARKS));
+        Date deadline;
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        }
+        else{
+            // If date is not present, initialise to the current date
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
+            LocalDate currentDate = LocalDate.now();
+            deadline = new Date(dtf.format(currentDate));
+        }
+        String remarks = null;
+        if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
+            remarks = argMultimap.getValue(PREFIX_REMARKS).get();
+        }
 
-        Debt debt = new Debt(personOwed, amount, deadline, category, remarks);
+        Debt debt = new Debt(personOwed, amount, category, deadline, remarks);
 
         return new AddDebtCommand(debt);
     }
