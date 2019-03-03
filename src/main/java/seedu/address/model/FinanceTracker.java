@@ -56,7 +56,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     public void resetData(ReadOnlyFinanceTracker newData) {
         requireNonNull(newData);
 
-        setExpenses(newData.getFinanceList());
+        setExpenses(newData.getExpenseList());
     }
 
     /**
@@ -227,9 +227,12 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     }
 
     @Override
-    public ObservableList<Expense> getFinanceList() {
+    public ObservableList<Expense> getExpenseList() {
         return expenses.asUnmodifiableObservableList();
     }
+
+    @Override
+    public ObservableList<Debt> getDebtList() { return debts.asUnmodifiableObservableList(); }
 
     @Override
     public boolean equals(Object other) {

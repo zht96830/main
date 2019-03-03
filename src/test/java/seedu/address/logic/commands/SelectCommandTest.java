@@ -58,7 +58,7 @@ public class SelectCommandTest {
 
         Index outOfBoundsIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getFinanceTracker().getFinanceList().size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getFinanceTracker().getExpenseList().size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
     }

@@ -37,7 +37,7 @@ class JsonSerializableFinanceTracker {
      * @param source future changes to this will not affect the created {@code JsonSerializableFinanceTracker}.
      */
     public JsonSerializableFinanceTracker(ReadOnlyFinanceTracker source) {
-        persons.addAll(source.getFinanceList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
+        persons.addAll(source.getExpenseList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
     }
 
     /**
