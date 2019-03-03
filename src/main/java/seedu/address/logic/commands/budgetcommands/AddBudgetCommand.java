@@ -4,11 +4,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.expense.Expense;
+import seedu.address.model.budget.Budget;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 /**
  * Adds a budget to the Finance Tracker.
@@ -24,29 +23,28 @@ public class AddBudgetCommand extends Command {
             + PREFIX_STARTDATE + "START_DATE "
             + PREFIX_ENDDATE + "END_DATE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Char Kuey Teow "
             + PREFIX_AMOUNT + "300 "
             + PREFIX_CATEGORY + "food "
-            + PREFIX_DATE + "13-01-1996 "
-            + PREFIX_REMARKS + "My lunch for tuesday";
+            + PREFIX_STARTDATE + "01-02-2019 "
+            + PREFIX_ENDDATE + "28-02-2019";
 
     public static final String MESSAGE_SUCCESS = "New expense added:\n%1$s";
 
-    private final Expense toAdd;
+    private final Budget toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Expense}
      */
-    public AddCommand(Expense expense) {
-        requireNonNull(expense);
-        toAdd = expense;
+    public AddBudgetCommand(Budget budget) {
+        requireNonNull(budget   );
+        toAdd = budget;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
-        model.addExpense(toAdd);
+        model.addBudget(toAdd);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
@@ -54,7 +52,7 @@ public class AddBudgetCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.logic.commands.expensecommands.AddCommand // instanceof handles nulls
-                && toAdd.equals(((seedu.address.logic.commands.expensecommands.AddCommand) other).toAdd));
+                || (other instanceof AddBudgetCommand // instanceof handles nulls
+                && toAdd.equals(((AddBudgetCommand) other).toAdd));
     }
 }
