@@ -26,7 +26,7 @@ public class Debt {
     /**
      * Initializes a newly created Debt object that contains only the compulsory fields.
      */
-    public Debt(Name personOwed, Amount amount, Category category, Date deadline, String remarks) {
+    public Debt(Name personOwed, Amount amount, Date deadline, Category category, String remarks) {
         requireAllNonNull(personOwed, amount, category);
         this.personOwed = personOwed;
         this.amount = amount;
