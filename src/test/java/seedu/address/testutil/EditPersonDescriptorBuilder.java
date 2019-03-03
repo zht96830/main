@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.expensecommands.EditCommand;
-import seedu.address.logic.commands.expensecommands.EditCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.expensecommands.EditCommand.EditRecurringDescriptor;
 import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Email;
 import seedu.address.model.expense.Expense;
@@ -14,25 +14,25 @@ import seedu.address.model.attributes.Amount;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditExpenseDescriptor objects.
+ * A utility class to help with building EditRecurringDescriptor objects.
  */
 public class EditPersonDescriptorBuilder {
 
-    private EditCommand.EditExpenseDescriptor descriptor;
+    private EditRecurringDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
-        descriptor = new EditCommand.EditExpenseDescriptor();
+        descriptor = new EditCommand.EditRecurringDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditExpenseDescriptor descriptor) {
-        this.descriptor = new EditCommand.EditExpenseDescriptor(descriptor);
+    public EditPersonDescriptorBuilder(EditRecurringDescriptor descriptor) {
+        this.descriptor = new EditRecurringDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditExpenseDescriptor} with fields containing {@code expense}'s details
+     * Returns an {@code EditRecurringDescriptor} with fields containing {@code expense}'s details
      */
     public EditPersonDescriptorBuilder(Expense expense) {
-        descriptor = new EditExpenseDescriptor();
+        descriptor = new EditRecurringDescriptor();
         descriptor.setName(expense.getName());
         descriptor.setAmount(expense.getAmount());
         descriptor.setEmail(expense.getEmail());
@@ -41,7 +41,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditExpenseDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditRecurringDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -49,7 +49,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Amount} of the {@code EditExpenseDescriptor} that we are building.
+     * Sets the {@code Amount} of the {@code EditRecurringDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
         descriptor.setAmount(new Amount(phone));
@@ -57,7 +57,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditExpenseDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditRecurringDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -65,7 +65,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditExpenseDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditRecurringDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
@@ -73,7 +73,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditExpenseDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditRecurringDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
@@ -82,7 +82,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    public EditCommand.EditExpenseDescriptor build() {
+    public EditRecurringDescriptor build() {
         return descriptor;
     }
 }

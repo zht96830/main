@@ -73,7 +73,7 @@ public class EditRecurringCommand extends Command {
         Recurring editedRecurring = createEditedRecurring(recurringToEdit, editRecurringDescriptor);
 
         model.setRecurring(recurringToEdit, editedRecurring);
-        model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+        model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_RECURRING);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedRecurring));
     }

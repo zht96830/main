@@ -13,15 +13,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import org.junit.Test;
 
 import seedu.address.logic.commands.expensecommands.EditCommand;
-import seedu.address.logic.commands.expensecommands.EditCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.expensecommands.EditCommand.EditRecurringDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
-public class EditExpenseDescriptorTest {
+public class EditRecurringDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditCommand.EditExpenseDescriptor descriptorWithSameValues = new EditExpenseDescriptor(DESC_AMY);
+        EditCommand.EditRecurringDescriptor descriptorWithSameValues = new EditRecurringDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -37,7 +37,7 @@ public class EditExpenseDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditCommand.EditExpenseDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditCommand.EditRecurringDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
