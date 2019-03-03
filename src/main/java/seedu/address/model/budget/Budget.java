@@ -76,9 +76,8 @@ public class Budget {
         if (this.category != other.category) {
             return false;
         }
-
-        if ((this.startDate.compareTo(other.startDate) && this.endDate.compareTo(other.startDate))
-        || (other.startDate.compareTo(this.startDate) && other.startDate.compareTo(this.startDate))) {
+        if (((this.startDate.compareTo(other.startDate)<0) && (this.endDate.compareTo(other.startDate)<0))
+        || ((other.startDate.compareTo(this.startDate)<0) && (other.startDate.compareTo(this.startDate)<0))) {
             return false;
         }
         return true;
