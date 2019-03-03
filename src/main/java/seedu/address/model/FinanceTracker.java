@@ -228,6 +228,9 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     public ObservableList<Debt> getDebtList() { return debts.asUnmodifiableObservableList(); }
 
     @Override
+    public ObservableList<Recurring> getRecurringList() { return recurrings.asUnmodifiableObservableList(); }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FinanceTracker // instanceof handles nulls

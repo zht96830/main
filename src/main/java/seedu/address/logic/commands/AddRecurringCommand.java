@@ -22,7 +22,7 @@ public class AddRecurringCommand extends Command {
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_REMARKS + "REMARKS] "
             + PREFIX_FREQUENCY + "FREQUENCY "
-            + PREFIX_OCCURRENCES + "OCCURENCES\n"
+            + PREFIX_OCCURRENCES + "OCCURENCE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Phone Bill "
             + PREFIX_AMOUNT + "50 "
