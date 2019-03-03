@@ -90,10 +90,10 @@ public class EditDebtCommand extends Command {
     private static Debt createEditedDebt(Debt debtToEdit, EditDebtDescriptor editDebtDescriptor) {
         assert debtToEdit != null;
 
-        Name updatedName = editDebtDescriptor.getName().orElse(debtToEdit.getPersonOwed());
+        Name updatedName = editDebtDescriptor.getPersonOwed().orElse(debtToEdit.getPersonOwed());
         Amount updatedAmount = editDebtDescriptor.getAmount().orElse(debtToEdit.getAmount());
         Category updatedCategory = editDebtDescriptor.getCategory().orElse(debtToEdit.getCategory());
-        Date updatedDate = editDebtDescriptor.getDate().orElse(debtToEdit.getDeadline());
+        Date updatedDate = editDebtDescriptor.getDeadline().orElse(debtToEdit.getDeadline());
         String updatedRemarks = editDebtDescriptor.getRemarks().orElse(debtToEdit.getRemarks());
 
         return new Debt(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks);
@@ -122,9 +122,9 @@ public class EditDebtCommand extends Command {
      * corresponding field value of the expense.
      */
     public static class EditDebtDescriptor {
-        private Name name;
+        private Name personOwed;
         private Amount amount;
-        private Date date;
+        private Date deadline;
         private Category category;
         private String remarks;
 
@@ -135,9 +135,9 @@ public class EditDebtCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditDebtDescriptor(EditDebtDescriptor toCopy) {
-            setName(toCopy.name);
+            setPersonOwed(toCopy.personOwed);
             setAmount(toCopy.amount);
-            setDate(toCopy.date);
+            setDeadline(toCopy.deadline);
             setCategory(toCopy.category);
             setRemarks(toCopy.remarks);
         }
@@ -146,15 +146,15 @@ public class EditDebtCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, amount, date, category, remarks);
+            return CollectionUtil.isAnyNonNull(personOwed, amount, deadline, category, remarks);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setPersonOwed(Name personOwed) {
+            this.personOwed = personOwed;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<Name> getPersonOwed() {
+            return Optional.ofNullable(personOwed);
         }
 
         public void setAmount(Amount amount) {
@@ -165,12 +165,12 @@ public class EditDebtCommand extends Command {
             return Optional.ofNullable(amount);
         }
 
-        public void setDate(Date date) {
-            this.date = date;
+        public void setDeadline(Date deadline) {
+            this.deadline = deadline;
         }
 
-        public Optional<Date> getDate() {
-            return Optional.ofNullable(date);
+        public Optional<Date> getDeadline() {
+            return Optional.ofNullable(deadline);
         }
 
         public void setCategory(Category category) { this.category = category; }
@@ -198,9 +198,9 @@ public class EditDebtCommand extends Command {
             // state check
             EditDebtDescriptor e = (EditDebtDescriptor) other;
 
-            return getName().equals(e.getName())
+            return getPersonOwed().equals(e.getPersonOwed())
                     && getAmount().equals(e.getAmount())
-                    && getDate().equals(e.getDate())
+                    && getDeadline().equals(e.getDeadline())
                     && getCategory().equals(e.getCategory())
                     && getRemarks().equals(e.getRemarks());
         }

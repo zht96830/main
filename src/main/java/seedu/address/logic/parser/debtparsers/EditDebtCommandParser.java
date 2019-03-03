@@ -40,7 +40,7 @@ public class EditDebtCommandParser implements Parser<EditDebtCommand> {
 
         EditDebtCommand.EditDebtDescriptor editDebtDescriptor = new EditDebtCommand.EditDebtDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editDebtDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editDebtDescriptor.setPersonOwed(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
             editDebtDescriptor.setAmount(ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get()));
@@ -49,7 +49,7 @@ public class EditDebtCommandParser implements Parser<EditDebtCommand> {
             editDebtDescriptor.setCategory(ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
         }
         if (argMultimap.getValue(PREFIX_DUE).isPresent()) {
-            editDebtDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUE).get()));
+            editDebtDescriptor.setDeadline(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUE).get()));
         }
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             editDebtDescriptor.setRemarks(argMultimap.getValue(PREFIX_REMARKS).get());

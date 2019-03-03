@@ -3,11 +3,11 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.EXPENSE;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -32,7 +32,7 @@ import seedu.address.model.expense.Expense;
 import seedu.address.storage.JsonFinanceTrackerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ExpenseBuilder;
 
 
 public class LogicManagerTest {
@@ -86,9 +86,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Expense expectedExpense = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                + DATE_DESC_EXPENSE;
+        Expense expectedExpense = new ExpenseBuilder(EXPENSE).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addExpense(expectedExpense);
         expectedModel.commitFinanceTracker();

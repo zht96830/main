@@ -6,9 +6,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.expensecommands.DeleteCommand.MESSAGE_DELETE_EXPENSE_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
+import static seedu.address.testutil.TestUtil.getExpense;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
 
 import org.junit.Test;
 
@@ -59,7 +59,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered expense list, delete index within bounds of address book and expense list -> deleted */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showPersonsWithName(KEYWORD_MATCHING_CHICKEN);
         Index index = INDEX_FIRST_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredExpenseList().size());
         assertCommandSuccess(index);
@@ -67,7 +67,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: filtered expense list, delete index within bounds of address book but out of bounds of expense list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showPersonsWithName(KEYWORD_MATCHING_CHICKEN);
         int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
@@ -116,7 +116,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
      * @return the removed expense
      */
     private Expense removePerson(Model model, Index index) {
-        Expense targetExpense = getPerson(model, index);
+        Expense targetExpense = getExpense(model, index);
         model.deleteExpense(targetExpense);
         return targetExpense;
     }
