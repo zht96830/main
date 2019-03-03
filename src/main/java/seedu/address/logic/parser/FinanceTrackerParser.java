@@ -54,6 +54,9 @@ public class FinanceTrackerParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DeleteDebtCommand.COMMAND_WORD:
+            return new DeleteDebtCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 

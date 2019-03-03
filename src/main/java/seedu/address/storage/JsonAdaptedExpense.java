@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Email;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
@@ -25,29 +27,23 @@ class JsonAdaptedExpense {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Expense's %s field is missing!";
 
     private final String name;
-    private final String phone;
-    private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String amount;
+    private final String category;
+    private final String date;
+    private final String remarks;
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/storage/JsonAdaptedPerson.java
      * Constructs a {@code JsonAdaptedPerson} with the given expense details.
-=======
-     * Constructs a {@code JsonAdaptedExpense} with the given person details.
->>>>>>> fbbc95da27c09e61ea192bccbe7108933a997ab5:src/main/java/seedu/address/storage/JsonAdaptedExpense.java
      */
     @JsonCreator
-    public JsonAdaptedExpense(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedExpense(@JsonProperty("name") String name, @JsonProperty("amount") String amount,
+                              @JsonProperty("category") String category, @JsonProperty("date") String date,
+                              @JsonProperty("remarks") String remarks) {
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
+        this.amount = amount;
+        this.category = category;
+        this.date = date;
+        this.remarks = remarks;
     }
 
     /**
@@ -55,12 +51,10 @@ class JsonAdaptedExpense {
      */
     public JsonAdaptedExpense(Expense source) {
         name = source.getName().name;
-        phone = source.getAmount().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        amount = source.getAmount().value;
+        category = source.getCategory().toString();
+        date = source.getDate().toString();
+        remarks = source.getRemarks();
     }
 
     /**
@@ -69,11 +63,6 @@ class JsonAdaptedExpense {
      * @throws IllegalValueException if there were any data constraints violated in the adapted expense.
      */
     public Expense toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -82,32 +71,33 @@ class JsonAdaptedExpense {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
+        if (amount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Amount.class.getSimpleName()));
         }
-        if (!Amount.isValidAmount(phone)) {
+        if (!Amount.isValidAmount(amount)) {
             throw new IllegalValueException(Amount.MESSAGE_CONSTRAINTS);
         }
-        final Amount modelAmount = new Amount(phone);
+        final Amount modelAmount = new Amount(amount);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        if (category == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Category.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!Category.isValid(category)) {
+            throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Category modelCategory = Category.valueOf(category.toUpperCase());
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
+        if (!Date.isValidDate(date)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Date modelDate = new Date(date);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Expense(modelName, modelAmount, modelEmail, modelAddress, modelTags);
+        final String modelRemarks = remarks;
+
+        return new Expense(modelName, modelAmount, modelDate, modelCategory, modelRemarks);
     }
 
 }
