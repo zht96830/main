@@ -20,6 +20,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Recurring> PREDICATE_SHOW_ALL_RECURRING = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */

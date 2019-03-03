@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FINANCES;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECURRING;
 
 import java.util.List;
 import java.util.Optional;
@@ -71,7 +71,7 @@ public class EditRecurringCommand extends Command {
         Recurring editedRecurring = createEditedRecurring(recurringToEdit, editRecurringDescriptor);
 
         model.setRecurring(recurringToEdit, editedRecurring);
-        model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+        model.updateFilteredRecurringList(PREDICATE_SHOW_ALL_RECURRING);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedRecurring));
     }
