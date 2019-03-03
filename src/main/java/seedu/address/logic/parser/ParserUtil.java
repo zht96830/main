@@ -7,9 +7,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
