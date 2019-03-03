@@ -1,13 +1,15 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditDebtCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 public class EditDebtCommandParser {
@@ -29,7 +31,7 @@ public class EditDebtCommandParser {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDebtCommand.MESSAGE_USAGE), pe);
         }
 
         EditDebtCommand.EditDebtDescriptor editDebtDescriptor = new EditDebtCommand.EditDebtDescriptor();
@@ -51,7 +53,7 @@ public class EditDebtCommandParser {
 
 
         if (!editDebtDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditDebtCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditDebtCommand(index, editDebtDescriptor);

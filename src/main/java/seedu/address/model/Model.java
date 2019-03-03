@@ -15,7 +15,10 @@ import seedu.address.model.recurring.Recurring;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Expense> PREDICATE_SHOW_ALL_FINANCES = unused -> true;
+    Predicate<Expense> PREDICATE_SHOW_ALL_EXPENSES = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

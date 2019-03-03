@@ -3,11 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FINANCES;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DEBTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,13 +19,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.debt.Debt;
-import seedu.address.model.expense.Expense;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Date;
 
 /**
- * Edits the details of an existing expense in the Finance Tracker.
+ * Edits the details of an existing debt in the Finance Tracker.
  */
 public class EditDebtCommand extends Command {
 
@@ -44,9 +42,10 @@ public class EditDebtCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Hatyai "
             + PREFIX_AMOUNT + "400 "
-            + PREFIX_CATEGORY + "travel";
+            + PREFIX_CATEGORY + "travel"
+            + PREFIX_DUE + "21-02-2019";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited debt: %1$s";
+    public static final String MESSAGE_EDIT_DEBT_SUCCESS = "Edited debt: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
@@ -70,30 +69,30 @@ public class EditDebtCommand extends Command {
         List<Debt> lastShownList = model.getFilteredDebtList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DEBT_DISPLAYED_INDEX);
         }
 
         Debt debtToEdit = lastShownList.get(index.getZeroBased());
         Debt editeddebt = createEditedDebt(debtToEdit, editDebtDescriptor);
 
         model.setDebt(debtToEdit, editeddebt);
-        model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+        model.updateFilteredDebtList(PREDICATE_SHOW_ALL_DEBTS);
         model.commitFinanceTracker();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editeddebt));
+        return new CommandResult(String.format(MESSAGE_EDIT_DEBT_SUCCESS, editeddebt));
     }
 
     /**
      * Creates and returns a {@code Debt} with the details of {@code debtToEdit}
      * edited with {@code editDebtDescriptor}.
      */
-    private static Debt createEditedDebt(Debt debtToEdit, EditDebtDescriptor editPersonDescriptor) {
+    private static Debt createEditedDebt(Debt debtToEdit, EditDebtDescriptor editDebtDescriptor) {
         assert debtToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(debtToEdit.getPersonOwed());
-        Amount updatedAmount = editPersonDescriptor.getAmount().orElse(debtToEdit.getAmount());
-        Category updatedCategory = editPersonDescriptor.getCategory().orElse(debtToEdit.getCategory());
-        Date updatedDate = editPersonDescriptor.getDate().orElse(debtToEdit.getDeadline());
-        String updatedRemarks = editPersonDescriptor.getRemarks().orElse(debtToEdit.getRemarks());
+        Name updatedName = editDebtDescriptor.getName().orElse(debtToEdit.getPersonOwed());
+        Amount updatedAmount = editDebtDescriptor.getAmount().orElse(debtToEdit.getAmount());
+        Category updatedCategory = editDebtDescriptor.getCategory().orElse(debtToEdit.getCategory());
+        Date updatedDate = editDebtDescriptor.getDate().orElse(debtToEdit.getDeadline());
+        String updatedRemarks = editDebtDescriptor.getRemarks().orElse(debtToEdit.getRemarks());
 
         return new Debt(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks);
     }
@@ -106,7 +105,7 @@ public class EditDebtCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditDebtCommand)) {
             return false;
         }
 
@@ -117,7 +116,7 @@ public class EditDebtCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the expense with. Each non-empty field value will replace the
+     * Stores the details to edit the debt with. Each non-empty field value will replace the
      * corresponding field value of the expense.
      */
     public static class EditDebtDescriptor {
