@@ -4,8 +4,11 @@ import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 public class Budget {
 
+    private int index;
     private Category category;
     private Amount amount;
     private Date startDate;
@@ -19,6 +22,7 @@ public class Budget {
 
     // constructor
     public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks) {
+        requireAllNonNull(category, amount, endDate);
         this.category = category;
         this.amount = amount;
         this.startDate = startDate;
@@ -76,11 +80,40 @@ public class Budget {
         if (this.category != other.category) {
             return false;
         }
-
-        if ((this.startDate.compareTo(other.startDate) && this.endDate.compareTo(other.startDate))
-        || (other.startDate.compareTo(this.startDate) && other.startDate.compareTo(this.startDate))) {
+        if (((this.startDate.compareTo(other.startDate)<0) && (this.endDate.compareTo(other.startDate)<0))
+        || ((other.startDate.compareTo(this.startDate)<0) && (other.startDate.compareTo(this.startDate)<0))) {
             return false;
         }
         return true;
     }
+
+    public boolean isSameBudget(Budget otherBudget) {
+        if (otherBudget == this) {
+            return true;
+        }
+
+        return otherBudget != null
+                && otherBudget.getCategory().equals(getCategory())
+                && otherBudget.getAmount().equals(getAmount())
+                && otherBudget.getStartDate().equals(getStartDate())
+                && otherBudget.getEndDate().equals(getEndDate());
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Category: ")
+                .append(category)
+                .append("Amount: ")
+                .append(amount);
+        if (startDate != null) {
+            builder.append("Start date: ").append(startDate);
+        }
+        builder.append("End date: ").append(endDate);
+        if (remarks != null) {
+            builder.append("Remarks: ").append(remarks);
+        }
+        return builder.toString();
+    }
+
 }
