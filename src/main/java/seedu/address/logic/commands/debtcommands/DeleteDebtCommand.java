@@ -13,6 +13,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.debt.Debt;
 
+/**
+ * Deletes a debt identified using it's displayed index from the Finance Tracker.
+ */
 public class DeleteDebtCommand extends Command {
 
     public static final String COMMAND_WORD = "deletedebt";
