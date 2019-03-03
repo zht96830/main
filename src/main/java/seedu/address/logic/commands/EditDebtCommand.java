@@ -75,7 +75,7 @@ public class EditDebtCommand extends Command {
         Debt debtToEdit = lastShownList.get(index.getZeroBased());
         Debt editeddebt = createEditedDebt(debtToEdit, editDebtDescriptor);
 
-        model.setDebts(debtToEdit, editeddebt);
+        model.setDebt(debtToEdit, editeddebt);
         model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editeddebt));
