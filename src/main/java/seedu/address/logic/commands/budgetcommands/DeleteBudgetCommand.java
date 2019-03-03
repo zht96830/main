@@ -27,7 +27,7 @@ public class DeleteBudgetCommand extends Command {
             + "Parameters: CATEGORY\n"
             + "Example: " + COMMAND_WORD + " food";
 
-    public static final String MESSAGE_DELETE_BUDGET_SUCCESS = "Deleted Budget.";
+    public static final String MESSAGE_DELETE_BUDGET_SUCCESS = "Deleted Budget.\n%1$s";
 
     private final int index;
 
