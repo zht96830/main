@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.debt.Debt;
 import seedu.address.model.recurring.Recurring;
 
 import static java.util.Objects.requireNonNull;

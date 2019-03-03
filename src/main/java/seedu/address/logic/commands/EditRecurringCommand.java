@@ -27,6 +27,7 @@ public class EditRecurringCommand extends Command {
             + "by the index number used in the displayed recurring list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_EDITPAST + "EDITPASTOPTION] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
             + "[" + PREFIX_CATEGORY + "CATEGORY] "
@@ -35,7 +36,8 @@ public class EditRecurringCommand extends Command {
             + "[" + PREFIX_FREQUENCY + "FREQUENCY] "
             + "[" + PREFIX_OCCURRENCES + "OCCURENCES]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "Phone Bill Latest"
+            + PREFIX_EDITPAST + "N "
+            + PREFIX_NAME + "Phone Bill Latest "
             + PREFIX_AMOUNT + "51 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Recurring: %1$s";
@@ -69,7 +71,7 @@ public class EditRecurringCommand extends Command {
         Recurring editedRecurring = createEditedRecurring(recurringToEdit, editRecurringDescriptor);
 
         model.setRecurring(recurringToEdit, editedRecurring);
-        model.updateFilteredRecurringList(PREDICATE_SHOW_ALL_FINANCES);
+        model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedRecurring));
     }
