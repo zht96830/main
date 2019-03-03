@@ -12,7 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.EditCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.commands.expensecommands.EditCommand.EditExpenseDescriptor;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
 public class EditExpenseDescriptorTest {
@@ -36,7 +37,8 @@ public class EditExpenseDescriptorTest {
         assertFalse(DESC_EXPENSE.equals(DESC_DEBT));
 
         // different name -> returns false
-        EditCommand.EditExpenseDescriptor editedAmy = new EditExpenseDescriptorBuilder(DESC_EXPENSE).withName(VALID_NAME_DEBT).build();
+        EditCommand.EditExpenseDescriptor editedAmy = new EditExpenseDescriptorBuilder(DESC_EXPENSE)
+                .withName(VALID_NAME_DEBT).build();
         assertFalse(DESC_EXPENSE.equals(editedAmy));
 
         // different phone -> returns false

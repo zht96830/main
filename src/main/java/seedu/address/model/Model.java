@@ -1,13 +1,14 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -18,6 +19,12 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Recurring> PREDICATE_SHOW_ALL_RECURRING = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Budget> PREDICATE_SHOW_ALL_BUDGETS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -121,6 +128,71 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDebtList(Predicate<Debt> predicate);
+
+    /**
+     * Returns true if a budget with the same identity as {@code budget} exists in the finance tracker.
+     */
+    boolean hasBudget(Budget budget);
+
+    /**
+     * Deletes the given budget.
+     * The budget must exist in the finance tracker.
+     */
+    void deleteBudget(Budget target);
+
+    /**
+     * Adds the given budget.
+     * {@code budget} must not overlap with an existing budget in the finance tracker.
+     */
+    void addBudget(Budget budget);
+
+    /**
+     * Replaces the given budget {@code target} with {@code editedBudget}.
+     * {@code target} must exist in the finance tracker.
+     * The budget identity of {@code editedBudget} must not be the same as another existing budget in the finance tracker.
+     */
+    void setBudget(Budget target, Budget editedBudget);
+
+    /** Returns an unmodifiable view of the filtered budget list */
+    ObservableList<Budget> getFilteredBudgetList();
+
+    /**
+     * Updates the filter of the filtered budget list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBudgetList(Predicate<Budget> predicate);
+
+    /**
+     * Returns true if a recurring with the same identity as {@code recurring} exists in the finance tracker.
+     */
+    boolean hasRecurring(Recurring recurring);
+
+    /**
+     * Deletes the given recurring.
+     * The recurring must exist in the finance tracker.
+     */
+    void deleteRecurring(Recurring target);
+
+    /**
+     * Adds the given recurring.
+     */
+    void addRecurring(Recurring recurring);
+
+    /**
+     * Replaces the given recurring {@code target} with {@code editedRecurring}.
+     * {@code target} must exist in the finance tracker.
+     * The recurring identity of {@code editedRecurring} must not be the same as another existing recurring in the finance tracker.
+     */
+    void setRecurring(Recurring target, Recurring editedRecurring);
+
+    /** Returns an unmodifiable view of the filtered recurring list */
+    ObservableList<Recurring> getFilteredRecurringList();
+
+    /**
+     * Updates the filter of the filtered recurring list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredRecurringList(Predicate<Recurring> predicate);
 
     /**
      * Returns true if the model has previous finance tracker states to restore.

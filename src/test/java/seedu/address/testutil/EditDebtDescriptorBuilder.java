@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.EditDebtCommand.EditDebtDescriptor;
+import seedu.address.logic.commands.debtcommands.EditDebtCommand.EditDebtDescriptor;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;

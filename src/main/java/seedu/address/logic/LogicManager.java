@@ -110,7 +110,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void setSelectedPerson(Expense expense) {
+    public void setSelectedExpense(Expense expense) {
         model.setSelectedExpense(expense);
     }
 }

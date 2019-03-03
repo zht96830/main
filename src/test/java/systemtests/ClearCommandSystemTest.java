@@ -6,9 +6,9 @@ import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.generalcommands.RedoCommand;
+import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 

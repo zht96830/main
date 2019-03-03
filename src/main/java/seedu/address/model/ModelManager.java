@@ -1,13 +1,5 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.nio.file.Path;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.logging.Logger;
-
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
@@ -15,9 +7,19 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
+import seedu.address.model.recurring.Recurring;
+
+import java.nio.file.Path;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the in-memory model of the finance tracker data.
@@ -29,6 +31,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Expense> filteredExpenses;
     private final FilteredList<Debt> filteredDebts;
+    private final FilteredList<Budget> filteredBudgets;
+    private final FilteredList<Recurring> filteredRecurring;
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
@@ -45,6 +49,8 @@ public class ModelManager implements Model {
         filteredExpenses = new FilteredList<>(versionedFinanceTracker.getExpenseList());
         filteredExpenses.addListener(this::ensureSelectedExpenseIsValid);
         filteredDebts = new FilteredList<>(versionedFinanceTracker.getDebtList());
+        filteredBudgets = new FilteredList<>(versionedFinanceTracker.getBudgetList());
+        filteredRecurring = new FilteredList<>(versionedFinanceTracker.getRecurringList());
     }
 
     public ModelManager() {
@@ -150,6 +156,58 @@ public class ModelManager implements Model {
         versionedFinanceTracker.setDebt(target, editedDebt);
     }
 
+    //=========== Budgets ========================================================================================
+
+    @Override
+    public boolean hasBudget(Budget budget) {
+        requireNonNull(budget);
+        return versionedFinanceTracker.hasBudget(budget);
+    }
+
+    @Override
+    public void deleteBudget(Budget target) {
+        versionedFinanceTracker.removeBudget(target);
+    }
+
+    @Override
+    public void addBudget(Budget budget) {
+        versionedFinanceTracker.addBudget(budget);
+        updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
+    }
+
+    @Override
+    public void setBudget(Budget target, Budget editedBudget) {
+        requireAllNonNull(target, editedBudget);
+
+        versionedFinanceTracker.setBudget(target, editedBudget);
+    }
+
+    //=========== Recurrings ========================================================================================
+
+    @Override
+    public boolean hasRecurring(Recurring recurring) {
+        requireNonNull(recurring);
+        return versionedFinanceTracker.hasRecurring(recurring);
+    }
+
+    @Override
+    public void deleteRecurring(Recurring target) {
+        versionedFinanceTracker.removeRecurring(target);
+    }
+
+    @Override
+    public void addRecurring(Recurring recurring) {
+        versionedFinanceTracker.addRecurring(recurring);
+        updateFilteredRecurringList(PREDICATE_SHOW_ALL_RECURRING);
+    }
+
+    @Override
+    public void setRecurring(Recurring target, Recurring editedRecurring) {
+        requireAllNonNull(target, editedRecurring);
+
+        versionedFinanceTracker.setRecurring(target, editedRecurring);
+    }
+
     //=========== Filtered Expense List Accessors ==============================================================
 
     /**
@@ -170,7 +228,7 @@ public class ModelManager implements Model {
     //=========== Filtered Debt List Accessors ==============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Debt} backed by the internal list of
      * {@code versionedFinanceTracker}
      */
     @Override
@@ -182,6 +240,40 @@ public class ModelManager implements Model {
     public void updateFilteredDebtList(Predicate<Debt> predicate) {
         requireNonNull(predicate);
         filteredDebts.setPredicate(predicate);
+    }
+
+    //=========== Filtered Budget List Accessors ==============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Budget} backed by the internal list of
+     * {@code versionedFinanceTracker}
+     */
+    @Override
+    public ObservableList<Budget> getFilteredBudgetList() {
+        return filteredBudgets;
+    }
+
+    @Override
+    public void updateFilteredBudgetList(Predicate<Budget> predicate) {
+        requireNonNull(predicate);
+        filteredBudgets.setPredicate(predicate);
+    }
+
+    //=========== Filtered Recurring List Accessors ==============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Recurring} backed by the internal list of
+     * {@code versionedFinanceTracker}
+     */
+    @Override
+    public ObservableList<Recurring> getFilteredRecurringList() {
+        return filteredRecurring;
+    }
+
+    @Override
+    public void updateFilteredRecurringList(Predicate<Recurring> predicate) {
+        requireNonNull(predicate);
+        filteredRecurring.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================

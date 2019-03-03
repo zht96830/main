@@ -33,8 +33,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.parser.expenseparsers.EditCommandParser;
 import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Email;
@@ -105,9 +105,9 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_DEBT + REMARKS_DESC_DEBT
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + NAME_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
 
-        EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
+        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
                 .withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE)
-                .withRemarks(VALID_REMARKS_EXPENSE, VALID_REMARKS_DEBT).build();
+                .withRemarks(VALID_REMARKS_EXPENSE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -130,7 +130,8 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_EXPENSE;
-        EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE).build();
+        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
+                .withName(VALID_NAME_EXPENSE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -166,9 +167,9 @@ public class EditCommandParserTest {
                 + REMARKS_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + REMARKS_DESC_EXPENSE
                 + AMOUNT_DESC_DEBT + DEADLINE_DESC_DEBT + CATEGORY_DESC_DEBT + REMARKS_DESC_DEBT;
 
-        EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_DEBT)
-                .withCategory(VALID_CATEGORY_DEBT).withDate(VALID_DEADLINE_DEBT).withRemarks(VALID_REMARKS_DEBT, VALID_REMARKS_EXPENSE)
-                .build();
+        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
+                .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE)
+                .withDate(VALID_DATE_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -179,7 +180,8 @@ public class EditCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + INVALID_AMOUNT_DESC + AMOUNT_DESC_DEBT;
-        EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_DEBT).build();
+        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
+                .withAmount(VALID_AMOUNT_DEBT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -197,7 +199,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + "";
 
-        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withRemarks().build();
+        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withRemarks("").build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

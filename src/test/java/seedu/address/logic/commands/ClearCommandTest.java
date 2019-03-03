@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWit
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.generalcommands.ClearCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

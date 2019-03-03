@@ -19,11 +19,15 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.expensecommands.AddCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFinanceTracker;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 import seedu.address.testutil.ExpenseBuilder;
 
 public class AddCommandTest {
@@ -51,17 +55,6 @@ public class AddCommandTest {
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validExpense), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validExpense), modelStub.personsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Expense validExpense = new ExpenseBuilder().build();
-        AddCommand addCommand = new AddCommand(validExpense);
-        ModelStub modelStub = new ModelStubWithPerson(validExpense);
-
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
     }
 
     @Test
@@ -123,17 +116,19 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addExpense(Expense expense) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setFinanceTracker(ReadOnlyFinanceTracker financeTracker) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyFinanceTracker getFinanceTracker() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //==========Expense-related===========================================================================
+
+        @Override
+        public void addExpense(Expense expense) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -161,6 +156,104 @@ public class AddCommandTest {
         public void updateFilteredExpenseList(Predicate<Expense> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        //==========Debt-related===========================================================================
+
+        @Override
+        public void addDebt(Debt debt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDebt(Debt debt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteDebt(Debt target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDebt(Debt target, Debt editedDebt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Debt> getFilteredDebtList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredDebtList(Predicate<Debt> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //==========Budget-related===========================================================================
+
+        @Override
+        public void addBudget(Budget budget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasBudget(Budget budget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteBudget(Budget target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setBudget(Budget target, Budget editedBudget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Budget> getFilteredBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredBudgetList(Predicate<Budget> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //==========Recurring-related===========================================================================
+
+        @Override
+        public void addRecurring(Recurring recurring) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasRecurring(Recurring recurring) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteRecurring(Recurring target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setRecurring(Recurring target, Recurring editedRecurring) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Recurring> getFilteredRecurringList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredRecurringList(Predicate<Recurring> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //==========History-Control-related===================================================================
 
         @Override
         public boolean canUndoFinanceTracker() {
