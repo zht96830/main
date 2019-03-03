@@ -20,7 +20,7 @@ import seedu.address.model.expense.Expense;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the finance tracker data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -114,7 +114,7 @@ public class ModelManager implements Model {
     @Override
     public void addExpense(Expense expense) {
         versionedFinanceTracker.addExpense(expense);
-        updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+        updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
     }
 
     @Override
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
     @Override
     public void addDebt(Debt debt) {
         versionedFinanceTracker.addDebt(debt);
-        updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+        updateFilteredDebtList(PREDICATE_SHOW_ALL_DEBTS);
     }
 
     @Override
