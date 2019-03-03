@@ -5,7 +5,7 @@ https://travis-ci.org/cs2103-ay1819s2-w15-2/main[image:https://travis-ci.org/cs2
 https://coveralls.io/github/cs2103-ay1819s2-w15-2/main?branch=master[image:https://coveralls.io/repos/github/cs2103-ay1819s2-w15-2/main/badge.svg?branch=master[Coverage Status]]
 
 //insert image of our future project here
-
+image::docs/images/Ui.png[width="600"]
 //ifdef::env-github[]
 //image::docs/images/Ui.png[width="600"]
 //endif::[]

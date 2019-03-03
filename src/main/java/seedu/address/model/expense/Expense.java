@@ -15,19 +15,19 @@ import seedu.address.model.attributes.Name;
  */
 public class Expense {
     // Identity fields
-    private final Name name;
-    private final Amount amount;
-    private final Date date;
+    private Name name;
+    private Amount amount;
+    private Date date;
 
     // Data fields
-    private final Category category;
-    private final String remarks;
+    private Category category;
+    private String remarks;
 
     /**
      * Every field must be present and not null.
      */
     public Expense(Name name, Amount amount, Date date, Category category, String remarks) {
-        requireAllNonNull(name, amount, date, category, remarks); // should we remove date and remarks?
+        requireAllNonNull(name, amount, date, category); // should we remove date and remarks?
         this.name = name;
         this.amount = amount;
         this.date = date;
@@ -50,14 +50,6 @@ public class Expense {
     }
 
     public String getRemarks() { return remarks; }
-
-//    /**
-//     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-//     * if modification is attempted.
-//     */
-//    public Set<Tag> getTags() {
-//        return Collections.unmodifiableSet(tags);
-//    }
 
     /**
      * Returns true if both expenses of the same name have the same cost amount and date.
@@ -105,17 +97,22 @@ public class Expense {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append("Name: ")
+                .append(name)
                 .append(" Amount: ")
-                .append(getAmount())
-                .append(" Name: ")
-                .append(getName())
-                .append(" Amount: ")
-                .append(getAmount())
+                .append(amount)
                 .append(" Category: ")
-                .append(getCategory())
-                .append(" Remarks: ")
-                .append(getRemarks());
+                .append(category);
+
+        if (date != null) {
+            builder.append(" Date: ")
+                    .append(date);
+        }
+        if (remarks != null) {
+            builder.append(" Remarks: ")
+                    .append(remarks);
+        }
+
         return builder.toString();
     }
 
