@@ -17,7 +17,7 @@ import static seedu.address.logic.parser.CliSyntax.*;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddRecurringCommandParser implements Parser<AddCommand> {
+public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
