@@ -138,7 +138,7 @@ public abstract class FinanceTrackerSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getFinanceTracker().getFinanceList().size(), getModel().getFilteredExpenseList().size());
+        assertEquals(getModel().getFinanceTracker().getExpenseList().size(), getModel().getFilteredExpenseList().size());
     }
 
     /**
@@ -146,7 +146,7 @@ public abstract class FinanceTrackerSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredExpenseList().size() < getModel().getFinanceTracker().getFinanceList().size());
+        assertTrue(getModel().getFilteredExpenseList().size() < getModel().getFinanceTracker().getExpenseList().size());
     }
 
     /**
@@ -162,7 +162,7 @@ public abstract class FinanceTrackerSystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getFinanceTracker().getFinanceList().size());
+        assertEquals(0, getModel().getFinanceTracker().getExpenseList().size());
     }
 
     /**

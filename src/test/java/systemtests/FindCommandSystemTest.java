@@ -82,7 +82,7 @@ public class FindCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: find same persons in address book after deleting 1 of them -> 1 expense found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getFinanceTracker().getFinanceList().contains(BENSON));
+        assertFalse(getModel().getFinanceTracker().getExpenseList().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
