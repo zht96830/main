@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 
 /**
  * The API of the Model component.
@@ -102,6 +103,11 @@ public interface Model {
      * Adds the given debt.
      */
     void addDebt(Debt debt);
+
+    /**
+     * Adds the given recurring.
+     */
+    void addRecurring(Recurring recurring);
 
     /**
      * Replaces the given debt {@code target} with {@code editedDebt}.

@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
+import seedu.address.model.recurring.Recurring;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -148,6 +149,32 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedDebt);
 
         versionedFinanceTracker.setDebt(target, editedDebt);
+    }
+
+    //=========== Recurrings ========================================================================================
+
+    @Override
+    public boolean hasRecurring(Recurring recurring) {
+        requireNonNull(recurring);
+        return versionedFinanceTracker.hasDebt(recurring);
+    }
+
+    @Override
+    public void deleteRecurring(Recurring target) {
+        versionedFinanceTracker.removeDebt(target);
+    }
+
+    @Override
+    public void addRecurring(Recurring recurring) {
+        versionedFinanceTracker.addRecurring(recurring);
+        updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+    }
+
+    @Override
+    public void setRecurring(Recurring target, Recurring editedRecurring) {
+        requireAllNonNull(target, editedRecurring);
+
+        versionedFinanceTracker.setRecurring(target, editedRecurring);
     }
 
     //=========== Filtered Expense List Accessors ==============================================================
