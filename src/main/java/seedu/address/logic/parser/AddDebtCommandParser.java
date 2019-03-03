@@ -42,8 +42,7 @@ public class AddDebtCommandParser implements Parser<AddDebtCommand> {
         Date deadline;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        }
-        else{
+        } else {
             // If date is not present, initialise to the current date
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
             LocalDate currentDate = LocalDate.now();

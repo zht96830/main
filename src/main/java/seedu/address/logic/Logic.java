@@ -31,8 +31,8 @@ public interface Logic {
      */
     ReadOnlyFinanceTracker getFinanceTracker();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Expense> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of expenses */
+    ObservableList<Expense> getFilteredExpenseList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -61,7 +61,7 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#selectedExpenseProperty()
      */
-    ReadOnlyProperty<Expense> selectedPersonProperty();
+    ReadOnlyProperty<Expense> selectedExpenseProperty();
 
     /**
      * Sets the selected expense in the filtered expense list.

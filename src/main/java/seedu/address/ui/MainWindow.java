@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -53,6 +55,59 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    //-------------- Expense Table -------------------------------
+    @FXML
+    private TableView expenseTable;
+
+    @FXML
+    private TableColumn expenseIndexColumn;
+
+    @FXML
+    private TableColumn expenseNameColumn;
+
+    @FXML
+    private TableColumn expenseAmountColumn;
+
+    //-------------- Debt Table -------------------------------
+    @FXML
+    private TableView debtTable;
+
+    @FXML
+    private TableColumn debtIndexColumn;
+
+    @FXML
+    private TableColumn debtNameColumn;
+
+    @FXML
+    private TableColumn debtAmountColumn;
+
+    //-------------- Budget Table -----------------------------
+    @FXML
+    private TableView budgetTable;
+
+    @FXML
+    private TableColumn budgetIndexColumn;
+
+    @FXML
+    private TableColumn budgetNameColumn;
+
+    @FXML
+    private TableColumn budgetAmountColumn;
+
+    //-------------- Recurring Expense Table -----------------
+    @FXML
+    private TableView recurringExpenseTable;
+
+    @FXML
+    private TableColumn recurringExpenseIndexColumn;
+
+    @FXML
+    private TableColumn recurringExpenseNameColumn;
+
+    @FXML
+    private TableColumn recurringExpenseAmountColumn;
+
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -111,10 +166,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(logic.selectedPersonProperty());
+        browserPanel = new BrowserPanel(logic.selectedExpenseProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.selectedPersonProperty(),
+        personListPanel = new PersonListPanel(logic.getFilteredExpenseList(), logic.selectedExpenseProperty(),
                 logic::setSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -127,6 +182,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        //-------------- Expense Table -------------------------------
+        expenseTable = new ExpenseTable();
     }
 
     /**
