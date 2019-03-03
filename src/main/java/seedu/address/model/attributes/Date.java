@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a date in the finance tracker.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should only be dd-mm-yyyy format.";
@@ -61,26 +61,33 @@ public class Date {
     }
 
     /**
-     * Returns true if date is earlier than given date.
-     * @param other A valid date.
+     * Returns -1, 0 and 1 respectively if Date is earlier than, same as, or later than {@param other}
      */
-    public boolean compareTo(Date other) {
+    @Override
+    public int compareTo(Date other) {
         if (this.year < other.year) {
-            return true;
+            return -1;
         }
         if (this.year > other.year) {
-            return false;
+            return 1;
         }
+
+        // years are the same
         if (this.month < other.month) {
-            return true;
+            return -1;
         }
         if (this.month > other.month) {
-            return false;
+            return 1;
         }
+
+        // years and months are the same
         if (this.day < other.day) {
-            return true;
+            return -1;
         }
-        return false; // other is after this or both are the same day
+        if (this.day > other.day) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override
