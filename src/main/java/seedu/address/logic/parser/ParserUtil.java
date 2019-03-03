@@ -67,7 +67,7 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
     }
@@ -85,7 +85,7 @@ public class ParserUtil {
         try {
             Category.valueOf(trimmedCategory);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
 
         return Category.valueOf(trimmedCategory);
