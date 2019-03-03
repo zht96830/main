@@ -56,7 +56,7 @@ public class ExpenseListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Expense} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Expense} using a {@code ExpenseCard}.
      */
     class ExpenseListViewCell extends ListCell<Expense> {
         @Override

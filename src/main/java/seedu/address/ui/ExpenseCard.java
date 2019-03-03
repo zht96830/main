@@ -36,18 +36,16 @@ public class ExpenseCard extends UiPart<Region> {
     private Label category;
     @FXML
     private Label date;
-    @FXML
-    private Label remarks;
+
 
     public ExpenseCard(Expense expense, int displayedIndex) {
         super(FXML);
         this.expense = expense;
         id.setText(displayedIndex + ". ");
+        amount.setText("$" + expense.getAmount().toString());
         name.setText(expense.getName().name);
-        amount.setText(expense.getAmount().toString());
         category.setText(expense.getCategory().toString());
         date.setText(expense.getDate().toString());
-        remarks.setText(expense.getRemarks());
     }
 
     @Override
