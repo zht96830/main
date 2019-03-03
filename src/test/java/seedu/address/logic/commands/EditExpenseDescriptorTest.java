@@ -12,7 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.EditCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.commands.expensecommands.EditCommand.EditExpenseDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditExpenseDescriptorTest {

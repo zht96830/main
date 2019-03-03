@@ -4,8 +4,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.commands.expensecommands.EditCommand.EditExpenseDescriptor;
 import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Email;
 import seedu.address.model.expense.Expense;

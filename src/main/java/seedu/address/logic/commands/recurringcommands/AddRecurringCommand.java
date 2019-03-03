@@ -1,6 +1,8 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.recurringcommands;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.recurring.Recurring;
 
