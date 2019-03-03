@@ -39,7 +39,7 @@ public class EditBudgetCommand extends Command {
             + PREFIX_CATEGORY + "food "
             + PREFIX_AMOUNT + "200 ";
 
-    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Edited budget: ";
+    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Edited budget:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final int index;
