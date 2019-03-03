@@ -39,6 +39,10 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of debts */
     ObservableList<Debt> getFilteredDebtList();
 
+    /** Returns an unmodifiable view of the filtered list of budgets */
+    ObservableList<Debt> getFilteredBudgetList();
+
+
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
      * The list is ordered from the least recent command to the most recent command.
@@ -101,7 +105,7 @@ public interface Logic {
     /**
      * Sets the selected budget in the filtered budget list.
      *
-     * @see seedu.address.model.Model#setSelectedDebt(Budget)
+     * @see seedu.address.model.Model#setSelectedBudget(Budget)
      */
     void setSelectedBudget(Budget budget);
 }
