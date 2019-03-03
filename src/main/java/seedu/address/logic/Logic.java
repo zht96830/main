@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFinanceTracker;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
 /**
@@ -33,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of expenses */
     ObservableList<Expense> getFilteredExpenseList();
+
+    /** Returns an unmodifiable view of the filtered list of debts */
+    ObservableList<Debt> getFilteredDebtList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
