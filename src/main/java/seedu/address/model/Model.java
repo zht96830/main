@@ -235,4 +235,38 @@ public interface Model {
      * Sets the selected expense in the filtered expense list.
      */
     void setSelectedExpense(Expense expense);
+
+    /**
+     * Selected debt in the filtered debt list.
+     * null if no debt is selected.
+     */
+    ReadOnlyProperty<Debt> selectedDebtProperty();
+
+    /**
+     * Returns the selected debt in the filtered debt list.
+     * null if no debt is selected.
+     */
+    Debt getSelectedDebt();
+
+    /**
+     * Sets the selected debt in the filtered debt list.
+     */
+    void setSelectedDebt(Debt debt);
+
+    /**
+     * Selected budget in the filtered budget list.
+     * null if no budget is selected.
+     */
+    ReadOnlyProperty<Budget> selectedBudgetProperty();
+
+    /**
+     * Returns the selected budget in the filtered budget list.
+     * null if no budget is selected.
+     */
+    Budget getSelectedBudget();
+
+    /**
+     * Sets the selected budget in the filtered budget list.
+     */
+    void setSelectedBudget(Budget budget);
 }
