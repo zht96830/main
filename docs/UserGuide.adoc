@@ -229,7 +229,7 @@ Format: `listdebt [v/VIEW]`
 
 Adds a debt to the finance tracker.
 
-Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMARK]`
+Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]`
 
 [NOTE]
 ====
@@ -240,8 +240,8 @@ Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMA
 
 Examples:
 
-* `adddebt n/John Doe $/50.00 c/shopping d/25-02-2019 r/Loan from John to finance my new earphones` +
-* `adddebt n/Jane Doe $/200 c/FOOD`
+* `adddebt n/John Doe $/50.00 c/shopping due/25-02-2019 r/Loan from John to finance my new earphones` +
+* `adddebt n/Jane Doe $/200 c/FOOD due/03-03-2019`
 
 Format 2: `adddebt`
 [TIP]
@@ -253,7 +253,7 @@ Examples:
 `Please enter the name of the expense you owed: John Doe` +
 `Please enter the amount owed : 50.00` +
 `Please enter the category: shopping` +
-`Please enter the deadline of the debt (optional): 25-02-2019` +
+`Please enter the deadline of the debt: 25-02-2019` +
 `Please enter the remark of the debt (optional): Loan from John to finance my new earphones.`
 
 === Editing a debt: `editdebt`
