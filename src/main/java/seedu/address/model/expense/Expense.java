@@ -27,7 +27,9 @@ public class Expense {
      * Every field must be present and not null.
      */
     public Expense(Name name, Amount amount, Date date, Category category, String remarks) {
-        requireAllNonNull(name, amount, date, category); // should we remove date and remarks?
+
+        requireAllNonNull(name, amount, category);
+
         this.name = name;
         this.amount = amount;
         this.date = date;
