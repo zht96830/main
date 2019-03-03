@@ -20,7 +20,11 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.EditCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.commands.expensecommands.EditCommand.EditRecurringDescriptor;
+import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.generalcommands.RedoCommand;
+import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -40,7 +44,7 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Expense editedExpense = new PersonBuilder().build();
-        EditCommand.EditExpenseDescriptor descriptor = new EditPersonDescriptorBuilder(editedExpense).build();
+        EditCommand.EditRecurringDescriptor descriptor = new EditPersonDescriptorBuilder(editedExpense).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedExpense);
@@ -61,7 +65,7 @@ public class EditCommandTest {
         Expense editedExpense = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditCommand.EditExpenseDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditCommand.EditRecurringDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
@@ -76,7 +80,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditExpenseDescriptor());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditRecurringDescriptor());
         Expense editedExpense = model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedExpense);
@@ -108,7 +112,7 @@ public class EditCommandTest {
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
         Expense firstExpense = model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditCommand.EditExpenseDescriptor descriptor = new EditPersonDescriptorBuilder(firstExpense).build();
+        EditCommand.EditRecurringDescriptor descriptor = new EditPersonDescriptorBuilder(firstExpense).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_PERSON);
@@ -129,7 +133,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredExpenseList().size() + 1);
-        EditExpenseDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditRecurringDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
@@ -156,7 +160,7 @@ public class EditCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Expense editedExpense = new PersonBuilder().build();
         Expense expenseToEdit = model.getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditExpenseDescriptor descriptor = new EditPersonDescriptorBuilder(editedExpense).build();
+        EditRecurringDescriptor descriptor = new EditPersonDescriptorBuilder(editedExpense).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new FinanceTracker(model.getFinanceTracker()), new UserPrefs());
         expectedModel.setExpense(expenseToEdit, editedExpense);
@@ -177,7 +181,7 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredExpenseList().size() + 1);
-        EditCommand.EditExpenseDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditRecurringDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model
@@ -198,7 +202,7 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
         Expense editedExpense = new PersonBuilder().build();
-        EditExpenseDescriptor descriptor = new EditPersonDescriptorBuilder(editedExpense).build();
+        EditRecurringDescriptor descriptor = new EditPersonDescriptorBuilder(editedExpense).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new FinanceTracker(model.getFinanceTracker()), new UserPrefs());
 
@@ -225,7 +229,7 @@ public class EditCommandTest {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 
         // same values -> returns true
-        EditExpenseDescriptor copyDescriptor = new EditExpenseDescriptor(DESC_AMY);
+        EditCommand.EditRecurringDescriptor copyDescriptor = new EditRecurringDescriptor(DESC_AMY);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 

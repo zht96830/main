@@ -1,8 +1,12 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.expensecommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECURRING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,46 +15,48 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.attributes.*;
-import seedu.address.model.recurring.Recurring;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Date;
 
 /**
- * Edits the details of an existing recurring in the Finance Tracker.
+ * Edits the details of an existing expense in the Finance Tracker.
  */
-public class EditRecurringCommand extends Command {
+public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "editrecurring";
+    public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the recurring identified "
-            + "by the index number used in the displayed recurring list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the expense identified "
+            + "by the index number used in the displayed expense list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_EDITPAST + "EDITPASTOPTION] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
             + "[" + PREFIX_CATEGORY + "CATEGORY] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_REMARKS + "REMARKS] "
-            + "[" + PREFIX_FREQUENCY + "FREQUENCY] "
-            + "[" + PREFIX_OCCURRENCES + "OCCURENCES]\n"
+            + "[" + PREFIX_REMARKS + "REMARKS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EDITPAST + "N "
-            + PREFIX_NAME + "Phone Bill Latest "
-            + PREFIX_AMOUNT + "51 ";
+            + PREFIX_NAME + "Hatyai "
+            + PREFIX_AMOUNT + "400 "
+            + PREFIX_CATEGORY + "travel";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Recurring: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Expense: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
     private final EditRecurringDescriptor editRecurringDescriptor;
 
     /**
-     * @param index of the recurring in the filtered recurring list to edit
-     * @param editRecurringDescriptor details to edit the recurring with
+     * @param index of the expense in the filtered expense list to edit
+     * @param editRecurringDescriptor details to edit the expense with
      */
-    public EditRecurringCommand(Index index, EditRecurringDescriptor editRecurringDescriptor) {
+    public EditCommand(Index index, EditRecurringDescriptor editRecurringDescriptor) {
         requireNonNull(index);
         requireNonNull(editRecurringDescriptor);
 
@@ -61,37 +67,35 @@ public class EditRecurringCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Recurring> lastShownList = model.getFilteredRecurringList();
+        List<Expense> lastShownList = model.getFilteredExpenseList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
         }
 
-        Recurring recurringToEdit = lastShownList.get(index.getZeroBased());
-        Recurring editedRecurring = createEditedRecurring(recurringToEdit, editRecurringDescriptor);
+        Expense expenseToEdit = lastShownList.get(index.getZeroBased());
+        Expense editedExpense = createEditedExpense(expenseToEdit, editRecurringDescriptor);
 
-        model.setRecurring(recurringToEdit, editedRecurring);
-        model.updateFilteredRecurringList(PREDICATE_SHOW_ALL_RECURRING);
+        model.setExpense(expenseToEdit, editedExpense);
+        model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
         model.commitFinanceTracker();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedRecurring));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedExpense));
     }
 
     /**
-     * Creates and returns a {@code Recurring} with the details of {@code recurringToEdit}
+     * Creates and returns a {@code Expense} with the details of {@code expenseToEdit}
      * edited with {@code editRecurringDescriptor}.
      */
-    private static Recurring createEditedRecurring(Recurring recurringToEdit, EditRecurringDescriptor editRecurringDescriptor) {
-        assert recurringToEdit != null;
+    private static Expense createEditedExpense(Expense expenseToEdit, EditRecurringDescriptor editRecurringDescriptor) {
+        assert expenseToEdit != null;
 
-        Name updatedName = editRecurringDescriptor.getName().orElse(recurringToEdit.getName());
-        Amount updatedAmount = editRecurringDescriptor.getAmount().orElse(recurringToEdit.getAmount());
-        Category updatedCategory = editRecurringDescriptor.getCategory().orElse(recurringToEdit.getCategory());
-        Date updatedDate = editRecurringDescriptor.getDate().orElse(recurringToEdit.getDate());
-        String updatedRemarks = editRecurringDescriptor.getRemarks().orElse(recurringToEdit.getRemarks());
-        Frequency updatedFrequency = editRecurringDescriptor.getFrequency().orElse(recurringToEdit.getFrequency());
-        int updatedOccurences = editRecurringDescriptor.getOccurences().orElse(recurringToEdit.getOccurences());
+        Name updatedName = editRecurringDescriptor.getName().orElse(expenseToEdit.getName());
+        Amount updatedAmount = editRecurringDescriptor.getAmount().orElse(expenseToEdit.getAmount());
+        Category updatedCategory = editRecurringDescriptor.getCategory().orElse(expenseToEdit.getCategory());
+        Date updatedDate = editRecurringDescriptor.getDate().orElse(expenseToEdit.getDate());
+        String updatedRemarks = editRecurringDescriptor.getRemarks().orElse(expenseToEdit.getRemarks());
 
-        return new Recurring(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks, updatedFrequency, updatedOccurences);
+        return new Expense(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks);
     }
 
     @Override
@@ -102,19 +106,19 @@ public class EditRecurringCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditRecurringCommand)) {
+        if (!(other instanceof EditCommand)) {
             return false;
         }
 
         // state check
-        EditRecurringCommand e = (EditRecurringCommand) other;
+        EditCommand e = (EditCommand) other;
         return index.equals(e.index)
                 && editRecurringDescriptor.equals(e.editRecurringDescriptor);
     }
 
     /**
-     * Stores the details to edit the recurring with. Each non-empty field value will replace the
-     * corresponding field value of the recurring.
+     * Stores the details to edit the expense with. Each non-empty field value will replace the
+     * corresponding field value of the expense.
      */
     public static class EditRecurringDescriptor {
         private Name name;
@@ -122,8 +126,6 @@ public class EditRecurringCommand extends Command {
         private Date date;
         private Category category;
         private String remarks;
-        private Frequency frequency;
-        private int occurences;
 
         public EditRecurringDescriptor() {}
 
@@ -137,15 +139,13 @@ public class EditRecurringCommand extends Command {
             setDate(toCopy.date);
             setCategory(toCopy.category);
             setRemarks(toCopy.remarks);
-            setFrequency(toCopy.frequency);
-            setOccurences(toCopy.occurences);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, amount, date, category, remarks, frequency, occurences);
+            return CollectionUtil.isAnyNonNull(name, amount, date, category, remarks);
         }
 
         public void setName(Name name) {
@@ -182,14 +182,6 @@ public class EditRecurringCommand extends Command {
 
         public Optional<String> getRemarks() { return Optional.ofNullable(remarks); }
 
-        public void setFrequency(Frequency frequency) {this.frequency = frequency; }
-
-        public Optional<Frequency> getFrequency() { return Optional.ofNullable(frequency); }
-
-        public void setOccurences(int occurences) {this.occurences = occurences; }
-
-        public Optional<Integer> getOccurences() { return Optional.ofNullable(occurences); }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -209,9 +201,7 @@ public class EditRecurringCommand extends Command {
                     && getAmount().equals(e.getAmount())
                     && getDate().equals(e.getDate())
                     && getCategory().equals(e.getCategory())
-                    && getRemarks().equals(e.getRemarks())
-                    && getFrequency().equals(e.getFrequency())
-                    && (getOccurences() == e.getOccurences());
+                    && getRemarks().equals(e.getRemarks());
         }
     }
 }
