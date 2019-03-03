@@ -2,11 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,54 +20,55 @@ import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.expense.Expense;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditDebtDescriptorBuilder;
+import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_NAME_EXPENSE = "Chicken Rice";
+    public static final String VALID_NAME_DEBT = "Bob Choo";
+    public static final String VALID_AMOUNT_EXPENSE = "11111111";
+    public static final String VALID_AMOUNT_DEBT = "22222222";
+    public static final String VALID_CATEGORY_EXPENSE = "food";
+    public static final String VALID_CATEGORY_DEBT = "shopping";
+    public static final String VALID_DATE_EXPENSE = "03-03-2019";
+    public static final String VALID_DEADLINE_DEBT = "05-05-2019";
+    public static final String VALID_REMARKS_EXPENSE = "Bishan chicken rice";
+    public static final String VALID_REMARKS_DEBT = "fan";
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String NAME_DESC_EXPENSE = " " + PREFIX_NAME + VALID_NAME_EXPENSE;
+    public static final String NAME_DESC_DEBT = " " + PREFIX_NAME + VALID_NAME_DEBT;
+    public static final String AMOUNT_DESC_EXPENSE = " " + PREFIX_AMOUNT + VALID_AMOUNT_EXPENSE;
+    public static final String AMOUNT_DESC_DEBT = " " + PREFIX_AMOUNT + VALID_AMOUNT_DEBT;
+    public static final String CATEGORY_DESC_EXPENSE = " " + PREFIX_CATEGORY + VALID_CATEGORY_EXPENSE;
+    public static final String CATEGORY_DESC_DEBT = " " + PREFIX_CATEGORY + VALID_CATEGORY_DEBT;
+    public static final String DATE_DESC_EXPENSE = " " + PREFIX_DATE + VALID_DATE_EXPENSE;
+    public static final String DEADLINE_DESC_DEBT = " " + PREFIX_DUE + VALID_DEADLINE_DEBT;
+    public static final String REMARKS_DESC_EXPENSE = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT;
+    public static final String REMARKS_DESC_DEBT = " " + PREFIX_REMARKS + VALID_REMARKS_EXPENSE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "fod"; // not one of enum values
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "142-121-012"; // must be dd-MM-yyyy
+    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DUE + "12-1213-01"; // must be dd-MM-yyyy
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditExpenseDescriptor DESC_AMY;
-    public static final EditCommand.EditExpenseDescriptor DESC_BOB;
+    public static final EditCommand.EditExpenseDescriptor DESC_EXPENSE;
+    public static final EditDebtCommand.EditDebtDescriptor DESC_DEBT;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_EXPENSE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
+                .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE)
+                .withRemarks(VALID_REMARKS_DEBT).build();
+        DESC_DEBT = new EditDebtDescriptorBuilder().withPersonOwed(VALID_NAME_DEBT)
+                .withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_DEBT).withDeadline(VALID_DEADLINE_DEBT)
+                .withRemarks(VALID_REMARKS_DEBT).build();
     }
 
     /**

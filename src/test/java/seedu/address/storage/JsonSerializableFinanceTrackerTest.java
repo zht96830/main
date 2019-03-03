@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.FinanceTracker;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalExpenses;
 
 public class JsonSerializableFinanceTrackerTest {
 
@@ -29,7 +29,7 @@ public class JsonSerializableFinanceTrackerTest {
         JsonSerializableFinanceTracker dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableFinanceTracker.class).get();
         FinanceTracker financeTrackerFromFile = dataFromFile.toModelType();
-        FinanceTracker typicalPersonsFinanceTracker = TypicalPersons.getTypicalAddressBook();
+        FinanceTracker typicalPersonsFinanceTracker = TypicalExpenses.getTypicalFinanceTrackerWithExpenses();
         assertEquals(financeTrackerFromFile, typicalPersonsFinanceTracker);
     }
 

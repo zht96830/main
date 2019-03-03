@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 
 import java.nio.file.Path;
 
@@ -56,7 +56,7 @@ public class StorageManagerTest {
          * {@link JsonFinanceTrackerStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonFinanceTrackerStorageTest} class.
          */
-        FinanceTracker original = getTypicalAddressBook();
+        FinanceTracker original = getTypicalFinanceTrackerWithExpenses();
         storageManager.saveFinanceTracker(original);
         ReadOnlyFinanceTracker retrieved = storageManager.readFinanceTracker().get();
         assertEquals(original, new FinanceTracker(retrieved));

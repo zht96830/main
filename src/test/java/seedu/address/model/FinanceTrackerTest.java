@@ -3,10 +3,10 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
+import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,7 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.exceptions.DuplicateExpenseException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ExpenseBuilder;
 
 public class FinanceTrackerTest {
 
@@ -45,7 +45,7 @@ public class FinanceTrackerTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        FinanceTracker newData = getTypicalAddressBook();
+        FinanceTracker newData = getTypicalFinanceTrackerWithExpenses();
         financeTracker.resetData(newData);
         assertEquals(newData, financeTracker);
     }
@@ -53,9 +53,9 @@ public class FinanceTrackerTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two expenses with the same identity fields
-        Expense editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withTags(VALID_REMARKS_EXPENSE)
                 .build();
-        List<Expense> newExpenses = Arrays.asList(ALICE, editedAlice);
+        List<Expense> newExpenses = Arrays.asList(DUCK_RICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newExpenses);
 
         thrown.expect(DuplicateExpenseException.class);
@@ -70,19 +70,19 @@ public class FinanceTrackerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(financeTracker.hasExpense(ALICE));
+        assertFalse(financeTracker.hasExpense(DUCK_RICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        financeTracker.addExpense(ALICE);
-        assertTrue(financeTracker.hasExpense(ALICE));
+        financeTracker.addExpense(DUCK_RICE);
+        assertTrue(financeTracker.hasExpense(DUCK_RICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        financeTracker.addExpense(ALICE);
-        Expense editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        financeTracker.addExpense(DUCK_RICE);
+        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withTags(VALID_REMARKS_EXPENSE)
                 .build();
         assertTrue(financeTracker.hasExpense(editedAlice));
     }
@@ -98,7 +98,7 @@ public class FinanceTrackerTest {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         financeTracker.addListener(listener);
-        financeTracker.addExpense(ALICE);
+        financeTracker.addExpense(DUCK_RICE);
         assertEquals(1, counter.get());
     }
 
@@ -108,7 +108,7 @@ public class FinanceTrackerTest {
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         financeTracker.addListener(listener);
         financeTracker.removeListener(listener);
-        financeTracker.addExpense(ALICE);
+        financeTracker.addExpense(DUCK_RICE);
         assertEquals(0, counter.get());
     }
 

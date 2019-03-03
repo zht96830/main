@@ -24,7 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFinanceTracker;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.expense.Expense;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ExpenseBuilder;
 
 public class AddCommandTest {
 
@@ -44,7 +44,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Expense validExpense = new PersonBuilder().build();
+        Expense validExpense = new ExpenseBuilder().build();
 
         CommandResult commandResult = new AddCommand(validExpense).execute(modelStub, commandHistory);
 
@@ -55,7 +55,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Expense validExpense = new PersonBuilder().build();
+        Expense validExpense = new ExpenseBuilder().build();
         AddCommand addCommand = new AddCommand(validExpense);
         ModelStub modelStub = new ModelStubWithPerson(validExpense);
 
@@ -66,8 +66,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Expense alice = new PersonBuilder().withName("Alice").build();
-        Expense bob = new PersonBuilder().withName("Bob").build();
+        Expense alice = new ExpenseBuilder().withName("Alice").build();
+        Expense bob = new ExpenseBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 

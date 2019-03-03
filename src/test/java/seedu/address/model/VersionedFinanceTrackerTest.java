@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalExpenses.EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.BOB;
+import static seedu.address.testutil.TypicalExpenses.GROCERIES;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,14 +14,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.FinanceTrackerBuilder;
 
 public class VersionedFinanceTrackerTest {
 
-    private final ReadOnlyFinanceTracker addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyFinanceTracker addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyFinanceTracker addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyFinanceTracker emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyFinanceTracker addressBookWithAmy = new FinanceTrackerBuilder().withPerson(EXPENSE).build();
+    private final ReadOnlyFinanceTracker addressBookWithBob = new FinanceTrackerBuilder().withPerson(BOB).build();
+    private final ReadOnlyFinanceTracker addressBookWithCarl = new FinanceTrackerBuilder().withPerson(GROCERIES).build();
+    private final ReadOnlyFinanceTracker emptyAddressBook = new FinanceTrackerBuilder().build();
 
     @Test
     public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
