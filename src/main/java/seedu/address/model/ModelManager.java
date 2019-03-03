@@ -156,12 +156,12 @@ public class ModelManager implements Model {
     @Override
     public boolean hasRecurring(Recurring recurring) {
         requireNonNull(recurring);
-        return versionedFinanceTracker.hasDebt(recurring);
+        return versionedFinanceTracker.hasRecurring(recurring);
     }
 
     @Override
     public void deleteRecurring(Recurring target) {
-        versionedFinanceTracker.removeDebt(target);
+        versionedFinanceTracker.removeRecurring(target);
     }
 
     @Override
