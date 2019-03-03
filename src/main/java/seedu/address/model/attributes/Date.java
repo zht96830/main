@@ -60,6 +60,29 @@ public class Date {
                 && year == ((Date) other).year);
     }
 
+    /**
+     * Returns true if date is earlier than given date.
+     * @param other A valid date.
+     */
+    public boolean compareTo(Date other) {
+        if (this.year < other.year) {
+            return true;
+        }
+        if (this.year > other.year) {
+            return false;
+        }
+        if (this.month < other.month) {
+            return true;
+        }
+        if (this.month > other.month) {
+            return false;
+        }
+        if (this.day < other.day) {
+            return true;
+        }
+        return false; // other is after this or both are the same day
+    }
+
     @Override
     public int hashCode() {
         return this.hashCode();
