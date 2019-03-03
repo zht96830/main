@@ -7,6 +7,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -63,9 +66,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseDate(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedDate = address.trim();
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
