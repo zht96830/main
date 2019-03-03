@@ -1,7 +1,10 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.debtparsers;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditDebtCommand;
+import seedu.address.logic.commands.debtcommands.EditDebtCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import static java.util.Objects.requireNonNull;

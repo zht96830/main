@@ -169,7 +169,7 @@ public class ModelManager implements Model {
     @Override
     public void addRecurring(Recurring recurring) {
         versionedFinanceTracker.addRecurring(recurring);
-        updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+        updateFilteredRecurringList(PREDICATE_SHOW_ALL_FINANCES);
     }
 
     @Override

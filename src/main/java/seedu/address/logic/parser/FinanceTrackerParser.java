@@ -7,7 +7,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.debtcommands.AddDebtCommand;
+import seedu.address.logic.commands.debtcommands.DeleteDebtCommand;
+import seedu.address.logic.commands.debtcommands.EditDebtCommand;
+import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.commands.expensecommands.DeleteCommand;
+import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.commands.generalcommands.*;
+import seedu.address.logic.commands.recurringcommands.AddRecurringCommand;
+import seedu.address.logic.parser.debtparsers.AddDebtCommandParser;
+import seedu.address.logic.parser.debtparsers.DeleteDebtCommandParser;
+import seedu.address.logic.parser.debtparsers.EditDebtCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.expenseparsers.AddCommandParser;
+import seedu.address.logic.parser.expenseparsers.DeleteCommandParser;
+import seedu.address.logic.parser.expenseparsers.EditCommandParser;
+import seedu.address.logic.parser.recurringparsers.AddRecurringCommandParser;
 
 /**
  * Parses user input.
