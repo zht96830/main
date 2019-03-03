@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
-public class DeleteDebtCommand {
+public class DeleteDebtCommand extends Command {
 
     public static final String COMMAND_WORD = "deletedebt";
 
