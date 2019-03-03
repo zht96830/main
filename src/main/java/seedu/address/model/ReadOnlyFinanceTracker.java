@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
 /**
@@ -10,9 +11,13 @@ import seedu.address.model.expense.Expense;
 public interface ReadOnlyFinanceTracker extends Observable {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the expense list.
      */
-    ObservableList<Expense> getFinanceList();
+    ObservableList<Expense> getExpenseList();
+
+    /**
+     * Returns an unmodifiable view of the debt list.
+     */
+    ObservableList<Debt> getDebtList();
 
 }

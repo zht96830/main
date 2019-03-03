@@ -73,8 +73,8 @@ public interface Model {
 
     /**
      * Replaces the given expense {@code target} with {@code editedExpense}.
-     * {@code target} must exist in the address book.
-     * The expense identity of {@code editedExpense} must not be the same as another existing expense in the address book.
+     * {@code target} must exist in the finance tracker.
+     * The expense identity of {@code editedExpense} must not be the same as another existing expense in the finance tracker.
      */
     void setExpense(Expense target, Expense editedExpense);
 
@@ -82,15 +82,42 @@ public interface Model {
     ObservableList<Expense> getFilteredExpenseList();
 
     /**
+     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredExpenseList(Predicate<Expense> predicate);
+
+    /**
+     * Returns true if a debt with the same identity as {@code debt} exists in the finance tracker.
+     */
+    boolean hasDebt(Debt debt);
+
+    /**
+     * Deletes the given debt.
+     * The debt must exist in the finance tracker.
+     */
+    void deleteDebt(Debt target);
+
+    /**
      * Adds the given debt.
      */
     void addDebt(Debt debt);
 
     /**
-     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
+     * Replaces the given debt {@code target} with {@code editedDebt}.
+     * {@code target} must exist in the finance tracker.
+     * The expense identity of {@code editedDebt} must not be the same as another existing debt in the finance tracker.
+     */
+    void setDebt(Debt target, Debt editedDebt);
+
+    /** Returns an unmodifiable view of the filtered debt list */
+    ObservableList<Debt> getFilteredDebtList();
+
+    /**
+     * Updates the filter of the filtered debt list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredExpenseList(Predicate<Expense> predicate);
+    void updateFilteredDebtList(Predicate<Debt> predicate);
 
     /**
      * Returns true if the model has previous finance tracker states to restore.
