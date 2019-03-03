@@ -83,4 +83,16 @@ public class Budget {
         }
         return true;
     }
+
+    public boolean isSameBudget(Budget otherBudget) {
+        if (otherBudget == this) {
+            return true;
+        }
+
+        return otherBudget != null
+                && otherBudget.getCategory().equals(getCategory())
+                && otherBudget.getAmount().equals(getAmount())
+                && otherBudget.getStartDate().equals(getStartDate())
+                && otherBudget.getEndDate().equals(getEndDate());
+    }
 }
