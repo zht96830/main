@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFinanceTracker;
+import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
@@ -72,5 +73,35 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#setSelectedExpense(Expense)
      */
-    void setSelectedExpense(Expense expense);
+    void setSelectedExpense(Expense debt);
+
+    /**
+     * Selected debt in the filtered debt list.
+     * null if no debt is selected.
+     *
+     * @see seedu.address.model.Model#selectedDebtProperty()
+     */
+    ReadOnlyProperty<Debt> selectedDebtProperty();
+
+    /**
+     * Sets the selected debt in the filtered expense list.
+     *
+     * @see seedu.address.model.Model#setSelectedDebt(Debt)
+     */
+    void setSelectedDebt(Debt debt);
+
+    /**
+     * Selected budget in the filtered budget list.
+     * null if no budget is selected.
+     *
+     * @see seedu.address.model.Model#selectedBudgetProperty()
+     */
+    ReadOnlyProperty<Budget> selectedBudgetProperty();
+
+    /**
+     * Sets the selected budget in the filtered budget list.
+     *
+     * @see seedu.address.model.Model#setSelectedDebt(Budget)
+     */
+    void setSelectedBudget(Budget budget);
 }
