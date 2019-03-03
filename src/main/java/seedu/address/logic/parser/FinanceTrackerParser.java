@@ -40,13 +40,13 @@ public class FinanceTrackerParser {
             return new AddCommandParser().parse(arguments);
 
         case AddDebtCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddDebtCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case EditDebtCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditDebtCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
