@@ -30,9 +30,6 @@ public class ExpenseList implements Iterable<Expense> {
      */
     public void add(Expense toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateExpenseException();
-        }
         internalList.add(toAdd);
     }
 
