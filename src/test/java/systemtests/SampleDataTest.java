@@ -45,7 +45,7 @@ public class SampleDataTest extends FinanceTrackerSystemTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() {
-        Expense[] expectedList = SampleDataUtil.getSamplePersons();
+        Expense[] expectedList = SampleDataUtil.getSampleExpenses();
         assertListMatching(getPersonListPanel(), expectedList);
     }
 }
