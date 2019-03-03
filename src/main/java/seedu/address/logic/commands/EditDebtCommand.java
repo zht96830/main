@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FINANCES;
@@ -35,10 +36,10 @@ public class EditDebtCommand extends Command {
             + "by the index number used in the displayed debt list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_NAME + "PERSON_OWED] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
             + "[" + PREFIX_CATEGORY + "CATEGORY] "
-            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_DUE + "DEADLINE] "
             + "[" + PREFIX_REMARKS + "REMARKS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Hatyai "
@@ -52,8 +53,8 @@ public class EditDebtCommand extends Command {
     private final EditDebtDescriptor editDebtDescriptor;
 
     /**
-     * @param index of the expense in the filtered expense list to edit
-     * @param editDebtDescriptor details to edit the expense with
+     * @param index of the expense in the filtered debt list to edit
+     * @param editDebtDescriptor details to edit the debt with
      */
     public EditDebtCommand(Index index, EditDebtDescriptor editDebtDescriptor) {
         requireNonNull(index);
@@ -75,7 +76,7 @@ public class EditDebtCommand extends Command {
         Debt debtToEdit = lastShownList.get(index.getZeroBased());
         Debt editeddebt = createEditedDebt(debtToEdit, editDebtDescriptor);
 
-        model.setDebts(debtToEdit, editeddebt);
+        model.setDebt(debtToEdit, editeddebt);
         model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editeddebt));
