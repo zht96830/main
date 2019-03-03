@@ -54,7 +54,7 @@ public class AddDebtCommandParser implements Parser<AddDebtCommand> {
             remarks = argMultimap.getValue(PREFIX_REMARKS).get();
         }
 
-        Debt debt = new Debt(personOwed, amount, category, deadline, remarks);
+        Debt debt = new Debt(personOwed, amount, deadline, category, remarks);
 
         return new AddDebtCommand(debt);
     }
