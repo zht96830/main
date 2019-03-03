@@ -15,7 +15,6 @@ import seedu.address.model.recurring.RecurringList;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.recurring;
 
 /**
  * Wraps all data at the address-book level

@@ -31,7 +31,7 @@ public class AddBudgetCommand extends Command {
             + PREFIX_ENDDATE + "31-05-2019 "
             + PREFIX_REMARKS + "i eat too much";
 
-    public static final String MESSAGE_SUCCESS = "New budget added!";
+    public static final String MESSAGE_SUCCESS =  "New budget added:\n%1$s";
 
     private final Budget toAdd;
 
