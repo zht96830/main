@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final VersionedFinanceTracker versionedFinanceTracker;
     private final UserPrefs userPrefs;
     private final FilteredList<Expense> filteredExpenses;
+    private final FilteredList<Debt> filteredDebts;
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
@@ -41,8 +42,9 @@ public class ModelManager implements Model {
 
         versionedFinanceTracker = new VersionedFinanceTracker(financeTracker);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredExpenses = new FilteredList<>(versionedFinanceTracker.getFinanceList());
+        filteredExpenses = new FilteredList<>(versionedFinanceTracker.getExpenseList());
         filteredExpenses.addListener(this::ensureSelectedExpenseIsValid);
+        filteredDebts = new FilteredList<>(versionedFinanceTracker.getDebtList());
     }
 
     public ModelManager() {
@@ -125,9 +127,27 @@ public class ModelManager implements Model {
     //=========== Debts ========================================================================================
 
     @Override
+    public boolean hasDebt(Debt debt) {
+        requireNonNull(debt);
+        return versionedFinanceTracker.hasDebt(debt);
+    }
+
+    @Override
+    public void deleteDebt(Debt target) {
+        versionedFinanceTracker.removeDebt(target);
+    }
+
+    @Override
     public void addDebt(Debt debt) {
         versionedFinanceTracker.addDebt(debt);
         updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+    }
+
+    @Override
+    public void setDebt(Debt target, Debt editedDebt) {
+        requireAllNonNull(target, editedDebt);
+
+        versionedFinanceTracker.setDebt(target, editedDebt);
     }
 
     //=========== Filtered Expense List Accessors ==============================================================
@@ -145,6 +165,23 @@ public class ModelManager implements Model {
     public void updateFilteredExpenseList(Predicate<Expense> predicate) {
         requireNonNull(predicate);
         filteredExpenses.setPredicate(predicate);
+    }
+
+    //=========== Filtered Debt List Accessors ==============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of
+     * {@code versionedFinanceTracker}
+     */
+    @Override
+    public ObservableList<Debt> getFilteredDebtList() {
+        return filteredDebts;
+    }
+
+    @Override
+    public void updateFilteredDebtList(Predicate<Debt> predicate) {
+        requireNonNull(predicate);
+        filteredDebts.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================

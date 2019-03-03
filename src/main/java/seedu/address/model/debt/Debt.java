@@ -15,54 +15,18 @@ import java.util.Objects;
  */
 public class Debt {
     // Compulsory fields
-    private final Name personOwed;
-    private final Amount amount;
-    private final Category category;
+    private Name personOwed;
+    private Amount amount;
+    private Category category;
 
     // Optional fields
-    private final Date deadline;
-    private final String remarks;
+    private Date deadline;
+    private String remarks;
 
     /**
      * Initializes a newly created Debt object that contains only the compulsory fields.
      */
-    public Debt(Name personOwed, Amount amount, Category category) {
-        requireAllNonNull(personOwed, amount, category);
-        this.personOwed = personOwed;
-        this.amount = amount;
-        this.category = category;
-        this.deadline = null;
-        this.remarks = null;
-    }
-
-    /**
-     * Initializes a newly created Debt object that contains the compulsory fields and a deadline.
-     */
-    public Debt(Name personOwed, Amount amount, Category category, Date deadline) {
-        requireAllNonNull(personOwed, amount, category, deadline);
-        this.personOwed = personOwed;
-        this.amount = amount;
-        this.category = category;
-        this.deadline = deadline;
-        this.remarks = null;
-    }
-
-    /**
-     * Initializes a newly created Debt object that contains the compulsory fields and remarks.
-     */
-    public Debt(Name personOwed, Amount amount, Category category, String remarks) {
-        requireAllNonNull(personOwed, amount, category, remarks);
-        this.personOwed = personOwed;
-        this.amount = amount;
-        this.category = category;
-        this.deadline = null;
-        this.remarks = remarks;
-    }
-
-    /**
-     * Initializes a newly created Debt object that contains all fields.
-     */
-    public Debt(Name personOwed, Amount amount, Date deadline, Category category, String remarks) {
+    public Debt(Name personOwed, Amount amount, Category category, Date deadline, String remarks) {
         requireAllNonNull(personOwed, amount, category);
         this.personOwed = personOwed;
         this.amount = amount;
