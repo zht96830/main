@@ -1,13 +1,14 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -118,6 +119,39 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDebtList(Predicate<Debt> predicate);
+
+    /**
+     * Returns true if a budget with the same identity as {@code budget} exists in the finance tracker.
+     */
+    boolean hasBudget(Budget budget);
+
+    /**
+     * Deletes the given budget.
+     * The budget must exist in the finance tracker.
+     */
+    void deleteBudget(Budget target);
+
+    /**
+     * Adds the given budget.
+     * {@code budget} must not overlap with an existing budget in the finance tracker.
+     */
+    void addBudget(Budget budget);
+
+    /**
+     * Replaces the given budget {@code target} with {@code editedBudget}.
+     * {@code target} must exist in the finance tracker.
+     * The budget identity of {@code editedBudget} must not be the same as another existing budget in the finance tracker.
+     */
+    void setBudget(Budget target, Budget editedBudget);
+
+    /** Returns an unmodifiable view of the filtered budget list */
+    ObservableList<Budget> getFilteredBudgetList();
+
+    /**
+     * Updates the filter of the filtered budget list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBudgetList(Predicate<Budget> predicate);
 
     /**
      * Returns true if the model has previous finance tracker states to restore.

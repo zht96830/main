@@ -4,6 +4,8 @@ import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 public class Budget {
 
     private Category category;
@@ -19,6 +21,7 @@ public class Budget {
 
     // constructor
     public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks) {
+        requireAllNonNull(category, amount, endDate);
         this.category = category;
         this.amount = amount;
         this.startDate = startDate;
@@ -94,4 +97,22 @@ public class Budget {
                 && otherBudget.getStartDate().equals(getStartDate())
                 && otherBudget.getEndDate().equals(getEndDate());
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Category: ")
+                .append(category)
+                .append("Amount: ")
+                .append(amount);
+        if (startDate != null) {
+            builder.append("Start date: ").append(startDate);
+        }
+        builder.append("End date: ").append(endDate);
+        if (remarks != null) {
+            builder.append("Remarks: ").append(remarks);
+        }
+        return builder.toString();
+    }
+
 }

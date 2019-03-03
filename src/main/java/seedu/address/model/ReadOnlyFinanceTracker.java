@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
+import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
@@ -20,4 +21,8 @@ public interface ReadOnlyFinanceTracker extends Observable {
      */
     ObservableList<Debt> getDebtList();
 
+    /**
+     * Returns as unmodifiable view of the budget list.
+     */
+    ObservableList<Budget> getBudgetList();
 }
