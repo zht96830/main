@@ -7,9 +7,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
-import seedu.address.model.attributes.Name;
 import seedu.address.model.budget.Budget;
-import seedu.address.model.debt.Debt;
 
 import java.util.stream.Stream;
 
