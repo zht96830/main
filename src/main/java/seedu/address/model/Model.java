@@ -105,11 +105,6 @@ public interface Model {
     void addDebt(Debt debt);
 
     /**
-     * Adds the given recurring.
-     */
-    void addRecurring(Recurring recurring);
-
-    /**
      * Replaces the given debt {@code target} with {@code editedDebt}.
      * {@code target} must exist in the finance tracker.
      * The expense identity of {@code editedDebt} must not be the same as another existing debt in the finance tracker.
@@ -124,6 +119,38 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDebtList(Predicate<Debt> predicate);
+
+    /**
+     * Returns true if a recurring with the same identity as {@code recurring} exists in the finance tracker.
+     */
+    boolean hasRecurring(Recurring recurring);
+
+    /**
+     * Deletes the given recurring.
+     * The recurring must exist in the finance tracker.
+     */
+    void deleteRecurring(Recurring target);
+
+    /**
+     * Adds the given recurring.
+     */
+    void addRecurring(Recurring recurring);
+
+    /**
+     * Replaces the given recurring {@code target} with {@code editedRecurring}.
+     * {@code target} must exist in the finance tracker.
+     * The recurring identity of {@code editedRecurring} must not be the same as another existing recurring in the finance tracker.
+     */
+    void setRecurring(Recurring target, Recurring editedRecurring);
+
+    /** Returns an unmodifiable view of the filtered recurring list */
+    ObservableList<Recurring> getFilteredRecurringList();
+
+    /**
+     * Updates the filter of the filtered recurring list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredRecurringList(Predicate<Recurring> predicate);
 
     /**
      * Returns true if the model has previous finance tracker states to restore.
