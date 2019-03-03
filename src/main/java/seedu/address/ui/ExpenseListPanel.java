@@ -40,7 +40,7 @@ public class ExpenseListPanel extends UiPart<Region> {
             logger.fine("Selected expense changed to: " + newValue);
 
             // Don't modify selection if we are already selecting the selected expense,
-            // otherwise we would have an infinite loop.
+            // otherwise we wouldgi have an infinite loop.
             if (Objects.equals(expenseListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
             }
@@ -56,7 +56,7 @@ public class ExpenseListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Expense} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Expense} using a {@code ExpenseCard}.
      */
     class ExpenseListViewCell extends ListCell<Expense> {
         @Override
