@@ -100,9 +100,9 @@ public class Recurring extends Expense {
                     .append(remarks);
         }
 
-        builder.append("Frequency: ")
+        builder.append(" Frequency: ")
                 .append(frequency)
-                .append(" Occurences")
+                .append(" Occurences: ")
                 .append(occurences);
 
         return builder.toString();
