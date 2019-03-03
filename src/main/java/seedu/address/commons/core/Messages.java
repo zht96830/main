@@ -13,4 +13,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_DEBT_DISPLAYED_INDEX = "The debt index provided is invalid";
     public static final String MESSAGE_EXPENSES_LISTED_OVERVIEW = "%1$d expenses listed!";
     public static final String MESSAGE_DEBTS_LISTED_OVERVIEW = "%1$d debts listed!";
+    public static final String MESSAGE_BUDGET_EXISTS = "Budget already exists for that category.";
 }

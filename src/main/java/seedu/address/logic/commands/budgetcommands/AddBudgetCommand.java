@@ -1,8 +1,10 @@
 package seedu.address.logic.commands.budgetcommands;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.budget.Budget;
 
@@ -44,11 +46,22 @@ public class AddBudgetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        model.addBudget(toAdd);
-        model.commitFinanceTracker();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        boolean exists = false;
+        for (Budget budget:model.getFilteredBudgetList()) {
+            if (budget.getCategory() == toAdd.getCategory()) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            model.addBudget(toAdd);
+            model.commitFinanceTracker();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        } else {
+            throw new CommandException(Messages.MESSAGE_BUDGET_EXISTS);
+        }
     }
 
     @Override
