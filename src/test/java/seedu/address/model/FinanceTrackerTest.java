@@ -34,7 +34,7 @@ public class FinanceTrackerTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), financeTracker.getFinanceList());
+        assertEquals(Collections.emptyList(), financeTracker.getExpenseList());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class FinanceTrackerTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        financeTracker.getFinanceList().remove(0);
+        financeTracker.getExpenseList().remove(0);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class FinanceTrackerTest {
         }
 
         @Override
-        public ObservableList<Expense> getFinanceList() {
+        public ObservableList<Expense> getExpenseList() {
             return expenses;
         }
 

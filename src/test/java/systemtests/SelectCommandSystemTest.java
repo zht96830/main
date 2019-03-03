@@ -58,7 +58,7 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getFinanceTracker().getFinanceList().size();
+        int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* Case: filtered expense list, select index within bounds of address book and expense list -> selected */

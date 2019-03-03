@@ -82,7 +82,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a expense with new values same as another expense's values but with different name -> edited */
-        assertTrue(getModel().getFinanceTracker().getFinanceList().contains(BOB));
+        assertTrue(getModel().getFinanceTracker().getExpenseList().contains(BOB));
         index = INDEX_SECOND_PERSON;
         assertNotEquals(getModel().getFilteredExpenseList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -121,7 +121,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getFinanceTracker().getFinanceList().size();
+        int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
@@ -184,7 +184,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: edit a expense with new values same as another expense's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
-        assertTrue(getModel().getFinanceTracker().getFinanceList().contains(BOB));
+        assertTrue(getModel().getFinanceTracker().getExpenseList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredExpenseList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
