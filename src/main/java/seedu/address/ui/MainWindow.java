@@ -184,7 +184,6 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         //-------------- Expense Table -------------------------------
-        expenseTable = new ExpenseTable();
     }
 
     /**
