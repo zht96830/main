@@ -7,19 +7,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
-import seedu.address.model.attributes.Email;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Amount;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -42,10 +40,22 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Amount amount = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_AMOUNT).get());
-        Category category = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_CATEGORY).get());
-        Date date = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_DATE).get());
-        String remarks = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_REMARKS));
+        Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
+        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+        Date date;
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        }
+        else{
+            // If date is not present, initialise to the current date
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
+            LocalDate currentDate = LocalDate.now();
+            date = new Date(dtf.format(currentDate));
+        }
+        String remarks = null;
+        if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
+            remarks = argMultimap.getValue(PREFIX_REMARKS).get();
+        }
 
         Expense expense = new Expense(name, amount, date, category, remarks);
 
