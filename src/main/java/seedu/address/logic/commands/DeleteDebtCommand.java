@@ -10,18 +10,17 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.debt.Debt;
-import seedu.address.model.expense.Expense;
 
 public class DeleteDebtCommand extends Command {
 
     public static final String COMMAND_WORD = "deletedebt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the debt identified by the index number used in the displayed expense list.\n"
+            + ": Deletes the debt identified by the index number used in the displayed debt list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Deleted Debt: %1$s";
+    public static final String MESSAGE_DELETE_DEBT_SUCCESS = "Deleted Debt: %1$s";
 
     private final Index targetIndex;
 
@@ -35,19 +34,19 @@ public class DeleteDebtCommand extends Command {
         List<Debt> lastShownList = model.getFilteredDebtList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DEBT_DISPLAYED_INDEX);
         }
 
         Debt debtToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteDebt(debtToDelete);
         model.commitFinanceTracker();
-        return new CommandResult(String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, debtToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_DEBT_SUCCESS, debtToDelete));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
+                || (other instanceof DeleteDebtCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteDebtCommand) other).targetIndex)); // state check
     }
 }
