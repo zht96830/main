@@ -45,8 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Date date;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        }
-        else{
+        } else {
             // If date is not present, initialise to the current date
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");
             LocalDate currentDate = LocalDate.now();
