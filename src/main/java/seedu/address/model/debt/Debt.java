@@ -62,8 +62,8 @@ public class Debt {
     /**
      * Initializes a newly created Debt object that contains all fields.
      */
-    public Debt(Name personOwed, Amount amount, Category category, Date deadline, String remarks) {
-        requireAllNonNull(personOwed, amount, category, deadline, remarks);
+    public Debt(Name personOwed, Amount amount, Date deadline, Category category, String remarks) {
+        requireAllNonNull(personOwed, amount, category);
         this.personOwed = personOwed;
         this.amount = amount;
         this.category = category;
