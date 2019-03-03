@@ -42,7 +42,7 @@ public class EditRecurringCommand extends Command {
             + PREFIX_NAME + "Phone Bill Latest "
             + PREFIX_AMOUNT + "51 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Recurring: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Recurring:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;

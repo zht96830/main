@@ -34,7 +34,7 @@ public class AddRecurringCommand extends Command {
             + PREFIX_FREQUENCY + "M "
             + PREFIX_OCCURRENCES + "24";
 
-    public static final String MESSAGE_SUCCESS = "New recurring added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New recurring added:\n%1$s";
 
     private final Recurring toAdd;
 

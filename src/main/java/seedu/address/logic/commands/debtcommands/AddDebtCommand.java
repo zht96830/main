@@ -34,7 +34,7 @@ public class AddDebtCommand extends Command {
             + PREFIX_DUE + "15-06-2019 "
             + PREFIX_REMARKS + "japan air ticket";
 
-    public static final String MESSAGE_SUCCESS = "New debt added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New debt added:\n%1$s";
 
     private final Debt toAdd;
 
