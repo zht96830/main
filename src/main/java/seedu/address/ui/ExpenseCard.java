@@ -10,9 +10,9 @@ import seedu.address.model.expense.Expense;
 /**
  * An UI component that displays information of a {@code Expense}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ExpenseCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ExpenseListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -31,23 +31,23 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label amount;
     @FXML
-    private Label address;
+    private Label category;
     @FXML
-    private Label email;
+    private Label date;
     @FXML
-    private FlowPane tags;
+    private Label remarks;
 
-    public PersonCard(Expense expense, int displayedIndex) {
+    public ExpenseCard(Expense expense, int displayedIndex) {
         super(FXML);
         this.expense = expense;
         id.setText(displayedIndex + ". ");
         name.setText(expense.getName().name);
-        phone.setText(expense.getAmount().value);
-        address.setText(expense.getAddress().value);
-        email.setText(expense.getEmail().value);
-        expense.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        amount.setText(expense.getAmount().value);
+        category.setText(expense.getCategory().toString());
+        date.setText(expense.getDate().toString());
+        remarks.setText(expense.getRemarks());
     }
 
     @Override
@@ -58,12 +58,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof ExpenseCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        ExpenseCard card = (ExpenseCard) other;
         return id.getText().equals(card.id.getText())
                 && expense.equals(card.expense);
     }

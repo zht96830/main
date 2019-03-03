@@ -9,10 +9,13 @@ import seedu.address.model.debt.Debt;
 import seedu.address.model.debt.DebtList;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.ExpenseList;
+import seedu.address.model.recurring.Recurring;
+import seedu.address.model.recurring.RecurringList;
 
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.recurring;
 
 /**
  * Wraps all data at the address-book level
@@ -23,6 +26,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     private final ExpenseList expenses;
     private final DebtList debts;
     private final BudgetList budgets;
+    private final RecurringList recurrings;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -38,10 +42,11 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
         expenses = new ExpenseList();
         debts = new DebtList();
         budgets = new BudgetList();
+        recurrings = new RecurringList();
     }
 
     /**
-     * Creates an FinanceTracker using the Expenses in the {@code toBeCopied}
+     * Creates a FinanceTracker using the Expenses in the {@code toBeCopied}
      */
     public FinanceTracker(ReadOnlyFinanceTracker toBeCopied) {
         this();
@@ -161,6 +166,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
         indicateModified();
     }
 
+
     //// budget-level operations =====================================================================
 
     /**
@@ -190,12 +196,53 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
         indicateModified();
     }
 
+
     /**
      * Removes {@code key} from this {@code FinanceTracker}.
      * {@code key} must exist in the budget list in the finance tracker.
      */
     public void removeBudget(Budget key) {
         budgets.removeBudget(key);
+        indicateModified();
+    }
+
+
+    //// recurring-level operations =====================================================================
+
+    /**
+     * Returns true if a recurring with the same identity as {@code recurring} exists in the
+     * recurring list in the finance tracker.
+     */
+    public boolean hasRecurring(Recurring recurring) {
+        requireNonNull(recurring);
+        return recurrings.contains(recurring);
+    }
+
+    /**
+     * Adds a recurring to the recurring list in the finance tracker.
+     */
+    public void addRecurring(Recurring recurring) {
+        recurrings.add(recurring);
+        indicateModified();
+    }
+
+
+     /** Replaces the given recurring {@code target} in the list with {@code editedRecurring}.
+     * {@code target} must exist in the recurring list in the finance tracker.
+     */
+    public void setRecurring(Recurring target, Recurring editedRecurring) {
+        requireNonNull(editedRecurring);
+
+        recurrings.setRecurring(target, editedRecurring);
+        indicateModified();
+    }
+
+    /**
+     * Removes {@code key} from this {@code FinanceTracker}.
+     * {@code key} must exist in the recurring list in the finance tracker.
+     * */
+    public void removeRecurring(Recurring key) {
+        recurrings.remove(key);
         indicateModified();
     }
 
@@ -238,6 +285,8 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     public ObservableList<Budget> getBudgetList() {
         return budgets.asUnmodifiableObservableList();
     }
+
+    public ObservableList<Recurring> getRecurringList() { return recurrings.asUnmodifiableObservableList(); }
 
     @Override
     public boolean equals(Object other) {

@@ -1,16 +1,22 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.debtparsers;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditDebtCommand;
+import seedu.address.logic.commands.debtcommands.EditDebtCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
-public class EditDebtCommandParser {
+public class EditDebtCommandParser implements Parser<EditDebtCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -22,14 +28,14 @@ public class EditDebtCommandParser {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_CATEGORY,
-                        PREFIX_DATE, PREFIX_REMARKS);
+                        PREFIX_DUE, PREFIX_REMARKS);
 
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDebtCommand.MESSAGE_USAGE), pe);
         }
 
         EditDebtCommand.EditDebtDescriptor editDebtDescriptor = new EditDebtCommand.EditDebtDescriptor();
@@ -42,8 +48,8 @@ public class EditDebtCommandParser {
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
             editDebtDescriptor.setCategory(ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
         }
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editDebtDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+        if (argMultimap.getValue(PREFIX_DUE).isPresent()) {
+            editDebtDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUE).get()));
         }
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             editDebtDescriptor.setRemarks(argMultimap.getValue(PREFIX_REMARKS).get());
@@ -51,8 +57,9 @@ public class EditDebtCommandParser {
 
 
         if (!editDebtDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditDebtCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditDebtCommand(index, editDebtDescriptor);
-    }}
+    }
+}

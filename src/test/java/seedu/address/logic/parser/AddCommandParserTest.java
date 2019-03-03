@@ -31,7 +31,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.parser.expenseparsers.AddCommandParser;
 import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Email;

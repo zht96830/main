@@ -1,6 +1,7 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.debtparsers;
 
-import seedu.address.logic.commands.AddDebtCommand;
+import seedu.address.logic.commands.debtcommands.AddDebtCommand;
+import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
@@ -8,13 +9,10 @@ import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.debt.Debt;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 /**
  * Parses input arguments and creates a new AddDebtCommand object
@@ -39,10 +37,7 @@ public class AddDebtCommandParser implements Parser<AddDebtCommand> {
         Name personOwed = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-        Date deadline = null;
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        }
+        Date deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUE).get());
         String remarks = null;
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             remarks = argMultimap.getValue(PREFIX_REMARKS).get();

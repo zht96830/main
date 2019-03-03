@@ -1,6 +1,8 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.debtcommands;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.debt.Debt;
 
@@ -48,7 +50,9 @@ public class AddDebtCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
+        System.out.println("got here (A)");
         model.addDebt(toAdd);
+        System.out.println("got here (B)");
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

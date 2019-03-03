@@ -18,16 +18,16 @@ public class Debt {
     private Name personOwed;
     private Amount amount;
     private Category category;
+    private Date deadline;
 
     // Optional fields
-    private Date deadline;
     private String remarks;
 
     /**
-     * Initializes a newly created Debt object that contains only the compulsory fields.
+     * Initializes a newly created Debt object.
      */
     public Debt(Name personOwed, Amount amount, Date deadline, Category category, String remarks) {
-        requireAllNonNull(personOwed, amount, category);
+        requireAllNonNull(personOwed, amount, deadline, category);
         this.personOwed = personOwed;
         this.amount = amount;
         this.category = category;
@@ -79,15 +79,14 @@ public class Debt {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Person owed: ")
-                .append(personOwed)
+                .append(personOwed.toString())
                 .append(" Amount owed: ")
-                .append(amount)
+                .append(amount.toString())
                 .append(" Category: ")
-                .append(category);
+                .append(category.toString())
+                .append(" Deadline: ")
+                .append(deadline.toString());
 
-        if (deadline != null) {
-            builder.append(" Deadline: ").append(deadline);
-        }
         if (remarks != null) {
             builder.append(" Remarks: ").append(remarks);
         }

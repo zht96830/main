@@ -1,9 +1,11 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.generalcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FINANCES;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -25,7 +27,7 @@ public class RedoCommand extends Command {
         }
 
         model.redoFinanceTracker();
-        model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+        model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

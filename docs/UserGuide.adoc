@@ -229,7 +229,7 @@ Format: `listdebt [v/VIEW]`
 
 Adds a debt to the finance tracker.
 
-Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMARK]`
+Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]`
 
 [NOTE]
 ====
@@ -240,8 +240,8 @@ Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMA
 
 Examples:
 
-* `adddebt n/John Doe $/50.00 c/shopping d/25-02-2019 r/Loan from John to finance my new earphones` +
-* `adddebt n/Jane Doe $/200 c/FOOD`
+* `adddebt n/John Doe $/50.00 c/shopping due/25-02-2019 r/Loan from John to finance my new earphones` +
+* `adddebt n/Jane Doe $/200 c/FOOD due/03-03-2019`
 
 Format 2: `adddebt`
 [TIP]
@@ -253,7 +253,7 @@ Examples:
 `Please enter the name of the expense you owed: John Doe` +
 `Please enter the amount owed : 50.00` +
 `Please enter the category: shopping` +
-`Please enter the deadline of the debt (optional): 25-02-2019` +
+`Please enter the deadline of the debt: 25-02-2019` +
 `Please enter the remark of the debt (optional): Loan from John to finance my new earphones.`
 
 === Editing a debt: `editdebt`
@@ -329,20 +329,20 @@ Converts the 3rd debt in the finance tracker into an expense.
 === Adding a recurring: `addrecurring`
 Adds a recurring payment to the finance tracker.
 
-Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY f/FREQUENCY o/OCCURENCES [d/STARTDATE] [r/REMARK]`
+Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] f/FREQUENCY o/OCCURENCES`
 
 [NOTE]
 ====
 * AMOUNT *must be a positive integer or decimal of max 2 decimal places.*
 * CATEGORY only consists of “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive.
-* FREQUENCY only consists of D, W, M, Y for daily, weekly, monthly and yearly respectively. Any numbers following D, W, M or Y means a multiple of that frequency e.g. W2 means fortnightly (every 2 weeks).
 * STARTDATE must be in dd-mm-yyyy format.
 * If STARTDATE is omitted, current date will be used.
+* FREQUENCY only consists of D, W, M, Y for daily, weekly, monthly and yearly respectively. Any numbers following D, W, M or Y means a multiple of that frequency e.g. W2 means fortnightly (every 2 weeks).
 ====
 
 Examples:
 
-* `addrecurring n/Phone Bill $/50.00 c/utilities f/M o/24 d/23-2-2019 r/Signed a new 2 year contract.` +
+* `addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24 ` +
 * `addrecurring n/Magazine Subscription $/20 c/utilities f/M2 o/12`
 
 Format 2: `addrecurring`
@@ -355,21 +355,21 @@ Examples:
   `Please enter the name of the recurring: Magazine Subscription` +
   `Please enter the amount of the recurring: 20` +
   `Please enter the category of the recurring: utilities` +
-  `Please enter the frequency of the recurring: M2` +
-  `Please enter the number of occurences of the recurring: 12` +
   `Please enter the start date of the recurring (optional):` +
-  `Please enter the remark of the expense (optional):`
+  `Please enter the remark of the expense (optional):` +
+  `Please enter the frequency of the recurring: M2` +
+  `Please enter the number of occurences of the recurring: 12`
 
 === Editing a recurring : `editrecurring`
 
 Edits an existing recurring in the finance tracker. +
-Format 1: `editrecurring INDEX p/EDITPAST [n/NAME] [$/AMOUNT] [c/CATEGORY] [f/FREQUENCY] [o/OCCURENCES] [d/STARTDATE] [r/REMARK]` +
+Format 1: `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURENCES]` +
 
 [NOTE]
 ====
 * Edits the expense at the specified `INDEX`. The index refers to the index number shown in the displayed expense list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
-* EDITPAST can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be edited to reflect the new changes.
+* EDITPASTOPTION can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be edited to reflect the new changes.
 * Agreeing (Y) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while also changing old expenses already added by this recurring.
 * Disagreeing (N) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while old expenses already added by this recurring will not be changed.
 * Existing values will be updated to the input values.
@@ -380,7 +380,7 @@ Examples:
 * `editrecurring 9 p/N $/450 c/food` +
 Edits the amount and category of the 9th recurring to be `450` and `food` respectively. No changes will be made to old expenses already added by this recurring.
 
-Format 2: `editrecurring INDEX p/EDITPAST`
+Format 2: `editrecurring INDEX p/EDITPASTOPTION`
 
 [TIP]
 You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
@@ -587,9 +587,9 @@ e.g. `editdebt 5 n/Tommy $/60`
 e.g. `deletedebt 5`
 * *Pay off debt* : `paydebt INDEX [d/DATE]` +
 e.g. `payDebt 2`
-* *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY f/FREQUENCY o/OCCURENCES [d/STARTDATE] [r/REMARK]` +
-e.g. `addrecurring n/Phone Bill $/50.00 c/utilities f/M o/24 d/23-2-2019 r/Signed a new 2 year contract.` +
-* *Edit a recurring* : `editrecurring INDEX p/EDITPAST [n/NAME] [$/AMOUNT] [c/CATEGORY] [f/FREQUENCY] [o/OCCURENCES] [d/STARTDATE] [r/REMARK]` +
+* *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURENCES]` +
+e.g. `addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24` +
+* *Edit a recurring* : `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURENCES]` +
 e.g. `editrecurring 9 p/N $/450 c/food` +
 * *Delete a recurring* : `deleterecurring INDEX p/DELETEPAST` +
 e.g. `deleterecurring 2 p/N` +

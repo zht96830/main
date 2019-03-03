@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFinanceTracker;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
 /**
@@ -31,8 +32,11 @@ public interface Logic {
      */
     ReadOnlyFinanceTracker getFinanceTracker();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Expense> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of expenses */
+    ObservableList<Expense> getFilteredExpenseList();
+
+    /** Returns an unmodifiable view of the filtered list of debts */
+    ObservableList<Debt> getFilteredDebtList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -61,12 +65,12 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#selectedExpenseProperty()
      */
-    ReadOnlyProperty<Expense> selectedPersonProperty();
+    ReadOnlyProperty<Expense> selectedExpenseProperty();
 
     /**
      * Sets the selected expense in the filtered expense list.
      *
      * @see seedu.address.model.Model#setSelectedExpense(Expense)
      */
-    void setSelectedPerson(Expense expense);
+    void setSelectedExpense(Expense expense);
 }

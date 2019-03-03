@@ -15,6 +15,7 @@ import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUDGETS;
 
 /**
  * Edits the details of an existing budget in the finance tracker
@@ -99,7 +100,7 @@ public class EditBudgetCommand extends Command {
         Budget editedbudget = createEditedBudget(budgetToEdit, editBudgetDescriptor);
 
         model.setBudget(budgetToEdit, editedbudget);
-        model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_FINANCES);
+        model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_EDIT_BUDGET_SUCCESS, editedbudget));
     }

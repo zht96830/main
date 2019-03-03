@@ -15,13 +15,13 @@ import seedu.address.model.attributes.Name;
  */
 public class Expense {
     // Identity fields
-    private Name name;
-    private Amount amount;
-    private Date date;
+    protected Name name;
+    protected Amount amount;
+    protected Date date;
 
     // Data fields
-    private Category category;
-    private String remarks;
+    protected Category category;
+    protected String remarks;
 
     /**
      * Every field must be present and not null.

@@ -14,28 +14,28 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Recurring extends Expense {
     // Additional fields
     private Frequency frequency;
-    private int occurances;
+    private int occurences;
 
     /**
      * Initializes a newly created Recurring object that contains only the compulsory fields.
      */
     public Recurring(Name name, Amount amount, Date date, Category category, String remarks, Frequency frequency,
-                     int occurances) {
+                     int occurences) {
         super(name, amount, date, category, remarks);
         this.frequency = frequency;
-        this.occurances = occurances;
+        this.occurences = occurences;
     }
 
     public Frequency getFrequency() {
         return frequency;
     }
 
-    public int getOccurances() {
-        return occurances;
+    public int getOccurences() {
+        return occurences;
     }
 
     /**
-     * Returns true if both recurrings of the same name have the same amount, date, frequency, and occurances.
+     * Returns true if both recurrings of the same name have the same amount, date, frequency, and occurences.
      * This defines a weaker notion of equality between two recurrings.
      */
     public boolean isSameRecurring(Recurring otherRecurring) {
@@ -48,7 +48,7 @@ public class Recurring extends Expense {
                 && otherRecurring.getAmount().equals(getAmount())
                 && otherRecurring.getDate().equals(getDate())
                 && otherRecurring.getFrequency().equals(getFrequency())
-                && otherRecurring.getOccurances() == (getOccurances());
+                && otherRecurring.getOccurences() == (getOccurences());
     }
 
     /**
@@ -72,13 +72,13 @@ public class Recurring extends Expense {
                 && otherRecurring.getCategory().equals(getCategory())
                 && otherRecurring.getRemarks().equals(getRemarks())
                 && otherRecurring.getFrequency().equals(getFrequency())
-                && otherRecurring.getOccurances() == (getOccurances());
+                && otherRecurring.getOccurences() == (getOccurences());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, amount, date, category, remarks, frequency, occurances);
+        return Objects.hash(name, amount, date, category, remarks, frequency, occurences);
     }
 
     @Override
@@ -102,8 +102,8 @@ public class Recurring extends Expense {
 
         builder.append("Frequency: ")
                 .append(frequency)
-                .append(" Occurances")
-                .append(occurances);
+                .append(" Occurences")
+                .append(occurences);
 
         return builder.toString();
     }
