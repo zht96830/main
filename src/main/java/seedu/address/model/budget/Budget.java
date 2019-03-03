@@ -33,7 +33,7 @@ public class Budget {
             this.remarks = remarks;
         }
         totalSpent = 0;
-        percentage = (((double)totalSpent)/Integer.parseInt(amount.toString()))*100;
+        percentage = (((double)totalSpent)/amount.value)*100;
         hasBudget = true;
         isAboutToExceed = false;
     }
