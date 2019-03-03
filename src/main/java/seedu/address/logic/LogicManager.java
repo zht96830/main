@@ -99,7 +99,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyProperty<Expense> selectedPersonProperty() {
+    public ReadOnlyProperty<Expense> selectedExpenseProperty() {
         return model.selectedExpenseProperty();
     }
 
