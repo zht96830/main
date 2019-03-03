@@ -10,9 +10,9 @@ import seedu.address.model.expense.Expense;
 /**
  * An UI component that displays information of a {@code Expense}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ExpenseCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ExpenseListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -38,10 +38,8 @@ public class PersonCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label remarks;
-    @FXML
-    private FlowPane tags;
 
-    public PersonCard(Expense expense, int displayedIndex) {
+    public ExpenseCard(Expense expense, int displayedIndex) {
         super(FXML);
         this.expense = expense;
         id.setText(displayedIndex + ". ");
@@ -60,12 +58,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof ExpenseCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        ExpenseCard card = (ExpenseCard) other;
         return id.getText().equals(card.id.getText())
                 && expense.equals(card.expense);
     }

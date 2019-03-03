@@ -16,37 +16,37 @@ import seedu.address.model.expense.Expense;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class ExpenseListPanel extends UiPart<Region> {
+    private static final String FXML = "ExpenseListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ExpenseListPanel.class);
 
     @FXML
-    private ListView<Expense> personListView;
+    private ListView<Expense> expenseListView;
 
-    public PersonListPanel(ObservableList<Expense> expenseList, ObservableValue<Expense> selectedPerson,
-                           Consumer<Expense> onSelectedPersonChange) {
+    public ExpenseListPanel(ObservableList<Expense> expenseList, ObservableValue<Expense> selectedExpense,
+                            Consumer<Expense> onSelectedExpenseChange) {
         super(FXML);
-        personListView.setItems(expenseList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
-        personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        expenseListView.setItems(expenseList);
+        expenseListView.setCellFactory(listView -> new ExpenseListViewCell());
+        expenseListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             logger.fine("Selection in expense list panel changed to : '" + newValue + "'");
-            onSelectedPersonChange.accept(newValue);
+            onSelectedExpenseChange.accept(newValue);
         });
-        selectedPerson.addListener((observable, oldValue, newValue) -> {
+        selectedExpense.addListener((observable, oldValue, newValue) -> {
             logger.fine("Selected expense changed to: " + newValue);
 
             // Don't modify selection if we are already selecting the selected expense,
             // otherwise we would have an infinite loop.
-            if (Objects.equals(personListView.getSelectionModel().getSelectedItem(), newValue)) {
+            if (Objects.equals(expenseListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
             }
 
             if (newValue == null) {
-                personListView.getSelectionModel().clearSelection();
+                expenseListView.getSelectionModel().clearSelection();
             } else {
-                int index = personListView.getItems().indexOf(newValue);
-                personListView.scrollTo(index);
-                personListView.getSelectionModel().clearAndSelect(index);
+                int index = expenseListView.getItems().indexOf(newValue);
+                expenseListView.scrollTo(index);
+                expenseListView.getSelectionModel().clearAndSelect(index);
             }
         });
     }
@@ -54,7 +54,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Expense} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Expense> {
+    class ExpenseListViewCell extends ListCell<Expense> {
         @Override
         protected void updateItem(Expense expense, boolean empty) {
             super.updateItem(expense, empty);
@@ -63,7 +63,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(expense, getIndex() + 1).getRoot());
+                setGraphic(new ExpenseCard(expense, getIndex() + 1).getRoot());
             }
         }
     }

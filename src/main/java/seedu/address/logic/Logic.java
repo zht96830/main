@@ -72,5 +72,5 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#setSelectedExpense(Expense)
      */
-    void setSelectedPerson(Expense expense);
+    void setSelectedExpense(Expense expense);
 }
