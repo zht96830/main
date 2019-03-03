@@ -25,27 +25,27 @@ public class ExpenseCard extends UiPart<Region> {
     public final Expense expense;
 
     @FXML
-    private HBox cardPane;
+    private HBox expenseCardPane;
     @FXML
-    private Label name;
+    private Label expenseName;
     @FXML
-    private Label id;
+    private Label expenseID;
     @FXML
-    private Label amount;
+    private Label expenseAmount;
     @FXML
-    private Label category;
+    private Label expenseCategory;
     @FXML
-    private Label date;
+    private Label expenseDate;
 
 
     public ExpenseCard(Expense expense, int displayedIndex) {
         super(FXML);
         this.expense = expense;
-        id.setText(displayedIndex + ". ");
-        amount.setText("$" + expense.getAmount().toString());
-        name.setText(expense.getName().name);
-        category.setText(expense.getCategory().toString());
-        date.setText(expense.getDate().toString());
+        expenseID.setText(displayedIndex + ". ");
+        expenseAmount.setText("$" + expense.getAmount().toString());
+        expenseName.setText(expense.getName().name);
+        expenseCategory.setText(expense.getCategory().toString());
+        expenseDate.setText(expense.getDate().toString());
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ExpenseCard extends UiPart<Region> {
 
         // state check
         ExpenseCard card = (ExpenseCard) other;
-        return id.getText().equals(card.id.getText())
+        return expenseID.getText().equals(card.expenseID.getText())
                 && expense.equals(card.expense);
     }
 }
