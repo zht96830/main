@@ -48,9 +48,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Amount parseAmount(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedAmount = phone.trim();
+    public static Amount parseAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
         if (!Amount.isValidAmount(trimmedAmount)) {
             throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
         }
