@@ -73,6 +73,33 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String frequency} into an {@code Frequency}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code frequency} is invalid.
+     */
+    public static Frequency parseFrequency(String frequency) throws ParseException {
+        requireNonNull(frequency);
+        String trimmedFrequency = frequency.trim();
+        if (!Frequency.isValidFrequency(trimmedFrequency)) {
+            throw new ParseException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        return new Frequency(trimmedFrequency);
+    }
+
+    /**
+     * Parses a {@code String occurence} into an {@code Occurence}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code occurence} is invalid.
+     */
+    public static int parseOccurence(String occurence) throws ParseException {
+        requireNonNull(occurence);
+        String trimmedOccurence = occurence.trim();
+        return Integer.parseInt(trimmedOccurence);
+    }
+
+    /**
      * Parses a {@code String category} into an {@code Category}.
      * Leading and trailing whitespaces will be trimmed.
      *
