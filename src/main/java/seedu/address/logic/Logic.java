@@ -73,7 +73,7 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#setSelectedExpense(Expense)
      */
-    void setSelectedExpense(Expense debt);
+    void setSelectedExpense(Expense expense);
 
     /**
      * Selected debt in the filtered debt list.
