@@ -8,6 +8,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class Budget {
 
+    private int index;
     private Category category;
     private Amount amount;
     private Date startDate;

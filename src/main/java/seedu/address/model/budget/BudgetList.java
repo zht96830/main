@@ -44,7 +44,35 @@ public class BudgetList implements Iterable<Budget> {
         if (hasOverlap(toAdd)) {
             throw new OverlappingBudgetException();
         }
-        internalList.add(toAdd);
+        switch (toAdd.getCategory()) {
+            case FOOD:
+                internalList.add(0, toAdd);
+                break;
+            case TRANSPORT:
+                internalList.add(1, toAdd);
+                break;
+            case SHOPPING:
+                internalList.add(2, toAdd);
+                break;
+            case WORK:
+                internalList.add(3, toAdd);
+                break;
+            case UTILITIES:
+                internalList.add(4, toAdd);
+                break;
+            case HEALTHCARE:
+                internalList.add(5, toAdd);
+                break;
+            case ENTERTAINMENT:
+                internalList.add(6, toAdd);
+                break;
+            case TRAVEL:
+                internalList.add(7, toAdd);
+                break;
+            case OTHERS:
+                internalList.add(8, toAdd);
+                break;
+        }
     }
 
     /**

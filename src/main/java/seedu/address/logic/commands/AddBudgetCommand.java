@@ -19,7 +19,7 @@ public class AddBudgetCommand extends Command {
             + PREFIX_CATEGORY + "CATEGORY "
             + PREFIX_AMOUNT + "AMOUNT "
             + "[" + PREFIX_STARTDATE + "START_DATE] "
-            + "[" + PREFIX_ENDDATE + "END_DATE] "
+            + PREFIX_ENDDATE + "END_DATE "
             + "[" + PREFIX_REMARKS + "REMARKS]\n"
             + "Example: " + COMMAND_WORD + " "
 
