@@ -14,6 +14,7 @@ import seedu.address.model.debt.exceptions.DebtNotFoundException;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 import seedu.address.model.recurring.Recurring;
+import seedu.address.model.recurring.RecurringNotFoundException;
 
 import java.nio.file.Path;
 import java.util.Objects;
@@ -33,12 +34,12 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Expense> filteredExpenses;
     private final FilteredList<Debt> filteredDebts;
+    private final FilteredList<Recurring> filteredRecurrings;
     private final FilteredList<Budget> filteredBudgets;
-    private final FilteredList<Recurring> filteredRecurring;
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Budget> selectedBudget = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Debt> selectedDebt = new SimpleObjectProperty<>();
-
+    private final SimpleObjectProperty<Recurring> selectedRecurring = new SimpleObjectProperty<>();
     /**
      * Initializes a ModelManager with the given financeTracker and userPrefs.
      */
@@ -56,7 +57,8 @@ public class ModelManager implements Model {
         filteredDebts.addListener(this::ensureSelectedDebtIsValid);
         filteredBudgets = new FilteredList<>(versionedFinanceTracker.getBudgetList());
         filteredBudgets.addListener(this::ensureSelectedBudgetIsValid);
-        filteredRecurring = new FilteredList<>(versionedFinanceTracker.getRecurringList());
+        filteredRecurrings = new FilteredList<>(versionedFinanceTracker.getRecurringList());
+        filteredRecurrings.addListener(this::ensureSelectedRecurringIsValid);
     }
 
     public ModelManager() {
@@ -273,13 +275,13 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Recurring> getFilteredRecurringList() {
-        return filteredRecurring;
+        return filteredRecurrings;
     }
 
     @Override
     public void updateFilteredRecurringList(Predicate<Recurring> predicate) {
         requireNonNull(predicate);
-        filteredRecurring.setPredicate(predicate);
+        filteredRecurrings.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -365,6 +367,53 @@ public class ModelManager implements Model {
         selectedDebt.setValue(debt);
     }
 
+    @Override
+    public ReadOnlyProperty<Recurring> selectedRecurringProperty() {
+        return selectedRecurring;
+    }
+
+    @Override
+    public Recurring getSelectedRecurring() {
+        return selectedRecurring.getValue();
+    }
+
+    @Override
+    public void setSelectedRecurring(Recurring recurring) {
+        if (recurring != null && !filteredRecurrings.contains(recurring)) {
+            throw new RecurringNotFoundException();
+        }
+        selectedRecurring.setValue(recurring);
+    }
+
+    /**
+     * Ensures {@code selectedRecurring} is a valid expense in {@code filteredRecurring}.
+     */
+    private void ensureSelectedRecurringIsValid(ListChangeListener.Change<? extends Recurring> change) {
+        while (change.next()) {
+            if (selectedRecurring.getValue() == null) {
+                // null is always a valid selected recurring, so we do not need to check that it is valid anymore.
+                return;
+            }
+
+            boolean wasSelectedRecurringReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
+                    && change.getRemoved().contains(selectedRecurring.getValue());
+            if (wasSelectedRecurringReplaced) {
+                // Update selectedRecurring to its new value.
+                int index = change.getRemoved().indexOf(selectedRecurring.getValue());
+                selectedRecurring.setValue(change.getAddedSubList().get(index));
+                continue;
+            }
+
+            boolean wasSelectedRecurringRemoved = change.getRemoved().stream()
+                    .anyMatch(removedRecurring -> selectedRecurring.getValue().isSameRecurring(removedRecurring));
+            if (wasSelectedRecurringRemoved) {
+                // Select the recurring that came before it in the list,
+                // or clear the selection if there is no such recurring.
+                selectedRecurring.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
+            }
+        }
+    }
+    
     /**
      * Ensures {@code selectedBudget} is a valid expense in {@code filteredBudget}.
      */
@@ -471,6 +520,7 @@ public class ModelManager implements Model {
                 && filteredExpenses.equals(other.filteredExpenses)
                 && Objects.equals(selectedExpense.get(), other.selectedExpense.get())
                 && Objects.equals(selectedDebt.get(), other.selectedDebt.get())
+                && Objects.equals(selectedRecurring.get(), other.selectedRecurring.get())
                 && Objects.equals(selectedBudget.get(), other.selectedBudget.get());
     }
 

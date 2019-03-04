@@ -269,4 +269,21 @@ public interface Model {
      * Sets the selected budget in the filtered budget list.
      */
     void setSelectedBudget(Budget budget);
+
+    /**
+     * Selected recurring in the filtered recurring list.
+     * null if no recurring is selected.
+     */
+    ReadOnlyProperty<Recurring> selectedRecurringProperty();
+
+    /**
+     * Returns the selected recurring in the filtered recurring list.
+     * null if no recurring is selected.
+     */
+    Recurring getSelectedRecurring();
+
+    /**
+     * Sets the selected recurring in the filtered recurring list.
+     */
+    void setSelectedRecurring(Recurring recurring);
 }

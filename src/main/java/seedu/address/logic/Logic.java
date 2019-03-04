@@ -12,6 +12,7 @@ import seedu.address.model.ReadOnlyFinanceTracker;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 
 /**
  * API of the Logic component
@@ -42,6 +43,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of budgets */
     ObservableList<Budget> getFilteredBudgetList();
 
+    /** Returns an unmodifiable view of the filtered list of recurring expenses */
+    ObservableList<Recurring> getFilteredRecurringList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -108,4 +111,19 @@ public interface Logic {
      * @see seedu.address.model.Model#setSelectedBudget(Budget)
      */
     void setSelectedBudget(Budget budget);
+
+    /**
+     * Selected recurring in the filtered recurring list.
+     * null if no recurring is selected.
+     *
+     * @see seedu.address.model.Model#selectedRecurringProperty()
+     */
+    ReadOnlyProperty<Recurring> selectedRecurringProperty();
+
+    /**
+     * Sets the selected recurring in the filtered recurring list.
+     *
+     * @see seedu.address.model.Model#setSelectedRecurring(Recurring)
+     */
+    void setSelectedRecurring(Recurring recurring);
 }
