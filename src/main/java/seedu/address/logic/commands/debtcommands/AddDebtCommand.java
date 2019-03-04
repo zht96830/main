@@ -25,7 +25,7 @@ public class AddDebtCommand extends Command {
             + PREFIX_NAME + "PERSON_OWED "
             + PREFIX_AMOUNT + "AMOUNT "
             + PREFIX_CATEGORY + "CATEGORY "
-            + "[" + PREFIX_DUE + "DEADLINE] "
+            + PREFIX_DUE + "DEADLINE "
             + "[" + PREFIX_REMARKS + "REMARKS]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
