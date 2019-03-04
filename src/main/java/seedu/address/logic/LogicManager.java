@@ -15,6 +15,7 @@ import seedu.address.logic.parser.FinanceTrackerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFinanceTracker;
+import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.storage.Storage;
@@ -85,6 +86,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Budget> getFilteredBudgetList() {
+        return model.getFilteredBudgetList();
+    }
+
+    @Override
     public ObservableList<String> getHistory() {
         return history.getHistory();
     }
@@ -112,5 +118,25 @@ public class LogicManager implements Logic {
     @Override
     public void setSelectedExpense(Expense expense) {
         model.setSelectedExpense(expense);
+    }
+
+    @Override
+    public ReadOnlyProperty<Debt> selectedDebtProperty() {
+        return model.selectedDebtProperty();
+    }
+
+    @Override
+    public void setSelectedDebt(Debt debt) {
+        model.setSelectedDebt(debt);
+    }
+
+    @Override
+    public ReadOnlyProperty<Budget> selectedBudgetProperty() {
+        return model.selectedBudgetProperty();
+    }
+
+    @Override
+    public void setSelectedBudget(Budget budget) {
+        model.setSelectedBudget(budget);
     }
 }
