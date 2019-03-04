@@ -416,7 +416,7 @@ Examples:
 `deleterecurring 2 p/N` +
 Deletes the 2nd recurring in the finance tracker, without deleting old expenses already added by this recurring.
 
-=== Viewing Statistics: `stats`
+=== Viewing Statistics - Summary: `stats`
 Produces statistics regarding the user's finance. +
 The statistics include the frequency of entries, the total amount of money spent +
 The user may choose the time frame to be considered for the statistic by entering the start date and end date. +
@@ -456,10 +456,25 @@ Examples:
 * `stats sd/12-02-2018`
 * `stats sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
 
-=== Viewing Macro Statistics Trend: `stats_mt`
-Produces statistics regarding user's finance for 2 or more time periods.
+=== Viewing Statistics - Trend: `statstrend`
+Produces statistics regarding the user's finance over a period of time to show trends. +
+The statistics include the total amount of money spent on different categories and the frequency of entries in those categories+
+The user must choose the time frame to be considered for the statistic by entering the start date and end date. +
+The user may also choose to display only the results in a specific category. +
+The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table.
 
-Format: `stats_mt sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
+Table Example:
+[width="50%"]
+|==========================
+|Month starting:    |01-01-2019     |01-02-2019     |01-03-2019     |01-04-2019
+|FOOD               |A:$302, E:38   |A:$23,  E:1   |A:$782,  E:64   |A:$23, E:5
+|TRANSPORT          |A:$123, E:2    |A:$0,   E:0   |A:$140,  E:2    |A:$0,  E:0
+|SHOPPING           |A:$324, E:1    |A:$0,   E:0   |A:$200,  E:1    |A:$0,  E:0
+|WORK               |A:$0,   E:0    |A:$401, E:2   |A:$0,    E:0    |A:$0,  E:0
+|TOTAL              |A:$749, E:41   |A:$424, E:3   |A:$1122, E:67   |A:$23, E:5
+|==========================
+
+Format: `statstrend sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
 
 [NOTE]
 ====
@@ -468,9 +483,9 @@ If VISUAL_REPRESENTATION field is left empty, vr options will be displayed.
 
 Examples:
 
-* `stats_mt sd/01-01-2018 ed/01-01-2018 p/month`
-* `stats_mt sd/01-01-2018 ed/01-01-2018 p/14`
-* `stats_mt sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
+* `statstrend sd/01-01-2018 ed/01-01-2018 p/month`
+* `statstrend sd/01-01-2018 ed/01-01-2018 p/14`
+* `statstrend sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
 
 === Viewing Macro Statistics Compare: `stats_mc`
 Produces statistics regarding the user's finance for 2 or more time periods.
