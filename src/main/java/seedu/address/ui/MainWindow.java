@@ -136,6 +136,7 @@ public class MainWindow extends UiPart<Stage> {
 
         budgetListPanel = new BudgetListPanel(logic.getFilteredBudgetList(), logic.selectedBudgetProperty(),
                 logic::setSelectedBudget);
+        budgetListPanelPlaceholder.getChildren().add(budgetListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

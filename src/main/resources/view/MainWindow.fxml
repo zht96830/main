@@ -46,32 +46,41 @@
           </padding>
         </StackPane>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-          <VBox fx:id="expenseList" minWidth="250" prefWidth="250" SplitPane.resizableWithParent="false">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.3" VBox.vgrow="ALWAYS">
+          <VBox fx:id="expenseList" minWidth="200" prefWidth="200" SplitPane.resizableWithParent="false">
             <StackPane fx:id="expenseListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
           </VBox>
 
-          <StackPane fx:id="browserPlaceholder" prefWidth="200" >
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-          </StackPane>
+          <SplitPane dividerPositions="0.8" VBox.vgrow = "ALWAYS">
+            <StackPane fx:id="browserPlaceholder" prefWidth="300" >
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+            </StackPane>
 
-          <VBox fx:id="debtAndBudgetList" minWidth="250" prefWidth="250" SplitPane.resizableWithParent="false">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="debtListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <SplitPane id="innerSplitPane" fx:id="innerSplitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
 
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="budgetListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
+              <VBox fx:id="debtList" minWidth="200" prefWidth="200" SplitPane.resizableWithParent="false">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
 
+                <StackPane fx:id="debtListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+
+              <VBox fx:id="budgetList" minWidth="200" prefWidth="200" SplitPane.resizableWithParent="false">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+
+                <StackPane fx:id="budgetListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+          </SplitPane>
+
+          </SplitPane>
         </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
