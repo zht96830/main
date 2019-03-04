@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private ExpenseListPanel expenseListPanel;
     private DebtListPanel debtListPanel;
     private BudgetListPanel budgetListPanel;
+    private RecurringExpenseListPanel recurringListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -57,6 +58,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane budgetListPanelPlaceholder;
+
+    @FXML
+    private StackPane recurringListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -137,6 +141,10 @@ public class MainWindow extends UiPart<Stage> {
         budgetListPanel = new BudgetListPanel(logic.getFilteredBudgetList(), logic.selectedBudgetProperty(),
                 logic::setSelectedBudget);
         budgetListPanelPlaceholder.getChildren().add(budgetListPanel.getRoot());
+
+//        recurringListPanel = new RecurringExpenseListPanel(logic.getFilteredRecurringList(),
+//                logic.selectedRecurringProperty(), logic::setSelectedRecurring);
+//        recurringListPanelPlaceholder.getChildren().add(recurringListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
