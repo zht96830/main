@@ -422,15 +422,15 @@ The statistics include the frequency of entries, the total amount of money spent
 The user may choose the time frame to be considered for the statistic by entering the start date and end date.
 The user may also choose to display only the results in a specific category.
 The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table
-
+.StatsExample
 [width="50%",cols=">s,^m,e",frame="topbot",options="header,footer"]
 |==========================
-|Category|Total Amount|
-|1       |Item 1  |Item 1
-|2       |Item 2  |Item 2
-|3       |Item 3  |Item 3
-|4       |Item 4  |Item 4
-|footer 1|footer 2|footer 3
+|Category|Total Amount|Entries
+|FOOD       |$302  |38
+|TRANSPORT      |$205  |4
+|SHOPPING       |$1702  |8
+|WORK       |$52  |1
+|OTHERS 1|$40|1
 |==========================
 
 
