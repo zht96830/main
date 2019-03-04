@@ -43,9 +43,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of budgets */
     ObservableList<Budget> getFilteredBudgetList();
 
-    /** Returns an unmodifiable view of the filtered list of budgets */
+    /** Returns an unmodifiable view of the filtered list of recurring expenses */
     ObservableList<Recurring> getFilteredRecurringList();
-
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.

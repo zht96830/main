@@ -2,17 +2,17 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
 /**
  * An UI component that displays information of a {@code Expense}.
  */
-public class ExpenseCard extends UiPart<Region> {
+public class DebtCard extends UiPart<Region> {
 
-    private static final String FXML = "ExpenseListCard.fxml";
+    private static final String FXML = "DebtListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -22,30 +22,30 @@ public class ExpenseCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on FinanceTracker level 4</a>
      */
 
-    public final Expense expense;
+    public final Debt debt;
 
     @FXML
-    private HBox expenseCardPane;
+    private HBox debtCardPane;
     @FXML
-    private Label expenseName;
+    private Label borrowerName;
     @FXML
-    private Label expenseID;
+    private Label debtID;
     @FXML
-    private Label expenseAmount;
+    private Label debtAmount;
     @FXML
-    private Label expenseCategory;
+    private Label debtCategory;
     @FXML
-    private Label expenseDate;
+    private Label debtDue;
 
 
-    public ExpenseCard(Expense expense, int displayedIndex) {
+    public DebtCard(Debt debt, int displayedIndex) {
         super(FXML);
-        this.expense = expense;
-        expenseID.setText(displayedIndex + ". ");
-        expenseAmount.setText("$" + expense.getAmount().toString());
-        expenseName.setText(expense.getName().name);
-        expenseCategory.setText(expense.getCategory().toString());
-        expenseDate.setText(expense.getDate().toString());
+        this.debt = debt;
+        debtID.setText(displayedIndex + ". ");
+        debtAmount.setText("$" + debt.getAmount().toString());
+        borrowerName.setText(debt.getPersonOwed().name);
+        debtCategory.setText(debt.getCategory().toString());
+        debtDue.setText(debt.getDeadline().toString());
     }
 
     @Override
@@ -56,13 +56,13 @@ public class ExpenseCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ExpenseCard)) {
+        if (!(other instanceof DebtCard)) {
             return false;
         }
 
         // state check
-        ExpenseCard card = (ExpenseCard) other;
-        return expenseID.getText().equals(card.expenseID.getText())
-                && expense.equals(card.expense);
+        DebtCard card = (DebtCard) other;
+        return debtID.getText().equals(card.debtID.getText())
+                && debt.equals(card.debt);
     }
 }
