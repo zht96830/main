@@ -36,7 +36,7 @@ public class EditRecurringCommand extends Command {
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_REMARKS + "REMARKS] "
             + "[" + PREFIX_FREQUENCY + "FREQUENCY] "
-            + "[" + PREFIX_OCCURRENCES + "OCCURENCES]\n"
+            + "[" + PREFIX_OCCURRENCES + "OCCURENCE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EDITPAST + "N "
             + PREFIX_NAME + "Phone Bill Latest "
@@ -92,9 +92,9 @@ public class EditRecurringCommand extends Command {
         Date updatedDate = editRecurringDescriptor.getDate().orElse(recurringToEdit.getDate());
         String updatedRemarks = editRecurringDescriptor.getRemarks().orElse(recurringToEdit.getRemarks());
         Frequency updatedFrequency = editRecurringDescriptor.getFrequency().orElse(recurringToEdit.getFrequency());
-        int updatedOccurences = editRecurringDescriptor.getOccurences().orElse(recurringToEdit.getOccurences());
+        int updatedOccurence = editRecurringDescriptor.getOccurence().orElse(recurringToEdit.getOccurence());
 
-        return new Recurring(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks, updatedFrequency, updatedOccurences);
+        return new Recurring(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks, updatedFrequency, updatedOccurence);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class EditRecurringCommand extends Command {
         private Category category;
         private String remarks;
         private Frequency frequency;
-        private int occurences;
+        private int occurence;
 
         public EditRecurringDescriptor() {}
 
@@ -141,14 +141,14 @@ public class EditRecurringCommand extends Command {
             setCategory(toCopy.category);
             setRemarks(toCopy.remarks);
             setFrequency(toCopy.frequency);
-            setOccurences(toCopy.occurences);
+            setOccurence(toCopy.occurence);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, amount, date, category, remarks, frequency, occurences);
+            return CollectionUtil.isAnyNonNull(name, amount, date, category, remarks, frequency, occurence);
         }
 
         public void setName(Name name) {
@@ -189,9 +189,9 @@ public class EditRecurringCommand extends Command {
 
         public Optional<Frequency> getFrequency() { return Optional.ofNullable(frequency); }
 
-        public void setOccurences(int occurences) {this.occurences = occurences; }
+        public void setOccurence(int occurence) {this.occurence = occurence; }
 
-        public Optional<Integer> getOccurences() { return Optional.ofNullable(occurences); }
+        public Optional<Integer> getOccurence() { return Optional.ofNullable(occurence); }
 
         @Override
         public boolean equals(Object other) {
@@ -214,7 +214,7 @@ public class EditRecurringCommand extends Command {
                     && getCategory().equals(e.getCategory())
                     && getRemarks().equals(e.getRemarks())
                     && getFrequency().equals(e.getFrequency())
-                    && (getOccurences() == e.getOccurences());
+                    && (getOccurence() == e.getOccurence());
         }
     }
 }
