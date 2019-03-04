@@ -142,9 +142,9 @@ public class MainWindow extends UiPart<Stage> {
                 logic::setSelectedBudget);
         budgetListPanelPlaceholder.getChildren().add(budgetListPanel.getRoot());
 
-//        recurringListPanel = new RecurringExpenseListPanel(logic.getFilteredRecurringList(),
-//                logic.selectedRecurringProperty(), logic::setSelectedRecurring);
-//        recurringListPanelPlaceholder.getChildren().add(recurringListPanel.getRoot());
+        recurringListPanel = new RecurringExpenseListPanel(logic.getFilteredRecurringList(),
+                logic.selectedRecurringProperty(), logic::setSelectedRecurring);
+        recurringListPanelPlaceholder.getChildren().add(recurringListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -156,7 +156,6 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        //-------------- Expense Table -------------------------------
     }
 
     /**

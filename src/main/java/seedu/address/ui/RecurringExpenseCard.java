@@ -34,7 +34,7 @@ public class RecurringExpenseCard extends UiPart<Region> {
     @FXML
     private Label recurringExpenseCategory;
     @FXML
-    private Label recurringxpenseDate;
+    private Label recurringExpenseDate;
 
 
     public RecurringExpenseCard(Recurring recurringExpense, int displayedIndex) {
@@ -44,7 +44,7 @@ public class RecurringExpenseCard extends UiPart<Region> {
         recurringExpenseAmount.setText("$" + recurringExpense.getAmount().toString());
         recurringExpenseName.setText(recurringExpense.getName().name);
         recurringExpenseCategory.setText(recurringExpense.getCategory().toString());
-        recurringxpenseDate.setText(recurringExpense.getDate().toString());
+        recurringExpenseDate.setText(recurringExpense.getDate().toString());
     }
 
     @Override

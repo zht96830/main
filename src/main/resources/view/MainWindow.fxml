@@ -58,7 +58,7 @@
             </VBox>
 
             <VBox fx:id="recurringExpenseList" minWidth="50" prefWidth="50" SplitPane.resizableWithParent="false">
-              <StackPane fx:id="recurringExpenseListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              <StackPane fx:id="recurringListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>

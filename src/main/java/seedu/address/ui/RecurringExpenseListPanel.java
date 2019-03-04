@@ -7,7 +7,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
 
 import java.util.Objects;
@@ -55,7 +54,8 @@ public class RecurringExpenseListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Expense} using a {@code ExpenseCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Recurring} using a
+     * {@code RecurringExpenseListCard}.
      */
     class RecurringExpenseListViewCell extends ListCell<Recurring> {
         @Override
