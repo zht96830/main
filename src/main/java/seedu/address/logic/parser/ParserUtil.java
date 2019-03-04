@@ -48,9 +48,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Amount parseAmount(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedAmount = phone.trim();
+    public static Amount parseAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
         if (!Amount.isValidAmount(trimmedAmount)) {
             throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
         }
@@ -67,9 +67,36 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String frequency} into an {@code Frequency}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code frequency} is invalid.
+     */
+    public static Frequency parseFrequency(String frequency) throws ParseException {
+        requireNonNull(frequency);
+        String trimmedFrequency = frequency.trim();
+        if (!Frequency.isValidFrequency(trimmedFrequency)) {
+            throw new ParseException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        return new Frequency(trimmedFrequency);
+    }
+
+    /**
+     * Parses a {@code String occurence} into an {@code Occurence}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code occurence} is invalid.
+     */
+    public static int parseOccurence(String occurence) throws ParseException {
+        requireNonNull(occurence);
+        String trimmedOccurence = occurence.trim();
+        return Integer.parseInt(trimmedOccurence);
     }
 
     /**
@@ -85,7 +112,7 @@ public class ParserUtil {
         try {
             Category.valueOf(trimmedCategory);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
 
         return Category.valueOf(trimmedCategory);

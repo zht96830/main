@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.generalcommands.ClearCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -26,8 +27,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalFinanceTrackerWithExpenses(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalFinanceTrackerWithExpenses(), new UserPrefs());
         expectedModel.setFinanceTracker(new FinanceTracker());
         expectedModel.commitFinanceTracker();
 

@@ -30,13 +30,13 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalExpenses;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
@@ -80,7 +80,7 @@ public abstract class FinanceTrackerSystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected FinanceTracker getInitialData() {
-        return TypicalPersons.getTypicalAddressBook();
+        return TypicalExpenses.getTypicalFinanceTrackerWithExpenses();
     }
 
     /**

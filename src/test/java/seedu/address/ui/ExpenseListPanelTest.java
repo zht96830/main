@@ -4,7 +4,7 @@ import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
+import static seedu.address.testutil.TypicalExpenses.getTypicalExpenses;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
@@ -19,13 +19,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Email;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.attributes.Name;
 
 public class ExpenseListPanelTest extends GuiUnitTest {
     private static final ObservableList<Expense> TYPICAL_EXPENSES =
-            FXCollections.observableList(getTypicalPersons());
+            FXCollections.observableList(getTypicalExpenses());
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
@@ -59,7 +61,7 @@ public class ExpenseListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
+     * Verifies that creating and deleting large number of persons in {@code ExpenseListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
@@ -74,31 +76,31 @@ public class ExpenseListPanelTest extends GuiUnitTest {
 
     /**
      * Returns a list of persons containing {@code personCount} persons that is used to populate the
-     * {@code PersonListPanel}.
+     * {@code ExpenseListPanel}.
      */
-    private ObservableList<Expense> createBackingList(int personCount) {
+    private ObservableList<Expense> createBackingList(int expenseCount) {
         ObservableList<Expense> backingList = FXCollections.observableArrayList();
-        for (int i = 0; i < personCount; i++) {
+        for (int i = 0; i < expenseCount; i++) {
             Name name = new Name(i + "a");
             Amount amount = new Amount("000");
-            Email email = new Email("a@aa");
-            Address address = new Address("a");
-            Expense expense = new Expense(name, amount, email, address, Collections.emptySet());
+            Date date = new Date("13-01-1996");
+            Category category = Category.FOOD;
+            Expense expense = new Expense(name, amount, date, category, null);
             backingList.add(expense);
         }
         return backingList;
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code backingList}.
-     * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
+     * Initializes {@code personListPanelHandle} with a {@code ExpenseListPanel} backed by {@code backingList}.
+     * Also shows the {@code Stage} that displays only {@code ExpenseListPanel}.
      */
     private void initUi(ObservableList<Expense> backingList) {
-        PersonListPanel personListPanel =
-                new PersonListPanel(backingList, selectedPerson, selectedPerson::set);
-        uiPartRule.setUiPart(personListPanel);
+        ExpenseListPanel expenseListPanel =
+                new ExpenseListPanel(backingList, selectedPerson, selectedPerson::set);
+        uiPartRule.setUiPart(expenseListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
+        personListPanelHandle = new PersonListPanelHandle(getChildNode(expenseListPanel.getRoot(),
                 PersonListPanelHandle.PERSON_LIST_VIEW_ID));
     }
 }

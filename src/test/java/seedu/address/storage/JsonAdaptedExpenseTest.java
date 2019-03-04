@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.JsonAdaptedExpense.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalExpenses.TAXI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +24,18 @@ public class JsonAdaptedExpenseTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getAmount().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = TAXI.getName().toString();
+    private static final String VALID_PHONE = TAXI.getAmount().toString();
+    private static final String VALID_EMAIL = TAXI.getEmail().toString();
+    private static final String VALID_ADDRESS = TAXI.getAddress().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = TAXI.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedExpense person = new JsonAdaptedExpense(BENSON);
-        assertEquals(BENSON, person.toModelType());
+        JsonAdaptedExpense person = new JsonAdaptedExpense(TAXI);
+        assertEquals(TAXI, person.toModelType());
     }
 
     @Test

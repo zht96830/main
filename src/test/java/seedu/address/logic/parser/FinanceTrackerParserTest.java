@@ -14,24 +14,24 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.expensecommands.DeleteCommand;
+import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.commands.generalcommands.ExitCommand;
+import seedu.address.logic.commands.generalcommands.FindCommand;
+import seedu.address.logic.commands.generalcommands.HelpCommand;
+import seedu.address.logic.commands.generalcommands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.EditExpenseDescriptorBuilder;
+import seedu.address.testutil.ExpenseBuilder;
+import seedu.address.testutil.ExpenseUtil;
 
 public class FinanceTrackerParserTest {
     @Rule
@@ -41,8 +41,8 @@ public class FinanceTrackerParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Expense expense = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(expense));
+        Expense expense = new ExpenseBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(ExpenseUtil.getAddCommand(expense));
         assertEquals(new AddCommand(expense), command);
     }
 
@@ -61,10 +61,10 @@ public class FinanceTrackerParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Expense expense = new PersonBuilder().build();
-        EditCommand.EditExpenseDescriptor descriptor = new EditPersonDescriptorBuilder(expense).build();
+        Expense expense = new ExpenseBuilder().build();
+        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder(expense).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + ExpenseUtil.getEditExpenseDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

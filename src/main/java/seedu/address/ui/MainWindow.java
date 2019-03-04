@@ -34,7 +34,9 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private ExpenseListPanel expenseListPanel;
+    private DebtListPanel debtListPanel;
+    private BudgetListPanel budgetListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -48,7 +50,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane expenseListPanelPlaceholder;
+
+    @FXML
+    private StackPane debtListPanelPlaceholder;
+
+    @FXML
+    private StackPane budgetListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -56,57 +64,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    //-------------- Expense Table -------------------------------
-    @FXML
-    private TableView expenseTable;
-
-    @FXML
-    private TableColumn expenseIndexColumn;
-
-    @FXML
-    private TableColumn expenseNameColumn;
-
-    @FXML
-    private TableColumn expenseAmountColumn;
-
-    //-------------- Debt Table -------------------------------
-    @FXML
-    private TableView debtTable;
-
-    @FXML
-    private TableColumn debtIndexColumn;
-
-    @FXML
-    private TableColumn debtNameColumn;
-
-    @FXML
-    private TableColumn debtAmountColumn;
-
-    //-------------- Budget Table -----------------------------
-    @FXML
-    private TableView budgetTable;
-
-    @FXML
-    private TableColumn budgetIndexColumn;
-
-    @FXML
-    private TableColumn budgetNameColumn;
-
-    @FXML
-    private TableColumn budgetAmountColumn;
-
-    //-------------- Recurring Expense Table -----------------
-    @FXML
-    private TableView recurringExpenseTable;
-
-    @FXML
-    private TableColumn recurringExpenseIndexColumn;
-
-    @FXML
-    private TableColumn recurringExpenseNameColumn;
-
-    @FXML
-    private TableColumn recurringExpenseAmountColumn;
 
 
     public MainWindow(Stage primaryStage, Logic logic) {
@@ -169,9 +126,17 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel(logic.selectedExpenseProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredExpenseList(), logic.selectedExpenseProperty(),
-                logic::setSelectedPerson);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(), logic.selectedExpenseProperty(),
+                logic::setSelectedExpense);
+        expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
+
+        debtListPanel = new DebtListPanel(logic.getFilteredDebtList(), logic.selectedDebtProperty(),
+                logic::setSelectedDebt);
+        debtListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+
+        budgetListPanel = new BudgetListPanel(logic.getFilteredBudgetList(), logic.selectedBudgetProperty(),
+                logic::setSelectedBudget);
+        budgetListPanelPlaceholder.getChildren().add(budgetListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -226,8 +191,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ExpenseListPanel getExpenseListPanel() {
+        return expenseListPanel;
     }
 
     /**

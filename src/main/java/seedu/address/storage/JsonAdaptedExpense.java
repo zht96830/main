@@ -51,7 +51,7 @@ class JsonAdaptedExpense {
      */
     public JsonAdaptedExpense(Expense source) {
         name = source.getName().name;
-        amount = source.getAmount().value;
+        amount = source.getAmount().toString();
         category = source.getCategory().toString();
         date = source.getDate().toString();
         remarks = source.getRemarks();

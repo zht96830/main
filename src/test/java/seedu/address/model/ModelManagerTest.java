@@ -3,11 +3,11 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FINANCES;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
+import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
+import static seedu.address.testutil.TypicalExpenses.TAXI;
+import static seedu.address.testutil.TypicalExpenses.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,8 +22,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
-import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.FinanceTrackerBuilder;
+import seedu.address.testutil.ExpenseBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -93,39 +93,39 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasExpense(ALICE));
+        assertFalse(modelManager.hasExpense(DUCK_RICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addExpense(ALICE);
-        assertTrue(modelManager.hasExpense(ALICE));
+        modelManager.addExpense(DUCK_RICE);
+        assertTrue(modelManager.hasExpense(DUCK_RICE));
     }
 
     @Test
     public void deletePerson_personIsSelectedAndFirstPersonInFilteredPersonList_selectionCleared() {
-        modelManager.addExpense(ALICE);
-        modelManager.setSelectedExpense(ALICE);
-        modelManager.deleteExpense(ALICE);
+        modelManager.addExpense(DUCK_RICE);
+        modelManager.setSelectedExpense(DUCK_RICE);
+        modelManager.deleteExpense(DUCK_RICE);
         assertEquals(null, modelManager.getSelectedExpense());
     }
 
     @Test
     public void deletePerson_personIsSelectedAndSecondPersonInFilteredPersonList_firstPersonSelected() {
-        modelManager.addExpense(ALICE);
+        modelManager.addExpense(DUCK_RICE);
         modelManager.addExpense(BOB);
-        assertEquals(Arrays.asList(ALICE, BOB), modelManager.getFilteredExpenseList());
+        assertEquals(Arrays.asList(DUCK_RICE, BOB), modelManager.getFilteredExpenseList());
         modelManager.setSelectedExpense(BOB);
         modelManager.deleteExpense(BOB);
-        assertEquals(ALICE, modelManager.getSelectedExpense());
+        assertEquals(DUCK_RICE, modelManager.getSelectedExpense());
     }
 
     @Test
     public void setPerson_personIsSelected_selectedPersonUpdated() {
-        modelManager.addExpense(ALICE);
-        modelManager.setSelectedExpense(ALICE);
-        Expense updatedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        modelManager.setExpense(ALICE, updatedAlice);
+        modelManager.addExpense(DUCK_RICE);
+        modelManager.setSelectedExpense(DUCK_RICE);
+        Expense updatedAlice = new ExpenseBuilder(DUCK_RICE).withDate(VALID_CATEGORY_DEBT).build();
+        modelManager.setExpense(DUCK_RICE, updatedAlice);
         assertEquals(updatedAlice, modelManager.getSelectedExpense());
     }
 
@@ -138,20 +138,20 @@ public class ModelManagerTest {
     @Test
     public void setSelectedPerson_personNotInFilteredPersonList_throwsPersonNotFoundException() {
         thrown.expect(ExpenseNotFoundException.class);
-        modelManager.setSelectedExpense(ALICE);
+        modelManager.setSelectedExpense(DUCK_RICE);
     }
 
     @Test
     public void setSelectedPerson_personInFilteredPersonList_setsSelectedPerson() {
-        modelManager.addExpense(ALICE);
-        assertEquals(Collections.singletonList(ALICE), modelManager.getFilteredExpenseList());
-        modelManager.setSelectedExpense(ALICE);
-        assertEquals(ALICE, modelManager.getSelectedExpense());
+        modelManager.addExpense(DUCK_RICE);
+        assertEquals(Collections.singletonList(DUCK_RICE), modelManager.getFilteredExpenseList());
+        modelManager.setSelectedExpense(DUCK_RICE);
+        assertEquals(DUCK_RICE, modelManager.getSelectedExpense());
     }
 
     @Test
     public void equals() {
-        FinanceTracker financeTracker = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        FinanceTracker financeTracker = new FinanceTrackerBuilder().withPerson(DUCK_RICE).withPerson(TAXI).build();
         FinanceTracker differentFinanceTracker = new FinanceTracker();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -173,12 +173,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentFinanceTracker, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().name.split("\\s+");
+        String[] keywords = DUCK_RICE.getName().name.split("\\s+");
         modelManager.updateFilteredExpenseList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(financeTracker, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredExpenseList(PREDICATE_SHOW_ALL_FINANCES);
+        modelManager.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
