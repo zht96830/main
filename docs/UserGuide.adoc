@@ -452,10 +452,9 @@ one month after START_DATE or the current date
 Examples:
 
 * `stats`
-* `stats m/cat`
-* `stats m/cat vr/pie`
-* `stats m/day sd/12-02-2018`
-* `stats m/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
+* `stats vr/pie`
+* `stats sd/12-02-2018`
+* `stats sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
 
 === Viewing Macro Statistics Trend: `stats_mt`
 Produces statistics regarding user's finance for 2 or more time periods.
