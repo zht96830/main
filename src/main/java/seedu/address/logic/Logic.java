@@ -40,7 +40,7 @@ public interface Logic {
     ObservableList<Debt> getFilteredDebtList();
 
     /** Returns an unmodifiable view of the filtered list of budgets */
-    ObservableList<Debt> getFilteredBudgetList();
+    ObservableList<Budget> getFilteredBudgetList();
 
 
     /**
