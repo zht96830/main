@@ -417,20 +417,21 @@ Examples:
 Deletes the 2nd recurring in the finance tracker, without deleting old expenses already added by this recurring.
 
 === Viewing Statistics: `stats`
-Produces statistics regarding the user's finance.
-The statistics include the frequency of entries, the total amount of money spent
-The user may choose the time frame to be considered for the statistic by entering the start date and end date.
-The user may also choose to display only the results in a specific category.
-The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table
-.StatsExample
-[width="50%",cols=">s,^m,e",frame="topbot",options="header,footer"]
+Produces statistics regarding the user's finance. +
+The statistics include the frequency of entries, the total amount of money spent +
+The user may choose the time frame to be considered for the statistic by entering the start date and end date. +
+The user may also choose to display only the results in a specific category. +
+The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table.
+
+Table Example:
+[width="50%"]
 |==========================
-|Category|Total Amount|Entries
-|FOOD       |$302  |38
-|TRANSPORT      |$205  |4
-|SHOPPING       |$1702  |8
-|WORK       |$52  |1
-|OTHERS 1|$40|1
+|Category       |Total Amount   |Entries
+|FOOD           |$302           |38
+|TRANSPORT      |$205           |4
+|SHOPPING       |$1702          |8
+|WORK           |$52            |1
+|OTHERS         |$40            |1
 |==========================
 
 
