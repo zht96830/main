@@ -418,13 +418,27 @@ Deletes the 2nd recurring in the finance tracker, without deleting old expenses 
 
 === Viewing Statistics: `stats`
 Produces statistics regarding the user's finance.
+The statistics include the frequency of entries, the total amount of money spent
+The user may choose the time frame to be considered for the statistic by entering the start date and end date.
+The user may also choose to display only the results in a specific category.
+The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table
+
+[width="50%",cols=">s,^m,e",frame="topbot",options="header,footer"]
+|==========================
+|Category|Total Amount|
+|1       |Item 1  |Item 1
+|2       |Item 2  |Item 2
+|3       |Item 3  |Item 3
+|4       |Item 4  |Item 4
+|footer 1|footer 2|footer 3
+|==========================
+
+
 Format:
-`stats [m/MODE] [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]`
+`stats [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]`
 
 [NOTE]
 ====
-* If all parameters are empty, stats defaults to showing the result of "stats c/cat vr/pie"
-* If MODE is not “cat”, display “User may choose a category with c/<category>” msg
 * If category is selected in MODE, CATEGORY field will be unavailable
 * If START_DATE is empty but END_DATE is specified, statistics will be calculated from the one month before END_DATE
 to END_DATE
