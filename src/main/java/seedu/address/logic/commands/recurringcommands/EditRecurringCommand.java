@@ -29,7 +29,7 @@ public class EditRecurringCommand extends Command {
             + "by the index number used in the displayed recurring list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_EDITPAST + "EDITPASTOPTION] "
+            + "[" + PREFIX_RECURRINGOPTION + "EDITPASTOPTION] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
             + "[" + PREFIX_CATEGORY + "CATEGORY] "
@@ -38,7 +38,7 @@ public class EditRecurringCommand extends Command {
             + "[" + PREFIX_FREQUENCY + "FREQUENCY] "
             + "[" + PREFIX_OCCURRENCES + "OCCURENCE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EDITPAST + "N "
+            + PREFIX_RECURRINGOPTION + "N "
             + PREFIX_NAME + "Phone Bill Latest "
             + PREFIX_AMOUNT + "51 ";
 
@@ -66,7 +66,7 @@ public class EditRecurringCommand extends Command {
         List<Recurring> lastShownList = model.getFilteredRecurringList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RECURRING_DISPLAYED_INDEX);
         }
 
         Recurring recurringToEdit = lastShownList.get(index.getZeroBased());

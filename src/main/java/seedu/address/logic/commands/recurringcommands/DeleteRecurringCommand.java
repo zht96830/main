@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.recurringcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRINGOPTION;
 
 import java.util.List;
 
@@ -19,10 +20,12 @@ public class DeleteRecurringCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the recurring identified by the index number used in the displayed recurring list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_RECURRINGOPTION + "DELETEPASTOPTION\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_RECURRINGOPTION + "Y";
 
-    public static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Deleted Recurring:\n%1$s";
+    public static final String MESSAGE_DELETE_RECURRING_SUCCESS = "Deleted Recurring:\n%1$s";
 
     private final Index targetIndex;
 
@@ -36,13 +39,13 @@ public class DeleteRecurringCommand extends Command {
         List<Recurring> lastShownList = model.getFilteredRecurringList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RECURRING_DISPLAYED_INDEX);
         }
 
         Recurring recurringToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteRecurring(recurringToDelete);
         model.commitFinanceTracker();
-        return new CommandResult(String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, recurringToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_RECURRING_SUCCESS, recurringToDelete));
     }
 
     @Override

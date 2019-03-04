@@ -17,7 +17,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_DUE = new Prefix("due/");
     public static final Prefix PREFIX_FREQUENCY = new Prefix("f/");
     public static final Prefix PREFIX_OCCURRENCES = new Prefix("o/");
-    public static final Prefix PREFIX_EDITPAST = new Prefix("p/");
+    public static final Prefix PREFIX_RECURRINGOPTION = new Prefix("p/");
     public static final Prefix PREFIX_MODE = new Prefix("m/");
 
 }
