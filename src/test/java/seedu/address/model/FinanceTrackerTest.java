@@ -21,8 +21,11 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.exceptions.DuplicateExpenseException;
+import seedu.address.model.recurring.Recurring;
 import seedu.address.testutil.ExpenseBuilder;
 
 public class FinanceTrackerTest {
@@ -53,7 +56,7 @@ public class FinanceTrackerTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two expenses with the same identity fields
-        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withTags(VALID_REMARKS_EXPENSE)
+        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withRemarks(VALID_REMARKS_EXPENSE)
                 .build();
         List<Expense> newExpenses = Arrays.asList(DUCK_RICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newExpenses);
@@ -82,7 +85,7 @@ public class FinanceTrackerTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         financeTracker.addExpense(DUCK_RICE);
-        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withTags(VALID_REMARKS_EXPENSE)
+        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withRemarks(VALID_REMARKS_EXPENSE)
                 .build();
         assertTrue(financeTracker.hasExpense(editedAlice));
     }
@@ -117,6 +120,9 @@ public class FinanceTrackerTest {
      */
     private static class AddressBookStub implements ReadOnlyFinanceTracker {
         private final ObservableList<Expense> expenses = FXCollections.observableArrayList();
+        private final ObservableList<Debt> debts = FXCollections.observableArrayList();
+        private final ObservableList<Budget> budgets = FXCollections.observableArrayList();
+        private final ObservableList<Recurring> recurrings = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Expense> expenses) {
             this.expenses.setAll(expenses);
@@ -125,6 +131,21 @@ public class FinanceTrackerTest {
         @Override
         public ObservableList<Expense> getExpenseList() {
             return expenses;
+        }
+
+        @Override
+        public ObservableList<Debt> getDebtList() {
+            return debts;
+        }
+
+        @Override
+        public ObservableList<Budget> getBudgetList() {
+            return budgets;
+        }
+
+        @Override
+        public ObservableList<Recurring> getRecurringList() {
+            return recurrings;
         }
 
         @Override

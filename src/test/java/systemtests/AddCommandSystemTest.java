@@ -2,28 +2,18 @@ package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
 import static seedu.address.testutil.TypicalExpenses.EXPENSE;
-import static seedu.address.testutil.TypicalExpenses.BOB;
 import static seedu.address.testutil.TypicalExpenses.GROCERIES;
-import static seedu.address.testutil.TypicalExpenses.JAPAN;
 import static seedu.address.testutil.TypicalExpenses.STOCKS;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
 
@@ -52,7 +42,7 @@ public class AddCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a expense without tags to a non-empty address book, command with leading spaces and trailing spaces
+        /* Case: add a expense to a non-empty address book, command with leading spaces and trailing spaces
          * -> added
          */
         Expense toAdd = EXPENSE;
@@ -60,42 +50,20 @@ public class AddCommandSystemTest extends FinanceTrackerSystemTest {
                 + CATEGORY_DESC_EXPENSE + "   " + DATE_DESC_EXPENSE + "   " + REMARKS_DESC_EXPENSE + " ";
         assertCommandSuccess(command, toAdd);
 
-        /* Case: undo adding Amy to the list -> Amy deleted */
+        /* Case: undo adding Expense to the list -> Expense deleted */
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: redo adding Amy to the list -> Amy added again */
+        /* Case: redo adding Expense to the list -> Expense added again */
         command = RedoCommand.COMMAND_WORD;
         model.addExpense(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add a expense with all fields same as another expense in the address book except name -> added */
-        toAdd = new ExpenseBuilder(EXPENSE).withName(VALID_NAME_DEBT).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_DEBT + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
-                + REMARKS_DESC_EXPENSE;
-        assertCommandSuccess(command, toAdd);
-
-        /* Case: add a expense with all fields same as another expense in the address book except phone and email
-         * -> added
-         */
-        toAdd = new ExpenseBuilder(EXPENSE).withAmount(VALID_AMOUNT_DEBT).withDate(VALID_CATEGORY_DEBT).build();
-        command = ExpenseUtil.getAddCommand(toAdd);
-        assertCommandSuccess(command, toAdd);
-
-        /* Case: add to empty address book -> added */
+        /* Case: add to empty finance tracker -> added */
         deleteAllPersons();
         assertCommandSuccess(DUCK_RICE);
-
-        /* Case: add a expense with tags, command with parameters in random order -> added */
-        toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + REMARKS_DESC_EXPENSE + AMOUNT_DESC_DEBT + DEADLINE_DESC_DEBT + NAME_DESC_DEBT
-                + REMARKS_DESC_DEBT + CATEGORY_DESC_DEBT;
-        assertCommandSuccess(command, toAdd);
-
-        /* Case: add a expense, missing tags -> added */
-        assertCommandSuccess(JAPAN);
 
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 

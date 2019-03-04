@@ -27,7 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalExpenses.EXPENSE;
-import static seedu.address.testutil.TypicalExpenses.BOB;
+import static seedu.address.testutil.TypicalExpenses.TAXI;
 
 import org.junit.Test;
 
@@ -46,7 +46,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Expense expectedExpense = new ExpenseBuilder(BOB).withTags(VALID_REMARKS_DEBT).build();
+        Expense expectedExpense = new ExpenseBuilder(TAXI).withRemarks(VALID_REMARKS_EXPENSE).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
@@ -69,7 +69,7 @@ public class AddCommandParserTest {
                 + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
 
         // multiple tags - all accepted
-        Expense expectedExpenseMultipleTags = new ExpenseBuilder(BOB).withTags(VALID_REMARKS_DEBT, VALID_REMARKS_EXPENSE)
+        Expense expectedExpenseMultipleTags = new ExpenseBuilder(TAXI).withRemarks(VALID_REMARKS_EXPENSE)
                 .build();
         assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT
                 + REMARKS_DESC_DEBT + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpenseMultipleTags));
@@ -78,7 +78,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Expense expectedExpense = new ExpenseBuilder(EXPENSE).withTags().build();
+        Expense expectedExpense = new ExpenseBuilder(EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
         assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE,
                 new AddCommand(expectedExpense));
     }

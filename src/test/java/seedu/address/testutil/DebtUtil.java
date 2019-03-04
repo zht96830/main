@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.AddDebtCommand;
-import seedu.address.logic.commands.EditDebtCommand.EditDebtDescriptor;
+import seedu.address.logic.commands.debtcommands.AddDebtCommand;
+import seedu.address.logic.commands.debtcommands.EditDebtCommand.EditDebtDescriptor;
 import seedu.address.model.debt.Debt;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
