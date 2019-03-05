@@ -56,8 +56,8 @@ public class FinanceTrackerTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two expenses with the same identity fields
-        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withRemarks(VALID_REMARKS_EXPENSE)
-                .build();
+        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withRemarks(
+                VALID_REMARKS_EXPENSE).build();
         List<Expense> newExpenses = Arrays.asList(DUCK_RICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newExpenses);
 
@@ -85,8 +85,8 @@ public class FinanceTrackerTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         financeTracker.addExpense(DUCK_RICE);
-        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withRemarks(VALID_REMARKS_EXPENSE)
-                .build();
+        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withRemarks(
+                VALID_REMARKS_EXPENSE).build();
         assertTrue(financeTracker.hasExpense(editedAlice));
     }
 

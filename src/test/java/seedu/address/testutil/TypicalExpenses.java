@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
 
 import java.util.ArrayList;

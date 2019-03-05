@@ -1,17 +1,17 @@
 package seedu.address.testutil;
 
-import seedu.address.model.FinanceTracker;
-import seedu.address.model.debt.Debt;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.model.FinanceTracker;
+import seedu.address.model.debt.Debt;
 
 /**
  * A utility class containing a list of {@code Debt} objects to be used in tests.

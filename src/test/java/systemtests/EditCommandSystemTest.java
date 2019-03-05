@@ -1,33 +1,31 @@
 package systemtests;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalExpenses.EXPENSE;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.Test;
 
@@ -38,13 +36,12 @@ import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.attributes.Address;
-import seedu.address.model.attributes.Email;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Email;
+import seedu.address.model.attributes.Name;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ExpenseBuilder;
-import seedu.address.testutil.ExpenseUtil;
 
 public class EditCommandSystemTest extends FinanceTrackerSystemTest {
 
@@ -59,7 +56,8 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
          */
         Index index = INDEX_FIRST_PERSON;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_EXPENSE + "  "
-                + AMOUNT_DESC_EXPENSE + " " + CATEGORY_DESC_EXPENSE + "  " + DATE_DESC_EXPENSE + " " + REMARKS_DESC_EXPENSE;
+                + AMOUNT_DESC_EXPENSE + " " + CATEGORY_DESC_EXPENSE + "  " + DATE_DESC_EXPENSE + " "
+                + REMARKS_DESC_EXPENSE;
         Expense editedExpense = new ExpenseBuilder(EXPENSE).build();
         assertCommandSuccess(command, index, editedExpense);
 
@@ -83,8 +81,8 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         assertTrue(getModel().getFinanceTracker().getExpenseList().contains(EXPENSE));
         index = INDEX_SECOND_PERSON;
         assertNotEquals(getModel().getFilteredExpenseList().get(index.getZeroBased()), EXPENSE);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
-                + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE + REMARKS_DESC_DEBT;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_DEBT
+                + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE + REMARKS_DESC_DEBT;
         editedExpense = new ExpenseBuilder(EXPENSE).withName(VALID_NAME_EXPENSE).build();
         assertCommandSuccess(command, index, editedExpense);
 
@@ -92,9 +90,10 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
          * -> edited
          */
         index = INDEX_SECOND_PERSON;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_DEBT + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE + REMARKS_DESC_DEBT;
-        editedExpense = new ExpenseBuilder(EXPENSE).withAmount(VALID_AMOUNT_EXPENSE).withDate(VALID_CATEGORY_EXPENSE).build();
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_DEBT + AMOUNT_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE + REMARKS_DESC_DEBT;
+        editedExpense =
+                new ExpenseBuilder(EXPENSE).withAmount(VALID_AMOUNT_EXPENSE).withDate(VALID_CATEGORY_EXPENSE).build();
         assertCommandSuccess(command, index, editedExpense);
 
         /* Case: clear tags -> cleared */
@@ -123,7 +122,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_DEBT,
                 Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
-        /* --------------------- Performing edit operation while a expense card is selected -------------------------- */
+        /* --------------------- Performing edit operation while a expense card is selected -------------------------*/
 
         /* Case: selects first card in the expense list, edit a expense -> edited, card selection remains unchanged but
          * browser url changes
@@ -131,8 +130,8 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         showAllPersons();
         index = INDEX_FIRST_PERSON;
         selectPerson(index);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new expense's name
         assertCommandSuccess(command, index, EXPENSE, index);
@@ -161,24 +160,24 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
                 EditCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_NAME_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_AMOUNT_DESC,
-                Amount.MESSAGE_CONSTRAINTS);
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + INVALID_AMOUNT_DESC, Amount.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_CATEGORY_DESC,
-                Email.MESSAGE_CONSTRAINTS);
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + INVALID_CATEGORY_DESC, Email.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_DATE_DESC,
-                Address.MESSAGE_CONSTRAINTS);
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + INVALID_DATE_DESC, Address.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_DEADLINE_DESC,
-                Tag.MESSAGE_CONSTRAINTS);
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + INVALID_DEADLINE_DESC, Tag.MESSAGE_CONSTRAINTS);
     }
 
     /**

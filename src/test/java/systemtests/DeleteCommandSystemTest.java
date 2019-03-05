@@ -4,11 +4,11 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.expensecommands.DeleteCommand.MESSAGE_DELETE_EXPENSE_SUCCESS;
+import static seedu.address.testutil.TestUtil.getExpense;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getExpense;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.Test;
 
@@ -72,7 +72,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a expense card is selected ------------------------ */
+        /* --------------------- Performing delete operation while a expense card is selected ---------------------- */
 
         /* Case: delete the selected expense -> expense list panel selects the expense before the deleted expense */
         showAllPersons();

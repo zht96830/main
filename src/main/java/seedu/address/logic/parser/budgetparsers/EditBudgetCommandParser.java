@@ -1,13 +1,5 @@
 package seedu.address.logic.parser.budgetparsers;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
-
 import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -15,6 +7,15 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Category;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -36,7 +37,7 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         Category category;
 
         try {
-            category = ParserUtil.parseCategory(argMultimap.getPreamble());
+            category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditBudgetCommand.MESSAGE_USAGE), pe);

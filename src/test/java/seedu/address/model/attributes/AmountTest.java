@@ -1,10 +1,11 @@
 package seedu.address.model.attributes;
 
-import org.junit.Test;
-import seedu.address.testutil.Assert;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+import seedu.address.testutil.Assert;
 
 public class AmountTest {
 
@@ -14,7 +15,7 @@ public class AmountTest {
     }
 
     @Test
-    public void constructor_invalidAmount_emptyString_throwsIllegalArgumentException() {
+    public void constructorInvalidAmount_emptyString_throwsIllegalArgumentException() {
         String invalidAmount = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Amount(invalidAmount));
     }
