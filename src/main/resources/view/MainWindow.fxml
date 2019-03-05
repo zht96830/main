@@ -46,24 +46,35 @@
           </padding>
         </StackPane>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.3" VBox.vgrow="ALWAYS">
-          <VBox fx:id="expenseList" minWidth="200" prefWidth="200" SplitPane.resizableWithParent="false">
-            <StackPane fx:id="expenseListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-          </VBox>
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.2, 0.8"  VBox.vgrow="ALWAYS">
 
-          <SplitPane dividerPositions="0.8" VBox.vgrow = "ALWAYS">
-            <StackPane fx:id="browserPlaceholder" prefWidth="300" >
+          <SplitPane id="splitPaneExpenses" orientation="VERTICAL" dividerPositions="0.7" VBox.vgrow="ALWAYS">
+
+            <VBox fx:id="expenseList" minWidth="100" prefWidth="100" SplitPane.resizableWithParent="false">
+              <StackPane fx:id="expenseListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+            </VBox>
+
+            <VBox fx:id="recurringExpenseList" minWidth="50" prefWidth="50" SplitPane.resizableWithParent="false">
+              <StackPane fx:id="recurringListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+            </VBox>
+          </SplitPane>
+
+            <StackPane fx:id="browserPlaceholder" prefWidth="400" >
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
             </StackPane>
 
-            <SplitPane id="innerSplitPane" fx:id="innerSplitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
 
-              <VBox fx:id="debtList" minWidth="200" prefWidth="200" SplitPane.resizableWithParent="false">
+            <SplitPane id="splitPaneExpenses" orientation="VERTICAL" dividerPositions="0.5" VBox.vgrow="ALWAYS">
+
+              <VBox fx:id="debtList" minWidth="150" prefWidth="150" SplitPane.resizableWithParent="false">
                 <padding>
                   <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
@@ -71,16 +82,16 @@
                 <StackPane fx:id="debtListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
               </VBox>
 
-              <VBox fx:id="budgetList" minWidth="200" prefWidth="200" SplitPane.resizableWithParent="false">
+              <VBox fx:id="budgetList" minWidth="150" prefWidth="150" SplitPane.resizableWithParent="false">
                 <padding>
                   <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
 
                 <StackPane fx:id="budgetListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
               </VBox>
-          </SplitPane>
 
-          </SplitPane>
+            </SplitPane>
+
         </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
