@@ -20,8 +20,8 @@ public class Budget {
     private int totalSpent; // in cents
     private double percentage;
 
-    public boolean hasBudget;
-    public boolean isAboutToExceed; // when percentage reaches 90
+    private boolean hasBudget;
+    private boolean isAboutToExceed; // when percentage reaches 90
 
     // constructor
     public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks) {
@@ -68,6 +68,10 @@ public class Budget {
     public double getPercentage() {
         return percentage;
     }
+
+    public boolean getHasBudget() { return hasBudget; }
+
+    public boolean getIsAboutToExceed() { return isAboutToExceed; }
 
     public void setCategory(Category category) {
         this.category = category;
