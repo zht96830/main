@@ -358,7 +358,7 @@ Converts the 3rd debt in the finance tracker into an expense.
 === Adding a recurring: `addrecurring`
 Adds a recurring payment to the finance tracker.
 
-Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] f/FREQUENCY o/OCCURENCE`
+Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE`
 
 [NOTE]
 ====
@@ -387,12 +387,12 @@ Examples:
   `Please enter the start date of the recurring (optional):` +
   `Please enter the remark of the expense (optional):` +
   `Please enter the frequency of the recurring: M2` +
-  `Please enter the number of occurence of the recurring: 12`
+  `Please enter the number of occurrence of the recurring: 12`
 
 === Editing a recurring : `editrecurring`
 
 Edits an existing recurring in the finance tracker. +
-Format 1: `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURENCE]` +
+Format 1: `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 
 [NOTE]
 ====
@@ -420,7 +420,7 @@ Examples:
 `Please enter the amount of the recurring to be updated (optional): 450` +
 `Please enter the category of the recurring to be updated (optional): food` +
 `Please enter the frequency of the recurring to be updated (optional):` +
-`Please enter the number of occurence of the recurring to be updated (optional):` +
+`Please enter the number of occurrence of the recurring to be updated (optional):` +
 `Please enter the start date of the recurring to be updated (optional):` +
 `Please enter the remark of the expense to be updated (optional):`
 
@@ -616,9 +616,9 @@ e.g. `editdebt 5 n/Tommy $/60`
 e.g. `deletedebt 5`
 * *Pay off debt* : `paydebt INDEX [d/DATE]` +
 e.g. `payDebt 2`
-* *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURENCE]` +
+* *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 e.g. `addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24` +
-* *Edit a recurring* : `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURENCE]` +
+* *Edit a recurring* : `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 e.g. `editrecurring 9 p/N $/450 c/food` +
 * *Delete a recurring* : `deleterecurring INDEX p/DELETEPASTOPTION` +
 e.g. `deleterecurring 2 p/N` +
