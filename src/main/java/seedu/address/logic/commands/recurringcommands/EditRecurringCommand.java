@@ -29,16 +29,16 @@ public class EditRecurringCommand extends Command {
             + "by the index number used in the displayed recurring list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_EDITPAST + "EDITPASTOPTION] "
+            + "[" + PREFIX_RECURRINGOPTION + "EDITPASTOPTION] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
             + "[" + PREFIX_CATEGORY + "CATEGORY] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_REMARKS + "REMARKS] "
             + "[" + PREFIX_FREQUENCY + "FREQUENCY] "
-            + "[" + PREFIX_OCCURRENCES + "OCCURENCES]\n"
+            + "[" + PREFIX_OCCURRENCE + "OCCURRENCE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EDITPAST + "N "
+            + PREFIX_RECURRINGOPTION + "N "
             + PREFIX_NAME + "Phone Bill Latest "
             + PREFIX_AMOUNT + "51 ";
 
@@ -66,7 +66,7 @@ public class EditRecurringCommand extends Command {
         List<Recurring> lastShownList = model.getFilteredRecurringList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RECURRING_DISPLAYED_INDEX);
         }
 
         Recurring recurringToEdit = lastShownList.get(index.getZeroBased());
@@ -92,9 +92,9 @@ public class EditRecurringCommand extends Command {
         Date updatedDate = editRecurringDescriptor.getDate().orElse(recurringToEdit.getDate());
         String updatedRemarks = editRecurringDescriptor.getRemarks().orElse(recurringToEdit.getRemarks());
         Frequency updatedFrequency = editRecurringDescriptor.getFrequency().orElse(recurringToEdit.getFrequency());
-        int updatedOccurences = editRecurringDescriptor.getOccurences().orElse(recurringToEdit.getOccurences());
+        int updatedOccurrence = editRecurringDescriptor.getOccurrence().orElse(recurringToEdit.getOccurrence());
 
-        return new Recurring(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks, updatedFrequency, updatedOccurences);
+        return new Recurring(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks, updatedFrequency, updatedOccurrence);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class EditRecurringCommand extends Command {
         private Category category;
         private String remarks;
         private Frequency frequency;
-        private int occurences;
+        private int occurrence;
 
         public EditRecurringDescriptor() {}
 
@@ -141,14 +141,14 @@ public class EditRecurringCommand extends Command {
             setCategory(toCopy.category);
             setRemarks(toCopy.remarks);
             setFrequency(toCopy.frequency);
-            setOccurences(toCopy.occurences);
+            setOccurrence(toCopy.occurrence);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, amount, date, category, remarks, frequency, occurences);
+            return CollectionUtil.isAnyNonNull(name, amount, date, category, remarks, frequency, occurrence);
         }
 
         public void setName(Name name) {
@@ -189,9 +189,9 @@ public class EditRecurringCommand extends Command {
 
         public Optional<Frequency> getFrequency() { return Optional.ofNullable(frequency); }
 
-        public void setOccurences(int occurences) {this.occurences = occurences; }
+        public void setOccurrence(int occurrence) {this.occurrence = occurrence; }
 
-        public Optional<Integer> getOccurences() { return Optional.ofNullable(occurences); }
+        public Optional<Integer> getOccurrence() { return Optional.ofNullable(occurrence); }
 
         @Override
         public boolean equals(Object other) {
@@ -214,7 +214,7 @@ public class EditRecurringCommand extends Command {
                     && getCategory().equals(e.getCategory())
                     && getRemarks().equals(e.getRemarks())
                     && getFrequency().equals(e.getFrequency())
-                    && (getOccurences() == e.getOccurences());
+                    && (getOccurrence() == e.getOccurrence());
         }
     }
 }
