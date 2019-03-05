@@ -1,21 +1,27 @@
 package seedu.address.logic.parser.budgetparsers;
 
-import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
-import seedu.address.logic.commands.debtcommands.AddDebtCommand;
-import seedu.address.logic.parser.*;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.attributes.Amount;
-import seedu.address.model.attributes.Category;
-import seedu.address.model.attributes.Date;
-import seedu.address.model.budget.Budget;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
+import seedu.address.model.budget.Budget;
 
 /**
  * Parses input arguments and creates a new AddDebtCommand object
@@ -40,8 +46,8 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Date startDate;
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
+            startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
         } else {
             // If date is not present, initialise to the current date
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
