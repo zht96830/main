@@ -31,33 +31,33 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final CommandHistory history;
-    private final FinanceTrackerParser FinanceTrackerParser;
-    private boolean FinanceTrackerModified;
+    private final FinanceTrackerParser financeTrackerParser;
+    private boolean financeTrackerModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         history = new CommandHistory();
-        FinanceTrackerParser = new FinanceTrackerParser();
+        financeTrackerParser = new FinanceTrackerParser();
 
-        // Set FinanceTrackerModified to true whenever the models' Finance Tracker is modified.
-        model.getFinanceTracker().addListener(observable -> FinanceTrackerModified = true);
+        // Set financeTrackerModified to true whenever the models' Finance Tracker is modified.
+        model.getFinanceTracker().addListener(observable -> financeTrackerModified = true);
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        FinanceTrackerModified = false;
+        financeTrackerModified = false;
 
         CommandResult commandResult;
         try {
-            Command command = FinanceTrackerParser.parseCommand(commandText);
+            Command command = financeTrackerParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);
         }
 
-        if (FinanceTrackerModified) {
+        if (financeTrackerModified) {
             logger.info("Finance Tracker modified, saving to file.");
             try {
                 storage.saveFinanceTracker(model.getFinanceTracker());

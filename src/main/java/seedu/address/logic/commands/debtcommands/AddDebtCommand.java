@@ -1,17 +1,19 @@
 package seedu.address.logic.commands.debtcommands;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.model.Model;
-import seedu.address.model.debt.Debt;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+
+import seedu.address.model.Model;
+import seedu.address.model.debt.Debt;
+
 
 /**
  * Adds a debt to the Finance Tracker.

@@ -1,7 +1,14 @@
 package seedu.address.logic.commands.recurringcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRINGOPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECURRING;
 
 import java.util.List;
@@ -15,7 +22,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.attributes.*;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
+import seedu.address.model.attributes.Name;
 import seedu.address.model.recurring.Recurring;
 
 /**
@@ -83,7 +94,8 @@ public class EditRecurringCommand extends Command {
      * Creates and returns a {@code Recurring} with the details of {@code recurringToEdit}
      * edited with {@code editRecurringDescriptor}.
      */
-    private static Recurring createEditedRecurring(Recurring recurringToEdit, EditRecurringDescriptor editRecurringDescriptor) {
+    private static Recurring createEditedRecurring(Recurring recurringToEdit,
+                                                   EditRecurringDescriptor editRecurringDescriptor) {
         assert recurringToEdit != null;
 
         Name updatedName = editRecurringDescriptor.getName().orElse(recurringToEdit.getName());
@@ -94,7 +106,8 @@ public class EditRecurringCommand extends Command {
         Frequency updatedFrequency = editRecurringDescriptor.getFrequency().orElse(recurringToEdit.getFrequency());
         int updatedOccurrence = editRecurringDescriptor.getOccurrence().orElse(recurringToEdit.getOccurrence());
 
-        return new Recurring(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks, updatedFrequency, updatedOccurrence);
+        return new Recurring(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks,
+                updatedFrequency, updatedOccurrence);
     }
 
     @Override
@@ -164,6 +177,7 @@ public class EditRecurringCommand extends Command {
         }
 
         public Optional<Amount> getAmount() {
+
             return Optional.ofNullable(amount);
         }
 
@@ -175,23 +189,37 @@ public class EditRecurringCommand extends Command {
             return Optional.ofNullable(date);
         }
 
-        public void setCategory(Category category) { this.category = category; }
+        public void setCategory(Category category) {
+            this.category = category;
+        }
 
-        public Optional<Category> getCategory() { return Optional.ofNullable(category); }
+        public Optional<Category> getCategory() {
+            return Optional.ofNullable(category);
+        }
 
         public void setRemarks(String remarks) {
             this.remarks = remarks;
         }
 
-        public Optional<String> getRemarks() { return Optional.ofNullable(remarks); }
+        public Optional<String> getRemarks() {
+            return Optional.ofNullable(remarks);
+        }
 
-        public void setFrequency(Frequency frequency) {this.frequency = frequency; }
+        public void setFrequency(Frequency frequency) {
+            this.frequency = frequency;
+        }
 
-        public Optional<Frequency> getFrequency() { return Optional.ofNullable(frequency); }
+        public Optional<Frequency> getFrequency() {
+            return Optional.ofNullable(frequency);
+        }
 
-        public void setOccurrence(int occurrence) {this.occurrence = occurrence; }
+        public void setOccurrence(int occurrence) {
+            this.occurrence = occurrence;
+        }
 
-        public Optional<Integer> getOccurrence() { return Optional.ofNullable(occurrence); }
+        public Optional<Integer> getOccurrence() {
+            return Optional.ofNullable(occurrence);
+        }
 
         @Override
         public boolean equals(Object other) {
