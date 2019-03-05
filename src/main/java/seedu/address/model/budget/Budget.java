@@ -69,9 +69,13 @@ public class Budget {
         return percentage;
     }
 
-    public boolean getHasBudget() { return hasBudget; }
+    public boolean getHasBudget() {
+        return hasBudget;
+    }
 
-    public boolean getIsAboutToExceed() { return isAboutToExceed; }
+    public boolean getIsAboutToExceed() {
+        return isAboutToExceed;
+    }
 
     public void setCategory(Category category) {
         this.category = category;
