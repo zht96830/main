@@ -2,12 +2,12 @@ package seedu.address.model.debt;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
-
-import java.util.Objects;
 
 /**
  * Represents a Debt in the finance tracker.

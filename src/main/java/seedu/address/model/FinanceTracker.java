@@ -1,5 +1,9 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
@@ -12,9 +16,6 @@ import seedu.address.model.expense.ExpenseList;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.model.recurring.RecurringList;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps all data at the address-book level
@@ -169,7 +170,8 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     //// budget-level operations =====================================================================
 
     /**
-     * Returns true if a budget with the same identity as {@code budget} exists in the budget list in the finance tracker.
+     * Returns true if a budget with the same identity as {@code budget} exists in the
+     * budget list in the finance tracker.
      */
     public boolean hasBudget(Budget budget) {
         requireNonNull(budget);
@@ -225,8 +227,8 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
         indicateModified();
     }
 
-
-     /** Replaces the given recurring {@code target} in the list with {@code editedRecurring}.
+    /**
+     * Replaces the given recurring {@code target} in the list with {@code editedRecurring}.
      * {@code target} must exist in the recurring list in the finance tracker.
      */
     public void setRecurring(Recurring target, Recurring editedRecurring) {
@@ -278,14 +280,18 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     }
 
     @Override
-    public ObservableList<Debt> getDebtList() { return debts.asUnmodifiableObservableList(); }
+    public ObservableList<Debt> getDebtList() {
+        return debts.asUnmodifiableObservableList();
+    }
 
     @Override
     public ObservableList<Budget> getBudgetList() {
         return budgets.asUnmodifiableObservableList();
     }
 
-    public ObservableList<Recurring> getRecurringList() { return recurrings.asUnmodifiableObservableList(); }
+    public ObservableList<Recurring> getRecurringList() {
+        return recurrings.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {

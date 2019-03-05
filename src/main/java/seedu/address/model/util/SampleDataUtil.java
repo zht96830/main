@@ -1,19 +1,12 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.ReadOnlyFinanceTracker;
-import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
-import seedu.address.model.attributes.Email;
-import seedu.address.model.expense.Expense;
 import seedu.address.model.attributes.Name;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.expense.Expense;
 
 /**
  * Contains utility methods for populating {@code FinanceTracker} with sample data.
