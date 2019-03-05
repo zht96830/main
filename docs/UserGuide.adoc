@@ -416,15 +416,30 @@ Examples:
 `deleterecurring 2 p/N` +
 Deletes the 2nd recurring in the finance tracker, without deleting old expenses already added by this recurring.
 
-=== Viewing Statistics: `stats`
-Produces statistics regarding the user's finance.
+=== Viewing Statistics - Summary: `stats`
+Produces statistics regarding the user's finance. +
+The statistics include the frequency of entries, the total amount of money spent +
+The user may choose the time frame to be considered for the statistic by entering the start date and end date. +
+The user may also choose to display only the results in a specific category. +
+The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table.
+
+Table Example:
+[width="50%"]
+|==========================
+|Category       |Total Amount   |Entries
+|FOOD           |$302           |38
+|TRANSPORT      |$205           |4
+|SHOPPING       |$1702          |8
+|WORK           |$52            |1
+|OTHERS         |$40            |1
+|==========================
+
+
 Format:
-`stats [m/MODE] [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]`
+`stats [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]`
 
 [NOTE]
 ====
-* If all parameters are empty, stats defaults to showing the result of "stats c/cat vr/pie"
-* If MODE is not “cat”, display “User may choose a category with c/<category>” msg
 * If category is selected in MODE, CATEGORY field will be unavailable
 * If START_DATE is empty but END_DATE is specified, statistics will be calculated from the one month before END_DATE
 to END_DATE
@@ -437,15 +452,29 @@ one month after START_DATE or the current date
 Examples:
 
 * `stats`
-* `stats m/cat`
-* `stats m/cat vr/pie`
-* `stats m/day sd/12-02-2018`
-* `stats m/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
+* `stats vr/pie`
+* `stats sd/12-02-2018`
+* `stats sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
 
-=== Viewing Macro Statistics Trend: `stats_mt`
-Produces statistics regarding user's finance for 2 or more time periods.
+=== Viewing Statistics - Trend: `statstrend`
+Produces statistics regarding the user's finance over a period of time to show trends. +
+The statistics include the total amount of money spent on different categories and the frequency of entries in those categories. +
+The user must choose the time frame to be considered for the statistic by entering the start date and end date. +
+The user may also choose to display only the results in a specific category. +
+The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table.
 
-Format: `stats_mt sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
+Table Example:
+[width="50%"]
+|==========================
+|Month starting:    |01-01-2019     |01-02-2019     |01-03-2019
+|FOOD               |A:$302, E:38   |A:$23,  E:1   |A:$782,  E:64
+|TRANSPORT          |A:$123, E:2    |A:$0,   E:0   |A:$140,  E:2
+|SHOPPING           |A:$324, E:1    |A:$0,   E:0   |A:$200,  E:1
+|WORK               |A:$0,   E:0    |A:$401, E:2   |A:$0,    E:0
+|TOTAL              |A:$749, E:41   |A:$424, E:3   |A:$1122, E:67
+|==========================
+
+Format: `statstrend sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
 
 [NOTE]
 ====
@@ -454,14 +483,29 @@ If VISUAL_REPRESENTATION field is left empty, vr options will be displayed.
 
 Examples:
 
-* `stats_mt sd/01-01-2018 ed/01-01-2018 p/month`
-* `stats_mt sd/01-01-2018 ed/01-01-2018 p/14`
-* `stats_mt sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
+* `statstrend sd/01-01-2018 ed/01-01-2018 p/month`
+* `statstrend sd/01-01-2018 ed/01-01-2018 p/14`
+* `statstrend sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
 
-=== Viewing Macro Statistics Compare: `stats_mc`
-Produces statistics regarding the user's finance for 2 or more time periods.
+=== Viewing Statistics - Compare: `statscompare`
+Produces and displays statistics regarding the user's finance for 2 to 4 time periods.
+The statistics include the total amount of money spent on different categories and the frequency of entries in those categories. +
+The user must specify at least 2 and not more than 4 time periods by specifying the starting dates and the desired period length. +
+The user may also choose to display only the results in a specific category. +
+The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table.
 
-Format: `stats_mc d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
+Table Example:
+[width="50%"]
+|==========================
+|Fortnight starting:    |01-01-2019     |02-01-2019     |01-03-2019     |13-03-2019
+|FOOD                   |A:$302, E:38   |A:$23,  E:1   |A:$782,  E:64   |A:$23, E:5
+|TRANSPORT              |A:$123, E:2    |A:$0,   E:0   |A:$140,  E:2    |A:$0,  E:0
+|SHOPPING               |A:$324, E:1    |A:$0,   E:0   |A:$200,  E:1    |A:$0,  E:0
+|WORK                   |A:$0,   E:0    |A:$401, E:2   |A:$0,    E:0    |A:$0,  E:0
+|TOTAL                  |A:$749, E:41   |A:$424, E:3   |A:$1122, E:67   |A:$23, E:5
+|==========================
+
+Format: `statscompare d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
 
 [NOTE]
 ====
@@ -470,9 +514,9 @@ If VISUAL_REPRESENTATION field is left empty, vr options will be displayed
 
 Examples:
 
-* `stats_mc d1/01-01-2019 d2/01-02-2019 p/month`
-* `stats_mc d1/01-01-2019 d2/07-01-2019 d3/07-01-2019 d4/13-02-2019 p/7`
-* `stats_mc d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food`
+* `statscompare d1/01-01-2019 d2/01-02-2019 p/month`
+* `statscompare d1/01-01-2019 d2/07-01-2019 d3/07-01-2019 d4/13-02-2019 p/7`
+* `statscompare d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food`
 
 === Listing entered commands : `history`
 

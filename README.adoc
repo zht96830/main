@@ -16,7 +16,7 @@ image::docs/images/Ui.png[width="600"]
 
 * Having trouble tracking your finance? We can help you effortlessly manage your finance with our Personal Finance Tracker application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * Track expenses?
-** Easily keep track of what you have spent on! View macro statistics about your spending so that you can plan ahead!
+** Easily keep track of what you have spent on! View various statistics about your spending so that you can plan ahead!
 * Budgets?
 ** Easily create budgets and be constantly aware of your spending limits!
 * Bills and debts?
