@@ -8,7 +8,6 @@ import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
 
-
 /**
  * Contains utility methods for populating {@code FinanceTracker} with sample data.
  */

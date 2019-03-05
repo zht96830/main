@@ -30,6 +30,9 @@ public class Date implements Comparable<Date> {
         year = datesInt[2];
     }
 
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     */
     private static int[] parseDate(String date) {
         int[] datesInt = new int[3];
         String[] datesString = date.split("-");
