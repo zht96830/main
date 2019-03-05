@@ -24,7 +24,7 @@ public class AddRecurringCommand extends Command {
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_REMARKS + "REMARKS] "
             + PREFIX_FREQUENCY + "FREQUENCY "
-            + PREFIX_OCCURRENCES + "OCCURENCE\n"
+            + PREFIX_OCCURRENCE + "OCCURENCE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Phone Bill "
             + PREFIX_AMOUNT + "50 "
@@ -32,7 +32,7 @@ public class AddRecurringCommand extends Command {
             + PREFIX_DATE + "23-2-2019 "
             + PREFIX_REMARKS + "Signed a new 2 year contract "
             + PREFIX_FREQUENCY + "M "
-            + PREFIX_OCCURRENCES + "24";
+            + PREFIX_OCCURRENCE + "24";
 
     public static final String MESSAGE_SUCCESS = "New recurring added:\n%1$s";
 
