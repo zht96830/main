@@ -1,17 +1,19 @@
 package seedu.address.logic.commands.budgetcommands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+
 import seedu.address.model.Model;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.budget.Budget;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a budget, identified using its category and its start date, from the finance tracker.
@@ -33,35 +35,35 @@ public class DeleteBudgetCommand extends Command {
 
     public DeleteBudgetCommand(Category targetCategory) {
         switch (targetCategory) {
-            case FOOD:
-                index = 0;
-                break;
-            case TRANSPORT:
-                index = 1;
-                break;
-            case SHOPPING:
-                index = 2;
-                break;
-            case WORK:
-                index = 3;
-                break;
-            case UTILITIES:
-                index = 4;
-                break;
-            case HEALTHCARE:
-                index = 5;
-                break;
-            case ENTERTAINMENT:
-                index = 6;
-                break;
-            case TRAVEL:
-                index = 7;
-                break;
-            case OTHERS:
-                index = 8;
-                break;
-            default:
-                index = -1;
+        case FOOD:
+            index = 0;
+            break;
+        case TRANSPORT:
+            index = 1;
+            break;
+        case SHOPPING:
+            index = 2;
+            break;
+        case WORK:
+            index = 3;
+            break;
+        case UTILITIES:
+            index = 4;
+            break;
+        case HEALTHCARE:
+            index = 5;
+            break;
+        case ENTERTAINMENT:
+            index = 6;
+            break;
+        case TRAVEL:
+            index = 7;
+            break;
+        case OTHERS:
+            index = 8;
+            break;
+        default:
+            index = -1;
         }
     }
 

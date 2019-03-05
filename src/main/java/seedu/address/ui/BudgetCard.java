@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.budget.Budget;
-import seedu.address.model.expense.Expense;
 
 /**
  * An UI component that displays information of a {@code Expense}.

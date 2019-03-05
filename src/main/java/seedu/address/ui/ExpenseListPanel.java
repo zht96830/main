@@ -11,10 +11,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.attributes.Amount;
-import seedu.address.model.attributes.Category;
-import seedu.address.model.attributes.Date;
-import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
 
 /**

@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.expense.Expense;
@@ -29,7 +28,7 @@ public class ExpenseCard extends UiPart<Region> {
     @FXML
     private Label expenseName;
     @FXML
-    private Label expenseID;
+    private Label expenseId;
     @FXML
     private Label expenseAmount;
     @FXML
@@ -41,7 +40,7 @@ public class ExpenseCard extends UiPart<Region> {
     public ExpenseCard(Expense expense, int displayedIndex) {
         super(FXML);
         this.expense = expense;
-        expenseID.setText(displayedIndex + ". ");
+        expenseId.setText(displayedIndex + ". ");
         expenseAmount.setText("$" + expense.getAmount().toString());
         expenseName.setText(expense.getName().name);
         expenseCategory.setText(expense.getCategory().toString());
@@ -62,7 +61,7 @@ public class ExpenseCard extends UiPart<Region> {
 
         // state check
         ExpenseCard card = (ExpenseCard) other;
-        return expenseID.getText().equals(card.expenseID.getText())
+        return expenseId.getText().equals(card.expenseId.getText())
                 && expense.equals(card.expense);
     }
 }

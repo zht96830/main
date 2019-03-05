@@ -1,16 +1,20 @@
 package seedu.address.logic.parser.budgetparsers;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
-import seedu.address.logic.commands.expensecommands.EditCommand;
-import seedu.address.logic.parser.*;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.attributes.Category;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+
+import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attributes.Category;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -27,7 +31,7 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_CATEGORY,
-                        PREFIX_STARTDATE, PREFIX_ENDDATE,PREFIX_REMARKS);
+                        PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_REMARKS);
 
         Category category;
 
@@ -44,11 +48,11 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
-            editBudgetDescriptor.setStartDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editBudgetDescriptor.setStartDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()));
         }
 
         if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()) {
-            editBudgetDescriptor.setEndDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editBudgetDescriptor.setEndDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()));
         }
 
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {

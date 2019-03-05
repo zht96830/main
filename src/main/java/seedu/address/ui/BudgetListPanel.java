@@ -1,17 +1,18 @@
 package seedu.address.ui;
 
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.logging.Logger;
+
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.budget.Budget;
-
-import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.logging.Logger;
 
 /**
  * Panel containing the list of persons.
@@ -56,14 +57,14 @@ public class BudgetListPanel extends UiPart<Region> {
      */
     class BudgetListViewCell extends ListCell<Budget> {
         @Override
-        protected void updateItem(Budget Budget, boolean empty) {
-            super.updateItem(Budget, empty);
+        protected void updateItem(Budget budget, boolean empty) {
+            super.updateItem(budget, empty);
 
-            if (empty || Budget == null) {
+            if (empty || budget == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new BudgetCard(Budget).getRoot());
+                setGraphic(new BudgetCard(budget).getRoot());
             }
         }
     }
