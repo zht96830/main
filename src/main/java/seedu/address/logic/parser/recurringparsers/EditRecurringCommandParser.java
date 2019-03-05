@@ -28,7 +28,7 @@ public class EditRecurringCommandParser implements Parser<EditRecurringCommand> 
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_CATEGORY,
-                        PREFIX_DATE, PREFIX_REMARKS, PREFIX_FREQUENCY, PREFIX_OCCURRENCES);
+                        PREFIX_DATE, PREFIX_REMARKS, PREFIX_FREQUENCY, PREFIX_OCCURRENCE);
 
         Index index;
 

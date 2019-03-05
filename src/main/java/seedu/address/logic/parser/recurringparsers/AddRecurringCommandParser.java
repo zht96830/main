@@ -26,10 +26,10 @@ public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
     public AddRecurringCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_CATEGORY,
-                        PREFIX_DATE, PREFIX_REMARKS, PREFIX_FREQUENCY, PREFIX_OCCURRENCES);
+                        PREFIX_DATE, PREFIX_REMARKS, PREFIX_FREQUENCY, PREFIX_OCCURRENCE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_CATEGORY,
-                PREFIX_OCCURRENCES, PREFIX_FREQUENCY) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_OCCURRENCE, PREFIX_FREQUENCY) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddRecurringCommand.MESSAGE_USAGE));
         }
@@ -38,7 +38,7 @@ public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Frequency frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get());
-        int occurence = ParserUtil.parseOccurence(argMultimap.getValue(PREFIX_OCCURRENCES).get());
+        int occurence = ParserUtil.parseOccurence(argMultimap.getValue(PREFIX_OCCURRENCE).get());
         Date date;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
