@@ -38,10 +38,39 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`delete`**`3` : deletes the 3rd expense shown in the current list
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+.  Refer to <<Commands>> for details of each command.
 
-[[Features]]
 == Features
+
+=== Expense
+Want to start tracking your expenses but don’t know what application to use? +
+Fret not, our Finance Tracker allows you to track your expenses by adding it into our system. +
+You can even categorise your expenses in terms of food, travel, transport and more!
+
+=== Budget
+Trying to save up for that upcoming trip? +
+The Budget feature helps you stay within your desired level of expenses within a specified time period! +
+You can even set budgets for specific categories to better manage your expenses!
+
+=== Debt
+Always losing track of payments due, personal loans or debts owed? +
+With the Debt feature, you'll never forget your payments due ever again! +
+The Debt feature helps you to make expenses in advance and helps you keep track of these expenses due.
+
+=== Recurring
+Want to keep track of monthly bills in the expense tracker as well? +
+The Recurring feature simplifies the process of adding periodic expenses such as phone bills or Netflix subscriptions. +
+Instead of manually adding the same expense repetitively, just add a Recurring and the Finance Tracker will automatically
+add the expense for you periodically at your specified frequency and for your specified duration! +
+The Recurring feature also simplifies the deletion and editing of these recurring expenses!
+
+=== Stats
+Want to see trends and statistics of your expenses? +
+The Stats feature allows you to view a variety of statistics based on the expenses you've input into the Finance Tracker. +
+These statistics will help you better understand your expenses and make effective changes to your habits if so desired.
+
+[[Commands]]
+== Commands
 
 ====
 *Command Format*
@@ -329,7 +358,7 @@ Converts the 3rd debt in the finance tracker into an expense.
 === Adding a recurring: `addrecurring`
 Adds a recurring payment to the finance tracker.
 
-Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] f/FREQUENCY o/OCCURENCES`
+Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE`
 
 [NOTE]
 ====
@@ -358,12 +387,12 @@ Examples:
   `Please enter the start date of the recurring (optional):` +
   `Please enter the remark of the expense (optional):` +
   `Please enter the frequency of the recurring: M2` +
-  `Please enter the number of occurences of the recurring: 12`
+  `Please enter the number of occurrence of the recurring: 12`
 
 === Editing a recurring : `editrecurring`
 
 Edits an existing recurring in the finance tracker. +
-Format 1: `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURENCES]` +
+Format 1: `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 
 [NOTE]
 ====
@@ -391,21 +420,21 @@ Examples:
 `Please enter the amount of the recurring to be updated (optional): 450` +
 `Please enter the category of the recurring to be updated (optional): food` +
 `Please enter the frequency of the recurring to be updated (optional):` +
-`Please enter the number of occurences of the recurring to be updated (optional):` +
+`Please enter the number of occurrence of the recurring to be updated (optional):` +
 `Please enter the start date of the recurring to be updated (optional):` +
 `Please enter the remark of the expense to be updated (optional):`
 
 === Deleting a recurring: `deleterecurring`
 
 Deletes the specified recurring from the finance tracker. +
-Format: `deleterecurring INDEX p/DELETEPAST` +
+Format: `deleterecurring INDEX p/DELETEPASTOPTION` +
 
 [NOTE]
 ====
 * Deletes the recurring at the specified `INDEX`.
 * The index refers to the index number shown in the displayed recurring list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* DELETEPAST can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be deleted.
+* DELETEPASTOPTION can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be deleted.
 * Agreeing (Y) will delete the recurring, and delete all old expenses already added by this recurring.
 * Disagreeing (N) will delete the recurring, but does not delete old expenses already added by this recurring.
 ====
@@ -631,11 +660,11 @@ e.g. `editdebt 5 n/Tommy $/60`
 e.g. `deletedebt 5`
 * *Pay off debt* : `paydebt INDEX [d/DATE]` +
 e.g. `payDebt 2`
-* *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURENCES]` +
+* *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 e.g. `addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24` +
-* *Edit a recurring* : `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURENCES]` +
+* *Edit a recurring* : `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 e.g. `editrecurring 9 p/N $/450 c/food` +
-* *Delete a recurring* : `deleterecurring INDEX p/DELETEPAST` +
+* *Delete a recurring* : `deleterecurring INDEX p/DELETEPASTOPTION` +
 e.g. `deleterecurring 2 p/N` +
 * *Viewing statistics* : `stats [m/MODE] [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]` +
 e.g. `stats c/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`

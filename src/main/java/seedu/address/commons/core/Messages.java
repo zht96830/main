@@ -11,7 +11,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INVALID_CATEGORY = "The category is invalid";
     public static final String MESSAGE_INVALID_DEBT_DISPLAYED_INDEX = "The debt index provided is invalid";
+    public static final String MESSAGE_INVALID_RECURRING_DISPLAYED_INDEX = "The recurring index provided is invalid";
     public static final String MESSAGE_EXPENSES_LISTED_OVERVIEW = "%1$d expenses listed!";
     public static final String MESSAGE_DEBTS_LISTED_OVERVIEW = "%1$d debts listed!";
+    public static final String MESSAGE_RECURRINGS_LISTED_OVERVIEW = "%1$d recurrings listed!";
     public static final String MESSAGE_BUDGET_EXISTS = "Budget already exists for that category.";
 }

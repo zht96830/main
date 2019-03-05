@@ -30,7 +30,7 @@ public class AddRecurringCommand extends Command {
             + PREFIX_AMOUNT + "50 "
             + PREFIX_CATEGORY + "utilities "
             + PREFIX_DATE + "23-2-2019 "
-            + PREFIX_REMARKS + "Signed a new 2 year contract"
+            + PREFIX_REMARKS + "Signed a new 2 year contract "
             + PREFIX_FREQUENCY + "M "
             + PREFIX_OCCURRENCES + "24";
 

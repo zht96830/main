@@ -13,7 +13,7 @@ public class Frequency {
             "Frequency should only contain an alphabet 'D', 'W', 'M' or 'Y' for daily, weekly, monthly or yearly " +
                     "respectively. Any numbers following the alphabet means a multiple of that frequency e.g. " +
                     "W2 means fortnightly (every 2 weeks).";
-    public static final String VALIDATION_REGEX = "[DWMY]\\d*";
+    public static final String VALIDATION_REGEX = "[DWMYdwmy]\\d*";
     public final String value;
 
     /**
