@@ -28,7 +28,7 @@ public class RecurringExpenseCard extends UiPart<Region> {
     @FXML
     private Label recurringExpenseName;
     @FXML
-    private Label recurringExpenseID;
+    private Label recurringExpenseId;
     @FXML
     private Label recurringExpenseAmount;
     @FXML
@@ -40,7 +40,7 @@ public class RecurringExpenseCard extends UiPart<Region> {
     public RecurringExpenseCard(Recurring recurringExpense, int displayedIndex) {
         super(FXML);
         this.recurringExpense = recurringExpense;
-        recurringExpenseID.setText(displayedIndex + ". ");
+        recurringExpenseId.setText(displayedIndex + ". ");
         recurringExpenseAmount.setText("$" + recurringExpense.getAmount().toString());
         recurringExpenseName.setText(recurringExpense.getName().name);
         recurringExpenseCategory.setText(recurringExpense.getCategory().toString());
@@ -61,7 +61,7 @@ public class RecurringExpenseCard extends UiPart<Region> {
 
         // state check
         RecurringExpenseCard card = (RecurringExpenseCard) other;
-        return recurringExpenseID.getText().equals(card.recurringExpenseID.getText())
+        return recurringExpenseId.getText().equals(card.recurringExpenseId.getText())
                 && recurringExpense.equals(card.recurringExpense);
     }
 }
