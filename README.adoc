@@ -5,7 +5,7 @@ https://travis-ci.org/cs2103-ay1819s2-w15-2/main[image:https://travis-ci.org/cs2
 https://coveralls.io/github/cs2103-ay1819s2-w15-2/main?branch=master[image:https://coveralls.io/repos/github/cs2103-ay1819s2-w15-2/main/badge.svg?branch=master[Coverage Status]]
 
 //insert image of our future project here
-
+image::docs/images/Ui.png[width="600"]
 //ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
 //endif::[]
@@ -16,7 +16,7 @@ image::docs/images/Ui.png[width="600"]
 
 * Having trouble tracking your finance? We can help you effortlessly manage your finance with our Personal Finance Tracker application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * Track expenses?
-** Easily keep track of what you have spent on! View macro statistics about your spending so that you can plan ahead!
+** Easily keep track of what you have spent on! View various statistics about your spending so that you can plan ahead!
 * Budgets?
 ** Easily create budgets and be constantly aware of your spending limits!
 * Bills and debts?

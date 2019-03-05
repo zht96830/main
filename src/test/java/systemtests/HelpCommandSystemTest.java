@@ -11,16 +11,16 @@ import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.expensecommands.DeleteCommand;
+import seedu.address.logic.commands.generalcommands.HelpCommand;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.StatusBarFooter;
 
 /**
  * A system test class for the help window, which contains interaction with other UI components.
  */
-public class HelpCommandSystemTest extends AddressBookSystemTest {
+public class HelpCommandSystemTest extends FinanceTrackerSystemTest {
     private static final String ERROR_MESSAGE = "ATTENTION!!!! : On some computers, this test may fail when run on "
             + "non-headless mode as FxRobot#clickOn(Node, MouseButton...) clicks on the wrong location. We suspect "
             + "that this is a bug with TestFX library that we are using. If this test fails, you have to run your "
@@ -65,7 +65,7 @@ public class HelpCommandSystemTest extends AddressBookSystemTest {
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());
         assertNotEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
+        assertListMatching(getPersonListPanel(), getModel().getFilteredExpenseList());
 
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar

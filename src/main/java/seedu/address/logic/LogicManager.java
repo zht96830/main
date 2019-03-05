@@ -11,11 +11,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.FinanceTrackerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyFinanceTracker;
+import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 import seedu.address.storage.Storage;
 
 /**
@@ -28,36 +31,36 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final CommandHistory history;
-    private final AddressBookParser addressBookParser;
-    private boolean addressBookModified;
+    private final FinanceTrackerParser financeTrackerParser;
+    private boolean financeTrackerModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         history = new CommandHistory();
-        addressBookParser = new AddressBookParser();
+        financeTrackerParser = new FinanceTrackerParser();
 
-        // Set addressBookModified to true whenever the models' address book is modified.
-        model.getAddressBook().addListener(observable -> addressBookModified = true);
+        // Set financeTrackerModified to true whenever the models' Finance Tracker is modified.
+        model.getFinanceTracker().addListener(observable -> financeTrackerModified = true);
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        addressBookModified = false;
+        financeTrackerModified = false;
 
         CommandResult commandResult;
         try {
-            Command command = addressBookParser.parseCommand(commandText);
+            Command command = financeTrackerParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);
         }
 
-        if (addressBookModified) {
-            logger.info("Address book modified, saving to file.");
+        if (financeTrackerModified) {
+            logger.info("Finance Tracker modified, saving to file.");
             try {
-                storage.saveAddressBook(model.getAddressBook());
+                storage.saveFinanceTracker(model.getFinanceTracker());
             } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
@@ -67,13 +70,30 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+
+    public ReadOnlyFinanceTracker getFinanceTracker() {
+        return model.getFinanceTracker();
+
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Expense> getFilteredExpenseList() {
+        return model.getFilteredExpenseList();
+    }
+
+    @Override
+    public ObservableList<Debt> getFilteredDebtList() {
+        return model.getFilteredDebtList();
+    }
+
+    @Override
+    public ObservableList<Budget> getFilteredBudgetList() {
+        return model.getFilteredBudgetList();
+    }
+
+    @Override
+    public ObservableList<Recurring> getFilteredRecurringList() {
+        return model.getFilteredRecurringList();
     }
 
     @Override
@@ -82,8 +102,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getFinanceTrackerFilePath() {
+        return model.getFinanceTrackerFilePath();
     }
 
     @Override
@@ -97,12 +117,42 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyProperty<Person> selectedPersonProperty() {
-        return model.selectedPersonProperty();
+    public ReadOnlyProperty<Expense> selectedExpenseProperty() {
+        return model.selectedExpenseProperty();
     }
 
     @Override
-    public void setSelectedPerson(Person person) {
-        model.setSelectedPerson(person);
+    public void setSelectedExpense(Expense expense) {
+        model.setSelectedExpense(expense);
+    }
+
+    @Override
+    public ReadOnlyProperty<Debt> selectedDebtProperty() {
+        return model.selectedDebtProperty();
+    }
+
+    @Override
+    public void setSelectedDebt(Debt debt) {
+        model.setSelectedDebt(debt);
+    }
+
+    @Override
+    public ReadOnlyProperty<Budget> selectedBudgetProperty() {
+        return model.selectedBudgetProperty();
+    }
+
+    @Override
+    public void setSelectedBudget(Budget budget) {
+        model.setSelectedBudget(budget);
+    }
+
+    @Override
+    public ReadOnlyProperty<Recurring> selectedRecurringProperty() {
+        return model.selectedRecurringProperty();
+    }
+
+    @Override
+    public void setSelectedRecurring(Recurring recurring) {
+        model.setSelectedRecurring(recurring);
     }
 }

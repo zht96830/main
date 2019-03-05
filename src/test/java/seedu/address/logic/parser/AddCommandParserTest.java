@@ -1,85 +1,86 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalExpenses.EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.TAXI;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.parser.expenseparsers.AddCommandParser;
+import seedu.address.model.attributes.Address;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Email;
+import seedu.address.model.attributes.Name;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ExpenseBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Expense expectedExpense = new ExpenseBuilder(TAXI).withRemarks(VALID_REMARKS_EXPENSE).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
+                + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_EXPENSE + NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
+                + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_EXPENSE + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
+                + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
 
         // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_EXPENSE + CATEGORY_DESC_DEBT
+                + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
 
         // multiple addresses - last address accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT + DATE_DESC_EXPENSE
+                + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Expense expectedExpenseMultipleTags = new ExpenseBuilder(TAXI).withRemarks(VALID_REMARKS_EXPENSE)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT
+                + REMARKS_DESC_DEBT + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpenseMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+        Expense expectedExpense = new ExpenseBuilder(EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
+        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE,
+                new AddCommand(expectedExpense));
     }
 
     @Test
@@ -87,55 +88,55 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, VALID_NAME_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT,
                 expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_DEBT + VALID_AMOUNT_DEBT + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT,
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + VALID_CATEGORY_DEBT + DEADLINE_DESC_DEBT,
                 expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT + VALID_DEADLINE_DEBT,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, VALID_NAME_DEBT + VALID_AMOUNT_DEBT + VALID_CATEGORY_DEBT + VALID_DEADLINE_DEBT,
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT
+                + REMARKS_DESC_DEBT + REMARKS_DESC_EXPENSE, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_DEBT + INVALID_AMOUNT_DESC + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT
+                + REMARKS_DESC_DEBT + REMARKS_DESC_EXPENSE, Amount.MESSAGE_CONSTRAINTS);
 
         // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + INVALID_CATEGORY_DESC + DEADLINE_DESC_DEBT
+                + REMARKS_DESC_DEBT + REMARKS_DESC_EXPENSE, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT + INVALID_DATE_DESC
+                + REMARKS_DESC_DEBT + REMARKS_DESC_EXPENSE, Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT
+                + INVALID_DEADLINE_DESC + VALID_REMARKS_DEBT, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT + INVALID_DATE_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
+                + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT + REMARKS_DESC_EXPENSE,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

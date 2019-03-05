@@ -32,7 +32,10 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
+    private ExpenseListPanel expenseListPanel;
+    private DebtListPanel debtListPanel;
+    private BudgetListPanel budgetListPanel;
+    private RecurringExpenseListPanel recurringListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -46,13 +49,24 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane expenseListPanelPlaceholder;
+
+    @FXML
+    private StackPane debtListPanelPlaceholder;
+
+    @FXML
+    private StackPane budgetListPanelPlaceholder;
+
+    @FXML
+    private StackPane recurringListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -111,21 +125,35 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(logic.selectedPersonProperty());
+        browserPanel = new BrowserPanel(logic.selectedExpenseProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.selectedPersonProperty(),
-                logic::setSelectedPerson);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(), logic.selectedExpenseProperty(),
+                logic::setSelectedExpense);
+        expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
+
+        debtListPanel = new DebtListPanel(logic.getFilteredDebtList(), logic.selectedDebtProperty(),
+                logic::setSelectedDebt);
+        debtListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+
+        budgetListPanel = new BudgetListPanel(logic.getFilteredBudgetList(), logic.selectedBudgetProperty(),
+                logic::setSelectedBudget);
+        budgetListPanelPlaceholder.getChildren().add(budgetListPanel.getRoot());
+
+        recurringListPanel = new RecurringExpenseListPanel(logic.getFilteredRecurringList(),
+                logic.selectedRecurringProperty(), logic::setSelectedRecurring);
+        recurringListPanelPlaceholder.getChildren().add(recurringListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), logic.getAddressBook());
+        StatusBarFooter statusBarFooter =
+                new StatusBarFooter(logic.getFinanceTrackerFilePath(), logic.getFinanceTracker());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
     }
 
     /**
@@ -168,8 +196,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ExpenseListPanel getExpenseListPanel() {
+        return expenseListPanel;
     }
 
     /**

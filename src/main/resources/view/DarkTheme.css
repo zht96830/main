@@ -6,7 +6,7 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: #FFFFFF;
     -fx-opacity: 0.9;
 }
 
@@ -77,6 +77,11 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: transparent transparent transparent #4d4d4d;
+}
+
+.split-pane:vertical .split-pane-divider {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
@@ -307,6 +312,10 @@
     -fx-padding: 8 1 8 1;
 }
 
+#listTitle {
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -328,7 +337,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #expenseListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

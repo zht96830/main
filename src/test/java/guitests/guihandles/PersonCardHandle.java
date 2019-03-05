@@ -3,15 +3,13 @@ package guitests.guihandles;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.ImmutableMultiset;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.expense.Expense;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a expense card in the expense list panel.
  */
 public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
@@ -73,15 +71,13 @@ public class PersonCardHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if this handle contains {@code person}.
+     * Returns true if this handle contains {@code expense}.
      */
-    public boolean equals(Person person) {
-        return getName().equals(person.getName().fullName)
-                && getAddress().equals(person.getAddress().value)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
-                        .map(tag -> tag.tagName)
-                        .collect(Collectors.toList())));
+    public boolean equals(Expense expense) {
+        return getName().equals(expense.getName().name)
+                && getAddress().equals(expense.getCategory().toString())
+                && getPhone().equals(expense.getAmount().value)
+                && getEmail().equals(expense.getDate().toString())
+                && getAddress().equals(expense.getRemarks());
     }
 }

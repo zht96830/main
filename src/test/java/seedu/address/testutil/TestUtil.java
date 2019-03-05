@@ -7,7 +7,8 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.debt.Debt;
+import seedu.address.model.expense.Expense;
 
 /**
  * A utility class for test cases.
@@ -33,23 +34,30 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the person in the {@code model}'s person list.
+     * Returns the middle index of the expense in the {@code model}'s expense list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+        return Index.fromOneBased(model.getFilteredExpenseList().size() / 2);
     }
 
     /**
-     * Returns the last index of the person in the {@code model}'s person list.
+     * Returns the last index of the expense in the {@code model}'s expense list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+        return Index.fromOneBased(model.getFilteredExpenseList().size());
     }
 
     /**
-     * Returns the person in the {@code model}'s person list at {@code index}.
+     * Returns the expense in the {@code model}'s expense list at {@code index}.
      */
-    public static Person getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+    public static Expense getExpense(Model model, Index index) {
+        return model.getFilteredExpenseList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns the debt in the {@code model}'s debt list at {@code index}.
+     */
+    public static Debt getDebt(Model model, Index index) {
+        return model.getFilteredDebtList().get(index.getZeroBased());
     }
 }

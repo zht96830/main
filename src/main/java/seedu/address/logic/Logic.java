@@ -8,8 +8,11 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyFinanceTracker;
+import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 
 /**
  * API of the Logic component
@@ -25,14 +28,23 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the FinanceTracker.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getFinanceTracker()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyFinanceTracker getFinanceTracker();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of expenses */
+    ObservableList<Expense> getFilteredExpenseList();
+
+    /** Returns an unmodifiable view of the filtered list of debts */
+    ObservableList<Debt> getFilteredDebtList();
+
+    /** Returns an unmodifiable view of the filtered list of budgets */
+    ObservableList<Budget> getFilteredBudgetList();
+
+    /** Returns an unmodifiable view of the filtered list of recurring expenses */
+    ObservableList<Recurring> getFilteredRecurringList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -41,9 +53,9 @@ public interface Logic {
     ObservableList<String> getHistory();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Finance Tracker file path.
      */
-    Path getAddressBookFilePath();
+    Path getFinanceTrackerFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -56,17 +68,62 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Selected expense in the filtered expense list.
+     * null if no expense is selected.
      *
-     * @see seedu.address.model.Model#selectedPersonProperty()
+     * @see seedu.address.model.Model#selectedExpenseProperty()
      */
-    ReadOnlyProperty<Person> selectedPersonProperty();
+    ReadOnlyProperty<Expense> selectedExpenseProperty();
 
     /**
-     * Sets the selected person in the filtered person list.
+     * Sets the selected expense in the filtered expense list.
      *
-     * @see seedu.address.model.Model#setSelectedPerson(Person)
+     * @see seedu.address.model.Model#setSelectedExpense(Expense)
      */
-    void setSelectedPerson(Person person);
+    void setSelectedExpense(Expense expense);
+
+    /**
+     * Selected debt in the filtered debt list.
+     * null if no debt is selected.
+     *
+     * @see seedu.address.model.Model#selectedDebtProperty()
+     */
+    ReadOnlyProperty<Debt> selectedDebtProperty();
+
+    /**
+     * Sets the selected debt in the filtered expense list.
+     *
+     * @see seedu.address.model.Model#setSelectedDebt(Debt)
+     */
+    void setSelectedDebt(Debt debt);
+
+    /**
+     * Selected budget in the filtered budget list.
+     * null if no budget is selected.
+     *
+     * @see seedu.address.model.Model#selectedBudgetProperty()
+     */
+    ReadOnlyProperty<Budget> selectedBudgetProperty();
+
+    /**
+     * Sets the selected budget in the filtered budget list.
+     *
+     * @see seedu.address.model.Model#setSelectedBudget(Budget)
+     */
+    void setSelectedBudget(Budget budget);
+
+    /**
+     * Selected recurring in the filtered recurring list.
+     * null if no recurring is selected.
+     *
+     * @see seedu.address.model.Model#selectedRecurringProperty()
+     */
+    ReadOnlyProperty<Recurring> selectedRecurringProperty();
+
+    /**
+     * Sets the selected recurring in the filtered recurring list.
+     *
+     * @see seedu.address.model.Model#setSelectedRecurring(Recurring)
+     */
+    void setSelectedRecurring(Recurring recurring);
 }

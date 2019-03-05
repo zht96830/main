@@ -8,7 +8,7 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFinanceTracker;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -35,10 +35,9 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private Label saveLocationStatus;
 
-
-    public StatusBarFooter(Path saveLocation, ReadOnlyAddressBook addressBook) {
+    public StatusBarFooter(Path saveLocation, ReadOnlyFinanceTracker financeTracker) {
         super(FXML);
-        addressBook.addListener(observable -> updateSyncStatus());
+        financeTracker.addListener(observable -> updateSyncStatus());
         syncStatus.setText(SYNC_STATUS_INITIAL);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }

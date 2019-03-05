@@ -6,14 +6,26 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Expense> PREDICATE_SHOW_ALL_EXPENSES = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Recurring> PREDICATE_SHOW_ALL_RECURRING = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Budget> PREDICATE_SHOW_ALL_BUDGETS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -36,95 +48,246 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' finance tracker file path.
      */
-    Path getAddressBookFilePath();
+    Path getFinanceTrackerFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' finance tracker file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setFinanceTrackerFilePath(Path financeTrackerFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces finance tracker data with the data in {@code financeTracker}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setFinanceTracker(ReadOnlyFinanceTracker financeTracker);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the FinanceTracker */
+    ReadOnlyFinanceTracker getFinanceTracker();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a expense with the same identity as {@code expense} exists in the finance tracker.
      */
-    boolean hasPerson(Person person);
+    boolean hasExpense(Expense expense);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given expense.
+     * The expense must exist in the finance tracker.
      */
-    void deletePerson(Person target);
+    void deleteExpense(Expense target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given expense.
+     * {@code expense} must not already exist in the finance tracker.
      */
-    void addPerson(Person person);
+    void addExpense(Expense expense);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given expense {@code target} with {@code editedExpense}.
+     * {@code target} must exist in the finance tracker.
+     * The expense identity of {@code editedExpense} must not be the same as another existing
+     * expense in the finance tracker.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setExpense(Expense target, Expense editedExpense);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered expense list */
+    ObservableList<Expense> getFilteredExpenseList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredExpenseList(Predicate<Expense> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if a debt with the same identity as {@code debt} exists in the finance tracker.
      */
-    boolean canUndoAddressBook();
+    boolean hasDebt(Debt debt);
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Deletes the given debt.
+     * The debt must exist in the finance tracker.
      */
-    boolean canRedoAddressBook();
+    void deleteDebt(Debt target);
 
     /**
-     * Restores the model's address book to its previous state.
+     * Adds the given debt.
      */
-    void undoAddressBook();
+    void addDebt(Debt debt);
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Replaces the given debt {@code target} with {@code editedDebt}.
+     * {@code target} must exist in the finance tracker.
+     * The expense identity of {@code editedDebt} must not be the same as another existing debt in the finance tracker.
      */
-    void redoAddressBook();
+    void setDebt(Debt target, Debt editedDebt);
+
+    /** Returns an unmodifiable view of the filtered debt list */
+    ObservableList<Debt> getFilteredDebtList();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Updates the filter of the filtered debt list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
      */
-    void commitAddressBook();
+    void updateFilteredDebtList(Predicate<Debt> predicate);
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Returns true if a budget with the same identity as {@code budget} exists in the finance tracker.
      */
-    ReadOnlyProperty<Person> selectedPersonProperty();
+    boolean hasBudget(Budget budget);
 
     /**
-     * Returns the selected person in the filtered person list.
-     * null if no person is selected.
+     * Deletes the given budget.
+     * The budget must exist in the finance tracker.
      */
-    Person getSelectedPerson();
+    void deleteBudget(Budget target);
 
     /**
-     * Sets the selected person in the filtered person list.
+     * Adds the given budget.
+     * {@code budget} must not overlap with an existing budget in the finance tracker.
      */
-    void setSelectedPerson(Person person);
+    void addBudget(Budget budget);
+
+    /**
+     * Replaces the given budget {@code target} with {@code editedBudget}.
+     * {@code target} must exist in the finance tracker.
+     * The budget identity of {@code editedBudget} must not be the same as another existing
+     * budget in the finance tracker.
+     */
+    void setBudget(Budget target, Budget editedBudget);
+
+    /** Returns an unmodifiable view of the filtered budget list */
+    ObservableList<Budget> getFilteredBudgetList();
+
+    /**
+     * Updates the filter of the filtered budget list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBudgetList(Predicate<Budget> predicate);
+
+    /**
+     * Returns true if a recurring with the same identity as {@code recurring} exists in the finance tracker.
+     */
+    boolean hasRecurring(Recurring recurring);
+
+    /**
+     * Deletes the given recurring.
+     * The recurring must exist in the finance tracker.
+     */
+    void deleteRecurring(Recurring target);
+
+    /**
+     * Adds the given recurring.
+     */
+    void addRecurring(Recurring recurring);
+
+    /**
+     * Replaces the given recurring {@code target} with {@code editedRecurring}.
+     * {@code target} must exist in the finance tracker.
+     * The recurring identity of {@code editedRecurring} must not be the same as another existing
+     * recurring in the finance tracker.
+     */
+    void setRecurring(Recurring target, Recurring editedRecurring);
+
+    /** Returns an unmodifiable view of the filtered recurring list */
+    ObservableList<Recurring> getFilteredRecurringList();
+
+    /**
+     * Updates the filter of the filtered recurring list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredRecurringList(Predicate<Recurring> predicate);
+
+    /**
+     * Returns true if the model has previous finance tracker states to restore.
+     */
+    boolean canUndoFinanceTracker();
+
+    /**
+     * Returns true if the model has undone finance tracker states to restore.
+     */
+    boolean canRedoFinanceTracker();
+
+    /**
+     * Restores the model's finance tracker to its previous state.
+     */
+    void undoFinanceTracker();
+
+    /**
+     * Restores the model's finance tracker to its previously undone state.
+     */
+    void redoFinanceTracker();
+
+    /**
+     * Saves the current finance tracker state for undo/redo.
+     */
+    void commitFinanceTracker();
+
+    /**
+     * Selected expense in the filtered expense list.
+     * null if no expense is selected.
+     */
+    ReadOnlyProperty<Expense> selectedExpenseProperty();
+
+    /**
+     * Returns the selected expense in the filtered expense list.
+     * null if no expense is selected.
+     */
+    Expense getSelectedExpense();
+
+    /**
+     * Sets the selected expense in the filtered expense list.
+     */
+    void setSelectedExpense(Expense expense);
+
+    /**
+     * Selected debt in the filtered debt list.
+     * null if no debt is selected.
+     */
+    ReadOnlyProperty<Debt> selectedDebtProperty();
+
+    /**
+     * Returns the selected debt in the filtered debt list.
+     * null if no debt is selected.
+     */
+    Debt getSelectedDebt();
+
+    /**
+     * Sets the selected debt in the filtered debt list.
+     */
+    void setSelectedDebt(Debt debt);
+
+    /**
+     * Selected budget in the filtered budget list.
+     * null if no budget is selected.
+     */
+    ReadOnlyProperty<Budget> selectedBudgetProperty();
+
+    /**
+     * Returns the selected budget in the filtered budget list.
+     * null if no budget is selected.
+     */
+    Budget getSelectedBudget();
+
+    /**
+     * Sets the selected budget in the filtered budget list.
+     */
+    void setSelectedBudget(Budget budget);
+
+    /**
+     * Selected recurring in the filtered recurring list.
+     * null if no recurring is selected.
+     */
+    ReadOnlyProperty<Recurring> selectedRecurringProperty();
+
+    /**
+     * Returns the selected recurring in the filtered recurring list.
+     * null if no recurring is selected.
+     */
+    Recurring getSelectedRecurring();
+
+    /**
+     * Sets the selected recurring in the filtered recurring list.
+     */
+    void setSelectedRecurring(Recurring recurring);
 }

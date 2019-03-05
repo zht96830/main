@@ -18,13 +18,16 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFinanceTracker;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
+import seedu.address.testutil.ExpenseBuilder;
 
 public class AddCommandTest {
 
@@ -44,30 +47,19 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Expense validExpense = new ExpenseBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCommand(validExpense).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validExpense), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validExpense), modelStub.personsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
-    }
-
-    @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Expense alice = new ExpenseBuilder().withName("Alice").build();
+        Expense bob = new ExpenseBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -84,7 +76,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different expense -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -113,140 +105,285 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getFinanceTrackerFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setFinanceTrackerFilePath(Path financeTrackerFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void setFinanceTracker(ReadOnlyFinanceTracker financeTracker) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public ReadOnlyFinanceTracker getFinanceTracker() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //==========Expense-related===========================================================================
+
+        @Override
+        public void addExpense(Expense expense) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public boolean hasExpense(Expense expense) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public void deleteExpense(Expense target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void setExpense(Expense target, Expense editedExpense) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public ObservableList<Expense> getFilteredExpenseList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public void updateFilteredExpenseList(Predicate<Expense> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //==========Debt-related===========================================================================
+
+        @Override
+        public void addDebt(Debt debt) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public boolean hasDebt(Debt debt) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public void deleteDebt(Debt target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public void setDebt(Debt target, Debt editedDebt) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public ObservableList<Debt> getFilteredDebtList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void updateFilteredDebtList(Predicate<Debt> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //==========Budget-related===========================================================================
+
+        @Override
+        public void addBudget(Budget budget) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public boolean hasBudget(Budget budget) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyProperty<Person> selectedPersonProperty() {
+        public void deleteBudget(Budget target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Person getSelectedPerson() {
+        public void setBudget(Budget target, Budget editedBudget) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setSelectedPerson(Person person) {
+        public ObservableList<Budget> getFilteredBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredBudgetList(Predicate<Budget> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //==========Recurring-related===========================================================================
+
+        @Override
+        public void addRecurring(Recurring recurring) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasRecurring(Recurring recurring) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteRecurring(Recurring target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setRecurring(Recurring target, Recurring editedRecurring) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Recurring> getFilteredRecurringList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredRecurringList(Predicate<Recurring> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //==========History-Control-related===================================================================
+
+        @Override
+        public boolean canUndoFinanceTracker() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoFinanceTracker() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoFinanceTracker() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoFinanceTracker() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitFinanceTracker() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Expense> selectedExpenseProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Expense getSelectedExpense() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedExpense(Expense expense) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Debt> selectedDebtProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Debt getSelectedDebt() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedDebt(Debt debt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Budget> selectedBudgetProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Budget getSelectedBudget() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedBudget(Budget budget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Recurring> selectedRecurringProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Recurring getSelectedRecurring() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedRecurring(Recurring recurring) {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single expense.
      */
     private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+        private final Expense expense;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithPerson(Expense expense) {
+            requireNonNull(expense);
+            this.expense = expense;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasExpense(Expense expense) {
+            requireNonNull(expense);
+            return this.expense.isSameExpense(expense);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the expense being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Expense> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasExpense(Expense expense) {
+            requireNonNull(expense);
+            return personsAdded.stream().anyMatch(expense::isSameExpense);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addExpense(Expense expense) {
+            requireNonNull(expense);
+            personsAdded.add(expense);
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitFinanceTracker() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyFinanceTracker getFinanceTracker() {
+            return new FinanceTracker();
         }
     }
 

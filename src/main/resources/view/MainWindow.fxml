@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Address App" minWidth="1280" minHeight="720" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -46,19 +46,52 @@
           </padding>
         </StackPane>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.2, 0.8"  VBox.vgrow="ALWAYS">
 
-          <StackPane fx:id="browserPlaceholder" prefWidth="340" >
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-          </StackPane>
+          <SplitPane id="splitPaneExpenses" orientation="VERTICAL" dividerPositions="0.7" VBox.vgrow="ALWAYS">
+
+            <VBox fx:id="expenseList" minWidth="100" prefWidth="100" SplitPane.resizableWithParent="false">
+              <StackPane fx:id="expenseListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+            </VBox>
+
+            <VBox fx:id="recurringExpenseList" minWidth="50" prefWidth="50" SplitPane.resizableWithParent="false">
+              <StackPane fx:id="recurringListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+            </VBox>
+          </SplitPane>
+
+            <StackPane fx:id="browserPlaceholder" prefWidth="400" >
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+            </StackPane>
+
+
+            <SplitPane id="splitPaneExpenses" orientation="VERTICAL" dividerPositions="0.5" VBox.vgrow="ALWAYS">
+
+              <VBox fx:id="debtList" minWidth="150" prefWidth="150" SplitPane.resizableWithParent="false">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+
+                <StackPane fx:id="debtListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+
+              <VBox fx:id="budgetList" minWidth="150" prefWidth="150" SplitPane.resizableWithParent="false">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+
+                <StackPane fx:id="budgetListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+
+            </SplitPane>
+
         </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
