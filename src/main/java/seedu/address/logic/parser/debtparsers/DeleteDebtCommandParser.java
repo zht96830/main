@@ -1,13 +1,16 @@
 package seedu.address.logic.parser.debtparsers;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.debtcommands.DeleteDebtCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+/**
+ * Parses input arguments and creates a new DeleteDebtCommand object
+ */
 public class DeleteDebtCommandParser implements Parser<DeleteDebtCommand> {
 
     /**
