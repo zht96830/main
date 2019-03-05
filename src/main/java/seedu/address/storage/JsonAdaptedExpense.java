@@ -1,11 +1,5 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,10 +8,8 @@ import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
-import seedu.address.model.attributes.Email;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Expense}.
@@ -80,7 +72,8 @@ class JsonAdaptedExpense {
         final Amount modelAmount = new Amount(amount);
 
         if (category == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Category.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Category.class.getSimpleName()));
         }
         if (!Category.isValid(category)) {
             throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);

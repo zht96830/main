@@ -1,11 +1,14 @@
 package seedu.address.model.budget;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+/**
+ * Represents a Budget in the finance tracker.
+ */
 public class Budget {
 
     private int index;
@@ -17,8 +20,8 @@ public class Budget {
     private int totalSpent; // in cents
     private double percentage;
 
-    public boolean hasBudget;
-    public boolean isAboutToExceed; // when percentage reaches 90
+    private boolean hasBudget;
+    private boolean isAboutToExceed; // when percentage reaches 90
 
     // constructor
     public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks) {
@@ -33,24 +36,42 @@ public class Budget {
             this.remarks = remarks;
         }
         totalSpent = 0;
-        percentage = (((double)totalSpent)/amount.value)*100;
+        percentage = (((double) totalSpent) / amount.value) * 100;
         hasBudget = true;
         isAboutToExceed = false;
     }
 
-    public Category getCategory() { return category; }
+    public Category getCategory() {
+        return category;
+    }
 
-    public Amount getAmount() { return amount; }
+    public Amount getAmount() {
+        return amount;
+    }
 
-    public Date getStartDate() { return startDate; }
+    public Date getStartDate() {
+        return startDate;
+    }
 
-    public Date getEndDate() { return endDate; }
+    public Date getEndDate() {
+        return endDate;
+    }
 
-    public String getRemarks() { return remarks; }
+    public String getRemarks() {
+        return remarks;
+    }
 
-    public double getTotalSpent() { return totalSpent; }
+    public double getTotalSpent() {
+        return totalSpent;
+    }
 
-    public double getPercentage() { return percentage; }
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public boolean getHasBudget() { return hasBudget; }
+
+    public boolean getIsAboutToExceed() { return isAboutToExceed; }
 
     public void setCategory(Category category) {
         this.category = category;
@@ -69,24 +90,34 @@ public class Budget {
     }
 
     public void setRemarks(String remarks) {
-        this. remarks = remarks;
+        this.remarks = remarks;
     }
 
     public void setTotalSpent(int totalSpent) {
         this.totalSpent = totalSpent;
     }
 
+    /**
+     * Checks if budget overlaps in terms of date with another budget.
+     * @return true if budget overlaps with {@code other}, false if otherwise
+     */
     public boolean overlaps(Budget other) {
         if (this.category != other.category) {
             return false;
         }
-        if (((this.startDate.compareTo(other.startDate)<0) && (this.endDate.compareTo(other.startDate)<0))
-        || ((other.startDate.compareTo(this.startDate)<0) && (other.startDate.compareTo(this.startDate)<0))) {
+        if (((this.startDate.compareTo(other.startDate) < 0) && (this.endDate.compareTo(other.startDate) < 0))
+                || ((other.startDate.compareTo(this.startDate) < 0)
+                && (other.startDate.compareTo(this.startDate) < 0))) {
             return false;
         }
         return true;
     }
 
+    /**
+     * Check on whether the two budgets are the same based on their variables.
+     * They need not be the same instance variable.
+     * @return true if the two budgets have the same attributes.
+     */
     public boolean isSameBudget(Budget otherBudget) {
         if (otherBudget == this) {
             return true;

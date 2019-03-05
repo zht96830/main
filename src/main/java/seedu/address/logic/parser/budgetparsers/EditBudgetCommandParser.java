@@ -10,7 +10,12 @@ import seedu.address.model.attributes.Category;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -27,7 +32,7 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_CATEGORY,
-                        PREFIX_STARTDATE, PREFIX_ENDDATE,PREFIX_REMARKS);
+                        PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_REMARKS);
 
         Category category;
 

@@ -5,7 +5,11 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.attributes.*;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
+import seedu.address.model.attributes.Name;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

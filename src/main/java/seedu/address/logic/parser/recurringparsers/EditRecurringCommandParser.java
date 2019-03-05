@@ -1,5 +1,15 @@
 package seedu.address.logic.parser.recurringparsers;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.recurringcommands.EditRecurringCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -7,11 +17,6 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 /**
  * Parses input arguments and creates a new EditRecurringCommand object

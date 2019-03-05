@@ -8,9 +8,15 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicateExpenseException;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 
+/**
+ * A list of expenses that does not allow nulls. Duplicates are allowed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Expense
+ */
 public class ExpenseList implements Iterable<Expense> {
     private final ObservableList<Expense> internalList = FXCollections.observableArrayList();
     private final ObservableList<Expense> internalUnmodifiableList =
@@ -36,7 +42,6 @@ public class ExpenseList implements Iterable<Expense> {
     /**
      * Replaces the expense {@code target} in the list with {@code editedExpense}.
      * {@code target} must exist in the list.
-     * The expense identity of {@code editedExpense} must not be the same as another existing expense in the list.
      */
     public void setExpense(Expense target, Expense editedExpense) {
         requireAllNonNull(target, editedExpense);
@@ -47,17 +52,6 @@ public class ExpenseList implements Iterable<Expense> {
         }
 
         internalList.set(index, editedExpense);
-    }
-
-    /**
-     * Removes the equivalent expense from the list.
-     * The expense must exist in the list.
-     */
-    public void remove(Expense toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new ExpenseNotFoundException();
-        }
     }
 
     public void setExpense(ExpenseList replacement) {
@@ -71,8 +65,18 @@ public class ExpenseList implements Iterable<Expense> {
      */
     public void setExpenses(List<Expense> expenses) {
         requireAllNonNull(expenses);
-
         internalList.setAll(expenses);
+    }
+
+    /**
+     * Removes the equivalent expense from the list.
+     * The expense must exist in the list.
+     */
+    public void remove(Expense toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new ExpenseNotFoundException();
+        }
     }
 
     /**
