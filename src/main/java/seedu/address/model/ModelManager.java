@@ -1,5 +1,13 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.nio.file.Path;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
@@ -16,13 +24,6 @@ import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.model.recurring.RecurringNotFoundException;
 
-import java.nio.file.Path;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.logging.Logger;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the in-memory model of the finance tracker data.
@@ -395,7 +396,8 @@ public class ModelManager implements Model {
                 return;
             }
 
-            boolean wasSelectedRecurringReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
+            boolean wasSelectedRecurringReplaced = change.wasReplaced()
+                    && change.getAddedSize() == change.getRemovedSize()
                     && change.getRemoved().contains(selectedRecurring.getValue());
             if (wasSelectedRecurringReplaced) {
                 // Update selectedRecurring to its new value.
@@ -482,7 +484,8 @@ public class ModelManager implements Model {
                 return;
             }
 
-            boolean wasSelectedExpenseReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
+            boolean wasSelectedExpenseReplaced = change.wasReplaced()
+                    && change.getAddedSize() == change.getRemovedSize()
                     && change.getRemoved().contains(selectedExpense.getValue());
             if (wasSelectedExpenseReplaced) {
                 // Update selectedExpense to its new value.

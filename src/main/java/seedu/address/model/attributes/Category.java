@@ -1,11 +1,14 @@
 package seedu.address.model.attributes;
 
+/**
+ * Represents a category in the finance tracker.
+ */
 public enum Category {
     FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Category should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, " +
-                    "HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.";
+            "Category should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, "
+                    + "HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.";
 
     /**
      * Method to check if string belongs to one of the possible enum values.

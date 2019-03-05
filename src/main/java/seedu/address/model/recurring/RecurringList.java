@@ -9,6 +9,13 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * A list of recurring expenses that does not allow nulls. Duplicates are not allowed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Recurring
+ */
 public class RecurringList {
     private final ObservableList<Recurring> internalList = FXCollections.observableArrayList();
     private final ObservableList<Recurring> internalUnmodifiableList =
@@ -50,17 +57,6 @@ public class RecurringList {
         internalList.set(index, editedRecurring);
     }
 
-    /**
-     * Removes the equivalent recurring from the list.
-     * The recurring must exist in the list.
-     */
-    public void remove(Recurring toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new RecurringNotFoundException();
-        }
-    }
-
     public void setRecurring(RecurringList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -73,6 +69,17 @@ public class RecurringList {
     public void setRecurring(List<Recurring> recurrings) {
         requireAllNonNull(recurrings);
         internalList.setAll(recurrings);
+    }
+
+    /**
+     * Removes the equivalent recurring from the list.
+     * The recurring must exist in the list.
+     */
+    public void remove(Recurring toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new RecurringNotFoundException();
+        }
     }
 
     /**

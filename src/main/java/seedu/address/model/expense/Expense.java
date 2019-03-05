@@ -4,8 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 
@@ -45,13 +45,17 @@ public class Expense {
         return amount;
     }
 
-    public Date getDate() { return date; }
+    public Date getDate() {
+        return date;
+    }
 
     public Category getCategory() {
         return category;
     }
 
-    public String getRemarks() { return remarks; }
+    public String getRemarks() {
+        return remarks;
+    }
 
     /**
      * Returns true if both expenses of the same name have the same cost amount and date.

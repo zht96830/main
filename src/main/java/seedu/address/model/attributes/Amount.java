@@ -1,9 +1,9 @@
 package seedu.address.model.attributes;
 
-import java.math.BigDecimal;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.math.BigDecimal;
 
 /**
  * Represents an amount in cents in the finance tracker.
@@ -12,7 +12,7 @@ public class Amount {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Amount should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.";
-    public static final String VALIDATION_REGEX = "\\d{1,}(\\.\\d{2})?";
+    public static final String VALIDATION_REGEX = "\\d{1,}(\\.\\d{1,2})?";
     public final int value;
 
     /**

@@ -1,11 +1,13 @@
 package seedu.address.model.recurring;
 
-import seedu.address.model.attributes.*;
-import seedu.address.model.expense.Expense;
-
 import java.util.Objects;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
+import seedu.address.model.attributes.Name;
+import seedu.address.model.expense.Expense;
 
 /**
  * Represents a Recurring in the finance tracker.

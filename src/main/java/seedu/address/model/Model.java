@@ -1,5 +1,8 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -7,8 +10,6 @@ import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -84,7 +85,8 @@ public interface Model {
     /**
      * Replaces the given expense {@code target} with {@code editedExpense}.
      * {@code target} must exist in the finance tracker.
-     * The expense identity of {@code editedExpense} must not be the same as another existing expense in the finance tracker.
+     * The expense identity of {@code editedExpense} must not be the same as another existing
+     * expense in the finance tracker.
      */
     void setExpense(Expense target, Expense editedExpense);
 
@@ -149,7 +151,8 @@ public interface Model {
     /**
      * Replaces the given budget {@code target} with {@code editedBudget}.
      * {@code target} must exist in the finance tracker.
-     * The budget identity of {@code editedBudget} must not be the same as another existing budget in the finance tracker.
+     * The budget identity of {@code editedBudget} must not be the same as another existing
+     * budget in the finance tracker.
      */
     void setBudget(Budget target, Budget editedBudget);
 
@@ -181,7 +184,8 @@ public interface Model {
     /**
      * Replaces the given recurring {@code target} with {@code editedRecurring}.
      * {@code target} must exist in the finance tracker.
-     * The recurring identity of {@code editedRecurring} must not be the same as another existing recurring in the finance tracker.
+     * The recurring identity of {@code editedRecurring} must not be the same as another existing
+     * recurring in the finance tracker.
      */
     void setRecurring(Recurring target, Recurring editedRecurring);
 
