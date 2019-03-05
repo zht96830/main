@@ -1,16 +1,16 @@
 package seedu.address.logic.parser.budgetparsers;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
-import seedu.address.logic.commands.expensecommands.EditCommand;
-import seedu.address.logic.parser.*;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Category;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -32,7 +32,7 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         Category category;
 
         try {
-            category = ParserUtil.parseCategory(argMultimap.getPreamble());
+            category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditBudgetCommand.MESSAGE_USAGE), pe);
@@ -44,11 +44,11 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
-            editBudgetDescriptor.setStartDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editBudgetDescriptor.setStartDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()));
         }
 
         if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()) {
-            editBudgetDescriptor.setEndDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editBudgetDescriptor.setEndDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()));
         }
 
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
