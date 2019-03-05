@@ -1,5 +1,16 @@
 package seedu.address.logic.commands.budgetcommands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUDGETS;
+
+import java.util.List;
+import java.util.Optional;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
@@ -12,12 +23,7 @@ import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.budget.Budget;
 
-import java.util.List;
-import java.util.Optional;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUDGETS;
 
 /**
  * Edits the details of an existing budget in the finance tracker
@@ -54,35 +60,35 @@ public class EditBudgetCommand extends Command {
         requireNonNull(editBudgetDescriptor);
 
         switch (category) {
-            case FOOD:
-                index = 0;
-                break;
-            case TRANSPORT:
-                index = 1;
-                break;
-            case SHOPPING:
-                index = 2;
-                break;
-            case WORK:
-                index = 3;
-                break;
-            case UTILITIES:
-                index = 4;
-                break;
-            case HEALTHCARE:
-                index = 5;
-                break;
-            case ENTERTAINMENT:
-                index = 6;
-                break;
-            case TRAVEL:
-                index = 7;
-                break;
-            case OTHERS:
-                index = 8;
-                break;
-            default:
-                index = -1;
+        case FOOD:
+            index = 0;
+            break;
+        case TRANSPORT:
+            index = 1;
+            break;
+        case SHOPPING:
+            index = 2;
+            break;
+        case WORK:
+            index = 3;
+            break;
+        case UTILITIES:
+            index = 4;
+            break;
+        case HEALTHCARE:
+            index = 5;
+            break;
+        case ENTERTAINMENT:
+            index = 6;
+            break;
+        case TRAVEL:
+            index = 7;
+            break;
+        case OTHERS:
+            index = 8;
+            break;
+        default:
+            index = -1;
         }
         this.editBudgetDescriptor = new EditBudgetDescriptor(editBudgetDescriptor);
     }
@@ -180,7 +186,10 @@ public class EditBudgetCommand extends Command {
             this.remarks = remarks;
         }
 
-        public Optional<String> getRemarks() { return Optional.ofNullable(remarks); }
+        public Optional<String> getRemarks() {
+
+            return Optional.ofNullable(remarks);
+        }
 
         @Override
         public boolean equals(Object other) {

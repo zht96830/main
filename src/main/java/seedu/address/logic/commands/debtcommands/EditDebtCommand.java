@@ -14,16 +14,19 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+
 import seedu.address.model.Model;
-import seedu.address.model.attributes.Category;
-import seedu.address.model.debt.Debt;
-import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Name;
+import seedu.address.model.debt.Debt;
+
 
 /**
  * Edits the details of an existing debt in the Finance Tracker.
@@ -173,15 +176,21 @@ public class EditDebtCommand extends Command {
             return Optional.ofNullable(deadline);
         }
 
-        public void setCategory(Category category) { this.category = category; }
+        public void setCategory(Category category) {
+            this.category = category;
+        }
 
-        public Optional<Category> getCategory() { return Optional.ofNullable(category); }
+        public Optional<Category> getCategory() {
+            return Optional.ofNullable(category);
+        }
 
         public void setRemarks(String remarks) {
             this.remarks = remarks;
         }
 
-        public Optional<String> getRemarks() { return Optional.ofNullable(remarks); }
+        public Optional<String> getRemarks() {
+            return Optional.ofNullable(remarks);
+        }
 
         @Override
         public boolean equals(Object other) {

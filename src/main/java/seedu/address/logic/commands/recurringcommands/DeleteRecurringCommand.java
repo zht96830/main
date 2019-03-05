@@ -14,6 +14,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.recurring.Recurring;
 
+/**
+ * Deletes a recurring expense identified using it's displayed index from the Finance Tracker.
+ */
 public class DeleteRecurringCommand extends Command {
 
     public static final String COMMAND_WORD = "deleterecurring";
