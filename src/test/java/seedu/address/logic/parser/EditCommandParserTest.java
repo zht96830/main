@@ -1,27 +1,27 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -95,7 +95,8 @@ public class EditCommandParserTest {
 
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_CATEGORY_DESC + VALID_DATE_EXPENSE + VALID_AMOUNT_EXPENSE,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_CATEGORY_DESC + VALID_DATE_EXPENSE
+                        + VALID_AMOUNT_EXPENSE,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -164,7 +165,8 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + REMARKS_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + REMARKS_DESC_EXPENSE
+                + REMARKS_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                + REMARKS_DESC_EXPENSE
                 + AMOUNT_DESC_DEBT + DEADLINE_DESC_DEBT + CATEGORY_DESC_DEBT + REMARKS_DESC_DEBT;
 
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
