@@ -21,7 +21,8 @@ import seedu.address.model.FinanceTracker;
 import seedu.address.model.ReadOnlyFinanceTracker;
 
 public class JsonFinanceTrackerStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get(
+            "src", "test", "data", "JsonAddressBookStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -36,7 +37,8 @@ public class JsonFinanceTrackerStorageTest {
     }
 
     private java.util.Optional<ReadOnlyFinanceTracker> readAddressBook(String filePath) throws Exception {
-        return new JsonFinanceTrackerStorage(Paths.get(filePath)).readFinanceTracker(addToTestDataPathIfNotNull(filePath));
+        return new JsonFinanceTrackerStorage(Paths.get(filePath)).readFinanceTracker(
+                addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {

@@ -18,9 +18,12 @@ import seedu.address.testutil.FinanceTrackerBuilder;
 
 public class VersionedFinanceTrackerTest {
 
-    private final ReadOnlyFinanceTracker financeTrackerWithExpense = new FinanceTrackerBuilder().withExpense(EXPENSE).build();
-    private final ReadOnlyFinanceTracker financeTrackerWithJapan = new FinanceTrackerBuilder().withExpense(JAPAN).build();
-    private final ReadOnlyFinanceTracker financeTrackerwithGroceries = new FinanceTrackerBuilder().withExpense(GROCERIES).build();
+    private final ReadOnlyFinanceTracker financeTrackerWithExpense = new FinanceTrackerBuilder().withExpense(
+            EXPENSE).build();
+    private final ReadOnlyFinanceTracker financeTrackerWithJapan = new FinanceTrackerBuilder().withExpense(
+            JAPAN).build();
+    private final ReadOnlyFinanceTracker financeTrackerWithGroceries = new FinanceTrackerBuilder().withExpense(
+            GROCERIES).build();
     private final ReadOnlyFinanceTracker emptyFinanceTracker = new FinanceTrackerBuilder().build();
 
     @Test
@@ -209,10 +212,12 @@ public class VersionedFinanceTrackerTest {
 
     @Test
     public void equals() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(financeTrackerWithExpense, financeTrackerWithJapan);
+        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(financeTrackerWithExpense,
+                financeTrackerWithJapan);
 
         // same values -> returns true
-        VersionedFinanceTracker copy = prepareAddressBookList(financeTrackerWithExpense, financeTrackerWithJapan);
+        VersionedFinanceTracker copy = prepareAddressBookList(financeTrackerWithExpense,
+                financeTrackerWithJapan);
         assertTrue(versionedFinanceTracker.equals(copy));
 
         // same object -> returns true
@@ -225,7 +230,8 @@ public class VersionedFinanceTrackerTest {
         assertFalse(versionedFinanceTracker.equals(1));
 
         // different state list -> returns false
-        VersionedFinanceTracker differentAddressBookList = prepareAddressBookList(financeTrackerWithJapan, financeTrackerwithGroceries);
+        VersionedFinanceTracker differentAddressBookList = prepareAddressBookList(financeTrackerWithJapan,
+                financeTrackerWithGroceries);
         assertFalse(versionedFinanceTracker.equals(differentAddressBookList));
 
         // different current pointer index -> returns false
@@ -237,8 +243,10 @@ public class VersionedFinanceTrackerTest {
 
     /**
      * Asserts that {@code versionedFinanceTracker} is currently pointing at {@code expectedCurrentState},
-     * states before {@code versionedFinanceTracker#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedFinanceTracker#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * states before {@code versionedFinanceTracker#currentStatePointer} is equal to
+     * {@code expectedStatesBeforePointer},
+     * and states after {@code versionedFinanceTracker#currentStatePointer} is equal to
+     * {@code expectedStatesAfterPointer}.
      */
     private void assertAddressBookListStatus(VersionedFinanceTracker versionedFinanceTracker,
                                              List<ReadOnlyFinanceTracker> expectedStatesBeforePointer,

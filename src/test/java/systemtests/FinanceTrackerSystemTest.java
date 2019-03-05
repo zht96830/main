@@ -30,10 +30,10 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.generalcommands.ClearCommand;
-import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalExpenses;
@@ -138,7 +138,8 @@ public abstract class FinanceTrackerSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getFinanceTracker().getExpenseList().size(), getModel().getFilteredExpenseList().size());
+        assertEquals(getModel().getFinanceTracker().getExpenseList().size(),
+                getModel().getFilteredExpenseList().size());
     }
 
     /**
@@ -146,7 +147,8 @@ public abstract class FinanceTrackerSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredExpenseList().size() < getModel().getFinanceTracker().getExpenseList().size());
+        assertTrue(getModel().getFilteredExpenseList().size()
+                < getModel().getFinanceTracker().getExpenseList().size());
     }
 
     /**
