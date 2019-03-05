@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalExpenses.GROCERIES;
-import static seedu.address.testutil.TypicalExpenses.PHONE_BILLS;
 import static seedu.address.testutil.TypicalExpenses.DOCTOR;
+import static seedu.address.testutil.TypicalExpenses.PHONE_BILLS;
 import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 
 import java.util.Arrays;

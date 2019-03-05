@@ -20,8 +20,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.expensecommands.EditCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditDebtDescriptorBuilder;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 

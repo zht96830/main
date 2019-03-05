@@ -3,10 +3,10 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
 import static seedu.address.testutil.TypicalExpenses.EXPENSE;
 
 import java.io.IOException;
@@ -18,11 +18,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.logic.commands.expensecommands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.generalcommands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.commands.generalcommands.HistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -49,7 +49,8 @@ public class LogicManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        JsonFinanceTrackerStorage addressBookStorage = new JsonFinanceTrackerStorage(temporaryFolder.newFile().toPath());
+        JsonFinanceTrackerStorage addressBookStorage =
+                new JsonFinanceTrackerStorage(temporaryFolder.newFile().toPath());
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
