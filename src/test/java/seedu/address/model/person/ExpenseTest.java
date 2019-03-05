@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.DOCTOR;
 import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
-import static seedu.address.testutil.TypicalExpenses.BOB;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class ExpenseTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Expense expense = new ExpenseBuilder().build();
         thrown.expect(UnsupportedOperationException.class);
-        expense.getTags().remove(0);
+        expense.getRemarks();
     }
 
     @Test
@@ -37,7 +37,8 @@ public class ExpenseTest {
         assertFalse(DUCK_RICE.isSameExpense(null));
 
         // different phone and email -> returns false
-        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withAmount(VALID_AMOUNT_DEBT).withDate(VALID_CATEGORY_DEBT).build();
+        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withAmount(VALID_AMOUNT_DEBT)
+                .withDate(VALID_CATEGORY_DEBT).build();
         assertFalse(DUCK_RICE.isSameExpense(editedAlice));
 
         // different name -> returns false
@@ -46,16 +47,17 @@ public class ExpenseTest {
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new ExpenseBuilder(DUCK_RICE).withDate(VALID_CATEGORY_DEBT).withCategory(VALID_DEADLINE_DEBT)
-                .withTags(VALID_REMARKS_EXPENSE).build();
+                .withRemarks(VALID_REMARKS_EXPENSE).build();
         assertTrue(DUCK_RICE.isSameExpense(editedAlice));
 
         // same name, same email, different attributes -> returns true
         editedAlice = new ExpenseBuilder(DUCK_RICE).withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_DEADLINE_DEBT)
-                .withTags(VALID_REMARKS_EXPENSE).build();
+                .withRemarks(VALID_REMARKS_EXPENSE).build();
         assertTrue(DUCK_RICE.isSameExpense(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withTags(VALID_REMARKS_EXPENSE).build();
+        editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT)
+                .withRemarks(VALID_REMARKS_EXPENSE).build();
         assertTrue(DUCK_RICE.isSameExpense(editedAlice));
     }
 
@@ -75,7 +77,7 @@ public class ExpenseTest {
         assertFalse(DUCK_RICE.equals(5));
 
         // different expense -> returns false
-        assertFalse(DUCK_RICE.equals(BOB));
+        assertFalse(DUCK_RICE.equals(DOCTOR));
 
         // different name -> returns false
         Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withName(VALID_NAME_DEBT).build();
@@ -94,7 +96,7 @@ public class ExpenseTest {
         assertFalse(DUCK_RICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new ExpenseBuilder(DUCK_RICE).withTags(VALID_REMARKS_EXPENSE).build();
+        editedAlice = new ExpenseBuilder(DUCK_RICE).withRemarks(VALID_REMARKS_EXPENSE).build();
         assertFalse(DUCK_RICE.equals(editedAlice));
     }
 }

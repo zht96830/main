@@ -294,6 +294,51 @@ public class AddCommandTest {
         public void setSelectedExpense(Expense expense) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ReadOnlyProperty<Debt> selectedDebtProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Debt getSelectedDebt() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedDebt(Debt debt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Budget> selectedBudgetProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Budget getSelectedBudget() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedBudget(Budget budget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Recurring> selectedRecurringProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Recurring getSelectedRecurring() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedRecurring(Recurring recurring) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -5,9 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
+import static seedu.address.testutil.TypicalExpenses.DOCTOR;
 import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
 import static seedu.address.testutil.TypicalExpenses.TAXI;
-import static seedu.address.testutil.TypicalExpenses.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -113,10 +113,10 @@ public class ModelManagerTest {
     @Test
     public void deletePerson_personIsSelectedAndSecondPersonInFilteredPersonList_firstPersonSelected() {
         modelManager.addExpense(DUCK_RICE);
-        modelManager.addExpense(BOB);
-        assertEquals(Arrays.asList(DUCK_RICE, BOB), modelManager.getFilteredExpenseList());
-        modelManager.setSelectedExpense(BOB);
-        modelManager.deleteExpense(BOB);
+        modelManager.addExpense(DOCTOR);
+        assertEquals(Arrays.asList(DUCK_RICE, DOCTOR), modelManager.getFilteredExpenseList());
+        modelManager.setSelectedExpense(DOCTOR);
+        modelManager.deleteExpense(DOCTOR);
         assertEquals(DUCK_RICE, modelManager.getSelectedExpense());
     }
 
@@ -151,7 +151,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        FinanceTracker financeTracker = new FinanceTrackerBuilder().withPerson(DUCK_RICE).withPerson(TAXI).build();
+        FinanceTracker financeTracker = new FinanceTrackerBuilder().withExpense(DUCK_RICE).withExpense(TAXI).build();
         FinanceTracker differentFinanceTracker = new FinanceTracker();
         UserPrefs userPrefs = new UserPrefs();
 

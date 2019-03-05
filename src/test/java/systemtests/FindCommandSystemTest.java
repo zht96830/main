@@ -25,8 +25,8 @@ public class FindCommandSystemTest extends FinanceTrackerSystemTest {
 
     @Test
     public void find() {
-        /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
-         * -> 2 persons found
+        /* Case: find multiple expenses in finance tracker, command with leading spaces and trailing spaces
+         * -> 2 expenses found
          */
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_CHICKEN + "   ";
         Model expectedModel = getModel();
@@ -34,8 +34,8 @@ public class FindCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: repeat previous find command where expense list is displaying the persons we are finding
-         * -> 2 persons found
+        /* Case: repeat previous find command where expense list is displaying the expenses we are finding
+         * -> 2 expenses found
          */
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_CHICKEN;
         assertCommandSuccess(command, expectedModel);
@@ -47,24 +47,24 @@ public class FindCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords -> 2 persons found */
+        /* Case: find multiple expenses in finance tracker, 2 keywords -> 2 expenses found */
         command = FindCommand.COMMAND_WORD + " Benson Daniel";
         ModelHelper.setFilteredList(expectedModel, TAXI, LAPTOP);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords in reversed order -> 2 persons found */
+        /* Case: find multiple expenses in finance tracker, 2 keywords in reversed order -> 2 expenses found */
         command = FindCommand.COMMAND_WORD + " Daniel Benson";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords with 1 repeat -> 2 persons found */
+        /* Case: find multiple expenses in finance tracker, 2 keywords with 1 repeat -> 2 expenses found */
         command = FindCommand.COMMAND_WORD + " Daniel Benson Daniel";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 matching keywords and 1 non-matching keyword
-         * -> 2 persons found
+        /* Case: find multiple expenses in finance tracker, 2 matching keywords and 1 non-matching keyword
+         * -> 2 expenses found
          */
         command = FindCommand.COMMAND_WORD + " Daniel Benson NonMatchingKeyWord";
         assertCommandSuccess(command, expectedModel);
@@ -80,7 +80,7 @@ public class FindCommandSystemTest extends FinanceTrackerSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: find same persons in address book after deleting 1 of them -> 1 expense found */
+        /* Case: find same expenses in finance tracker after deleting 1 of them -> 1 expense found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getFinanceTracker().getExpenseList().contains(TAXI));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_CHICKEN;
@@ -89,46 +89,45 @@ public class FindCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find expense in address book, keyword is same as name but of different case -> 1 expense found */
+        /* Case: find expense in finance tracker, keyword is same as name but of different case -> 1 expense found */
         command = FindCommand.COMMAND_WORD + " MeIeR";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find expense in address book, keyword is substring of name -> 0 persons found */
+        /* Case: find expense in finance tracker, keyword is substring of name -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " Mei";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find expense in address book, name is substring of keyword -> 0 persons found */
+        /* Case: find expense in finance tracker, name is substring of keyword -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " Meiers";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find expense not in address book -> 0 persons found */
+        /* Case: find expense not in finance tracker -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find phone number of expense in address book -> 0 persons found */
+        /* Case: find amount number of expense in finance tracker -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " " + LAPTOP.getAmount().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find address of expense in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + LAPTOP.getAddress().value;
+        /* Case: find date of expense in finance tracker -> 0 persons found */
+        command = FindCommand.COMMAND_WORD + " " + LAPTOP.getDate().toString();
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of expense in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + LAPTOP.getEmail().value;
+        /* Case: find category of expense in finance tracker -> 0 persons found */
+        command = FindCommand.COMMAND_WORD + " " + LAPTOP.getCategory().toString();
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find tags of expense in address book -> 0 persons found */
-        List<Tag> tags = new ArrayList<>(LAPTOP.getTags());
-        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
+        /* Case: find remarks of expense in finance tracker -> 0 persons found */
+        command = FindCommand.COMMAND_WORD + " " + LAPTOP.getRemarks();
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -141,7 +140,7 @@ public class FindCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
-        /* Case: find expense in empty address book -> 0 persons found */
+        /* Case: find expense in empty finance tracker -> 0 expenses found */
         deleteAllPersons();
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_CHICKEN;
         expectedModel = getModel();

@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.DOCTOR;
 import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
-import static seedu.address.testutil.TypicalExpenses.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import seedu.address.model.person.exceptions.DuplicateExpenseException;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
 import seedu.address.testutil.ExpenseBuilder;
 
-public class UniqueExpenseListTest {
+public class ExpenseListTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -47,8 +47,8 @@ public class UniqueExpenseListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueExpenseList.add(DUCK_RICE);
-        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withTags(VALID_REMARKS_EXPENSE)
-                .build();
+        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT)
+                .withRemarks(VALID_REMARKS_EXPENSE).build();
         assertTrue(uniqueExpenseList.contains(editedAlice));
     }
 
@@ -95,8 +95,8 @@ public class UniqueExpenseListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueExpenseList.add(DUCK_RICE);
-        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT).withTags(VALID_REMARKS_EXPENSE)
-                .build();
+        Expense editedAlice = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_DEADLINE_DEBT)
+                .withRemarks(VALID_REMARKS_EXPENSE).build();
         uniqueExpenseList.setExpense(DUCK_RICE, editedAlice);
         UniqueExpenseList expectedUniqueExpenseList = new UniqueExpenseList();
         expectedUniqueExpenseList.add(editedAlice);
@@ -106,18 +106,18 @@ public class UniqueExpenseListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniqueExpenseList.add(DUCK_RICE);
-        uniqueExpenseList.setExpense(DUCK_RICE, BOB);
+        uniqueExpenseList.setExpense(DUCK_RICE, DOCTOR);
         UniqueExpenseList expectedUniqueExpenseList = new UniqueExpenseList();
-        expectedUniqueExpenseList.add(BOB);
+        expectedUniqueExpenseList.add(DOCTOR);
         assertEquals(expectedUniqueExpenseList, uniqueExpenseList);
     }
 
     @Test
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueExpenseList.add(DUCK_RICE);
-        uniqueExpenseList.add(BOB);
+        uniqueExpenseList.add(DOCTOR);
         thrown.expect(DuplicateExpenseException.class);
-        uniqueExpenseList.setExpense(DUCK_RICE, BOB);
+        uniqueExpenseList.setExpense(DUCK_RICE, DOCTOR);
     }
 
     @Test
@@ -150,7 +150,7 @@ public class UniqueExpenseListTest {
     public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
         uniqueExpenseList.add(DUCK_RICE);
         UniqueExpenseList expectedUniqueExpenseList = new UniqueExpenseList();
-        expectedUniqueExpenseList.add(BOB);
+        expectedUniqueExpenseList.add(DOCTOR);
         uniqueExpenseList.setExpenses(expectedUniqueExpenseList);
         assertEquals(expectedUniqueExpenseList, uniqueExpenseList);
     }
@@ -164,10 +164,10 @@ public class UniqueExpenseListTest {
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniqueExpenseList.add(DUCK_RICE);
-        List<Expense> expenseList = Collections.singletonList(BOB);
+        List<Expense> expenseList = Collections.singletonList(DOCTOR);
         uniqueExpenseList.setExpenses(expenseList);
         UniqueExpenseList expectedUniqueExpenseList = new UniqueExpenseList();
-        expectedUniqueExpenseList.add(BOB);
+        expectedUniqueExpenseList.add(DOCTOR);
         assertEquals(expectedUniqueExpenseList, uniqueExpenseList);
     }
 

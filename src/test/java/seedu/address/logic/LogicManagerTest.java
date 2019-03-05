@@ -88,7 +88,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + DATE_DESC_EXPENSE;
-        Expense expectedExpense = new ExpenseBuilder(EXPENSE).withTags().build();
+        Expense expectedExpense = new ExpenseBuilder(EXPENSE).withRemarks("").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addExpense(expectedExpense);
         expectedModel.commitFinanceTracker();
@@ -100,7 +100,7 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        logic.getFilteredPersonList().remove(0);
+        logic.getFilteredExpenseList().remove(0);
     }
 
     /**

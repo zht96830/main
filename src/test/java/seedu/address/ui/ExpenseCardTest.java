@@ -16,52 +16,52 @@ public class ExpenseCardTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags
-        Expense expenseWithNoTags = new ExpenseBuilder().withTags(new String[0]).build();
-        PersonCard personCard = new PersonCard(expenseWithNoTags, 1);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, expenseWithNoTags, 1);
+        Expense expenseWithNoTags = new ExpenseBuilder().withRemarks("").build();
+        ExpenseCard expenseCard = new ExpenseCard(expenseWithNoTags, 1);
+        uiPartRule.setUiPart(expenseCard);
+        assertCardDisplay(expenseCard, expenseWithNoTags, 1);
 
         // with tags
         Expense expenseWithTags = new ExpenseBuilder().build();
-        personCard = new PersonCard(expenseWithTags, 2);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, expenseWithTags, 2);
+        expenseCard = new ExpenseCard(expenseWithTags, 2);
+        uiPartRule.setUiPart(expenseCard);
+        assertCardDisplay(expenseCard, expenseWithTags, 2);
     }
 
     @Test
     public void equals() {
         Expense expense = new ExpenseBuilder().build();
-        PersonCard personCard = new PersonCard(expense, 0);
+        ExpenseCard expenseCard = new ExpenseCard(expense, 0);
 
         // same expense, same index -> returns true
-        PersonCard copy = new PersonCard(expense, 0);
-        assertTrue(personCard.equals(copy));
+        ExpenseCard copy = new ExpenseCard(expense, 0);
+        assertTrue(expenseCard.equals(copy));
 
         // same object -> returns true
-        assertTrue(personCard.equals(personCard));
+        assertTrue(expenseCard.equals(expenseCard));
 
         // null -> returns false
-        assertFalse(personCard.equals(null));
+        assertFalse(expenseCard.equals(null));
 
         // different types -> returns false
-        assertFalse(personCard.equals(0));
+        assertFalse(expenseCard.equals(0));
 
         // different expense, same index -> returns false
         Expense differentExpense = new ExpenseBuilder().withName("differentName").build();
-        assertFalse(personCard.equals(new PersonCard(differentExpense, 0)));
+        assertFalse(expenseCard.equals(new ExpenseCard(differentExpense, 0)));
 
         // same expense, different index -> returns false
-        assertFalse(personCard.equals(new PersonCard(expense, 1)));
+        assertFalse(expenseCard.equals(new ExpenseCard(expense, 1)));
     }
 
     /**
-     * Asserts that {@code personCard} displays the details of {@code expectedExpense} correctly and matches
+     * Asserts that {@code expenseCard} displays the details of {@code expectedExpense} correctly and matches
      * {@code expectedId}.
      */
-    private void assertCardDisplay(PersonCard personCard, Expense expectedExpense, int expectedId) {
+    private void assertCardDisplay(ExpenseCard expenseCard, Expense expectedExpense, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(personCard.getRoot());
+        PersonCardHandle personCardHandle = new PersonCardHandle(expenseCard.getRoot());
 
         // verify id is displayed correctly
         assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());

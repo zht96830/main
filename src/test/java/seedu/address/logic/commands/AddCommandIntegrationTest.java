@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 
@@ -38,13 +37,6 @@ public class AddCommandIntegrationTest {
 
         assertCommandSuccess(new AddCommand(validExpense), model, commandHistory,
                 String.format(AddCommand.MESSAGE_SUCCESS, validExpense), expectedModel);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Expense expenseInList = model.getFinanceTracker().getExpenseList().get(0);
-        assertCommandFailure(new AddCommand(expenseInList), model, commandHistory,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }
