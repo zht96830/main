@@ -413,7 +413,7 @@ public class ModelManager implements Model {
             }
         }
     }
-    
+
     /**
      * Ensures {@code selectedBudget} is a valid expense in {@code filteredBudget}.
      */
@@ -471,7 +471,7 @@ public class ModelManager implements Model {
             }
         }
     }
-    
+
     /**
      * Ensures {@code selectedExpense} is a valid expense in {@code filteredExpenses}.
      */
