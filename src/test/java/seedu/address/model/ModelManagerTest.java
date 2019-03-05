@@ -22,8 +22,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.exceptions.ExpenseNotFoundException;
-import seedu.address.testutil.FinanceTrackerBuilder;
 import seedu.address.testutil.ExpenseBuilder;
+import seedu.address.testutil.FinanceTrackerBuilder;
 
 public class ModelManagerTest {
     @Rule

@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.expensecommands.EditCommand.EditExpenseDescriptor;
+import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
-import seedu.address.model.expense.Expense;
 import seedu.address.model.attributes.Name;
-import seedu.address.model.attributes.Amount;
+import seedu.address.model.expense.Expense;
 
 /**
  * A utility class to help with building EditExpenseDescriptor objects.

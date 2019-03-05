@@ -1,14 +1,15 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.debtcommands.AddDebtCommand;
-import seedu.address.logic.commands.debtcommands.EditDebtCommand.EditDebtDescriptor;
-import seedu.address.model.debt.Debt;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+
+import seedu.address.logic.commands.debtcommands.AddDebtCommand;
+import seedu.address.logic.commands.debtcommands.EditDebtCommand.EditDebtDescriptor;
+import seedu.address.model.debt.Debt;
+
 
 /**
  * A utility class for Expense.
@@ -43,7 +44,8 @@ public class DebtUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getPersonOwed().ifPresent(personOwed -> sb.append(PREFIX_NAME).append(personOwed.name).append(" "));
         descriptor.getAmount().ifPresent(amount -> sb.append(PREFIX_AMOUNT).append(amount.toString()).append(" "));
-        descriptor.getCategory().ifPresent(category -> sb.append(PREFIX_CATEGORY).append(category.toString()).append(" "));
+        descriptor.getCategory().ifPresent(category -> sb.append(PREFIX_CATEGORY).append(
+                category.toString()).append(" "));
         descriptor.getDeadline().ifPresent(deadline -> sb.append(PREFIX_DUE).append(deadline.toString()).append(" "));
         descriptor.getRemarks().ifPresent(remarks -> sb.append(PREFIX_REMARKS).append(remarks));
 
