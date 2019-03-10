@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.expense;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.ExpenseBuilder;
 
 public class NameContainsKeywordsPredicateTest {
