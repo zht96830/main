@@ -19,16 +19,14 @@ import seedu.address.model.expense.Expense;
 @JsonRootName(value = "financetracker")
 class JsonSerializableFinanceTracker {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate expense(s).";
-
-    private final List<JsonAdaptedExpense> persons = new ArrayList<>();
+    private final List<JsonAdaptedExpense> expenses = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableFinanceTracker} with the given persons.
+     * Constructs a {@code JsonSerializableFinanceTracker} with the given expenses.
      */
     @JsonCreator
-    public JsonSerializableFinanceTracker(@JsonProperty("persons") List<JsonAdaptedExpense> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableFinanceTracker(@JsonProperty("expenses") List<JsonAdaptedExpense> expenses) {
+        this.expenses.addAll(expenses);
     }
 
     /**
@@ -37,7 +35,7 @@ class JsonSerializableFinanceTracker {
      * @param source future changes to this will not affect the created {@code JsonSerializableFinanceTracker}.
      */
     public JsonSerializableFinanceTracker(ReadOnlyFinanceTracker source) {
-        persons.addAll(source.getExpenseList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
+        expenses.addAll(source.getExpenseList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,11 +45,8 @@ class JsonSerializableFinanceTracker {
      */
     public FinanceTracker toModelType() throws IllegalValueException {
         FinanceTracker financeTracker = new FinanceTracker();
-        for (JsonAdaptedExpense jsonAdaptedExpense : persons) {
+        for (JsonAdaptedExpense jsonAdaptedExpense : expenses) {
             Expense expense = jsonAdaptedExpense.toModelType();
-            if (financeTracker.hasExpense(expense)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
             financeTracker.addExpense(expense);
         }
         return financeTracker;

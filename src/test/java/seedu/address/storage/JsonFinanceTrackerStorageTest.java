@@ -65,7 +65,7 @@ public class JsonFinanceTrackerStorageTest {
     @Test
     public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidPersonAddressBook.json");
+        readAddressBook("invalidExpenseFinanceTracker.json");
     }
 
     @Test
