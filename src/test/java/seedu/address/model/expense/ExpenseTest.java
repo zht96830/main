@@ -2,13 +2,9 @@ package seedu.address.model.expense;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
 import static seedu.address.testutil.TypicalExpenses.DOCTOR;
@@ -22,7 +18,6 @@ import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
-import seedu.address.model.expense.Expense;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.ExpenseBuilder;
 
