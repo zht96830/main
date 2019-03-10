@@ -1,12 +1,12 @@
 package guitests.guihandles;
 
-import javafx.scene.Node;
-import javafx.scene.control.ListView;
-import seedu.address.model.debt.Debt;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import javafx.scene.Node;
+import javafx.scene.control.ListView;
+import seedu.address.model.debt.Debt;
 
 /**
  * Provides a handle for {@code DebtListPanel} containing the list of {@code DebtCard}.

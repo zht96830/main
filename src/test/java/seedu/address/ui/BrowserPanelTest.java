@@ -33,8 +33,8 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a expense
         guiRobot.interact(() -> selectedExpense.set(DUCK_RICE));
-        URL expectedExpenseUrl = new URL(BrowserPanel.SEARCH_PAGE_URL +
-                DUCK_RICE.getName().name.replaceAll(" ", "%20"));
+        URL expectedExpenseUrl = new URL(BrowserPanel.SEARCH_PAGE_URL
+                + DUCK_RICE.getName().name.replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedExpenseUrl, browserPanelHandle.getLoadedUrl());

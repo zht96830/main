@@ -31,7 +31,8 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: delete the first expense in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_EXPENSE.getOneBased() + "       ";
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_EXPENSE.getOneBased()
+                + "       ";
         Expense deletedExpense = removePerson(expectedModel, INDEX_FIRST_EXPENSE);
         String expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);

@@ -8,9 +8,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysExpense;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
-import guitests.guihandles.ExpenseCardHandle;
 import org.junit.Test;
 
+import guitests.guihandles.ExpenseCardHandle;
 import guitests.guihandles.ExpenseListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -51,7 +51,8 @@ public class ExpenseListPanelTest extends GuiUnitTest {
         guiRobot.interact(() -> selectedPerson.set(secondExpense));
         guiRobot.pauseForHuman();
 
-        ExpenseCardHandle expectedPerson = expenseListPanelHandle.getExpenseCardHandle(INDEX_SECOND_EXPENSE.getZeroBased());
+        ExpenseCardHandle expectedPerson = expenseListPanelHandle.getExpenseCardHandle(
+                INDEX_SECOND_EXPENSE.getZeroBased());
         ExpenseCardHandle selectedPerson = expenseListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
