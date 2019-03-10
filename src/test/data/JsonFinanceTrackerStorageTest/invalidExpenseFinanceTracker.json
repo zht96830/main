@@ -1,0 +1,9 @@
+{
+  "expenses": [ {
+    "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "amount": "9482424",
+    "date": "invalid-date",
+    "category": "invalid-category",
+    "remarks": ""
+  } ]
+}

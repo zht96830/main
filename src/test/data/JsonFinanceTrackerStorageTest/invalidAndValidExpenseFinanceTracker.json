@@ -1,0 +1,15 @@
+{
+  "expenses": [ {
+    "name": "Valid Expense",
+    "amount": "5.00",
+    "date": "01-01-2018",
+    "category": "FOOD",
+    "remarks": ""
+  }, {
+    "name": "Person With Invalid Amount Field",
+    "amount": "948asdf2424",
+    "date": "05-05-2018",
+    "category": "FOOD",
+    "remarks": ""
+  } ]
+}
