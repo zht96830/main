@@ -95,7 +95,7 @@ public class ExpenseTest {
         assertFalse(DUCK_RICE.equals(editedExpense));
 
         // different category -> returns false
-        editedExpense = new ExpenseBuilder(DUCK_RICE).withCategory("OTHERS").build();
+        editedExpense = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_CATEGORY_EXPENSE).build();
         assertFalse(DUCK_RICE.equals(editedExpense));
 
         // different remarks -> returns false

@@ -54,7 +54,7 @@ public class ExpenseList implements Iterable<Expense> {
         internalList.set(index, editedExpense);
     }
 
-    public void setExpense(ExpenseList replacement) {
+    public void setExpenses(ExpenseList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
