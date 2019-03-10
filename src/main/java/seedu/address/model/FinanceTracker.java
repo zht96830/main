@@ -18,8 +18,7 @@ import seedu.address.model.recurring.RecurringList;
 
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameExpense comparison)
+ * Wraps all data at the finance-tracker level
  */
 public class FinanceTracker implements ReadOnlyFinanceTracker {
 
