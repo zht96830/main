@@ -29,7 +29,7 @@ class JsonAdaptedExpense {
      */
     @JsonCreator
     public JsonAdaptedExpense(@JsonProperty("name") String name, @JsonProperty("amount") String amount,
-                              @JsonProperty("category") String category, @JsonProperty("date") String date,
+                              @JsonProperty("date") String date, @JsonProperty("category") String category,
                               @JsonProperty("remarks") String remarks) {
         this.name = name;
         this.amount = amount;
@@ -84,7 +84,7 @@ class JsonAdaptedExpense {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
         if (!Date.isValidDate(date)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
         final Date modelDate = new Date(date);
 
