@@ -58,7 +58,9 @@ public class Expense {
         return category;
     }
 
-    public String getRemarks() { return remarks; }
+    public String getRemarks() {
+        return remarks;
+    }
 
     /**
      * Returns true if both expenses of the same name have the same cost amount and date.
