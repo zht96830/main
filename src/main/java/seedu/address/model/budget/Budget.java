@@ -31,7 +31,7 @@ public class Budget {
         this.startDate = startDate;
         this.endDate = endDate;
         if (remarks == null) {
-            this.remarks = null;
+            this.remarks = "";
         } else {
             this.remarks = remarks;
         }

@@ -32,7 +32,12 @@ public class Debt {
         this.amount = amount;
         this.category = category;
         this.deadline = deadline;
-        this.remarks = remarks;
+
+        if (remarks == null) {
+            this.remarks = "";
+        } else {
+            this.remarks = remarks;
+        }
     }
 
     public Name getPersonOwed() {
@@ -87,7 +92,7 @@ public class Debt {
                 .append(" Deadline: ")
                 .append(deadline.toString());
 
-        if (remarks != null) {
+        if (!remarks.equals("")) {
             builder.append(" Remarks: ").append(remarks);
         }
         return builder.toString();

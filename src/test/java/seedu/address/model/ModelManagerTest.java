@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 import static seedu.address.testutil.TypicalExpenses.DOCTOR;
 import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
@@ -73,37 +73,37 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setFinanceTrackerFilePath_nullPath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         modelManager.setFinanceTrackerFilePath(null);
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setFinanceTrackerFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setFinanceTrackerFilePath(path);
         assertEquals(path, modelManager.getFinanceTrackerFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasExpense_nullExpense_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         modelManager.hasExpense(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasExpense_expenseNotInFinanceTracker_returnsFalse() {
         assertFalse(modelManager.hasExpense(DUCK_RICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasExpense_expenseInFinanceTracker_returnsTrue() {
         modelManager.addExpense(DUCK_RICE);
         assertTrue(modelManager.hasExpense(DUCK_RICE));
     }
 
     @Test
-    public void deletePerson_personIsSelectedAndFirstPersonInFilteredPersonList_selectionCleared() {
+    public void deleteExpense_expenseIsSelectedAndFirstExpenseInFilteredExpenseList_selectionCleared() {
         modelManager.addExpense(DUCK_RICE);
         modelManager.setSelectedExpense(DUCK_RICE);
         modelManager.deleteExpense(DUCK_RICE);
@@ -111,7 +111,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deletePerson_personIsSelectedAndSecondPersonInFilteredPersonList_firstPersonSelected() {
+    public void deleteExpense_expenseIsSelectedAndSecondExpenseInFilteredExpenseList_firstExpenseSelected() {
         modelManager.addExpense(DUCK_RICE);
         modelManager.addExpense(DOCTOR);
         assertEquals(Arrays.asList(DUCK_RICE, DOCTOR), modelManager.getFilteredExpenseList());
@@ -121,28 +121,28 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setPerson_personIsSelected_selectedPersonUpdated() {
+    public void setExpense_expenseIsSelected_selectedExpenseUpdated() {
         modelManager.addExpense(DUCK_RICE);
         modelManager.setSelectedExpense(DUCK_RICE);
-        Expense updatedAlice = new ExpenseBuilder(DUCK_RICE).withDate(VALID_CATEGORY_DEBT).build();
-        modelManager.setExpense(DUCK_RICE, updatedAlice);
-        assertEquals(updatedAlice, modelManager.getSelectedExpense());
+        Expense updatedExpense = new ExpenseBuilder(DUCK_RICE).withDate(VALID_DATE_EXPENSE).build();
+        modelManager.setExpense(DUCK_RICE, updatedExpense);
+        assertEquals(updatedExpense, modelManager.getSelectedExpense());
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredExpenseList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredExpenseList().remove(0);
     }
 
     @Test
-    public void setSelectedPerson_personNotInFilteredPersonList_throwsPersonNotFoundException() {
+    public void setSelectedExpense_expenseNotInFilteredExpenseList_throwsExpenseNotFoundException() {
         thrown.expect(ExpenseNotFoundException.class);
         modelManager.setSelectedExpense(DUCK_RICE);
     }
 
     @Test
-    public void setSelectedPerson_personInFilteredPersonList_setsSelectedPerson() {
+    public void setSelectedExpense_expenseInFilteredExpenseList_setsSelectedExpense() {
         modelManager.addExpense(DUCK_RICE);
         assertEquals(Collections.singletonList(DUCK_RICE), modelManager.getFilteredExpenseList());
         modelManager.setSelectedExpense(DUCK_RICE);

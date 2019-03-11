@@ -35,7 +35,7 @@ public class JsonUserPrefsStorageTest {
 
     private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataConversionException {
         Path prefsFilePath = addToTestDataPathIfNotNull(userPrefsFileInTestDataFolder);
-        return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs(prefsFilePath);
+        return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs();
     }
 
     @Test
@@ -83,7 +83,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setFinanceTrackerFilePath(Paths.get("addressbook.json"));
+        userPrefs.setFinanceTrackerFilePath(Paths.get("financetracker.json"));
         return userPrefs;
     }
 
@@ -117,8 +117,8 @@ public class JsonUserPrefsStorageTest {
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
 
-        Path pefsFilePath = testFolder.getRoot().toPath().resolve("TempPrefs.json");
-        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
+        Path prefsFilePath = testFolder.getRoot().toPath().resolve("TempPrefs.json");
+        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(prefsFilePath);
 
         //Try writing when the file doesn't exist
         jsonUserPrefsStorage.saveUserPrefs(original);
