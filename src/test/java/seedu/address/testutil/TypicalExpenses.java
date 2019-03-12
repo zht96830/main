@@ -1,17 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
+import seedu.address.model.FinanceTracker;
+import seedu.address.model.expense.Expense;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.FinanceTracker;
-import seedu.address.model.expense.Expense;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Expense} objects to be used in tests.
@@ -27,7 +23,7 @@ public class TypicalExpenses {
             .withAmount("57.30").withDate("08-01-2019").withCategory("shopping")
             .withRemarks("fish, eggs, chicken, beef, oyster sauce").build();
     public static final Expense LAPTOP = new ExpenseBuilder().withName("new ASUS laptop")
-            .withAmount("1300").withDate("15-12-2018").withCategory("work").build();
+            .withAmount("1300").withDate("15-12-2018").withCategory("work").withRemarks("may get reimbursed").build();
     public static final Expense PHONE_BILLS = new ExpenseBuilder().withName("Phone bills")
             .withAmount("20").withDate("31-01-2019").withCategory("utilities").build();
     public static final Expense DOCTOR = new ExpenseBuilder().withName("doctor consultation")
@@ -49,6 +45,7 @@ public class TypicalExpenses {
             .withCategory(VALID_CATEGORY_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
 
     public static final String KEYWORD_MATCHING_CHICKEN = "Chicken"; // A keyword that matches CHICKEN
+    public static final String KEYWORD_MATCHING_PHONE = "Phone"; // A keyword that matches PHONE
 
     private TypicalExpenses() {} // prevents instantiation
 

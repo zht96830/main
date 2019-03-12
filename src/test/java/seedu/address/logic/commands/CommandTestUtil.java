@@ -1,18 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
@@ -25,6 +12,14 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditDebtDescriptorBuilder;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.*;
+
 /**
  * Contains helper methods for testing commands.
  */
@@ -33,10 +28,11 @@ public class CommandTestUtil {
     public static final String VALID_NAME_EXPENSE = "Chicken Rice";
     public static final String VALID_NAME_DEBT = "Bob Choo";
     public static final String VALID_AMOUNT_EXPENSE = "11111111";
-    public static final String VALID_AMOUNT_DEBT = "22222222";
+    public static final String VALID_AMOUNT_DEBT = "2222222";
     public static final String VALID_CATEGORY_EXPENSE = "others";
     public static final String VALID_CATEGORY_DEBT = "shopping";
     public static final String VALID_DATE_EXPENSE = "03-03-2019";
+    public static final String VALID_DATE_EXPENSE_2 = "12-03-2019";
     public static final String VALID_DEADLINE_DEBT = "05-05-2019";
     public static final String VALID_REMARKS_EXPENSE = "Bishan chicken rice";
     public static final String VALID_REMARKS_DEBT = "fan";
@@ -48,9 +44,10 @@ public class CommandTestUtil {
     public static final String CATEGORY_DESC_EXPENSE = " " + PREFIX_CATEGORY + VALID_CATEGORY_EXPENSE;
     public static final String CATEGORY_DESC_DEBT = " " + PREFIX_CATEGORY + VALID_CATEGORY_DEBT;
     public static final String DATE_DESC_EXPENSE = " " + PREFIX_DATE + VALID_DATE_EXPENSE;
+    public static final String DATE_DESC_EXPENSE_2 = " " + PREFIX_DATE + VALID_DATE_EXPENSE_2;
     public static final String DEADLINE_DESC_DEBT = " " + PREFIX_DUE + VALID_DEADLINE_DEBT;
-    public static final String REMARKS_DESC_EXPENSE = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT;
-    public static final String REMARKS_DESC_DEBT = " " + PREFIX_REMARKS + VALID_REMARKS_EXPENSE;
+    public static final String REMARKS_DESC_EXPENSE = " " + PREFIX_REMARKS + VALID_REMARKS_EXPENSE;
+    public static final String REMARKS_DESC_DEBT = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "911a"; // 'a' not allowed in phones

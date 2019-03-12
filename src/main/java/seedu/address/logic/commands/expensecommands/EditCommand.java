@@ -1,31 +1,25 @@
 package seedu.address.logic.commands.expensecommands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
-
-import java.util.List;
-import java.util.Optional;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-
 import seedu.address.model.Model;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
+
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 
 
 /**
@@ -49,7 +43,7 @@ public class EditCommand extends Command {
             + PREFIX_AMOUNT + "400 "
             + PREFIX_CATEGORY + "travel";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Expense:\n%1$s";
+    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited Expense:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
@@ -82,7 +76,7 @@ public class EditCommand extends Command {
         model.setExpense(expenseToEdit, editedExpense);
         model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
         model.commitFinanceTracker();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedExpense));
+        return new CommandResult(String.format(MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense));
     }
 
     /**
