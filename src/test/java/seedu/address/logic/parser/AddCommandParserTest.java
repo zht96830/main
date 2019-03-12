@@ -4,8 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
@@ -52,8 +50,8 @@ public class AddCommandParserTest {
                 + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
 
         // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
+        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
@@ -95,8 +93,8 @@ public class AddCommandParserTest {
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_EXPENSE + VALID_AMOUNT_EXPENSE + VALID_CATEGORY_EXPENSE + VALID_DATE_EXPENSE,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_EXPENSE + VALID_AMOUNT_EXPENSE + VALID_CATEGORY_EXPENSE
+                        + VALID_DATE_EXPENSE, expectedMessage);
     }
 
     @Test

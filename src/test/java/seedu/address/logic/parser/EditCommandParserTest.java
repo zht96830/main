@@ -10,10 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
@@ -35,13 +33,10 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.EditCommand;
 import seedu.address.logic.parser.expenseparsers.EditCommandParser;
-import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
-import seedu.address.model.attributes.Email;
 import seedu.address.model.attributes.Name;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
 public class EditCommandParserTest {

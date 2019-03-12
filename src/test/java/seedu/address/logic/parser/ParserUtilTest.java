@@ -10,9 +10,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
-import seedu.address.model.attributes.Email;
 import seedu.address.model.attributes.Name;
 import seedu.address.testutil.Assert;
 
