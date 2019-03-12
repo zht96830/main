@@ -20,6 +20,9 @@ public class TypicalExpenses {
 
     public static final Expense DUCK_RICE = new ExpenseBuilder().withName("Duck Rice")
             .withCategory("food").withDate("01-01-2019").withAmount("3.50").build();
+    public static final Expense CHICKEN_RICE = new ExpenseBuilder().withName("Chicken Rice")
+            .withCategory("food").withDate("03-03-2019").withAmount("11111111").withRemarks("Bishan chicken rice")
+            .build();
     public static final Expense TAXI = new ExpenseBuilder().withName("Taxi")
             .withCategory("transport").withDate("05-01-2019").withAmount("17.20")
             .withRemarks("from NUS to Home").build();
@@ -47,6 +50,10 @@ public class TypicalExpenses {
     public static final Expense EXPENSE = new ExpenseBuilder().withName(VALID_NAME_EXPENSE)
             .withAmount(VALID_AMOUNT_EXPENSE).withDate(VALID_DATE_EXPENSE)
             .withCategory(VALID_CATEGORY_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
+
+    public static final Expense EXPENSE_WITHOUT_REMARKS = new ExpenseBuilder().withName(VALID_NAME_EXPENSE)
+            .withAmount(VALID_AMOUNT_EXPENSE).withDate(VALID_DATE_EXPENSE)
+            .withCategory(VALID_CATEGORY_EXPENSE).build();
 
     public static final String KEYWORD_MATCHING_CHICKEN = "Chicken"; // A keyword that matches CHICKEN
 

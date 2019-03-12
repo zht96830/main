@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
@@ -95,7 +96,7 @@ public class ExpenseTest {
         assertFalse(DUCK_RICE.equals(editedExpense));
 
         // different category -> returns false
-        editedExpense = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_CATEGORY_EXPENSE).build();
+        editedExpense = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_CATEGORY_EXPENSE_2).build();
         assertFalse(DUCK_RICE.equals(editedExpense));
 
         // different remarks -> returns false

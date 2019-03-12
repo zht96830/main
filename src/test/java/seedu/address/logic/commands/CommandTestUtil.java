@@ -34,7 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_DEBT = "Bob Choo";
     public static final String VALID_AMOUNT_EXPENSE = "11111111";
     public static final String VALID_AMOUNT_DEBT = "22222222";
-    public static final String VALID_CATEGORY_EXPENSE = "others";
+    public static final String VALID_CATEGORY_EXPENSE = "food";
+    public static final String VALID_CATEGORY_EXPENSE_2 = "transport";
     public static final String VALID_CATEGORY_DEBT = "shopping";
     public static final String VALID_DATE_EXPENSE = "03-03-2019";
     public static final String VALID_DEADLINE_DEBT = "05-05-2019";
@@ -49,7 +50,7 @@ public class CommandTestUtil {
     public static final String CATEGORY_DESC_DEBT = " " + PREFIX_CATEGORY + VALID_CATEGORY_DEBT;
     public static final String DATE_DESC_EXPENSE = " " + PREFIX_DATE + VALID_DATE_EXPENSE;
     public static final String DEADLINE_DESC_DEBT = " " + PREFIX_DUE + VALID_DEADLINE_DEBT;
-    public static final String REMARKS_DESC_EXPENSE = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT;
+    public static final String REMARKS_DESC_EXPENSE = " " + PREFIX_REMARKS + VALID_REMARKS_EXPENSE;
     public static final String REMARKS_DESC_DEBT = " " + PREFIX_REMARKS + VALID_REMARKS_EXPENSE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
