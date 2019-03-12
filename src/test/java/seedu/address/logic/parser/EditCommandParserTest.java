@@ -37,6 +37,8 @@ import seedu.address.logic.commands.expensecommands.EditCommand;
 import seedu.address.logic.parser.expenseparsers.EditCommandParser;
 import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Email;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.tag.Tag;
@@ -81,18 +83,11 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_AMOUNT_DESC, Amount.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_CATEGORY_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_DATE_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, "1" + INVALID_DEADLINE_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
-
-        // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_AMOUNT_DESC + CATEGORY_DESC_EXPENSE, Amount.MESSAGE_CONSTRAINTS);
-
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
-        // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + AMOUNT_DESC_DEBT + INVALID_AMOUNT_DESC, Amount.MESSAGE_CONSTRAINTS);
-
-
+        assertParseFailure(parser, "1" + INVALID_CATEGORY_DESC, Category.MESSAGE_CONSTRAINTS);
+        // invalid category
+        assertParseFailure(parser, "1" + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS); // invalid date
+        //Deadline not required for editexpense command
+        //assertParseFailure(parser, "1" + INVALID_DEADLINE_DESC, Date.MESSAGE_CONSTRAINTS); // invalid tag
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_CATEGORY_DESC + VALID_DATE_EXPENSE
@@ -101,13 +96,13 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_allFieldsSpecified_success() {
+    public void parse_necessaryFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_EXPENSE;
-        String userInput = targetIndex.getOneBased() + AMOUNT_DESC_DEBT + REMARKS_DESC_DEBT
+        String userInput = targetIndex.getOneBased() + AMOUNT_DESC_EXPENSE
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + NAME_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
 
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
-                .withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE)
+                .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE)
                 .withRemarks(VALID_REMARKS_EXPENSE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -166,8 +161,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_EXPENSE;
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + REMARKS_DESC_EXPENSE
-                + AMOUNT_DESC_DEBT + DEADLINE_DESC_DEBT + CATEGORY_DESC_DEBT + REMARKS_DESC_DEBT;
+                + REMARKS_DESC_EXPENSE;
 
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
                 .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE)
@@ -193,17 +187,6 @@ public class EditCommandParserTest {
         descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_DEBT)
                 .withDate(VALID_DEADLINE_DEBT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_EXPENSE;
-        String userInput = targetIndex.getOneBased() + "";
-
-        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withRemarks("").build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
