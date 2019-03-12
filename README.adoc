@@ -7,7 +7,6 @@ https://coveralls.io/github/cs2103-ay1819s2-w15-2/main?branch=master[image:https
 //insert image of our future project here
 image::docs/images/Ui.png[width="600"]
 //ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
 //endif::[]
 
 //ifndef::env-github[]
