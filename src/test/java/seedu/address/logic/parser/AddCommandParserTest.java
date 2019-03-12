@@ -18,16 +18,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalExpenses.CHICKEN_RICE;
-import static seedu.address.testutil.TypicalExpenses.EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.EXPENSE_WITHOUT_REMARKS;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.expensecommands.AddCommand;
 import seedu.address.logic.parser.expenseparsers.AddCommandParser;
-import seedu.address.model.attributes.Address;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ExpenseBuilder;
 
 public class AddCommandParserTest {
@@ -39,10 +38,6 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
-
-        // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_EXPENSE + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
 
         // multiple phones - last phone accepted
@@ -67,7 +62,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Expense expectedExpense = new ExpenseBuilder(EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
+        Expense expectedExpense = new ExpenseBuilder(EXPENSE_WITHOUT_REMARKS).build();
         assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE,
                 new AddCommand(expectedExpense));
     }
@@ -77,20 +72,16 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                        + DATE_DESC_EXPENSE, expectedMessage);
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_EXPENSE + VALID_AMOUNT_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE,
-                expectedMessage);
+        // missing category prefix
+        assertParseFailure(parser, NAME_DESC_EXPENSE + VALID_CATEGORY_EXPENSE + DATE_DESC_EXPENSE
+                + AMOUNT_DESC_EXPENSE, expectedMessage);
 
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + VALID_CATEGORY_EXPENSE + DATE_DESC_EXPENSE,
-                expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + VALID_DATE_EXPENSE,
-                expectedMessage);
+        // missing amount prefix
+        assertParseFailure(parser, NAME_DESC_EXPENSE + VALID_AMOUNT_EXPENSE + DATE_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_EXPENSE + VALID_AMOUNT_EXPENSE + VALID_CATEGORY_EXPENSE
@@ -103,13 +94,9 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid address
+        // invalid date
         assertParseFailure(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + INVALID_DATE_DESC
-                + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, Address.MESSAGE_CONSTRAINTS);
-
-        // invalid tag
-        assertParseFailure(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
-                + INVALID_DATE_DESC + VALID_REMARKS_EXPENSE, Tag.MESSAGE_CONSTRAINTS);
+                + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, Date.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + INVALID_DATE_DESC,

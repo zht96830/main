@@ -1,26 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -107,10 +100,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_EXPENSE;
-        String userInput = targetIndex.getOneBased() + AMOUNT_DESC_DEBT + CATEGORY_DESC_EXPENSE;
+        String userInput = targetIndex.getOneBased() + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE;
 
-        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_DEBT)
-                .withCategory(VALID_CATEGORY_EXPENSE).build();
+        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
+                .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -146,7 +139,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + REMARKS_DESC_EXPENSE;
-        descriptor = new EditExpenseDescriptorBuilder().withRemarks(VALID_REMARKS_DEBT).build();
+        descriptor = new EditExpenseDescriptorBuilder().withRemarks(VALID_REMARKS_EXPENSE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -170,17 +163,17 @@ public class EditCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_EXPENSE;
-        String userInput = targetIndex.getOneBased() + INVALID_AMOUNT_DESC + AMOUNT_DESC_DEBT;
+        String userInput = targetIndex.getOneBased() + INVALID_AMOUNT_DESC + AMOUNT_DESC_EXPENSE;
         EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
-                .withAmount(VALID_AMOUNT_DEBT).build();
+                .withAmount(VALID_AMOUNT_EXPENSE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + CATEGORY_DESC_DEBT + INVALID_AMOUNT_DESC + DEADLINE_DESC_DEBT
-                + AMOUNT_DESC_DEBT;
-        descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_DEBT)
-                .withDate(VALID_DEADLINE_DEBT).build();
+        userInput = targetIndex.getOneBased() + CATEGORY_DESC_EXPENSE + INVALID_AMOUNT_DESC + DATE_DESC_EXPENSE
+                + AMOUNT_DESC_EXPENSE;
+        descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_EXPENSE)
+                .withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
