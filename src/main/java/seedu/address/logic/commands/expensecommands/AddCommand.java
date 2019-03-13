@@ -14,13 +14,13 @@ import seedu.address.model.Model;
 import seedu.address.model.expense.Expense;
 
 /**
- * Adds a expense to the Finance Tracker.
+ * Adds an expense to the Finance Tracker.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a expense to the Finance Tracker. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an expense to the Finance Tracker. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_AMOUNT + "AMOUNT "

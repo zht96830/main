@@ -14,12 +14,10 @@ import java.util.Optional;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-
 import seedu.address.model.Model;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
@@ -49,7 +47,7 @@ public class EditCommand extends Command {
             + PREFIX_AMOUNT + "400 "
             + PREFIX_CATEGORY + "travel";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Expense:\n%1$s";
+    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited Expense:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
@@ -82,7 +80,7 @@ public class EditCommand extends Command {
         model.setExpense(expenseToEdit, editedExpense);
         model.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
         model.commitFinanceTracker();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedExpense));
+        return new CommandResult(String.format(MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense));
     }
 
     /**

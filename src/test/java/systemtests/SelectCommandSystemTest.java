@@ -7,7 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
+import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_PHONE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandSuccess(command, INDEX_FIRST_EXPENSE);
 
         /* Case: select the last card in the expense list -> selected */
-        Index personCount = getLastIndex(getModel());
-        command = SelectCommand.COMMAND_WORD + " " + personCount.getOneBased();
-        assertCommandSuccess(command, personCount);
+        Index expenseCount = getLastIndex(getModel());
+        command = SelectCommand.COMMAND_WORD + " " + expenseCount.getOneBased();
+        assertCommandSuccess(command, expenseCount);
 
         /* Case: undo previous selection -> rejected */
         command = UndoCommand.COMMAND_WORD;
@@ -57,12 +57,13 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: filtered expense list, select index within bounds of address book but out of bounds of expense list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_CHICKEN);
+        showExpensesWithName(KEYWORD_MATCHING_PHONE);
         int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
+        command = SelectCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* Case: filtered expense list, select index within bounds of address book and expense list -> selected */
-        Index validIndex = Index.fromOneBased(1);
+        Index validIndex = INDEX_FIRST_EXPENSE;
         assertTrue(validIndex.getZeroBased() < getModel().getFilteredExpenseList().size());
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
         assertCommandSuccess(command, validIndex);
@@ -92,8 +93,8 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
-        /* Case: select from empty address book -> rejected */
-        deleteAllPersons();
+        /* Case: select from empty finance tracker -> rejected */
+        deleteAllExpenses();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased(),
                 MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
     }
@@ -116,7 +117,7 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
         Model expectedModel = getModel();
         String expectedResultMessage = String.format(
                 MESSAGE_SELECT_PERSON_SUCCESS, expectedSelectedCardIndex.getOneBased());
-        int preExecutionSelectedCardIndex = getPersonListPanel().getSelectedCardIndex();
+        int preExecutionSelectedCardIndex = getExpenseListPanel().getSelectedCardIndex();
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

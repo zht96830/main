@@ -8,6 +8,7 @@ import static seedu.address.testutil.TestUtil.getExpense;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
+import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_PHONE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Test;
@@ -31,16 +32,15 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: delete the first expense in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_EXPENSE.getOneBased()
-                + "       ";
-        Expense deletedExpense = removePerson(expectedModel, INDEX_FIRST_EXPENSE);
+        String command = "     " + DeleteCommand.COMMAND_WORD + "     " + INDEX_FIRST_EXPENSE.getOneBased() + "       ";
+        Expense deletedExpense = removeExpense(expectedModel, INDEX_FIRST_EXPENSE);
         String expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last expense in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeDeletingLast);
-        assertCommandSuccess(lastPersonIndex);
+        Index lastExpenseIndex = getLastIndex(modelBeforeDeletingLast);
+        assertCommandSuccess(lastExpenseIndex);
 
         /* Case: undo deleting the last expense in the list -> last expense restored */
         command = UndoCommand.COMMAND_WORD;
@@ -49,40 +49,40 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: redo deleting the last expense in the list -> last expense deleted again */
         command = RedoCommand.COMMAND_WORD;
-        removePerson(modelBeforeDeletingLast, lastPersonIndex);
+        removeExpense(modelBeforeDeletingLast, lastExpenseIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
         /* Case: delete the middle expense in the list -> deleted */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex);
+        Index middleExpenseIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleExpenseIndex);
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered expense list, delete index within bounds of address book and expense list -> deleted */
-        showPersonsWithName(KEYWORD_MATCHING_CHICKEN);
+        showExpensesWithName(KEYWORD_MATCHING_PHONE);
         Index index = INDEX_FIRST_EXPENSE;
         assertTrue(index.getZeroBased() < getModel().getFilteredExpenseList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered expense list, delete index within bounds of address book but out of bounds of expense list
+        /* Case: filtered expense list, delete index within bounds of finance tracker but out of bounds of expense list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_CHICKEN);
+        showExpensesWithName(KEYWORD_MATCHING_CHICKEN);
         int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a expense card is selected ---------------------- */
+        /* --------------------- Performing delete operation while an expense card is selected ---------------------- */
 
         /* Case: delete the selected expense -> expense list panel selects the expense before the deleted expense */
-        showAllPersons();
+        showAllExpenses();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
-        selectPerson(selectedIndex);
+        selectExpense(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        deletedExpense = removePerson(expectedModel, selectedIndex);
+        deletedExpense = removeExpense(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
@@ -113,10 +113,10 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
     }
 
     /**
-     * Removes the {@code Expense} at the specified {@code index} in {@code model}'s address book.
+     * Removes the {@code Expense} at the specified {@code index} in {@code model}'s finance tracker.
      * @return the removed expense
      */
-    private Expense removePerson(Model model, Index index) {
+    private Expense removeExpense(Model model, Index index) {
         Expense targetExpense = getExpense(model, index);
         model.deleteExpense(targetExpense);
         return targetExpense;
@@ -129,7 +129,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
-        Expense deletedExpense = removePerson(expectedModel, toDelete);
+        Expense deletedExpense = removeExpense(expectedModel, toDelete);
         String expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
 
         assertCommandSuccess(

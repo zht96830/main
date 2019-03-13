@@ -98,7 +98,7 @@ public abstract class FinanceTrackerSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public ExpenseListPanelHandle getPersonListPanel() {
+    public ExpenseListPanelHandle getExpenseListPanel() {
         return mainWindowHandle.getExpenseListPanel();
     }
 
@@ -134,35 +134,35 @@ public abstract class FinanceTrackerSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all expenses in the finance tracker.
      */
-    protected void showAllPersons() {
+    protected void showAllExpenses() {
         executeCommand(ListCommand.COMMAND_WORD);
         assertEquals(getModel().getFinanceTracker().getExpenseList().size(),
                 getModel().getFilteredExpenseList().size());
     }
 
     /**
-     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     * Displays all expenses with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showPersonsWithName(String keyword) {
+    protected void showExpensesWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredExpenseList().size()
-                < getModel().getFinanceTracker().getExpenseList().size());
+                <= getModel().getFinanceTracker().getExpenseList().size());
     }
 
     /**
      * Selects the expense at {@code index} of the displayed list.
      */
-    protected void selectPerson(Index index) {
+    protected void selectExpense(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(index.getZeroBased(), getExpenseListPanel().getSelectedCardIndex());
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all expenses in the finance tracker.
      */
-    protected void deleteAllPersons() {
+    protected void deleteAllExpenses() {
         executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getFinanceTracker().getExpenseList().size());
     }
@@ -170,14 +170,14 @@ public abstract class FinanceTrackerSystemTest {
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
      * {@code expectedResultMessage}, the storage contains the same expense objects as {@code expectedModel}
-     * and the expense list panel displays the persons in the model correctly.
+     * and the expense list panel displays the expenses in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new FinanceTracker(expectedModel.getFinanceTracker()), testApp.readStorageAddressBook());
-        assertListMatching(getPersonListPanel(), expectedModel.getFilteredExpenseList());
+        assertListMatching(getExpenseListPanel(), expectedModel.getFilteredExpenseList());
     }
 
     /**
@@ -189,7 +189,7 @@ public abstract class FinanceTrackerSystemTest {
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
-        getPersonListPanel().rememberSelectedExpenseCard();
+        getExpenseListPanel().rememberSelectedExpenseCard();
     }
 
     /**
@@ -199,7 +199,7 @@ public abstract class FinanceTrackerSystemTest {
      */
     protected void assertSelectedCardDeselected() {
         assertEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
-        assertFalse(getPersonListPanel().isAnyCardSelected());
+        assertFalse(getExpenseListPanel().isAnyCardSelected());
     }
 
     /**
@@ -209,8 +209,8 @@ public abstract class FinanceTrackerSystemTest {
      * @see ExpenseListPanelHandle#isSelectedExpenseCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-        getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
-        String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
+        getExpenseListPanel().navigateToCard(getExpenseListPanel().getSelectedCardIndex());
+        String selectedCardName = getExpenseListPanel().getHandleToSelectedCard().getName();
         URL expectedUrl;
         try {
             expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
@@ -219,7 +219,7 @@ public abstract class FinanceTrackerSystemTest {
         }
         assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
-        assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getExpenseListPanel().getSelectedCardIndex());
     }
 
     /**
@@ -229,7 +229,7 @@ public abstract class FinanceTrackerSystemTest {
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isSelectedExpenseCardChanged());
+        assertFalse(getExpenseListPanel().isSelectedExpenseCardChanged());
     }
 
     /**
@@ -273,7 +273,7 @@ public abstract class FinanceTrackerSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredExpenseList());
+        assertListMatching(getExpenseListPanel(), getModel().getFilteredExpenseList());
         assertEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
