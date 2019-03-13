@@ -1,13 +1,17 @@
 package seedu.address.testutil;
 
-import seedu.address.model.FinanceTracker;
-import seedu.address.model.expense.Expense;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import seedu.address.model.FinanceTracker;
+import seedu.address.model.expense.Expense;
 
 /**
  * A utility class containing a list of {@code Expense} objects to be used in tests.

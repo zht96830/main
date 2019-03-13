@@ -1,5 +1,18 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
@@ -12,14 +25,6 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditDebtDescriptorBuilder;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
-
 /**
  * Contains helper methods for testing commands.
  */
@@ -28,7 +33,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_EXPENSE = "Chicken Rice";
     public static final String VALID_NAME_DEBT = "Bob Choo";
     public static final String VALID_AMOUNT_EXPENSE = "11111111";
-    public static final String VALID_AMOUNT_DEBT = "2222222";
+    public static final String VALID_AMOUNT_DEBT = "12345";
     public static final String VALID_CATEGORY_EXPENSE = "food";
     public static final String VALID_CATEGORY_EXPENSE_2 = "transport";
     public static final String VALID_CATEGORY_DEBT = "shopping";

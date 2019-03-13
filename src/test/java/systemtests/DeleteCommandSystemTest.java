@@ -1,6 +1,18 @@
 package systemtests;
 
+import static org.junit.Assert.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.expensecommands.DeleteCommand.MESSAGE_DELETE_EXPENSE_SUCCESS;
+import static seedu.address.testutil.TestUtil.getExpense;
+import static seedu.address.testutil.TestUtil.getLastIndex;
+import static seedu.address.testutil.TestUtil.getMidIndex;
+import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
+import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_PHONE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.DeleteCommand;
@@ -8,15 +20,6 @@ import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.expense.Expense;
-
-import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.expensecommands.DeleteCommand.MESSAGE_DELETE_EXPENSE_SUCCESS;
-import static seedu.address.testutil.TestUtil.*;
-import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
-import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_PHONE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
 
@@ -29,7 +32,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: delete the first expense in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_EXPENSE.getOneBased() + "       ";
+        String command = "     " + DeleteCommand.COMMAND_WORD + "     " + INDEX_FIRST_EXPENSE.getOneBased() + "       ";
         Expense deletedExpense = removeExpense(expectedModel, INDEX_FIRST_EXPENSE);
         String expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);

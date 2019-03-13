@@ -1,17 +1,21 @@
 package systemtests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+
+import org.junit.Test;
+
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
-import org.junit.Test;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.expensecommands.DeleteCommand;
 import seedu.address.logic.commands.generalcommands.HelpCommand;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.StatusBarFooter;
-
-import static org.junit.Assert.*;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 /**
  * A system test class for the help window, which contains interaction with other UI components.

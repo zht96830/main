@@ -1,6 +1,22 @@
 package systemtests;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.GROCERIES;
+import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
+import static seedu.address.testutil.TypicalExpenses.STOCKS;
+
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.AddCommand;
@@ -13,10 +29,6 @@ import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.ExpenseUtil;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalExpenses.*;
 
 public class AddCommandSystemTest extends FinanceTrackerSystemTest {
 
@@ -67,35 +79,37 @@ public class AddCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case:
         missing name -> rejected */
-        command = AddCommand.COMMAND_WORD + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
+        command = AddCommand.COMMAND_WORD + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
+                + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing amount -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
+                + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing category -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE
+                + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        /* Case: missing date -> rejected */
-/*        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-*/
         /* Case: invalid keyword -> rejected */
         command = "adds " + ExpenseUtil.getExpenseDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
+        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, Name.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid amount -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + INVALID_AMOUNT_DESC + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + INVALID_AMOUNT_DESC + CATEGORY_DESC_EXPENSE
+                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, Amount.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid category -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + INVALID_CATEGORY_DESC + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + INVALID_CATEGORY_DESC
+                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, Category.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid date -> rejected */
@@ -103,12 +117,6 @@ public class AddCommandSystemTest extends FinanceTrackerSystemTest {
                 + INVALID_DATE_DESC + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, Date.MESSAGE_CONSTRAINTS);
 
-        /* Case: invalid tag -> rejected */
-/*      command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DATE_DESC_EXPENSE + INVALID_DEADLINE_DESC;
-        assertCommandFailure(command, Tag.MESSAGE_CONSTRAINTS);
-
-*/
     }
 
     /**

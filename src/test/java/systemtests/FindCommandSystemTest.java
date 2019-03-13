@@ -1,17 +1,23 @@
 package systemtests;
 
+import static org.junit.Assert.assertFalse;
+import static seedu.address.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
+import static seedu.address.testutil.TypicalExpenses.EXPENSE;
+import static seedu.address.testutil.TypicalExpenses.GROCERIES;
+import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
+import static seedu.address.testutil.TypicalExpenses.LAPTOP;
+import static seedu.address.testutil.TypicalExpenses.TAXI;
+
 import org.junit.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.DeleteCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
-
-import static org.junit.Assert.assertFalse;
-import static seedu.address.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalExpenses.*;
 
 public class FindCommandSystemTest extends FinanceTrackerSystemTest {
 
