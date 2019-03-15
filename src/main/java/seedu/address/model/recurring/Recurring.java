@@ -97,7 +97,7 @@ public class Recurring extends Expense {
             builder.append(" Date: ")
                     .append(date);
         }
-        if (remarks != null) {
+        if (!remarks.equals("")) {
             builder.append(" Remarks: ")
                     .append(remarks);
         }

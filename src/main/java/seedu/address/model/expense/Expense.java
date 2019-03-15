@@ -34,7 +34,12 @@ public class Expense {
         this.amount = amount;
         this.date = date;
         this.category = category;
-        this.remarks = remarks;
+
+        if (remarks == null) {
+            this.remarks = "";
+        } else {
+            this.remarks = remarks;
+        }
     }
 
     public Name getName() {
@@ -114,7 +119,7 @@ public class Expense {
             builder.append(" Date: ")
                     .append(date);
         }
-        if (remarks != null) {
+        if (!remarks.equals("")) {
             builder.append(" Remarks: ")
                     .append(remarks);
         }

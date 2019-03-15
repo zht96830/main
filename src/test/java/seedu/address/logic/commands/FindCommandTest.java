@@ -7,7 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVI
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalExpenses.DOCTOR;
 import static seedu.address.testutil.TypicalExpenses.GROCERIES;
-import static seedu.address.testutil.TypicalExpenses.PHONE_BILLS;
+import static seedu.address.testutil.TypicalExpenses.TAXI;
 import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 
 import java.util.Arrays;
@@ -70,11 +70,11 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("TAXI GROCERIES DOCTOR ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredExpenseList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(GROCERIES, PHONE_BILLS, DOCTOR), model.getFilteredExpenseList());
+        assertEquals(Arrays.asList(TAXI, GROCERIES, DOCTOR), model.getFilteredExpenseList());
     }
 
     /**

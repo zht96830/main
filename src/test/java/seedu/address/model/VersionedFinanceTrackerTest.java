@@ -27,52 +27,52 @@ public class VersionedFinanceTrackerTest {
     private final ReadOnlyFinanceTracker emptyFinanceTracker = new FinanceTrackerBuilder().build();
 
     @Test
-    public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(emptyFinanceTracker);
+    public void commit_singleFinanceTracker_noStatesRemovedCurrentStateSaved() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(emptyFinanceTracker);
 
         versionedFinanceTracker.commit();
-        assertAddressBookListStatus(versionedFinanceTracker,
+        assertFinanceTrackerListStatus(versionedFinanceTracker,
                 Collections.singletonList(emptyFinanceTracker),
                 emptyFinanceTracker,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void commit_multipleFinanceTrackerPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
 
         versionedFinanceTracker.commit();
-        assertAddressBookListStatus(versionedFinanceTracker,
+        assertFinanceTrackerListStatus(versionedFinanceTracker,
                 Arrays.asList(emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan),
                 financeTrackerWithJapan,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void commit_multipleFinanceTrackerPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
 
         versionedFinanceTracker.commit();
-        assertAddressBookListStatus(versionedFinanceTracker,
+        assertFinanceTrackerListStatus(versionedFinanceTracker,
                 Collections.singletonList(emptyFinanceTracker),
                 emptyFinanceTracker,
                 Collections.emptyList());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtEndOfStateList_returnsTrue() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void canUndo_multipleFinanceTrackerPointerAtEndOfStateList_returnsTrue() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
 
         assertTrue(versionedFinanceTracker.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void canUndo_multipleFinanceTrackerPointerNotAtStartOfStateList_returnsTrue() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
 
@@ -80,15 +80,15 @@ public class VersionedFinanceTrackerTest {
     }
 
     @Test
-    public void canUndo_singleAddressBook_returnsFalse() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(emptyFinanceTracker);
+    public void canUndo_singleFinanceTracker_returnsFalse() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(emptyFinanceTracker);
 
         assertFalse(versionedFinanceTracker.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsFalse() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void canUndo_multipleFinanceTrackerPointerAtStartOfStateList_returnsFalse() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
 
@@ -96,8 +96,8 @@ public class VersionedFinanceTrackerTest {
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerNotAtEndOfStateList_returnsTrue() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void canRedo_multipleFinanceTrackerPointerNotAtEndOfStateList_returnsTrue() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
 
@@ -105,8 +105,8 @@ public class VersionedFinanceTrackerTest {
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void canRedo_multipleFinanceTrackerPointerAtStartOfStateList_returnsTrue() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
 
@@ -114,55 +114,55 @@ public class VersionedFinanceTrackerTest {
     }
 
     @Test
-    public void canRedo_singleAddressBook_returnsFalse() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(emptyFinanceTracker);
+    public void canRedo_singleFinanceTracker_returnsFalse() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(emptyFinanceTracker);
 
         assertFalse(versionedFinanceTracker.canRedo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtEndOfStateList_returnsFalse() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void canRedo_multipleFinanceTrackerPointerAtEndOfStateList_returnsFalse() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
 
         assertFalse(versionedFinanceTracker.canRedo());
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtEndOfStateList_success() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void undo_multipleFinanceTrackerPointerAtEndOfStateList_success() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
 
         versionedFinanceTracker.undo();
-        assertAddressBookListStatus(versionedFinanceTracker,
+        assertFinanceTrackerListStatus(versionedFinanceTracker,
                 Collections.singletonList(emptyFinanceTracker),
                 financeTrackerWithExpense,
                 Collections.singletonList(financeTrackerWithJapan));
     }
 
     @Test
-    public void undo_multipleAddressBookPointerNotAtStartOfStateList_success() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void undo_multipleFinanceTrackerPointerNotAtStartOfStateList_success() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
 
         versionedFinanceTracker.undo();
-        assertAddressBookListStatus(versionedFinanceTracker,
+        assertFinanceTrackerListStatus(versionedFinanceTracker,
                 Collections.emptyList(),
                 emptyFinanceTracker,
                 Arrays.asList(financeTrackerWithExpense, financeTrackerWithJapan));
     }
 
     @Test
-    public void undo_singleAddressBook_throwsNoUndoableStateException() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(emptyFinanceTracker);
+    public void undo_singleFinanceTracker_throwsNoUndoableStateException() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(emptyFinanceTracker);
 
         assertThrows(VersionedFinanceTracker.NoUndoableStateException.class, versionedFinanceTracker::undo);
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtStartOfStateList_throwsNoUndoableStateException() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void undo_multipleFinanceTrackerPointerAtStartOfStateList_throwsNoUndoableStateException() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
 
@@ -170,41 +170,41 @@ public class VersionedFinanceTrackerTest {
     }
 
     @Test
-    public void redo_multipleAddressBookPointerNotAtEndOfStateList_success() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void redo_multipleFinanceTrackerPointerNotAtEndOfStateList_success() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
 
         versionedFinanceTracker.redo();
-        assertAddressBookListStatus(versionedFinanceTracker,
+        assertFinanceTrackerListStatus(versionedFinanceTracker,
                 Arrays.asList(emptyFinanceTracker, financeTrackerWithExpense),
                 financeTrackerWithJapan,
                 Collections.emptyList());
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtStartOfStateList_success() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void redo_multipleFinanceTrackerPointerAtStartOfStateList_success() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
 
         versionedFinanceTracker.redo();
-        assertAddressBookListStatus(versionedFinanceTracker,
+        assertFinanceTrackerListStatus(versionedFinanceTracker,
                 Collections.singletonList(emptyFinanceTracker),
                 financeTrackerWithExpense,
                 Collections.singletonList(financeTrackerWithJapan));
     }
 
     @Test
-    public void redo_singleAddressBook_throwsNoRedoableStateException() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(emptyFinanceTracker);
+    public void redo_singleFinanceTracker_throwsNoRedoableStateException() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(emptyFinanceTracker);
 
         assertThrows(VersionedFinanceTracker.NoRedoableStateException.class, versionedFinanceTracker::redo);
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtEndOfStateList_throwsNoRedoableStateException() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(
+    public void redo_multipleFinanceTrackerPointerAtEndOfStateList_throwsNoRedoableStateException() {
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
                 emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
 
         assertThrows(VersionedFinanceTracker.NoRedoableStateException.class, versionedFinanceTracker::redo);
@@ -212,11 +212,11 @@ public class VersionedFinanceTrackerTest {
 
     @Test
     public void equals() {
-        VersionedFinanceTracker versionedFinanceTracker = prepareAddressBookList(financeTrackerWithExpense,
+        VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(financeTrackerWithExpense,
                 financeTrackerWithJapan);
 
         // same values -> returns true
-        VersionedFinanceTracker copy = prepareAddressBookList(financeTrackerWithExpense,
+        VersionedFinanceTracker copy = prepareFinanceTrackerList(financeTrackerWithExpense,
                 financeTrackerWithJapan);
         assertTrue(versionedFinanceTracker.equals(copy));
 
@@ -230,12 +230,12 @@ public class VersionedFinanceTrackerTest {
         assertFalse(versionedFinanceTracker.equals(1));
 
         // different state list -> returns false
-        VersionedFinanceTracker differentAddressBookList = prepareAddressBookList(financeTrackerWithJapan,
+        VersionedFinanceTracker differentFinanceTrackerList = prepareFinanceTrackerList(financeTrackerWithJapan,
                 financeTrackerWithGroceries);
-        assertFalse(versionedFinanceTracker.equals(differentAddressBookList));
+        assertFalse(versionedFinanceTracker.equals(differentFinanceTrackerList));
 
         // different current pointer index -> returns false
-        VersionedFinanceTracker differentCurrentStatePointer = prepareAddressBookList(
+        VersionedFinanceTracker differentCurrentStatePointer = prepareFinanceTrackerList(
                 financeTrackerWithExpense, financeTrackerWithJapan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
         assertFalse(versionedFinanceTracker.equals(differentCurrentStatePointer));
@@ -248,10 +248,10 @@ public class VersionedFinanceTrackerTest {
      * and states after {@code versionedFinanceTracker#currentStatePointer} is equal to
      * {@code expectedStatesAfterPointer}.
      */
-    private void assertAddressBookListStatus(VersionedFinanceTracker versionedFinanceTracker,
-                                             List<ReadOnlyFinanceTracker> expectedStatesBeforePointer,
-                                             ReadOnlyFinanceTracker expectedCurrentState,
-                                             List<ReadOnlyFinanceTracker> expectedStatesAfterPointer) {
+    private void assertFinanceTrackerListStatus(VersionedFinanceTracker versionedFinanceTracker,
+                                                List<ReadOnlyFinanceTracker> expectedStatesBeforePointer,
+                                                ReadOnlyFinanceTracker expectedCurrentState,
+                                                List<ReadOnlyFinanceTracker> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
         assertEquals(new FinanceTracker(versionedFinanceTracker), expectedCurrentState);
 
@@ -261,15 +261,15 @@ public class VersionedFinanceTrackerTest {
         }
 
         // check states before pointer are correct
-        for (ReadOnlyFinanceTracker expectedAddressBook : expectedStatesBeforePointer) {
-            assertEquals(expectedAddressBook, new FinanceTracker(versionedFinanceTracker));
+        for (ReadOnlyFinanceTracker expectedFinanceTracker : expectedStatesBeforePointer) {
+            assertEquals(expectedFinanceTracker, new FinanceTracker(versionedFinanceTracker));
             versionedFinanceTracker.redo();
         }
 
         // check states after pointer are correct
-        for (ReadOnlyFinanceTracker expectedAddressBook : expectedStatesAfterPointer) {
+        for (ReadOnlyFinanceTracker expectedFinanceTracker : expectedStatesAfterPointer) {
             versionedFinanceTracker.redo();
-            assertEquals(expectedAddressBook, new FinanceTracker(versionedFinanceTracker));
+            assertEquals(expectedFinanceTracker, new FinanceTracker(versionedFinanceTracker));
         }
 
         // check that there are no more states after pointer
@@ -280,15 +280,15 @@ public class VersionedFinanceTrackerTest {
     }
 
     /**
-     * Creates and returns a {@code VersionedFinanceTracker} with the {@code addressBookStates} added into it, and the
-     * {@code VersionedFinanceTracker#currentStatePointer} at the end of list.
+     * Creates and returns a {@code VersionedFinanceTracker} with the {@code financeTrackerStates} added into it,
+     * and the {@code VersionedFinanceTracker#currentStatePointer} at the end of list.
      */
-    private VersionedFinanceTracker prepareAddressBookList(ReadOnlyFinanceTracker... addressBookStates) {
-        assertFalse(addressBookStates.length == 0);
+    private VersionedFinanceTracker prepareFinanceTrackerList(ReadOnlyFinanceTracker... financeTrackerStates) {
+        assertFalse(financeTrackerStates.length == 0);
 
-        VersionedFinanceTracker versionedFinanceTracker = new VersionedFinanceTracker(addressBookStates[0]);
-        for (int i = 1; i < addressBookStates.length; i++) {
-            versionedFinanceTracker.resetData(addressBookStates[i]);
+        VersionedFinanceTracker versionedFinanceTracker = new VersionedFinanceTracker(financeTrackerStates[0]);
+        for (int i = 1; i < financeTrackerStates.length; i++) {
+            versionedFinanceTracker.resetData(financeTrackerStates[i]);
             versionedFinanceTracker.commit();
         }
 

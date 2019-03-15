@@ -4,28 +4,22 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_EXPENSE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 import static seedu.address.testutil.TypicalExpenses.EXPENSE;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
 
 import org.junit.Test;
 
@@ -35,12 +29,11 @@ import seedu.address.logic.commands.expensecommands.EditCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.attributes.Address;
 import seedu.address.model.attributes.Amount;
-import seedu.address.model.attributes.Email;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ExpenseBuilder;
 
 public class EditCommandSystemTest extends FinanceTrackerSystemTest {
@@ -54,10 +47,10 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited
          */
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_EXPENSE;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_EXPENSE + "  "
-                + AMOUNT_DESC_EXPENSE + " " + CATEGORY_DESC_EXPENSE + "  " + DATE_DESC_EXPENSE + " "
-                + REMARKS_DESC_EXPENSE;
+                + AMOUNT_DESC_EXPENSE + "    " + CATEGORY_DESC_EXPENSE + "  " + DATE_DESC_EXPENSE + " "
+                + REMARKS_DESC_EXPENSE + "   ";
         Expense editedExpense = new ExpenseBuilder(EXPENSE).build();
         assertCommandSuccess(command, index, editedExpense);
 
@@ -69,67 +62,72 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: redo editing the last expense in the list -> last expense edited again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        model.setExpense(getModel().getFilteredExpenseList().get(INDEX_FIRST_PERSON.getZeroBased()), editedExpense);
+        model.setExpense(getModel().getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased()), editedExpense);
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: edit a expense with new values same as existing values -> edited */
+        /* Case: edit an expense with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         assertCommandSuccess(command, index, EXPENSE);
 
-        /* Case: edit a expense with new values same as another expense's values but with different name -> edited */
+        /* Case: edit an expense with new values same as another expense's values but with different name -> edited
+        * In this case, test edits second expense with values to be the same as first expense except for the name
+        */
         assertTrue(getModel().getFinanceTracker().getExpenseList().contains(EXPENSE));
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_EXPENSE;
         assertNotEquals(getModel().getFilteredExpenseList().get(index.getZeroBased()), EXPENSE);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_DEBT
-                + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE + REMARKS_DESC_DEBT;
-        editedExpense = new ExpenseBuilder(EXPENSE).withName(VALID_NAME_EXPENSE).build();
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_DEBT + AMOUNT_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
+        editedExpense = new ExpenseBuilder(EXPENSE).withName(VALID_NAME_DEBT).build();
         assertCommandSuccess(command, index, editedExpense);
 
-        /* Case: edit a expense with new values same as another expense's values but with different phone and email
+        /* Case: edit an expense with new values same as another expense's values but with different amount
          * -> edited
          */
-        index = INDEX_SECOND_PERSON;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_DEBT + AMOUNT_DESC_EXPENSE
-                + CATEGORY_DESC_EXPENSE + DEADLINE_DESC_DEBT + REMARKS_DESC_EXPENSE + REMARKS_DESC_DEBT;
-        editedExpense =
-                new ExpenseBuilder(EXPENSE).withAmount(VALID_AMOUNT_EXPENSE).withDate(VALID_CATEGORY_EXPENSE).build();
+        assertTrue(getModel().getFinanceTracker().getExpenseList().contains(EXPENSE));
+        index = INDEX_SECOND_EXPENSE;
+        assertNotEquals(getModel().getFilteredExpenseList().get(index.getZeroBased()), EXPENSE);
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_DEBT
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
+        editedExpense = new ExpenseBuilder(EXPENSE).withAmount(VALID_AMOUNT_DEBT).build();
         assertCommandSuccess(command, index, editedExpense);
 
         /* Case: clear tags -> cleared */
-        index = INDEX_FIRST_PERSON;
+        /* index = INDEX_FIRST_EXPENSE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased();
         Expense expenseToEdit = getModel().getFilteredExpenseList().get(index.getZeroBased());
         editedExpense = new ExpenseBuilder(expenseToEdit).build();
-        assertCommandSuccess(command, index, editedExpense);
+        assertCommandSuccess(command, index, editedExpense);*/
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
-        /* Case: filtered expense list, edit index within bounds of address book and expense list -> edited */
-        showPersonsWithName(KEYWORD_MATCHING_CHICKEN);
-        index = INDEX_FIRST_PERSON;
+        /* Case: filtered expense list, edit index within bounds of finance tracker and expense list -> edited */
+        showExpensesWithName(KEYWORD_MATCHING_CHICKEN);
+        index = INDEX_FIRST_EXPENSE;
         assertTrue(index.getZeroBased() < getModel().getFilteredExpenseList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_DEBT;
-        expenseToEdit = getModel().getFilteredExpenseList().get(index.getZeroBased());
+        Expense expenseToEdit = getModel().getFilteredExpenseList().get(index.getZeroBased());
         editedExpense = new ExpenseBuilder(expenseToEdit).withName(VALID_NAME_DEBT).build();
         assertCommandSuccess(command, index, editedExpense);
 
         /* Case: filtered expense list, edit index within bounds of address book but out of bounds of expense list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_CHICKEN);
+        showExpensesWithName(KEYWORD_MATCHING_CHICKEN);
         int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_DEBT,
                 Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
-        /* --------------------- Performing edit operation while a expense card is selected -------------------------*/
+        /* --------------------- Performing edit operation while an expense card is selected -------------------------*/
 
-        /* Case: selects first card in the expense list, edit a expense -> edited, card selection remains unchanged but
+        /* Case: selects first card in the expense list, edit an expense -> edited, card selection remains unchanged but
          * browser url changes
          */
-        showAllPersons();
-        index = INDEX_FIRST_PERSON;
-        selectPerson(index);
+        showAllExpenses();
+        index = INDEX_FIRST_EXPENSE;
+
+        selectExpense(index);
+
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         // this can be misleading: card selection actually remains unchanged but the
@@ -156,28 +154,28 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: missing all fields -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased(),
                 EditCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
 
-        /* Case: invalid phone -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        /* Case: invalid amount -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_AMOUNT_DESC, Amount.MESSAGE_CONSTRAINTS);
 
-        /* Case: invalid email -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                + INVALID_CATEGORY_DESC, Email.MESSAGE_CONSTRAINTS);
+        /* Case: invalid category -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
+                + INVALID_CATEGORY_DESC, Category.MESSAGE_CONSTRAINTS);
 
-        /* Case: invalid address -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                + INVALID_DATE_DESC, Address.MESSAGE_CONSTRAINTS);
+        /* Case: invalid date -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
+                + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                + INVALID_DEADLINE_DESC, Tag.MESSAGE_CONSTRAINTS);
+        /*assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
+                + INVALID_DEADLINE_DESC, Tag.MESSAGE_CONSTRAINTS);*/
     }
 
     /**
@@ -199,13 +197,13 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
      * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
     private void assertCommandSuccess(String command, Index toEdit, Expense editedExpense,
-            Index expectedSelectedCardIndex) {
+                                      Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         expectedModel.setExpense(expectedModel.getFilteredExpenseList().get(toEdit.getZeroBased()), editedExpense);
         expectedModel.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
 
         assertCommandSuccess(command, expectedModel,
-                String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedExpense), expectedSelectedCardIndex);
+                String.format(EditCommand.MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense), expectedSelectedCardIndex);
     }
 
     /**
