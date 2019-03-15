@@ -15,10 +15,10 @@ import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
 import seedu.address.logic.commands.debtcommands.AddDebtCommand;
 import seedu.address.logic.commands.debtcommands.DeleteDebtCommand;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
-import seedu.address.logic.commands.expensecommands.AddCommand;
-import seedu.address.logic.commands.expensecommands.DeleteCommand;
-import seedu.address.logic.commands.expensecommands.EditCommand;
-import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
+import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
+import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
+import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.logic.commands.generalcommands.ExitCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.generalcommands.HelpCommand;
@@ -35,9 +35,9 @@ import seedu.address.logic.parser.debtparsers.AddDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.DeleteDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.EditDebtCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.expenseparsers.AddCommandParser;
-import seedu.address.logic.parser.expenseparsers.DeleteCommandParser;
-import seedu.address.logic.parser.expenseparsers.EditCommandParser;
+import seedu.address.logic.parser.expenseparsers.AddExpenseCommandParser;
+import seedu.address.logic.parser.expenseparsers.DeleteExpenseCommandParser;
+import seedu.address.logic.parser.expenseparsers.EditExpenseCommandParser;
 import seedu.address.logic.parser.recurringparsers.AddRecurringCommandParser;
 import seedu.address.logic.parser.recurringparsers.DeleteRecurringCommandParser;
 import seedu.address.logic.parser.recurringparsers.EditRecurringCommandParser;
@@ -69,8 +69,8 @@ public class FinanceTrackerParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddExpenseCommand.COMMAND_WORD:
+            return new AddExpenseCommandParser().parse(arguments);
 
         case AddDebtCommand.COMMAND_WORD:
             return new AddDebtCommandParser().parse(arguments);
@@ -81,8 +81,8 @@ public class FinanceTrackerParser {
         case AddBudgetCommand.COMMAND_WORD:
             return new AddBudgetCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditExpenseCommand.COMMAND_WORD:
+            return new EditExpenseCommandParser().parse(arguments);
 
         case EditDebtCommand.COMMAND_WORD:
             return new EditDebtCommandParser().parse(arguments);
@@ -96,8 +96,8 @@ public class FinanceTrackerParser {
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteExpenseCommand.COMMAND_WORD:
+            return new DeleteExpenseCommandParser().parse(arguments);
 
         case DeleteDebtCommand.COMMAND_WORD:
             return new DeleteDebtCommandParser().parse(arguments);
@@ -108,8 +108,8 @@ public class FinanceTrackerParser {
         case DeleteRecurringCommand.COMMAND_WORD:
             return new DeleteRecurringCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case ClearExpenseCommand.COMMAND_WORD:
+            return new ClearExpenseCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);

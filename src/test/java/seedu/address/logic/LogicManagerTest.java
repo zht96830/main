@@ -21,7 +21,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
 import seedu.address.logic.commands.generalcommands.HistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -65,7 +65,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "deleteexpense 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
         assertHistoryCorrect(deleteCommand);
     }
@@ -87,8 +87,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DATE_DESC_EXPENSE;
+        String addCommand = AddExpenseCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE;
         Expense expectedExpense = new ExpenseBuilder(EXPENSE).withRemarks("").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addExpense(expectedExpense);

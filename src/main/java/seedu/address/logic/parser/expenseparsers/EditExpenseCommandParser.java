@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -17,17 +17,17 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditExpenseCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditExpenseCommand
+     * and returns an EditExpenseCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditExpenseCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_CATEGORY,
@@ -38,10 +38,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditExpenseCommand.MESSAGE_USAGE),
+                    pe);
         }
 
-        EditCommand.EditExpenseDescriptor editRecurringDescriptor = new EditCommand.EditExpenseDescriptor();
+        EditExpenseCommand.EditExpenseDescriptor editRecurringDescriptor =
+                new EditExpenseCommand.EditExpenseDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editRecurringDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -60,9 +62,9 @@ public class EditCommandParser implements Parser<EditCommand> {
 
 
         if (!editRecurringDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditExpenseCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editRecurringDescriptor);
+        return new EditExpenseCommand(index, editRecurringDescriptor);
     }
 }

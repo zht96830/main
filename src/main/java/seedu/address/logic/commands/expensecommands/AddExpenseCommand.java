@@ -16,9 +16,9 @@ import seedu.address.model.expense.Expense;
 /**
  * Adds an expense to the Finance Tracker.
  */
-public class AddCommand extends Command {
+public class AddExpenseCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addexpense";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an expense to the Finance Tracker. "
             + "Parameters: "
@@ -39,9 +39,9 @@ public class AddCommand extends Command {
     private final Expense toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Expense}
+     * Creates an AddExpenseCommand to add the specified {@code Expense}
      */
-    public AddCommand(Expense expense) {
+    public AddExpenseCommand(Expense expense) {
         requireNonNull(expense);
         toAdd = expense;
     }
@@ -58,7 +58,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof AddExpenseCommand // instanceof handles nulls
+                && toAdd.equals(((AddExpenseCommand) other).toAdd));
     }
 }

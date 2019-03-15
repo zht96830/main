@@ -3,7 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.expensecommands.DeleteCommand.MESSAGE_DELETE_EXPENSE_SUCCESS;
+import static seedu.address.logic.commands.expensecommands.DeleteExpenseCommand.MESSAGE_DELETE_EXPENSE_SUCCESS;
 import static seedu.address.testutil.TestUtil.getExpense;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
@@ -15,16 +15,16 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.expensecommands.DeleteCommand;
+import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.expense.Expense;
 
-public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
+public class DeleteExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteExpenseCommand.MESSAGE_USAGE);
 
     @Test
     public void delete() {
@@ -32,7 +32,8 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: delete the first expense in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "     " + INDEX_FIRST_EXPENSE.getOneBased() + "       ";
+        String command = "     " + DeleteExpenseCommand.COMMAND_WORD + "     " + INDEX_FIRST_EXPENSE.getOneBased()
+                + "       ";
         Expense deletedExpense = removeExpense(expectedModel, INDEX_FIRST_EXPENSE);
         String expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -70,7 +71,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
          */
         showExpensesWithName(KEYWORD_MATCHING_CHICKEN);
         int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
-        command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
+        command = DeleteExpenseCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* --------------------- Performing delete operation while an expense card is selected ---------------------- */
@@ -81,7 +82,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         Index selectedIndex = getLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
         selectExpense(selectedIndex);
-        command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
+        command = DeleteExpenseCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         deletedExpense = removeExpense(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
@@ -89,24 +90,26 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
 
         /* Case: invalid index (0) -> rejected */
-        command = DeleteCommand.COMMAND_WORD + " 0";
+        command = DeleteExpenseCommand.COMMAND_WORD + " 0";
         assertCommandFailure(command, MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: invalid index (-1) -> rejected */
-        command = DeleteCommand.COMMAND_WORD + " -1";
+        command = DeleteExpenseCommand.COMMAND_WORD + " -1";
         assertCommandFailure(command, MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
                 getModel().getFinanceTracker().getExpenseList().size() + 1);
-        command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
+        command = DeleteExpenseCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
-        assertCommandFailure(DeleteCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
+        assertCommandFailure(DeleteExpenseCommand.COMMAND_WORD + " abc",
+                MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: invalid arguments (extra argument) -> rejected */
-        assertCommandFailure(DeleteCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
+        assertCommandFailure(DeleteExpenseCommand.COMMAND_WORD + " 1 abc",
+                MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND);
@@ -123,9 +126,9 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
     }
 
     /**
-     * Deletes the expense at {@code toDelete} by creating a default {@code DeleteCommand} using {@code toDelete} and
-     * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
-     * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
+     * Deletes the expense at {@code toDelete} by creating a default {@code DeleteExpenseCommand} using {@code toDelete}
+     * and performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
+     * @see DeleteExpenseCommandSystemTest#assertCommandSuccess(String, Model, String)
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
@@ -133,7 +136,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
         String expectedResultMessage = String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, deletedExpense);
 
         assertCommandSuccess(
-                DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);
+                DeleteExpenseCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);
     }
 
     /**
@@ -154,7 +157,7 @@ public class DeleteCommandSystemTest extends FinanceTrackerSystemTest {
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
      * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
-     * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
+     * @see DeleteExpenseCommandSystemTest#assertCommandSuccess(String, Model, String)
      * @see FinanceTrackerSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
