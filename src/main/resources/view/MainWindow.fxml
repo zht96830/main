@@ -65,7 +65,7 @@
             </VBox>
           </SplitPane>
 
-            <StackPane fx:id="browserPlaceholder" prefWidth="400" >
+            <StackPane fx:id="browserPlaceholder" prefWidth="400">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
