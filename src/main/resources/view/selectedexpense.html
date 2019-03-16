@@ -16,7 +16,42 @@
             }
             document.addEventListener("DOMContentLoaded", function(event) {
                 document.getElementById("name").textContent = getJsonFromUrl().name;
-                document.getElementById("category").textContent = getJsonFromUrl().category;
+
+                var img = document.createElement("img");
+                var path = "../images/"
+                var categoryDiv = document.getElementById("category");
+                switch (getJsonFromUrl().category) {
+                    case "FOOD":
+                        img.src = path + "food.png"
+                        break;
+                    case "TRANSPORT":
+                        img.src = path + "transport.png"
+                        break;
+                    case "TRAVEL":
+                        img.src = path + "travel.png"
+                        break;
+                    case "UTILITIES":
+                        img.src = path + "utilities.png"
+                        break;
+                    case "OTHERS":
+                        img.src = path + "others.png"
+                        break;
+                    case "SHOPPING":
+                        img.src = path + "shopping.png"
+                        break;
+                    case "WORK":
+                        img.src = path + "work.png"
+                        break;
+                    case "HEALTHCARE":
+                        img.src = path + "healthcare.png"
+                        break;
+                    case "ENTERTAINMENT":
+                        img.src = path + "entertainment.png"
+                        break;
+                    default:
+                }
+                categoryDiv.append(img);
+
                 document.getElementById("amount").textContent = getJsonFromUrl().amount;
                 document.getElementById("date").textContent = getJsonFromUrl().date;
                 document.getElementById("remarks").textContent = getJsonFromUrl().remarks;
