@@ -58,8 +58,8 @@ public class ExpenseListTest {
         expenseList.add(DUCK_RICE);
         expenseList.add(TAXI);
         Iterator<Expense> iter = expenseList.iterator();
-        assertTrue(iter.next().toString().equals(DUCK_RICE.toString())
-            && iter.next().toString().equals(TAXI.toString()));
+        assertTrue(iter.next().toString().equals(TAXI.toString())
+                && iter.next().toString().equals(DUCK_RICE.toString()));
     }
 
     @Test

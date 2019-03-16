@@ -8,7 +8,7 @@ import static seedu.address.testutil.TestUtil.getExpense;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
-import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_PHONE;
+import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_LAPTOP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Test;
@@ -61,7 +61,7 @@ public class DeleteExpenseCommandSystemTest extends FinanceTrackerSystemTest {
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered expense list, delete index within bounds of address book and expense list -> deleted */
-        showExpensesWithName(KEYWORD_MATCHING_PHONE);
+        showExpensesWithName(KEYWORD_MATCHING_LAPTOP);
         Index index = INDEX_FIRST_EXPENSE;
         assertTrue(index.getZeroBased() < getModel().getFilteredExpenseList().size());
         assertCommandSuccess(index);

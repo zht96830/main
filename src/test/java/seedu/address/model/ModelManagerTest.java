@@ -114,10 +114,10 @@ public class ModelManagerTest {
     public void deleteExpense_expenseIsSelectedAndSecondExpenseInFilteredExpenseList_firstExpenseSelected() {
         modelManager.addExpense(DUCK_RICE);
         modelManager.addExpense(DOCTOR);
-        assertEquals(Arrays.asList(DUCK_RICE, DOCTOR), modelManager.getFilteredExpenseList());
-        modelManager.setSelectedExpense(DOCTOR);
-        modelManager.deleteExpense(DOCTOR);
-        assertEquals(DUCK_RICE, modelManager.getSelectedExpense());
+        assertEquals(Arrays.asList(DOCTOR, DUCK_RICE), modelManager.getFilteredExpenseList());
+        modelManager.setSelectedExpense(DUCK_RICE);
+        modelManager.deleteExpense(DUCK_RICE);
+        assertEquals(DOCTOR, modelManager.getSelectedExpense());
     }
 
     @Test
