@@ -27,6 +27,7 @@ import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.recurring.Recurring;
 
 /**
@@ -104,7 +105,7 @@ public class EditRecurringCommand extends Command {
         Date updatedDate = editRecurringDescriptor.getDate().orElse(recurringToEdit.getDate());
         String updatedRemarks = editRecurringDescriptor.getRemarks().orElse(recurringToEdit.getRemarks());
         Frequency updatedFrequency = editRecurringDescriptor.getFrequency().orElse(recurringToEdit.getFrequency());
-        int updatedOccurrence = editRecurringDescriptor.getOccurrence().orElse(recurringToEdit.getOccurrence());
+        Occurrence updatedOccurrence = editRecurringDescriptor.getOccurrence().orElse(recurringToEdit.getOccurrence());
 
         return new Recurring(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks,
                 updatedFrequency, updatedOccurrence);
@@ -139,7 +140,7 @@ public class EditRecurringCommand extends Command {
         private Category category;
         private String remarks;
         private Frequency frequency;
-        private int occurrence;
+        private Occurrence occurrence;
 
         public EditRecurringDescriptor() {}
 
@@ -213,11 +214,11 @@ public class EditRecurringCommand extends Command {
             return Optional.ofNullable(frequency);
         }
 
-        public void setOccurrence(int occurrence) {
+        public void setOccurrence(Occurrence occurrence) {
             this.occurrence = occurrence;
         }
 
-        public Optional<Integer> getOccurrence() {
+        public Optional<Occurrence> getOccurrence() {
             return Optional.ofNullable(occurrence);
         }
 
