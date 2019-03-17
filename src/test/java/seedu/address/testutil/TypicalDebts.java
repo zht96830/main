@@ -19,7 +19,7 @@ import seedu.address.model.debt.Debt;
 public class TypicalDebts {
 
     public static final Debt DUCK_RICE = new DebtBuilder().withPersonOwed("Amy")
-            .withCategory("food").withDeadline("1-12-2020").withAmount("3.50")
+            .withCategory("food").withDeadline("01-12-2020").withAmount("3.50")
             .withRemarks("for duck rice last week").build();
     public static final Debt TAXI = new DebtBuilder().withPersonOwed("Bob")
             .withCategory("transport").withDeadline("05-12-2019").withAmount("17.20")
@@ -46,12 +46,12 @@ public class TypicalDebts {
             .withRemarks("money borrowed during Japan trip").build();
     public static final Debt STOCKS = new DebtBuilder().withPersonOwed("Ivan")
             .withAmount("1152.25").withDeadline("03-03-2021").withCategory("others")
-            .withRemarks("borrowed to purcahse mapletree stocks").build();
+            .withRemarks("borrowed to purchase mapletree stocks").build();
 
     // Manually added - Debt's details found in {@code CommandTestUtil}
     public static final Debt DEBT = new DebtBuilder().withPersonOwed(VALID_NAME_DEBT)
-            .withAmount(VALID_AMOUNT_DEBT).withDeadline(VALID_CATEGORY_DEBT)
-            .withCategory(VALID_DEADLINE_DEBT).withRemarks(VALID_REMARKS_DEBT).build();
+            .withAmount(VALID_AMOUNT_DEBT).withDeadline(VALID_DEADLINE_DEBT)
+            .withCategory(VALID_CATEGORY_DEBT).withRemarks(VALID_REMARKS_DEBT).build();
 
     public static final String KEYWORD_MATCHING_CHICKEN = "Chicken"; // A keyword that matches CHICKEN
 
