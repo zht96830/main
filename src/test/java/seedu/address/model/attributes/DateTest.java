@@ -27,16 +27,16 @@ public class DateTest {
         Assert.assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
 
         // invalid dates
-        assertFalse(Date.isValidDate("")); // empty string
-        assertFalse(Date.isValidDate(" ")); // spaces only
-        assertFalse(Date.isValidDate("01-01")); // must be dd-mm-yyyy
-        assertFalse(Date.isValidDate("01-01-18")); // need 4 numbers for year, e.g. 2018
-        assertFalse(Date.isValidDate("01-01-2018a")); // alphabets not allowed
-        assertFalse(Date.isValidDate("date")); // non-numeric
+        assertFalse(Date.isValidDate("")=="format"); // empty string
+        assertFalse(Date.isValidDate(" ")=="format"); // spaces only
+        assertFalse(Date.isValidDate("01-01")=="format"); // must be dd-mm-yyyy
+        assertFalse(Date.isValidDate("01-01-18")=="format"); // need 4 numbers for year, e.g. 2018
+        assertFalse(Date.isValidDate("01-01-2018a")=="format"); // alphabets not allowed
+        assertFalse(Date.isValidDate("date")=="format"); // non-numeric
 
         // valid dates
-        assertTrue(Date.isValidDate("01-01-2019"));
-        assertTrue(Date.isValidDate("31-12-1999"));
+        assertTrue(Date.isValidDate("01-01-2019")=="valid");
+        assertTrue(Date.isValidDate("31-12-1999")=="valid");
     }
 
     @Test

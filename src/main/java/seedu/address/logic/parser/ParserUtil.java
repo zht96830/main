@@ -70,8 +70,11 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        switch (Date.isValidDate(trimmedDate)) {
+            case "format":
+                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            case "exist":
+                throw new ParseException(Date.MESSAGE_DATE_DOES_NOT_EXIST);
         }
         return new Date(trimmedDate);
     }
