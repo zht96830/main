@@ -16,9 +16,9 @@ import seedu.address.model.expense.Expense;
 /**
  * Deletes an expense identified using it's displayed index from the Finance Tracker.
  */
-public class DeleteCommand extends Command {
+public class DeleteExpenseCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deleteexpense";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the expense identified by the index number used in the displayed expense list.\n"
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteExpenseCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -51,7 +51,7 @@ public class DeleteCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteExpenseCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteExpenseCommand) other).targetIndex)); // state check
     }
 }

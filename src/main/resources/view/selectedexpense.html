@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"></meta-charset>
+        <title>Selected Expense Page</title>
+
+        <script type="text/javascript">
+            function getJsonFromUrl() {
+                var query = location.search.substr(1);
+                var result = {};
+                query.split("&").forEach(function(part) {
+                    var item = part.split("=");
+                    result[item[0]] = decodeURIComponent(item[1]);
+                });
+                return result;
+            }
+            document.addEventListener("DOMContentLoaded", function(event) {
+                document.getElementById("name").textContent = getJsonFromUrl().name;
+
+                var img = document.createElement("img");
+                var path = "../images/"
+                var categoryDiv = document.getElementById("category");
+                switch (getJsonFromUrl().category) {
+                    case "FOOD":
+                        img.src = path + "food.png"
+                        break;
+                    case "TRANSPORT":
+                        img.src = path + "transport.png"
+                        break;
+                    case "TRAVEL":
+                        img.src = path + "travel.png"
+                        break;
+                    case "UTILITIES":
+                        img.src = path + "utilities.png"
+                        break;
+                    case "OTHERS":
+                        img.src = path + "others.png"
+                        break;
+                    case "SHOPPING":
+                        img.src = path + "shopping.png"
+                        break;
+                    case "WORK":
+                        img.src = path + "work.png"
+                        break;
+                    case "HEALTHCARE":
+                        img.src = path + "healthcare.png"
+                        break;
+                    case "ENTERTAINMENT":
+                        img.src = path + "entertainment.png"
+                        break;
+                    default:
+                }
+                categoryDiv.append(img);
+
+                document.getElementById("amount").textContent = getJsonFromUrl().amount;
+                document.getElementById("date").textContent = getJsonFromUrl().date;
+                document.getElementById("remarks").textContent = getJsonFromUrl().remarks;
+            });
+        </script>
+
+        <style>
+            body {
+                background-color: #383838;
+                -fx-font-family: "Segoe UI Semibold";
+            }
+
+            h1 {
+                color: white;
+                text-align: center;
+                font-style: italic;
+                font-weight: bold;
+                text-shadow: 2px 2px 3px darkgrey;
+            }
+
+            div {
+                color: white;
+                /* overflow-wrap breaks sentence into next lines if too long */
+                overflow-wrap: break-word;
+                text-align: center;
+            }
+        </style>
+
+    </head>
+    <body>
+        <h1>Selected Expense</h1>
+        <h3>
+            <div id="name"></div>
+            <br>
+            <div id="category"></div>
+            <br>
+            <div id="amount"></div>
+            <br>
+            <div id="date"></div>
+            <br>
+            <div id="remarks"></div>
+        </h3>
+    </body>
+</html>

@@ -22,54 +22,59 @@ import static seedu.address.testutil.TypicalExpenses.EXPENSE_WITHOUT_REMARKS;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.expensecommands.AddCommand;
-import seedu.address.logic.parser.expenseparsers.AddCommandParser;
+import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
+import seedu.address.logic.parser.expenseparsers.AddExpenseCommandParser;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.ExpenseBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class AddExpenseCommandParserTest {
+    private AddExpenseCommandParser parser = new AddExpenseCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
         Expense expectedExpense = new ExpenseBuilder(CHICKEN_RICE).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE,
+                new AddExpenseCommand(expectedExpense));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
+        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE,
+                new AddExpenseCommand(expectedExpense));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE,
+                new AddExpenseCommand(expectedExpense));
 
         // multiple addresses - last address accepted
-        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
-                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpense));
+        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                + DATE_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE,
+                new AddExpenseCommand(expectedExpense));
 
         // multiple tags - all accepted
         Expense expectedExpenseMultipleTags = new ExpenseBuilder(CHICKEN_RICE).withRemarks(VALID_REMARKS_EXPENSE)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
-                + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, new AddCommand(expectedExpenseMultipleTags));
+        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE,
+                new AddExpenseCommand(expectedExpenseMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Expense expectedExpense = new ExpenseBuilder(EXPENSE_WITHOUT_REMARKS).build();
-        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE,
-                new AddCommand(expectedExpense));
+        assertParseSuccess(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                        + DATE_DESC_EXPENSE, new AddExpenseCommand(expectedExpense));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
@@ -91,20 +96,20 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
-                + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, Name.MESSAGE_CONSTRAINTS);
 
         // invalid date
-        assertParseFailure(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + INVALID_DATE_DESC
-                + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, Date.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                + INVALID_DATE_DESC + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, Date.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + INVALID_DATE_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+                + INVALID_DATE_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
     }
 }

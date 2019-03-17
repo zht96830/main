@@ -13,7 +13,7 @@ import static seedu.address.testutil.TypicalExpenses.TAXI;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.expensecommands.DeleteCommand;
+import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
@@ -79,7 +79,7 @@ public class FindCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: find same expenses in finance tracker after deleting 1 of them -> 1 expense found */
-        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
+        executeCommand(DeleteExpenseCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getFinanceTracker().getExpenseList().contains(TAXI));
         command = FindCommand.COMMAND_WORD + " laptop taxi";
         expectedModel = getModel();

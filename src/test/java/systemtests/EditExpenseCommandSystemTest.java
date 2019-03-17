@@ -25,7 +25,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
@@ -36,7 +36,7 @@ import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.ExpenseBuilder;
 
-public class EditCommandSystemTest extends FinanceTrackerSystemTest {
+public class EditExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 
     @Test
     public void edit() {
@@ -48,8 +48,8 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
          * -> edited
          */
         Index index = INDEX_FIRST_EXPENSE;
-        String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_EXPENSE + "  "
-                + AMOUNT_DESC_EXPENSE + "    " + CATEGORY_DESC_EXPENSE + "  " + DATE_DESC_EXPENSE + " "
+        String command = " " + EditExpenseCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_EXPENSE
+                + "  " + AMOUNT_DESC_EXPENSE + "    " + CATEGORY_DESC_EXPENSE + "  " + DATE_DESC_EXPENSE + " "
                 + REMARKS_DESC_EXPENSE + "   ";
         Expense editedExpense = new ExpenseBuilder(EXPENSE).build();
         assertCommandSuccess(command, index, editedExpense);
@@ -66,7 +66,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit an expense with new values same as existing values -> edited */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
+        command = EditExpenseCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         assertCommandSuccess(command, index, EXPENSE);
 
@@ -76,7 +76,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         assertTrue(getModel().getFinanceTracker().getExpenseList().contains(EXPENSE));
         index = INDEX_SECOND_EXPENSE;
         assertNotEquals(getModel().getFilteredExpenseList().get(index.getZeroBased()), EXPENSE);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_DEBT + AMOUNT_DESC_EXPENSE
+        command = EditExpenseCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_DEBT + AMOUNT_DESC_EXPENSE
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         editedExpense = new ExpenseBuilder(EXPENSE).withName(VALID_NAME_DEBT).build();
         assertCommandSuccess(command, index, editedExpense);
@@ -87,14 +87,14 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         assertTrue(getModel().getFinanceTracker().getExpenseList().contains(EXPENSE));
         index = INDEX_SECOND_EXPENSE;
         assertNotEquals(getModel().getFilteredExpenseList().get(index.getZeroBased()), EXPENSE);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_DEBT
+        command = EditExpenseCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_DEBT
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         editedExpense = new ExpenseBuilder(EXPENSE).withAmount(VALID_AMOUNT_DEBT).build();
         assertCommandSuccess(command, index, editedExpense);
 
         /* Case: clear tags -> cleared */
         /* index = INDEX_FIRST_EXPENSE;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased();
+        command = EditExpenseCommand.COMMAND_WORD + " " + index.getOneBased();
         Expense expenseToEdit = getModel().getFilteredExpenseList().get(index.getZeroBased());
         editedExpense = new ExpenseBuilder(expenseToEdit).build();
         assertCommandSuccess(command, index, editedExpense);*/
@@ -105,7 +105,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         showExpensesWithName(KEYWORD_MATCHING_CHICKEN);
         index = INDEX_FIRST_EXPENSE;
         assertTrue(index.getZeroBased() < getModel().getFilteredExpenseList().size());
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_DEBT;
+        command = EditExpenseCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_DEBT;
         Expense expenseToEdit = getModel().getFilteredExpenseList().get(index.getZeroBased());
         editedExpense = new ExpenseBuilder(expenseToEdit).withName(VALID_NAME_DEBT).build();
         assertCommandSuccess(command, index, editedExpense);
@@ -115,7 +115,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
          */
         showExpensesWithName(KEYWORD_MATCHING_CHICKEN);
         int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_DEBT,
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_DEBT,
                 Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* --------------------- Performing edit operation while an expense card is selected -------------------------*/
@@ -128,7 +128,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
 
         selectExpense(index);
 
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
+        command = EditExpenseCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new expense's name
@@ -137,44 +137,44 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         /* --------------------------------- Performing invalid edit operation -------------------------------------- */
 
         /* Case: invalid index (0) -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " 0" + NAME_DESC_DEBT,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " 0" + NAME_DESC_DEBT,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditExpenseCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (-1) -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " -1" + NAME_DESC_DEBT,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " -1" + NAME_DESC_DEBT,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditExpenseCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredExpenseList().size() + 1;
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_DEBT,
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_DEBT,
                 Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* Case: missing index -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + NAME_DESC_DEBT,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + NAME_DESC_DEBT,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditExpenseCommand.MESSAGE_USAGE));
 
         /* Case: missing all fields -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased(),
-                EditCommand.MESSAGE_NOT_EDITED);
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased(),
+                EditExpenseCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid amount -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_AMOUNT_DESC, Amount.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid category -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_CATEGORY_DESC, Category.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid date -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
+        assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        /*assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
+        /*assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
                 + INVALID_DEADLINE_DESC, Tag.MESSAGE_CONSTRAINTS);*/
     }
 
@@ -182,7 +182,7 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Index, Expense, Index)} except that
      * the browser url and selected card remain unchanged.
      * @param toEdit the index of the current model's filtered list
-     * @see EditCommandSystemTest#assertCommandSuccess(String, Index, Expense, Index)
+     * @see EditExpenseCommandSystemTest#assertCommandSuccess(String, Index, Expense, Index)
      */
     private void assertCommandSuccess(String command, Index toEdit, Expense editedExpense) {
         assertCommandSuccess(command, toEdit, editedExpense, null);
@@ -190,11 +190,11 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
-     * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
+     * 1. Asserts that result display box displays the success message of executing {@code EditExpenseCommand}.<br>
      * 2. Asserts that the model related components are updated to reflect the expense at index {@code toEdit} being
      * updated to values specified {@code editedExpense}.<br>
      * @param toEdit the index of the current model's filtered list.
-     * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
+     * @see EditExpenseCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
     private void assertCommandSuccess(String command, Index toEdit, Expense editedExpense,
                                       Index expectedSelectedCardIndex) {
@@ -202,14 +202,14 @@ public class EditCommandSystemTest extends FinanceTrackerSystemTest {
         expectedModel.setExpense(expectedModel.getFilteredExpenseList().get(toEdit.getZeroBased()), editedExpense);
         expectedModel.updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
 
-        assertCommandSuccess(command, expectedModel,
-                String.format(EditCommand.MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense), expectedSelectedCardIndex);
+        assertCommandSuccess(command, expectedModel, String.format(EditExpenseCommand.MESSAGE_EDIT_EXPENSE_SUCCESS,
+                editedExpense), expectedSelectedCardIndex);
     }
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} except that the
      * browser url and selected card remain unchanged.
-     * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
+     * @see EditExpenseCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         assertCommandSuccess(command, expectedModel, expectedResultMessage, null);

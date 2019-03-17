@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.expensecommands.EditCommand;
-import seedu.address.logic.commands.expensecommands.EditCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
+import seedu.address.logic.commands.expensecommands.EditExpenseCommand.EditExpenseDescriptor;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
 public class EditExpenseDescriptorTest {
@@ -21,7 +21,7 @@ public class EditExpenseDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditCommand.EditExpenseDescriptor descriptorWithSameValues = new EditExpenseDescriptor(DESC_EXPENSE);
+        EditExpenseCommand.EditExpenseDescriptor descriptorWithSameValues = new EditExpenseDescriptor(DESC_EXPENSE);
         assertTrue(DESC_EXPENSE.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -37,7 +37,7 @@ public class EditExpenseDescriptorTest {
         assertFalse(DESC_EXPENSE.equals(DESC_DEBT));
 
         // different name -> returns false
-        EditCommand.EditExpenseDescriptor editedAmy = new EditExpenseDescriptorBuilder(DESC_EXPENSE)
+        EditExpenseCommand.EditExpenseDescriptor editedAmy = new EditExpenseDescriptorBuilder(DESC_EXPENSE)
                 .withName(VALID_NAME_DEBT).build();
         assertFalse(DESC_EXPENSE.equals(editedAmy));
 

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="1280" minHeight="720" onCloseRequest="#handleExit">
+         title="Finance Tracker" minWidth="1280" minHeight="720" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -65,7 +65,7 @@
             </VBox>
           </SplitPane>
 
-            <StackPane fx:id="browserPlaceholder" prefWidth="400" >
+            <StackPane fx:id="browserPlaceholder" prefWidth="400">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
