@@ -248,11 +248,11 @@ Step 1. The user launches the application for the first time. The `VersionedFina
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th expense in the finance tracker. The `delete` command calls `Model#commitFinanceTracker()`, causing the modified state of the finance tracker after the `delete 5` command executes to be saved in the `financeTrackerStateList`, and the `currentStatePointer` is shifted to the newly inserted finance tracker state.
+Step 2. The user executes `deleteexpense 5` command to delete the 5th expense in the finance tracker. The `deletexpense` command calls `Model#commitFinanceTracker()`, causing the modified state of the finance tracker after the `deleteexpense 5` command executes to be saved in the `financeTrackerStateList`, and the `currentStatePointer` is shifted to the newly inserted finance tracker state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/cai tao kuey ...` to add a new expense. The `add` command also calls `Model#commitFinanceTracker()`, causing another modified finance tracker state to be saved into the `financeTrackerStateList`.
+Step 3. The user executes `addexpense n/BKT ...` to add a new expense. The `add` command also calls `Model#commitFinanceTracker()`, causing another modified finance tracker state to be saved into the `financeTrackerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
@@ -279,7 +279,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitFinanceTracker()`. Since the `currentStatePointer` is not pointing at the end of the `financeTrackerStateList`, all finance tracker states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/cai tao kuey ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clearexpense`, which calls `Model#commitFinanceTracker()`. Since the `currentStatePointer` is not pointing at the end of the `financeTrackerStateList`, all finance tracker states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `addexpense n/BKT ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -295,7 +295,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the expense being deleted).
+** Pros: Will use less memory (e.g. for `deleteexpense`, just save the expense being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
