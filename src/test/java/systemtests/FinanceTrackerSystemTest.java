@@ -31,9 +31,9 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
+import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
@@ -138,7 +138,7 @@ public abstract class FinanceTrackerSystemTest {
      * Displays all expenses in the finance tracker.
      */
     protected void showAllExpenses() {
-        executeCommand(ListCommand.COMMAND_WORD);
+        executeCommand(ListExpenseCommand.COMMAND_WORD);
         assertEquals(getModel().getFinanceTracker().getExpenseList().size(),
                 getModel().getFilteredExpenseList().size());
     }
