@@ -3,6 +3,9 @@ package seedu.address.model.attributes;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a date in the finance tracker.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
@@ -11,6 +14,8 @@ public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should only be dd-mm-yyyy format.";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS =
+            "Deadline must not be a date that has already passed.";
     public static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
     public final int day;
     public final int month;
@@ -91,6 +96,17 @@ public class Date implements Comparable<Date> {
             return 1;
         }
         return 0;
+    }
+
+    public boolean isEqualOrAfterToday() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        Date currentDate = new Date(dtf.format(LocalDate.now()));
+
+        if (compareTo(currentDate) == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override

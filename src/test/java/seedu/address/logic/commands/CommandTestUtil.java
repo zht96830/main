@@ -18,6 +18,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.expense.Expense;
@@ -39,7 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_CATEGORY_DEBT = "shopping";
     public static final String VALID_DATE_EXPENSE = "03-03-2019";
     public static final String VALID_DATE_EXPENSE_2 = "12-03-2019";
-    public static final String VALID_DEADLINE_DEBT = "05-05-2019";
+    public static final String VALID_DEADLINE_DEBT = "05-05-2020";
     public static final String VALID_REMARKS_EXPENSE = "Bishan chicken rice";
     public static final String VALID_REMARKS_DEBT = "fan";
 
@@ -66,15 +67,19 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_EXPENSE;
-    public static final EditDebtCommand.EditDebtDescriptor DESC_DEBT;
+    public static EditDebtCommand.EditDebtDescriptor DESC_DEBT = null;
 
     static {
         DESC_EXPENSE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
                 .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE)
                 .withRemarks(VALID_REMARKS_DEBT).build();
-        DESC_DEBT = new EditDebtDescriptorBuilder().withPersonOwed(VALID_NAME_DEBT)
-                .withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_DEBT).withDeadline(VALID_DEADLINE_DEBT)
-                .withRemarks(VALID_REMARKS_DEBT).build();
+        try {
+            DESC_DEBT = new EditDebtDescriptorBuilder().withPersonOwed(VALID_NAME_DEBT)
+                    .withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_DEBT).withDeadline(VALID_DEADLINE_DEBT)
+                    .withRemarks(VALID_REMARKS_DEBT).build();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
