@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.generalcommands;
+package seedu.address.logic.commands.expensecommands;
 
 import static java.util.Objects.requireNonNull;
 
@@ -11,10 +11,10 @@ import seedu.address.model.Model;
 /**
  * Clears the Finance Tracker.
  */
-public class ClearCommand extends Command {
+public class ClearExpenseCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Finance Tracker has been cleared!";
+    public static final String COMMAND_WORD = "clearexpense";
+    public static final String MESSAGE_SUCCESS = "Expense list has been cleared!";
 
 
     @Override

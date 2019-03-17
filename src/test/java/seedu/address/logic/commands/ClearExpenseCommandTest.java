@@ -6,13 +6,13 @@ import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWit
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class ClearCommandTest {
+public class ClearExpenseCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -22,7 +22,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager();
         expectedModel.commitFinanceTracker();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearExpenseCommand(), model, commandHistory, ClearExpenseCommand.MESSAGE_SUCCESS,
+                expectedModel);
     }
 
     @Test
@@ -32,7 +33,8 @@ public class ClearCommandTest {
         expectedModel.setFinanceTracker(new FinanceTracker());
         expectedModel.commitFinanceTracker();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearExpenseCommand(), model, commandHistory, ClearExpenseCommand.MESSAGE_SUCCESS,
+                expectedModel);
     }
 
 }

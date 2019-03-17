@@ -19,7 +19,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
@@ -30,7 +30,7 @@ import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.ExpenseUtil;
 
-public class AddCommandSystemTest extends FinanceTrackerSystemTest {
+public class AddExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 
     @Test
     public void add() {
@@ -42,8 +42,8 @@ public class AddCommandSystemTest extends FinanceTrackerSystemTest {
          * -> added
          */
         Expense toAdd = EXPENSE;
-        String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_EXPENSE + "  " + AMOUNT_DESC_EXPENSE + " "
-                + CATEGORY_DESC_EXPENSE + "   " + DATE_DESC_EXPENSE + "   " + REMARKS_DESC_EXPENSE + " ";
+        String command = "   " + AddExpenseCommand.COMMAND_WORD + "  " + NAME_DESC_EXPENSE + "  " + AMOUNT_DESC_EXPENSE
+                + " " + CATEGORY_DESC_EXPENSE + "   " + DATE_DESC_EXPENSE + "   " + REMARKS_DESC_EXPENSE + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Expense to the list -> Expense deleted */
@@ -59,7 +59,7 @@ public class AddCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: add to empty finance tracker -> added */
         deleteAllExpenses();
-        command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_EXPENSE + "  " + AMOUNT_DESC_EXPENSE + " "
+        command = "   " + AddExpenseCommand.COMMAND_WORD + "  " + NAME_DESC_EXPENSE + "  " + AMOUNT_DESC_EXPENSE + " "
                 + CATEGORY_DESC_EXPENSE + "   " + DATE_DESC_EXPENSE + "   " + REMARKS_DESC_EXPENSE + " ";
         assertCommandSuccess(command, toAdd);
 
@@ -79,51 +79,51 @@ public class AddCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case:
         missing name -> rejected */
-        command = AddCommand.COMMAND_WORD + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
+        command = AddExpenseCommand.COMMAND_WORD + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
 
         /* Case: missing amount -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
+        command = AddExpenseCommand.COMMAND_WORD + NAME_DESC_EXPENSE + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
 
         /* Case: missing category -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE
+        command = AddExpenseCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
         command = "adds " + ExpenseUtil.getExpenseDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+        command = AddExpenseCommand.COMMAND_WORD + INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, Name.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid amount -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + INVALID_AMOUNT_DESC + CATEGORY_DESC_EXPENSE
+        command = AddExpenseCommand.COMMAND_WORD + NAME_DESC_EXPENSE + INVALID_AMOUNT_DESC + CATEGORY_DESC_EXPENSE
                 + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, Amount.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid category -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + INVALID_CATEGORY_DESC
+        command = AddExpenseCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + INVALID_CATEGORY_DESC
                 + DATE_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, Category.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid date -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
+        command = AddExpenseCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + INVALID_DATE_DESC + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, Date.MESSAGE_CONSTRAINTS);
 
     }
 
     /**
-     * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br>
+     * Executes the {@code AddExpenseCommand} that adds {@code toAdd} to the model and asserts that the,<br>
      * 1. Command box displays an empty string.<br>
      * 2. Command box has the default style class.<br>
-     * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
+     * 3. Result display box displays the success message of executing {@code AddExpenseCommand} with the details of
      * {@code toAdd}.<br>
      * 4. {@code Storage} and {@code ExpenseListPanel} equal to the corresponding components in
      * the current model added with {@code toAdd}.<br>
@@ -140,12 +140,12 @@ public class AddCommandSystemTest extends FinanceTrackerSystemTest {
     /**
      * Performs the same verification as {@code assertCommandSuccess(Expense)}. Executes {@code command}
      * instead.
-     * @see AddCommandSystemTest#assertCommandSuccess(Expense)
+     * @see AddExpenseCommandSystemTest#assertCommandSuccess(Expense)
      */
     private void assertCommandSuccess(String command, Expense toAdd) {
         Model expectedModel = getModel();
         expectedModel.addExpense(toAdd);
-        String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, toAdd);
+        String expectedResultMessage = String.format(AddExpenseCommand.MESSAGE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
@@ -156,7 +156,7 @@ public class AddCommandSystemTest extends FinanceTrackerSystemTest {
      * 1. Result display box displays {@code expectedResultMessage}.<br>
      * 2. {@code Storage} and {@code ExpenseListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
-     * @see AddCommandSystemTest#assertCommandSuccess(String, Expense)
+     * @see AddExpenseCommandSystemTest#assertCommandSuccess(String, Expense)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);

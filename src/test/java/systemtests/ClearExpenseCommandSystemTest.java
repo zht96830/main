@@ -6,13 +6,13 @@ import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
-public class ClearCommandSystemTest extends FinanceTrackerSystemTest {
+public class ClearExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 
     @Test
     public void clear() {
@@ -21,7 +21,7 @@ public class ClearCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: clear non-empty finance tracker, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
          */
-        assertCommandSuccess("   " + ClearCommand.COMMAND_WORD + " ab12   ");
+        assertCommandSuccess("   " + ClearExpenseCommand.COMMAND_WORD + " ab12   ");
         assertSelectedCardUnchanged();
 
         /* Case: undo clearing finance tracker -> original finance tracker restored */
@@ -39,17 +39,17 @@ public class ClearCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: selects first card in expense list and clears finance tracker -> cleared and no card selected */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
         selectExpense(Index.fromOneBased(1));
-        assertCommandSuccess(ClearCommand.COMMAND_WORD);
+        assertCommandSuccess(ClearExpenseCommand.COMMAND_WORD);
         assertSelectedCardDeselected();
 
         /* Case: filters the expense list before clearing -> entire finance tracker cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
         showExpensesWithName(KEYWORD_MATCHING_CHICKEN);
-        assertCommandSuccess(ClearCommand.COMMAND_WORD);
+        assertCommandSuccess(ClearExpenseCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
         /* Case: clear empty finance tracker -> cleared */
-        assertCommandSuccess(ClearCommand.COMMAND_WORD);
+        assertCommandSuccess(ClearExpenseCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
         /* Case: mixed case command word -> rejected */
@@ -57,21 +57,21 @@ public class ClearCommandSystemTest extends FinanceTrackerSystemTest {
     }
 
     /**
-     * Executes {@code command} and verifies that the command box displays an empty string, the result display
-     * box displays {@code ClearCommand#MESSAGE_SUCCESS} and the model related components equal to an empty model.
+     * Executes {@code command} and verifies that the command box displays an empty string, the result display box
+     * displays {@code ClearExpenseCommand#MESSAGE_SUCCESS} and the model related components equal to an empty model.
      * These verifications are done by
      * {@code FinanceTrackerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the command box has the default style class and the status bar's sync status changes.
      * @see FinanceTrackerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command) {
-        assertCommandSuccess(command, ClearCommand.MESSAGE_SUCCESS, new ModelManager());
+        assertCommandSuccess(command, ClearExpenseCommand.MESSAGE_SUCCESS, new ModelManager());
     }
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String)} except that the result box displays
      * {@code expectedResultMessage} and the model related components equal to {@code expectedModel}.
-     * @see ClearCommandSystemTest#assertCommandSuccess(String)
+     * @see ClearExpenseCommandSystemTest#assertCommandSuccess(String)
      */
     private void assertCommandSuccess(String command, String expectedResultMessage, Model expectedModel) {
         executeCommand(command);
