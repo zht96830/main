@@ -18,7 +18,7 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFinanceTracker;
@@ -29,7 +29,7 @@ import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.testutil.ExpenseBuilder;
 
-public class AddCommandTest {
+public class AddExpenseCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -41,7 +41,7 @@ public class AddCommandTest {
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new AddExpenseCommand(null);
     }
 
     @Test
@@ -49,9 +49,9 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Expense validExpense = new ExpenseBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validExpense).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddExpenseCommand(validExpense).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validExpense), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddExpenseCommand.MESSAGE_SUCCESS, validExpense), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validExpense), modelStub.personsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
@@ -60,14 +60,14 @@ public class AddCommandTest {
     public void equals() {
         Expense alice = new ExpenseBuilder().withName("Alice").build();
         Expense bob = new ExpenseBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddExpenseCommand addAliceCommand = new AddExpenseCommand(alice);
+        AddExpenseCommand addBobCommand = new AddExpenseCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddExpenseCommand addAliceCommandCopy = new AddExpenseCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -378,7 +378,7 @@ public class AddCommandTest {
 
         @Override
         public void commitFinanceTracker() {
-            // called by {@code AddCommand#execute()}
+            // called by {@code AddExpenseCommand#execute()}
         }
 
         @Override

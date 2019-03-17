@@ -56,7 +56,7 @@ public class TypicalExpenses {
             .withCategory(VALID_CATEGORY_EXPENSE).build();
 
     public static final String KEYWORD_MATCHING_CHICKEN = "Chicken"; // A keyword that matches CHICKEN
-    public static final String KEYWORD_MATCHING_PHONE = "Phone"; // A keyword that matches PHONE
+    public static final String KEYWORD_MATCHING_LAPTOP = "laptop"; // A keyword that matches LAPTOP
 
     private TypicalExpenses() {} // prevents instantiation
 

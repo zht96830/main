@@ -10,8 +10,10 @@ import static seedu.address.testutil.TypicalExpenses.GROCERIES;
 import static seedu.address.testutil.TypicalExpenses.TAXI;
 import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 
 import org.junit.Test;
 
@@ -20,6 +22,7 @@ import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -29,6 +32,13 @@ public class FindCommandTest {
     private Model model = new ModelManager(getTypicalFinanceTrackerWithExpenses(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalFinanceTrackerWithExpenses(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
+    private final Comparator<Expense> comparator = new Comparator<Expense>() {
+        @Override
+        public int compare(Expense o1, Expense o2) {
+            return o2.getDate().compareTo(o1.getDate()); // in descending order
+        }
+    };
 
     @Test
     public void equals() {
@@ -74,7 +84,11 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredExpenseList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TAXI, GROCERIES, DOCTOR), model.getFilteredExpenseList());
+
+        ArrayList<Expense> inputList = new ArrayList<>(Arrays.asList(TAXI, GROCERIES, DOCTOR));
+        Collections.sort(inputList, comparator); // sort in descending order, then only compare
+
+        assertEquals(inputList, model.getFilteredExpenseList());
     }
 
     /**

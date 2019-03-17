@@ -18,7 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Category;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditExpenseCommand object
  */
 public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
 

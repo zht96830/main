@@ -29,13 +29,13 @@ import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.recurring.Recurring;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddExpenseCommand object
  */
 public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddExpenseCommand
+     * and returns an AddExpenseCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddRecurringCommand parse(String args) throws ParseException {
