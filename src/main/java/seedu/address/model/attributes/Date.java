@@ -16,7 +16,7 @@ public class Date implements Comparable<Date> {
     public static final String MESSAGE_CONSTRAINTS =
             "Date should only be dd-mm-yyyy format.";
     public static final String MESSAGE_DATE_DOES_NOT_EXIST = "Date does not exist.";
-    public static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
+    private static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
     public LocalDate localDate;
 
     /**
