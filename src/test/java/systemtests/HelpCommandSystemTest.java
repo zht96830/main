@@ -12,7 +12,7 @@ import org.junit.Test;
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.expensecommands.DeleteCommand;
+import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
 import seedu.address.logic.commands.generalcommands.HelpCommand;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.StatusBarFooter;
@@ -69,7 +69,7 @@ public class HelpCommandSystemTest extends FinanceTrackerSystemTest {
 
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar
-        executeCommand(DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased());
+        executeCommand(DeleteExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased());
         assertNotEquals(StatusBarFooter.SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }
 

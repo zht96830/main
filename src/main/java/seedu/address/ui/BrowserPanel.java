@@ -22,7 +22,17 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final URL DEFAULT_PAGE =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
-    public static final String SEARCH_PAGE_URL = "https://se-education.org/dummy-search-page/?name=";
+
+    public static final String SEARCH_PAGE_URL = "https://se-education.org/dummy-search-page/";
+
+    public static final URL EXPENSES_PAGE_URL =
+            requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "selectedexpense.html"));
+
+    public static final String QUERY_NAME = "?name=";
+    public static final String QUERY_CATEGORY = "&category=";
+    public static final String QUERY_AMOUNT = "&amount=";
+    public static final String QUERY_DATE = "&date=";
+    public static final String QUERY_REMARK = "&remarks=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -43,14 +53,16 @@ public class BrowserPanel extends UiPart<Region> {
                 loadDefaultPage();
                 return;
             }
-            loadPersonPage(newValue);
+            loadExpensePage(newValue);
         });
 
         loadDefaultPage();
     }
 
-    private void loadPersonPage(Expense expense) {
-        loadPage(SEARCH_PAGE_URL + expense.getName().name);
+    private void loadExpensePage(Expense expense) {
+        loadPage(EXPENSES_PAGE_URL.toExternalForm() + QUERY_NAME + expense.getName().name + QUERY_CATEGORY
+                + expense.getCategory().toString() + QUERY_AMOUNT + "$" + expense.getAmount().toString() + QUERY_DATE
+                + expense.getDate().toString() + QUERY_REMARK + expense.getRemarks());
     }
 
     public void loadPage(String url) {

@@ -45,7 +45,7 @@ public class SampleDataTest extends FinanceTrackerSystemTest {
 
     @Test
     public void financeTracker_dataFileDoesNotExist_loadSampleData() {
-        Expense[] expectedList = SampleDataUtil.getSampleExpenses();
+        Expense[] expectedList = SampleDataUtil.getSortedSampleExpenses(); // get expenses that is sorted
         assertListMatching(getExpenseListPanel(), expectedList);
     }
 }

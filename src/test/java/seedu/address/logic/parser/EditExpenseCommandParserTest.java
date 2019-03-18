@@ -24,21 +24,21 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EXPENSE;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.expensecommands.EditCommand;
-import seedu.address.logic.parser.expenseparsers.EditCommandParser;
+import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
+import seedu.address.logic.parser.expenseparsers.EditExpenseCommandParser;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
-public class EditCommandParserTest {
+public class EditExpenseCommandParserTest {
 
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditExpenseCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private EditExpenseCommandParser parser = new EditExpenseCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -46,7 +46,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_NAME_EXPENSE, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", EditExpenseCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -89,10 +89,10 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_EXPENSE
                 + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE + NAME_DESC_EXPENSE + REMARKS_DESC_EXPENSE;
 
-        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
-                .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE)
-                .withRemarks(VALID_REMARKS_EXPENSE).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditExpenseCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder().withName(
+                VALID_NAME_EXPENSE).withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE).withDate(
+                        VALID_DATE_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
+        EditExpenseCommand expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -102,9 +102,9 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_EXPENSE;
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE;
 
-        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
+        EditExpenseCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
                 .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditExpenseCommand expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -114,33 +114,33 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_EXPENSE;
         String userInput = targetIndex.getOneBased() + NAME_DESC_EXPENSE;
-        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
+        EditExpenseCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
                 .withName(VALID_NAME_EXPENSE).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditExpenseCommand expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + AMOUNT_DESC_EXPENSE;
         descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_EXPENSE).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + CATEGORY_DESC_EXPENSE;
         descriptor = new EditExpenseDescriptorBuilder().withCategory(VALID_CATEGORY_EXPENSE).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + DATE_DESC_EXPENSE;
         descriptor = new EditExpenseDescriptorBuilder().withDate(VALID_DATE_EXPENSE).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + REMARKS_DESC_EXPENSE;
         descriptor = new EditExpenseDescriptorBuilder().withRemarks(VALID_REMARKS_EXPENSE).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -151,10 +151,10 @@ public class EditCommandParserTest {
                 + REMARKS_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE;
 
-        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
+        EditExpenseCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
                 .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE)
                 .withDate(VALID_DATE_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditExpenseCommand expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -164,9 +164,9 @@ public class EditCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_EXPENSE;
         String userInput = targetIndex.getOneBased() + INVALID_AMOUNT_DESC + AMOUNT_DESC_EXPENSE;
-        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
+        EditExpenseCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
                 .withAmount(VALID_AMOUNT_EXPENSE).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditExpenseCommand expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
@@ -174,7 +174,7 @@ public class EditCommandParserTest {
                 + AMOUNT_DESC_EXPENSE;
         descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_EXPENSE)
                 .withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

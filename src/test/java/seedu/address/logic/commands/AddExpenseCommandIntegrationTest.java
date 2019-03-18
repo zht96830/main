@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -15,9 +15,9 @@ import seedu.address.model.expense.Expense;
 import seedu.address.testutil.ExpenseBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddExpenseCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddExpenseCommandIntegrationTest {
 
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
@@ -35,8 +35,8 @@ public class AddCommandIntegrationTest {
         expectedModel.addExpense(validExpense);
         expectedModel.commitFinanceTracker();
 
-        assertCommandSuccess(new AddCommand(validExpense), model, commandHistory,
-                String.format(AddCommand.MESSAGE_SUCCESS, validExpense), expectedModel);
+        assertCommandSuccess(new AddExpenseCommand(validExpense), model, commandHistory,
+                String.format(AddExpenseCommand.MESSAGE_SUCCESS, validExpense), expectedModel);
     }
 
 }
