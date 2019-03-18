@@ -17,7 +17,7 @@ public class Date implements Comparable<Date> {
             "Date should only be dd-mm-yyyy format.";
     public static final String MESSAGE_DATE_DOES_NOT_EXIST = "Date does not exist.";
     private static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
-    public LocalDate localDate;
+    private LocalDate localDate;
 
     /**
      * Constructs a {@code Date}.
@@ -27,7 +27,17 @@ public class Date implements Comparable<Date> {
         requireNonNull(date);
         //checkArgument((isValidDate(date)=="format"), MESSAGE_CONSTRAINTS);
         //checkArgument((isValidDate(date)=="exist"), MESSAGE_DATE_DOES_NOT_EXIST);
-        localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT));
+        localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                .withResolverStyle(ResolverStyle.STRICT));
+    }
+
+    public LocalDate getLocalDate() {
+        return this.localDate;
+    }
+
+    public void setLocalDate(String date) {
+        this.localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                .withResolverStyle(ResolverStyle.STRICT));
     }
 
     /**
@@ -36,7 +46,7 @@ public class Date implements Comparable<Date> {
     public static String isValidDate(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
             return "format";
-        } else if (!doesDateExist(test)){
+        } else if (!doesDateExist(test)) {
             return "exist";
         }
         return "valid";
@@ -47,9 +57,9 @@ public class Date implements Comparable<Date> {
      */
     private static boolean doesDateExist(String test) throws DateTimeParseException {
         try {
-            LocalDate localDate = LocalDate.parse(test,DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT));
-        }
-        catch(DateTimeParseException dtpe) {
+            LocalDate localDate = LocalDate.parse(test, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                    .withResolverStyle(ResolverStyle.STRICT));
+        } catch (DateTimeParseException dtpe) {
             return false;
         }
         return true;
@@ -57,7 +67,8 @@ public class Date implements Comparable<Date> {
 
     @Override
     public String toString() {
-        return String.format("%02d-%02d-%4d", localDate.getDayOfMonth(), localDate.getMonthValue(), localDate.getYear());
+        return String.format("%02d-%02d-%4d", localDate.getDayOfMonth(), localDate.getMonthValue(),
+                localDate.getYear());
     }
 
     @Override
@@ -73,10 +84,10 @@ public class Date implements Comparable<Date> {
      * Returns -1, 0 and 1 respectively if Date is earlier than, same as, or later than {@param other}
      */
     public int compareTo(Date other) {
-        if (this.localDate.isBefore(other.localDate)){
+        if (this.localDate.isBefore(other.localDate)) {
             return -1;
         }
-        if (this.localDate.isAfter(other.localDate)){
+        if (this.localDate.isAfter(other.localDate)) {
             return 1;
         }
         return 0;

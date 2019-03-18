@@ -82,7 +82,7 @@ class JsonAdaptedExpense {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (Date.isValidDate(date)=="format") {
+        if (Date.isValidDate(date) == "format") {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
         final Date modelDate = new Date(date);
