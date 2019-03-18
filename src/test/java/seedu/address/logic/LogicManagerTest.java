@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.testutil.TypicalExpenses.EXPENSE;
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyFinanceTracker;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.attributes.View;
 import seedu.address.model.expense.Expense;
 import seedu.address.storage.JsonFinanceTrackerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -72,8 +74,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() {
-        String listCommand = ListExpenseCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListExpenseCommand.MESSAGE_SUCCESS, model);
+        String listCommand = ListExpenseCommand.COMMAND_WORD + " " + PREFIX_VIEW + View.ALL;
+        assertCommandSuccess(listCommand, String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL), model);
         assertHistoryCorrect(listCommand);
     }
 

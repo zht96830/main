@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.attributes.Category;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
@@ -17,6 +18,25 @@ import seedu.address.model.recurring.Recurring;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Expense> PREDICATE_SHOW_ALL_EXPENSES = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true if it is within the range of current date */
+    // needs to be implemented
+    Predicate<Expense> PREDICATE_SHOW_DAY_EXPENSES = unused -> true;
+    Predicate<Expense> PREDICATE_SHOW_WEEK_EXPENSES = unused -> true;
+    Predicate<Expense> PREDICATE_SHOW_MONTH_EXPENSES = unused -> true;
+    Predicate<Expense> PREDICATE_SHOW_YEAR_EXPENSES = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true if expense is in the specified category */
+    Predicate<Expense> PREDICATE_SHOW_FOOD_EXPENSES = p -> p.getCategory().equals(Category.FOOD);
+    Predicate<Expense> PREDICATE_SHOW_WORK_EXPENSES = p -> p.getCategory().equals(Category.WORK);
+    Predicate<Expense> PREDICATE_SHOW_TRAVEL_EXPENSES = p -> p.getCategory().equals(Category.TRAVEL);
+    Predicate<Expense> PREDICATE_SHOW_OTHERS_EXPENSES = p -> p.getCategory().equals(Category.OTHERS);
+    Predicate<Expense> PREDICATE_SHOW_ENT_EXPENSES = p -> p.getCategory().equals(Category.ENTERTAINMENT);
+    Predicate<Expense> PREDICATE_SHOW_SHOPPING_EXPENSES = p -> p.getCategory().equals(Category.SHOPPING);
+    Predicate<Expense> PREDICATE_SHOW_TRANSPORT_EXPENSES = p -> p.getCategory().equals(Category.TRANSPORT);
+    Predicate<Expense> PREDICATE_SHOW_UTIL_EXPENSES = p -> p.getCategory().equals(Category.UTILITIES);
+    Predicate<Expense> PREDICATE_SHOW_HEALTHCARE_EXPENSES = p -> p.getCategory().equals(Category.HEALTHCARE);
+
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;

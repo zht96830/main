@@ -13,6 +13,7 @@ import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.attributes.View;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListExpenseCommand.
@@ -31,14 +32,14 @@ public class ListExpenseCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListExpenseCommand(), model, commandHistory, ListExpenseCommand.MESSAGE_SUCCESS,
-                expectedModel);
+        assertCommandSuccess(new ListExpenseCommand(View.ALL), model, commandHistory,
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_EXPENSE);
-        assertCommandSuccess(new ListExpenseCommand(), model, commandHistory, ListExpenseCommand.MESSAGE_SUCCESS,
-                expectedModel);
+        assertCommandSuccess(new ListExpenseCommand(View.ALL), model, commandHistory,
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL), expectedModel);
     }
 }

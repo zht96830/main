@@ -39,7 +39,7 @@ public class AddExpenseCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullExpense_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddExpenseCommand(null);
     }
@@ -52,7 +52,7 @@ public class AddExpenseCommandTest {
         CommandResult commandResult = new AddExpenseCommand(validExpense).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddExpenseCommand.MESSAGE_SUCCESS, validExpense), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validExpense), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validExpense), modelStub.expensesAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
@@ -362,18 +362,18 @@ public class AddExpenseCommandTest {
      * A Model stub that always accept the expense being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Expense> personsAdded = new ArrayList<>();
+        final ArrayList<Expense> expensesAdded = new ArrayList<>();
 
         @Override
         public boolean hasExpense(Expense expense) {
             requireNonNull(expense);
-            return personsAdded.stream().anyMatch(expense::isSameExpense);
+            return expensesAdded.stream().anyMatch(expense::isSameExpense);
         }
 
         @Override
         public void addExpense(Expense expense) {
             requireNonNull(expense);
-            personsAdded.add(expense);
+            expensesAdded.add(expense);
         }
 
         @Override
