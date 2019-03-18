@@ -1,11 +1,9 @@
 package seedu.address.model.attributes;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
-
 import seedu.address.testutil.Assert;
 
 public class DateTest {
@@ -16,23 +14,17 @@ public class DateTest {
     }
 
     @Test
-    public void constructor_invalidDate_throwsIllegalArgumentException() {
-        String invalidDate = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
-    }
-
-    @Test
     public void isValidDate() {
         // null date
         Assert.assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
 
         // invalid dates
-        assertNotSame("format", Date.isValidDate("")); // empty string
-        assertNotSame("format", Date.isValidDate(" ")); // spaces only
-        assertNotSame("format", Date.isValidDate("01-01")); // must be dd-mm-yyyy
-        assertNotSame("format", Date.isValidDate("01-01-18")); // need 4 numbers for year, e.g. 2018
-        assertNotSame("format", Date.isValidDate("01-01-2018a")); // alphabets not allowed
-        assertNotSame("format", Date.isValidDate("date")); // non-numeric
+        assertSame("format", Date.isValidDate("")); // empty string
+        assertSame("format", Date.isValidDate(" ")); // spaces only
+        assertSame("format", Date.isValidDate("01-01")); // must be dd-mm-yyyy
+        assertSame("format", Date.isValidDate("01-01-18")); // need 4 numbers for year, e.g. 2018
+        assertSame("format", Date.isValidDate("01-01-2018a")); // alphabets not allowed
+        assertSame("format", Date.isValidDate("date")); // non-numeric
 
         // valid dates
         assertSame("valid", Date.isValidDate("01-01-2019"));
