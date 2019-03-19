@@ -1,7 +1,11 @@
 package seedu.address.model.attributes;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a date in the finance tracker.
@@ -11,86 +15,106 @@ public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should only be dd-mm-yyyy format.";
-    public static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
-    public final int day;
-    public final int month;
-    public final int year;
+    public static final String MESSAGE_DATE_DOES_NOT_EXIST = "Date does not exist.";
+    private static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
+    private LocalDate localDate;
 
     /**
      * Constructs a {@code Date}.
-     *
      * @param date A valid date number.
      */
-    public Date(String date) {
+    public Date(String date) throws DateTimeParseException {
         requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        int[] datesInt = parseDate(date);
-        day = datesInt[0];
-        month = datesInt[1];
-        year = datesInt[2];
+        //checkArgument((isValidDate(date)=="format"), MESSAGE_CONSTRAINTS);
+        //checkArgument((isValidDate(date)=="exist"), MESSAGE_DATE_DOES_NOT_EXIST);
+        localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                .withResolverStyle(ResolverStyle.STRICT));
+    }
+
+    public LocalDate getLocalDate() {
+        return this.localDate;
+    }
+
+    public void setLocalDate(String date) {
+        this.localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                .withResolverStyle(ResolverStyle.STRICT));
     }
 
     /**
-     * Parses a {@code String date} into a {@code Date}.
+     * Returns string that informs if a given string is valid or of the wrong date format or does not exist.
      */
-    private static int[] parseDate(String date) {
-        int[] datesInt = new int[3];
-        String[] datesString = date.split("-");
-        for (int i = 0; i < 3; i++) {
-            datesInt[i] = Integer.parseInt(datesString[i]);
+    public static String isValidDate(String test) {
+        if (!test.matches(VALIDATION_REGEX)) {
+            return "format";
+        } else if (!doesDateExist(test)) {
+            return "exist";
         }
-        return datesInt;
+        return "valid";
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if date exists.
      */
-    public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+    private static boolean doesDateExist(String test) throws DateTimeParseException {
+        try {
+            LocalDate localDate = LocalDate.parse(test, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                    .withResolverStyle(ResolverStyle.STRICT));
+        } catch (DateTimeParseException dtpe) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return String.format("%02d-%02d-%4d", day, month, year);
+        return String.format("%02d-%02d-%4d", localDate.getDayOfMonth(), localDate.getMonthValue(),
+                localDate.getYear());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Date // instanceof handles nulls
-                && day == (((Date) other).day) // state check
-                && month == (((Date) other).month)
-                && year == ((Date) other).year);
+                && localDate.getDayOfMonth() == (((Date) other).localDate.getDayOfMonth()) // state check
+                && localDate.getMonthValue() == (((Date) other).localDate.getMonthValue())
+                && localDate.getYear() == ((Date) other).localDate.getYear());
     }
 
     /**
      * Returns -1, 0 and 1 respectively if Date is earlier than, same as, or later than {@param other}
      */
-    @Override
     public int compareTo(Date other) {
-        if (this.year < other.year) {
+        if (this.localDate.isBefore(other.localDate)) {
             return -1;
         }
-        if (this.year > other.year) {
+        if (this.localDate.isAfter(other.localDate)) {
+            return 1;
+        }
+        return 0;
+        /*
+        if (this.localDate.getYear() < other.localDate.getYear()) {
+            return -1;
+        }
+        if (this.localDate.getYear() > other.localDate.getYear()) {
             return 1;
         }
 
         // years are the same
-        if (this.month < other.month) {
+        if (this.localDate.getMonthValue() < other.localDate.getMonthValue()) {
             return -1;
         }
-        if (this.month > other.month) {
+        if (this.localDate.getMonthValue() > other.localDate.getMonthValue()) {
             return 1;
         }
 
         // years and months are the same
-        if (this.day < other.day) {
+        if (this.localDate.getDayOfMonth() < other.localDate.getDayOfMonth()) {
             return -1;
         }
-        if (this.day > other.day) {
+        if (this.localDate.getDayOfMonth() > other.localDate.getDayOfMonth()) {
             return 1;
         }
-        return 0;
+        return 0;*/
     }
 
     @Override
