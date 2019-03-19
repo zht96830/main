@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
-import static seedu.address.testutil.TypicalDebts.DOCTOR;
-import static seedu.address.testutil.TypicalDebts.DUCK_RICE;
-import static seedu.address.testutil.TypicalDebts.TAXI;
+import static seedu.address.testutil.TypicalDebts.FRANK;
+import static seedu.address.testutil.TypicalDebts.AMY;
+import static seedu.address.testutil.TypicalDebts.BOB;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -35,20 +35,20 @@ public class DebtListTest {
 
     @Test
     public void contains_debtNotInList_returnsFalse() {
-        assertFalse(debtList.contains(DUCK_RICE));
+        assertFalse(debtList.contains(AMY));
     }
 
     @Test
     public void contains_debtInList_returnsTrue() {
-        debtList.add(DUCK_RICE);
-        assertTrue(debtList.contains(DUCK_RICE));
+        debtList.add(AMY);
+        assertTrue(debtList.contains(AMY));
     }
 
     @Test
     public void contains_expenseWithSameIdentityFieldsInList_returnsTrue() {
         // expenses just need to have same personOwed and amount to be classified as the same
-        debtList.add(DUCK_RICE);
-        Debt editedDebt = new DebtBuilder(DUCK_RICE).withCategory(VALID_CATEGORY_DEBT)
+        debtList.add(AMY);
+        Debt editedDebt = new DebtBuilder(AMY).withCategory(VALID_CATEGORY_DEBT)
                 .withDeadline(VALID_DEADLINE_DEBT).withRemarks(VALID_REMARKS_DEBT).build();
         assertTrue(debtList.contains(editedDebt));
     }
@@ -56,11 +56,11 @@ public class DebtListTest {
     @Test
     public void contains_debtWithSameToStringInList_returnsTrue() {
         // check if the string format of expense in expense list is same as string format of added
-        debtList.add(DUCK_RICE);
-        debtList.add(TAXI);
+        debtList.add(AMY);
+        debtList.add(BOB);
         Iterator<Debt> iter = debtList.iterator();
-        assertTrue(iter.next().toString().equals(DUCK_RICE.toString())
-                && iter.next().toString().equals(TAXI.toString()));
+        assertTrue(iter.next().toString().equals(AMY.toString())
+                && iter.next().toString().equals(BOB.toString()));
     }
 
     @Test
@@ -72,36 +72,36 @@ public class DebtListTest {
     @Test
     public void setDebt_nullTargetDebt_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        debtList.setDebt(null, DUCK_RICE);
+        debtList.setDebt(null, AMY);
     }
 
     @Test
     public void setDebt_nullEditedDebt_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        debtList.setDebt(DUCK_RICE, null);
+        debtList.setDebt(AMY, null);
     }
 
     @Test
     public void setDebt_targetDebtNotInList_throwsDebtNotFoundException() {
         thrown.expect(DebtNotFoundException.class);
-        debtList.setDebt(DUCK_RICE, DUCK_RICE);
+        debtList.setDebt(AMY, AMY);
     }
 
     @Test
     public void setDebt_editedDebtIsSameDebt_success() {
-        debtList.add(DUCK_RICE);
-        debtList.setDebt(DUCK_RICE, DUCK_RICE);
+        debtList.add(AMY);
+        debtList.setDebt(AMY, AMY);
         DebtList expectedDebtList = new DebtList();
-        expectedDebtList.add(DUCK_RICE);
+        expectedDebtList.add(AMY);
         assertEquals(expectedDebtList, debtList);
     }
 
     @Test
     public void setDebt_editedDebtHasSameIdentity_success() {
-        debtList.add(DUCK_RICE);
-        Debt editedDebt = new DebtBuilder(DUCK_RICE).withCategory(VALID_CATEGORY_DEBT)
+        debtList.add(AMY);
+        Debt editedDebt = new DebtBuilder(AMY).withCategory(VALID_CATEGORY_DEBT)
                 .withDeadline(VALID_DEADLINE_DEBT).withRemarks(VALID_REMARKS_DEBT).build();
-        debtList.setDebt(DUCK_RICE, editedDebt);
+        debtList.setDebt(AMY, editedDebt);
         DebtList expectedDebtList = new DebtList();
         expectedDebtList.add(editedDebt);
         assertEquals(expectedDebtList, debtList);
@@ -109,10 +109,10 @@ public class DebtListTest {
 
     @Test
     public void setDebt_editedDebtHasDifferentIdentity_success() {
-        debtList.add(DUCK_RICE);
-        debtList.setDebt(DUCK_RICE, DOCTOR);
+        debtList.add(AMY);
+        debtList.setDebt(AMY, FRANK);
         DebtList expectedDebtList = new DebtList();
-        expectedDebtList.add(DOCTOR);
+        expectedDebtList.add(FRANK);
         assertEquals(expectedDebtList, debtList);
     }
 
@@ -124,9 +124,9 @@ public class DebtListTest {
 
     @Test
     public void setDebts_debtList_replacesOwnListWithProvidedDebtList() {
-        debtList.add(DUCK_RICE);
+        debtList.add(AMY);
         DebtList expectedDebtList = new DebtList();
-        expectedDebtList.add(DOCTOR);
+        expectedDebtList.add(FRANK);
         debtList.setDebts(expectedDebtList);
         assertEquals(expectedDebtList, debtList);
     }
@@ -139,11 +139,11 @@ public class DebtListTest {
 
     @Test
     public void setDebts_list_replacesOwnListWithProvidedList() {
-        debtList.add(DUCK_RICE);
-        List<Debt> debtList = Collections.singletonList(DOCTOR);
+        debtList.add(AMY);
+        List<Debt> debtList = Collections.singletonList(FRANK);
         this.debtList.setDebts(debtList);
         DebtList expectedDebtList = new DebtList();
-        expectedDebtList.add(DOCTOR);
+        expectedDebtList.add(FRANK);
         assertEquals(expectedDebtList, this.debtList);
     }
 
@@ -156,13 +156,13 @@ public class DebtListTest {
     @Test
     public void remove_debtDoesNotExist_throwsDebtNotFoundException() {
         thrown.expect(DebtNotFoundException.class);
-        debtList.remove(DUCK_RICE);
+        debtList.remove(AMY);
     }
 
     @Test
     public void remove_existingDebt_removesDebt() {
-        debtList.add(DUCK_RICE);
-        debtList.remove(DUCK_RICE);
+        debtList.add(AMY);
+        debtList.remove(AMY);
         DebtList expectedExpenseList = new DebtList();
         assertEquals(expectedExpenseList, debtList);
     }

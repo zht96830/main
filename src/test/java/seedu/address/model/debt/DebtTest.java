@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
-import static seedu.address.testutil.TypicalDebts.DOCTOR;
-import static seedu.address.testutil.TypicalDebts.DUCK_RICE;
+import static seedu.address.testutil.TypicalDebts.FRANK;
+import static seedu.address.testutil.TypicalDebts.AMY;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,61 +44,61 @@ public class DebtTest {
     @Test
     public void isSameDebt() {
         // same object -> returns true
-        assertTrue(DUCK_RICE.isSameDebt(DUCK_RICE));
+        assertTrue(AMY.isSameDebt(AMY));
 
         // null -> returns false
-        assertFalse(DUCK_RICE.isSameDebt(null));
+        assertFalse(AMY.isSameDebt(null));
 
         // different name -> returns false
-        Debt editedDebt = new DebtBuilder(DUCK_RICE).withPersonOwed(VALID_NAME_DEBT).build();
-        assertFalse(DUCK_RICE.isSameDebt(editedDebt));
+        Debt editedDebt = new DebtBuilder(AMY).withPersonOwed(VALID_NAME_DEBT).build();
+        assertFalse(AMY.isSameDebt(editedDebt));
 
         // different amount -> returns false
-        editedDebt = new DebtBuilder(DUCK_RICE).withAmount(VALID_AMOUNT_DEBT).build();
-        assertFalse(DUCK_RICE.isSameDebt(editedDebt));
+        editedDebt = new DebtBuilder(AMY).withAmount(VALID_AMOUNT_DEBT).build();
+        assertFalse(AMY.isSameDebt(editedDebt));
 
         // same name, same amount, different attributes -> returns true
-        editedDebt = new DebtBuilder(DUCK_RICE).withDeadline(VALID_DEADLINE_DEBT)
+        editedDebt = new DebtBuilder(AMY).withDeadline(VALID_DEADLINE_DEBT)
                 .withCategory(VALID_CATEGORY_DEBT).withRemarks(VALID_REMARKS_DEBT).build();
-        assertTrue(DUCK_RICE.isSameDebt(editedDebt));
+        assertTrue(AMY.isSameDebt(editedDebt));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Debt debtCopy = new DebtBuilder(DUCK_RICE).build();
-        assertTrue(DUCK_RICE.equals(debtCopy));
+        Debt debtCopy = new DebtBuilder(AMY).build();
+        assertTrue(AMY.equals(debtCopy));
 
         // same object -> returns true
-        assertTrue(DUCK_RICE.equals(DUCK_RICE));
+        assertTrue(AMY.equals(AMY));
 
         // null -> returns false
-        assertFalse(DUCK_RICE.equals(null));
+        assertFalse(AMY.equals(null));
 
         // different type -> returns false
-        assertFalse(DUCK_RICE.equals(5));
+        assertFalse(AMY.equals(5));
 
         // different debt -> returns false
-        assertFalse(DUCK_RICE.equals(DOCTOR));
+        assertFalse(AMY.equals(FRANK));
 
         // different person owed -> returns false
-        Debt editedDebt = new DebtBuilder(DUCK_RICE).withPersonOwed(VALID_NAME_DEBT).build();
-        assertFalse(DUCK_RICE.equals(editedDebt));
+        Debt editedDebt = new DebtBuilder(AMY).withPersonOwed(VALID_NAME_DEBT).build();
+        assertFalse(AMY.equals(editedDebt));
 
         // different amount -> returns false
-        editedDebt = new DebtBuilder(DUCK_RICE).withAmount(VALID_AMOUNT_DEBT).build();
-        assertFalse(DUCK_RICE.equals(editedDebt));
+        editedDebt = new DebtBuilder(AMY).withAmount(VALID_AMOUNT_DEBT).build();
+        assertFalse(AMY.equals(editedDebt));
 
         // different deadline -> returns false
-        editedDebt = new DebtBuilder(DUCK_RICE).withDeadline(VALID_DEADLINE_DEBT).build();
-        assertFalse(DUCK_RICE.equals(editedDebt));
+        editedDebt = new DebtBuilder(AMY).withDeadline(VALID_DEADLINE_DEBT).build();
+        assertFalse(AMY.equals(editedDebt));
 
         // different category -> returns false
-        editedDebt = new DebtBuilder(DUCK_RICE).withCategory(VALID_CATEGORY_DEBT).build();
-        assertFalse(DUCK_RICE.equals(editedDebt));
+        editedDebt = new DebtBuilder(AMY).withCategory(VALID_CATEGORY_DEBT).build();
+        assertFalse(AMY.equals(editedDebt));
 
         // different remarks -> returns false
-        editedDebt = new DebtBuilder(DUCK_RICE).withRemarks(VALID_REMARKS_DEBT).build();
-        assertFalse(DUCK_RICE.equals(editedDebt));
+        editedDebt = new DebtBuilder(AMY).withRemarks(VALID_REMARKS_DEBT).build();
+        assertFalse(AMY.equals(editedDebt));
     }
 }
