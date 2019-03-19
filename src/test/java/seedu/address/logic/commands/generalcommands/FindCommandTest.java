@@ -22,7 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -41,10 +41,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        NameContainsKeywordsPredicateForExpense firstPredicate =
+                new NameContainsKeywordsPredicateForExpense(Collections.singletonList("first"));
+        NameContainsKeywordsPredicateForExpense secondPredicate =
+                new NameContainsKeywordsPredicateForExpense(Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -69,7 +69,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        NameContainsKeywordsPredicateForExpense predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredExpenseList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -79,7 +79,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("TAXI GROCERIES DOCTOR ");
+        NameContainsKeywordsPredicateForExpense predicate = preparePredicate("TAXI GROCERIES DOCTOR ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredExpenseList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -91,9 +91,9 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicateForExpense}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private NameContainsKeywordsPredicateForExpense preparePredicate(String userInput) {
+        return new NameContainsKeywordsPredicateForExpense(Arrays.asList(userInput.split("\\s+")));
     }
 }
