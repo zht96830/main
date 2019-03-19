@@ -134,25 +134,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String view} into an {@code view}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code view} is invalid.
-     */
-    public static View parseView(String view) throws ParseException {
-        requireNonNull(view);
-        String trimmedView = view.trim().toUpperCase();
-
-        try {
-            View.valueOf(trimmedView);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(View.MESSAGE_CONSTRAINTS);
-        }
-
-        return View.valueOf(trimmedView);
-    }
-
-    /**
      * Parses a {@code String category} into an {@code Category}.
      * Leading and trailing whitespaces will be trimmed.
      *

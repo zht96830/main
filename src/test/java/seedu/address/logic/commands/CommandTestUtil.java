@@ -50,7 +50,6 @@ public class CommandTestUtil {
     public static final String VALID_DATE_EXPENSE_2 = "12-03-2019";
     public static final String VALID_DATE_RECURRING = "12-03-2019";
     public static final String VALID_DEADLINE_DEBT = "05-05-2019";
-    public static final String VALID_DEADLINE_DEBT = "05-05-2020";
     public static final String VALID_REMARKS_EXPENSE = "Bishan chicken rice";
     public static final String VALID_REMARKS_DEBT = "fan";
     public static final String VALID_REMARKS_RECURRING = "Signed up for new 2 month phone contract.";
