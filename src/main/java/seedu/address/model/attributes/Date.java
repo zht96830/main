@@ -117,6 +117,50 @@ public class Date implements Comparable<Date> {
         return 0;*/
     }
 
+
+    /**
+     * @return true if localDate is the same date as current date
+     */
+    public boolean isWithinDay() {
+        // get today's date
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.equals(localDate);
+    }
+
+    /**
+     * @return true if localDate is 1 week within the current date (including today)
+     * if today's date is 13-01-1996, the last date that is within the range would be 07-01-1996
+     */
+    public boolean isWithinWeek() {
+        // get today's date
+        LocalDate currentDate = LocalDate.now();
+        // get date is one week before today's date
+        LocalDate lastWeekDate = currentDate.minusWeeks(1);
+        return currentDate.equals(localDate) || (localDate.isAfter(lastWeekDate) && localDate.isBefore(currentDate));
+    }
+
+    /**
+     * @return true if localDate is 1 month within the current date (including today)
+     */
+    public boolean isWithinMonth() {
+        // get today's date
+        LocalDate currentDate = LocalDate.now();
+        // get date is one month before today's date
+        LocalDate lastMonthDate = currentDate.minusMonths(1);
+        return currentDate.equals(localDate) || (localDate.isAfter(lastMonthDate) && localDate.isBefore(currentDate));
+    }
+
+    /**
+     * @return true if localDate is 1 year within the current date (including today)
+     */
+    public boolean isWithinYear() {
+        // get today's date
+        LocalDate currentDate = LocalDate.now();
+        // get date is one year before today's date
+        LocalDate lastYearDate = currentDate.minusYears(1);
+        return currentDate.equals(localDate) || (localDate.isAfter(lastYearDate) && localDate.isBefore(currentDate));
+    }
+
     @Override
     public int hashCode() {
         return this.hashCode();
