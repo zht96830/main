@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.generalcommands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.generalcommands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.generalcommands.ExitCommand.MESSAGE_E
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.generalcommands.ExitCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 

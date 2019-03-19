@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.expensecommands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -19,8 +19,6 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
-import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.FinanceTracker;
