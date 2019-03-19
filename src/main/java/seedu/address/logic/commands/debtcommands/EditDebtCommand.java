@@ -170,6 +170,10 @@ public class EditDebtCommand extends Command {
         }
 
         public void setDeadline(Date deadline) throws ParseException {
+            if (deadline == null) {
+                this.deadline = null;
+                return;
+            }
             if (!deadline.isEqualOrAfterToday()) {
                 throw new ParseException(Date.MESSAGE_DEADLINE_CONSTRAINTS);
             }
