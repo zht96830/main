@@ -59,8 +59,8 @@ public class DebtListTest {
         debtList.add(DUCK_RICE);
         debtList.add(TAXI);
         Iterator<Debt> iter = debtList.iterator();
-        assertTrue(iter.next().toString().equals(TAXI.toString())
-                && iter.next().toString().equals(DUCK_RICE.toString()));
+        assertTrue(iter.next().toString().equals(DUCK_RICE.toString())
+                && iter.next().toString().equals(TAXI.toString()));
     }
 
     @Test
