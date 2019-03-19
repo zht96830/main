@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 /**
- * Represents a date in the finance tracker.
+ * Represents a localDate in the finance tracker.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date implements Comparable<Date> {
@@ -16,38 +16,38 @@ public class Date implements Comparable<Date> {
     public static final String MESSAGE_CONSTRAINTS =
             "Date should only be dd-mm-yyyy format.";
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-            "Deadline must not be a date that has already passed.";
+            "Deadline must not be a localDate that has already passed.";
     public static final String MESSAGE_DATE_DOES_NOT_EXIST = "Date does not exist.";
     private static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
-    private LocalDate date;
+    private LocalDate localDate;
 
     /**
      * Constructs a {@code Date}.
-     * @param date A valid date number.
+     * @param localDate A valid localDate number.
      */
-    public Date(String date) throws DateTimeParseException {
-        requireNonNull(date);
-        //checkArgument((isValidDate(date)=="format"), MESSAGE_CONSTRAINTS);
-        //checkArgument((isValidDate(date)=="exist"), MESSAGE_DATE_DOES_NOT_EXIST);
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+    public Date(String localDate) throws DateTimeParseException {
+        requireNonNull(localDate);
+        //checkArgument((isValidDate(localDate)=="format"), MESSAGE_CONSTRAINTS);
+        //checkArgument((isValidDate(localDate)=="exist"), MESSAGE_DATE_DOES_NOT_EXIST);
+        this.localDate = LocalDate.parse(localDate, DateTimeFormatter.ofPattern("dd-MM-uuuu")
                 .withResolverStyle(ResolverStyle.STRICT));
     }
 
-    public LocalDate getDate() {
-        return this.date;
+    public LocalDate getLocalDate() {
+        return this.localDate;
     }
 
-    public void setDate(String date) {
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+    public void setLocalDate(String localDate) {
+        this.localDate = LocalDate.parse(localDate, DateTimeFormatter.ofPattern("dd-MM-uuuu")
                 .withResolverStyle(ResolverStyle.STRICT));
     }
 
-    public void setDate(Date date) {
-        this.date = date.getDate();
+    public void setLocalDate(Date date) {
+        this.localDate = date.getLocalDate();
     }
 
     /**
-     * Returns string that informs if a given string is valid or of the wrong date format or does not exist.
+     * Returns string that informs if a given string is valid or of the wrong localDate format or does not exist.
      */
     public static String isValidDate(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
@@ -59,7 +59,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Returns true if date exists.
+     * Returns true if localDate exists.
      */
     private static boolean doesDateExist(String test) throws DateTimeParseException {
         try {
@@ -73,17 +73,17 @@ public class Date implements Comparable<Date> {
 
     @Override
     public String toString() {
-        return String.format("%02d-%02d-%4d", date.getDayOfMonth(), date.getMonthValue(),
-                date.getYear());
+        return String.format("%02d-%02d-%4d", localDate.getDayOfMonth(), localDate.getMonthValue(),
+                localDate.getYear());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Date // instanceof handles nulls
-                && date.getDayOfMonth() == (((Date) other).date.getDayOfMonth()) // state check
-                && date.getMonthValue() == (((Date) other).date.getMonthValue())
-                && date.getYear() == ((Date) other).date.getYear());
+                && localDate.getDayOfMonth() == (((Date) other).localDate.getDayOfMonth()) // state check
+                && localDate.getMonthValue() == (((Date) other).localDate.getMonthValue())
+                && localDate.getYear() == ((Date) other).localDate.getYear());
     }
 
     /**
@@ -91,44 +91,44 @@ public class Date implements Comparable<Date> {
      */
     @Override
     public int compareTo(Date other) {
-        if (this.date.isBefore(other.date)) {
+        if (this.localDate.isBefore(other.localDate)) {
             return -1;
         }
-        if (this.date.isAfter(other.date)) {
+        if (this.localDate.isAfter(other.localDate)) {
             return 1;
         }
         return 0;
         /*
-        if (this.date.getYear() < other.date.getYear()) {
+        if (this.localDate.getYear() < other.localDate.getYear()) {
             return -1;
         }
-        if (this.date.getYear() > other.date.getYear()) {
+        if (this.localDate.getYear() > other.localDate.getYear()) {
             return 1;
         }
 
         // years are the same
-        if (this.date.getMonthValue() < other.date.getMonthValue()) {
+        if (this.localDate.getMonthValue() < other.localDate.getMonthValue()) {
             return -1;
         }
-        if (this.date.getMonthValue() > other.date.getMonthValue()) {
+        if (this.localDate.getMonthValue() > other.localDate.getMonthValue()) {
             return 1;
         }
 
         // years and months are the same
-        if (this.date.getDayOfMonth() < other.date.getDayOfMonth()) {
+        if (this.localDate.getDayOfMonth() < other.localDate.getDayOfMonth()) {
             return -1;
         }
-        if (this.date.getDayOfMonth() > other.date.getDayOfMonth()) {
+        if (this.localDate.getDayOfMonth() > other.localDate.getDayOfMonth()) {
             return 1;
         }
         return 0;*/
     }
 
     /**
-     * Checks against operating system's date and check whether {@code date} is equal or after this date.
+     * Checks against operating system's localDate and check whether {@code localDate} is equal or after this localDate.
      *
-     * @return true if date is the same as the system's current date or if it falls on a date after the
-     * system's current date, else it returns false
+     * @return true if localDate is the same as the system's current localDate or if it falls on a localDate after the
+     * system's current localDate, else it returns false
      */
     public boolean isEqualOrAfterToday() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
