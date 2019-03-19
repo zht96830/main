@@ -20,6 +20,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
@@ -60,7 +61,7 @@ public class EditDebtCommand extends Command {
      * @param index of the expense in the filtered debt list to edit
      * @param editDebtDescriptor details to edit the debt with
      */
-    public EditDebtCommand(Index index, EditDebtDescriptor editDebtDescriptor) {
+    public EditDebtCommand(Index index, EditDebtDescriptor editDebtDescriptor) throws ParseException {
         requireNonNull(index);
         requireNonNull(editDebtDescriptor);
 
@@ -137,7 +138,7 @@ public class EditDebtCommand extends Command {
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditDebtDescriptor(EditDebtDescriptor toCopy) {
+        public EditDebtDescriptor(EditDebtDescriptor toCopy) throws ParseException {
             setPersonOwed(toCopy.personOwed);
             setAmount(toCopy.amount);
             setDeadline(toCopy.deadline);
@@ -168,7 +169,14 @@ public class EditDebtCommand extends Command {
             return Optional.ofNullable(amount);
         }
 
-        public void setDeadline(Date deadline) {
+        public void setDeadline(Date deadline) throws ParseException {
+            if (deadline == null) {
+                this.deadline = null;
+                return;
+            }
+            if (!deadline.isEqualOrAfterToday()) {
+                throw new ParseException(Date.MESSAGE_DEADLINE_CONSTRAINTS);
+            }
             this.deadline = deadline;
         }
 

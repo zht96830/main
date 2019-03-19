@@ -15,14 +15,14 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.debtcommands.EditDebtCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
+import seedu.address.model.debt.Debt;
+import seedu.address.model.debt.NameContainsKeywordsPredicateForDebt;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditDebtDescriptorBuilder;
+import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
 /**
@@ -39,7 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_CATEGORY_DEBT = "shopping";
     public static final String VALID_DATE_EXPENSE = "03-03-2019";
     public static final String VALID_DATE_EXPENSE_2 = "12-03-2019";
-    public static final String VALID_DEADLINE_DEBT = "05-05-2019";
+    public static final String VALID_DEADLINE_DEBT = "05-05-2020";
     public static final String VALID_REMARKS_EXPENSE = "Bishan chicken rice";
     public static final String VALID_REMARKS_DEBT = "fan";
 
@@ -66,14 +66,10 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_EXPENSE;
-    public static final EditDebtCommand.EditDebtDescriptor DESC_DEBT;
 
     static {
         DESC_EXPENSE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
                 .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE)
-                .withRemarks(VALID_REMARKS_DEBT).build();
-        DESC_DEBT = new EditDebtDescriptorBuilder().withPersonOwed(VALID_NAME_DEBT)
-                .withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_DEBT).withDeadline(VALID_DEADLINE_DEBT)
                 .withRemarks(VALID_REMARKS_DEBT).build();
     }
 
@@ -135,26 +131,53 @@ public class CommandTestUtil {
         }
     }
 
+    //==========Expense-related==============================================================================
+
     /**
      * Updates {@code model}'s filtered list to show only the expense at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s finance tracker.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showExpenseAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredExpenseList().size());
 
         Expense expense = model.getFilteredExpenseList().get(targetIndex.getZeroBased());
         final String[] splitName = expense.getName().name.split("\\s+");
-        model.updateFilteredExpenseList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredExpenseList(new NameContainsKeywordsPredicateForExpense(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredExpenseList().size());
     }
 
     /**
-     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s finance tracker.
      */
-    public static void deleteFirstPerson(Model model) {
+    public static void deleteFirstExpense(Model model) {
         Expense firstExpense = model.getFilteredExpenseList().get(0);
         model.deleteExpense(firstExpense);
+        model.commitFinanceTracker();
+    }
+
+    //==========Debt-related=================================================================================
+
+    /**
+     * Updates {@code model}'s filtered list to show only the debt at the given {@code targetIndex} in the
+     * {@code model}'s finance tracker.
+     */
+    public static void showDebtAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredDebtList().size());
+
+        Debt debt = model.getFilteredDebtList().get(targetIndex.getZeroBased());
+        final String[] splitName = debt.getPersonOwed().name.split("\\s+");
+        model.updateFilteredDebtList(new NameContainsKeywordsPredicateForDebt(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredDebtList().size());
+    }
+
+    /**
+     * Deletes the first debt in {@code model}'s filtered list from {@code model}'s finance tracker.
+     */
+    public static void deleteFirstDebt(Model model) {
+        Debt firstDebt = model.getFilteredDebtList().get(0);
+        model.deleteDebt(firstDebt);
         model.commitFinanceTracker();
     }
 

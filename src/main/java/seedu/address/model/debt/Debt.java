@@ -74,6 +74,28 @@ public class Debt {
                 && otherDebt.getAmount().equals(this.amount);
     }
 
+    /**
+     * Returns true if both persons have the same identity and data fields.
+     * This defines a stronger notion of equality between two expenses.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Debt)) {
+            return false;
+        }
+
+        Debt otherExpense = (Debt) other;
+        return otherExpense.getPersonOwed().equals(getPersonOwed())
+                && otherExpense.getAmount().equals(getAmount())
+                && otherExpense.getDeadline().equals(getDeadline())
+                && otherExpense.getCategory().equals(getCategory())
+                && otherExpense.getRemarks().equals(getRemarks());
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
