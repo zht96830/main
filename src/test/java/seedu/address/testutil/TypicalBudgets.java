@@ -35,15 +35,13 @@ public class TypicalBudgets {
             .withStartDate("11-05-2019").withEndDate("11-08-2019").withRemarks("yay summer vacation").build();
     public static final Budget TRAVEL_BUDGET = new BudgetBuilder().withCategory("travel").withAmount("7000")
             .withStartDate("01-01-2020").withEndDate("31-12-2020").withRemarks("grad trip and family trip").build();
-    public static final Budget OTHERS_BUDGET = new BudgetBuilder().withCategory("others").withAmount("1000")
-            .withStartDate("01-05-2019").withEndDate("31-12-2019").withRemarks("buffer just in case").build();
 
     // Manually added
-    public static final Budget BUDGET1 = new BudgetBuilder().withCategory("travel").withAmount("500")
+    /*public static final Budget BUDGET1 = new BudgetBuilder().withCategory("travel").withAmount("500")
         .withStartDate("01-06-2019").withEndDate("15-05-2020").withRemarks("spend less before grad").build();
     public static final Budget BUDGET2 = new BudgetBuilder().withCategory("others").withAmount("1000")
             .withStartDate("15-05-2019").withEndDate("31-12-2019").withRemarks("time to invest").build();
-
+    */
     // Manually added - Budget's details found in {@code CommandTestUtil}
     public static final Budget BUDGET = new BudgetBuilder().withCategory(VALID_CATEGORY_BUDGET)
             .withAmount(VALID_AMOUNT_BUDGET).withStartDate(VALID_STARTDATE_BUDGET).withEndDate(VALID_ENDDATE_BUDGET)
@@ -64,6 +62,6 @@ public class TypicalBudgets {
 
     public static List<Budget> getTypicalBudgets() {
         return new ArrayList<>(Arrays.asList(FOOD_BUDGET, TRANSPORT_BUDGET, SHOPPING_BUDGET, WORK_BUDGET,
-                UTILITIES_BUDGET, HEALTHCARE_BUDGET, ENTERTAINMENT_BUDGET, TRAVEL_BUDGET, OTHERS_BUDGET));
+                UTILITIES_BUDGET, HEALTHCARE_BUDGET, ENTERTAINMENT_BUDGET, TRAVEL_BUDGET));
     }
 }

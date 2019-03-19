@@ -9,7 +9,7 @@ import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 
 /**
- * Clears the Finance Tracker.
+ * Clears all expenses in Finance Tracker.
  */
 public class ClearExpenseCommand extends Command {
 

@@ -332,6 +332,7 @@ public class ModelManager implements Model {
         selectedExpense.setValue(expense);
     }
 
+    //=========== Selected budget ===========================================================================
     @Override
     public ReadOnlyProperty<Budget> selectedBudgetProperty() {
         return selectedBudget;
@@ -350,6 +351,7 @@ public class ModelManager implements Model {
         selectedBudget.setValue(budget);
     }
 
+    //=========== Selected debt ===========================================================================
     @Override
     public ReadOnlyProperty<Debt> selectedDebtProperty() {
         return selectedDebt;

@@ -7,9 +7,9 @@ import static seedu.address.testutil.TypicalBudgets.BUDGET;
 import static seedu.address.testutil.TypicalBudgets.ENTERTAINMENT_BUDGET;
 import static seedu.address.testutil.TypicalBudgets.FOOD_BUDGET;
 import static seedu.address.testutil.TypicalBudgets.HEALTHCARE_BUDGET;
-import static seedu.address.testutil.TypicalBudgets.OTHERS_BUDGET;
 import static seedu.address.testutil.TypicalBudgets.SHOPPING_BUDGET;
 import static seedu.address.testutil.TypicalBudgets.TRAVEL_BUDGET;
+import static seedu.address.testutil.TypicalBudgets.UTILITIES_BUDGET;
 import static seedu.address.testutil.TypicalBudgets.WORK_BUDGET;
 
 import java.util.Collections;
@@ -92,7 +92,7 @@ public class BudgetListTest {
 
     @Test
     public void setBudget_budgetList_replacesOwnListWithProvidedBudgetList() {
-        budgetList.addBudget(OTHERS_BUDGET);
+        budgetList.addBudget(UTILITIES_BUDGET);
         BudgetList expectedBudgetList = new BudgetList();
         expectedBudgetList.addBudget(SHOPPING_BUDGET);
         budgetList.setBudgets(expectedBudgetList);

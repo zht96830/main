@@ -61,6 +61,9 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
         requireNonNull(newData);
 
         setExpenses(newData.getExpenseList());
+        setBudgets(newData.getBudgetList());
+        setDebts(newData.getDebtList());
+        setRecurrings(newData.getRecurringList());
     }
 
     /**
@@ -84,6 +87,14 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
      */
     public void setBudgets(List<Budget> budgets) {
         this.budgets.setBudgets(budgets);
+        indicateModified();
+    }
+
+    /**
+     * Replaces the contents of the recurring list with {@code recurrings}.
+     */
+    public void setRecurrings(List<Recurring> recurrings) {
+        this.recurrings.setRecurring(recurrings);
         indicateModified();
     }
 

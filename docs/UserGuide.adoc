@@ -186,13 +186,15 @@ Deletes the 2nd expense in the finance tracker.
 === Adding a budget : `addbudget`
 
 Adds a budget with a time frame to the tracker. +
-Format 1: `addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE`
+Format 1: `addbudget $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]`
 
 [NOTE]
 ====
 * The categories include: “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”,
 “entertainment” and “others” which are case insensitive.
 * The program only limits one budget for each category.
+* START_DATE and END_DATE must be in dd-mm-yyyy format.
+* If START_DATE is omitted, current date will be used.
 ====
 
 Examples:
@@ -216,9 +218,14 @@ Edits a budget in the finance tracker.
 
 Format 1: `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]`
 
-Examples:
+[NOTE]
+====
+* Edits the budget of the specified CATEGORY.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+====
 
-* `editbudget c/food $/500`
+Examples:
 * `editbudget c/shopping ed/31-3-2019`
 * `editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019`
 
@@ -645,9 +652,9 @@ e.g. `edit 2 n/Bak Kut Teh`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Add a budget* : `addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE` +
+* *Add a budget* : `addbudget $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]` +
 e.g. `addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
-* *Edit a budget* : `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]` +
+* *Edit a budget* : `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE] [r/REMARKS]` +
 e.g. `editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019`
 * *Delete a budget* : `deletebudget c/CATEGORY` +
 e.g. `deletebudget c/food`
