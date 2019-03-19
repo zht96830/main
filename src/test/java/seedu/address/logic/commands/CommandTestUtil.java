@@ -17,8 +17,10 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
+import seedu.address.logic.commands.debtcommands.EditDebtCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
+import seedu.address.logic.commands.recurringcommands.EditRecurringCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.debt.Debt;
@@ -26,7 +28,11 @@ import seedu.address.model.debt.NameContainsKeywordsPredicateForDebt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 import seedu.address.testutil.EditBudgetDescriptorBuilder;
+import seedu.address.testutil.EditDebtDescriptorBuilder;
+import seedu.address.model.recurring.Recurring;
+import seedu.address.model.recurring.RecurringNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
+import seedu.address.testutil.EditRecurringDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -35,6 +41,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_EXPENSE = "Chicken Rice";
     public static final String VALID_NAME_DEBT = "Bob Choo";
+    public static final String VALID_NAME_RECURRING = "Phone Bill";
     public static final String VALID_AMOUNT_EXPENSE = "4";
     public static final String VALID_AMOUNT_DEBT = "12345";
     public static final String VALID_AMOUNT_BUDGET = "55555";
@@ -50,6 +57,12 @@ public class CommandTestUtil {
     public static final String VALID_REMARKS_EXPENSE = "Bishan chicken rice";
     public static final String VALID_REMARKS_DEBT = "fan";
     public static final String VALID_REMARKS_BUDGET = "eat more for christmas yay";
+    public static final String VALID_AMOUNT_RECURRING = "50";
+    public static final String VALID_CATEGORY_RECURRING = "utilities";
+    public static final String VALID_DATE_RECURRING = "12-03-2019";
+    public static final String VALID_REMARKS_RECURRING = "Signed up for new 2 month phone contract.";
+    public static final String VALID_FREQUENCY_RECURRING = "M";
+    public static final String VALID_OCCURRENCE_RECURRING = "24";
 
     public static final String NAME_DESC_EXPENSE = " " + PREFIX_NAME + VALID_NAME_EXPENSE;
     public static final String NAME_DESC_DEBT = " " + PREFIX_NAME + VALID_NAME_DEBT;
@@ -80,6 +93,7 @@ public class CommandTestUtil {
 
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_EXPENSE;
     public static final EditBudgetCommand.EditBudgetDescriptor DESC_BUDGET;
+    public static final EditRecurringCommand.EditRecurringDescriptor DESC_RECURRING;
 
     static {
         DESC_EXPENSE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
@@ -88,6 +102,11 @@ public class CommandTestUtil {
         DESC_BUDGET = new EditBudgetDescriptorBuilder().withAmount(VALID_AMOUNT_BUDGET)
                 .withStartDate(VALID_STARTDATE_BUDGET).withEndDate(VALID_ENDDATE_BUDGET)
                 .withRemarks(VALID_REMARKS_BUDGET).build();
+        DESC_RECURRING = new EditRecurringDescriptorBuilder().withName(VALID_NAME_RECURRING)
+                .withAmount(VALID_AMOUNT_RECURRING).withCategory(VALID_CATEGORY_RECURRING)
+                .withDate(VALID_DATE_RECURRING)
+                .withRemarks(VALID_REMARKS_RECURRING).withFrequency(VALID_FREQUENCY_RECURRING)
+                .withOccurrence(VALID_OCCURRENCE_RECURRING).build();
     }
 
     /**
@@ -162,6 +181,20 @@ public class CommandTestUtil {
         model.updateFilteredExpenseList(new NameContainsKeywordsPredicateForExpense(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredExpenseList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the recurring at the given {@code targetIndex} in the
+     * {@code model}'s recurring list.
+     */
+    public static void showRecurringAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredRecurringList().size());
+
+        Recurring recurring = model.getFilteredRecurringList().get(targetIndex.getZeroBased());
+        final String[] splitName = recurring.getName().name.split("\\s+");
+        model.updateFilteredRecurringList(new RecurringNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredRecurringList().size());
     }
 
     /**
