@@ -19,8 +19,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
+import seedu.address.model.debt.Debt;
+import seedu.address.model.debt.NameContainsKeywordsPredicateForDebt;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
 /**
@@ -129,26 +131,53 @@ public class CommandTestUtil {
         }
     }
 
+    //==========Expense-related==============================================================================
+
     /**
      * Updates {@code model}'s filtered list to show only the expense at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s finance tracker.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showExpenseAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredExpenseList().size());
 
         Expense expense = model.getFilteredExpenseList().get(targetIndex.getZeroBased());
         final String[] splitName = expense.getName().name.split("\\s+");
-        model.updateFilteredExpenseList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredExpenseList(new NameContainsKeywordsPredicateForExpense(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredExpenseList().size());
     }
 
     /**
-     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s finance tracker.
      */
-    public static void deleteFirstPerson(Model model) {
+    public static void deleteFirstExpense(Model model) {
         Expense firstExpense = model.getFilteredExpenseList().get(0);
         model.deleteExpense(firstExpense);
+        model.commitFinanceTracker();
+    }
+
+    //==========Debt-related=================================================================================
+
+    /**
+     * Updates {@code model}'s filtered list to show only the debt at the given {@code targetIndex} in the
+     * {@code model}'s finance tracker.
+     */
+    public static void showDebtAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredDebtList().size());
+
+        Debt debt = model.getFilteredDebtList().get(targetIndex.getZeroBased());
+        final String[] splitName = debt.getPersonOwed().name.split("\\s+");
+        model.updateFilteredDebtList(new NameContainsKeywordsPredicateForDebt(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredDebtList().size());
+    }
+
+    /**
+     * Deletes the first debt in {@code model}'s filtered list from {@code model}'s finance tracker.
+     */
+    public static void deleteFirstDebt(Model model) {
+        Debt firstDebt = model.getFilteredDebtList().get(0);
+        model.deleteDebt(firstDebt);
         model.commitFinanceTracker();
     }
 
