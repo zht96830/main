@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.generalcommands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -9,12 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class UndoCommandTest {
+public class RedoCommandTest {
 
     private final Model model = new ModelManager(getTypicalFinanceTrackerWithExpenses(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalFinanceTrackerWithExpenses(), new UserPrefs());
@@ -22,25 +21,29 @@ public class UndoCommandTest {
 
     @Before
     public void setUp() {
-        // set up of models' undo/redo history
+        // set up of both models' undo/redo history
         deleteFirstPerson(model);
         deleteFirstPerson(model);
+        model.undoFinanceTracker();
+        model.undoFinanceTracker();
 
         deleteFirstPerson(expectedModel);
         deleteFirstPerson(expectedModel);
+        expectedModel.undoFinanceTracker();
+        expectedModel.undoFinanceTracker();
     }
 
     @Test
     public void execute() {
-        // multiple undoable states in model
-        expectedModel.undoFinanceTracker();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        // multiple redoable states in model
+        expectedModel.redoFinanceTracker();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // single undoable state in model
-        expectedModel.undoFinanceTracker();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        // single redoable state in model
+        expectedModel.redoFinanceTracker();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // no undoable states in model
-        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        // no redoable state in model
+        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 }
