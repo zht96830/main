@@ -16,7 +16,6 @@ import org.junit.rules.ExpectedException;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
@@ -52,7 +51,8 @@ public class AddBudgetCommandTest {
 
         CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS, validBudget),
+                     commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validBudget), modelStub.budgetsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
