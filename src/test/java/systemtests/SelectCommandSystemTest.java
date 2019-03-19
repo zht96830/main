@@ -7,7 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_PHONE;
+import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_LAPTOP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Test;
@@ -57,7 +57,7 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: filtered expense list, select index within bounds of address book but out of bounds of expense list
          * -> rejected
          */
-        showExpensesWithName(KEYWORD_MATCHING_PHONE);
+        showExpensesWithName(KEYWORD_MATCHING_LAPTOP);
         int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
         command = SelectCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.attributes.Category;
 
 /**
  * A list of budgets that does not allow nulls. One for each of the eight category and one for total.
@@ -43,6 +44,15 @@ public class BudgetList implements Iterable<Budget> {
         return internalList.stream().anyMatch(toCheck::isSameBudget);
     }
 
+    public int getIndex(Category category) {
+        for (Budget budget : internalList) {
+            if (budget.getCategory() == category) {
+                return internalList.indexOf(budget);
+            }
+        }
+        return -1;
+    }
+
     /**
      * Adds a budget to the list.
      * Budget cannot be overlapping with another existing budget.
@@ -52,37 +62,10 @@ public class BudgetList implements Iterable<Budget> {
         if (hasOverlap(toAdd)) {
             throw new OverlappingBudgetException();
         }
-        switch (toAdd.getCategory()) {
-        case FOOD:
-            internalList.add(0, toAdd);
-            break;
-        case TRANSPORT:
-            internalList.add(1, toAdd);
-            break;
-        case SHOPPING:
-            internalList.add(2, toAdd);
-            break;
-        case WORK:
-            internalList.add(3, toAdd);
-            break;
-        case UTILITIES:
-            internalList.add(4, toAdd);
-            break;
-        case HEALTHCARE:
-            internalList.add(5, toAdd);
-            break;
-        case ENTERTAINMENT:
-            internalList.add(6, toAdd);
-            break;
-        case TRAVEL:
-            internalList.add(7, toAdd);
-            break;
-        case OTHERS:
-            internalList.add(8, toAdd);
-            break;
-        default:
-            //intentional fallthrough
+        if (internalList.contains(toAdd)) {
+            throw new BudgetExistsException();
         }
+        internalList.add(toAdd);
     }
 
     /**
@@ -123,6 +106,13 @@ public class BudgetList implements Iterable<Budget> {
         if (!internalList.remove(toRemove)) {
             throw new BudgetNotFoundException();
         }
+    }
+
+    /**
+     * Returns budget at specified category.
+     */
+    public Budget get(Category category) {
+        return internalList.get(getIndex(category));
     }
 
     /**

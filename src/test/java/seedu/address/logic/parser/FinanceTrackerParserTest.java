@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import java.util.Arrays;
@@ -14,12 +15,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.expensecommands.AddCommand;
-import seedu.address.logic.commands.expensecommands.DeleteCommand;
-import seedu.address.logic.commands.expensecommands.EditCommand;
-import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
+import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
+import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
+import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
+import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
 import seedu.address.logic.commands.generalcommands.ExitCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.generalcommands.HelpCommand;
@@ -27,8 +28,9 @@ import seedu.address.logic.commands.generalcommands.HistoryCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attributes.View;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 import seedu.address.testutil.ExpenseBuilder;
 import seedu.address.testutil.ExpenseUtil;
@@ -42,30 +44,32 @@ public class FinanceTrackerParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Expense expense = new ExpenseBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(ExpenseUtil.getAddCommand(expense));
-        assertEquals(new AddCommand(expense), command);
+        AddExpenseCommand command = (AddExpenseCommand) parser.parseCommand(ExpenseUtil.getAddCommand(expense));
+        assertEquals(new AddExpenseCommand(expense), command);
     }
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearExpenseCommand.COMMAND_WORD) instanceof ClearExpenseCommand);
+        assertTrue(parser.parseCommand(ClearExpenseCommand.COMMAND_WORD + " 3")
+                instanceof ClearExpenseCommand);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_EXPENSE), command);
+        DeleteExpenseCommand command = (DeleteExpenseCommand) parser.parseCommand(
+                DeleteExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased());
+        assertEquals(new DeleteExpenseCommand(INDEX_FIRST_EXPENSE), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         Expense expense = new ExpenseBuilder().build();
-        EditCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder(expense).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_EXPENSE.getOneBased() + " " + ExpenseUtil.getEditExpenseDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_EXPENSE, descriptor), command);
+        EditExpenseCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder(expense).build();
+        EditExpenseCommand command = (EditExpenseCommand) parser.parseCommand(EditExpenseCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_EXPENSE.getOneBased() + " "
+                + ExpenseUtil.getEditExpenseDescriptorDetails(descriptor));
+        assertEquals(new EditExpenseCommand(INDEX_FIRST_EXPENSE, descriptor), command);
     }
 
     @Test
@@ -79,7 +83,7 @@ public class FinanceTrackerParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicateForExpense(keywords)), command);
     }
 
     @Test
@@ -103,8 +107,10 @@ public class FinanceTrackerParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListExpenseCommand.COMMAND_WORD + " " + PREFIX_VIEW + View.ALL)
+                instanceof ListExpenseCommand);
+        assertTrue(parser.parseCommand(ListExpenseCommand.COMMAND_WORD + " " + PREFIX_VIEW + View.FOOD)
+                instanceof ListExpenseCommand);
     }
 
     @Test

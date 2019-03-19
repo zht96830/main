@@ -7,15 +7,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EXPENS
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_EXPENSE;
 import static seedu.address.testutil.TypicalExpenses.DOCTOR;
 import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
+import static seedu.address.testutil.TypicalExpenses.TAXI;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 import seedu.address.testutil.ExpenseBuilder;
 
 public class ExpenseListTest {
@@ -48,6 +50,16 @@ public class ExpenseListTest {
         Expense editedExpense = new ExpenseBuilder(DUCK_RICE).withCategory(VALID_CATEGORY_EXPENSE)
                 .withRemarks(VALID_REMARKS_EXPENSE).build();
         assertTrue(expenseList.contains(editedExpense));
+    }
+
+    @Test
+    public void contains_expenseWithSameToStringInList_returnsTrue() {
+        // check if the string format of expense in expense list is same as string format of added
+        expenseList.add(DUCK_RICE);
+        expenseList.add(TAXI);
+        Iterator<Expense> iter = expenseList.iterator();
+        assertTrue(iter.next().toString().equals(TAXI.toString())
+                && iter.next().toString().equals(DUCK_RICE.toString()));
     }
 
     @Test

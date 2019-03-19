@@ -25,16 +25,17 @@ import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.recurring.Recurring;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddExpenseCommand object
  */
 public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddExpenseCommand
+     * and returns an AddExpenseCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddRecurringCommand parse(String args) throws ParseException {
@@ -52,7 +53,7 @@ public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Frequency frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get());
-        int occurence = ParserUtil.parseOccurence(argMultimap.getValue(PREFIX_OCCURRENCE).get());
+        Occurrence occurence = ParserUtil.parseOccurence(argMultimap.getValue(PREFIX_OCCURRENCE).get());
         Date date;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());

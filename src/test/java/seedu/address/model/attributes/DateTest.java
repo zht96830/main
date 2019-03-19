@@ -2,7 +2,10 @@ package seedu.address.model.attributes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+
+import java.time.format.DateTimeParseException;
 
 import org.junit.Test;
 
@@ -10,15 +13,22 @@ import seedu.address.testutil.Assert;
 
 public class DateTest {
 
+    public static final String VALID_DATE_1 = "01-01-2000";
+    public static final String VALID_DATE_2 = "31-01-2000";
+    public static final String VALID_DATE_3 = "01-12-2000";
+    public static final String VALID_DATE_4 = "01-01-2015";
+    public static final String INVALID_DATE_1 = "29-02-2019";
+    public static final String INVALID_DATE_2 = "32-05-2021";
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Date(null));
     }
 
     @Test
-    public void constructor_invalidDate_throwsIllegalArgumentException() {
-        String invalidDate = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
+    public void constructor_invalidDate_throwsDateTimeParseException() {
+        Assert.assertThrows(DateTimeParseException.class, () -> new Date(INVALID_DATE_1));
+        Assert.assertThrows(DateTimeParseException.class, () -> new Date(INVALID_DATE_2));
     }
 
     @Test
@@ -27,25 +37,55 @@ public class DateTest {
         Assert.assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
 
         // invalid dates
-        assertFalse(Date.isValidDate("")); // empty string
-        assertFalse(Date.isValidDate(" ")); // spaces only
-        assertFalse(Date.isValidDate("01-01")); // must be dd-mm-yyyy
-        assertFalse(Date.isValidDate("01-01-18")); // need 4 numbers for year, e.g. 2018
-        assertFalse(Date.isValidDate("01-01-2018a")); // alphabets not allowed
-        assertFalse(Date.isValidDate("date")); // non-numeric
+        assertSame("format", Date.isValidDate("")); // empty string
+        assertSame("format", Date.isValidDate(" ")); // spaces only
+        assertSame("format", Date.isValidDate("01-01")); // must be dd-mm-yyyy
+        assertSame("format", Date.isValidDate("01-01-18")); // need 4 numbers for year, e.g. 2018
+        assertSame("format", Date.isValidDate("01-01-2018a")); // alphabets not allowed
+        assertSame("format", Date.isValidDate("date")); // non-numeric
 
         // valid dates
-        assertTrue(Date.isValidDate("01-01-2019"));
-        assertTrue(Date.isValidDate("31-12-1999"));
+        assertSame("valid", Date.isValidDate("01-01-2019"));
+        assertSame("valid", Date.isValidDate("31-12-1999"));
+    }
+
+    @Test
+    public void equals() {
+        Date date1 = new Date(VALID_DATE_1);
+        Date date2 = new Date(VALID_DATE_2);
+        Date date3 = new Date(VALID_DATE_3);
+        Date date4 = new Date(VALID_DATE_4);
+
+        // same date instance -> returns true
+        assertTrue(date1.equals(date1));
+
+        // same values -> returns true
+        Date date1Copy = new Date(VALID_DATE_1);
+        assertTrue(date1.equals(date1Copy));
+
+        // null -> returns false
+        assertFalse(date1.equals(null));
+
+        // different type -> returns false
+        assertFalse(date1.equals(5));
+
+        // different day -> returns false
+        assertFalse(date1.equals(date2));
+
+        // different month -> returns false
+        assertFalse(date1.equals(date3));
+
+        // different year -> returns false
+        assertFalse(date1.equals(date4));
     }
 
     @Test
     public void compareTo() {
         // initialize dates in chronological order
-        Date date1 = new Date("01-01-2000");
-        Date date2 = new Date("31-01-2000");
-        Date date3 = new Date("10-12-2000");
-        Date date4 = new Date("01-01-2015");
+        Date date1 = new Date(VALID_DATE_1);
+        Date date2 = new Date(VALID_DATE_2);
+        Date date3 = new Date(VALID_DATE_3);
+        Date date4 = new Date(VALID_DATE_4);
 
         assertEquals(date1.compareTo(date1), 0);
         assertEquals(date1.compareTo(date2), -1);

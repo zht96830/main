@@ -3,12 +3,13 @@ package seedu.address.model.expense;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 
 /**
  * A list of expenses that does not allow nulls. Duplicates are allowed.
@@ -21,6 +22,13 @@ public class ExpenseList implements Iterable<Expense> {
     private final ObservableList<Expense> internalList = FXCollections.observableArrayList();
     private final ObservableList<Expense> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    private final Comparator<Expense> comparator = new Comparator<Expense>() {
+        @Override
+        public int compare(Expense o1, Expense o2) {
+            return o2.getDate().compareTo(o1.getDate()); // in descending order
+        }
+    };
 
     /**
      * Returns true if the list contains an equivalent expense as the given argument.
@@ -37,6 +45,7 @@ public class ExpenseList implements Iterable<Expense> {
     public void add(Expense toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
+        FXCollections.sort(internalList, comparator); // sort internal list every time expense added
     }
 
     /**
@@ -52,6 +61,11 @@ public class ExpenseList implements Iterable<Expense> {
         }
 
         internalList.set(index, editedExpense);
+
+        if (!editedExpense.getDate().equals(target.getDate())) {
+            FXCollections.sort(internalList, comparator); // sort internal list every date is edited
+        }
+
     }
 
     public void setExpenses(ExpenseList replacement) {
@@ -102,6 +116,4 @@ public class ExpenseList implements Iterable<Expense> {
     public int hashCode() {
         return internalList.hashCode();
     }
-
-
 }

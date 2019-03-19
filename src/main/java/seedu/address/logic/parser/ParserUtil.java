@@ -10,6 +10,8 @@ import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Occurrence;
+import seedu.address.model.attributes.View;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,6 +23,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -70,8 +73,13 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
+        switch (Date.isValidDate(trimmedDate)) {
+        case "format":
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        case "exist":
+            throw new ParseException(Date.MESSAGE_DATE_DOES_NOT_EXIST);
+        default:
+            break;
         }
         return new Date(trimmedDate);
     }
@@ -97,10 +105,32 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code occurence} is invalid.
      */
-    public static int parseOccurence(String occurence) throws ParseException {
+    public static Occurrence parseOccurence(String occurence) throws ParseException {
         requireNonNull(occurence);
         String trimmedOccurence = occurence.trim();
-        return Integer.parseInt(trimmedOccurence);
+        if (!Occurrence.isValidOccurrence(trimmedOccurence)) {
+            throw new ParseException(Occurrence.MESSAGE_CONSTRAINTS);
+        }
+        return new Occurrence(occurence);
+    }
+
+    /**
+     * Parses a {@code String view} into an {@code view}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code view} is invalid.
+     */
+    public static View parseView(String view) throws ParseException {
+        requireNonNull(view);
+        String trimmedView = view.trim().toUpperCase();
+
+        try {
+            View.valueOf(trimmedView);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(View.MESSAGE_CONSTRAINTS);
+        }
+
+        return View.valueOf(trimmedView);
     }
 
     /**

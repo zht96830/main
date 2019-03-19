@@ -48,7 +48,7 @@ public class EditBudgetCommand extends Command {
     public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Edited budget:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
-    private final int index;
+    private final Category category;
     private final EditBudgetDescriptor editBudgetDescriptor;
 
     /**
@@ -59,58 +59,38 @@ public class EditBudgetCommand extends Command {
         requireNonNull(category);
         requireNonNull(editBudgetDescriptor);
 
-        switch (category) {
-        case FOOD:
-            index = 0;
-            break;
-        case TRANSPORT:
-            index = 1;
-            break;
-        case SHOPPING:
-            index = 2;
-            break;
-        case WORK:
-            index = 3;
-            break;
-        case UTILITIES:
-            index = 4;
-            break;
-        case HEALTHCARE:
-            index = 5;
-            break;
-        case ENTERTAINMENT:
-            index = 6;
-            break;
-        case TRAVEL:
-            index = 7;
-            break;
-        case OTHERS:
-            index = 8;
-            break;
-        default:
-            index = -1;
-        }
+        this.category = category;
         this.editBudgetDescriptor = new EditBudgetDescriptor(editBudgetDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
         List<Budget> lastShownList = model.getFilteredBudgetList();
 
-        Budget budgetToEdit = lastShownList.get(index);
-
-        if (index == -1) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CATEGORY);
+        int index = -1;
+        for (Budget budget : lastShownList) {
+            if (budget.getCategory() == category) {
+                index = lastShownList.indexOf(budget);
+                break;
+            }
         }
 
+        if (index == -1) {
+            throw new CommandException(Messages.MESSAGE_INVALID_BUDGET_CATEGORY);
+        }
+
+        Budget budgetToEdit = lastShownList.get(index);
         Budget editedbudget = createEditedBudget(budgetToEdit, editBudgetDescriptor);
 
         model.setBudget(budgetToEdit, editedbudget);
         model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_EDIT_BUDGET_SUCCESS, editedbudget));
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     /**

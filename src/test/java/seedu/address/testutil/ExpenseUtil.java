@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
-import seedu.address.logic.commands.expensecommands.AddCommand;
-import seedu.address.logic.commands.expensecommands.EditCommand;
+import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
+import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.model.expense.Expense;
 
 /**
@@ -19,7 +19,7 @@ public class ExpenseUtil {
      * Returns an add command string for adding the {@code expense}.
      */
     public static String getAddCommand(Expense expense) {
-        return AddCommand.COMMAND_WORD + " " + getExpenseDetails(expense);
+        return AddExpenseCommand.COMMAND_WORD + " " + getExpenseDetails(expense);
     }
 
     /**
@@ -39,7 +39,7 @@ public class ExpenseUtil {
     /**
      * Returns the part of command string for the given {@code EditExpenseDescriptor}'s details.
      */
-    public static String getEditExpenseDescriptorDetails(EditCommand.EditExpenseDescriptor descriptor) {
+    public static String getEditExpenseDescriptorDetails(EditExpenseCommand.EditExpenseDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.name).append(" "));
         descriptor.getAmount().ifPresent(amount -> sb.append(PREFIX_AMOUNT).append(amount.toString()).append(" "));

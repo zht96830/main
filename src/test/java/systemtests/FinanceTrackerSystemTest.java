@@ -4,6 +4,7 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
@@ -23,6 +24,7 @@ import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.ExpenseCardHandle;
 import guitests.guihandles.ExpenseListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
@@ -30,12 +32,13 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.generalcommands.ClearCommand;
+import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
+import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
+import seedu.address.model.attributes.View;
 import seedu.address.testutil.TypicalExpenses;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
@@ -137,7 +140,7 @@ public abstract class FinanceTrackerSystemTest {
      * Displays all expenses in the finance tracker.
      */
     protected void showAllExpenses() {
-        executeCommand(ListCommand.COMMAND_WORD);
+        executeCommand(ListExpenseCommand.COMMAND_WORD + " " + PREFIX_VIEW + View.ALL);
         assertEquals(getModel().getFinanceTracker().getExpenseList().size(),
                 getModel().getFilteredExpenseList().size());
     }
@@ -163,7 +166,7 @@ public abstract class FinanceTrackerSystemTest {
      * Deletes all expenses in the finance tracker.
      */
     protected void deleteAllExpenses() {
-        executeCommand(ClearCommand.COMMAND_WORD);
+        executeCommand(ClearExpenseCommand.COMMAND_WORD);
         assertEquals(0, getModel().getFinanceTracker().getExpenseList().size());
     }
 
@@ -210,14 +213,28 @@ public abstract class FinanceTrackerSystemTest {
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getExpenseListPanel().navigateToCard(getExpenseListPanel().getSelectedCardIndex());
-        String selectedCardName = getExpenseListPanel().getHandleToSelectedCard().getName();
+        ExpenseCardHandle selectedCard = getExpenseListPanel().getHandleToSelectedCard();
+
+        String query = BrowserPanel.QUERY_NAME + selectedCard.getName() + BrowserPanel.QUERY_CATEGORY
+                + selectedCard.getCategory() + BrowserPanel.QUERY_AMOUNT + selectedCard.getAmount()
+                + BrowserPanel.QUERY_DATE + selectedCard.getDate() + BrowserPanel.QUERY_REMARK;
+
+        String url = BrowserPanel.EXPENSES_PAGE_URL + query.replaceAll(" ", "%20");
+        int urlLength = url.length();
+
+        // since selected will not have remarks, we only get substring without remarks
+        String browserUrl = getBrowserPanel().getLoadedUrl().toExternalForm().substring(0, urlLength);
+
         URL expectedUrl;
+        URL actualUrl;
         try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
+            expectedUrl = new URL(url);
+            actualUrl = new URL(browserUrl);
+
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }
-        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
+        assertEquals(expectedUrl, actualUrl);
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getExpenseListPanel().getSelectedCardIndex());
     }
