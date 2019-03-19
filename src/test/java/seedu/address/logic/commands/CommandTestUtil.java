@@ -88,7 +88,8 @@ public class CommandTestUtil {
                 .withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_DEBT).withDeadline(VALID_DEADLINE_DEBT)
                 .withRemarks(VALID_REMARKS_DEBT).build();
         DESC_RECURRING = new EditRecurringDescriptorBuilder().withName(VALID_NAME_RECURRING)
-                .withAmount(VALID_AMOUNT_RECURRING).withCategory(VALID_CATEGORY_RECURRING).withDate(VALID_DATE_RECURRING)
+                .withAmount(VALID_AMOUNT_RECURRING).withCategory(VALID_CATEGORY_RECURRING)
+                .withDate(VALID_DATE_RECURRING)
                 .withRemarks(VALID_REMARKS_RECURRING).withFrequency(VALID_FREQUENCY_RECURRING)
                 .withOccurrence(VALID_OCCURRENCE_RECURRING).build();
     }

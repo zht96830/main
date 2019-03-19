@@ -1,6 +1,20 @@
 package seedu.address.logic.commands.recurringcommands;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showRecurringAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
+import static seedu.address.testutil.TypicalRecurrings.getTypicalFinanceTrackerWithRecurrings;
+
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -12,13 +26,6 @@ import seedu.address.model.recurring.Recurring;
 import seedu.address.testutil.EditRecurringDescriptorBuilder;
 import seedu.address.testutil.RecurringBuilder;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
-import static seedu.address.testutil.TypicalRecurrings.getTypicalFinanceTrackerWithRecurrings;
-
 public class EditRecurringCommandTest {
 
     private Model model = new ModelManager(getTypicalFinanceTrackerWithRecurrings(), new UserPrefs());
@@ -27,7 +34,8 @@ public class EditRecurringCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Recurring editedRecurring = new RecurringBuilder().build();
-        EditRecurringCommand.EditRecurringDescriptor descriptor = new EditRecurringDescriptorBuilder(editedRecurring).build();
+        EditRecurringCommand.EditRecurringDescriptor descriptor = new EditRecurringDescriptorBuilder(editedRecurring)
+                .build();
         EditRecurringCommand editRecurringCommand = new EditRecurringCommand(INDEX_FIRST_EXPENSE, descriptor);
 
         String expectedMessage = String.format(EditRecurringCommand.MESSAGE_EDIT_RECURRING_SUCCESS, editedRecurring);
@@ -80,7 +88,8 @@ public class EditRecurringCommandTest {
         showRecurringAtIndex(model, INDEX_FIRST_EXPENSE);
 
         Recurring recurringInFilteredList = model.getFilteredRecurringList().get(INDEX_FIRST_EXPENSE.getZeroBased());
-        Recurring editedRecurring = new RecurringBuilder(recurringInFilteredList).withName(VALID_NAME_RECURRING).build();
+        Recurring editedRecurring = new RecurringBuilder(recurringInFilteredList).withName(VALID_NAME_RECURRING)
+                .build();
         EditRecurringCommand editRecurringCommand = new EditRecurringCommand(INDEX_FIRST_EXPENSE,
                 new EditRecurringDescriptorBuilder().withName(VALID_NAME_RECURRING).build());
 
@@ -150,7 +159,8 @@ public class EditRecurringCommandTest {
         assertFalse(standardCommand.equals(new EditRecurringCommand(INDEX_SECOND_EXPENSE, DESC_RECURRING)));
 
         // different descriptor -> returns false
-        EditRecurringCommand.EditRecurringDescriptor differentDescriptor = new EditRecurringCommand.EditRecurringDescriptor();
+        EditRecurringCommand.EditRecurringDescriptor differentDescriptor = new EditRecurringCommand
+                .EditRecurringDescriptor();
         assertFalse(standardCommand.equals(new EditRecurringCommand(INDEX_FIRST_EXPENSE, differentDescriptor)));
     }
 

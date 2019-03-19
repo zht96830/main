@@ -1,14 +1,5 @@
 package seedu.address.logic.commands.recurringcommands;
 
-import org.junit.Test;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.recurring.Recurring;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -17,6 +8,17 @@ import static seedu.address.logic.commands.CommandTestUtil.showRecurringAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
 import static seedu.address.testutil.TypicalRecurrings.getTypicalFinanceTrackerWithRecurrings;
+
+import org.junit.Test;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.recurring.Recurring;
+
 
 public class DeleteRecurringCommandTest {
     private Model model = new ModelManager(getTypicalFinanceTrackerWithRecurrings(), new UserPrefs());
@@ -27,7 +29,8 @@ public class DeleteRecurringCommandTest {
         Recurring recurringToDelete = model.getFilteredRecurringList().get(INDEX_FIRST_EXPENSE.getZeroBased());
         DeleteRecurringCommand deleteRecurringCommand = new DeleteRecurringCommand(INDEX_FIRST_EXPENSE);
 
-        String expectedMessage = String.format(DeleteRecurringCommand.MESSAGE_DELETE_RECURRING_SUCCESS, recurringToDelete);
+        String expectedMessage = String.format(DeleteRecurringCommand.MESSAGE_DELETE_RECURRING_SUCCESS,
+                recurringToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getFinanceTracker(), new UserPrefs());
         expectedModel.deleteRecurring(recurringToDelete);
@@ -52,7 +55,8 @@ public class DeleteRecurringCommandTest {
         Recurring recurringToDelete = model.getFilteredRecurringList().get(INDEX_FIRST_EXPENSE.getZeroBased());
         DeleteRecurringCommand deleteRecurringCommand = new DeleteRecurringCommand(INDEX_FIRST_EXPENSE);
 
-        String expectedMessage = String.format(DeleteRecurringCommand.MESSAGE_DELETE_RECURRING_SUCCESS, recurringToDelete);
+        String expectedMessage = String.format(DeleteRecurringCommand.MESSAGE_DELETE_RECURRING_SUCCESS,
+                recurringToDelete);
 
         Model expectedModel = new ModelManager(model.getFinanceTracker(), new UserPrefs());
         expectedModel.deleteRecurring(recurringToDelete);

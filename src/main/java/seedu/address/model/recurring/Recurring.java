@@ -1,5 +1,7 @@
 package seedu.address.model.recurring;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 import seedu.address.model.attributes.Amount;
@@ -9,8 +11,6 @@ import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.expense.Expense;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Recurring in the finance tracker.

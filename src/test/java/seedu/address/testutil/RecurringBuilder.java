@@ -8,7 +8,9 @@ import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.recurring.Recurring;
 
-
+/**
+ * A utility class to help with building Recurring objects.
+ */
 public class RecurringBuilder {
     public static final String DEFAULT_NAME = "Phone Bill";
     public static final String DEFAULT_AMOUNT = "50.00";

@@ -2,7 +2,12 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.recurringcommands.EditRecurringCommand;
 import seedu.address.logic.commands.recurringcommands.EditRecurringCommand.EditRecurringDescriptor;
-import seedu.address.model.attributes.*;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
+import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.recurring.Recurring;
 
 /**

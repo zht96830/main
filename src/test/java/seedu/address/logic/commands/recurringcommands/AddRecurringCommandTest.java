@@ -1,10 +1,22 @@
 package seedu.address.logic.commands.recurringcommands;
 
-import javafx.beans.property.ReadOnlyProperty;
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
@@ -17,16 +29,6 @@ import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.testutil.RecurringBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class AddRecurringCommandTest {
 
@@ -50,7 +52,8 @@ public class AddRecurringCommandTest {
 
         CommandResult commandResult = new AddRecurringCommand(validRecurring).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddRecurringCommand.MESSAGE_SUCCESS, validRecurring), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddRecurringCommand.MESSAGE_SUCCESS, validRecurring),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validRecurring), modelStub.recurringsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }

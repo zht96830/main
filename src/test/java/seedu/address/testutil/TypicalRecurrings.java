@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.model.FinanceTracker;
-import seedu.address.model.recurring.Recurring;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.FinanceTracker;
+import seedu.address.model.recurring.Recurring;
 
 /**
  * A utility class containing a list of {@code Recurring} objects to be used in tests.
