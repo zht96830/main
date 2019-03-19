@@ -11,6 +11,7 @@ import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Occurrence;
+import seedu.address.model.attributes.View;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -111,6 +112,25 @@ public class ParserUtil {
             throw new ParseException(Occurrence.MESSAGE_CONSTRAINTS);
         }
         return new Occurrence(occurence);
+    }
+
+    /**
+     * Parses a {@code String view} into an {@code view}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code view} is invalid.
+     */
+    public static View parseView(String view) throws ParseException {
+        requireNonNull(view);
+        String trimmedView = view.trim().toUpperCase();
+
+        try {
+            View.valueOf(trimmedView);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(View.MESSAGE_CONSTRAINTS);
+        }
+
+        return View.valueOf(trimmedView);
     }
 
     /**

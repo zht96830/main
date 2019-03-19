@@ -39,6 +39,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.expenseparsers.AddExpenseCommandParser;
 import seedu.address.logic.parser.expenseparsers.DeleteExpenseCommandParser;
 import seedu.address.logic.parser.expenseparsers.EditExpenseCommandParser;
+import seedu.address.logic.parser.expenseparsers.ListExpenseCommandParser;
 import seedu.address.logic.parser.recurringparsers.AddRecurringCommandParser;
 import seedu.address.logic.parser.recurringparsers.DeleteRecurringCommandParser;
 import seedu.address.logic.parser.recurringparsers.EditRecurringCommandParser;
@@ -116,7 +117,7 @@ public class FinanceTrackerParser {
             return new FindCommandParser().parse(arguments);
 
         case ListExpenseCommand.COMMAND_WORD:
-            return new ListExpenseCommand();
+            return new ListExpenseCommandParser().parse(arguments);
 
         case ListRecurringCommand.COMMAND_WORD:
             return new ListRecurringCommand();
