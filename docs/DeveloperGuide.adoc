@@ -385,7 +385,7 @@ This implementation is under Logic and Model components.
 
 ===== Current implementation
 
-Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `listexpense`. The other list commands have similar implementations.
+Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `stats`. The other list commands have similar implementations.
 
 (UML here)
 
