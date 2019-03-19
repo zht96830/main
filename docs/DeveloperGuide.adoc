@@ -444,6 +444,14 @@ Below is the UML sequence diagram and a step-by-step explanation of an example u
 
 Work in Progress
 
+=== Budget feature
+
+This feature allows users to set budgets for different categories so they can limit the amount spent for each category.
+
+How it is implemented:
+User enters the amount they want to limit themselves to for a particular category and specifies the start and end date for their budget.
+For every expense they enter that falls under that category, the totalSpent variable in the Budget class will be updated (coming in v1.3). This information will be displayed to the user so that they can know how much they have spent so far and better plan their future expenses so as not to exceed their budget.
+
 == Documentation
 
 We use asciidoc for writing documentation.
