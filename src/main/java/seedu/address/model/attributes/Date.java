@@ -141,6 +141,40 @@ public class Date implements Comparable<Date> {
         }
     }
 
+    /**
+     *
+     * @param duration is the duration before current date
+     * @return true if localDate is within the duration
+     */
+    public boolean isWithinDuration(String duration) {
+        // get today's date
+        LocalDate currentDate = LocalDate.now();
+
+        // auto return true if same date
+        if (currentDate.equals(localDate)) {
+            return true;
+        }
+
+        switch (duration) {
+        case "day":
+            return currentDate.equals(localDate);
+        case "week":
+            // get date is one week before today's date
+            LocalDate lastWeekDate = currentDate.minusWeeks(1);
+            return (localDate.isAfter(lastWeekDate) && localDate.isBefore(currentDate));
+        case "month":
+            // get date is one month before today's date
+            LocalDate lastMonthDate = currentDate.minusMonths(1);
+            return (localDate.isAfter(lastMonthDate) && localDate.isBefore(currentDate));
+        case "year":
+            // get date is one year before today's date
+            LocalDate lastYearDate = currentDate.minusYears(1);
+            return (localDate.isAfter(lastYearDate) && localDate.isBefore(currentDate));
+        default:
+            return false;
+        }
+    }
+
     @Override
     public int hashCode() {
         return this.hashCode();

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import java.util.Arrays;
@@ -27,6 +28,7 @@ import seedu.address.logic.commands.generalcommands.HistoryCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attributes.View;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
@@ -105,8 +107,10 @@ public class FinanceTrackerParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListExpenseCommand.COMMAND_WORD) instanceof ListExpenseCommand);
-        assertTrue(parser.parseCommand(ListExpenseCommand.COMMAND_WORD + " 3") instanceof ListExpenseCommand);
+        assertTrue(parser.parseCommand(ListExpenseCommand.COMMAND_WORD + " " + PREFIX_VIEW + View.ALL)
+                instanceof ListExpenseCommand);
+        assertTrue(parser.parseCommand(ListExpenseCommand.COMMAND_WORD + " " + PREFIX_VIEW + View.FOOD)
+                instanceof ListExpenseCommand);
     }
 
     @Test

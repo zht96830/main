@@ -335,6 +335,44 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
+=== Listing Feature
+
+This feature allows users to filter out specific expenses based on the view specified. Only expenses that are under those views will be shown on the respective list panels.
+
+Listing feature consists of `listexpense`, `listrecurring`, `listbudget` and `listdebt`.
+
+This implementation is under Logic and Model components.
+
+==== Current implementation
+
+Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `listexpense`. The other list commands have similar implementations.
+
+image::ListExpenseSequenceDiagram.png[width="800"]
+
+1. User enters command `listexpense v/food`. The command is received by `FinanceTrackerParser`, which then creates a `ListExpenseCommandParser` object. The created object then calls `ListExpenseCommandParser.parse("v/food")` method.
+
+2. `ListExpenseCommandParser.parse("v/food")` method calls the `ArgumentTokenizer.tokenize()` to tokenize the input `v/food` and stores it in an `ArgumentMultiMap` object.
+
+3. `ListExpenseCommandParse.parse("v/food")` method then calls `ParserUtil.parseView(argMultiMap.getValue(PREFIX_VIEW).get())` and gets a `View` object in return.
+
+4.  After that, a  `ListExpenseCommand` object is created with the `View` object as parameter and return to `LogicManager`.
+
+5. `LogicManager` then calls `ListExpenseCommand.execute()`, which calls `Model.updateFilteredExpense(predicate)`, where predicate is obtained from calling the `ListExpenseCommand.getPredicate(view)`. It then updates the filter of the filtered expense list and it now contains the new set of expenses that are filtered by the predicate.
+
+6. Finally, the expense list panel will show the new set of expenses. A `CommandResult` is then created and returned to `LogicManager`.
+
+==== Design Consideration
+
+This feature can be implemented in different ways in terms of how the specified expenses are filtered out. The alternative ways of implementation are shown below.
+
+* Alternative 1 (current choice): Go through all expenses in the `FinanceTracker` and filter out those that are under the specified view.
+** Pros: Easy to implement. The original architecture is preserved.
+** Cons: Time-consuming. Large number of expenses in FinanceTracker will take longer time to filter.
+
+* Alternative 2: Store expenses in separate files based on different views. Only check files under the specified view when filtering.
+** Pros: More efficient. Will not go through every single expense.
+** Cons: Will need to alter the original architecture.
+
 === Pay Debt Function
 
 This feature is currently not implemented. Will be implemented by v1.3. +
