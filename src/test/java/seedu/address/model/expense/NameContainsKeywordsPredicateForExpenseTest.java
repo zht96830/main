@@ -18,14 +18,17 @@ public class NameContainsKeywordsPredicateForExpenseTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        NameContainsKeywordsPredicateForExpense firstPredicate = new NameContainsKeywordsPredicateForExpense(firstPredicateKeywordList);
-        NameContainsKeywordsPredicateForExpense secondPredicate = new NameContainsKeywordsPredicateForExpense(secondPredicateKeywordList);
+        NameContainsKeywordsPredicateForExpense firstPredicate =
+                new NameContainsKeywordsPredicateForExpense(firstPredicateKeywordList);
+        NameContainsKeywordsPredicateForExpense secondPredicate =
+                new NameContainsKeywordsPredicateForExpense(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsKeywordsPredicateForExpense firstPredicateCopy = new NameContainsKeywordsPredicateForExpense(firstPredicateKeywordList);
+        NameContainsKeywordsPredicateForExpense firstPredicateCopy =
+                new NameContainsKeywordsPredicateForExpense(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -61,7 +64,8 @@ public class NameContainsKeywordsPredicateForExpenseTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        NameContainsKeywordsPredicateForExpense predicate = new NameContainsKeywordsPredicateForExpense(Collections.emptyList());
+        NameContainsKeywordsPredicateForExpense predicate =
+                new NameContainsKeywordsPredicateForExpense(Collections.emptyList());
         assertFalse(predicate.test(new ExpenseBuilder().withName("Chicken Rice").build()));
 
         // Non-matching keyword
@@ -69,7 +73,8 @@ public class NameContainsKeywordsPredicateForExpenseTest {
         assertFalse(predicate.test(new ExpenseBuilder().withName("Chicken Rice").build()));
 
         // Keywords match amount, date and category, but does not match name
-        predicate = new NameContainsKeywordsPredicateForExpense(Arrays.asList("1.10", "10-03-2019", "food", "FOOD"));
+        predicate = new NameContainsKeywordsPredicateForExpense(
+                Arrays.asList("1.10", "10-03-2019", "food", "FOOD"));
         assertFalse(predicate.test(new ExpenseBuilder().withName("Chicken Rice").withAmount("1.10")
                 .withDate("10-03-2019").withCategory("food").build()));
     }
