@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_EXPENSES_FOUND_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalExpenses.DOCTOR;
 import static seedu.address.testutil.TypicalExpenses.GROCERIES;
@@ -69,7 +69,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_EXPENSES_FOUND_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredExpenseList(predicate);
@@ -79,7 +79,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_EXPENSES_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_EXPENSES_FOUND_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("TAXI GROCERIES DOCTOR ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredExpenseList(predicate);

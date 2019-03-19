@@ -40,7 +40,7 @@ public class ListExpenseCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_VIEW + "food";
 
-    public static final String MESSAGE_SUCCESS = "Listed expenses:\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Listed expenses under:\n%1$s";
 
     private final View view;
 
