@@ -1,18 +1,17 @@
-package seedu.address.model.person;
+package seedu.address.model.expense;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.expense.Expense;
 
 /**
  * Tests that a {@code Expense}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Expense> {
+public class NameContainsKeywordsPredicateForExpense implements Predicate<Expense> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public NameContainsKeywordsPredicateForExpense(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -25,8 +24,8 @@ public class NameContainsKeywordsPredicate implements Predicate<Expense> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof NameContainsKeywordsPredicateForExpense // instanceof handles nulls
+                && keywords.equals(((NameContainsKeywordsPredicateForExpense) other).keywords)); // state check
     }
 
 }

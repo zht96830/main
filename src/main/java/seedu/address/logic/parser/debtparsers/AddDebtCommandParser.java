@@ -46,6 +46,9 @@ public class AddDebtCommandParser implements Parser<AddDebtCommand> {
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Date deadline = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUE).get());
+        if (!deadline.isEqualOrAfterToday()) {
+            throw new ParseException(Date.MESSAGE_DEADLINE_CONSTRAINTS);
+        }
         String remarks = null;
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             remarks = argMultimap.getValue(PREFIX_REMARKS).get();

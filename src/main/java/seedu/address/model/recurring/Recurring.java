@@ -1,5 +1,7 @@
 package seedu.address.model.recurring;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 import seedu.address.model.attributes.Amount;
@@ -7,6 +9,7 @@ import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.expense.Expense;
 
 /**
@@ -16,14 +19,15 @@ import seedu.address.model.expense.Expense;
 public class Recurring extends Expense {
     // Additional fields
     private Frequency frequency;
-    private int occurrence;
+    private Occurrence occurrence;
 
     /**
      * Initializes a newly created Recurring object that contains only the compulsory fields.
      */
     public Recurring(Name name, Amount amount, Date date, Category category, String remarks, Frequency frequency,
-                     int occurrence) {
+                     Occurrence occurrence) {
         super(name, amount, date, category, remarks);
+        requireAllNonNull(frequency, occurrence);
         this.frequency = frequency;
         this.occurrence = occurrence;
     }
@@ -32,7 +36,7 @@ public class Recurring extends Expense {
         return frequency;
     }
 
-    public int getOccurrence() {
+    public Occurrence getOccurrence() {
         return occurrence;
     }
 

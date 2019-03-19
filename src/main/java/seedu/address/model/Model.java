@@ -44,6 +44,24 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Recurring> PREDICATE_SHOW_ALL_RECURRING = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true if it is within the range of current date */
+    // needs to be implemented
+    Predicate<Recurring> PREDICATE_SHOW_DAY_RECURRING = p -> p.getDate().isWithinDuration("day");
+    Predicate<Recurring> PREDICATE_SHOW_WEEK_RECURRING = p -> p.getDate().isWithinDuration("week");
+    Predicate<Recurring> PREDICATE_SHOW_MONTH_RECURRING = p -> p.getDate().isWithinDuration("month");
+    Predicate<Recurring> PREDICATE_SHOW_YEAR_RECURRING = p -> p.getDate().isWithinDuration("year");
+
+    /** {@code Predicate} that always evaluate to true if expense is in the specified category */
+    Predicate<Recurring> PREDICATE_SHOW_FOOD_RECURRING = p -> p.getCategory().equals(Category.FOOD);
+    Predicate<Recurring> PREDICATE_SHOW_WORK_RECURRING = p -> p.getCategory().equals(Category.WORK);
+    Predicate<Recurring> PREDICATE_SHOW_TRAVEL_RECURRING = p -> p.getCategory().equals(Category.TRAVEL);
+    Predicate<Recurring> PREDICATE_SHOW_OTHERS_RECURRING = p -> p.getCategory().equals(Category.OTHERS);
+    Predicate<Recurring> PREDICATE_SHOW_ENT_RECURRING = p -> p.getCategory().equals(Category.ENTERTAINMENT);
+    Predicate<Recurring> PREDICATE_SHOW_SHOPPING_RECURRING = p -> p.getCategory().equals(Category.SHOPPING);
+    Predicate<Recurring> PREDICATE_SHOW_TRANSPORT_RECURRING = p -> p.getCategory().equals(Category.TRANSPORT);
+    Predicate<Recurring> PREDICATE_SHOW_UTIL_RECURRING = p -> p.getCategory().equals(Category.UTILITIES);
+    Predicate<Recurring> PREDICATE_SHOW_HEALTHCARE_RECURRING = p -> p.getCategory().equals(Category.HEALTHCARE);
+
     /** {@code Predicate} that always evaluate to true */
     Predicate<Budget> PREDICATE_SHOW_ALL_BUDGETS = unused -> true;
 
