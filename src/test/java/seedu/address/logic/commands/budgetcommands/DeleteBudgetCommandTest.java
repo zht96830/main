@@ -11,6 +11,7 @@ import static seedu.address.model.attributes.Category.WORK;
 import static seedu.address.testutil.TypicalBudgets.getTypicalFinanceTrackerWithBudgets;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.generalcommands.RedoCommand;

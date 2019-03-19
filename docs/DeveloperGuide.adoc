@@ -373,6 +373,27 @@ This feature can be implemented in different ways in terms of how the specified 
 ** Pros: More efficient. Will not go through every single expense.
 ** Cons: Will need to alter the original architecture.
 
+=== Pay Debt Function
+
+This feature is currently not implemented. Will be implemented by v1.3. +
+
+The purpose of this feature is to provide the convenience for users to indicate that they have paid off a particular debt and seamlessly convert that into an expense. +
+
+How the software does it is to sieve out the following relevant information from the Debt entry: +
+
+* `Person Owed`
+* `Amount`
+* `Category`
+* `Remarks`
+
+The software then take this information and create a new Expense with the following fields: +
+
+* `Name` : Paid Debt to `Person Owed`
+* `Amount` : Same amount will be used
+* `Category` : Same category will be used
+* `Date` : There is no need for the user to key in the date. The program will use the local date in the system's clock
+* `Remarks` : Same remarks will be used
+
 == Documentation
 
 We use asciidoc for writing documentation.

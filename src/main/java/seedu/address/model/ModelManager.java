@@ -20,7 +20,7 @@ import seedu.address.model.budget.BudgetNotFoundException;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.debt.exceptions.DebtNotFoundException;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.person.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.model.recurring.RecurringNotFoundException;
 

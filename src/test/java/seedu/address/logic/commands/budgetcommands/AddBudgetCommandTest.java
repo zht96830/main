@@ -9,12 +9,14 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import javafx.beans.property.ReadOnlyProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
@@ -44,7 +46,8 @@ public class AddBudgetCommandTest {
 
     @Test
     public void execute_budgetAcceptedByModel_addSuccessful() throws Exception {
-        AddBudgetCommandTest.ModelStubAcceptingBudgetAdded modelStub = new AddBudgetCommandTest.ModelStubAcceptingBudgetAdded();
+        AddBudgetCommandTest.ModelStubAcceptingBudgetAdded modelStub = new AddBudgetCommandTest
+                .ModelStubAcceptingBudgetAdded();
         Budget validBudget = new BudgetBuilder().build();
 
         CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);

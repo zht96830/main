@@ -8,26 +8,28 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 /**
- * Represents a date in the finance tracker.
+ * Represents a localDate in the finance tracker.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should only be dd-mm-yyyy format.";
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS =
+            "Deadline must not be a localDate that has already passed.";
     public static final String MESSAGE_DATE_DOES_NOT_EXIST = "Date does not exist.";
     private static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
     private LocalDate localDate;
 
     /**
      * Constructs a {@code Date}.
-     * @param date A valid date number.
+     * @param localDate A valid localDate number.
      */
-    public Date(String date) throws DateTimeParseException {
-        requireNonNull(date);
-        //checkArgument((isValidDate(date)=="format"), MESSAGE_CONSTRAINTS);
-        //checkArgument((isValidDate(date)=="exist"), MESSAGE_DATE_DOES_NOT_EXIST);
-        localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+    public Date(String localDate) throws DateTimeParseException {
+        requireNonNull(localDate);
+        //checkArgument((isValidDate(localDate)=="format"), MESSAGE_CONSTRAINTS);
+        //checkArgument((isValidDate(localDate)=="exist"), MESSAGE_DATE_DOES_NOT_EXIST);
+        this.localDate = LocalDate.parse(localDate, DateTimeFormatter.ofPattern("dd-MM-uuuu")
                 .withResolverStyle(ResolverStyle.STRICT));
     }
 
@@ -35,13 +37,17 @@ public class Date implements Comparable<Date> {
         return this.localDate;
     }
 
-    public void setLocalDate(String date) {
-        this.localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+    public void setLocalDate(String localDate) {
+        this.localDate = LocalDate.parse(localDate, DateTimeFormatter.ofPattern("dd-MM-uuuu")
                 .withResolverStyle(ResolverStyle.STRICT));
     }
 
+    public void setLocalDate(Date date) {
+        this.localDate = date.getLocalDate();
+    }
+
     /**
-     * Returns string that informs if a given string is valid or of the wrong date format or does not exist.
+     * Returns string that informs if a given string is valid or of the wrong localDate format or does not exist.
      */
     public static String isValidDate(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
@@ -53,11 +59,11 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Returns true if date exists.
+     * Returns true if localDate exists.
      */
     private static boolean doesDateExist(String test) throws DateTimeParseException {
         try {
-            LocalDate localDate = LocalDate.parse(test, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+            LocalDate date = LocalDate.parse(test, DateTimeFormatter.ofPattern("dd-MM-uuuu")
                     .withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException dtpe) {
             return false;
@@ -83,6 +89,7 @@ public class Date implements Comparable<Date> {
     /**
      * Returns -1, 0 and 1 respectively if Date is earlier than, same as, or later than {@param other}
      */
+    @Override
     public int compareTo(Date other) {
         if (this.localDate.isBefore(other.localDate)) {
             return -1;
@@ -117,6 +124,22 @@ public class Date implements Comparable<Date> {
         return 0;*/
     }
 
+    /**
+     * Checks against operating system's localDate and check whether {@code localDate} is equal or after this localDate.
+     *
+     * @return true if localDate is the same as the system's current localDate or if it falls on a localDate after the
+     * system's current localDate, else it returns false
+     */
+    public boolean isEqualOrAfterToday() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        Date currentDate = new Date(dtf.format(LocalDate.now()));
+
+        if (compareTo(currentDate) == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     /**
      *
