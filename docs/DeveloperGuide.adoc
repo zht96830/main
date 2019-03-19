@@ -373,6 +373,42 @@ This feature can be implemented in different ways in terms of how the specified 
 ** Pros: More efficient. Will not go through every single expense.
 ** Cons: Will need to alter the original architecture.
 
+=== Statistics Feature
+
+This feature allows users to calculate various statistics for the entries in their Financial Tracker. The feature will read the expenses, debts and budgets and generate various metrics to display.
+
+The Statistic feature consists of `stats`, `statstrend` and `statscompare`
+
+This implementation is under Logic and Model components.
+
+==== `stats`
+
+===== Current implementation
+
+Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `listexpense`. The other list commands have similar implementations.
+
+(UML here)
+
+1. User enters command `stats c/food`. The command is received by `FinanceTrackerParser`, which then creates a `StatsCommandParser` object. The created object then calls `StatsCommandParser.parse("v/food")` method.
+
+2. `StatsCommandParser.parse("v/food")` method calls the `ArgumentTokenizer.tokenize()` to tokenize the input `v/food` and stores it in an `ArgumentMultiMap` object.
+
+3. `StatsCommandParse.parse("v/food")` method then calls `ParserUtil.parseCategory(argMultiMap.getCategory(PREFIX_Category).get())` and gets a `Category` object in return.
+
+4. `StatsCommandParser` will then create a relevant `Statistic` object.
+
+5.  After that, a `StatsCommand` object is created with the `Statistic` object as parameter and return to `LogicManager`.
+
+6. `LogicManager` then calls `StatsCommand.execute()`, which calls `Model.getStatistics(Statistics)` using the `Statistic` object created in step 3
+
+7. `Model.getStatistics(Statistics)` will call `Statistics.calculate` which will generate the appropriate results
+
+8.  The result will be shown on the UI
+
+===== Design Consideration
+
+Work in Progress
+
 == Documentation
 
 We use asciidoc for writing documentation.
