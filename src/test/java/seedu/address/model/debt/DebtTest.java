@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalDebts.DUCK_RICE;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
