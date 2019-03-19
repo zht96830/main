@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
-import static seedu.address.testutil.TypicalDebts.FRANK;
 import static seedu.address.testutil.TypicalDebts.AMY;
 import static seedu.address.testutil.TypicalDebts.BOB;
+import static seedu.address.testutil.TypicalDebts.FRANK;
 
 import java.util.Collections;
 import java.util.Iterator;

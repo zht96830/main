@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
-import static seedu.address.testutil.TypicalDebts.FRANK;
 import static seedu.address.testutil.TypicalDebts.AMY;
+import static seedu.address.testutil.TypicalDebts.FRANK;
 
 import org.junit.Rule;
 import org.junit.Test;
