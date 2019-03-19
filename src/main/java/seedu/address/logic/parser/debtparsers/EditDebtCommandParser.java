@@ -22,8 +22,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class EditDebtCommandParser implements Parser<EditDebtCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditExpenseCommand
+     * and returns an EditExpenseCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */

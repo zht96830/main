@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.testutil.TypicalExpenses.EXPENSE;
 
 import java.io.IOException;
@@ -19,15 +20,16 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.expensecommands.AddCommand;
+import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
+import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
 import seedu.address.logic.commands.generalcommands.HistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyFinanceTracker;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.attributes.View;
 import seedu.address.model.expense.Expense;
 import seedu.address.storage.JsonFinanceTrackerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -65,15 +67,15 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "deleteexpense 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
         assertHistoryCorrect(deleteCommand);
     }
 
     @Test
     public void execute_validCommand_success() {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        String listCommand = ListExpenseCommand.COMMAND_WORD + " " + PREFIX_VIEW + View.ALL;
+        assertCommandSuccess(listCommand, String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL), model);
         assertHistoryCorrect(listCommand);
     }
 
@@ -87,8 +89,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + DATE_DESC_EXPENSE;
+        String addCommand = AddExpenseCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE
+                + CATEGORY_DESC_EXPENSE + DATE_DESC_EXPENSE;
         Expense expectedExpense = new ExpenseBuilder(EXPENSE).withRemarks("").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addExpense(expectedExpense);

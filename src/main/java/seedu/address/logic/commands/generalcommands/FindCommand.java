@@ -7,7 +7,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 
 /**
  * Finds and lists all persons in Finance Tracker whose name contains any of the argument keywords.
@@ -22,9 +22,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final NameContainsKeywordsPredicateForExpense predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(NameContainsKeywordsPredicateForExpense predicate) {
         this.predicate = predicate;
     }
 
@@ -33,7 +33,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredExpenseList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW, model.getFilteredExpenseList().size()));
+                String.format(Messages.MESSAGE_EXPENSES_FOUND_OVERVIEW, model.getFilteredExpenseList().size()));
     }
 
     @Override
