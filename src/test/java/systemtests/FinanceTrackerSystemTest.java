@@ -4,6 +4,7 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
@@ -37,6 +38,7 @@ import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
+import seedu.address.model.attributes.View;
 import seedu.address.testutil.TypicalExpenses;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
@@ -138,7 +140,7 @@ public abstract class FinanceTrackerSystemTest {
      * Displays all expenses in the finance tracker.
      */
     protected void showAllExpenses() {
-        executeCommand(ListExpenseCommand.COMMAND_WORD);
+        executeCommand(ListExpenseCommand.COMMAND_WORD + " " + PREFIX_VIEW + View.ALL);
         assertEquals(getModel().getFinanceTracker().getExpenseList().size(),
                 getModel().getFilteredExpenseList().size());
     }
