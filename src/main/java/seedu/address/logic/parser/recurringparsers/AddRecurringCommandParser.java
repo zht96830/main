@@ -25,6 +25,7 @@ import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.recurring.Recurring;
 
 /**
@@ -52,7 +53,7 @@ public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Frequency frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get());
-        int occurence = ParserUtil.parseOccurence(argMultimap.getValue(PREFIX_OCCURRENCE).get());
+        Occurrence occurence = ParserUtil.parseOccurence(argMultimap.getValue(PREFIX_OCCURRENCE).get());
         Date date;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());

@@ -10,6 +10,7 @@ import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.attributes.View;
 
 /**
@@ -104,10 +105,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code occurence} is invalid.
      */
-    public static int parseOccurence(String occurence) throws ParseException {
+    public static Occurrence parseOccurence(String occurence) throws ParseException {
         requireNonNull(occurence);
         String trimmedOccurence = occurence.trim();
-        return Integer.parseInt(trimmedOccurence);
+        if (!Occurrence.isValidOccurrence(trimmedOccurence)) {
+            throw new ParseException(Occurrence.MESSAGE_CONSTRAINTS);
+        }
+        return new Occurrence(occurence);
     }
 
     /**
