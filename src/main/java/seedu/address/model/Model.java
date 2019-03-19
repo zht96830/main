@@ -21,10 +21,10 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true if it is within the range of current date */
     // needs to be implemented
-    Predicate<Expense> PREDICATE_SHOW_DAY_EXPENSES = p -> p.getDate().isWithinDay();
-    Predicate<Expense> PREDICATE_SHOW_WEEK_EXPENSES = p -> p.getDate().isWithinWeek();
-    Predicate<Expense> PREDICATE_SHOW_MONTH_EXPENSES = p -> p.getDate().isWithinMonth();
-    Predicate<Expense> PREDICATE_SHOW_YEAR_EXPENSES = p -> p.getDate().isWithinYear();
+    Predicate<Expense> PREDICATE_SHOW_DAY_EXPENSES = p -> p.getDate().isWithinDuration("day");
+    Predicate<Expense> PREDICATE_SHOW_WEEK_EXPENSES = p -> p.getDate().isWithinDuration("week");
+    Predicate<Expense> PREDICATE_SHOW_MONTH_EXPENSES = p -> p.getDate().isWithinDuration("month");
+    Predicate<Expense> PREDICATE_SHOW_YEAR_EXPENSES = p -> p.getDate().isWithinDuration("year");
 
     /** {@code Predicate} that always evaluate to true if expense is in the specified category */
     Predicate<Expense> PREDICATE_SHOW_FOOD_EXPENSES = p -> p.getCategory().equals(Category.FOOD);
