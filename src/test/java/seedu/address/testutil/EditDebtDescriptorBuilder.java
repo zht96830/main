@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.debtcommands.EditDebtCommand.EditDebtDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
@@ -18,14 +19,14 @@ public class EditDebtDescriptorBuilder {
         descriptor = new EditDebtDescriptor();
     }
 
-    public EditDebtDescriptorBuilder(EditDebtDescriptor descriptor) {
+    public EditDebtDescriptorBuilder(EditDebtDescriptor descriptor) throws ParseException {
         this.descriptor = new EditDebtDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditDebtDescriptor} with fields containing {@code debt}'s details
      */
-    public EditDebtDescriptorBuilder(Debt debt) {
+    public EditDebtDescriptorBuilder(Debt debt) throws ParseException {
         descriptor = new EditDebtDescriptor();
         descriptor.setPersonOwed(debt.getPersonOwed());
         descriptor.setAmount(debt.getAmount());
@@ -61,7 +62,7 @@ public class EditDebtDescriptorBuilder {
     /**
      * Sets the {@code Date} of the {@code EditDebtDescriptor} that we are building.
      */
-    public EditDebtDescriptorBuilder withDeadline(String date) {
+    public EditDebtDescriptorBuilder withDeadline(String date) throws ParseException {
         descriptor.setDeadline(new Date(date));
         return this;
     }

@@ -387,6 +387,27 @@ This feature also simplifies the deletion and editing of these recurring expense
 
 Work in Progress
 
+=== Pay Debt Function
+
+This feature is currently not implemented. Will be implemented by v1.3. +
+
+The purpose of this feature is to provide the convenience for users to indicate that they have paid off a particular debt and seamlessly convert that into an expense. +
+
+How the software does it is to sieve out the following relevant information from the Debt entry: +
+
+* `Person Owed`
+* `Amount`
+* `Category`
+* `Remarks`
+
+The software then take this information and create a new Expense with the following fields: +
+
+* `Name` : Paid Debt to `Person Owed`
+* `Amount` : Same amount will be used
+* `Category` : Same category will be used
+* `Date` : There is no need for the user to key in the date. The program will use the local date in the system's clock
+* `Remarks` : Same remarks will be used
+
 === Statistics Feature
 
 This feature allows users to calculate various statistics for the entries in their Financial Tracker. The feature will read the expenses, debts and budgets and generate various metrics to display.

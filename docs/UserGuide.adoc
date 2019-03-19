@@ -87,12 +87,11 @@ e.g. When adding an expense, instead of inputting an entire line of command such
 
 Format: `help`
 
-=== Listing expenses : `list`
+=== Listing expenses : `listexpense`
 
 Shows a list of expenses in the finance tracker according to the view specified. +
-Format: `list v/VIEW`
+Format: `listexpense v/VIEW`
 
-[NOTE]
 ====
 * The VIEW specifies how the list of expenses are displayed.
 ** v/all: displays entire list of expenses
@@ -102,62 +101,62 @@ Format: `list v/VIEW`
 ** v/CATEGORY: displays list of expenses with CATEGORY
 ====
 
-=== Adding an expense: `add`
+=== Adding an expense: `addexpense`
 
 Adds an expense to the finance tracker. +
-Format 1: `add n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]`
+Format 1: `addexpense n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]`
 
-[NOTE]
 ====
-* The AMOUNT *must be a positive integer or decimal of max 2 decimal places.*
-* The CATEGORY only consists of “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive.
-* DATE must be in dd-mm-yyyy format.
+* The NAME should only contain alphanumeric characters and spaces, and it should not be blank.
+* The AMOUNT should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.
+* The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.
+* The DATE should be in dd-mm-yyyy format.
 * If DATE is omitted, current date will be used.
+* If REMARK is omitted, no remarks will be stored.
 ====
-
-Examples:
-
-* `add n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake.`
-* `add n/Sofa $/200 c/HOME`
-
-Format 2: `add`
 
 [TIP]
-You can omit (optional) parameters by leaving them empty.
+You can omit [optional] parameters by leaving them empty.
 
 Examples:
 
-* `add` +
+* `addexpense n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake.`
+* `addexpense n/Sofa $/200 c/HOME`
+
+Format 2: `addexpense`
+
+Examples:
+
+* `addexpense` +
   `Please enter the name of the expense: BKT` +
   `Please enter the amount of the expense: 3.00` +
   `Please enter the category of the expense: food` +
   `Please enter the date of the expense (optional):` +
   `Please enter the remark of the expense (optional):`
 
-=== Editing an expense : `edit`
+=== Editing an expense : `editexpense`
 
 Edits an existing expense in the finance tracker. +
-Format 1: `edit INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]`
+Format 1: `editexpense INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]`
 
-[NOTE]
 ====
-* Edits the expense at the specified `INDEX`. The index refers to the index number shown in the displayed expense list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the expense at the specified `INDEX`.
+* The index refers to the index number shown in the displayed expense list. The index must be a positive integer.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 ====
+[TIP]
+You can omit [optional] parameters by leaving them empty. If all parameters are empty, no edits will occur.
 
 Examples:
 
-* `edit 9 $/450 c/food` +
+* `editexpense 9 $/450 c/food` +
 Edits the amount and category of the 9th expense to be `450` and `food` respectively.
 
-Format 2: `edit INDEX`
-
-[TIP]
-You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
+Format 2: `editexpense INDEX`
 
 Examples:
-`edit 9` +
+`editexpense 9` +
 `Please enter the name of the expense to be updated (optional):` +
 `Please enter the amount of the expense to be updated (optional): 450` +
 `Please enter the category of the expense to be updated (optional): food` +
@@ -165,22 +164,20 @@ Examples:
 `Please enter the remark of the expense to be updated (optional):`
 
 
-=== Deleting an expense : `delete`
+=== Deleting an expense : `deleteexpense`
 
 Deletes the specified expense from the finance tracker. +
-Format: `delete INDEX`
+Format: `deleteexpense INDEX`
 
-[NOTE]
 ====
 * Deletes the expense at the specified `INDEX`.
-* The index refers to the index number shown in the displayed expense list.
-* The index *must be a positive integer* 1, 2, 3, ...
+* The index refers to the index number shown in the displayed expense list. The index must be a positive integer.
 ====
 
 Examples:
 
 * `list` +
-`delete 2` +
+`deleteexpense 2` +
 Deletes the 2nd expense in the finance tracker.
 
 === Adding a budget : `addbudget`
@@ -188,11 +185,11 @@ Deletes the 2nd expense in the finance tracker.
 Adds a budget with a time frame to the tracker. +
 Format 1: `addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE`
 
-[NOTE]
 ====
-* The categories include: “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”,
-“entertainment” and “others” which are case insensitive.
-* The program only limits one budget for each category.
+* There is only one budget for each category.
+* The AMOUNT should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.
+* The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.
+* The START_DATE and END_DATE should be in dd-mm-yyyy format.
 ====
 
 Examples:
@@ -207,14 +204,19 @@ Examples:
 * `addbudget` +
 `Please enter the category of the budget: food` +
 `Please enter the amount of the budget: 400` +
-`Please enter the start date of budget: 1-2-2019` +
+`Please enter the start date of budget: 01-2-2019` +
 `Please enter the end date of budget: 28-2-2019`
 
 === Editing a budget: `editbudget`
 
-Edits a budget in the finance tracker.
-
+Edits a budget in the finance tracker. +
 Format 1: `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]`
+
+====
+* Edits the budget of the specified `CATEGORY`.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+====
 
 Examples:
 
@@ -236,6 +238,10 @@ Examples:
 
 Deletes a budget from the finance tracker.
 
+====
+* Deletes the budget of the specified `CATEGORY`.
+====
+
 Format: `deletebudget c/CATEGORY`
 
 Examples:
@@ -244,12 +250,11 @@ Examples:
 
 === Listing debts: `listdebt`
 Shows a list of debts in the finance tracker according to the view specified.
-
 Format: `listdebt [v/VIEW]`
 
-[NOTE]
 ====
-* The VIEW specifies how the list of expenses are displayed.
+* If VIEW is omitted, all debts are listed.
+* The VIEW specifies how the list of debts is displayed.
 ** v/DEADLINE: display list of debts showing nearest DEADLINE first. Debts without deadlines will be at the bottom of the list.
 ** v/CATEGORY: displays list of expenses with CATEGORY
 ====
@@ -260,12 +265,16 @@ Adds a debt to the finance tracker.
 
 Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]`
 
-[NOTE]
 ====
-* AMOUNT_OWED *must be a positive integer or decimal of max 2 decimal places.*
-* CATEGORY only consists of “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive.
-* DEADLINE must be in dd-mm-yyyy format.
+* The PERSON_OWED should only contain alphanumeric characters and spaces, and it should not be blank.
+* The AMOUNT_OWED should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.
+* The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.
+* The DEADLINE should be in dd-mm-yyyy format.
+* If REMARK is omitted, no remarks will be stored.
 ====
+
+[TIP]
+You can omit (optional) parameters by leaving them empty.
 
 Examples:
 
@@ -273,8 +282,6 @@ Examples:
 * `adddebt n/Jane Doe $/200 c/FOOD due/03-03-2019`
 
 Format 2: `adddebt`
-[TIP]
-You can omit (optional) parameters by leaving them empty.
 
 Examples:
 
@@ -287,16 +294,17 @@ Examples:
 
 === Editing a debt: `editdebt`
 
-Edits debt at specified INDEX based on latest debt list shown and updates values of parameters.
-
+Edits an existing debt in the finance tracker. +
 Format 1: `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]`
 
-[NOTE]
 ====
-* Edits the debt at the specified INDEX. The index refers to the index number shown in the displayed debt list. The index *must be a positive integer* 1, 2, 3, …​
+* Edits the debt at the specified `INDEX`.
+* The index refers to the index number shown in the displayed expense list. The index must be a positive integer.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 ====
+[TIP]
+You can omit [optional] parameters by leaving them empty. If all parameters are empty, no edits will occur.
 
 Examples:
 
@@ -304,13 +312,11 @@ Examples:
 Edits expense owed and amount owed of the 5th debt to be `Tommy` and `$60` respectively.
 
 Format 2: `editdebt`
-[TIP]
-You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
 
 Examples:
 
 * `editdebt 5` +
-`Please enter the updated name of the expense you owed (optional): Tommy` +
+`Please enter the updated name of the debt you owed (optional): Tommy` +
 `Please enter the updated amount owed (optional): 60.00` +
 `Please enter the updated category (optional):` +
 `Please enter the updated deadline of the debt (optional):` +
@@ -320,11 +326,9 @@ Examples:
 Deletes the specified debt from the finance tracker.
 Format: `deletedebt INDEX`
 
-[NOTE]
 ====
-* Deletes the debt at the specified INDEX.
-* The index refers to the index number shown in the displayed debt list.
-* The index *must be a positive integer* 1, 2, 3, …​
+* Deletes the debt at the specified `INDEX`.
+* The index refers to the index number shown in the displayed expense list. The index must be a positive integer.
 ====
 
 Examples:
@@ -334,19 +338,21 @@ Examples:
  Deletes the 5th debt in the finance tracker.
 
 === Paying off a debt: `paydebt`
-Convert the debt record to an expense.
+Converts the specified debt into an expense.
 
 Format: `paydebt INDEX [d/DATE]`
 
-[NOTE]
 ====
-* Parameters from debt will be carried over to expense
-* NAME will be entered as “Debt to PERSON_OWED”
-* AMOUNT will be entered as “AMOUNT_OWED”
-* CATEGORY will carry over as such
-* DESCRIPTION will carry over as such
-* DATE must be in dd-mm-yyyy format and can be used to indicate actual day when user paid off the debt
-* If DATE is omitted, current date will be used
+* Converts the debt at the specified `INDEX`.
+* The index refers to the index number shown in the displayed expense list. The index must be a positive integer.
+* After converting the debt into an expense, the debt is deleted.
+* The following parameters from debt will be carried over to expense:
+** The NAME will be entered as “Debt to PERSON_OWED”.
+** The AMOUNT will be entered as “AMOUNT_OWED”.
+** The CATEGORY will carry over as indicated in the debt.
+** The REMARKS will carry over as indicated in the debt.
+* The DATE should be in dd-mm-yyyy format and can be used to indicate actual day when user paid off the debt.
+* If DATE is omitted, current date will be used.
 ====
 
 Examples:
@@ -358,16 +364,20 @@ Converts the 3rd debt in the finance tracker into an expense.
 === Adding a recurring: `addrecurring`
 Adds a recurring payment to the finance tracker.
 
-Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE`
+Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE`
 
-[NOTE]
 ====
-* AMOUNT *must be a positive integer or decimal of max 2 decimal places.*
-* CATEGORY only consists of “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive.
-* STARTDATE must be in dd-mm-yyyy format.
-* If STARTDATE is omitted, current date will be used.
-* FREQUENCY only consists of D, W, M, Y for daily, weekly, monthly and yearly respectively. Any numbers following D, W, M or Y means a multiple of that frequency e.g. W2 means fortnightly (every 2 weeks).
+* The NAME should only contain alphanumeric characters and spaces, and it should not be blank.
+* The AMOUNT should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.
+* The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.
+* The START_DATE should be in dd-mm-yyyy format.
+* If START_DATE is omitted, current date will be used.
+* If REMARK is omitted, no remarks will be stored.
+* The FREQUENCY should consists of D, W, M, Y for daily, weekly, monthly and yearly respectively. Any numbers following D, W, M or Y means a multiple of that frequency e.g. W2 means fortnightly (every 2 weeks).
+* The OCCURRENCE should be a number from 1 to 999 inclusive.
 ====
+[TIP]
+You can omit (optional) parameters by leaving them empty.
 
 Examples:
 
@@ -375,8 +385,6 @@ Examples:
 * `addrecurring n/Magazine Subscription $/20 c/utilities f/M2 o/12`
 
 Format 2: `addrecurring`
-[TIP]
-You can omit (optional) parameters by leaving them empty.
 
 Examples:
 
@@ -392,30 +400,31 @@ Examples:
 === Editing a recurring : `editrecurring`
 
 Edits an existing recurring in the finance tracker. +
-Format 1: `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
+Format 1: `editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 
-[NOTE]
 ====
-* Edits the expense at the specified `INDEX`. The index refers to the index number shown in the displayed expense list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the recurring at the specified `INDEX`.
+* The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.
 * At least one of the optional fields must be provided.
-* EDITPASTOPTION can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be edited to reflect the new changes.
-* Agreeing (Y) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while also changing old expenses already added by this recurring.
-* Disagreeing (N) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while old expenses already added by this recurring will not be changed.
+* EDITPASTOPTION should only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be edited to reflect the new changes.
+** Agreeing (Y) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while also changing old expenses already added by this recurring.
+** Disagreeing (N) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while old expenses already added by this recurring will not be changed.
+* If EDITPASTOPTION is omitted, it defaults to N.
 * Existing values will be updated to the input values.
 ====
+[TIP]
+You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
 
 Examples:
 
 * `editrecurring 9 p/N $/450 c/food` +
 Edits the amount and category of the 9th recurring to be `450` and `food` respectively. No changes will be made to old expenses already added by this recurring.
 
-Format 2: `editrecurring INDEX p/EDITPASTOPTION`
-
-[TIP]
-You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
+Format 2: `editrecurring INDEX`
 
 Examples:
-`editrecurring 9 p/N` +
+`editrecurring 9` +
+`Do you wish to edit previous expenses added by this recurring?:` +
 `Please enter the name of the recurring to be updated (optional):` +
 `Please enter the amount of the recurring to be updated (optional): 450` +
 `Please enter the category of the recurring to be updated (optional): food` +
@@ -427,17 +436,19 @@ Examples:
 === Deleting a recurring: `deleterecurring`
 
 Deletes the specified recurring from the finance tracker. +
-Format: `deleterecurring INDEX p/DELETEPASTOPTION` +
+Format: `deleterecurring INDEX [p/DELETEPASTOPTION]` +
 
-[NOTE]
 ====
 * Deletes the recurring at the specified `INDEX`.
-* The index refers to the index number shown in the displayed recurring list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* DELETEPASTOPTION can only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be deleted.
-* Agreeing (Y) will delete the recurring, and delete all old expenses already added by this recurring.
-* Disagreeing (N) will delete the recurring, but does not delete old expenses already added by this recurring.
+* The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.
+* At least one of the optional fields must be provided.
+* The DELETEPASTOPTION should only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be deleted.
+** Agreeing (Y) will delete the recurring, and delete all old expenses already added by this recurring.
+** Disagreeing (N) will delete the recurring, but does not delete old expenses already added by this recurring.
+* If DELETEPASTOPTION is omitted, it defaults to N.
 ====
+[TIP]
+You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
 
 Examples:
 
@@ -633,38 +644,38 @@ _{Sends an email if the expenses are about to exceed the budget or when debts ar
 
 == Command Summary
 
-* *Add* `add n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]` +
-e.g. `add n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]` +
-e.g. `edit 2 n/Bak Kut Teh`
-* *List* : `list`
 * *Help* : `help`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *List expenses* : `listexpense`
+* *Add an expense* `addexpense n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]` +
+e.g. `addexpense n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake`
+* *Edit an expense* : `editexpense INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]` +
+e.g. `editexpense 2 n/Bak Kut Teh`
+* *Delete an expense* : `deleteexpense INDEX` +
+e.g. `deleteexpense 3`
+* *Clear expenses* : `clearexpense`
 * *Add a budget* : `addbudget $/AMOUNT c/CATEGORY sd/START_DATE ed/END_DATE` +
 e.g. `addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
 * *Edit a budget* : `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]` +
 e.g. `editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019`
 * *Delete a budget* : `deletebudget c/CATEGORY` +
 e.g. `deletebudget c/food`
+* *List debts* : `listdebt [v/VIEW]`
 * *Add a debt* : `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMARK]` +
 e.g. `adddebt n/Jane Doe $/200 c/FOOD`
 * *Edit a debt* : `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]` +
 e.g. `editdebt 5 n/Tommy $/60`
-* *List debts* : `listdebt [v/VIEW]`
 * *Delete a debt* : `deletedebt INDEX` +
 e.g. `deletedebt 5`
 * *Pay off debt* : `paydebt INDEX [d/DATE]` +
 e.g. `payDebt 2`
 * *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 e.g. `addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24` +
-* *Edit a recurring* : `editrecurring INDEX p/EDITPASTOPTION [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
+* *Edit a recurring* : `editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 e.g. `editrecurring 9 p/N $/450 c/food` +
-* *Delete a recurring* : `deleterecurring INDEX p/DELETEPASTOPTION` +
+* *Delete a recurring* : `deleterecurring INDEX [p/DELETEPASTOPTION]` +
 e.g. `deleterecurring 2 p/N` +
 * *Viewing statistics* : `stats [m/MODE] [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]` +
 e.g. `stats c/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
