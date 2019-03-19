@@ -384,8 +384,8 @@ Instead of manually adding the same expense repetitively, use `addrecurring` to 
 This feature also simplifies the deletion and editing of these recurring expenses.
 
 ==== Future Implementation of Automatic expense adding
-1. User adds a recurring.
-2. Upon each launch of the MainApp,
+
+Work in Progress
 
 === Statistics Feature
 
