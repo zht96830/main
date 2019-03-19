@@ -28,6 +28,7 @@ import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.logic.commands.recurringcommands.AddRecurringCommand;
 import seedu.address.logic.commands.recurringcommands.DeleteRecurringCommand;
 import seedu.address.logic.commands.recurringcommands.EditRecurringCommand;
+import seedu.address.logic.commands.recurringcommands.ListRecurringCommand;
 import seedu.address.logic.parser.budgetparsers.AddBudgetCommandParser;
 import seedu.address.logic.parser.budgetparsers.DeleteBudgetCommandParser;
 import seedu.address.logic.parser.budgetparsers.EditBudgetCommandParser;
@@ -116,6 +117,9 @@ public class FinanceTrackerParser {
 
         case ListExpenseCommand.COMMAND_WORD:
             return new ListExpenseCommand();
+
+        case ListRecurringCommand.COMMAND_WORD:
+            return new ListRecurringCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();

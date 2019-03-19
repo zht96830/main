@@ -10,6 +10,8 @@ import seedu.address.model.attributes.Name;
 import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.expense.Expense;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * Represents a Recurring in the finance tracker.
  * Guarantees: field values are validated, immutable.
@@ -25,6 +27,7 @@ public class Recurring extends Expense {
     public Recurring(Name name, Amount amount, Date date, Category category, String remarks, Frequency frequency,
                      Occurrence occurrence) {
         super(name, amount, date, category, remarks);
+        requireAllNonNull(frequency, occurrence);
         this.frequency = frequency;
         this.occurrence = occurrence;
     }
