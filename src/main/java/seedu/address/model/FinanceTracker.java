@@ -61,8 +61,8 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
         requireNonNull(newData);
 
         setExpenses(newData.getExpenseList());
-        setDebts(newData.getDebtList());
         setBudgets(newData.getBudgetList());
+        setDebts(newData.getDebtList());
         setRecurrings(newData.getRecurringList());
     }
 

@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
@@ -171,7 +171,7 @@ public class EditExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: invalid date -> rejected */
         assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()
-                + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
+                + INVALID_DATE_DESC_FORMAT, Date.MESSAGE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         /*assertCommandFailure(EditExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased()

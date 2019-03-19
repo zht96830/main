@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
@@ -73,7 +73,7 @@ public class EditExpenseCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_AMOUNT_DESC, Amount.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_CATEGORY_DESC, Category.MESSAGE_CONSTRAINTS);
         // invalid category
-        assertParseFailure(parser, "1" + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS); // invalid date
+        assertParseFailure(parser, "1" + INVALID_DATE_DESC_FORMAT, Date.MESSAGE_CONSTRAINTS); // invalid date
         //Deadline not required for editexpense command
         //assertParseFailure(parser, "1" + INVALID_DEADLINE_DESC, Date.MESSAGE_CONSTRAINTS); // invalid tag
 

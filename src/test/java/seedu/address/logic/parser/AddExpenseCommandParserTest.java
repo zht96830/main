@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -101,11 +101,11 @@ public class AddExpenseCommandParserTest {
 
         // invalid date
         assertParseFailure(parser, NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + INVALID_DATE_DESC + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, Date.MESSAGE_CONSTRAINTS);
+                + INVALID_DATE_DESC_FORMAT + REMARKS_DESC_EXPENSE + REMARKS_DESC_EXPENSE, Date.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + INVALID_DATE_DESC, Name.MESSAGE_CONSTRAINTS);
+                + INVALID_DATE_DESC_FORMAT, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE

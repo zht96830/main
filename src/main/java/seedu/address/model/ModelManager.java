@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.budget.Budget;
@@ -332,6 +333,7 @@ public class ModelManager implements Model {
         selectedExpense.setValue(expense);
     }
 
+    //=========== Selected budget ===========================================================================
     @Override
     public ReadOnlyProperty<Budget> selectedBudgetProperty() {
         return selectedBudget;
@@ -350,6 +352,7 @@ public class ModelManager implements Model {
         selectedBudget.setValue(budget);
     }
 
+    //=========== Selected debt ===========================================================================
     @Override
     public ReadOnlyProperty<Debt> selectedDebtProperty() {
         return selectedDebt;

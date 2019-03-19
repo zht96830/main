@@ -12,7 +12,7 @@ import seedu.address.model.debt.Debt;
 
 
 /**
- * A utility class for Expense.
+ * A utility class for Debt.
  */
 public class DebtUtil {
 
