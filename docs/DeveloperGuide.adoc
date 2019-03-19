@@ -373,6 +373,20 @@ This feature can be implemented in different ways in terms of how the specified 
 ** Pros: More efficient. Will not go through every single expense.
 ** Cons: Will need to alter the original architecture.
 
+=== Recurring Feature
+
+The Recurring feature consists of `addrecurring`, `listrecurring`, `editrecurring` and `deleterecurring`.
+
+This feature allows users to add recurring expenses: expenses that are perioidic and have a fixed frequency and a defined number of occurrences. Examples of these 'recurring' are bills or subscription fees.
+
+Instead of manually adding the same expense repetitively, use `addrecurring` to add a Recurring. The Finance Tracker will automatically add the expense for you periodically at your specified frequency and for your specified duration!
+
+This feature also simplifies the deletion and editing of these recurring expenses.
+
+==== Future Implementation of Automatic expense adding
+
+Work in Progress
+
 === Pay Debt Function
 
 This feature is currently not implemented. Will be implemented by v1.3. +
@@ -393,6 +407,42 @@ The software then take this information and create a new Expense with the follow
 * `Category` : Same category will be used
 * `Date` : There is no need for the user to key in the date. The program will use the local date in the system's clock
 * `Remarks` : Same remarks will be used
+
+=== Statistics Feature
+
+This feature allows users to calculate various statistics for the entries in their Financial Tracker. The feature will read the expenses, debts and budgets and generate various metrics to display.
+
+The Statistic feature consists of `stats`, `statstrend` and `statscompare`
+
+This implementation is under Logic and Model components.
+
+==== `stats`
+
+===== Current implementation
+
+Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `stats`. The other list commands have similar implementations.
+
+(UML here)
+
+1. User enters command `stats c/food`. The command is received by `FinanceTrackerParser`, which then creates a `StatsCommandParser` object. The created object then calls `StatsCommandParser.parse("v/food")` method.
+
+2. `StatsCommandParser.parse("v/food")` method calls the `ArgumentTokenizer.tokenize()` to tokenize the input `v/food` and stores it in an `ArgumentMultiMap` object.
+
+3. `StatsCommandParse.parse("v/food")` method then calls `ParserUtil.parseCategory(argMultiMap.getCategory(PREFIX_Category).get())` and gets a `Category` object in return.
+
+4. `StatsCommandParser` will then create a relevant `Statistic` object.
+
+5.  After that, a `StatsCommand` object is created with the `Statistic` object as parameter and return to `LogicManager`.
+
+6. `LogicManager` then calls `StatsCommand.execute()`, which calls `Model.getStatistics(Statistics)` using the `Statistic` object created in step 3
+
+7. `Model.getStatistics(Statistics)` will call `Statistics.calculate` which will generate the appropriate results
+
+8.  The result will be shown on the UI
+
+===== Design Consideration
+
+Work in Progress
 
 == Documentation
 
