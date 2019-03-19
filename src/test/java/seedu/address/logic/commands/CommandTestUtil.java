@@ -15,7 +15,6 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.debtcommands.EditDebtCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.logic.commands.recurringcommands.EditRecurringCommand;
@@ -24,10 +23,9 @@ import seedu.address.model.Model;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.debt.NameContainsKeywordsPredicateForDebt;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.model.recurring.RecurringNameContainsKeywordsPredicate;
-import seedu.address.testutil.EditDebtDescriptorBuilder;
-import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 import seedu.address.testutil.EditRecurringDescriptorBuilder;
 
@@ -79,15 +77,11 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_EXPENSE;
-    public static final EditDebtCommand.EditDebtDescriptor DESC_DEBT;
     public static final EditRecurringCommand.EditRecurringDescriptor DESC_RECURRING;
 
     static {
         DESC_EXPENSE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
                 .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE)
-                .withRemarks(VALID_REMARKS_DEBT).build();
-        DESC_DEBT = new EditDebtDescriptorBuilder().withPersonOwed(VALID_NAME_DEBT)
-                .withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_DEBT).withDeadline(VALID_DEADLINE_DEBT)
                 .withRemarks(VALID_REMARKS_DEBT).build();
         DESC_RECURRING = new EditRecurringDescriptorBuilder().withName(VALID_NAME_RECURRING)
                 .withAmount(VALID_AMOUNT_RECURRING).withCategory(VALID_CATEGORY_RECURRING)
