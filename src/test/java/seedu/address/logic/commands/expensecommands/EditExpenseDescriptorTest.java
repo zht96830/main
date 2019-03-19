@@ -2,7 +2,6 @@ package seedu.address.logic.commands.expensecommands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
@@ -32,28 +31,25 @@ public class EditExpenseDescriptorTest {
         // different types -> returns false
         assertFalse(DESC_EXPENSE.equals(5));
 
-        // different values -> returns false
-        assertFalse(DESC_EXPENSE.equals(DESC_DEBT));
-
         // different name -> returns false
-        EditExpenseCommand.EditExpenseDescriptor editedAmy = new EditExpenseDescriptorBuilder(DESC_EXPENSE)
+        EditExpenseCommand.EditExpenseDescriptor editedExpense = new EditExpenseDescriptorBuilder(DESC_EXPENSE)
                 .withName(VALID_NAME_DEBT).build();
-        assertFalse(DESC_EXPENSE.equals(editedAmy));
+        assertFalse(DESC_EXPENSE.equals(editedExpense));
 
         // different phone -> returns false
-        editedAmy = new EditExpenseDescriptorBuilder(DESC_EXPENSE).withAmount(VALID_AMOUNT_DEBT).build();
-        assertFalse(DESC_EXPENSE.equals(editedAmy));
+        editedExpense = new EditExpenseDescriptorBuilder(DESC_EXPENSE).withAmount(VALID_AMOUNT_DEBT).build();
+        assertFalse(DESC_EXPENSE.equals(editedExpense));
 
         // different email -> returns false
-        editedAmy = new EditExpenseDescriptorBuilder(DESC_EXPENSE).withCategory(VALID_CATEGORY_DEBT).build();
-        assertFalse(DESC_EXPENSE.equals(editedAmy));
+        editedExpense = new EditExpenseDescriptorBuilder(DESC_EXPENSE).withCategory(VALID_CATEGORY_DEBT).build();
+        assertFalse(DESC_EXPENSE.equals(editedExpense));
 
         // different address -> returns false
-        editedAmy = new EditExpenseDescriptorBuilder(DESC_EXPENSE).withDate(VALID_DEADLINE_DEBT).build();
-        assertFalse(DESC_EXPENSE.equals(editedAmy));
+        editedExpense = new EditExpenseDescriptorBuilder(DESC_EXPENSE).withDate(VALID_DEADLINE_DEBT).build();
+        assertFalse(DESC_EXPENSE.equals(editedExpense));
 
         // different tags -> returns false
-        editedAmy = new EditExpenseDescriptorBuilder(DESC_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
-        assertFalse(DESC_EXPENSE.equals(editedAmy));
+        editedExpense = new EditExpenseDescriptorBuilder(DESC_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
+        assertFalse(DESC_EXPENSE.equals(editedExpense));
     }
 }

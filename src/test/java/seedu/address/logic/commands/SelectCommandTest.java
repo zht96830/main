@@ -4,7 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showExpenseAtIndex;
 import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
@@ -45,16 +45,16 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_EXPENSE);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_EXPENSE);
+        showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
+        showExpenseAtIndex(expectedModel, INDEX_FIRST_EXPENSE);
 
         assertExecutionSuccess(INDEX_FIRST_EXPENSE);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_EXPENSE);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_EXPENSE);
+        showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
+        showExpenseAtIndex(expectedModel, INDEX_FIRST_EXPENSE);
 
         Index outOfBoundsIndex = INDEX_SECOND_EXPENSE;
         // ensures that outOfBoundIndex is still in bounds of address book list

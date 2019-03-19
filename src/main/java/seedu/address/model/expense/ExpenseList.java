@@ -9,7 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 
 /**
  * A list of expenses that does not allow nulls. Duplicates are allowed.

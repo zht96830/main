@@ -9,8 +9,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.person.exceptions.DuplicateExpenseException;
-import seedu.address.model.person.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.exceptions.DuplicateExpenseException;
+import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 
 /**
  * A list of expenses that enforces uniqueness between its elements and does not allow nulls.

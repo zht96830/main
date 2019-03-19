@@ -20,8 +20,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
+import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 import seedu.address.testutil.ExpenseBuilder;
 import seedu.address.testutil.FinanceTrackerBuilder;
 
@@ -174,7 +174,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = DUCK_RICE.getName().name.split("\\s+");
-        modelManager.updateFilteredExpenseList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredExpenseList(new NameContainsKeywordsPredicateForExpense(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(financeTracker, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

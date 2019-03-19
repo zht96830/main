@@ -2,7 +2,7 @@ package seedu.address.logic.commands.generalcommands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
+import static seedu.address.logic.commands.CommandTestUtil.deleteFirstExpense;
 import static seedu.address.testutil.TypicalExpenses.getTypicalFinanceTrackerWithExpenses;
 
 import org.junit.Before;
@@ -22,11 +22,11 @@ public class UndoCommandTest {
     @Before
     public void setUp() {
         // set up of models' undo/redo history
-        deleteFirstPerson(model);
-        deleteFirstPerson(model);
+        deleteFirstExpense(model);
+        deleteFirstExpense(model);
 
-        deleteFirstPerson(expectedModel);
-        deleteFirstPerson(expectedModel);
+        deleteFirstExpense(expectedModel);
+        deleteFirstExpense(expectedModel);
     }
 
     @Test
