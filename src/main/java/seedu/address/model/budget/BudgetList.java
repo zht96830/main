@@ -52,6 +52,10 @@ public class BudgetList implements Iterable<Budget> {
         if (hasOverlap(toAdd)) {
             throw new OverlappingBudgetException();
         }
+        if (internalList.contains(toAdd)) {
+            throw new BudgetExistsException();
+        }
+
         switch (toAdd.getCategory()) {
         case FOOD:
             internalList.add(0, toAdd);

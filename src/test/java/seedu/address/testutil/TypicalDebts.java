@@ -60,7 +60,7 @@ public class TypicalDebts {
     /**
      * Returns an {@code FinanceTracker} with all the typical debts.
      */
-    public static FinanceTracker getTypicalFinanceTrackerWithExpenses() {
+    public static FinanceTracker getTypicalFinanceTrackerWithDebts() {
         FinanceTracker ft = new FinanceTracker();
         for (Debt debt : getTypicalDebts()) {
             ft.addDebt(debt);

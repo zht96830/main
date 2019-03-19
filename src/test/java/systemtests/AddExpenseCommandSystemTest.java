@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
@@ -114,7 +114,7 @@ public class AddExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: invalid date -> rejected */
         command = AddExpenseCommand.COMMAND_WORD + NAME_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
-                + INVALID_DATE_DESC + REMARKS_DESC_EXPENSE;
+                + INVALID_DATE_DESC_FORMAT + REMARKS_DESC_EXPENSE;
         assertCommandFailure(command, Date.MESSAGE_CONSTRAINTS);
 
     }

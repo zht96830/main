@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
@@ -22,6 +24,7 @@ import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditBudgetDescriptorBuilder;
 import seedu.address.testutil.EditDebtDescriptorBuilder;
 import seedu.address.testutil.EditExpenseDescriptorBuilder;
 
@@ -34,39 +37,50 @@ public class CommandTestUtil {
     public static final String VALID_NAME_DEBT = "Bob Choo";
     public static final String VALID_AMOUNT_EXPENSE = "11111111";
     public static final String VALID_AMOUNT_DEBT = "12345";
+    public static final String VALID_AMOUNT_BUDGET = "55555";
     public static final String VALID_CATEGORY_EXPENSE = "food";
     public static final String VALID_CATEGORY_EXPENSE_2 = "transport";
     public static final String VALID_CATEGORY_DEBT = "shopping";
+    public static final String VALID_CATEGORY_BUDGET = "food";
     public static final String VALID_DATE_EXPENSE = "03-03-2019";
     public static final String VALID_DATE_EXPENSE_2 = "12-03-2019";
     public static final String VALID_DEADLINE_DEBT = "05-05-2019";
+    public static final String VALID_STARTDATE_BUDGET = "01-12-2019";
+    public static final String VALID_ENDDATE_BUDGET = "31-12-2019";
     public static final String VALID_REMARKS_EXPENSE = "Bishan chicken rice";
     public static final String VALID_REMARKS_DEBT = "fan";
+    public static final String VALID_REMARKS_BUDGET = "eat more for christmas yay";
 
     public static final String NAME_DESC_EXPENSE = " " + PREFIX_NAME + VALID_NAME_EXPENSE;
     public static final String NAME_DESC_DEBT = " " + PREFIX_NAME + VALID_NAME_DEBT;
     public static final String AMOUNT_DESC_EXPENSE = " " + PREFIX_AMOUNT + VALID_AMOUNT_EXPENSE;
     public static final String AMOUNT_DESC_DEBT = " " + PREFIX_AMOUNT + VALID_AMOUNT_DEBT;
+    public static final String AMOUNT_DESC_BUDGET = " " + PREFIX_AMOUNT + VALID_AMOUNT_BUDGET;
     public static final String CATEGORY_DESC_EXPENSE = " " + PREFIX_CATEGORY + VALID_CATEGORY_EXPENSE;
     public static final String CATEGORY_DESC_DEBT = " " + PREFIX_CATEGORY + VALID_CATEGORY_DEBT;
+    public static final String CATEGORY_DESC_BUDGET = " " + PREFIX_CATEGORY + VALID_CATEGORY_BUDGET;
     public static final String DATE_DESC_EXPENSE = " " + PREFIX_DATE + VALID_DATE_EXPENSE;
     public static final String DATE_DESC_EXPENSE_2 = " " + PREFIX_DATE + VALID_DATE_EXPENSE_2;
     public static final String DEADLINE_DESC_DEBT = " " + PREFIX_DUE + VALID_DEADLINE_DEBT;
+    public static final String STARTDATE_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_STARTDATE_BUDGET;
+    public static final String ENDDATE_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_ENDDATE_BUDGET;
     public static final String REMARKS_DESC_EXPENSE = " " + PREFIX_REMARKS + VALID_REMARKS_EXPENSE;
     public static final String REMARKS_DESC_DEBT = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT;
-
+    public static final String REMARKS_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_REMARKS_BUDGET;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "911a"; // 'a' not allowed in phones
     public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "fod"; // not one of enum values
-    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "142-121-012"; // must be dd-MM-yyyy
+    public static final String INVALID_DATE_DESC_FORMAT = " " + PREFIX_DATE + "142-121-012"; // must be dd-MM-yyyy
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DUE + "12-1213-01"; // must be dd-MM-yyyy
+    public static final String INVALID_DATE_DESC_EXIST = " " + PREFIX_DATE + "29-02-2021"; //does not exist
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_EXPENSE;
     public static final EditDebtCommand.EditDebtDescriptor DESC_DEBT;
+    public static final EditBudgetCommand.EditBudgetDescriptor DESC_BUDGET;
 
     static {
         DESC_EXPENSE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_EXPENSE)
@@ -75,6 +89,9 @@ public class CommandTestUtil {
         DESC_DEBT = new EditDebtDescriptorBuilder().withPersonOwed(VALID_NAME_DEBT)
                 .withAmount(VALID_AMOUNT_DEBT).withCategory(VALID_CATEGORY_DEBT).withDeadline(VALID_DEADLINE_DEBT)
                 .withRemarks(VALID_REMARKS_DEBT).build();
+        DESC_BUDGET = new EditBudgetDescriptorBuilder().withAmount(VALID_AMOUNT_BUDGET)
+                .withStartDate(VALID_STARTDATE_BUDGET).withEndDate(VALID_ENDDATE_BUDGET)
+                .withRemarks(VALID_REMARKS_BUDGET).build();
     }
 
     /**
@@ -150,7 +167,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s finance tracker.
      */
     public static void deleteFirstPerson(Model model) {
         Expense firstExpense = model.getFilteredExpenseList().get(0);
