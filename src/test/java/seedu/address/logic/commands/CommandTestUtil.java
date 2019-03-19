@@ -35,7 +35,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_EXPENSE = "Chicken Rice";
     public static final String VALID_NAME_DEBT = "Bob Choo";
-    public static final String VALID_AMOUNT_EXPENSE = "11111111";
+    public static final String VALID_AMOUNT_EXPENSE = "4";
     public static final String VALID_AMOUNT_DEBT = "12345";
     public static final String VALID_AMOUNT_BUDGET = "55555";
     public static final String VALID_CATEGORY_EXPENSE = "food";
