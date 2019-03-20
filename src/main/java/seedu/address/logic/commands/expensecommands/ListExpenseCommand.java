@@ -56,6 +56,23 @@ public class ListExpenseCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.view.toString()));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListExpenseCommand)) {
+            return false;
+        }
+
+        // state check
+        ListExpenseCommand e = (ListExpenseCommand) other;
+        return view.equals(e.view);
+    }
+
     public Predicate<Expense> getPredicate(View view) {
         switch (view) {
         case DAY:

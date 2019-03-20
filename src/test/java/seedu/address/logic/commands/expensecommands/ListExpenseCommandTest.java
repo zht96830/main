@@ -36,9 +36,16 @@ public class ListExpenseCommandTest {
     }
 
     @Test
+    public void execute_listIsNotFiltered_showsHealthCareCategoryList() {
+        assertCommandSuccess(new ListExpenseCommand(View.HEALTHCARE), model, commandHistory,
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.HEALTHCARE), expectedModel);
+    }
+
+    @Test
     public void execute_listIsFiltered_showsEverything() {
         showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
         assertCommandSuccess(new ListExpenseCommand(View.ALL), model, commandHistory,
                 String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL), expectedModel);
     }
+
 }
