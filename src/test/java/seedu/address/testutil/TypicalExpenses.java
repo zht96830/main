@@ -34,7 +34,7 @@ public class TypicalExpenses {
     public static final Expense PHONE_BILLS = new ExpenseBuilder().withName("Phone bills")
             .withAmount("20").withDate("31-01-2019").withCategory("utilities").build();
     public static final Expense DOCTOR = new ExpenseBuilder().withName("doctor consultation")
-            .withAmount("30.50").withDate("15-03-2019").withCategory("healthcare")
+            .withAmount("30.50").withDate("15-01-2019").withCategory("healthcare")
             .withRemarks("down with flu").build();
     public static final Expense TV = new ExpenseBuilder().withName("new Panasonic TV").withAmount("750.00")
             .withDate("21-07-2017").withCategory("ENTERTAINMENT").build();
