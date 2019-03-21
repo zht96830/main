@@ -27,7 +27,7 @@ public class ExpenseListPanelTest extends GuiUnitTest {
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
-    private final SimpleObjectProperty<Expense> selectedPerson = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
     private ExpenseListPanelHandle expenseListPanelHandle;
 
     @Test
@@ -40,7 +40,7 @@ public class ExpenseListPanelTest extends GuiUnitTest {
             ExpenseCardHandle actualCard = expenseListPanelHandle.getExpenseCardHandle(i);
 
             assertCardDisplaysExpense(expectedExpense, actualCard);
-            assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
+            assertEquals((i + 1) + ". ", actualCard.getId());
         }
     }
 
@@ -48,7 +48,7 @@ public class ExpenseListPanelTest extends GuiUnitTest {
     public void selection_modelSelectedPersonChanged_selectionChanges() {
         initUi(TYPICAL_EXPENSES);
         Expense secondExpense = TYPICAL_EXPENSES.get(INDEX_SECOND_EXPENSE.getZeroBased());
-        guiRobot.interact(() -> selectedPerson.set(secondExpense));
+        guiRobot.interact(() -> selectedExpense.set(secondExpense));
         guiRobot.pauseForHuman();
 
         ExpenseCardHandle expectedPerson = expenseListPanelHandle.getExpenseCardHandle(
@@ -58,7 +58,7 @@ public class ExpenseListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Verifies that creating and deleting large number of persons in {@code ExpenseListPanel} requires lesser than
+     * Verifies that creating and deleting large number of expenses in {@code ExpenseListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
@@ -72,7 +72,7 @@ public class ExpenseListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Returns a list of persons containing {@code personCount} persons that is used to populate the
+     * Returns a list of expenses containing {@code personCount} expenses that is used to populate the
      * {@code ExpenseListPanel}.
      */
     private ObservableList<Expense> createBackingList(int expenseCount) {
@@ -94,7 +94,7 @@ public class ExpenseListPanelTest extends GuiUnitTest {
      */
     private void initUi(ObservableList<Expense> backingList) {
         ExpenseListPanel expenseListPanel =
-                new ExpenseListPanel(backingList, selectedPerson, selectedPerson::set);
+                new ExpenseListPanel(backingList, selectedExpense, selectedExpense::set);
         uiPartRule.setUiPart(expenseListPanel);
 
         expenseListPanelHandle = new ExpenseListPanelHandle(getChildNode(expenseListPanel.getRoot(),

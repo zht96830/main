@@ -16,17 +16,17 @@ public class ExpenseCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // no tags
-        Expense expenseWithNoTags = new ExpenseBuilder().withRemarks("").build();
-        ExpenseCard expenseCard = new ExpenseCard(expenseWithNoTags, 1);
+        // no remarks
+        Expense expenseWithNoRemarks = new ExpenseBuilder().withRemarks("").build();
+        ExpenseCard expenseCard = new ExpenseCard(expenseWithNoRemarks, 1);
         uiPartRule.setUiPart(expenseCard);
-        assertCardDisplay(expenseCard, expenseWithNoTags, 1);
+        assertCardDisplay(expenseCard, expenseWithNoRemarks, 1);
 
-        // with tags
-        Expense expenseWithTags = new ExpenseBuilder().build();
-        expenseCard = new ExpenseCard(expenseWithTags, 2);
+        // with remarks
+        Expense expenseWithRemarks = new ExpenseBuilder().build();
+        expenseCard = new ExpenseCard(expenseWithRemarks, 2);
         uiPartRule.setUiPart(expenseCard);
-        assertCardDisplay(expenseCard, expenseWithTags, 2);
+        assertCardDisplay(expenseCard, expenseWithRemarks, 2);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ExpenseCardTest extends GuiUnitTest {
         ExpenseCardHandle expenseCardHandle = new ExpenseCardHandle(expenseCard.getRoot());
 
         // verify id is displayed correctly
-        assertEquals(Integer.toString(expectedId) + ". ", expenseCardHandle.getId());
+        assertEquals(expectedId + ". ", expenseCardHandle.getId());
 
         // verify expense details are displayed correctly
         assertCardDisplaysExpense(expectedExpense, expenseCardHandle);
