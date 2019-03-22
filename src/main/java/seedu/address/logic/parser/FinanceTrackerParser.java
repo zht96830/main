@@ -82,61 +82,61 @@ public class FinanceTrackerParser {
 
         case AddRecurringCommand.COMMAND_WORD:
         case AddRecurringCommand.COMMAND_WORD_SHORTCUT:
-                return new AddRecurringCommandParser().parse(arguments);
+            return new AddRecurringCommandParser().parse(arguments);
 
         case AddBudgetCommand.COMMAND_WORD:
         case AddBudgetCommand.COMMAND_WORD_SHORTCUT:
-                return new AddBudgetCommandParser().parse(arguments);
+            return new AddBudgetCommandParser().parse(arguments);
 
         case EditExpenseCommand.COMMAND_WORD:
         case EditExpenseCommand.COMMAND_WORD_SHORTCUT:
-                return new EditExpenseCommandParser().parse(arguments);
+            return new EditExpenseCommandParser().parse(arguments);
 
         case EditDebtCommand.COMMAND_WORD:
         case EditDebtCommand.COMMAND_WORD_SHORTCUT:
-                return new EditDebtCommandParser().parse(arguments);
+            return new EditDebtCommandParser().parse(arguments);
 
         case EditRecurringCommand.COMMAND_WORD:
         case EditRecurringCommand.COMMAND_WORD_SHORTCUT:
-                return new EditRecurringCommandParser().parse(arguments);
+            return new EditRecurringCommandParser().parse(arguments);
 
         case EditBudgetCommand.COMMAND_WORD:
         case EditBudgetCommand.COMMAND_WORD_SHORTCUT:
-                return new EditBudgetCommandParser().parse(arguments);
+            return new EditBudgetCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteExpenseCommand.COMMAND_WORD:
         case DeleteExpenseCommand.COMMAND_WORD_SHORTCUT:
-                return new DeleteExpenseCommandParser().parse(arguments);
+            return new DeleteExpenseCommandParser().parse(arguments);
 
         case DeleteDebtCommand.COMMAND_WORD:
         case DeleteDebtCommand.COMMAND_WORD_SHORTCUT:
-                return new DeleteDebtCommandParser().parse(arguments);
+            return new DeleteDebtCommandParser().parse(arguments);
 
         case DeleteBudgetCommand.COMMAND_WORD:
         case DeleteBudgetCommand.COMMAND_WORD_SHORTCUT:
-                return new DeleteBudgetCommandParser().parse(arguments);
+            return new DeleteBudgetCommandParser().parse(arguments);
 
         case DeleteRecurringCommand.COMMAND_WORD:
         case DeleteRecurringCommand.COMMAND_WORD_SHORTCUT:
-                return new DeleteRecurringCommandParser().parse(arguments);
+            return new DeleteRecurringCommandParser().parse(arguments);
 
         case ClearExpenseCommand.COMMAND_WORD:
         case ClearExpenseCommand.COMMAND_WORD_SHORTCUT:
-                return new ClearExpenseCommand();
+            return new ClearExpenseCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListExpenseCommand.COMMAND_WORD:
         case ListExpenseCommand.COMMAND_WORD_SHORTCUT:
-                return new ListExpenseCommandParser().parse(arguments);
+            return new ListExpenseCommandParser().parse(arguments);
 
         case ListRecurringCommand.COMMAND_WORD:
         case ListRecurringCommand.COMMAND_WORD_SHORTCUT:
-                return new ListRecurringCommandParser().parse(arguments);
+            return new ListRecurringCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
