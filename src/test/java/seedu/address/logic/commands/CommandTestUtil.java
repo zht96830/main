@@ -79,7 +79,7 @@ public class CommandTestUtil {
     public static final String REMARKS_DESC_DEBT = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT;
     public static final String REMARKS_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_REMARKS_BUDGET;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // ' ' not allowed as a name
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "911a"; // 'a' not allowed in phones
     public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "fod"; // not one of enum values
     public static final String INVALID_DATE_DESC_FORMAT = " " + PREFIX_DATE + "142-121-012"; // must be dd-MM-yyyy
