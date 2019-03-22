@@ -37,7 +37,6 @@ public interface Model {
     Predicate<Expense> PREDICATE_SHOW_UTIL_EXPENSES = p -> p.getCategory().equals(Category.UTILITIES);
     Predicate<Expense> PREDICATE_SHOW_HEALTHCARE_EXPENSES = p -> p.getCategory().equals(Category.HEALTHCARE);
 
-
     /** {@code Predicate} that always evaluate to true */
     Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
 
