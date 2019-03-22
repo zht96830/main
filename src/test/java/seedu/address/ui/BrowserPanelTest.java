@@ -11,16 +11,25 @@ import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
+
+import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
+    private SimpleObjectProperty<Debt> selectedDebt = new SimpleObjectProperty<>();
+    private SimpleObjectProperty<Budget> selectedBudget = new SimpleObjectProperty<>();
+    private SimpleObjectProperty<Recurring> selectedRecurring = new SimpleObjectProperty<>();
+
     private BrowserPanel browserPanel;
     private BrowserPanelHandle browserPanelHandle;
 
     @Before
     public void setUp() {
-        guiRobot.interact(() -> browserPanel = new BrowserPanel(selectedExpense));
+        guiRobot.interact(() -> browserPanel = new BrowserPanel(selectedExpense, selectedDebt, selectedBudget,
+                selectedRecurring));
         uiPartRule.setUiPart(browserPanel);
 
         browserPanelHandle = new BrowserPanelHandle(browserPanel.getRoot());
@@ -33,9 +42,9 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a expense
         guiRobot.interact(() -> selectedExpense.set(DUCK_RICE));
-        String urlQuery = BrowserPanel.QUERY_NAME + DUCK_RICE.getName().name + BrowserPanel.QUERY_CATEGORY
-                + DUCK_RICE.getCategory().toString() + BrowserPanel.QUERY_AMOUNT + "$"
-                + DUCK_RICE.getAmount().toString() + BrowserPanel.QUERY_DATE
+        String urlQuery = BrowserPanel.QUESTION_MARK + BrowserPanel.QUERY_NAME + DUCK_RICE.getName().name
+                + BrowserPanel.QUERY_CATEGORY + DUCK_RICE.getCategory().toString() + BrowserPanel.QUERY_AMOUNT
+                + BrowserPanel.DOLLAR_SIGN + DUCK_RICE.getAmount().toString() + BrowserPanel.QUERY_DATE
                 + DUCK_RICE.getDate().toString() + BrowserPanel.QUERY_REMARK + DUCK_RICE.getRemarks();
 
         URL expectedExpenseUrl = new URL(BrowserPanel.EXPENSES_PAGE_URL

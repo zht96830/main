@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8"></meta-charset>
-        <title>Selected Expense Page</title>
+        <title>Selected Recurring Page</title>
 
         <script type="text/javascript">
             function getJsonFromUrl() {
@@ -15,7 +15,7 @@
                 return result;
             }
             document.addEventListener("DOMContentLoaded", function(event) {
-                document.getElementById("name").textContent = "Expense Name: " + getJsonFromUrl().name;
+                document.getElementById("name").textContent = getJsonFromUrl().name;
 
                 var img = document.createElement("img");
                 var path = "../images/"
@@ -52,8 +52,10 @@
                 }
                 categoryDiv.append(img);
 
-                document.getElementById("amount").textContent = "Expense Amount: " + getJsonFromUrl().amount;
+                document.getElementById("amount").textContent = "Recurring Expense Amount: " + getJsonFromUrl().amount;
                 document.getElementById("date").textContent = "Date added: " + getJsonFromUrl().date;
+                document.getElementById("frequency").textContent = "Frequency: " + getJsonFromUrl().frequency;
+                document.getElementById("occurrence").textContent = "Occurrence: " + getJsonFromUrl().occurrence;
                 document.getElementById("remarks").textContent = "Remarks: " + getJsonFromUrl().remarks;
             });
         </script>
@@ -82,7 +84,7 @@
 
     </head>
     <body>
-        <h1>Selected Expense</h1>
+        <h1>Selected Recurring</h1>
         <h3>
             <div id="name"></div>
             <br>
@@ -91,6 +93,10 @@
             <div id="amount"></div>
             <br>
             <div id="date"></div>
+            <br>
+            <div id="frequency"></div>
+            <br>
+            <div id="occurrence"></div>
             <br>
             <div id="remarks"></div>
         </h3>
