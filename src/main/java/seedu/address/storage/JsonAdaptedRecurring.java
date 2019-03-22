@@ -7,53 +7,62 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
-import seedu.address.model.expense.Expense;
+import seedu.address.model.attributes.Occurrence;
+import seedu.address.model.recurring.Recurring;
 
 /**
- * Jackson-friendly version of {@link Expense}.
+ * Jackson-friendly version of {@link Recurring}.
  */
-class JsonAdaptedExpense {
+class JsonAdaptedRecurring {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Expense's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Recurring's %s field is missing!";
 
     private final String name;
     private final String amount;
     private final String category;
     private final String date;
     private final String remarks;
+    private final String frequency;
+    private final String occurrence;
 
     /**
-     * Constructs a {@code JsonAdaptedExpense} with the given expense details.
+     * Constructs a {@code JsonAdaptedRecurring} with the given recurring details.
      */
     @JsonCreator
-    public JsonAdaptedExpense(@JsonProperty("name") String name, @JsonProperty("amount") String amount,
-                              @JsonProperty("date") String date, @JsonProperty("category") String category,
-                              @JsonProperty("remarks") String remarks) {
+    public JsonAdaptedRecurring(@JsonProperty("name") String name, @JsonProperty("amount") String amount,
+                                @JsonProperty("date") String date, @JsonProperty("category") String category,
+                                @JsonProperty("remarks") String remarks, @JsonProperty("frequency") String frequency,
+                                @JsonProperty("occurrence") String occurrence) {
         this.name = name;
         this.amount = amount;
         this.category = category;
         this.date = date;
         this.remarks = remarks;
+        this.frequency = frequency;
+        this.occurrence = occurrence;
     }
 
     /**
-     * Converts a given {@code Expense} into this class for Jackson use.
+     * Converts a given {@code Recurring} into this class for Jackson use.
      */
-    public JsonAdaptedExpense(Expense source) {
+    public JsonAdaptedRecurring(Recurring source) {
         name = source.getName().name;
         amount = source.getAmount().toString();
         category = source.getCategory().toString();
         date = source.getDate().toString();
         remarks = source.getRemarks();
+        frequency = source.getFrequency().toString();
+        occurrence = source.getOccurrence().toString();
     }
 
     /**
-     * Converts this Jackson-friendly adapted expense object into the model's {@code Expense} object.
+     * Converts this Jackson-friendly adapted recurring object into the model's {@code Recurring} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted expense.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted recurring.
      */
-    public Expense toModelType() throws IllegalValueException {
+    public Recurring toModelType() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -89,7 +98,26 @@ class JsonAdaptedExpense {
 
         final String modelRemarks = remarks;
 
-        return new Expense(modelName, modelAmount, modelDate, modelCategory, modelRemarks);
+        if (frequency == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Frequency.class.getSimpleName()));
+        }
+        if (!Frequency.isValidFrequency(frequency)) {
+            throw new IllegalValueException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        final Frequency modelFrequency = new Frequency(frequency);
+
+        if (occurrence == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Occurrence.class.getSimpleName()));
+        }
+        if (!Occurrence.isValidOccurrence(occurrence)) {
+            throw new IllegalValueException(Occurrence.MESSAGE_CONSTRAINTS);
+        }
+        final Occurrence modelOccurrence = new Occurrence(occurrence);
+
+        return new Recurring(modelName, modelAmount, modelDate, modelCategory, modelRemarks, modelFrequency,
+                modelOccurrence);
     }
 
 }
