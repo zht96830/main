@@ -21,6 +21,8 @@ public class DeleteRecurringCommand extends Command {
 
     public static final String COMMAND_WORD = "deleterecurring";
 
+    public static final String COMMAND_WORD_SHORTCUT = "dr";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the recurring identified by the index number used in the displayed recurring list.\n"
             + "Parameters: INDEX (must be a positive integer) "

@@ -20,6 +20,8 @@ public class AddExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "addexpense";
 
+    public static final String COMMAND_WORD_SHORTCUT = "ae";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an expense to the Finance Tracker. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "

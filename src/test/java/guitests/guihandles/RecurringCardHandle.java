@@ -55,7 +55,7 @@ public class RecurringCardHandle extends NodeHandle<Node> {
      */
     public boolean equals(Recurring recurring) {
         return getName().equals(recurring.getName().name)
-                && getAmount().equals(recurring.getAmount().value)
+                && getAmount().equals("$" + recurring.getAmount().toString())
                 && getCategory().equals(recurring.getCategory().toString())
                 && getDate().equals(recurring.getDate().toString());
     }

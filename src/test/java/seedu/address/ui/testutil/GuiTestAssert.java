@@ -4,10 +4,17 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import guitests.guihandles.BudgetCardHandle;
+import guitests.guihandles.DebtCardHandle;
 import guitests.guihandles.ExpenseCardHandle;
 import guitests.guihandles.ExpenseListPanelHandle;
+import guitests.guihandles.RecurringCardHandle;
 import guitests.guihandles.ResultDisplayHandle;
+
+import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -25,6 +32,38 @@ public class GuiTestAssert {
     }
 
     /**
+     * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
+     */
+    public static void assertCardEquals(BudgetCardHandle expectedCard, BudgetCardHandle actualCard) {
+        assertEquals(expectedCard.getEndDate(), actualCard.getEndDate());
+        assertEquals(expectedCard.getAmount(), actualCard.getAmount());
+        assertEquals(expectedCard.getStartDate(), actualCard.getStartDate());
+        assertEquals(expectedCard.getCategory(), actualCard.getCategory());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
+     */
+    public static void assertCardEquals(DebtCardHandle expectedCard, DebtCardHandle actualCard) {
+        assertEquals(expectedCard.getId(), actualCard.getId());
+        assertEquals(expectedCard.getAmount(), actualCard.getAmount());
+        assertEquals(expectedCard.getDueDate(), actualCard.getDueDate());
+        assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getCategory(), actualCard.getCategory());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
+     */
+    public static void assertCardEquals(RecurringCardHandle expectedCard, RecurringCardHandle actualCard) {
+        assertEquals(expectedCard.getId(), actualCard.getId());
+        assertEquals(expectedCard.getAmount(), actualCard.getAmount());
+        assertEquals(expectedCard.getDate(), actualCard.getDate());
+        assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getCategory(), actualCard.getCategory());
+    }
+
+    /**
      * Asserts that {@code actualCard} displays the details of {@code expectedExpense}.
      */
     public static void assertCardDisplaysExpense(Expense expectedExpense, ExpenseCardHandle actualCard) {
@@ -32,6 +71,36 @@ public class GuiTestAssert {
         assertEquals("$" + expectedExpense.getAmount(), actualCard.getAmount());
         assertEquals(expectedExpense.getCategory().toString(), actualCard.getCategory());
         assertEquals(expectedExpense.getDate().toString(), actualCard.getDate());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedRecurring}.
+     */
+    public static void assertCardDisplaysRecurring(Recurring expectedRecurring, RecurringCardHandle actualCard) {
+        assertEquals(expectedRecurring.getName().name, actualCard.getName());
+        assertEquals("$" + expectedRecurring.getAmount(), actualCard.getAmount());
+        assertEquals(expectedRecurring.getCategory().toString(), actualCard.getCategory());
+        assertEquals(expectedRecurring.getDate().toString(), actualCard.getDate());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedBudget}.
+     */
+    public static void assertCardDisplaysBudget(Budget expectedBudget, BudgetCardHandle actualCard) {
+        assertEquals("$" + expectedBudget.getAmount(), actualCard.getAmount());
+        assertEquals(expectedBudget.getCategory().toString(), actualCard.getCategory());
+        assertEquals(expectedBudget.getStartDate().toString(), actualCard.getStartDate());
+        assertEquals(expectedBudget.getEndDate().toString(), actualCard.getEndDate());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedDebt}.
+     */
+    public static void assertCardDisplaysDebt(Debt expectedDebt, DebtCardHandle actualCard) {
+        assertEquals("$" + expectedDebt.getAmount(), actualCard.getAmount());
+        assertEquals(expectedDebt.getCategory().toString(), actualCard.getCategory());
+        assertEquals(expectedDebt.getPersonOwed().name, actualCard.getName());
+        assertEquals(expectedDebt.getDeadline().toString(), actualCard.getDueDate());
     }
 
     /**

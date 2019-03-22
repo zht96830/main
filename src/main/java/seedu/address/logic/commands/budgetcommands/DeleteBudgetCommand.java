@@ -23,6 +23,8 @@ public class DeleteBudgetCommand extends Command {
 
     public static final String COMMAND_WORD = "deletebudget";
 
+    public static final String COMMAND_WORD_SHORTCUT = "db";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the budget identified by its category.\n"
             + "Parameters: " + PREFIX_CATEGORY + "CATEGORY\n"
