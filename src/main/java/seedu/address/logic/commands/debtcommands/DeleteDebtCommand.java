@@ -20,6 +20,8 @@ public class DeleteDebtCommand extends Command {
 
     public static final String COMMAND_WORD = "deletedebt";
 
+    public static final String COMMAND_WORD_SHORTCUT = "dd";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the debt identified by the index number used in the displayed debt list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"

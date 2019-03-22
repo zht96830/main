@@ -22,6 +22,8 @@ public class AddDebtCommand extends Command {
 
     public static final String COMMAND_WORD = "adddebt";
 
+    public static final String COMMAND_WORD_SHORTCUT = "ad";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a debt to the Finance Tracker. "
             + "Parameters: "
             + PREFIX_NAME + "PERSON_OWED "

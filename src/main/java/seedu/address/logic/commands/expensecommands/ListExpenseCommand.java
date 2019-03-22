@@ -34,6 +34,8 @@ public class ListExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "listexpense";
 
+    public static final String COMMAND_WORD_SHORTCUT = "le";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an expense to the Finance Tracker. "
             + "Parameters: "
             + PREFIX_VIEW + "VIEW\n"

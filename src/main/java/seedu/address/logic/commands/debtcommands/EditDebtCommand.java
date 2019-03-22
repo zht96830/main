@@ -36,6 +36,8 @@ public class EditDebtCommand extends Command {
 
     public static final String COMMAND_WORD = "editdebt";
 
+    public static final String COMMAND_WORD_SHORTCUT = "ed";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the debt identified "
             + "by the index number used in the displayed debt list. "
             + "Existing values will be overwritten by the input values.\n"

@@ -20,6 +20,8 @@ public class DeleteExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteexpense";
 
+    public static final String COMMAND_WORD_SHORTCUT = "de";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the expense identified by the index number used in the displayed expense list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"

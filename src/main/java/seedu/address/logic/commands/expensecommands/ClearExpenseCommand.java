@@ -14,8 +14,10 @@ import seedu.address.model.Model;
 public class ClearExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "clearexpense";
-    public static final String MESSAGE_SUCCESS = "Expense list has been cleared!";
 
+    public static final String COMMAND_WORD_SHORTCUT = "ce";
+
+    public static final String MESSAGE_SUCCESS = "Expense list has been cleared!";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
