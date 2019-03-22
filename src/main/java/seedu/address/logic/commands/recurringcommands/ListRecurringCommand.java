@@ -33,6 +33,8 @@ public class ListRecurringCommand extends Command {
 
     public static final String COMMAND_WORD = "listrecurring";
 
+    public static final String COMMAND_WORD_SHORTCUT = "lr";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an recurring to the Finance Tracker. "
             + "Parameters: "
             + PREFIX_VIEW + "VIEW\n"
