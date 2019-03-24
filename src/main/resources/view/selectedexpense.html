@@ -15,7 +15,7 @@
                 return result;
             }
             document.addEventListener("DOMContentLoaded", function(event) {
-                document.getElementById("name").textContent = getJsonFromUrl().name;
+                document.getElementById("name").textContent = "Expense Name: " + getJsonFromUrl().name;
 
                 var img = document.createElement("img");
                 var path = "../images/"
@@ -52,9 +52,9 @@
                 }
                 categoryDiv.append(img);
 
-                document.getElementById("amount").textContent = getJsonFromUrl().amount;
-                document.getElementById("date").textContent = getJsonFromUrl().date;
-                document.getElementById("remarks").textContent = getJsonFromUrl().remarks;
+                document.getElementById("amount").textContent = "Expense Amount: " + getJsonFromUrl().amount;
+                document.getElementById("date").textContent = "Date added: " + getJsonFromUrl().date;
+                document.getElementById("remarks").textContent = "Remarks: " + getJsonFromUrl().remarks;
             });
         </script>
 

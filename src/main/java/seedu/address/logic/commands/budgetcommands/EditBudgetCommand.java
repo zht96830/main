@@ -32,6 +32,7 @@ public class EditBudgetCommand extends Command {
 
     public static final String COMMAND_WORD = "editbudget";
 
+    public static final String COMMAND_WORD_SHORTCUT = "eb";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the budget identified "
             + "by its index in the budget list. "

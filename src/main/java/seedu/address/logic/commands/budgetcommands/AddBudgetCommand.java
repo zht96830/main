@@ -23,6 +23,8 @@ public class AddBudgetCommand extends Command {
 
     public static final String COMMAND_WORD = "addbudget";
 
+    public static final String COMMAND_WORD_SHORTCUT = "ab";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a budget to the Finance Tracker. "
             + "Parameters: "
             + PREFIX_CATEGORY + "CATEGORY "

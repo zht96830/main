@@ -33,6 +33,8 @@ public class EditExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "editexpense";
 
+    public static final String COMMAND_WORD_SHORTCUT = "ee";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the expense identified "
             + "by the index number used in the displayed expense list. "
             + "Existing values will be overwritten by the input values.\n"

@@ -41,7 +41,7 @@ public class RecurringExpenseListPanel extends UiPart<Region> {
         selectedRecurringExpense.addListener((observable, oldValue, newValue) -> {
             logger.fine("Selected recurring expense changed to: " + newValue);
 
-            // Don't modify selection if we are already selecting the selected expense,
+            // Don't modify selection if we are already selecting the selected recurring,
             // otherwise we would have an infinite loop.
             if (Objects.equals(recurringExpenseListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;

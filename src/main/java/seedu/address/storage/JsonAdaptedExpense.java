@@ -24,7 +24,7 @@ class JsonAdaptedExpense {
     private final String remarks;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given expense details.
+     * Constructs a {@code JsonAdaptedExpense} with the given expense details.
      */
     @JsonCreator
     public JsonAdaptedExpense(@JsonProperty("name") String name, @JsonProperty("amount") String amount,

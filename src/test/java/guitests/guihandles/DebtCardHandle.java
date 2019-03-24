@@ -54,8 +54,8 @@ public class DebtCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code debt}.
      */
     public boolean equals(Debt debt) {
-        return getName().equals(debt.getPersonOwed())
-                && getAmount().equals(debt.getAmount().value)
+        return getName().equals(debt.getPersonOwed().name)
+                && getAmount().equals("$" + debt.getAmount().toString())
                 && getCategory().equals(debt.getCategory().toString())
                 && getDueDate().equals(debt.getDeadline().toString());
     }

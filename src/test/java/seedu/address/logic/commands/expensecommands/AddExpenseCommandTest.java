@@ -37,7 +37,7 @@ public class AddExpenseCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
         Expense validExpense = new ExpenseBuilder().build();
 
         CommandResult commandResult = new AddExpenseCommand(validExpense).execute(modelStub, commandHistory);
@@ -74,10 +74,10 @@ public class AddExpenseCommandTest {
     /**
      * A Model stub that contains a single expense.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithExpense extends ModelStub {
         private final Expense expense;
 
-        ModelStubWithPerson(Expense expense) {
+        ModelStubWithExpense(Expense expense) {
             requireNonNull(expense);
             this.expense = expense;
         }
@@ -92,7 +92,7 @@ public class AddExpenseCommandTest {
     /**
      * A Model stub that always accept the expense being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingExpenseAdded extends ModelStub {
         final ArrayList<Expense> expensesAdded = new ArrayList<>();
 
         @Override

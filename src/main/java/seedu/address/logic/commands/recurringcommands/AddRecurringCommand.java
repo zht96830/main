@@ -23,6 +23,8 @@ public class AddRecurringCommand extends Command {
 
     public static final String COMMAND_WORD = "addrecurring";
 
+    public static final String COMMAND_WORD_SHORTCUT = "ar";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a recurring to the Finance Tracker. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
