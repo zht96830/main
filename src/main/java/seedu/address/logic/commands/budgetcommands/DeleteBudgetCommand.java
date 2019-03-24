@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.budgetcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_BUDGET__DOES_NOT_EXIST_FOR_CATEGORY;
+import static seedu.address.commons.core.Messages.MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class DeleteBudgetCommand extends Command {
         }
 
         if (index == -1) {
-            throw new CommandException(MESSAGE_BUDGET__DOES_NOT_EXIST_FOR_CATEGORY);
+            throw new CommandException(MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY);
         }
 
         Budget budgetToDelete = lastShownList.get(index);

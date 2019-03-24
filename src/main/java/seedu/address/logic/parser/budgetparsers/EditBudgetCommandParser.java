@@ -18,6 +18,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Category;
+import seedu.address.model.budget.Budget;
 
 /**
  * Parses input arguments and creates a new EditExpenseCommand object
@@ -47,13 +48,21 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
+            if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).isEqualOrAfterToday())) {
+                throw new ParseException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
+            }
             editBudgetDescriptor.setStartDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()));
         }
 
         if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()) {
+            if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) { // already checked
+                if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()).getLocalDate()
+                        .isAfter(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).getLocalDate()))) {
+                    throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+                }
+            }
             editBudgetDescriptor.setEndDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()));
         }
-
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             editBudgetDescriptor.setRemarks(argMultimap.getValue(PREFIX_REMARKS).get());
         }
@@ -63,9 +72,12 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         }
 
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-        int index = -1;
 
-        return new EditBudgetCommand(category, editBudgetDescriptor);
+        try {
+            return new EditBudgetCommand(category, editBudgetDescriptor);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+        }
     }
 
     /**

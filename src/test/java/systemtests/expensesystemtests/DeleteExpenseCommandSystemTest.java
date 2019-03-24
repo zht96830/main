@@ -1,4 +1,4 @@
-package systemtests;
+package systemtests.expensesystemtests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_LAPTOP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Test;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
@@ -20,6 +19,7 @@ import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.expense.Expense;
+import systemtests.FinanceTrackerSystemTest;
 
 public class DeleteExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 

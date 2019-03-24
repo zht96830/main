@@ -1,4 +1,4 @@
-package systemtests;
+package systemtests.expensesystemtests;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +22,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
 
 import org.junit.Test;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
@@ -35,6 +34,7 @@ import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.ExpenseBuilder;
+import systemtests.FinanceTrackerSystemTest;
 
 public class EditExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 

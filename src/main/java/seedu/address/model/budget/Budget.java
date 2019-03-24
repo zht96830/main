@@ -21,15 +21,21 @@ public class Budget {
     private int totalSpent; // in cents
     private double percentage;
 
-    private boolean hasBudget;
     private boolean isAboutToExceed; // when percentage reaches 90
+
+    public static final String MESSAGE_CONSTRAINTS_START_DATE =
+            "Start date has to be today or later.";
+    public static final String MESSAGE_CONSTRAINTS_END_DATE =
+            "Start date has to be before end date.";
 
     // constructor
     public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks) {
         requireAllNonNull(category, amount, endDate);
         this.category = category;
         this.amount = amount;
+        //checkArgument(startDate.isEqualOrAfterToday(), MESSAGE_CONSTRAINTS_START_DATE);
         this.startDate = startDate;
+        //checkArgument(startDate.getLocalDate().isBefore(endDate.getLocalDate()));
         this.endDate = endDate;
         if (remarks == null) {
             this.remarks = "";
@@ -38,7 +44,6 @@ public class Budget {
         }
         totalSpent = 0;
         percentage = (((double) totalSpent) / amount.value) * 100;
-        hasBudget = true;
         isAboutToExceed = false;
     }
     public Budget(Budget toCopy) {
@@ -54,7 +59,6 @@ public class Budget {
         }
         totalSpent = toCopy.totalSpent;
         percentage = (((double) totalSpent) / amount.value) * 100;
-        hasBudget = true;
         isAboutToExceed = toCopy.isAboutToExceed;
     }
 
@@ -86,10 +90,6 @@ public class Budget {
         return percentage;
     }
 
-    public boolean getHasBudget() {
-        return hasBudget;
-    }
-
     public boolean getIsAboutToExceed() {
         return isAboutToExceed;
     }
@@ -116,6 +116,26 @@ public class Budget {
 
     public void setTotalSpent(int totalSpent) {
         this.totalSpent = totalSpent;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
+
+    public void changeIsAboutToExceed() {
+        if (isAboutToExceed == true) {
+            isAboutToExceed = false;
+        } else {
+            isAboutToExceed = true;
+        }
+    }
+
+    public void updateTotalSpent(double difference) {
+        this.totalSpent += difference;
+    }
+
+    public void updatePercentage() {
+        this.percentage = (((double) totalSpent) / amount.value) * 100;
     }
 
     /**
