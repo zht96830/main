@@ -1,0 +1,11 @@
+{
+  "expenses": [ {
+    "name": "Chicken Rice",
+    "amount": "9482424",
+    "date": "invalid-date",
+    "category": "invalid-category"
+  } ],
+  "debts": [],
+  "budgets": [],
+  "recurrings": []
+}

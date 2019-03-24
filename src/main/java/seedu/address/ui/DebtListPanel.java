@@ -36,7 +36,7 @@ public class DebtListPanel extends UiPart<Region> {
         selectedDebt.addListener((observable, oldValue, newValue) -> {
             logger.fine("Selected debt changed to: " + newValue);
 
-            // Don't modify selection if we are already selecting the selected expense,
+            // Don't modify selection if we are already selecting the selected debt,
             // otherwise we wouldgi have an infinite loop.
             if (Objects.equals(debtListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;

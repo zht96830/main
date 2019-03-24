@@ -8,59 +8,59 @@ import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
-import seedu.address.model.expense.Expense;
+import seedu.address.model.debt.Debt;
 
 /**
- * Jackson-friendly version of {@link Expense}.
+ * Jackson-friendly version of {@link Debt}.
  */
-class JsonAdaptedExpense {
+class JsonAdaptedDebt {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Expense's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Debt's %s field is missing!";
 
-    private final String name;
+    private final String personOwed;
     private final String amount;
     private final String category;
-    private final String date;
+    private final String deadline;
     private final String remarks;
 
     /**
-     * Constructs a {@code JsonAdaptedExpense} with the given expense details.
+     * Constructs a {@code JsonAdaptedDebt} with the given debt details.
      */
     @JsonCreator
-    public JsonAdaptedExpense(@JsonProperty("name") String name, @JsonProperty("amount") String amount,
-                              @JsonProperty("date") String date, @JsonProperty("category") String category,
-                              @JsonProperty("remarks") String remarks) {
-        this.name = name;
+    public JsonAdaptedDebt(@JsonProperty("personOwed") String personOwed, @JsonProperty("amount") String amount,
+                           @JsonProperty("deadline") String deadline, @JsonProperty("category") String category,
+                           @JsonProperty("remarks") String remarks) {
+        this.personOwed = personOwed;
         this.amount = amount;
         this.category = category;
-        this.date = date;
+        this.deadline = deadline;
         this.remarks = remarks;
     }
 
     /**
-     * Converts a given {@code Expense} into this class for Jackson use.
+     * Converts a given {@code Debt} into this class for Jackson use.
      */
-    public JsonAdaptedExpense(Expense source) {
-        name = source.getName().name;
+    public JsonAdaptedDebt(Debt source) {
+        personOwed = source.getPersonOwed().name;
         amount = source.getAmount().toString();
         category = source.getCategory().toString();
-        date = source.getDate().toString();
+        deadline = source.getDeadline().toString();
         remarks = source.getRemarks();
     }
 
     /**
-     * Converts this Jackson-friendly adapted expense object into the model's {@code Expense} object.
+     * Converts this Jackson-friendly adapted debt object into the model's {@code Debt} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted expense.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted debt.
      */
-    public Expense toModelType() throws IllegalValueException {
-        if (name == null) {
+    public Debt toModelType() throws IllegalValueException {
+        if (personOwed == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
+        if (!Name.isValidName(personOwed)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final Name modelPersonOwed = new Name(personOwed);
 
         if (amount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Amount.class.getSimpleName()));
@@ -79,17 +79,17 @@ class JsonAdaptedExpense {
         }
         final Category modelCategory = Category.valueOf(category.toUpperCase());
 
-        if (date == null) {
+        if (deadline == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (Date.isValidDate(date) == "format") {
+        if (Date.isValidDate(deadline) == "format") {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final Date modelDate = new Date(date);
+        final Date modelDeadline = new Date(deadline);
 
         final String modelRemarks = remarks;
 
-        return new Expense(modelName, modelAmount, modelDate, modelCategory, modelRemarks);
+        return new Debt(modelPersonOwed, modelAmount, modelDeadline, modelCategory, modelRemarks);
     }
 
 }
