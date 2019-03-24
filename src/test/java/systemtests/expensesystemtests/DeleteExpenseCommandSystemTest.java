@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_LAPTOP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;

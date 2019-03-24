@@ -42,6 +42,8 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditBudgetCommand.MESSAGE_USAGE));
         }
 
+        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+
         EditBudgetCommand.EditBudgetDescriptor editBudgetDescriptor = new EditBudgetCommand.EditBudgetDescriptor();
         if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
             editBudgetDescriptor.setAmount(ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get()));
@@ -55,7 +57,7 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()) {
-            if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) { // already checked
+            if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) { // already checked start date
                 if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()).getLocalDate()
                         .isAfter(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).getLocalDate()))) {
                     throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
@@ -70,8 +72,6 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         if (!editBudgetDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditBudgetCommand.MESSAGE_NOT_EDITED);
         }
-
-        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
 
         try {
             return new EditBudgetCommand(category, editBudgetDescriptor);

@@ -58,7 +58,8 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
             LocalDate currentDate = LocalDate.now();
             startDate = new Date(dtf.format(currentDate));
         }
-        if (ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()).getLocalDate().isBefore(startDate.getLocalDate())) {
+        if (ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()).getLocalDate()
+                .isBefore(startDate.getLocalDate())) {
             throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
         }
         Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get());

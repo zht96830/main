@@ -11,6 +11,7 @@ import static seedu.address.model.attributes.Category.TRAVEL;
 import static seedu.address.testutil.TypicalBudgets.getTypicalFinanceTrackerWithBudgets;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
@@ -112,7 +113,7 @@ public class EditBudgetCommandTest {
         EditBudgetCommand editBudgetCommand = new EditBudgetCommand(category, descriptor);
 
         assertCommandFailure(editBudgetCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_BUDGET_CATEGORY);
+                Messages.MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY);
     }
 
     /*@Test
@@ -153,7 +154,7 @@ public class EditBudgetCommandTest {
 
         // execution failed -> finance tracker state not added into model
         assertCommandFailure(editBudgetCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_BUDGET_CATEGORY);
+                Messages.MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY);
 
         // single finance tracker state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);

@@ -57,22 +57,22 @@ public class SampleDataUtil {
     }
     public static Budget[] getSampleBudgets() {
         return new Budget[] {
-                new Budget(FOOD, new Amount("600"), new Date("01-10-2019"), new Date("31-10-2019"),
-                        "eat less save more"),
-                new Budget(TRANSPORT, new Amount("300"), new Date("01-07-2019"), new Date("31-12-2019"),
-                        "only for school and back"),
-                new Budget(SHOPPING, new Amount("200"), new Date("01-06-2019"), new Date("30-06-2019"),
-                        "only for grocery shopping"),
-                new Budget(WORK, new Amount("100"), new Date("13-05-2019"), new Date("02-08-2019"),
-                        "internship stuff"),
-                new Budget(UTILITIES, new Amount("450"), new Date("01-05-2019"), new Date("31-05-2019"),
-                        "take shorter showers"),
-                new Budget(HEALTHCARE, new Amount("100"), new Date("01-06-2019"), new Date("15-06-2019"),
-                        "stress may make me feel sick"),
-                new Budget(ENTERTAINMENT, new Amount("900"), new Date("11-05-2019"), new Date("11-08-2019"),
-                        "yay summer vacation"),
-                new Budget(TRAVEL, new Amount("7000"), new Date("01-01-2020"), new Date("31-12-2020"),
-                        "grad trip and family trip")};
+            new Budget(FOOD, new Amount("600"), new Date("01-10-2019"), new Date("31-10-2019"),
+                    "eat less save more"),
+            new Budget(TRANSPORT, new Amount("300"), new Date("01-07-2019"), new Date("31-12-2019"),
+                    "only for school and back"),
+            new Budget(SHOPPING, new Amount("200"), new Date("01-06-2019"), new Date("30-06-2019"),
+                    "only for grocery shopping"),
+            new Budget(WORK, new Amount("100"), new Date("13-05-2019"), new Date("02-08-2019"),
+                    "internship stuff"),
+            new Budget(UTILITIES, new Amount("450"), new Date("01-05-2019"), new Date("31-05-2019"),
+                    "take shorter showers"),
+            new Budget(HEALTHCARE, new Amount("100"), new Date("01-06-2019"), new Date("15-06-2019"),
+                    "stress may make me feel sick"),
+            new Budget(ENTERTAINMENT, new Amount("900"), new Date("11-05-2019"), new Date("11-08-2019"),
+                    "yay summer vacation"),
+            new Budget(TRAVEL, new Amount("7000"), new Date("01-01-2020"), new Date("31-12-2020"),
+                    "grad trip and family trip")};
     }
 
     public static ReadOnlyFinanceTracker getSampleFinanceTracker() {

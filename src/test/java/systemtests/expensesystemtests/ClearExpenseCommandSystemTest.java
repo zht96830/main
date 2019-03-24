@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;

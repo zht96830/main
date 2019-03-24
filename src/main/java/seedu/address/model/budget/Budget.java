@@ -12,6 +12,10 @@ import seedu.address.model.attributes.Date;
  */
 public class Budget {
 
+    public static final String MESSAGE_CONSTRAINTS_START_DATE =
+            "Start date has to be today or later.";
+    public static final String MESSAGE_CONSTRAINTS_END_DATE =
+            "Start date has to be before end date.";
     private int index;
     private Category category;
     private Amount amount;
@@ -20,13 +24,7 @@ public class Budget {
     private String remarks;
     private int totalSpent; // in cents
     private double percentage;
-
     private boolean isAboutToExceed; // when percentage reaches 90
-
-    public static final String MESSAGE_CONSTRAINTS_START_DATE =
-            "Start date has to be today or later.";
-    public static final String MESSAGE_CONSTRAINTS_END_DATE =
-            "Start date has to be before end date.";
 
     // constructor
     public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks) {
@@ -122,7 +120,7 @@ public class Budget {
         this.percentage = percentage;
     }
 
-    public void changeIsAboutToExceed() {
+    public void setIsAboutToExceed() {
         if (isAboutToExceed == true) {
             isAboutToExceed = false;
         } else {

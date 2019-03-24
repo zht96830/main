@@ -131,15 +131,15 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
      */
     public void setExpense(Expense target, Expense editedExpense) {
         requireNonNull(editedExpense);
-        int index = budgets.getIndex(target.getCategory());
+        expenses.setExpense(target, editedExpense);
+        int index = budgets.getIndex(editedExpense.getCategory());
         if (index != -1) {
-            Budget targetBudget = budgets.get(target.getCategory());
-            Budget updatedBudget = budgets.get(target.getCategory());
+            Budget targetBudget = budgets.get(editedExpense.getCategory());
+            Budget updatedBudget = budgets.get(editedExpense.getCategory());
             double diff = target.getAmount().value - editedExpense.getAmount().value;
             updatedBudget.updateTotalSpent(diff);
             updatedBudget.updatePercentage();
             budgets.setBudget(targetBudget, updatedBudget);
-            expenses.setExpense(target, editedExpense);
         }
         indicateModified();
     }

@@ -25,18 +25,18 @@ public class ModelHelper {
         model.updateFilteredExpenseList(predicate.orElse(PREDICATE_MATCHING_NO_EXPENSES));
     }
 
-    public static void setFilteredBudgetList(Model model, List<Budget> toDisplay) {
-        Optional<Predicate<Budget>> budgetpredicate =
-                toDisplay.stream().map(ModelHelper::getPredicateMatching).reduce(Predicate::or);
-
-        model.updateFilteredBudgetList(budgetpredicate.orElse(PREDICATE_MATCHING_NO_BUDGETS));
-    }
-
     /**
      * @see ModelHelper#setFilteredList(Model, List)
      */
     public static void setFilteredList(Model model, Expense... toDisplay) {
         setFilteredList(model, Arrays.asList(toDisplay));
+    }
+
+    public static void setFilteredBudgetList(Model model, List<Budget> toDisplay) {
+        Optional<Predicate<Budget>> budgetpredicate =
+                toDisplay.stream().map(ModelHelper::getPredicateMatching).reduce(Predicate::or);
+
+        model.updateFilteredBudgetList(budgetpredicate.orElse(PREDICATE_MATCHING_NO_BUDGETS));
     }
 
     /**

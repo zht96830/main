@@ -16,7 +16,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
@@ -64,7 +64,7 @@ public class EditBudgetCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws ParseException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Budget> lastShownList = model.getFilteredBudgetList();
 
@@ -77,15 +77,19 @@ public class EditBudgetCommand extends Command {
         }
 
         if (index == -1) {
-            throw new IllegalArgumentException(Messages.MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY);
+            throw new CommandException(Messages.MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY);
         }
 
         Budget budgetToEdit = lastShownList.get(index);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDescriptor);
-
-        if (!(editedBudget.getEndDate().getLocalDate().isAfter(budgetToEdit.getStartDate().getLocalDate()))) {
-            throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+        if (!(editedBudget.getStartDate().isEqualOrAfterToday())) {
+            throw new CommandException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
         }
+        if (!(editedBudget.getEndDate().getLocalDate().isAfter(editedBudget.getStartDate().getLocalDate()))
+                || !(editedBudget.getEndDate().getLocalDate().isAfter(budgetToEdit.getStartDate().getLocalDate()))) {
+            throw new CommandException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+        }
+
         model.setBudget(budgetToEdit, editedBudget);
         model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
         model.commitFinanceTracker();
@@ -100,7 +104,7 @@ public class EditBudgetCommand extends Command {
      * Creates and returns a {@code Budget} with the details of {@code budgetToEdit}
      * edited with {@code editBudgetDescriptor}.
      */
-    private static Budget createEditedBudget(Budget budgetToEdit, EditBudgetDescriptor editBudgetDescriptor) throws ParseException {
+    private static Budget createEditedBudget(Budget budgetToEdit, EditBudgetDescriptor editBudgetDescriptor) {
         assert budgetToEdit != null;
 
         Amount updatedAmount = editBudgetDescriptor.getAmount().orElse(budgetToEdit.getAmount());
@@ -109,9 +113,9 @@ public class EditBudgetCommand extends Command {
             throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
         }
         Date updatedEndDate = editBudgetDescriptor.getEndDate().orElse(budgetToEdit.getEndDate());
-        if (!(updatedEndDate.getLocalDate().isAfter(updatedStartDate.getLocalDate()))) {
-            throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
-        }
+        /*if (!(updatedEndDate.getLocalDate().isAfter(updatedStartDate.getLocalDate()))) {
+            throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+        }*/
         String updatedRemarks = editBudgetDescriptor.getRemarks().orElse(budgetToEdit.getRemarks());
 
         return new Budget(budgetToEdit.getCategory(), updatedAmount, updatedStartDate, updatedEndDate, updatedRemarks);
@@ -165,7 +169,7 @@ public class EditBudgetCommand extends Command {
         }
 
         public void setStartDate(Date startDate) {
-                this.startDate = startDate;
+            this.startDate = startDate;
         }
 
         public Optional<Date> getStartDate() {
@@ -173,7 +177,7 @@ public class EditBudgetCommand extends Command {
         }
 
         public void setEndDate(Date endDate) {
-                this.endDate = endDate;
+            this.endDate = endDate;
         }
 
         public Optional<Date> getEndDate() {

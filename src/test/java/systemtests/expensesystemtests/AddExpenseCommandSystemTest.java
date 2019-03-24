@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
 import static seedu.address.testutil.TypicalExpenses.STOCKS;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.AddExpenseCommand;

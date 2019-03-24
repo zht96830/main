@@ -16,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.STARTDATE_DESC_BUDGET
 import static seedu.address.testutil.TypicalBudgets.BUDGET;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
@@ -56,7 +57,7 @@ public class AddBudgetCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: add to empty finance tracker -> added */
         // implement clearbudget command first
-/*        deleteAllBudgets();
+        /*deleteAllBudgets();
         command = "   " + AddExpenseCommand.COMMAND_WORD + "  " + NAME_DESC_EXPENSE + "  " + AMOUNT_DESC_EXPENSE + " "
                 + CATEGORY_DESC_EXPENSE + "   " + DATE_DESC_EXPENSE + "   " + REMARKS_DESC_EXPENSE + " ";
         assertCommandSuccess(command, toAdd);
@@ -64,7 +65,7 @@ public class AddBudgetCommandSystemTest extends FinanceTrackerSystemTest {
         /* ------------------------ Perform add operation while a expense card is selected -------------------------- */
         // implement selectbudget command first
         /* Case: selects first card in the expense list, add a expense -> added, card selection remains unchanged */
-/*        selectExpense(Index.fromOneBased(1));
+        /*selectExpense(Index.fromOneBased(1));
         assertCommandSuccess(GROCERIES);
 */
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
