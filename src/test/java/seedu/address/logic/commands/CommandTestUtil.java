@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
@@ -50,7 +51,9 @@ public class CommandTestUtil {
     public static final String VALID_DATE_EXPENSE = "03-03-2019";
     public static final String VALID_DATE_EXPENSE_2 = "12-03-2019";
     public static final String VALID_STARTDATE_BUDGET = "01-12-2019";
+    public static final String VALID_STARTDATE_BUDGET_2 = "01-06-2019";
     public static final String VALID_ENDDATE_BUDGET = "31-12-2019";
+    public static final String VALID_ENDDATE_BUDGET_2 = "30-06-2019";
     public static final String VALID_DEADLINE_DEBT = "05-05-2020";
     public static final String VALID_REMARKS_EXPENSE = "Bishan chicken rice";
     public static final String VALID_REMARKS_DEBT = "fan";
@@ -74,17 +77,23 @@ public class CommandTestUtil {
     public static final String DATE_DESC_EXPENSE_2 = " " + PREFIX_DATE + VALID_DATE_EXPENSE_2;
     public static final String DEADLINE_DESC_DEBT = " " + PREFIX_DUE + VALID_DEADLINE_DEBT;
     public static final String STARTDATE_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_STARTDATE_BUDGET;
-    public static final String ENDDATE_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_ENDDATE_BUDGET;
+    public static final String STARTDATE_DESC_BUDGET_2 = " " + PREFIX_STARTDATE + VALID_STARTDATE_BUDGET_2;
+    public static final String ENDDATE_DESC_BUDGET = " " + PREFIX_ENDDATE + VALID_ENDDATE_BUDGET;
+    public static final String ENDDATE_DESC_BUDGET_2 = " " + PREFIX_ENDDATE + VALID_ENDDATE_BUDGET_2;
     public static final String REMARKS_DESC_EXPENSE = " " + PREFIX_REMARKS + VALID_REMARKS_EXPENSE;
     public static final String REMARKS_DESC_DEBT = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT;
-    public static final String REMARKS_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_REMARKS_BUDGET;
+    public static final String REMARKS_DESC_BUDGET = " " + PREFIX_REMARKS + VALID_REMARKS_BUDGET;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "911a"; // 'a' not allowed in phones
     public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "fod"; // not one of enum values
     public static final String INVALID_DATE_DESC_FORMAT = " " + PREFIX_DATE + "142-121-012"; // must be dd-MM-yyyy
-    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DUE + "12-1213-01"; // must be dd-MM-yyyy
     public static final String INVALID_DATE_DESC_EXIST = " " + PREFIX_DATE + "29-02-2021"; //does not exist
+    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DUE + "12-1213-01"; // must be dd-MM-yyyy
+    public static final String INVALID_STARTDATE_DESC_FORMAT = " " + PREFIX_STARTDATE + "29-033-2021"; //does not exist
+    public static final String INVALID_ENDDATE_DESC_FORMAT = " " + PREFIX_ENDDATE + "291-02-23021"; //does not exist
+    public static final String INVALID_STARTDATE_DESC_EXIST = " " + PREFIX_STARTDATE + "29-02-2019"; //does not exist
+    public static final String INVALID_ENDDATE_DESC_EXIST = " " + PREFIX_ENDDATE + "31-06-2019"; //does not exist
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

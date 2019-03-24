@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 public class MainWindowHandle extends StageHandle {
 
     private final ExpenseListPanelHandle expenseListPanel;
+    private final BudgetListPanelHandle budgetListPanel;
     private final ResultDisplayHandle resultDisplay;
     private final CommandBoxHandle commandBox;
     private final StatusBarFooterHandle statusBarFooter;
@@ -18,6 +19,7 @@ public class MainWindowHandle extends StageHandle {
         super(stage);
 
         expenseListPanel = new ExpenseListPanelHandle(getChildNode(ExpenseListPanelHandle.EXPENSE_LIST_VIEW_ID));
+        budgetListPanel = new BudgetListPanelHandle(getChildNode(BudgetListPanelHandle.BUDGET_LIST_VIEW_ID));
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
@@ -27,6 +29,10 @@ public class MainWindowHandle extends StageHandle {
 
     public ExpenseListPanelHandle getExpenseListPanel() {
         return expenseListPanel;
+    }
+
+    public BudgetListPanelHandle getBudgetListPanel() {
+        return budgetListPanel;
     }
 
     public ResultDisplayHandle getResultDisplay() {

@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ENDDATE_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STARTDATE_BUDGET;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,6 +48,14 @@ public class TypicalBudgets {
     public static final Budget BUDGET = new BudgetBuilder().withCategory(VALID_CATEGORY_BUDGET)
             .withAmount(VALID_AMOUNT_BUDGET).withStartDate(VALID_STARTDATE_BUDGET).withEndDate(VALID_ENDDATE_BUDGET)
             .withRemarks(VALID_REMARKS_BUDGET).build();
+    public static final Budget BUDGET_WITH_TODAYS_DATE = new BudgetBuilder().withCategory(VALID_CATEGORY_BUDGET)
+            .withAmount(VALID_AMOUNT_BUDGET).withStartDate(LocalDate.now().format(DateTimeFormatter.
+                    ofPattern("dd-MM-uuuu"))).withEndDate(VALID_ENDDATE_BUDGET).withRemarks(VALID_REMARKS_BUDGET)
+            .build();
+    public static final Budget BUDGET_WITHOUT_REMARKS = new BudgetBuilder().withCategory(VALID_CATEGORY_BUDGET)
+            .withAmount(VALID_AMOUNT_BUDGET).withStartDate(VALID_STARTDATE_BUDGET).withEndDate(VALID_ENDDATE_BUDGET)
+            .withRemarks(null).build();
+
 
     private TypicalBudgets() {} // prevents instantiation
 

@@ -2,18 +2,20 @@ package seedu.address.logic.parser.budgetparsers;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Category;
 
@@ -34,13 +36,9 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_CATEGORY,
                         PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_REMARKS);
 
-        Category category;
-
-        try {
-            category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditBudgetCommand.MESSAGE_USAGE), pe);
+        if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditBudgetCommand.MESSAGE_USAGE));
         }
 
         EditBudgetCommand.EditBudgetDescriptor editBudgetDescriptor = new EditBudgetCommand.EditBudgetDescriptor();
@@ -60,11 +58,21 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
             editBudgetDescriptor.setRemarks(argMultimap.getValue(PREFIX_REMARKS).get());
         }
 
-
         if (!editBudgetDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditBudgetCommand.MESSAGE_NOT_EDITED);
         }
 
+        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+        int index = -1;
+
         return new EditBudgetCommand(category, editBudgetDescriptor);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

@@ -35,7 +35,7 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
      */
     public AddBudgetCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_CATEGORY,
+                ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_AMOUNT,
                         PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_REMARKS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_CATEGORY, PREFIX_ENDDATE)
@@ -55,9 +55,11 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
             startDate = new Date(dtf.format(currentDate));
         }
         Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get());
-        String remarks = null;
+        String remarks;
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             remarks = argMultimap.getValue(PREFIX_REMARKS).get();
+        } else {
+            remarks = "";
         }
 
         Budget budget = new Budget(category, amount, startDate, endDate, remarks);

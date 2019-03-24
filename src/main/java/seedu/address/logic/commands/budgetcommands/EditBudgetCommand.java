@@ -77,7 +77,7 @@ public class EditBudgetCommand extends Command {
         }
 
         if (index == -1) {
-            throw new CommandException(Messages.MESSAGE_INVALID_BUDGET_CATEGORY);
+            throw new CommandException(Messages.MESSAGE_BUDGET__DOES_NOT_EXIST_FOR_CATEGORY);
         }
 
         Budget budgetToEdit = lastShownList.get(index);
@@ -106,6 +106,14 @@ public class EditBudgetCommand extends Command {
         String updatedRemarks = editBudgetDescriptor.getRemarks().orElse(budgetToEdit.getRemarks());
 
         return new Budget(budgetToEdit.getCategory(), updatedAmount, updatedStartDate, updatedEndDate, updatedRemarks);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditBudgetCommand // instanceof handles nulls
+                && category.equals(((EditBudgetCommand) other).category))
+                && editBudgetDescriptor.equals(((EditBudgetCommand) other).editBudgetDescriptor);
     }
 
     /**

@@ -1,0 +1,7 @@
+diff a/src/test/java/systemtests/expensesystemtests/EditExpenseCommandSystemTest.java b/src/test/java/systemtests/expensesystemtests/EditExpenseCommandSystemTest.java	(rejected hunks)
+@@ -1,4 +0,4 @@
+-package systemtests;
++package systemtests.expensesystemtests;
+ 
+ import static org.junit.Assert.assertNotEquals;
+ import static org.junit.Assert.assertTrue;

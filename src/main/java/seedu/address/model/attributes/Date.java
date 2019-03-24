@@ -23,13 +23,13 @@ public class Date implements Comparable<Date> {
 
     /**
      * Constructs a {@code Date}.
-     * @param localDate A valid localDate number.
+     * @param date A valid localDate number.
      */
-    public Date(String localDate) throws DateTimeParseException {
-        requireNonNull(localDate);
+    public Date(String date) throws DateTimeParseException {
+        requireNonNull(date);
         //checkArgument((isValidDate(localDate)=="format"), MESSAGE_CONSTRAINTS);
         //checkArgument((isValidDate(localDate)=="exist"), MESSAGE_DATE_DOES_NOT_EXIST);
-        this.localDate = LocalDate.parse(localDate, DateTimeFormatter.ofPattern("dd-MM-uuuu")
+        this.localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
                 .withResolverStyle(ResolverStyle.STRICT));
     }
 
@@ -98,30 +98,6 @@ public class Date implements Comparable<Date> {
             return 1;
         }
         return 0;
-        /*
-        if (this.localDate.getYear() < other.localDate.getYear()) {
-            return -1;
-        }
-        if (this.localDate.getYear() > other.localDate.getYear()) {
-            return 1;
-        }
-
-        // years are the same
-        if (this.localDate.getMonthValue() < other.localDate.getMonthValue()) {
-            return -1;
-        }
-        if (this.localDate.getMonthValue() > other.localDate.getMonthValue()) {
-            return 1;
-        }
-
-        // years and months are the same
-        if (this.localDate.getDayOfMonth() < other.localDate.getDayOfMonth()) {
-            return -1;
-        }
-        if (this.localDate.getDayOfMonth() > other.localDate.getDayOfMonth()) {
-            return 1;
-        }
-        return 0;*/
     }
 
     /**

@@ -1,5 +1,6 @@
 package seedu.address.model.budget;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.model.attributes.Amount;
@@ -39,6 +40,22 @@ public class Budget {
         percentage = (((double) totalSpent) / amount.value) * 100;
         hasBudget = true;
         isAboutToExceed = false;
+    }
+    public Budget(Budget toCopy) {
+        requireNonNull(toCopy);
+        this.category = toCopy.category;
+        this.amount = toCopy.amount;
+        this.startDate = toCopy.startDate;
+        this.endDate = toCopy.endDate;
+        if (toCopy.remarks == null) {
+            this.remarks = "";
+        } else {
+            this.remarks = toCopy.remarks;
+        }
+        totalSpent = toCopy.totalSpent;
+        percentage = (((double) totalSpent) / amount.value) * 100;
+        hasBudget = true;
+        isAboutToExceed = toCopy.isAboutToExceed;
     }
 
     public Category getCategory() {
