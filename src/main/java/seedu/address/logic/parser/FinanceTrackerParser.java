@@ -9,9 +9,11 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
+import seedu.address.logic.commands.budgetcommands.ClearBudgetCommand;
 import seedu.address.logic.commands.budgetcommands.DeleteBudgetCommand;
 import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
 import seedu.address.logic.commands.debtcommands.AddDebtCommand;
+import seedu.address.logic.commands.debtcommands.ClearDebtCommand;
 import seedu.address.logic.commands.debtcommands.DeleteDebtCommand;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
 import seedu.address.logic.commands.debtcommands.ListDebtCommand;
@@ -27,6 +29,7 @@ import seedu.address.logic.commands.generalcommands.HistoryCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.logic.commands.recurringcommands.AddRecurringCommand;
+import seedu.address.logic.commands.recurringcommands.ClearRecurringCommand;
 import seedu.address.logic.commands.recurringcommands.DeleteRecurringCommand;
 import seedu.address.logic.commands.recurringcommands.EditRecurringCommand;
 import seedu.address.logic.commands.recurringcommands.ListRecurringCommand;
@@ -128,6 +131,18 @@ public class FinanceTrackerParser {
         case ClearExpenseCommand.COMMAND_WORD:
         case ClearExpenseCommand.COMMAND_WORD_SHORTCUT:
             return new ClearExpenseCommand();
+
+        case ClearBudgetCommand.COMMAND_WORD:
+        case ClearBudgetCommand.COMMAND_WORD_SHORTCUT:
+            return new ClearBudgetCommand();
+
+        case ClearDebtCommand.COMMAND_WORD:
+        case ClearDebtCommand.COMMAND_WORD_SHORTCUT:
+            return new ClearDebtCommand();
+
+        case ClearRecurringCommand.COMMAND_WORD:
+        case ClearRecurringCommand.COMMAND_WORD_SHORTCUT:
+            return new ClearRecurringCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
