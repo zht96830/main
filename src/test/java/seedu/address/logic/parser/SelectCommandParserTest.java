@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 import org.junit.Test;
 
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.parser.expenseparsers.DeleteExpenseCommandParserTest;
 
 /**
  * Test scope: similar to {@code DeleteExpenseCommandParserTest}.
