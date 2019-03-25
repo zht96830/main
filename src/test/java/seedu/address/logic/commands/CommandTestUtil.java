@@ -39,21 +39,26 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_EXPENSE = "Chicken Rice";
     public static final String VALID_NAME_DEBT = "Bob Choo";
+    public static final String VALID_NAME_DEBT_2 = "Jordan Foo";
     public static final String VALID_NAME_RECURRING = "Phone Bill";
     public static final String VALID_AMOUNT_EXPENSE = "4";
     public static final String VALID_AMOUNT_DEBT = "12345";
+    public static final String VALID_AMOUNT_DEBT_2 = "123.45";
     public static final String VALID_AMOUNT_BUDGET = "55555";
     public static final String VALID_CATEGORY_EXPENSE = "food";
     public static final String VALID_CATEGORY_EXPENSE_2 = "transport";
     public static final String VALID_CATEGORY_DEBT = "shopping";
+    public static final String VALID_CATEGORY_DEBT_2 = "TRANSPORT";
     public static final String VALID_CATEGORY_BUDGET = "food";
     public static final String VALID_DATE_EXPENSE = "03-03-2019";
     public static final String VALID_DATE_EXPENSE_2 = "12-03-2019";
     public static final String VALID_STARTDATE_BUDGET = "01-12-2019";
     public static final String VALID_ENDDATE_BUDGET = "31-12-2019";
     public static final String VALID_DEADLINE_DEBT = "05-05-2020";
+    public static final String VALID_DEADLINE_DEBT_2 = "01-01-2024";
     public static final String VALID_REMARKS_EXPENSE = "Bishan chicken rice";
     public static final String VALID_REMARKS_DEBT = "fan";
+    public static final String VALID_REMARKS_DEBT_2 = "chicken";
     public static final String VALID_REMARKS_BUDGET = "eat more for christmas yay";
     public static final String VALID_AMOUNT_RECURRING = "50";
     public static final String VALID_CATEGORY_RECURRING = "utilities";
@@ -64,19 +69,24 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_EXPENSE = " " + PREFIX_NAME + VALID_NAME_EXPENSE;
     public static final String NAME_DESC_DEBT = " " + PREFIX_NAME + VALID_NAME_DEBT;
+    public static final String NAME_DESC_DEBT_2 = " " + PREFIX_NAME + VALID_NAME_DEBT_2;
     public static final String AMOUNT_DESC_EXPENSE = " " + PREFIX_AMOUNT + VALID_AMOUNT_EXPENSE;
     public static final String AMOUNT_DESC_DEBT = " " + PREFIX_AMOUNT + VALID_AMOUNT_DEBT;
+    public static final String AMOUNT_DESC_DEBT_2 = " " + PREFIX_AMOUNT + VALID_AMOUNT_DEBT_2;
     public static final String AMOUNT_DESC_BUDGET = " " + PREFIX_AMOUNT + VALID_AMOUNT_BUDGET;
     public static final String CATEGORY_DESC_EXPENSE = " " + PREFIX_CATEGORY + VALID_CATEGORY_EXPENSE;
     public static final String CATEGORY_DESC_DEBT = " " + PREFIX_CATEGORY + VALID_CATEGORY_DEBT;
+    public static final String CATEGORY_DESC_DEBT_2 = " " + PREFIX_CATEGORY + VALID_CATEGORY_DEBT_2;
     public static final String CATEGORY_DESC_BUDGET = " " + PREFIX_CATEGORY + VALID_CATEGORY_BUDGET;
     public static final String DATE_DESC_EXPENSE = " " + PREFIX_DATE + VALID_DATE_EXPENSE;
     public static final String DATE_DESC_EXPENSE_2 = " " + PREFIX_DATE + VALID_DATE_EXPENSE_2;
     public static final String DEADLINE_DESC_DEBT = " " + PREFIX_DUE + VALID_DEADLINE_DEBT;
+    public static final String DEADLINE_DESC_DEBT_2 = " " + PREFIX_DUE + VALID_DEADLINE_DEBT_2;
     public static final String STARTDATE_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_STARTDATE_BUDGET;
     public static final String ENDDATE_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_ENDDATE_BUDGET;
     public static final String REMARKS_DESC_EXPENSE = " " + PREFIX_REMARKS + VALID_REMARKS_EXPENSE;
     public static final String REMARKS_DESC_DEBT = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT;
+    public static final String REMARKS_DESC_DEBT_2 = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT_2;
     public static final String REMARKS_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_REMARKS_BUDGET;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // ' ' not allowed as a name
