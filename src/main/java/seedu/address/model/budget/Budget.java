@@ -157,16 +157,22 @@ public class Budget {
      * They need not be the same instance variable.
      * @return true if the two budgets have the same attributes.
      */
-    public boolean isSameBudget(Budget otherBudget) {
-        if (otherBudget == this) {
+    public boolean equals(Object other) {
+        if (other == this) {
             return true;
         }
 
+        if (!(other instanceof Budget)) {
+            return false;
+        }
+
+        Budget otherBudget = (Budget) other;
         return otherBudget != null
                 && otherBudget.getCategory().equals(getCategory())
                 && otherBudget.getAmount().equals(getAmount())
                 && otherBudget.getStartDate().equals(getStartDate())
-                && otherBudget.getEndDate().equals(getEndDate());
+                && otherBudget.getEndDate().equals(getEndDate())
+                && otherBudget.getRemarks().equals(getRemarks());
     }
 
     @Override

@@ -41,30 +41,30 @@ public class BudgetTest {
     @Test
     public void isSameBudget() {
         // same object -> returns true
-        assertTrue(BUDGET.isSameBudget(BUDGET));
+        assertTrue(BUDGET.equals(BUDGET));
 
         // null -> returns false
-        assertFalse(BUDGET.isSameBudget(null));
+        assertFalse(BUDGET.equals(null));
 
         // different category -> returns false
         Budget editedBudget = new BudgetBuilder(FOOD_BUDGET).withCategory(VALID_CATEGORY_DEBT).build();
-        assertFalse(FOOD_BUDGET.isSameBudget(editedBudget));
+        assertFalse(FOOD_BUDGET.equals(editedBudget));
 
         // different amount -> returns false
         editedBudget = new BudgetBuilder(FOOD_BUDGET).withAmount(VALID_AMOUNT_BUDGET).build();
-        assertFalse(FOOD_BUDGET.isSameBudget(editedBudget));
+        assertFalse(FOOD_BUDGET.equals(editedBudget));
 
         // different start date -> returns false
         editedBudget = new BudgetBuilder(FOOD_BUDGET).withStartDate(VALID_STARTDATE_BUDGET).build();
-        assertFalse(FOOD_BUDGET.isSameBudget(editedBudget));
+        assertFalse(FOOD_BUDGET.equals(editedBudget));
 
         // different end date -> returns false
         editedBudget = new BudgetBuilder(FOOD_BUDGET).withEndDate(VALID_ENDDATE_BUDGET).build();
-        assertFalse(FOOD_BUDGET.isSameBudget(editedBudget));
+        assertFalse(FOOD_BUDGET.equals(editedBudget));
 
         // different remarks -> returns false
         //editedBudget = new BudgetBuilder(FOOD_BUDGET).withRemarks(VALID_REMARKS_DEBT).build();
-        //assertFalse(FOOD_BUDGET.isSameBudget(editedBudget));
+        //assertFalse(FOOD_BUDGET.equals(editedBudget));
     }
 
     @Test

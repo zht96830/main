@@ -478,7 +478,7 @@ public class ModelManager implements Model {
             }
 
             boolean wasSelectedBudgetRemoved = change.getRemoved().stream()
-                    .anyMatch(removedBudget -> selectedBudget.getValue().isSameBudget(removedBudget));
+                    .anyMatch(removedBudget -> selectedBudget.getValue().equals(removedBudget));
             if (wasSelectedBudgetRemoved) {
                 // Select the budget that came before it in the list,
                 // or clear the selection if there is no such budget.
