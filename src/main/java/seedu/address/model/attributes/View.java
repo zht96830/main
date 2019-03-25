@@ -4,12 +4,12 @@ package seedu.address.model.attributes;
  * Represents a list view in the finance tracker.
  */
 public enum View {
-    ALL, DAY, WEEK, MONTH, YEAR, FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, AMOUNT,
-    OTHERS;
+    ALL, DAY, WEEK, MONTH, YEAR, FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, $10,
+    $100, $1000, OTHERS;
 
     public static final String MESSAGE_CONSTRAINTS =
             "View should only be one of the following:\nALL, DAY, WEEK, MONTH, FOOD, TRANSPORT, SHOPPING, WORK, "
-                    + "UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, AMOUNT, OTHERS.";
+                    + "UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS, $10, $100, $1000.";
 
     /**
      * Method to check if string belongs to one of the possible View enum values.
@@ -26,5 +26,31 @@ public enum View {
             }
         }
         return false;
+    }
+
+    public String getMessage() {
+        switch (this) {
+        case DAY:
+        case WEEK:
+        case MONTH:
+        case YEAR:
+            return "Since last " + this.toString();
+        case FOOD:
+        case TRANSPORT:
+        case TRAVEL:
+        case SHOPPING:
+        case WORK:
+        case UTILITIES:
+        case HEALTHCARE:
+        case ENTERTAINMENT:
+        case OTHERS:
+            return "With category under " + this.toString();
+        case $10:
+        case $100:
+        case $1000:
+            return "With amount greater than " + this.toString();
+        default:
+            return this.toString();
+        }
     }
 }

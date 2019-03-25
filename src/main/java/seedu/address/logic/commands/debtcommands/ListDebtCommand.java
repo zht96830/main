@@ -9,6 +9,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_FOOD_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_HEALTHCARE_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_MONTH_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_OTHERS_DEBTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$1000_DEBTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$100_DEBTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$10_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_SHOPPING_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_TRANSPORT_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_TRAVEL_DEBTS;
@@ -36,13 +39,13 @@ public class ListDebtCommand extends Command {
 
     public static final String COMMAND_WORD_SHORTCUT = "ld";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a debt to the Finance Tracker. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists debts in the Finance Tracker. "
             + "Parameters: "
             + PREFIX_VIEW + "VIEW\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_VIEW + "food";
 
-    public static final String MESSAGE_SUCCESS = "Listed debts under:\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Listed debts: \n%1$s";
 
     private final View view;
 
@@ -55,7 +58,7 @@ public class ListDebtCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredDebtList(this.getPredicate(this.view));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.view.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.view.getMessage()));
     }
 
     @Override
@@ -103,6 +106,12 @@ public class ListDebtCommand extends Command {
             return PREDICATE_SHOW_UTIL_DEBTS;
         case HEALTHCARE:
             return PREDICATE_SHOW_HEALTHCARE_DEBTS;
+        case $10:
+            return PREDICATE_SHOW_OVER_$10_DEBTS;
+        case $100:
+            return PREDICATE_SHOW_OVER_$100_DEBTS;
+        case $1000:
+            return PREDICATE_SHOW_OVER_$1000_DEBTS;
         default:
             return PREDICATE_SHOW_ALL_DEBTS;
         }
