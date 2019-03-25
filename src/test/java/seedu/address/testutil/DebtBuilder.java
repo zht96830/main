@@ -14,7 +14,7 @@ public class DebtBuilder {
     public static final String DEFAULT_AMOUNT = "50.00";
     public static final String DEFAULT_CATEGORY = "work";
     public static final String DEFAULT_DEADLINE = "12-12-2019";
-    public static final String DEFAULT_REMARKS = "borrowed money for bagels";
+    public static final String DEFAULT_REMARKS = "";
 
     private Name personOwed;
     private Amount amount;

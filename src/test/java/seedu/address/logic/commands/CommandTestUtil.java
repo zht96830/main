@@ -80,10 +80,13 @@ public class CommandTestUtil {
     public static final String REMARKS_DESC_BUDGET = " " + PREFIX_STARTDATE + VALID_REMARKS_BUDGET;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // ' ' not allowed as a name
-    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "911a"; // 'a' not allowed in amount
     public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "fod"; // not one of enum values
     public static final String INVALID_DATE_DESC_FORMAT = " " + PREFIX_DATE + "142-121-012"; // must be dd-MM-yyyy
-    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DUE + "12-1213-01"; // must be dd-MM-yyyy
+    public static final String INVALID_DEADLINE_DESC_FORMAT = " " + PREFIX_DUE
+            + "12-1213-01"; // must be dd-MM-yyyy
+    public static final String INVALID_DEADLINE_DESC_DATE = " " + PREFIX_DUE
+            + "01-01-2018"; // cannot be before today's date
     public static final String INVALID_DATE_DESC_EXIST = " " + PREFIX_DATE + "29-02-2021"; //does not exist
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
