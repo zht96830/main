@@ -161,7 +161,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ExpenseListPanel`, `BudgetListPanel`, `DebtListPanel`, `RecurringListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -188,8 +188,8 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
+.Interactions Inside the Logic Component for the `deleteexpense 1` Command
+image::DeleteExpenseSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
@@ -337,7 +337,7 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 === Listing Feature
 
-This feature allows users to filter out specific expenses based on the view specified. Only expenses that are under those views will be shown on the respective list panels.
+This feature allows users to filter out specific items based on the view specified. Only expenses that are under those views will be shown on the respective list panels.
 
 Listing feature consists of `listexpense`, `listrecurring`, `listbudget` and `listdebt`.
 
@@ -703,29 +703,8 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 
 *Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your finance tracker application. You realize that one of the users occasionally tries to delete non-existent tags from an expense, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last expense in the list. Your job is to implement improvements to the UI to solve all these problems.
 
-[TIP]
-Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
+[TIP]Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
 
-. Use different colors for different tags inside expense cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
-+
-**Before**
-+
-image::getting-started-ui-tag-before.png[width="300"]
-+
-**After**
-+
-image::getting-started-ui-tag-after.png[width="300"]
-+
-****
-* Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/ExpenseCard.java[the `ExpenseCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
-** Use the .css attribute `-fx-background-color` to add a color.
-** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
-* Solution
-** You can modify the existing test methods for `ExpenseCard` 's to include testing the tag's color as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
-*** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
-****
 
 . Modify link:{repoURL}/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
 +
@@ -751,7 +730,7 @@ image::getting-started-ui-result-after.png[width="200"]
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the finance tracker.
+. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of expense in the finance tracker.
 +
 **Before**
 +
@@ -764,11 +743,11 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 * Hints
 ** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the finance tarcker is updated.
+** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the finance tracker is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of expenses when the application just started.
 ** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleFinanceTrackerChangedEvent(FinanceTrackerChangedEvent)`] to update the number of expenses whenever there are new changes to the finance tracker.
-** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
+** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of expense status, just like what we did for save location and sync status.
 ** For system tests, modify link:{repoURL}/src/test/java/systemtests/FinanceTrackerSystemTest.java[`FinanceTrackerSystemTest`] to also verify the new total number of expenses status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
 ****
@@ -817,7 +796,7 @@ Let's start by teaching the application how to parse a `remark` command. We will
 **Main:**
 
 . Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`FinanceTrackerParser`] to accept a `RemarkCommand`.
+. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/FinanceTrackerParser.java[`FinanceTrackerParser`] to accept a `RemarkCommand`.
 
 **Tests:**
 
@@ -850,7 +829,7 @@ Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
+. Modify link:{repoURL}/src/test/java/guitests/guihandles/ExpenseCardHandle.java[`ExpenseCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
 We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/expense/Expense.java[`Expense`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
@@ -873,7 +852,7 @@ Now we have the `Remark` class, we need to actually use it inside link:{repoURL}
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the expense will be created without a remark).
 . Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `data/addressbook.json` so that the application will load the sample data when you launch it.)
 
-===== [Step 6] Storage: Add `Remark` field to `JsonAdaptedPerson` class
+===== [Step 6] Storage: Add `Remark` field to `JsonAdaptedExpense` class
 We now have `Remark` s for `Expense` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/JsonAdaptedExpense.java[`JsonAdaptedExpense`] to include a `Remark` field so that it will be saved.
 
 **Main:**
@@ -882,15 +861,15 @@ We now have `Remark` s for `Expense` s, but they will be gone when we exit the a
 
 **Tests:**
 
-. Fix `invalidAndValidPersonAddressBook.json`, `typicalPersonsFinanceTracker.json`, `validAddressBook.json` etc., such that the JSON tests will not fail due to a missing `remark` field.
+. Fix `invalidAndValidExpenseAddressBook.json`, `typicalExpensesFinanceTracker.json`, `validAddressBook.json` etc., such that the JSON tests will not fail due to a missing `remark` field.
 
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Expense` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/expense/Expense.java[`Expense`].
+===== [Step 6b] Test: Add withRemark() for `ExpenseBuilder`
+Since `Expense` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/ExpenseBuilder.java[`ExpenseBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/expense/Expense.java[`Expense`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the expense that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
+. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/ExpenseBuilder.java[`ExpenseBuilder`]. This method will create a new `Remark` for the expense that it is currently building.
+. Try and use the method on any sample `Expense` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalExpenses.java[`TypicalExpenses`].
 
 ===== [Step 7] Ui: Connect `Remark` field to `ExpenseCard`
 Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/ExpenseCard.java[`ExpenseCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
@@ -901,7 +880,7 @@ Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/ExpenseCard.ja
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
+. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysExpense(...)`] so that it will compare the now-functioning remark label.
 
 ===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
 We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
@@ -1665,7 +1644,7 @@ _{ more test cases ... }_
 
 . Deleting an expense while all expenses are listed
 
-.. Prerequisites: List all expenses using the `list` command. Multiple expenses in the list.
+.. Prerequisites: List all expenses using the `listexpense v/all` command. Multiple expenses in the list.
 .. Test case: `delete 1` +
    Expected: First expense is deleted from the list. Details of the deleted expense shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +

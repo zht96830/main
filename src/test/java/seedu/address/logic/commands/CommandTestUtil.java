@@ -47,7 +47,7 @@ public class CommandTestUtil {
     public static final String VALID_CATEGORY_EXPENSE = "food";
     public static final String VALID_CATEGORY_EXPENSE_2 = "transport";
     public static final String VALID_CATEGORY_DEBT = "shopping";
-    public static final String VALID_CATEGORY_BUDGET = "food";
+    public static final String VALID_CATEGORY_BUDGET = "travel";
     public static final String VALID_DATE_EXPENSE = "03-03-2019";
     public static final String VALID_DATE_EXPENSE_2 = "12-03-2019";
     public static final String VALID_STARTDATE_BUDGET = "01-12-2019";

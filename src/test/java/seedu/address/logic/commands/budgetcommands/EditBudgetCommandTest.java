@@ -4,10 +4,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_BUDGET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENDDATE_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.attributes.Category.FOOD;
 import static seedu.address.model.attributes.Category.OTHERS;
 import static seedu.address.model.attributes.Category.TRAVEL;
+import static seedu.address.model.attributes.Category.WORK;
 import static seedu.address.testutil.TypicalBudgets.getTypicalFinanceTrackerWithBudgets;
 
 import org.junit.Test;
@@ -16,10 +20,13 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
+import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.attributes.Category;
+import seedu.address.model.budget.Budget;
+import seedu.address.testutil.BudgetBuilder;
 import seedu.address.testutil.EditBudgetDescriptorBuilder;
 
 /**
@@ -30,7 +37,7 @@ public class EditBudgetCommandTest {
     private Model model = new ModelManager(getTypicalFinanceTrackerWithBudgets(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
-    /*@Test
+    @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Category category = WORK;
         Budget editedBudget = new BudgetBuilder().withCategory(category.toString()).build();
@@ -51,11 +58,12 @@ public class EditBudgetCommandTest {
         expectedModel.commitFinanceTracker();
 
         assertCommandSuccess(editBudgetCommand, model, commandHistory, expectedMessage, expectedModel);
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Category category = FOOD;
+
 
         int index = -1;
         for (Budget budget : model.getFilteredBudgetList()) {
@@ -67,7 +75,7 @@ public class EditBudgetCommandTest {
         BudgetBuilder budgetInList = new BudgetBuilder(foodBudget);
 
         Budget editedBudget = budgetInList.withAmount(VALID_AMOUNT_DEBT)
-                .withEndDate(VALID_DATE_EXPENSE).build();
+                .withEndDate(VALID_ENDDATE_BUDGET).build();
 
         EditBudgetCommand.EditBudgetDescriptor descriptor = new EditBudgetDescriptorBuilder(editedBudget).build();
         EditBudgetCommand editBudgetCommand = new EditBudgetCommand(category, descriptor);
@@ -79,10 +87,10 @@ public class EditBudgetCommandTest {
         expectedModel.commitFinanceTracker();
 
         assertCommandSuccess(editBudgetCommand, model, commandHistory, expectedMessage, expectedModel);
-    }*/
+    }
 
 
-    /*@Test
+    @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         Category category = FOOD;
         int index = -1;
@@ -102,7 +110,7 @@ public class EditBudgetCommandTest {
         expectedModel.commitFinanceTracker();
 
         assertCommandSuccess(editBudgetCommand, model, commandHistory, expectedMessage, expectedModel);
-    }*/
+    }
 
     @Test
     public void execute_invalidCategoryUnfilteredList_failure() {
@@ -116,7 +124,7 @@ public class EditBudgetCommandTest {
                 Messages.MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY);
     }
 
-    /*@Test
+    @Test
     public void executeUndoRedo_validCategoryUnfilteredList_success() throws Exception {
         Category category = FOOD;
         int index = -1;
@@ -143,7 +151,7 @@ public class EditBudgetCommandTest {
         // redo -> same budget (food) edited again
         expectedModel.redoFinanceTracker();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }*/
+    }
 
     @Test
     public void executeUndoRedo_invalidICategoryUnfilteredList_failure() {

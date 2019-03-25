@@ -41,7 +41,7 @@ public class BudgetList implements Iterable<Budget> {
      */
     public boolean contains(Budget toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameBudget);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     public int getIndex(Category category) {

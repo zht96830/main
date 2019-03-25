@@ -12,8 +12,8 @@ public class BudgetBuilder {
 
     public static final String DEFAULT_CATEGORY = "food";
     public static final String DEFAULT_AMOUNT = "500";
-    public static final String DEFAULT_START_DATE = "01-06-2019";
-    public static final String DEFAULT_END_DATE = "30-06-2019";
+    public static final String DEFAULT_START_DATE = "01-06-2021";
+    public static final String DEFAULT_END_DATE = "30-06-2021";
     public static final String DEFAULT_REMARKS = "save up for trip";
 
     private Category category;
