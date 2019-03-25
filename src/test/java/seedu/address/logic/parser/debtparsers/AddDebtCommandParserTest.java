@@ -2,8 +2,11 @@ package seedu.address.logic.parser.debtparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC_DATE;
@@ -13,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT;
+import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
@@ -45,23 +49,23 @@ public class AddDebtCommandParserTest {
                 new AddDebtCommand(expectedDebt));
 
         // multiple amounts - last amount accepted
-        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + AMOUNT_DESC_DEBT
+        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT_2 + AMOUNT_DESC_DEBT
                         + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
                 new AddDebtCommand(expectedDebt));
 
         // multiple categories - last category accepted
-        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
+        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT_2
                         + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
                 new AddDebtCommand(expectedDebt));
 
         // multiple deadlines - last deadline accepted
         assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
-                        + DEADLINE_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
+                        + DEADLINE_DESC_DEBT_2 + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
                 new AddDebtCommand(expectedDebt));
 
         // multiple remarks - last remark accepted
         assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
-                        + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT + REMARKS_DESC_DEBT,
+                        + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT_2 + REMARKS_DESC_DEBT,
                 new AddDebtCommand(expectedDebt));
     }
 
