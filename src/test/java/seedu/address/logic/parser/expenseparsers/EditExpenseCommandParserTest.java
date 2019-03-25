@@ -25,7 +25,6 @@ import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
-import seedu.address.logic.parser.expenseparsers.EditExpenseCommandParser;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;

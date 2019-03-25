@@ -23,7 +23,6 @@ import static seedu.address.testutil.TypicalExpenses.EXPENSE_WITHOUT_REMARKS;
 import org.junit.Test;
 
 import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
-import seedu.address.logic.parser.expenseparsers.AddExpenseCommandParser;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;

@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 import org.junit.Test;
 
 import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
-import seedu.address.logic.parser.expenseparsers.DeleteExpenseCommandParser;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
