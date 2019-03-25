@@ -1,4 +1,4 @@
-package systemtests;
+package systemtests.expensesystemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_CHICKEN;
@@ -11,6 +11,7 @@ import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import systemtests.FinanceTrackerSystemTest;
 
 public class ClearExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 

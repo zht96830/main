@@ -1,4 +1,4 @@
-package systemtests;
+package systemtests.expensesystemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
@@ -29,6 +29,7 @@ import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Name;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.ExpenseUtil;
+import systemtests.FinanceTrackerSystemTest;
 
 public class AddExpenseCommandSystemTest extends FinanceTrackerSystemTest {
 

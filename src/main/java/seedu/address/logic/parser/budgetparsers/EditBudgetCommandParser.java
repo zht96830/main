@@ -2,20 +2,23 @@ package seedu.address.logic.parser.budgetparsers;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Category;
+import seedu.address.model.budget.Budget;
 
 /**
  * Parses input arguments and creates a new EditExpenseCommand object
@@ -34,14 +37,12 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_CATEGORY,
                         PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_REMARKS);
 
-        Category category;
-
-        try {
-            category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditBudgetCommand.MESSAGE_USAGE), pe);
+        if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditBudgetCommand.MESSAGE_USAGE));
         }
+
+        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
 
         EditBudgetCommand.EditBudgetDescriptor editBudgetDescriptor = new EditBudgetCommand.EditBudgetDescriptor();
         if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
@@ -49,22 +50,41 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
+            if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).isEqualOrAfterToday())) {
+                throw new ParseException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
+            }
             editBudgetDescriptor.setStartDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()));
         }
 
         if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()) {
+            if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) { // already checked start date
+                if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()).getLocalDate()
+                        .isAfter(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).getLocalDate()))) {
+                    throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+                }
+            }
             editBudgetDescriptor.setEndDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()));
         }
-
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             editBudgetDescriptor.setRemarks(argMultimap.getValue(PREFIX_REMARKS).get());
         }
-
 
         if (!editBudgetDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditBudgetCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditBudgetCommand(category, editBudgetDescriptor);
+        try {
+            return new EditBudgetCommand(category, editBudgetDescriptor);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+        }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

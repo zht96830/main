@@ -110,6 +110,7 @@ public class BudgetList implements Iterable<Budget> {
 
     /**
      * Returns budget at specified category.
+     * Does not take care of the case where budget does no exist
      */
     public Budget get(Category category) {
         return internalList.get(getIndex(category));

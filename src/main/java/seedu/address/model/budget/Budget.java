@@ -1,5 +1,6 @@
 package seedu.address.model.budget;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.model.attributes.Amount;
@@ -11,6 +12,10 @@ import seedu.address.model.attributes.Date;
  */
 public class Budget {
 
+    public static final String MESSAGE_CONSTRAINTS_START_DATE =
+            "Start date has to be today or later.";
+    public static final String MESSAGE_CONSTRAINTS_END_DATE =
+            "Start date has to be before end date.";
     private int index;
     private Category category;
     private Amount amount;
@@ -19,8 +24,6 @@ public class Budget {
     private String remarks;
     private int totalSpent; // in cents
     private double percentage;
-
-    private boolean hasBudget;
     private boolean isAboutToExceed; // when percentage reaches 90
 
     // constructor
@@ -28,7 +31,9 @@ public class Budget {
         requireAllNonNull(category, amount, endDate);
         this.category = category;
         this.amount = amount;
+        //checkArgument(startDate.isEqualOrAfterToday(), MESSAGE_CONSTRAINTS_START_DATE);
         this.startDate = startDate;
+        //checkArgument(startDate.getLocalDate().isBefore(endDate.getLocalDate()));
         this.endDate = endDate;
         if (remarks == null) {
             this.remarks = "";
@@ -37,8 +42,22 @@ public class Budget {
         }
         totalSpent = 0;
         percentage = (((double) totalSpent) / amount.value) * 100;
-        hasBudget = true;
         isAboutToExceed = false;
+    }
+    public Budget(Budget toCopy) {
+        requireNonNull(toCopy);
+        this.category = toCopy.category;
+        this.amount = toCopy.amount;
+        this.startDate = toCopy.startDate;
+        this.endDate = toCopy.endDate;
+        if (toCopy.remarks == null) {
+            this.remarks = "";
+        } else {
+            this.remarks = toCopy.remarks;
+        }
+        totalSpent = toCopy.totalSpent;
+        percentage = (((double) totalSpent) / amount.value) * 100;
+        isAboutToExceed = toCopy.isAboutToExceed;
     }
 
     public Category getCategory() {
@@ -69,10 +88,6 @@ public class Budget {
         return percentage;
     }
 
-    public boolean getHasBudget() {
-        return hasBudget;
-    }
-
     public boolean getIsAboutToExceed() {
         return isAboutToExceed;
     }
@@ -99,6 +114,26 @@ public class Budget {
 
     public void setTotalSpent(int totalSpent) {
         this.totalSpent = totalSpent;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
+
+    public void setIsAboutToExceed() {
+        if (isAboutToExceed == true) {
+            isAboutToExceed = false;
+        } else {
+            isAboutToExceed = true;
+        }
+    }
+
+    public void updateTotalSpent(double difference) {
+        this.totalSpent += difference;
+    }
+
+    public void updatePercentage() {
+        this.percentage = (((double) totalSpent) / amount.value) * 100;
     }
 
     /**

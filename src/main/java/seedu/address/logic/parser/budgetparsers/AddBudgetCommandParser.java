@@ -35,7 +35,7 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
      */
     public AddBudgetCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_CATEGORY,
+                ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_AMOUNT,
                         PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_REMARKS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_CATEGORY, PREFIX_ENDDATE)
@@ -47,6 +47,10 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Date startDate;
         if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
+            // check if is before today
+            if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).isEqualOrAfterToday())) {
+                throw new ParseException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
+            }
             startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
         } else {
             // If date is not present, initialise to the current date
@@ -54,10 +58,16 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
             LocalDate currentDate = LocalDate.now();
             startDate = new Date(dtf.format(currentDate));
         }
+        if (ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()).getLocalDate()
+                .isBefore(startDate.getLocalDate())) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+        }
         Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get());
-        String remarks = null;
+        String remarks;
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             remarks = argMultimap.getValue(PREFIX_REMARKS).get();
+        } else {
+            remarks = "";
         }
 
         Budget budget = new Budget(category, amount, startDate, endDate, remarks);

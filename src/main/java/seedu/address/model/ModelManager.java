@@ -125,19 +125,59 @@ public class ModelManager implements Model {
     @Override
     public void deleteExpense(Expense target) {
         versionedFinanceTracker.removeExpense(target);
+        int index = -1;
+        for (Budget budget : filteredBudgets) {
+            if (budget.getCategory() == target.getCategory()) {
+                index = filteredBudgets.indexOf(budget);
+            }
+        }
+        if (index != -1) {
+            Budget targetBudget = filteredBudgets.get(index);
+            Budget updatedBudget = filteredBudgets.get(index);
+            double diff = 0 - target.getAmount().value;
+            updatedBudget.updateTotalSpent(diff);
+            updatedBudget.updatePercentage();
+            versionedFinanceTracker.setBudget(targetBudget, updatedBudget);
+        }
     }
 
     @Override
     public void addExpense(Expense expense) {
         versionedFinanceTracker.addExpense(expense);
         updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
+        int index = -1;
+        for (Budget budget : filteredBudgets) {
+            if (budget.getCategory() == expense.getCategory()) {
+                index = filteredBudgets.indexOf(budget);
+            }
+        }
+        if (index != -1) {
+            Budget targetBudget = filteredBudgets.get(index);
+            Budget updatedBudget = filteredBudgets.get(index);
+            updatedBudget.updateTotalSpent(expense.getAmount().value);
+            updatedBudget.updatePercentage();
+            versionedFinanceTracker.setBudget(targetBudget, updatedBudget);
+        }
     }
 
     @Override
     public void setExpense(Expense target, Expense editedExpense) {
         requireAllNonNull(target, editedExpense);
-
         versionedFinanceTracker.setExpense(target, editedExpense);
+        int index = -1;
+        for (Budget budget : filteredBudgets) {
+            if (budget.getCategory() == target.getCategory()) {
+                index = filteredBudgets.indexOf(budget);
+            }
+        }
+        if (index != -1) {
+            double diff = target.getAmount().value - editedExpense.getAmount().value;
+            Budget targetBudget = filteredBudgets.get(index);
+            Budget updatedBudget = filteredBudgets.get(index);
+            updatedBudget.updateTotalSpent(diff);
+            updatedBudget.updatePercentage();
+            versionedFinanceTracker.setBudget(targetBudget, updatedBudget);
+        }
     }
 
     //=========== Debts ========================================================================================
@@ -188,7 +228,6 @@ public class ModelManager implements Model {
     @Override
     public void setBudget(Budget target, Budget editedBudget) {
         requireAllNonNull(target, editedBudget);
-
         versionedFinanceTracker.setBudget(target, editedBudget);
     }
 

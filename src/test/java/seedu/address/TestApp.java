@@ -94,6 +94,7 @@ public class TestApp extends MainApp {
     public Model getModel() {
         Model copy = new ModelManager((model.getFinanceTracker()), new UserPrefs());
         ModelHelper.setFilteredList(copy, model.getFilteredExpenseList());
+        ModelHelper.setFilteredBudgetList(copy, model.getFilteredBudgetList());
         return copy;
     }
 
