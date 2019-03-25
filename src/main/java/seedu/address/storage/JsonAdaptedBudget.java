@@ -7,61 +7,52 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
-import seedu.address.model.attributes.Name;
-import seedu.address.model.expense.Expense;
+import seedu.address.model.budget.Budget;
 
 /**
- * Jackson-friendly version of {@link Expense}.
+ * Jackson-friendly version of {@link Budget}.
  */
-class JsonAdaptedExpense {
+class JsonAdaptedBudget {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Expense's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Budget's %s field is missing!";
 
-    private final String name;
     private final String amount;
     private final String category;
-    private final String date;
+    private final String startDate;
+    private final String endDate;
     private final String remarks;
 
     /**
-     * Constructs a {@code JsonAdaptedExpense} with the given expense details.
+     * Constructs a {@code JsonAdaptedBudget} with the given budget details.
      */
     @JsonCreator
-    public JsonAdaptedExpense(@JsonProperty("name") String name, @JsonProperty("amount") String amount,
-                              @JsonProperty("date") String date, @JsonProperty("category") String category,
-                              @JsonProperty("remarks") String remarks) {
-        this.name = name;
+    public JsonAdaptedBudget(@JsonProperty("amount") String amount, @JsonProperty("category") String category,
+                             @JsonProperty("startDate") String startDate, @JsonProperty("endDate") String endDate,
+                             @JsonProperty("remarks") String remarks) {
+        this.startDate = startDate;
         this.amount = amount;
         this.category = category;
-        this.date = date;
+        this.endDate = endDate;
         this.remarks = remarks;
     }
 
     /**
-     * Converts a given {@code Expense} into this class for Jackson use.
+     * Converts a given {@code Budget} into this class for Jackson use.
      */
-    public JsonAdaptedExpense(Expense source) {
-        name = source.getName().name;
+    public JsonAdaptedBudget(Budget source) {
         amount = source.getAmount().toString();
         category = source.getCategory().toString();
-        date = source.getDate().toString();
+        startDate = source.getStartDate().toString();
+        endDate = source.getEndDate().toString();
         remarks = source.getRemarks();
     }
 
     /**
-     * Converts this Jackson-friendly adapted expense object into the model's {@code Expense} object.
+     * Converts this Jackson-friendly adapted budget object into the model's {@code Budget} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted expense.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted budget.
      */
-    public Expense toModelType() throws IllegalValueException {
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
-
+    public Budget toModelType() throws IllegalValueException {
         if (amount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Amount.class.getSimpleName()));
         }
@@ -79,17 +70,19 @@ class JsonAdaptedExpense {
         }
         final Category modelCategory = Category.valueOf(category.toUpperCase());
 
-        if (date == null) {
+        // start date is optional hence not required to check if null
+        if (endDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (Date.isValidDate(date) == "format") {
+        if (Date.isValidDate(startDate) == "format" || Date.isValidDate(endDate) == "format") {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final Date modelDate = new Date(date);
+        final Date modelStartDate = new Date(startDate);
+        final Date modelEndDate = new Date(endDate);
 
         final String modelRemarks = remarks;
 
-        return new Expense(modelName, modelAmount, modelDate, modelCategory, modelRemarks);
+        return new Budget(modelCategory, modelAmount, modelStartDate, modelEndDate, modelRemarks);
     }
 
 }

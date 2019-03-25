@@ -215,8 +215,9 @@ public abstract class FinanceTrackerSystemTest {
         getExpenseListPanel().navigateToCard(getExpenseListPanel().getSelectedCardIndex());
         ExpenseCardHandle selectedCard = getExpenseListPanel().getHandleToSelectedCard();
 
-        String query = BrowserPanel.QUERY_NAME + selectedCard.getName() + BrowserPanel.QUERY_CATEGORY
-                + selectedCard.getCategory() + BrowserPanel.QUERY_AMOUNT + selectedCard.getAmount()
+        String query = BrowserPanel.QUESTION_MARK + BrowserPanel.QUERY_NAME + selectedCard.getName()
+                + BrowserPanel.QUERY_CATEGORY + selectedCard.getCategory()
+                + BrowserPanel.QUERY_AMOUNT + selectedCard.getAmount()
                 + BrowserPanel.QUERY_DATE + selectedCard.getDate() + BrowserPanel.QUERY_REMARK;
 
         String url = BrowserPanel.EXPENSES_PAGE_URL + query.replaceAll(" ", "%20");

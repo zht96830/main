@@ -11,7 +11,10 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.ReadOnlyFinanceTracker;
+import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 
 /**
  * An Immutable FinanceTracker that is serializable to JSON format.
@@ -20,13 +23,23 @@ import seedu.address.model.expense.Expense;
 class JsonSerializableFinanceTracker {
 
     private final List<JsonAdaptedExpense> expenses = new ArrayList<>();
+    private final List<JsonAdaptedDebt> debts = new ArrayList<>();
+    private final List<JsonAdaptedBudget> budgets = new ArrayList<>();
+    private final List<JsonAdaptedRecurring> recurrings = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonSerializableFinanceTracker} with the given expenses.
      */
     @JsonCreator
-    public JsonSerializableFinanceTracker(@JsonProperty("expenses") List<JsonAdaptedExpense> expenses) {
+    public JsonSerializableFinanceTracker(@JsonProperty("expenses") List<JsonAdaptedExpense> expenses,
+                                          @JsonProperty("debts") List<JsonAdaptedDebt> debts,
+                                          @JsonProperty("budgets") List<JsonAdaptedBudget> budgets,
+                                          @JsonProperty("recurrings") List<JsonAdaptedRecurring> recurrings) {
         this.expenses.addAll(expenses);
+        this.debts.addAll(debts);
+        this.budgets.addAll(budgets);
+        this.recurrings.addAll(recurrings);
     }
 
     /**
@@ -36,6 +49,10 @@ class JsonSerializableFinanceTracker {
      */
     public JsonSerializableFinanceTracker(ReadOnlyFinanceTracker source) {
         expenses.addAll(source.getExpenseList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
+        debts.addAll(source.getDebtList().stream().map(JsonAdaptedDebt::new).collect(Collectors.toList()));
+        budgets.addAll(source.getBudgetList().stream().map(JsonAdaptedBudget::new).collect(Collectors.toList()));
+        recurrings.addAll(source.getRecurringList().stream().map(
+                JsonAdaptedRecurring::new).collect(Collectors.toList()));
     }
 
     /**
@@ -48,6 +65,18 @@ class JsonSerializableFinanceTracker {
         for (JsonAdaptedExpense jsonAdaptedExpense : expenses) {
             Expense expense = jsonAdaptedExpense.toModelType();
             financeTracker.addExpense(expense);
+        }
+        for (JsonAdaptedDebt jsonAdaptedDebt : debts) {
+            Debt debt = jsonAdaptedDebt.toModelType();
+            financeTracker.addDebt(debt);
+        }
+        for (JsonAdaptedBudget jsonAdaptedBudget : budgets) {
+            Budget budget = jsonAdaptedBudget.toModelType();
+            financeTracker.addBudget(budget);
+        }
+        for (JsonAdaptedRecurring jsonAdaptedRecurring : recurrings) {
+            Recurring recurring = jsonAdaptedRecurring.toModelType();
+            financeTracker.addRecurring(recurring);
         }
         return financeTracker;
     }

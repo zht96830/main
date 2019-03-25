@@ -69,7 +69,7 @@ public class BudgetBuilder {
      * Sets the {@code Date} of the {@code Budget} that we are building.
      */
     public BudgetBuilder withEndDate(String endDate) {
-        this.startDate = new Date(endDate);
+        this.endDate = new Date(endDate);
         return this;
     }
 

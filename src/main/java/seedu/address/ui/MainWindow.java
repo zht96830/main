@@ -125,7 +125,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(logic.selectedExpenseProperty());
+        browserPanel = new BrowserPanel(logic.selectedExpenseProperty(), logic.selectedDebtProperty(),
+                logic.selectedBudgetProperty(), logic.selectedRecurringProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(), logic.selectedExpenseProperty(),

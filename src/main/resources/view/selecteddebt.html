@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8"></meta-charset>
-        <title>Selected Expense Page</title>
+        <title>Selected Debt Page</title>
 
         <script type="text/javascript">
             function getJsonFromUrl() {
@@ -15,7 +15,7 @@
                 return result;
             }
             document.addEventListener("DOMContentLoaded", function(event) {
-                document.getElementById("name").textContent = "Expense Name: " + getJsonFromUrl().name;
+                document.getElementById("personowed").textContent = "Owed to: " +  getJsonFromUrl().personowed;
 
                 var img = document.createElement("img");
                 var path = "../images/"
@@ -52,8 +52,8 @@
                 }
                 categoryDiv.append(img);
 
-                document.getElementById("amount").textContent = "Expense Amount: " + getJsonFromUrl().amount;
-                document.getElementById("date").textContent = "Date added: " + getJsonFromUrl().date;
+                document.getElementById("amount").textContent = "Debt Amount: " + getJsonFromUrl().amount;
+                document.getElementById("deadline").textContent = "Deadline: " + getJsonFromUrl().deadline;
                 document.getElementById("remarks").textContent = "Remarks: " + getJsonFromUrl().remarks;
             });
         </script>
@@ -82,15 +82,15 @@
 
     </head>
     <body>
-        <h1>Selected Expense</h1>
+        <h1>Selected Debt</h1>
         <h3>
-            <div id="name"></div>
+            <div id="personowed"></div>
             <br>
             <div id="category"></div>
             <br>
             <div id="amount"></div>
             <br>
-            <div id="date"></div>
+            <div id="deadline"></div>
             <br>
             <div id="remarks"></div>
         </h3>
