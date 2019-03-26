@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.debtcommands;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -14,6 +15,8 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.generalcommands.RedoCommand;
+import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -83,7 +86,6 @@ public class DeleteDebtCommandTest {
                 Messages.MESSAGE_INVALID_DEBT_DISPLAYED_INDEX);
     }
 
-    /*
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Debt debtToDelete = model.getFilteredDebtList().get(INDEX_FIRST_DEBT.getZeroBased());
@@ -111,7 +113,7 @@ public class DeleteDebtCommandTest {
 
         // execution failed -> finance tracker state not added into model
         assertCommandFailure(deleteDebtCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_DEBT_DISPLAYED_INDEX);
 
         // single finance tracker state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -125,7 +127,6 @@ public class DeleteDebtCommandTest {
      * unfiltered list is different from the index at the filtered list.
      * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the debt object regardless of indexing.
      */
-    /*
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameDebtDeleted() throws Exception {
         DeleteDebtCommand deleteDebtCommand = new DeleteDebtCommand(INDEX_FIRST_DEBT);
@@ -147,7 +148,7 @@ public class DeleteDebtCommandTest {
         // redo -> deletes same second debt in unfiltered debt list
         expectedModel.redoFinanceTracker();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }*/
+    }
 
     @Test
     public void equals() {

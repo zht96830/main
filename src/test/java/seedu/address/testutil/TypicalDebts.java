@@ -53,6 +53,10 @@ public class TypicalDebts {
             .withAmount(VALID_AMOUNT_DEBT).withDeadline(VALID_DEADLINE_DEBT)
             .withCategory(VALID_CATEGORY_DEBT).withRemarks(VALID_REMARKS_DEBT).build();
 
+    public static final Debt DEBT_WITHOUT_REMARKS = new DebtBuilder().withPersonOwed(VALID_NAME_DEBT)
+            .withAmount(VALID_AMOUNT_DEBT).withDeadline(VALID_DEADLINE_DEBT)
+            .withCategory(VALID_CATEGORY_DEBT).build();
+
     public static final String KEYWORD_MATCHING_CHICKEN = "Chicken"; // A keyword that matches CHICKEN
 
     private TypicalDebts() {} // prevents instantiation
