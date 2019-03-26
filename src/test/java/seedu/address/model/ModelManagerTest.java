@@ -4,7 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
+import static seedu.address.testutil.TypicalDebts.AMY;
+import static seedu.address.testutil.TypicalDebts.BOB;
 import static seedu.address.testutil.TypicalExpenses.DOCTOR;
 import static seedu.address.testutil.TypicalExpenses.DUCK_RICE;
 import static seedu.address.testutil.TypicalExpenses.TAXI;
@@ -19,9 +22,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.debt.Debt;
+import seedu.address.model.debt.exceptions.DebtNotFoundException;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.NameContainsKeywordsPredicateForExpense;
 import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
+import seedu.address.testutil.DebtBuilder;
 import seedu.address.testutil.ExpenseBuilder;
 import seedu.address.testutil.FinanceTrackerBuilder;
 
@@ -38,6 +44,8 @@ public class ModelManagerTest {
         assertEquals(new FinanceTracker(), new FinanceTracker(modelManager.getFinanceTracker()));
         assertEquals(null, modelManager.getSelectedExpense());
     }
+
+    //==== UserPrefs-related tests ===========================================================================
 
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
@@ -59,6 +67,8 @@ public class ModelManagerTest {
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
+    //==== Gui-related tests ===========================================================================
+
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -72,6 +82,8 @@ public class ModelManagerTest {
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
+    //==== FinanceTracker-related tests ======================================================================
+
     @Test
     public void setFinanceTrackerFilePath_nullPath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -84,6 +96,8 @@ public class ModelManagerTest {
         modelManager.setFinanceTrackerFilePath(path);
         assertEquals(path, modelManager.getFinanceTrackerFilePath());
     }
+
+    //==== Expense-related tests ===========================================================================
 
     @Test
     public void hasExpense_nullExpense_throwsNullPointerException() {
@@ -148,6 +162,76 @@ public class ModelManagerTest {
         modelManager.setSelectedExpense(DUCK_RICE);
         assertEquals(DUCK_RICE, modelManager.getSelectedExpense());
     }
+
+    //==== Debt-related tests ================================================================================
+
+    @Test
+    public void hasDebt_nullDebt_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasDebt(null);
+    }
+
+    @Test
+    public void hasDebt_debtNotInFinanceTracker_returnsFalse() {
+        assertFalse(modelManager.hasDebt(AMY));
+    }
+
+    @Test
+    public void hasDebt_debtInFinanceTracker_returnsTrue() {
+        modelManager.addDebt(AMY);
+        assertTrue(modelManager.hasDebt(AMY));
+    }
+
+    @Test
+    public void deleteDebt_debtIsSelectedAndFirstDebtInFilteredDebtList_selectionCleared() {
+        modelManager.addDebt(AMY);
+        modelManager.setSelectedDebt(AMY);
+        modelManager.deleteDebt(AMY);
+        assertEquals(null, modelManager.getSelectedDebt());
+    }
+
+    @Test
+    public void deleteDebt_debtIsSelectedAndSecondDebtInFilteredDebtList_firstDebtSelected() {
+        modelManager.addDebt(AMY);
+        modelManager.addDebt(BOB);
+        assertEquals(Arrays.asList(AMY, BOB), modelManager.getFilteredDebtList());
+        modelManager.setSelectedDebt(BOB);
+        modelManager.deleteDebt(BOB);
+        assertEquals(AMY, modelManager.getSelectedDebt());
+    }
+
+    @Test
+    public void setDebt_debtIsSelected_selectedDebtUpdated() {
+        modelManager.addDebt(AMY);
+        modelManager.setSelectedDebt(AMY);
+        Debt updatedDebt = new DebtBuilder(AMY).withPersonOwed(VALID_NAME_DEBT).build();
+        modelManager.setDebt(AMY, updatedDebt);
+        assertEquals(updatedDebt, modelManager.getSelectedDebt());
+    }
+
+    @Test
+    public void getFilteredDebtList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getFilteredDebtList().remove(0);
+    }
+
+    @Test
+    public void setSelectedDebt_debtNotInFilteredDebtList_throwsDebtNotFoundException() {
+        thrown.expect(DebtNotFoundException.class);
+        modelManager.setSelectedDebt(AMY);
+    }
+
+    @Test
+    public void setSelectedDebt_debtInFilteredDebtList_setsSelectedDebt() {
+        modelManager.addDebt(AMY);
+        assertEquals(Collections.singletonList(AMY), modelManager.getFilteredDebtList());
+        modelManager.setSelectedDebt(AMY);
+        assertEquals(AMY, modelManager.getSelectedDebt());
+    }
+
+    //==== Budget-related tests ==============================================================================
+
+    //==== Recurring-related tests ===========================================================================
 
     @Test
     public void equals() {

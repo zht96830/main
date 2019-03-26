@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.budgetcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_BUDGET_CATEGORY;
+import static seedu.address.commons.core.Messages.MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
 import java.util.List;
@@ -52,12 +52,19 @@ public class DeleteBudgetCommand extends Command {
         }
 
         if (index == -1) {
-            throw new CommandException(MESSAGE_INVALID_BUDGET_CATEGORY);
+            throw new CommandException(MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY);
         }
 
         Budget budgetToDelete = lastShownList.get(index);
         model.deleteBudget(budgetToDelete);
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_DELETE_BUDGET_SUCCESS, budgetToDelete));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteBudgetCommand // instanceof handles nulls
+                && targetCategory.equals(((DeleteBudgetCommand) other).targetCategory));
     }
 }

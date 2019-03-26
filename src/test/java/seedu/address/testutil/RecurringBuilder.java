@@ -95,7 +95,7 @@ public class RecurringBuilder {
      * Sets the {@code Frequency} of the {@code Recurring} that we are building.
      */
     public RecurringBuilder withFrequency(String frequency) {
-        this.remarks = frequency;
+        this.frequency = new Frequency(frequency);
         return this;
     }
 
@@ -103,7 +103,7 @@ public class RecurringBuilder {
      * Sets the {@code Occurrence} of the {@code Recurring} that we are building.
      */
     public RecurringBuilder withOccurrence(String occurrence) {
-        this.remarks = occurrence;
+        this.occurrence = new Occurrence(occurrence);
         return this;
     }
 

@@ -7,6 +7,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyFinanceTracker;
 
 /**
  * Clears all expenses in Finance Tracker.
@@ -22,7 +23,12 @@ public class ClearExpenseCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.setFinanceTracker(new FinanceTracker());
+        ReadOnlyFinanceTracker oldFt = model.getFinanceTracker();
+        FinanceTracker newFt = new FinanceTracker();
+        newFt.setBudgets(model.getFinanceTracker().getBudgetList());
+        newFt.setDebts(model.getFinanceTracker().getDebtList());
+        newFt.setRecurrings(model.getFinanceTracker().getRecurringList());
+        model.setFinanceTracker(newFt);
         model.commitFinanceTracker();
 
         return new CommandResult(MESSAGE_SUCCESS);

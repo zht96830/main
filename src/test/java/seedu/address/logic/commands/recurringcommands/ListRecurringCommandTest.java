@@ -18,6 +18,7 @@ import seedu.address.model.attributes.View;
  * Contains integration tests (interaction with the Model) and unit tests for ListRecurringCommand.
  */
 public class ListRecurringCommandTest {
+
     private Model model;
     private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();

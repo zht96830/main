@@ -12,8 +12,8 @@ public class BudgetBuilder {
 
     public static final String DEFAULT_CATEGORY = "food";
     public static final String DEFAULT_AMOUNT = "500";
-    public static final String DEFAULT_START_DATE = "01-06-2019";
-    public static final String DEFAULT_END_DATE = "30-06-2019";
+    public static final String DEFAULT_START_DATE = "01-06-2021";
+    public static final String DEFAULT_END_DATE = "30-06-2021";
     public static final String DEFAULT_REMARKS = "save up for trip";
 
     private Category category;
@@ -69,7 +69,7 @@ public class BudgetBuilder {
      * Sets the {@code Date} of the {@code Budget} that we are building.
      */
     public BudgetBuilder withEndDate(String endDate) {
-        this.startDate = new Date(endDate);
+        this.endDate = new Date(endDate);
         return this;
     }
 

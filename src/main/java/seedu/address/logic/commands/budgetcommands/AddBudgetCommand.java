@@ -16,8 +16,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.budget.Budget;
 
-
-
 /**
  * Adds a budget to the finance tracker.
  */
@@ -51,6 +49,12 @@ public class AddBudgetCommand extends Command {
      */
     public AddBudgetCommand(Budget budget) {
         requireNonNull(budget);
+        if (!budget.getStartDate().isEqualOrAfterToday()) {
+            throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
+        }
+        if (!(budget.getEndDate().getLocalDate().isAfter(budget.getStartDate().getLocalDate()))) {
+            throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+        }
         toAdd = budget;
     }
 

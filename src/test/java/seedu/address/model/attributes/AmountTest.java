@@ -30,13 +30,14 @@ public class AmountTest {
         assertFalse(Amount.isValidAmount(" ")); // spaces only
         assertFalse(Amount.isValidAmount("amount")); // non-numeric
         assertFalse(Amount.isValidAmount("91p041")); // alphabets within digits
+        assertFalse(Amount.isValidAmount("12345678")); // more than 7 digits in dollars
         assertFalse(Amount.isValidAmount("1.")); // . without decimal places
         assertFalse(Amount.isValidAmount("1.234")); // 3 decimal places, max 2
 
         // valid amount numbers
         assertTrue(Amount.isValidAmount("1")); // exactly 1 number
-        assertTrue(Amount.isValidAmount("12345"));
-        assertTrue(Amount.isValidAmount("124293842033123")); // long amount numbers
+        assertTrue(Amount.isValidAmount("1234567")); // 7 digit numbers
+        assertTrue(Amount.isValidAmount("1234567.25")); // 7 digit numbers with 2 decimal places
         assertTrue(Amount.isValidAmount("1.2")); // 1 decimal place
         assertTrue(Amount.isValidAmount("1.23")); // 2 decimal places
     }

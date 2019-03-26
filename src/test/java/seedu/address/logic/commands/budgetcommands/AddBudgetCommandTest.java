@@ -356,7 +356,7 @@ public class AddBudgetCommandTest {
         @Override
         public boolean hasBudget(Budget budget) {
             requireNonNull(budget);
-            return this.budget.isSameBudget(budget);
+            return this.budget.equals(budget);
         }
     }
 
@@ -370,7 +370,7 @@ public class AddBudgetCommandTest {
         @Override
         public boolean hasBudget(Budget budget) {
             requireNonNull(budget);
-            return budgetsAdded.stream().anyMatch(budget::isSameBudget);
+            return budgetsAdded.stream().anyMatch(budget::equals);
         }
 
         @Override
