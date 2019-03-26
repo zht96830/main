@@ -12,7 +12,7 @@ public class Frequency {
     public static final String MESSAGE_CONSTRAINTS =
             "Frequency should only contain an alphabet 'D', 'W', 'M' or 'Y' for daily, weekly, monthly or yearly "
                     + "respectively.";
-    public static final String VALIDATION_REGEX = "[DWMYdwmy]*";
+    public static final String VALIDATION_REGEX = "[DWMYdwmy]";
     public final String value;
 
     /**
