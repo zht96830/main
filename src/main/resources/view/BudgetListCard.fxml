@@ -25,8 +25,8 @@
         <Label id="budgetCategory" fx:id="budgetCategory" text="\$category" styleClass="cell_big_label" />
       </HBox>
       <Label id="budgetAmount" fx:id="budgetAmount" styleClass="cell_small_label" text="\$amount" />
-      <Label id="budgetStartDate" fx:id="budgetStartDate" styleClass="cell_small_label" text="\$startdate" />
-      <Label id="budgetEndDate" fx:id="budgetEndDate" styleClass="cell_small_label" text="\$enddate" />
+      <Label id="budgetDuration" fx:id="budgetDuration" styleClass="cell_small_label" text="\$duration" />
+      <Label id="budgetPercentage" fx:id="budgetPercentage" styleClass="cell_small_label" text="\$percentage" />
     </VBox>
   </GridPane>
 </HBox>

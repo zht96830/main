@@ -3,6 +3,9 @@ package seedu.address.logic.commands.expensecommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_1000_EXPENSES;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_100_EXPENSES;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_10_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_DAY_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ENT_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_FOOD_EXPENSES;
@@ -28,7 +31,7 @@ import seedu.address.model.expense.Expense;
 
 
 /**
- * Lists all expenses in the Finance Tracker to the user.
+ * Lists expenses in the Finance Tracker to the user.
  */
 public class ListExpenseCommand extends Command {
 
@@ -36,13 +39,13 @@ public class ListExpenseCommand extends Command {
 
     public static final String COMMAND_WORD_SHORTCUT = "le";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an expense to the Finance Tracker. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists expenses in the Finance Tracker. "
             + "Parameters: "
             + PREFIX_VIEW + "VIEW\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_VIEW + "food";
 
-    public static final String MESSAGE_SUCCESS = "Listed expenses under:\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Listed Expenses: \n%1$s";
 
     private final View view;
 
@@ -55,7 +58,7 @@ public class ListExpenseCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredExpenseList(this.getPredicate(this.view));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.view.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.view.getMessage()));
     }
 
     @Override
@@ -85,6 +88,12 @@ public class ListExpenseCommand extends Command {
             return PREDICATE_SHOW_MONTH_EXPENSES;
         case YEAR:
             return PREDICATE_SHOW_YEAR_EXPENSES;
+        case $10:
+            return PREDICATE_SHOW_AMOUNT_OVER_10_EXPENSES;
+        case $100:
+            return PREDICATE_SHOW_AMOUNT_OVER_100_EXPENSES;
+        case $1000:
+            return PREDICATE_SHOW_AMOUNT_OVER_1000_EXPENSES;
         case FOOD:
             return PREDICATE_SHOW_FOOD_EXPENSES;
         case WORK:

@@ -32,21 +32,21 @@ public class ListExpenseCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListExpenseCommand(View.ALL), model, commandHistory,
-                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL), expectedModel);
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL.getMessage()), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
         assertCommandSuccess(new ListExpenseCommand(View.ALL), model, commandHistory,
-                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL), expectedModel);
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL.getMessage()), expectedModel);
     }
 
     @Test
     public void execute_listIsNotFiltered_showsHealthCareCategory() {
         expectedModel.updateFilteredExpenseList(Model.PREDICATE_SHOW_HEALTHCARE_EXPENSES);
         assertCommandSuccess(new ListExpenseCommand(View.HEALTHCARE), model, commandHistory,
-                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.HEALTHCARE), expectedModel);
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ListExpenseCommandTest {
         expectedModel.updateFilteredExpenseList(Model.PREDICATE_SHOW_HEALTHCARE_EXPENSES);
         showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
         assertCommandSuccess(new ListExpenseCommand(View.HEALTHCARE), model, commandHistory,
-                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.HEALTHCARE), expectedModel);
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
     }
 
 }
