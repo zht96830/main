@@ -19,6 +19,7 @@ import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.attributes.Category;
 import seedu.address.model.budget.Budget;
 
 /**
@@ -50,17 +51,20 @@ public class DeleteBudgetCommandTest {
     }
 
     @Test
-    public void execute_invalidCategoryFilteredList_throwsCommandException() {
+    public void execute_noBudgetforThatCategoryFilteredList_throwsCommandException() {
+
+        Category category = OTHERS;
         int index = -1;
         for (Budget budget : model.getFilteredBudgetList()) {
-            if (budget.getCategory() == OTHERS) {
+            if (budget.getCategory() == category) {
                 index = model.getFilteredBudgetList().indexOf(budget);
+                break;
             }
         }
-        DeleteBudgetCommand deleteBudgetCommand = new DeleteBudgetCommand(OTHERS);
+        DeleteBudgetCommand deleteBudgetCommand = new DeleteBudgetCommand(category);
 
         assertCommandFailure(deleteBudgetCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_BUDGET_CATEGORY);
+                Messages.MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY);
     }
 
     @Test
@@ -96,47 +100,21 @@ public class DeleteBudgetCommandTest {
 
         // execution failed -> finance tracker state not added into model
         assertCommandFailure(deleteBudgetCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_BUDGET_CATEGORY);
+                Messages.MESSAGE_BUDGET_DOES_NOT_EXIST_FOR_CATEGORY);
 
         // single finance tracker state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 
-    /**
-     * 1. Deletes a {@code Budget} from a filtered list.
-     * 2. Undo the deletion.
-     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted expense in the
-     * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the expense object regardless of indexing.
-     */
-    /*@Test
-    public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
-        DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
-        Model expectedModel = new ModelManager(model.getFinanceTracker(), new UserPrefs());
-
-        showPersonAtIndex(model, INDEX_SECOND_EXPENSE);
-        Expense expenseToDelete = model.getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased());
-        expectedModel.deleteExpense(expenseToDelete);
-        expectedModel.commitFinanceTracker();
-
-        // delete -> deletes second expense in unfiltered expense list / first expense in filtered expense list
-        deleteExpenseCommand.execute(model, commandHistory);
-
-        // undo -> reverts addressbook back to previous state and filtered expense list to show all persons
-        expectedModel.undoFinanceTracker();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
-
-        assertNotEquals(expenseToDelete, model.getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased()));
-        // redo -> deletes same second expense in unfiltered expense list
-        expectedModel.redoFinanceTracker();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }*/
-
     @Test
     public void equals() {
         DeleteBudgetCommand deleteUtilitiesCommand = new DeleteBudgetCommand(UTILITIES);
         DeleteBudgetCommand deleteWorkCommand = new DeleteBudgetCommand(WORK);
+        DeleteBudgetCommand deleteWorkCommandCopy = new DeleteBudgetCommand(WORK);
+
+        //same values -> returns true
+        assertTrue(deleteWorkCommand.equals(deleteWorkCommandCopy));
 
         // same object -> returns true
         assertTrue(deleteWorkCommand.equals(deleteWorkCommand));

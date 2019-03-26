@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
@@ -59,5 +61,18 @@ public class TestUtil {
      */
     public static Debt getDebt(Model model, Index index) {
         return model.getFilteredDebtList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns the budget in the {@code model}'s budget list with {@code category}.
+     */
+    public static Budget getBudget(Model model, Category category) {
+        int index = -1;
+        for (Budget budget : model.getFilteredBudgetList()) {
+            if (budget.getCategory() == category) {
+                index = model.getFilteredBudgetList().indexOf(budget);
+            }
+        }
+        return model.getFilteredBudgetList().get(index);
     }
 }
