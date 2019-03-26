@@ -2,8 +2,8 @@ package seedu.address.logic.commands.recurringcommands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showRecurringAtIndex;
-import static seedu.address.testutil.TypicalRecurrings.getTypicalFinanceTrackerWithRecurrings;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.address.testutil.TypicalRecurrings.getTypicalFinanceTrackerWithRecurrings;
 
 import org.junit.Before;
 import org.junit.Test;

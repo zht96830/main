@@ -18,7 +18,8 @@ public class EditRecurringDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditRecurringCommand.EditRecurringDescriptor descriptorWithSameValues = new EditRecurringDescriptor(DESC_RECURRING);
+        EditRecurringCommand.EditRecurringDescriptor descriptorWithSameValues =
+                new EditRecurringDescriptor(DESC_RECURRING);
         assertTrue(DESC_RECURRING.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -31,8 +32,8 @@ public class EditRecurringDescriptorTest {
         assertFalse(DESC_RECURRING.equals(5));
 
         // different name -> returns false
-        EditRecurringCommand.EditRecurringDescriptor editedRecurring = new EditRecurringDescriptorBuilder(DESC_RECURRING)
-                .withName(VALID_NAME_DEBT).build();
+        EditRecurringCommand.EditRecurringDescriptor editedRecurring =
+                new EditRecurringDescriptorBuilder(DESC_RECURRING).withName(VALID_NAME_DEBT).build();
         assertFalse(DESC_RECURRING.equals(editedRecurring));
 
         // different amount -> returns false
