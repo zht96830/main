@@ -90,7 +90,8 @@ Format: `help`
 === Listing expenses : `listexpense`
 
 Shows a list of expenses in the finance tracker according to the view specified. +
-Format: `listexpense v/VIEW`
+Format: `listexpense v/VIEW` +
+Shortcut: `le v/VIEW`
 
 ====
 * The VIEW specifies how the list of expenses are displayed.
@@ -104,7 +105,8 @@ Format: `listexpense v/VIEW`
 === Adding an expense: `addexpense`
 
 Adds an expense to the finance tracker. +
-Format 1: `addexpense n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]`
+Format 1: `addexpense n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]` +
+Shortcut: `ae n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]`
 
 ====
 * The NAME should only contain alphanumeric characters and spaces, and it should not be blank.
@@ -121,9 +123,10 @@ You can omit [optional] parameters by leaving them empty.
 Examples:
 
 * `addexpense n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake.`
-* `addexpense n/Sofa $/200 c/HOME`
+* `ae n/Sofa $/200 c/HOME`
 
-Format 2: `addexpense`
+Format 2: `addexpense` +
+Shortcut: `ae`
 
 Examples:
 
@@ -137,7 +140,8 @@ Examples:
 === Editing an expense : `editexpense`
 
 Edits an existing expense in the finance tracker. +
-Format 1: `editexpense INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]`
+Format 1: `editexpense INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]` +
+Shortcut: `ee INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]`
 
 ====
 * Edits the expense at the specified `INDEX`.
@@ -153,7 +157,8 @@ Examples:
 * `editexpense 9 $/450 c/food` +
 Edits the amount and category of the 9th expense to be `450` and `food` respectively.
 
-Format 2: `editexpense INDEX`
+Format 2: `editexpense INDEX` +
+Shortcut: `ee INDEX`
 
 Examples:
 `editexpense 9` +
@@ -167,7 +172,8 @@ Examples:
 === Deleting an expense : `deleteexpense`
 
 Deletes the specified expense from the finance tracker. +
-Format: `deleteexpense INDEX`
+Format: `deleteexpense INDEX` +
+Shortcut: `de INDEX`
 
 ====
 * Deletes the expense at the specified `INDEX`.
@@ -183,7 +189,8 @@ Deletes the 2nd expense in the finance tracker.
 === Adding a budget : `addbudget`
 
 Adds a budget with a time frame to the tracker. +
-Format 1: `addbudget $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]`
+Format 1: `addbudget $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]` +
+Shortcut: `ab $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]`
 
 ====
 * The categories include: “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”,
@@ -191,13 +198,15 @@ Format 1: `addbudget $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]
 * The program only limits one budget for each category.
 * START_DATE and END_DATE must be in dd-mm-yyyy format.
 * If START_DATE is omitted, current date will be used.
+====
 
 Examples:
 
 * `addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
-* `addbudget c/others $/12000 sd/1-1-2019 ed/31-12-2019`
+* `ab c/others $/12000 sd/1-1-2019 ed/31-12-2019`
 
-Format 2: `addbudget`
+Format 2: `addbudget` +
+Shortcut: `ab`
 
 Examples:
 
@@ -210,7 +219,8 @@ Examples:
 === Editing a budget: `editbudget`
 
 Edits a budget in the finance tracker. +
-Format 1: `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]`
+Format 1: `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]` +
+Shortcut: `eb c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]`
 
 [NOTE]
 ====
@@ -221,9 +231,10 @@ Format 1: `editbudget c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE
 
 Examples:
 * `editbudget c/shopping ed/31-3-2019`
-* `editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019`
+* `eb c/others $/5000 sd/1-1-2019 ed/31-3-2019`
 
-Format 2: `editbudget`
+Format 2: `editbudget` +
+Shortcut: `eb`
 
 Examples:
 
@@ -241,7 +252,8 @@ Deletes a budget from the finance tracker.
 * Deletes the budget of the specified `CATEGORY`.
 ====
 
-Format: `deletebudget c/CATEGORY`
+Format: `deletebudget c/CATEGORY` +
+Shortcut: `db c/CATEGORY`
 
 Examples:
 
@@ -249,7 +261,8 @@ Examples:
 
 === Listing debts: `listdebt`
 Shows a list of debts in the finance tracker according to the view specified.
-Format: `listdebt [v/VIEW]`
+Format: `listdebt [v/VIEW]` +
+Shortcut: `ld [v/VIEW]`
 
 ====
 * If VIEW is omitted, all debts are listed.
@@ -262,7 +275,8 @@ Format: `listdebt [v/VIEW]`
 
 Adds a debt to the finance tracker.
 
-Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]`
+Format 1: `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]` +
+Shortcut: `ad n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]`
 
 ====
 * The PERSON_OWED should only contain alphanumeric characters and spaces, and it should not be blank.
@@ -278,9 +292,10 @@ You can omit (optional) parameters by leaving them empty.
 Examples:
 
 * `adddebt n/John Doe $/50.00 c/shopping due/25-02-2019 r/Loan from John to finance my new earphones` +
-* `adddebt n/Jane Doe $/200 c/FOOD due/03-03-2019`
+* `ad n/Jane Doe $/200 c/FOOD due/03-03-2019`
 
-Format 2: `adddebt`
+Format 2: `adddebt` +
+Shortcut: `ad`
 
 Examples:
 
@@ -294,7 +309,8 @@ Examples:
 === Editing a debt: `editdebt`
 
 Edits an existing debt in the finance tracker. +
-Format 1: `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]`
+Format 1: `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]` +
+Shortcut: `ed INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]`
 
 ====
 * Edits the debt at the specified `INDEX`.
@@ -310,7 +326,8 @@ Examples:
 * `editdebt 5 n/Tommy $/60`
 Edits expense owed and amount owed of the 5th debt to be `Tommy` and `$60` respectively.
 
-Format 2: `editdebt`
+Format 2: `editdebt` +
+Shortcut: `ed`
 
 Examples:
 
@@ -323,7 +340,8 @@ Examples:
 
 === Deleting a debt: `deletedebt`
 Deletes the specified debt from the finance tracker.
-Format: `deletedebt INDEX`
+Format: `deletedebt INDEX` +
+Shortcut: `dd INDEX`
 
 ====
 * Deletes the debt at the specified `INDEX`.
@@ -339,7 +357,8 @@ Examples:
 === Paying off a debt: `paydebt`
 Converts the specified debt into an expense.
 
-Format: `paydebt INDEX [d/DATE]`
+Format: `paydebt INDEX [d/DATE]` +
+Shortcut: `pd INDEX [d/DATE]`
 
 ====
 * Converts the debt at the specified `INDEX`.
@@ -363,7 +382,8 @@ Converts the 3rd debt in the finance tracker into an expense.
 === Adding a recurring: `addrecurring`
 Adds a recurring payment to the finance tracker.
 
-Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE`
+Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE` +
+Shortcut: `ar n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/FREQUENCY o/OCCURRENCE`
 
 ====
 * The NAME should only contain alphanumeric characters and spaces, and it should not be blank.
@@ -372,7 +392,7 @@ Format 1: `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/F
 * The START_DATE should be in dd-mm-yyyy format.
 * If START_DATE is omitted, current date will be used.
 * If REMARK is omitted, no remarks will be stored.
-* The FREQUENCY should consists of D, W, M, Y for daily, weekly, monthly and yearly respectively. Any numbers following D, W, M or Y means a multiple of that frequency e.g. W2 means fortnightly (every 2 weeks).
+* The FREQUENCY should consists of D, W, M, Y for daily, weekly, monthly and yearly respectively.
 * The OCCURRENCE should be a number from 1 to 999 inclusive.
 ====
 [TIP]
@@ -381,9 +401,10 @@ You can omit (optional) parameters by leaving them empty.
 Examples:
 
 * `addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24 ` +
-* `addrecurring n/Magazine Subscription $/20 c/utilities f/M2 o/12`
+* `addrecurring n/Magazine Subscription $/20 c/utilities f/M o/12`
 
-Format 2: `addrecurring`
+Format 2: `addrecurring` +
+Shortcut: `ar`
 
 Examples:
 
@@ -393,13 +414,14 @@ Examples:
   `Please enter the category of the recurring: utilities` +
   `Please enter the start date of the recurring (optional):` +
   `Please enter the remark of the expense (optional):` +
-  `Please enter the frequency of the recurring: M2` +
+  `Please enter the frequency of the recurring: M` +
   `Please enter the number of occurrence of the recurring: 12`
 
 === Editing a recurring : `editrecurring`
 
 Edits an existing recurring in the finance tracker. +
 Format 1: `editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
+Shortcut: `er INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]`
 
 ====
 * Edits the recurring at the specified `INDEX`.
@@ -419,7 +441,8 @@ Examples:
 * `editrecurring 9 p/N $/450 c/food` +
 Edits the amount and category of the 9th recurring to be `450` and `food` respectively. No changes will be made to old expenses already added by this recurring.
 
-Format 2: `editrecurring INDEX`
+Format 2: `editrecurring INDEX` +
+Shortcut: `er INDEX`
 
 Examples:
 `editrecurring 9` +
@@ -436,6 +459,7 @@ Examples:
 
 Deletes the specified recurring from the finance tracker. +
 Format: `deleterecurring INDEX [p/DELETEPASTOPTION]` +
+Shortcut: `dr INDEX [p/DELETEPASTOPTION]`
 
 ====
 * Deletes the recurring at the specified `INDEX`.
