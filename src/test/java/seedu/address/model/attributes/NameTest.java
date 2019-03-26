@@ -22,20 +22,24 @@ public class NameTest {
 
     @Test
     public void isValidName() {
+        String hundredCharacterName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
         // null name
         Assert.assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName(hundredCharacterName + "a")); // contains 101 characters
 
         // valid name
+        assertTrue(Name.isValidName("a")); // single character
+        assertTrue(Name.isValidName(hundredCharacterName)); // 100 characters
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
+        assertTrue(Name.isValidName("?!@?!@$?ASFASF@$!@F12359")); // random characters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }

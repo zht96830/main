@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TypicalDebts.HOLLY;
+import static seedu.address.testutil.TypicalDebts.IVAN;
 import static seedu.address.testutil.TypicalExpenses.EXPENSE;
 import static seedu.address.testutil.TypicalExpenses.GROCERIES;
 import static seedu.address.testutil.TypicalExpenses.JAPAN;
@@ -24,6 +26,10 @@ public class VersionedFinanceTrackerTest {
             JAPAN).build();
     private final ReadOnlyFinanceTracker financeTrackerWithGroceries = new FinanceTrackerBuilder().withExpense(
             GROCERIES).build();
+    private final ReadOnlyFinanceTracker financeTrackerWithHolly = new FinanceTrackerBuilder().withDebt(
+            HOLLY).build();
+    private final ReadOnlyFinanceTracker financeTrackerWithIvan = new FinanceTrackerBuilder().withDebt(
+            IVAN).build();
     private final ReadOnlyFinanceTracker emptyFinanceTracker = new FinanceTrackerBuilder().build();
 
     @Test
@@ -40,19 +46,19 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void commit_multipleFinanceTrackerPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly);
 
         versionedFinanceTracker.commit();
         assertFinanceTrackerListStatus(versionedFinanceTracker,
-                Arrays.asList(emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan),
-                financeTrackerWithJapan,
+                Arrays.asList(emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly),
+                financeTrackerWithHolly,
                 Collections.emptyList());
     }
 
     @Test
     public void commit_multipleFinanceTrackerPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithIvan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
 
         versionedFinanceTracker.commit();
@@ -65,7 +71,8 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void canUndo_multipleFinanceTrackerPointerAtEndOfStateList_returnsTrue() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
 
         assertTrue(versionedFinanceTracker.canUndo());
     }
@@ -73,7 +80,8 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void canUndo_multipleFinanceTrackerPointerNotAtStartOfStateList_returnsTrue() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
 
         assertTrue(versionedFinanceTracker.canUndo());
@@ -89,8 +97,9 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void canUndo_multipleFinanceTrackerPointerAtStartOfStateList_returnsFalse() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
-        shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
+        shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 4);
 
         assertFalse(versionedFinanceTracker.canUndo());
     }
@@ -98,7 +107,8 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void canRedo_multipleFinanceTrackerPointerNotAtEndOfStateList_returnsTrue() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
 
         assertTrue(versionedFinanceTracker.canRedo());
@@ -107,7 +117,8 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void canRedo_multipleFinanceTrackerPointerAtStartOfStateList_returnsTrue() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
 
         assertTrue(versionedFinanceTracker.canRedo());
@@ -131,26 +142,28 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void undo_multipleFinanceTrackerPointerAtEndOfStateList_success() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
 
         versionedFinanceTracker.undo();
         assertFinanceTrackerListStatus(versionedFinanceTracker,
-                Collections.singletonList(emptyFinanceTracker),
-                financeTrackerWithExpense,
-                Collections.singletonList(financeTrackerWithJapan));
+                Arrays.asList(emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly),
+                financeTrackerWithJapan,
+                Collections.singletonList(financeTrackerWithIvan));
     }
 
     @Test
     public void undo_multipleFinanceTrackerPointerNotAtStartOfStateList_success() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
 
         versionedFinanceTracker.undo();
         assertFinanceTrackerListStatus(versionedFinanceTracker,
-                Collections.emptyList(),
-                emptyFinanceTracker,
-                Arrays.asList(financeTrackerWithExpense, financeTrackerWithJapan));
+                Arrays.asList(emptyFinanceTracker, financeTrackerWithExpense),
+                financeTrackerWithHolly,
+                Arrays.asList(financeTrackerWithJapan, financeTrackerWithIvan));
     }
 
     @Test
@@ -163,8 +176,9 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void undo_multipleFinanceTrackerPointerAtStartOfStateList_throwsNoUndoableStateException() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
-        shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
+        shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 4);
 
         assertThrows(VersionedFinanceTracker.NoUndoableStateException.class, versionedFinanceTracker::undo);
     }
@@ -172,27 +186,27 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void redo_multipleFinanceTrackerPointerNotAtEndOfStateList_success() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
 
         versionedFinanceTracker.redo();
         assertFinanceTrackerListStatus(versionedFinanceTracker,
-                Arrays.asList(emptyFinanceTracker, financeTrackerWithExpense),
-                financeTrackerWithJapan,
-                Collections.emptyList());
+                Arrays.asList(emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan), financeTrackerWithIvan, Collections.emptyList());
     }
 
     @Test
     public void redo_multipleFinanceTrackerPointerAtStartOfStateList_success() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 2);
 
         versionedFinanceTracker.redo();
         assertFinanceTrackerListStatus(versionedFinanceTracker,
-                Collections.singletonList(emptyFinanceTracker),
-                financeTrackerWithExpense,
-                Collections.singletonList(financeTrackerWithJapan));
+                Arrays.asList(emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly),
+                financeTrackerWithJapan, Collections.singletonList(financeTrackerWithIvan));
     }
 
     @Test
@@ -205,7 +219,8 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void redo_multipleFinanceTrackerPointerAtEndOfStateList_throwsNoRedoableStateException() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(
-                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithJapan);
+                emptyFinanceTracker, financeTrackerWithExpense, financeTrackerWithHolly,
+                financeTrackerWithJapan, financeTrackerWithIvan);
 
         assertThrows(VersionedFinanceTracker.NoRedoableStateException.class, versionedFinanceTracker::redo);
     }
@@ -213,11 +228,11 @@ public class VersionedFinanceTrackerTest {
     @Test
     public void equals() {
         VersionedFinanceTracker versionedFinanceTracker = prepareFinanceTrackerList(financeTrackerWithExpense,
-                financeTrackerWithJapan);
+                financeTrackerWithHolly);
 
         // same values -> returns true
         VersionedFinanceTracker copy = prepareFinanceTrackerList(financeTrackerWithExpense,
-                financeTrackerWithJapan);
+                financeTrackerWithHolly);
         assertTrue(versionedFinanceTracker.equals(copy));
 
         // same object -> returns true
@@ -230,13 +245,13 @@ public class VersionedFinanceTrackerTest {
         assertFalse(versionedFinanceTracker.equals(1));
 
         // different state list -> returns false
-        VersionedFinanceTracker differentFinanceTrackerList = prepareFinanceTrackerList(financeTrackerWithJapan,
-                financeTrackerWithGroceries);
+        VersionedFinanceTracker differentFinanceTrackerList = prepareFinanceTrackerList(
+                financeTrackerWithGroceries, financeTrackerWithHolly);
         assertFalse(versionedFinanceTracker.equals(differentFinanceTrackerList));
 
         // different current pointer index -> returns false
         VersionedFinanceTracker differentCurrentStatePointer = prepareFinanceTrackerList(
-                financeTrackerWithExpense, financeTrackerWithJapan);
+                financeTrackerWithExpense, financeTrackerWithHolly);
         shiftCurrentStatePointerLeftwards(versionedFinanceTracker, 1);
         assertFalse(versionedFinanceTracker.equals(differentCurrentStatePointer));
     }
