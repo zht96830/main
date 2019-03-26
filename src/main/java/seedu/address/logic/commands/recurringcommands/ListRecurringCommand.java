@@ -3,15 +3,15 @@ package seedu.address.logic.commands.recurringcommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECURRING;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_1000_RECURRINGS;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_100_RECURRINGS;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS;
 import static seedu.address.model.Model.PREDICATE_SHOW_DAY_RECURRING;
 import static seedu.address.model.Model.PREDICATE_SHOW_ENT_RECURRING;
 import static seedu.address.model.Model.PREDICATE_SHOW_FOOD_RECURRING;
 import static seedu.address.model.Model.PREDICATE_SHOW_HEALTHCARE_RECURRING;
 import static seedu.address.model.Model.PREDICATE_SHOW_MONTH_RECURRING;
 import static seedu.address.model.Model.PREDICATE_SHOW_OTHERS_RECURRING;
-import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$1000_RECURRINGS;
-import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$100_RECURRINGS;
-import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$10_RECURRINGS;
 import static seedu.address.model.Model.PREDICATE_SHOW_SHOPPING_RECURRING;
 import static seedu.address.model.Model.PREDICATE_SHOW_TRANSPORT_RECURRING;
 import static seedu.address.model.Model.PREDICATE_SHOW_TRAVEL_RECURRING;
@@ -90,11 +90,11 @@ public class ListRecurringCommand extends Command {
         case HEALTHCARE:
             return PREDICATE_SHOW_HEALTHCARE_RECURRING;
         case $10:
-            return PREDICATE_SHOW_OVER_$10_RECURRINGS;
+            return PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS;
         case $100:
-            return PREDICATE_SHOW_OVER_$100_RECURRINGS;
+            return PREDICATE_SHOW_AMOUNT_OVER_100_RECURRINGS;
         case $1000:
-            return PREDICATE_SHOW_OVER_$1000_RECURRINGS;
+            return PREDICATE_SHOW_AMOUNT_OVER_1000_RECURRINGS;
         default:
             return PREDICATE_SHOW_ALL_RECURRING;
         }

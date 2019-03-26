@@ -3,15 +3,15 @@ package seedu.address.logic.commands.debtcommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DEBTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_1000_DEBTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_100_DEBTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_10_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_DAY_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ENT_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_FOOD_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_HEALTHCARE_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_MONTH_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_OTHERS_DEBTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$1000_DEBTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$100_DEBTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$10_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_SHOPPING_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_TRANSPORT_DEBTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_TRAVEL_DEBTS;
@@ -107,11 +107,11 @@ public class ListDebtCommand extends Command {
         case HEALTHCARE:
             return PREDICATE_SHOW_HEALTHCARE_DEBTS;
         case $10:
-            return PREDICATE_SHOW_OVER_$10_DEBTS;
+            return PREDICATE_SHOW_AMOUNT_OVER_10_DEBTS;
         case $100:
-            return PREDICATE_SHOW_OVER_$100_DEBTS;
+            return PREDICATE_SHOW_AMOUNT_OVER_100_DEBTS;
         case $1000:
-            return PREDICATE_SHOW_OVER_$1000_DEBTS;
+            return PREDICATE_SHOW_AMOUNT_OVER_1000_DEBTS;
         default:
             return PREDICATE_SHOW_ALL_DEBTS;
         }

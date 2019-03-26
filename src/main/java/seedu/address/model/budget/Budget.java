@@ -153,10 +153,18 @@ public class Budget {
     }
 
     /**
+     * Returns the duration of budget in String format.
+     */
+    public String getDuration() {
+        return startDate.toString() + " till " + endDate.toString();
+    }
+
+    /**
      * Check on whether the two budgets are the same based on their variables.
      * They need not be the same instance variable.
      * @return true if the two budgets have the same attributes.
      */
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

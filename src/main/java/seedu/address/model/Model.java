@@ -41,9 +41,9 @@ public interface Model {
      * {@code Predicate} that always evaluate to true if expense amount is within range, note that the range
      *  is in terms of cents
      **/
-    Predicate<Expense> PREDICATE_SHOW_OVER_$10_EXPENSES = p -> p.getAmount().value >= 1000;
-    Predicate<Expense> PREDICATE_SHOW_OVER_$100_EXPENSES = p -> p.getAmount().value >= 10000;
-    Predicate<Expense> PREDICATE_SHOW_OVER_$1000_EXPENSES = p -> p.getAmount().value >= 100000;
+    Predicate<Expense> PREDICATE_SHOW_AMOUNT_OVER_10_EXPENSES = p -> p.getAmount().value >= 1000;
+    Predicate<Expense> PREDICATE_SHOW_AMOUNT_OVER_100_EXPENSES = p -> p.getAmount().value >= 10000;
+    Predicate<Expense> PREDICATE_SHOW_AMOUNT_OVER_1000_EXPENSES = p -> p.getAmount().value >= 100000;
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
@@ -70,9 +70,9 @@ public interface Model {
      * {@code Predicate} that always evaluate to true if debt amount is within range, note that the range
      *  is in terms of cents
      **/
-    Predicate<Debt> PREDICATE_SHOW_OVER_$10_DEBTS = p -> p.getAmount().value >= 1000;
-    Predicate<Debt> PREDICATE_SHOW_OVER_$100_DEBTS = p -> p.getAmount().value >= 10000;
-    Predicate<Debt> PREDICATE_SHOW_OVER_$1000_DEBTS = p -> p.getAmount().value >= 100000;
+    Predicate<Debt> PREDICATE_SHOW_AMOUNT_OVER_10_DEBTS = p -> p.getAmount().value >= 1000;
+    Predicate<Debt> PREDICATE_SHOW_AMOUNT_OVER_100_DEBTS = p -> p.getAmount().value >= 10000;
+    Predicate<Debt> PREDICATE_SHOW_AMOUNT_OVER_1000_DEBTS = p -> p.getAmount().value >= 100000;
 
 
     /** {@code Predicate} that always evaluate to true */
@@ -100,9 +100,9 @@ public interface Model {
      * {@code Predicate} that always evaluate to true if recurring amount is within range, note that the range
      *  is in terms of cents
      **/
-    Predicate<Recurring> PREDICATE_SHOW_OVER_$10_RECURRINGS = p -> p.getAmount().value >= 1000;
-    Predicate<Recurring> PREDICATE_SHOW_OVER_$100_RECURRINGS = p -> p.getAmount().value >= 10000;
-    Predicate<Recurring> PREDICATE_SHOW_OVER_$1000_RECURRINGS = p -> p.getAmount().value >= 100000;
+    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS = p -> p.getAmount().value >= 1000;
+    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_100_RECURRINGS = p -> p.getAmount().value >= 10000;
+    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_1000_RECURRINGS = p -> p.getAmount().value >= 100000;
 
 
     /** {@code Predicate} that always evaluate to true */

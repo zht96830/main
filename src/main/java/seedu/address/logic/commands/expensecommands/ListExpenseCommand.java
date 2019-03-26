@@ -3,15 +3,15 @@ package seedu.address.logic.commands.expensecommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_1000_EXPENSES;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_100_EXPENSES;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_10_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_DAY_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ENT_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_FOOD_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_HEALTHCARE_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_MONTH_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_OTHERS_EXPENSES;
-import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$1000_EXPENSES;
-import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$100_EXPENSES;
-import static seedu.address.model.Model.PREDICATE_SHOW_OVER_$10_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_SHOPPING_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_TRANSPORT_EXPENSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_TRAVEL_EXPENSES;
@@ -89,11 +89,11 @@ public class ListExpenseCommand extends Command {
         case YEAR:
             return PREDICATE_SHOW_YEAR_EXPENSES;
         case $10:
-            return PREDICATE_SHOW_OVER_$10_EXPENSES;
+            return PREDICATE_SHOW_AMOUNT_OVER_10_EXPENSES;
         case $100:
-            return PREDICATE_SHOW_OVER_$100_EXPENSES;
+            return PREDICATE_SHOW_AMOUNT_OVER_100_EXPENSES;
         case $1000:
-            return PREDICATE_SHOW_OVER_$1000_EXPENSES;
+            return PREDICATE_SHOW_AMOUNT_OVER_1000_EXPENSES;
         case FOOD:
             return PREDICATE_SHOW_FOOD_EXPENSES;
         case WORK:
