@@ -56,5 +56,4 @@ public class ListRecurringCommandTest {
         assertCommandSuccess(new ListRecurringCommand(View.HEALTHCARE), model, commandHistory,
                 String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
     }
-
 }
