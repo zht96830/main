@@ -114,6 +114,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
      */
     public void addExpense(Expense p) {
         expenses.add(p);
+        /*
         int index = budgets.getIndex(p.getCategory());
         if (index != -1) {
             Budget targetBudget = budgets.get(p.getCategory());
@@ -121,7 +122,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
             updatedBudget.updateTotalSpent(p.getAmount().value);
             updatedBudget.updatePercentage();
             budgets.setBudget(targetBudget, updatedBudget);
-        }
+        }*/
         indicateModified();
     }
 
@@ -132,6 +133,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     public void setExpense(Expense target, Expense editedExpense) {
         requireNonNull(editedExpense);
         expenses.setExpense(target, editedExpense);
+        /*
         int index = budgets.getIndex(editedExpense.getCategory());
         if (index != -1) {
             Budget targetBudget = budgets.get(editedExpense.getCategory());
@@ -140,7 +142,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
             updatedBudget.updateTotalSpent(diff);
             updatedBudget.updatePercentage();
             budgets.setBudget(targetBudget, updatedBudget);
-        }
+        }*/
         indicateModified();
     }
 
@@ -151,6 +153,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
     public void removeExpense(Expense key) {
         expenses.remove(key);
 
+        /*
         int index = budgets.getIndex(key.getCategory());
         if (index != -1) {
             Budget targetBudget = budgets.get(key.getCategory());
@@ -159,7 +162,7 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
             updatedBudget.updateTotalSpent(diff);
             updatedBudget.updatePercentage();
             budgets.setBudget(targetBudget, updatedBudget);
-        }
+        }*/
         indicateModified();
     }
 

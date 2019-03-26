@@ -3,6 +3,9 @@ package seedu.address.logic.commands.recurringcommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECURRING;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_1000_RECURRINGS;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_100_RECURRINGS;
+import static seedu.address.model.Model.PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS;
 import static seedu.address.model.Model.PREDICATE_SHOW_DAY_RECURRING;
 import static seedu.address.model.Model.PREDICATE_SHOW_ENT_RECURRING;
 import static seedu.address.model.Model.PREDICATE_SHOW_FOOD_RECURRING;
@@ -35,13 +38,13 @@ public class ListRecurringCommand extends Command {
 
     public static final String COMMAND_WORD_SHORTCUT = "lr";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an recurring to the Finance Tracker. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists recurrings in the Finance Tracker. "
             + "Parameters: "
             + PREFIX_VIEW + "VIEW\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_VIEW + "food";
 
-    public static final String MESSAGE_SUCCESS = "Listed recurring under:\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Listed recurrings:\n%1$s";
 
     private final View view;
 
@@ -55,7 +58,7 @@ public class ListRecurringCommand extends Command {
 
         requireNonNull(model);
         model.updateFilteredRecurringList(this.getPredicate(this.view));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.view.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.view.getMessage()));
     }
 
     private Predicate<Recurring> getPredicate(View view) {
@@ -86,6 +89,12 @@ public class ListRecurringCommand extends Command {
             return PREDICATE_SHOW_UTIL_RECURRING;
         case HEALTHCARE:
             return PREDICATE_SHOW_HEALTHCARE_RECURRING;
+        case $10:
+            return PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS;
+        case $100:
+            return PREDICATE_SHOW_AMOUNT_OVER_100_RECURRINGS;
+        case $1000:
+            return PREDICATE_SHOW_AMOUNT_OVER_1000_RECURRINGS;
         default:
             return PREDICATE_SHOW_ALL_RECURRING;
         }

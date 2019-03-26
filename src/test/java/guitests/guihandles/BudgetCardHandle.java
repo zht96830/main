@@ -10,21 +10,21 @@ import seedu.address.model.budget.Budget;
 public class BudgetCardHandle extends NodeHandle<Node> {
     private static final String AMOUNT_FIELD_ID = "#budgetAmount";
     private static final String CATEGORY_FIELD_ID = "#budgetCategory";
-    private static final String START_DATE_FIELD_ID = "#budgetStartDate";
-    private static final String END_DATE_FIELD_ID = "#budgetEndDate";
+    private static final String DURATION_FIELD_ID = "#budgetDuration";
+    private static final String PERCENTAGE_FIELD_ID = "#budgetPercentage";
 
     private final Label amountLabel;
     private final Label categoryLabel;
-    private final Label startDateLabel;
-    private final Label endDateLabel;
+    private final Label durationLabel;
+    private final Label percentageLabel;
 
     public BudgetCardHandle(Node cardNode) {
         super(cardNode);
 
         amountLabel = getChildNode(AMOUNT_FIELD_ID);
         categoryLabel = getChildNode(CATEGORY_FIELD_ID);
-        startDateLabel = getChildNode(START_DATE_FIELD_ID);
-        endDateLabel = getChildNode(END_DATE_FIELD_ID);
+        durationLabel = getChildNode(DURATION_FIELD_ID);
+        percentageLabel = getChildNode(PERCENTAGE_FIELD_ID);
     }
 
     public String getAmount() {
@@ -35,12 +35,12 @@ public class BudgetCardHandle extends NodeHandle<Node> {
         return categoryLabel.getText();
     }
 
-    public String getStartDate() {
-        return startDateLabel.getText();
+    public String getDuration() {
+        return durationLabel.getText();
     }
 
-    public String getEndDate() {
-        return endDateLabel.getText();
+    public String getPercentage() {
+        return percentageLabel.getText();
     }
 
     /**
@@ -49,7 +49,7 @@ public class BudgetCardHandle extends NodeHandle<Node> {
     public boolean equals(Budget budget) {
         return getAmount().equals("$" + budget.getAmount().toString())
                 && getCategory().equals(budget.getCategory().toString())
-                && getStartDate().equals(budget.getStartDate().toString())
-                && getEndDate().equals(budget.getEndDate().toString());
+                && getDuration().equals(budget.getDuration())
+                && getPercentage().equals(budget.getPercentage() + "% spent");
     }
 }

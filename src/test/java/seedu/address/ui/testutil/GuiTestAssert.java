@@ -35,9 +35,9 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
      */
     public static void assertCardEquals(BudgetCardHandle expectedCard, BudgetCardHandle actualCard) {
-        assertEquals(expectedCard.getEndDate(), actualCard.getEndDate());
+        assertEquals(expectedCard.getPercentage(), actualCard.getPercentage());
         assertEquals(expectedCard.getAmount(), actualCard.getAmount());
-        assertEquals(expectedCard.getStartDate(), actualCard.getStartDate());
+        assertEquals(expectedCard.getDuration(), actualCard.getDuration());
         assertEquals(expectedCard.getCategory(), actualCard.getCategory());
     }
 
@@ -89,8 +89,8 @@ public class GuiTestAssert {
     public static void assertCardDisplaysBudget(Budget expectedBudget, BudgetCardHandle actualCard) {
         assertEquals("$" + expectedBudget.getAmount(), actualCard.getAmount());
         assertEquals(expectedBudget.getCategory().toString(), actualCard.getCategory());
-        assertEquals(expectedBudget.getStartDate().toString(), actualCard.getStartDate());
-        assertEquals(expectedBudget.getEndDate().toString(), actualCard.getEndDate());
+        assertEquals(expectedBudget.getDuration(), actualCard.getDuration());
+        assertEquals(expectedBudget.getPercentage() + "% spent", actualCard.getPercentage());
     }
 
     /**
