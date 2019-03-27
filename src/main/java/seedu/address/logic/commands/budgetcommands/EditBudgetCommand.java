@@ -113,9 +113,6 @@ public class EditBudgetCommand extends Command {
             throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
         }
         Date updatedEndDate = editBudgetDescriptor.getEndDate().orElse(budgetToEdit.getEndDate());
-        /*if (!(updatedEndDate.getLocalDate().isAfter(updatedStartDate.getLocalDate()))) {
-            throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
-        }*/
         String updatedRemarks = editBudgetDescriptor.getRemarks().orElse(budgetToEdit.getRemarks());
 
         return new Budget(budgetToEdit.getCategory(), updatedAmount, updatedStartDate, updatedEndDate, updatedRemarks);
