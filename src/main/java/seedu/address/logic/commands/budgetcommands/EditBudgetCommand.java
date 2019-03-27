@@ -114,8 +114,9 @@ public class EditBudgetCommand extends Command {
         }
         Date updatedEndDate = editBudgetDescriptor.getEndDate().orElse(budgetToEdit.getEndDate());
         String updatedRemarks = editBudgetDescriptor.getRemarks().orElse(budgetToEdit.getRemarks());
-
-        return new Budget(budgetToEdit.getCategory(), updatedAmount, updatedStartDate, updatedEndDate, updatedRemarks);
+        double updatedPercentage = 100*budgetToEdit.getTotalSpent()/updatedAmount.value*100;
+        return new Budget(budgetToEdit.getCategory(), updatedAmount, updatedStartDate, updatedEndDate, updatedRemarks,
+                budgetToEdit.getTotalSpent(), updatedPercentage);
     }
 
     @Override
@@ -135,6 +136,9 @@ public class EditBudgetCommand extends Command {
         private Date startDate;
         private Date endDate;
         private String remarks;
+        private int totalSpent;
+        private double percentage;
+
 
         public EditBudgetDescriptor() {}
 
@@ -148,6 +152,8 @@ public class EditBudgetCommand extends Command {
             setStartDate(toCopy.startDate);
             setEndDate(toCopy.endDate);
             setRemarks(toCopy.remarks);
+            setTotalSpent(toCopy.totalSpent);
+            setPercentage(toCopy.percentage);
         }
 
         /**
@@ -190,6 +196,22 @@ public class EditBudgetCommand extends Command {
             return Optional.ofNullable(remarks);
         }
 
+        public void setTotalSpent(int totalSpent) {
+            this.totalSpent = totalSpent;
+        }
+
+        public Optional<Integer> getTotalSpent() {
+            return Optional.ofNullable(totalSpent);
+        }
+
+        public void setPercentage(double percentage) {
+            this.percentage = percentage;
+        }
+
+        public Optional<Double> getPercentage() {
+            return Optional.ofNullable(percentage);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -208,7 +230,9 @@ public class EditBudgetCommand extends Command {
             return getAmount().equals(e.getAmount())
                     && getStartDate().equals(e.getStartDate())
                     && getEndDate().equals(e.getEndDate())
-                    && getRemarks().equals(e.getRemarks());
+                    && getRemarks().equals(e.getRemarks())
+                    && getTotalSpent().equals(e.getTotalSpent())
+                    && getPercentage().equals(e.getPercentage());
         }
     }
 

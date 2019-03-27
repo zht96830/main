@@ -27,7 +27,8 @@ public class Budget {
     private boolean isAboutToExceed; // when percentage reaches 90
 
     // constructor
-    public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks) {
+    public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks, int totalSpent,
+                  double percentage) {
         requireAllNonNull(category, amount, endDate);
         this.category = category;
         this.amount = amount;
@@ -40,8 +41,8 @@ public class Budget {
         } else {
             this.remarks = remarks;
         }
-        totalSpent = 0;
-        percentage = (((double) totalSpent) / amount.value) * 100;
+        this.totalSpent = totalSpent;
+        this.percentage = (((double) totalSpent) / amount.value) * 100;
         isAboutToExceed = false;
     }
     public Budget(Budget toCopy) {
@@ -80,12 +81,20 @@ public class Budget {
         return remarks;
     }
 
-    public double getTotalSpent() {
+    public int getTotalSpent() {
         return totalSpent;
+    }
+
+    public String getTotalSpentString() {
+        return Integer.toString(totalSpent);
     }
 
     public double getPercentage() {
         return percentage;
+    }
+
+    public String getPercentageString() {
+        return Double.toString(percentage);
     }
 
     public boolean getIsAboutToExceed() {

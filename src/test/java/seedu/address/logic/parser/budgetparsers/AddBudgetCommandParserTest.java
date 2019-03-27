@@ -2,8 +2,11 @@ package seedu.address.logic.parser.budgetparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_BUDGET;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_BUDGET;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.ENDDATE_DESC_BUDGET;
+import static seedu.address.logic.commands.CommandTestUtil.ENDDATE_DESC_BUDGET_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_EXIST;
@@ -12,37 +15,42 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DES
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_BUDGET;
+import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.STARTDATE_DESC_BUDGET;
+import static seedu.address.logic.commands.CommandTestUtil.STARTDATE_DESC_BUDGET_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ENDDATE_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STARTDATE_BUDGET;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalBudgets.BUDGET;
+import static seedu.address.testutil.TypicalBudgets.BUDGET_WITHOUT_REMARKS;
 
 import org.junit.Test;
-
 import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
+import seedu.address.model.budget.Budget;
+import seedu.address.testutil.BudgetBuilder;
 
 public class AddBudgetCommandParserTest {
     private AddBudgetCommandParser parser = new AddBudgetCommandParser();
 
-    // fail
-    /*@Test
+    @Test
     public void parse_allFieldsPresent_success() {
 
         Budget expectedBudget = new BudgetBuilder(BUDGET).build();
 
-    // whitespace only preamble
-    /*assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
-                        + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
-                new AddBudgetCommand(expectedBudget));*/
+        // whitespace only preamble
+        //assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
+        //                + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
+        //        new AddBudgetCommand(expectedBudget));
 
-    // multiple categories - last category accepted
-    /*assertParseSuccess(parser, CATEGORY_DESC_DEBT + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
+        // multiple categories - last category accepted
+        assertParseSuccess(parser, CATEGORY_DESC_DEBT + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
                         + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
                 new AddBudgetCommand(expectedBudget));
 
@@ -67,8 +75,8 @@ public class AddBudgetCommandParserTest {
                 new AddBudgetCommand(expectedBudget));
     }
 
-    // fail
-    /*@Test
+
+    @Test
     public void parse_optionalFieldsMissing_success() {
         //Budget expectedBudget = new BudgetBuilder(BUDGET_WITH_TODAYS_DATE).build();
         //assertParseSuccess(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + ENDDATE_DESC_BUDGET
@@ -77,7 +85,7 @@ public class AddBudgetCommandParserTest {
         Budget expectedBudget = new BudgetBuilder(BUDGET_WITHOUT_REMARKS).build();
         assertParseSuccess(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + STARTDATE_DESC_BUDGET
                 + ENDDATE_DESC_BUDGET, new AddBudgetCommand(expectedBudget));
-    }*/
+    }
 
     // pass
     @Test

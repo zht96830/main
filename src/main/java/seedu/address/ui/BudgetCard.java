@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.text.DecimalFormat;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -32,7 +34,7 @@ public class BudgetCard extends UiPart<Region> {
     @FXML
     private Label budgetDuration;
     @FXML
-    private Label budgetPercentage;
+    private Label budgetSpent;
 
 
     public BudgetCard(Budget budget) {
@@ -41,7 +43,9 @@ public class BudgetCard extends UiPart<Region> {
         budgetCategory.setText(budget.getCategory().name());
         budgetAmount.setText("$" + budget.getAmount().toString());
         budgetDuration.setText(budget.getStartDate().toString() + " till " + budget.getEndDate().toString());
-        budgetPercentage.setText(budget.getPercentage() + "% spent");
+        DecimalFormat percentageFormat = new DecimalFormat("#.##");
+        budgetSpent.setText((double)budget.getTotalSpent()/100 + " ("
+                + percentageFormat.format(budget.getPercentage()) + "%) spent");
     }
 
     @Override
