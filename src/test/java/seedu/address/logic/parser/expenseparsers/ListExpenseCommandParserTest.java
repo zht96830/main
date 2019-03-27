@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.expenseparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.Test;
 
 import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
-import seedu.address.logic.parser.expenseparsers.ListExpenseCommandParser;
 import seedu.address.model.attributes.View;
 
 public class ListExpenseCommandParserTest {

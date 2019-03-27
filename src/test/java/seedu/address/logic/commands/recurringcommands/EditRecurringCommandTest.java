@@ -136,13 +136,11 @@ public class EditRecurringCommandTest {
     public void equals() {
         final EditRecurringCommand standardCommand = new EditRecurringCommand(INDEX_FIRST_EXPENSE, DESC_RECURRING);
 
-        /*
         // same values -> returns true
         EditRecurringCommand.EditRecurringDescriptor copyDescriptor =
                 new EditRecurringCommand.EditRecurringDescriptor(DESC_RECURRING);
         EditRecurringCommand commandWithSameValues = new EditRecurringCommand(INDEX_FIRST_EXPENSE, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
-        */
 
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -150,10 +148,8 @@ public class EditRecurringCommandTest {
         // null -> returns false
         assertFalse(standardCommand.equals(null));
 
-        /*
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearRecurringCommand()));
-        */
+        assertFalse(standardCommand.equals(1));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditRecurringCommand(INDEX_SECOND_EXPENSE, DESC_RECURRING)));

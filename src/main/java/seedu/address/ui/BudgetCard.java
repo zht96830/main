@@ -30,9 +30,9 @@ public class BudgetCard extends UiPart<Region> {
     @FXML
     private Label budgetAmount;
     @FXML
-    private Label budgetStartDate;
+    private Label budgetDuration;
     @FXML
-    private Label budgetEndDate;
+    private Label budgetPercentage;
 
 
     public BudgetCard(Budget budget) {
@@ -40,8 +40,8 @@ public class BudgetCard extends UiPart<Region> {
         this.budget = budget;
         budgetCategory.setText(budget.getCategory().name());
         budgetAmount.setText("$" + budget.getAmount().toString());
-        budgetStartDate.setText(budget.getStartDate().toString());
-        budgetEndDate.setText(budget.getEndDate().toString());
+        budgetDuration.setText(budget.getStartDate().toString() + " till " + budget.getEndDate().toString());
+        budgetPercentage.setText(budget.getPercentage() + "% spent");
     }
 
     @Override

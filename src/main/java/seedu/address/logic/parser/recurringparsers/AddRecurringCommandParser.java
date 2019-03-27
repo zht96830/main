@@ -53,7 +53,7 @@ public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Frequency frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get());
-        Occurrence occurence = ParserUtil.parseOccurence(argMultimap.getValue(PREFIX_OCCURRENCE).get());
+        Occurrence occurrence = ParserUtil.parseOccurrence(argMultimap.getValue(PREFIX_OCCURRENCE).get());
         Date date;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
@@ -68,7 +68,7 @@ public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
             remarks = argMultimap.getValue(PREFIX_REMARKS).get();
         }
 
-        Recurring recurring = new Recurring(name, amount, date, category, remarks, frequency, occurence);
+        Recurring recurring = new Recurring(name, amount, date, category, remarks, frequency, occurrence);
 
         return new AddRecurringCommand(recurring);
     }

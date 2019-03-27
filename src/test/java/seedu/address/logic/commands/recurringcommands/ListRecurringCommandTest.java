@@ -32,21 +32,21 @@ public class ListRecurringCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListRecurringCommand(View.ALL), model, commandHistory,
-                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.ALL), expectedModel);
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.ALL.getMessage()), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showRecurringAtIndex(model, INDEX_FIRST_EXPENSE);
         assertCommandSuccess(new ListRecurringCommand(View.ALL), model, commandHistory,
-                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.ALL), expectedModel);
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.ALL.getMessage()), expectedModel);
     }
 
     @Test
     public void execute_listIsNotFiltered_showsHealthCareCategory() {
         expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_HEALTHCARE_RECURRING);
         assertCommandSuccess(new ListRecurringCommand(View.HEALTHCARE), model, commandHistory,
-                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.HEALTHCARE), expectedModel);
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
     }
 
     @Test
@@ -54,7 +54,6 @@ public class ListRecurringCommandTest {
         expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_HEALTHCARE_RECURRING);
         showRecurringAtIndex(model, INDEX_FIRST_EXPENSE);
         assertCommandSuccess(new ListRecurringCommand(View.HEALTHCARE), model, commandHistory,
-                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.HEALTHCARE), expectedModel);
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
     }
-
 }

@@ -100,18 +100,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String occurence} into an {@code Occurence}.
+     * Parses a {@code String occurrence} into an {@code Occurrence}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code occurence} is invalid.
+     * @throws ParseException if the given {@code occurrence} is invalid.
      */
-    public static Occurrence parseOccurence(String occurence) throws ParseException {
-        requireNonNull(occurence);
-        String trimmedOccurence = occurence.trim();
-        if (!Occurrence.isValidOccurrence(trimmedOccurence)) {
+    public static Occurrence parseOccurrence(String occurrence) throws ParseException {
+        requireNonNull(occurrence);
+        String trimmedOccurrence = occurrence.trim();
+        if (!Occurrence.isValidOccurrence(trimmedOccurrence)) {
             throw new ParseException(Occurrence.MESSAGE_CONSTRAINTS);
         }
-        return new Occurrence(occurence);
+        return new Occurrence(occurrence);
     }
 
     /**

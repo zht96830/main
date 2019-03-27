@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.debtcommands;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
@@ -19,6 +20,8 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.generalcommands.RedoCommand;
+import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
@@ -144,7 +147,6 @@ public class EditDebtCommandTest {
                 Messages.MESSAGE_INVALID_DEBT_DISPLAYED_INDEX);
     }
 
-    /*
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Debt editedDebt = new DebtBuilder().build();
@@ -176,7 +178,7 @@ public class EditDebtCommandTest {
 
         // execution failed -> finance tracker state not added into model
         assertCommandFailure(editDebtCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_DEBT_DISPLAYED_INDEX);
 
         // single finance tracker state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -190,7 +192,6 @@ public class EditDebtCommandTest {
      * unfiltered list is different from the index at the filtered list.
      * 4. Redo the edit. This ensures {@code RedoCommand} edits the debt object regardless of indexing.
      */
-    /*
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
         Debt editedDebt = new DebtBuilder().build();
@@ -214,7 +215,7 @@ public class EditDebtCommandTest {
         // redo -> edits same second debt in unfiltered debt list
         expectedModel.redoFinanceTracker();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }*/
+    }
 
     @Test
     public void equals() throws ParseException {

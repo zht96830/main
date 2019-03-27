@@ -14,7 +14,7 @@ import seedu.address.model.attributes.Name;
 import seedu.address.testutil.Assert;
 
 public class JsonAdaptedExpenseTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = " ";
     private static final String INVALID_AMOUNT = "+651a234";
     private static final String INVALID_DATE = "example-date";
     private static final String INVALID_CATEGORY = " ";

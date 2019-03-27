@@ -42,6 +42,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Budget> selectedBudget = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Debt> selectedDebt = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Recurring> selectedRecurring = new SimpleObjectProperty<>();
+
     /**
      * Initializes a ModelManager with the given financeTracker and userPrefs.
      */

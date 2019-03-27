@@ -245,7 +245,7 @@ public class EditRecurringCommand extends Command {
                     && getCategory().equals(e.getCategory())
                     && getRemarks().equals(e.getRemarks())
                     && getFrequency().equals(e.getFrequency())
-                    && (getOccurrence() == e.getOccurrence());
+                    && (getOccurrence().equals(e.getOccurrence()));
         }
     }
 }

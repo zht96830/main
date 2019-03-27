@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalRecurrings.getTypicalFinanceTrackerWithRecurrings;
 
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
@@ -34,6 +35,4 @@ public class ClearRecurringCommandTest {
         assertCommandSuccess(new ClearRecurringCommand(), model, commandHistory, ClearRecurringCommand.MESSAGE_SUCCESS,
                 expectedModel);
     }
-
-
 }

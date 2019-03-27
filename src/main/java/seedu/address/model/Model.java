@@ -37,6 +37,13 @@ public interface Model {
     Predicate<Expense> PREDICATE_SHOW_UTIL_EXPENSES = p -> p.getCategory().equals(Category.UTILITIES);
     Predicate<Expense> PREDICATE_SHOW_HEALTHCARE_EXPENSES = p -> p.getCategory().equals(Category.HEALTHCARE);
 
+    /**
+     * {@code Predicate} that always evaluate to true if expense amount is within range, note that the range
+     *  is in terms of cents
+     **/
+    Predicate<Expense> PREDICATE_SHOW_AMOUNT_OVER_10_EXPENSES = p -> p.getAmount().value >= 1000;
+    Predicate<Expense> PREDICATE_SHOW_AMOUNT_OVER_100_EXPENSES = p -> p.getAmount().value >= 10000;
+    Predicate<Expense> PREDICATE_SHOW_AMOUNT_OVER_1000_EXPENSES = p -> p.getAmount().value >= 100000;
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
@@ -59,6 +66,15 @@ public interface Model {
     Predicate<Debt> PREDICATE_SHOW_UTIL_DEBTS = p -> p.getCategory().equals(Category.UTILITIES);
     Predicate<Debt> PREDICATE_SHOW_HEALTHCARE_DEBTS = p -> p.getCategory().equals(Category.HEALTHCARE);
 
+    /**
+     * {@code Predicate} that always evaluate to true if debt amount is within range, note that the range
+     *  is in terms of cents
+     **/
+    Predicate<Debt> PREDICATE_SHOW_AMOUNT_OVER_10_DEBTS = p -> p.getAmount().value >= 1000;
+    Predicate<Debt> PREDICATE_SHOW_AMOUNT_OVER_100_DEBTS = p -> p.getAmount().value >= 10000;
+    Predicate<Debt> PREDICATE_SHOW_AMOUNT_OVER_1000_DEBTS = p -> p.getAmount().value >= 100000;
+
+
     /** {@code Predicate} that always evaluate to true */
     Predicate<Recurring> PREDICATE_SHOW_ALL_RECURRING = unused -> true;
 
@@ -79,6 +95,15 @@ public interface Model {
     Predicate<Recurring> PREDICATE_SHOW_TRANSPORT_RECURRING = p -> p.getCategory().equals(Category.TRANSPORT);
     Predicate<Recurring> PREDICATE_SHOW_UTIL_RECURRING = p -> p.getCategory().equals(Category.UTILITIES);
     Predicate<Recurring> PREDICATE_SHOW_HEALTHCARE_RECURRING = p -> p.getCategory().equals(Category.HEALTHCARE);
+
+    /**
+     * {@code Predicate} that always evaluate to true if recurring amount is within range, note that the range
+     *  is in terms of cents
+     **/
+    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS = p -> p.getAmount().value >= 1000;
+    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_100_RECURRINGS = p -> p.getAmount().value >= 10000;
+    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_1000_RECURRINGS = p -> p.getAmount().value >= 100000;
+
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Budget> PREDICATE_SHOW_ALL_BUDGETS = unused -> true;
