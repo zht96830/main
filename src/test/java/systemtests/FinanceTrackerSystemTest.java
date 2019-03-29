@@ -17,25 +17,30 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-
 import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.BudgetListPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.DebtListPanelHandle;
 import guitests.guihandles.ExpenseCardHandle;
 import guitests.guihandles.ExpenseListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.RecurringListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.budgetcommands.ClearBudgetCommand;
+import seedu.address.logic.commands.debtcommands.ClearDebtCommand;
 import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
 import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
+import seedu.address.logic.commands.recurringcommands.ClearRecurringCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.attributes.View;
@@ -105,6 +110,18 @@ public abstract class FinanceTrackerSystemTest {
         return mainWindowHandle.getExpenseListPanel();
     }
 
+    public BudgetListPanelHandle getBudgetListPanel() {
+        return mainWindowHandle.getBudgetListPanel();
+    }
+
+    public DebtListPanelHandle getDebtListPanel() {
+        return mainWindowHandle.getDebtListPanel();
+    }
+
+    public RecurringListPanelHandle getRecurringListPanel() {
+        return mainWindowHandle.getRecurringListPanel();
+    }
+
     public MainMenuHandle getMainMenu() {
         return mainWindowHandle.getMainMenu();
     }
@@ -171,6 +188,30 @@ public abstract class FinanceTrackerSystemTest {
     }
 
     /**
+     * Deletes all budgets in the finance tracker.
+     */
+    protected void deleteAllBudgets() {
+        executeCommand(ClearBudgetCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getFinanceTracker().getBudgetList().size());
+    }
+
+    /**
+     * Deletes all debts in the finance tracker.
+     */
+    protected void deleteAllDebts() {
+        executeCommand(ClearDebtCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getFinanceTracker().getDebtList().size());
+    }
+
+    /**
+     * Deletes all recurring expenses in the finance tracker.
+     */
+    protected void deleteAllRecurrings() {
+        executeCommand(ClearRecurringCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getFinanceTracker().getRecurringList().size());
+    }
+
+    /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
      * {@code expectedResultMessage}, the storage contains the same expense objects as {@code expectedModel}
      * and the expense list panel displays the expenses in the model correctly.
@@ -181,6 +222,9 @@ public abstract class FinanceTrackerSystemTest {
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new FinanceTracker(expectedModel.getFinanceTracker()), testApp.readStorageAddressBook());
         assertListMatching(getExpenseListPanel(), expectedModel.getFilteredExpenseList());
+        assertListMatching(getBudgetListPanel(), expectedModel.getFilteredBudgetList());
+        assertListMatching(getDebtListPanel(), expectedModel.getFilteredDebtList());
+        assertListMatching(getRecurringListPanel(), expectedModel.getFilteredRecurringList());
     }
 
     /**
@@ -193,6 +237,9 @@ public abstract class FinanceTrackerSystemTest {
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
         getExpenseListPanel().rememberSelectedExpenseCard();
+        getBudgetListPanel().rememberSelectedBudgetCard();
+        getDebtListPanel().rememberSelectedDebtCard();
+        getRecurringListPanel().rememberSelectedRecurringCard();
     }
 
     /**
@@ -203,6 +250,9 @@ public abstract class FinanceTrackerSystemTest {
     protected void assertSelectedCardDeselected() {
         assertEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
         assertFalse(getExpenseListPanel().isAnyCardSelected());
+        assertFalse(getBudgetListPanel().isAnyCardSelected());
+        assertFalse(getDebtListPanel().isAnyCardSelected());
+        assertFalse(getRecurringListPanel().isAnyCardSelected());
     }
 
     /**
