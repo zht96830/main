@@ -1,4 +1,4 @@
-= Personal Finance Tracker
+= Personal Finance Tracker - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -377,7 +377,7 @@ This feature can be implemented in different ways in terms of how the specified 
 
 The Recurring feature consists of `addrecurring`, `listrecurring`, `editrecurring` and `deleterecurring`.
 
-This feature allows users to add recurring expenses: expenses that are perioidic and have a fixed frequency and a defined number of occurrences. Examples of these 'recurring' are bills or subscription fees.
+This feature allows users to add recurring expenses: expenses that are periodic and have a fixed frequency and a defined number of occurrences. Examples of these 'recurring' are bills or subscription fees.
 
 Instead of manually adding the same expense repetitively, use `addrecurring` to add a Recurring. The Finance Tracker will automatically add the expense for you periodically at your specified frequency and for your specified duration!
 
@@ -385,7 +385,15 @@ This feature also simplifies the deletion and editing of these recurring expense
 
 ==== Future Implementation of Automatic expense adding
 
-Work in Progress
+For each recurring with occurrence "O" created, create an array of size O, A[O]. Inside each index is the date that an expense has to be added due to this recurring, i.e. A recurring created with Frequency = M and Occurrence = 2 on Date = 01-01-19 will create an array A of size 2, where A[0] = 01-02-19 and A[1] = 01-03-19.
+
+After an expense has been automatically created for each occurrence of the recurring, the specific index will be converted to null.
+
+Upon each launch of the MainApp, a check is done against the array of every recurring, comparing the current System date against non-null indexes. Any dates earlier or equals to the current System date will mean that an expense has to be automatically created for that recurring.
+
+==== Future Implementation of delete/edit recurring with pastOption = "Y"
+
+Work in progress.
 
 === Pay Debt Function
 

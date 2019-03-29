@@ -11,12 +11,12 @@ public class BudgetCardHandle extends NodeHandle<Node> {
     private static final String AMOUNT_FIELD_ID = "#budgetAmount";
     private static final String CATEGORY_FIELD_ID = "#budgetCategory";
     private static final String DURATION_FIELD_ID = "#budgetDuration";
-    private static final String PERCENTAGE_FIELD_ID = "#budgetPercentage";
+    private static final String SPENT_FIELD_ID = "#budgetSpent";
 
     private final Label amountLabel;
     private final Label categoryLabel;
     private final Label durationLabel;
-    private final Label percentageLabel;
+    private final Label spentLabel;
 
     public BudgetCardHandle(Node cardNode) {
         super(cardNode);
@@ -24,7 +24,7 @@ public class BudgetCardHandle extends NodeHandle<Node> {
         amountLabel = getChildNode(AMOUNT_FIELD_ID);
         categoryLabel = getChildNode(CATEGORY_FIELD_ID);
         durationLabel = getChildNode(DURATION_FIELD_ID);
-        percentageLabel = getChildNode(PERCENTAGE_FIELD_ID);
+        spentLabel = getChildNode(SPENT_FIELD_ID);
     }
 
     public String getAmount() {
@@ -39,8 +39,8 @@ public class BudgetCardHandle extends NodeHandle<Node> {
         return durationLabel.getText();
     }
 
-    public String getPercentage() {
-        return percentageLabel.getText();
+    public String getSpent() {
+        return spentLabel.getText();
     }
 
     /**
@@ -50,6 +50,7 @@ public class BudgetCardHandle extends NodeHandle<Node> {
         return getAmount().equals("$" + budget.getAmount().toString())
                 && getCategory().equals(budget.getCategory().toString())
                 && getDuration().equals(budget.getDuration())
-                && getPercentage().equals(budget.getPercentage() + "% spent");
+                && getSpent().equals("$" + (double) budget.getTotalSpent() / 100 + " ("
+                + budget.getPercentage() + "%) spent");
     }
 }

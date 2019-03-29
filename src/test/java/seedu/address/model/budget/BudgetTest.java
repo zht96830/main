@@ -29,13 +29,13 @@ public class BudgetTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () ->
-                new Budget(null, new Amount("1"), new Date("01-01-2019"), new Date("31-12-2019"), null));
+                new Budget(null, new Amount("1"), new Date("01-01-2019"), new Date("31-12-2019"), null, 0, 0));
         Assert.assertThrows(NullPointerException.class, () ->
                 new Budget(Category.valueOf("FOOD"), null, new Date("01-01-2019"), new Date("31-12-2019"),
-                        null));
+                        null, 0, 0));
         Assert.assertThrows(NullPointerException.class, () ->
                 new Budget(Category.valueOf("FOOD"), new Amount("1"), new Date("01-01-2019"), null,
-                        null));
+                        null, 0, 0));
     }
 
     @Test

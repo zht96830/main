@@ -26,7 +26,7 @@
       </HBox>
       <Label id="budgetAmount" fx:id="budgetAmount" styleClass="cell_small_label" text="\$amount" />
       <Label id="budgetDuration" fx:id="budgetDuration" styleClass="cell_small_label" text="\$duration" />
-      <Label id="budgetPercentage" fx:id="budgetPercentage" styleClass="cell_small_label" text="\$percentage" />
+      <Label id="budgetSpent" fx:id="budgetSpent" styleClass="cell_small_label" text="\$spent" />
     </VBox>
   </GridPane>
 </HBox>

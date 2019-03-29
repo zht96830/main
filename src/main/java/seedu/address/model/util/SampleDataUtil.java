@@ -62,21 +62,21 @@ public class SampleDataUtil {
     public static Budget[] getSampleBudgets() {
         return new Budget[] {
             new Budget(FOOD, new Amount("600"), new Date("01-10-2019"), new Date("31-10-2019"),
-                    "eat less save more"),
+                    "eat less save more", 0, 0),
             new Budget(TRANSPORT, new Amount("300"), new Date("01-07-2019"), new Date("31-12-2019"),
-                    "only for school and back"),
+                    "only for school and back", 0, 0),
             new Budget(SHOPPING, new Amount("200"), new Date("01-06-2019"), new Date("30-06-2019"),
-                    "only for grocery shopping"),
+                    "only for grocery shopping", 0, 0),
             new Budget(WORK, new Amount("100"), new Date("13-05-2019"), new Date("02-08-2019"),
-                    "internship stuff"),
+                    "internship stuff", 0, 0),
             new Budget(UTILITIES, new Amount("450"), new Date("01-05-2019"), new Date("31-05-2019"),
-                    "take shorter showers"),
+                    "take shorter showers", 0, 0),
             new Budget(HEALTHCARE, new Amount("100"), new Date("01-06-2019"), new Date("15-06-2019"),
-                    "stress may make me feel sick"),
+                    "stress may make me feel sick", 0, 0),
             new Budget(ENTERTAINMENT, new Amount("900"), new Date("11-05-2019"), new Date("11-08-2019"),
-                    "yay summer vacation"),
+                    "yay summer vacation", 0, 0),
             new Budget(TRAVEL, new Amount("7000"), new Date("01-01-2020"), new Date("31-12-2020"),
-                    "grad trip and family trip")
+                    "grad trip and family trip", 0, 0)
         };
     }
 
@@ -92,11 +92,11 @@ public class SampleDataUtil {
     }
 
     public static Recurring[] getSampleRecurrings() {
-        return new Recurring[] {
-            new Recurring(new Name("Phone Bill"), new Amount("50.00"), new Date("23-02-2019"),
-                    UTILITIES, "Signed a new 2 year plan.", new Frequency("M"), new Occurrence("24")),
-            new Recurring(new Name("Spotify Subscription"), new Amount("20.00"), new Date("24-09-2019"),
-                    UTILITIES, "Spotify for a year!", new Frequency("M"), new Occurrence("12"))
+        return new Recurring[]{
+                new Recurring(new Name("Phone Bill"), new Amount("50.00"), new Date("23-02-2019"),
+                        UTILITIES, "Signed a new 2 year plan.", new Frequency("M"), new Occurrence("24")),
+                new Recurring(new Name("Spotify Subscription"), new Amount("20.00"), new Date("24-09-2019"),
+                        UTILITIES, "Spotify for a year!", new Frequency("M"), new Occurrence("12"))
         };
     }
 

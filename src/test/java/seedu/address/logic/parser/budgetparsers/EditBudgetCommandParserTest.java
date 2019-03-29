@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.ENDDATE_DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_EXIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_EXIST;
@@ -54,11 +55,11 @@ public class EditBudgetCommandParserTest {
                 EditBudgetCommand.MESSAGE_USAGE));
     }
 
-    /*@Test
+    @Test
     public void parse_invalidPreamble_failure() {
         // invalid category
         assertParseFailure(parser, INVALID_CATEGORY_DESC + AMOUNT_DESC_BUDGET, Category.MESSAGE_CONSTRAINTS);
-    }*/
+    }
 
     @Test
     public void parse_invalidValue_failure() {
