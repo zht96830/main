@@ -9,8 +9,6 @@ import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -189,7 +187,7 @@ public abstract class FinanceTrackerSystemTest {
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
-        getBrowserPanel().rememberUrl();
+        // getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
         getExpenseListPanel().rememberSelectedExpenseCard();
@@ -215,27 +213,15 @@ public abstract class FinanceTrackerSystemTest {
         getExpenseListPanel().navigateToCard(getExpenseListPanel().getSelectedCardIndex());
         ExpenseCardHandle selectedCard = getExpenseListPanel().getHandleToSelectedCard();
 
-        String query = BrowserPanel.QUESTION_MARK + BrowserPanel.QUERY_NAME + selectedCard.getName()
-                + BrowserPanel.QUERY_CATEGORY + selectedCard.getCategory()
-                + BrowserPanel.QUERY_AMOUNT + selectedCard.getAmount()
-                + BrowserPanel.QUERY_DATE + selectedCard.getDate() + BrowserPanel.QUERY_REMARK;
+        // URL expectedUrl;
+        // URL actualUrl;
+        // expectedUrl = BrowserPanel.EXPENSES_PAGE_URL;
+        // actualUrl = BrowserPanel.getCurrentObjectPageUrl();
+        String expectedPageTitle = BrowserPanel.EXPENSE_PAGE_TITLE;
+        String actualPageTitle = getBrowserPanel().getLoadedUrlTitle();
 
-        String url = BrowserPanel.EXPENSES_PAGE_URL + query.replaceAll(" ", "%20");
-        int urlLength = url.length();
-
-        // since selected will not have remarks, we only get substring without remarks
-        String browserUrl = getBrowserPanel().getLoadedUrl().toExternalForm().substring(0, urlLength);
-
-        URL expectedUrl;
-        URL actualUrl;
-        try {
-            expectedUrl = new URL(url);
-            actualUrl = new URL(browserUrl);
-
-        } catch (MalformedURLException mue) {
-            throw new AssertionError("URL expected to be valid.", mue);
-        }
-        assertEquals(expectedUrl, actualUrl);
+        // assertEquals(expectedUrl, actualUrl);
+        assertEquals(expectedPageTitle, actualPageTitle);
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getExpenseListPanel().getSelectedCardIndex());
     }
@@ -246,7 +232,7 @@ public abstract class FinanceTrackerSystemTest {
      * @see ExpenseListPanelHandle#isSelectedExpenseCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
-        assertFalse(getBrowserPanel().isUrlChanged());
+        // assertFalse(getBrowserPanel().isUrlChanged());
         assertFalse(getExpenseListPanel().isSelectedExpenseCardChanged());
     }
 
