@@ -93,10 +93,10 @@ public class SampleDataUtil {
 
     public static Recurring[] getSampleRecurrings() {
         return new Recurring[]{
-                new Recurring(new Name("Phone Bill"), new Amount("50.00"), new Date("23-02-2019"),
-                        UTILITIES, "Signed a new 2 year plan.", new Frequency("M"), new Occurrence("24")),
-                new Recurring(new Name("Spotify Subscription"), new Amount("20.00"), new Date("24-09-2019"),
-                        UTILITIES, "Spotify for a year!", new Frequency("M"), new Occurrence("12"))
+            new Recurring(new Name("Phone Bill"), new Amount("50.00"), new Date("23-02-2019"),
+                    UTILITIES, "Signed a new 2 year plan.", new Frequency("M"), new Occurrence("24")),
+            new Recurring(new Name("Spotify Subscription"), new Amount("20.00"), new Date("24-09-2019"),
+                    UTILITIES, "Spotify for a year!", new Frequency("M"), new Occurrence("12"))
         };
     }
 
