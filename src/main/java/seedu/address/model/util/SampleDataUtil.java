@@ -14,9 +14,13 @@ import seedu.address.model.ReadOnlyFinanceTracker;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
 import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Occurrence;
 import seedu.address.model.budget.Budget;
+import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.recurring.Recurring;
 
 /**
  * Contains utility methods for populating {@code FinanceTracker} with sample data.
@@ -72,7 +76,28 @@ public class SampleDataUtil {
             new Budget(ENTERTAINMENT, new Amount("900"), new Date("11-05-2019"), new Date("11-08-2019"),
                     "yay summer vacation"),
             new Budget(TRAVEL, new Amount("7000"), new Date("01-01-2020"), new Date("31-12-2020"),
-                    "grad trip and family trip")};
+                    "grad trip and family trip")
+        };
+    }
+
+    public static Debt[] getSampleDebts() {
+        return new Debt[] {
+            new Debt(new Name("Amy"), new Amount("3.50"), new Date("01-12-2020"), FOOD,
+                    "for duck rice last week"),
+            new Debt(new Name("Bob"), new Amount("17.20"), new Date("05-12-2019"), TRANSPORT,
+                    "taxi from NUS to Home"),
+            new Debt(new Name("Charlie"), new Amount("57.30"), new Date("08-08-2019"), SHOPPING,
+                    "groceries: fish, eggs, chicken, beef, oyster sauce")
+        };
+    }
+
+    public static Recurring[] getSampleRecurrings() {
+        return new Recurring[] {
+            new Recurring(new Name("Phone Bill"), new Amount("50.00"), new Date("23-02-2019"),
+                    UTILITIES, "Signed a new 2 year plan.", new Frequency("M"), new Occurrence("24")),
+            new Recurring(new Name("Spotify Subscription"), new Amount("20.00"), new Date("24-09-2019"),
+                    UTILITIES, "Spotify for a year!", new Frequency("M"), new Occurrence("12"))
+        };
     }
 
     public static ReadOnlyFinanceTracker getSampleFinanceTracker() {
@@ -83,6 +108,13 @@ public class SampleDataUtil {
         for (Budget sampleBudget : getSampleBudgets()) {
             sampleFt.addBudget(sampleBudget);
         }
+        for (Debt sampleDebt : getSampleDebts()) {
+            sampleFt.addDebt(sampleDebt);
+        }
+        for (Recurring sampleRecurring : getSampleRecurrings()) {
+            sampleFt.addRecurring(sampleRecurring);
+        }
+
         return sampleFt;
     }
 }
