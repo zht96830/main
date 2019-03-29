@@ -626,6 +626,7 @@ e.g. `editdebt 5 n/Tommy $/60`
 e.g. `deletedebt 5`
 * *Pay off debt* : `paydebt INDEX [d/DATE]` +
 e.g. `payDebt 2`
+* *List recurrings* : `listrecurring`
 * *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 e.g. `addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24` +
 * *Edit a recurring* : `editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
