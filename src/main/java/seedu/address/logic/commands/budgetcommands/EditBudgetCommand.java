@@ -123,8 +123,8 @@ public class EditBudgetCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditBudgetCommand // instanceof handles nulls
-                && category.equals(((EditBudgetCommand) other).category))
-                && editBudgetDescriptor.equals(((EditBudgetCommand) other).editBudgetDescriptor);
+                && category.equals(((EditBudgetCommand) other).category)
+                && editBudgetDescriptor.equals(((EditBudgetCommand) other).editBudgetDescriptor));
     }
 
     /**

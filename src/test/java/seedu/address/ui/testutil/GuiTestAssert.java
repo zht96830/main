@@ -2,6 +2,7 @@ package seedu.address.ui.testutil;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import guitests.guihandles.BudgetCardHandle;
@@ -35,7 +36,7 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
      */
     public static void assertCardEquals(BudgetCardHandle expectedCard, BudgetCardHandle actualCard) {
-        assertEquals(expectedCard.getPercentage(), actualCard.getPercentage());
+        assertEquals(expectedCard.getSpent(), actualCard.getSpent());
         assertEquals(expectedCard.getAmount(), actualCard.getAmount());
         assertEquals(expectedCard.getDuration(), actualCard.getDuration());
         assertEquals(expectedCard.getCategory(), actualCard.getCategory());
@@ -90,7 +91,9 @@ public class GuiTestAssert {
         assertEquals("$" + expectedBudget.getAmount(), actualCard.getAmount());
         assertEquals(expectedBudget.getCategory().toString(), actualCard.getCategory());
         assertEquals(expectedBudget.getDuration(), actualCard.getDuration());
-        assertEquals(expectedBudget.getPercentage() + "% spent", actualCard.getPercentage());
+        DecimalFormat percentageFormat = new DecimalFormat("#.##");
+        assertEquals((double)expectedBudget.getTotalSpent()/100 + " ("
+                + percentageFormat.format(expectedBudget.getPercentage()) + "%) spent", actualCard.getSpent());
     }
 
     /**
