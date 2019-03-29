@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class Amount {
 
     public static final String MESSAGE_CONSTRAINTS = "Amount should only contain positive numbers, "
-            + "reflect the value in dollars and it should be at least 1 digit long,"
+            + "reflect the value in dollars and it should be at least 1 digit long, "
             + "but not more than 7 digits in dollars.";
     public static final String VALIDATION_REGEX = "\\d{1,7}(\\.\\d{1,2})?";
     public final int value;
