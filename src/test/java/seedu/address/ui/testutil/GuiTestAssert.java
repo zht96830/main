@@ -2,7 +2,6 @@ package seedu.address.ui.testutil;
 
 import static org.junit.Assert.assertEquals;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import guitests.guihandles.BudgetCardHandle;
@@ -93,9 +92,8 @@ public class GuiTestAssert {
         assertEquals("$" + expectedBudget.getAmount(), actualCard.getAmount());
         assertEquals(expectedBudget.getCategory().toString(), actualCard.getCategory());
         assertEquals(expectedBudget.getDuration(), actualCard.getDuration());
-        DecimalFormat percentageFormat = new DecimalFormat("#.##");
-        assertEquals((double)expectedBudget.getTotalSpent()/100 + " ("
-                + percentageFormat.format(expectedBudget.getPercentage()) + "%) spent", actualCard.getSpent());
+        assertEquals("$" + (double) expectedBudget.getTotalSpent() / 100 + " ("
+                + expectedBudget.getPercentage() + "%) spent", actualCard.getSpent());
     }
 
     /**
@@ -142,8 +140,8 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that the list in {@code recurringListPanelHandle} displays the details of {@code recurrings} correctly and
-     * in the correct order.
+     * Asserts that the list in {@code recurringListPanelHandle} displays the details of {@code recurrings} correctly
+     * and in the correct order.
      */
     public static void assertListMatching(RecurringListPanelHandle recurringListPanelHandle, Recurring... recurrings) {
         for (int i = 0; i < recurrings.length; i++) {
@@ -177,10 +175,11 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that the list in {@code recurringListPanelHandle} displays the details of {@code recurrings} correctly and
-     * in the correct order.
+     * Asserts that the list in {@code recurringListPanelHandle} displays the details of {@code recurrings} correctly
+     * and in the correct order.
      */
-    public static void assertListMatching(RecurringListPanelHandle recurringListPanelHandle, List<Recurring> recurrings) {
+    public static void assertListMatching(RecurringListPanelHandle recurringListPanelHandle,
+                                          List<Recurring> recurrings) {
         assertListMatching(recurringListPanelHandle, recurrings.toArray(new Recurring[0]));
     }
 

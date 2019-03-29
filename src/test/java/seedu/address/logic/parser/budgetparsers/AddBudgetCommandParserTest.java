@@ -29,6 +29,7 @@ import static seedu.address.testutil.TypicalBudgets.BUDGET;
 import static seedu.address.testutil.TypicalBudgets.BUDGET_WITHOUT_REMARKS;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;

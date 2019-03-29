@@ -3,6 +3,8 @@ package seedu.address.model.budget;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.text.DecimalFormat;
+
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
@@ -90,7 +92,8 @@ public class Budget {
     }
 
     public double getPercentage() {
-        return percentage;
+        DecimalFormat percentageFormat = new DecimalFormat("#.##");
+        return Double.parseDouble(percentageFormat.format(percentage));
     }
 
     public String getPercentageString() {

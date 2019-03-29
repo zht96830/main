@@ -114,7 +114,7 @@ public class EditBudgetCommand extends Command {
         }
         Date updatedEndDate = editBudgetDescriptor.getEndDate().orElse(budgetToEdit.getEndDate());
         String updatedRemarks = editBudgetDescriptor.getRemarks().orElse(budgetToEdit.getRemarks());
-        double updatedPercentage = 100*budgetToEdit.getTotalSpent()/updatedAmount.value*100;
+        double updatedPercentage = 100 * budgetToEdit.getTotalSpent() / updatedAmount.value * 100;
         return new Budget(budgetToEdit.getCategory(), updatedAmount, updatedStartDate, updatedEndDate, updatedRemarks,
                 budgetToEdit.getTotalSpent(), updatedPercentage);
     }

@@ -23,7 +23,8 @@ public class MainWindowHandle extends StageHandle {
         expenseListPanel = new ExpenseListPanelHandle(getChildNode(ExpenseListPanelHandle.EXPENSE_LIST_VIEW_ID));
         budgetListPanel = new BudgetListPanelHandle(getChildNode(BudgetListPanelHandle.BUDGET_LIST_VIEW_ID));
         debtListPanel = new DebtListPanelHandle(getChildNode(DebtListPanelHandle.DEBT_LIST_VIEW_ID));
-        recurringListPanel = new RecurringListPanelHandle(getChildNode(RecurringListPanelHandle.RECURRING_LIST_VIEW_ID));
+        recurringListPanel = new RecurringListPanelHandle(getChildNode(RecurringListPanelHandle
+                .RECURRING_LIST_VIEW_ID));
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
