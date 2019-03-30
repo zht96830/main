@@ -362,20 +362,15 @@ Shortcut: `pd INDEX [d/DATE]`
 
 ====
 * Converts the debt at the specified `INDEX`.
-* The index refers to the index number shown in the displayed expense list. The index must be a positive integer.
+* The index refers to the index number shown in the displayed debt list. The index must be a positive integer.
 * After converting the debt into an expense, the debt is deleted.
-* The following parameters from debt will be carried over to expense:
-** The NAME will be entered as “Debt to PERSON_OWED”.
-** The AMOUNT will be entered as “AMOUNT_OWED”.
-** The CATEGORY will carry over as indicated in the debt.
-** The REMARKS will carry over as indicated in the debt.
 * The DATE should be in dd-mm-yyyy format and can be used to indicate actual day when user paid off the debt.
 * If DATE is omitted, current date will be used.
 ====
 
 Examples:
 
-* `listdebt` +
+* `listdebt v/all` +
 `paydebt 3` +
 Converts the 3rd debt in the finance tracker into an expense.
 
