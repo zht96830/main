@@ -339,7 +339,7 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 This feature allows users to filter out specific items based on the view specified. Only expenses that are under those views will be shown on the respective list panels.
 
-Listing feature consists of `listexpense`, `listrecurring`, `listbudget` and `listdebt`.
+Listing feature consists of `listexpense`, `listrecurring` and `listdebt`.
 
 This implementation is under Logic and Model components.
 
@@ -349,15 +349,15 @@ Below is the UML sequence diagram and a step-by-step explanation of an example u
 
 image::ListExpenseSequenceDiagram.png[width="800"]
 
-1. User enters command `listexpense v/food`. The command is received by `FinanceTrackerParser`, which then creates a `ListExpenseCommandParser` object. The created object then calls `ListExpenseCommandParser.parse("v/food")` method.
+1. User enters command `listexpense v/food`. The command is received by `FinanceTrackerParser`, which then creates a `ListExpenseCommandParser` object. The created object then calls `ListExpenseCommandParser#parse("v/food")` method.
 
-2. `ListExpenseCommandParser.parse("v/food")` method calls the `ArgumentTokenizer.tokenize()` to tokenize the input `v/food` and stores it in an `ArgumentMultiMap` object.
+2. `ListExpenseCommandParser#parse("v/food")` method calls the `ArgumentTokenizer#tokenize()` to tokenize the input `v/food` and stores it in an `ArgumentMultiMap` object.
 
-3. `ListExpenseCommandParse.parse("v/food")` method then calls `ParserUtil.parseView(argMultiMap.getValue(PREFIX_VIEW).get())` and gets a `View` object in return.
+3. `ListExpenseCommandParse#parse("v/food")` method then calls `ParserUtil#parseView(argMultiMap#getValue(PREFIX_VIEW)#get())` and gets a `View` object in return.
 
 4.  After that, a  `ListExpenseCommand` object is created with the `View` object as parameter and return to `LogicManager`.
 
-5. `LogicManager` then calls `ListExpenseCommand.execute()`, which calls `Model.updateFilteredExpense(predicate)`, where predicate is obtained from calling the `ListExpenseCommand.getPredicate(view)`. It then updates the filter of the filtered expense list and it now contains the new set of expenses that are filtered by the predicate.
+5. `LogicManager` then calls `ListExpenseCommand#execute()`, which calls `Model#updateFilteredExpense(predicate)`, where predicate is obtained from calling the `ListExpenseCommand#getPredicate(view)`. It then updates the filter of the filtered expense list and it now contains the new set of expenses that are filtered by the predicate.
 
 6. Finally, the expense list panel will show the new set of expenses. A `CommandResult` is then created and returned to `LogicManager`.
 
@@ -371,7 +371,7 @@ This feature can be implemented in different ways in terms of how the specified 
 
 * Alternative 2: Store expenses in separate files based on different views. Only check files under the specified view when filtering.
 ** Pros: More efficient. Will not go through every single expense.
-** Cons: Will need to alter the original architecture.
+** Cons: Will need to alter the original architecture. More storage space will be needed.
 
 === Recurring Feature
 
@@ -428,7 +428,7 @@ This implementation is under Logic and Model components.
 
 ===== Current implementation
 
-Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `stats`. The other list commands have similar implementations.
+Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `stats`.
 
 (UML here)
 
@@ -858,7 +858,7 @@ Now we have the `Remark` class, we need to actually use it inside link:{repoURL}
 
 . Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/expense/Expense.java[`Expense`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the expense will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `data/addressbook.json` so that the application will load the sample data when you launch it.)
+. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `data/financetracker.json` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `JsonAdaptedExpense` class
 We now have `Remark` s for `Expense` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/JsonAdaptedExpense.java[`JsonAdaptedExpense`] to include a `Remark` field so that it will be saved.
@@ -869,7 +869,7 @@ We now have `Remark` s for `Expense` s, but they will be gone when we exit the a
 
 **Tests:**
 
-. Fix `invalidAndValidExpenseAddressBook.json`, `typicalExpensesFinanceTracker.json`, `validAddressBook.json` etc., such that the JSON tests will not fail due to a missing `remark` field.
+. Fix `invalidAndValidExpenseFinanceTracker.json`, `typicalExpensesFinanceTracker.json`, `validFinanceTracker.json` etc., such that the JSON tests will not fail due to a missing `remark` field.
 
 ===== [Step 6b] Test: Add withRemark() for `ExpenseBuilder`
 Since `Expense` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/ExpenseBuilder.java[`ExpenseBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/expense/Expense.java[`Expense`].
