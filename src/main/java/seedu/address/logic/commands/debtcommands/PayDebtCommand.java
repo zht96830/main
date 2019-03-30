@@ -19,6 +19,9 @@ import seedu.address.model.attributes.Name;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 
+/**
+ * Converts a debt into an expense in the Finance Tracker.
+ */
 public class PayDebtCommand extends Command {
 
     public static final String COMMAND_WORD = "paydebt";
@@ -45,7 +48,7 @@ public class PayDebtCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Debt> lastShownDebtList = model.getFilteredDebtList();
 

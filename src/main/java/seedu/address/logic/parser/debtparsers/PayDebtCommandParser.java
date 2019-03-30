@@ -16,6 +16,9 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Date;
 
+/**
+ * Parses input arguments and creates a new PayDebtCommand object
+ */
 public class PayDebtCommandParser implements Parser<PayDebtCommand> {
 
     /**
