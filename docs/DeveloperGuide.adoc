@@ -25,7 +25,7 @@ By: `CS2103-AY1819S2-W15-2`      Since: `Feb 2019`
 . *JDK `9`* or later
 +
 [WARNING]
-JDK `10` on Windows will fail to run tests in <<UsingGradle#Running-Tests, headless mode>> due to a https://github.com/javafxports/openjdk-jfx/issues/66[JavaFX bug].
+JDK `10` on Windows will fail to run tests in <<UsingGradle.adoc#Running-Tests, headless mode>> due to a https://github.com/javafxports/openjdk-jfx/issues/66[JavaFX bug].
 Windows developers are highly recommended to use JDK `9`.
 
 . *IntelliJ* IDE
@@ -75,9 +75,9 @@ Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> docume
 
 ==== Updating documentation to match your fork
 
-After forking the repo, the documentation will still have the SE-EDU branding and refer to the `se-edu/addressbook-level4` repo.
+After forking the repo, the documentation will still refer to the `CS2103-AY1819S2-W15-2/main` repo.
 
-If you plan to develop this fork as a separate product (i.e. instead of contributing to `se-edu/addressbook-level4`), you should do the following:
+If you plan to develop this fork as a separate product (i.e. instead of contributing to `CS2103-AY1819S2-W15-2/main`), you should do the following:
 
 . Configure the <<Docs-SiteWideDocSettings, site-wide documentation settings>> in link:{repoURL}/build.gradle[`build.gradle`], such as the `site-name`, to suit your own project.
 
@@ -297,7 +297,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
 ** Pros: Will use less memory (e.g. for `deleteexpense`, just save the expense being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
+** Cons: We must ensure that the implementation of each individual command is correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
 
@@ -453,9 +453,43 @@ Work in Progress
 
 This feature allows users to set budgets for different categories so they can limit the amount spent for each category.
 
-How it is implemented:
-User enters the amount they want to limit themselves to for a particular category and specifies the start and end date for their budget.
-For every expense they enter that falls under that category, the totalSpent variable in the Budget class will be updated (coming in v1.3). This information will be displayed to the user so that they can know how much they have spent so far and better plan their future expenses so as not to exceed their budget.
+It stores all budgets added by the user and keeps track of the expenses added within the user-specified time frame.
+
+The implementation of the budget feature is under the Logic and Model components.
+
+==== Current implementation
+
+===== Adding a budget:
+User enters the command word `addbudget`, followed by the category for which they want to set the budget for, the amount they want to limit themselves to for that category and specifies the start and end date for that budget.
+
+===== Editing an existing budget:
+User enters the command word `editbudget`, followed by the category for which they want to edit the budget of and the relevant parameters of which they wish to edit the values of.
+
+===== Deleting an existing budget:
+User enters the command word `deletebudget`, followed by the category for which they wish to delete the budget for.
+
+For all three actions, the user command gets parsed by the respective parsers: `AddBudgetCommandParser`, `EditBudgetCommandParser` and `DeleteBudgetCommandParser`, which handle the execution of the commands.
+
+Below is the UML sequence diagram of a scenario for the `addbudget` command.
+
+image::AddBudgetSequenceDiagram.png[width="800"]
+
+===== Updating of budgets:
+* When a new budget is added, the model checks the expense list for any expenses of that category which fall within the time frame of the added budget
+and sets the `totalSpent` and `percentage` variables of the Budget object accordingly.
+* When an existing budget is edited, the model updates the `percentage` variable of the Budget object.
+* For every expense the user enters, the model will check if there exists a budget for the category of the added expense
+and if the date of the expense is within the time frame of the budget.
+If the added expense is during the time of the budget, the totalSpent variable in the Budget object with that specific category will be updated.
+* The total amount spent for each budget category, along with the percentage of the total budgeted amount, will be displayed to the user so that the user can know how much has been spent so far and can better plan their future expenses so as not to exceed their budget.
+
+==== Future Enhancements
+The Budget class has a boolean method `overlaps(Budget other)` which returns true if two budgets of the same category have overlapping time frames.
+This method was included with the idea of allowing the user to add multiple budgets for the same category but for different time frames.
+
+Another possible enhancement would be to allow the user to set a recurring budget.
+For example, if a user wants to limit their daily spending to $20, maybe an `addrecurringbudget c/food $/20 f/d` command, similar to the recurring expense command, could be implemented so that the user does not have to add a budget everyday.
+
 
 == Documentation
 
