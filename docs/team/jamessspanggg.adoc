@@ -1,0 +1,68 @@
+= James Pang Mun Wai - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Personal Finance Tracker
+
+---
+
+== Overview
+This portfolio aims to document the contributions made by James Pang Mun Wai to the Personal Finance Tracker.
+
+Personal Finance Tracker is a desktop finance tracker application used for tracking personal finances such as daily expenses, recurring expenses such as monthly electricity bills, budgets and debts owed to another party. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 30 kLoC. The product was morphed from an https://github.com/nus-cs2103-AY1819S2/addressbook-level4[Address Book] over a period of 8 weeks under the constraints described https://nus-cs2103-ay1819s2.github.io/cs2103-website/admin/project-constraints.html[here].
+
+== Summary of contributions
+
+* *Major enhancement*: added *the listing feature to list expenses, debts and recurring expenses*
+** What it does: allows the user to efficiently list expenses, debts and recurring expenses based on the view specified. Only items that match the view will be listed. For example, listing expense with view as the category food will lead to only expenses with the category food to be listed.
+** Justification: This feature improves the product significantly because a user can conveniently look at groups of items based on the view specified rather than spending time to scroll through all the expenses/debts/recurring expenses.
+** Highlights: This enhancement was built to be more flexible according to the user's needs. Rather than the list command from AB4 that lists all items, the updated list commands allow more specific listings. The listing features was implemented for 3 lists, namely ExpenseList, DebtList and RecurringList.
+
+* *Minor enhancement*: added and handled *all UI components* in Personal Finance Tracker.
+
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=jamessspanggg&sort=displayName&since=2019-02-10&until=2019-03-26&timeframe=day&reverse=false&repoSort=true[Code collated by reposense]]
+
+* *Other contributions*:
+
+** Project management:
+*** Facilitated meetings every Friday evening
+*** Set deadlines for tasks
+*** Check all pull requests done by group mates
+** Enhancements to existing features:
+*** Updated the GUI to have Debt, Budget and Recurring Lists (Pull requests https://github.com/CS2103-AY1819S2-W15-2/main/pull/111[#111], https://github.com/CS2103-AY1819S2-W15-2/main/pull/115[#115])
+*** Updated the GUI to display selected individual list items in Browser Panel (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/174[#174])
+*** Updated the storage to allow read and write of Debt, Budget and Recurring data (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/199[#199])
+*** Wrote additional tests for existing features to increase coverage from 74.04% to 80.56% (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/194[#194])
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/22[#22])
+*** Added the implementation of listing in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/176[#176])
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S2-W15-2/main/pull/81[#81], https://github.com/CS2103-AY1819S2-W15-2/main/pull/119[#119], https://github.com/CS2103-AY1819S2-W15-2/main/pull/175[#175], https://github.com/CS2103-AY1819S2-W15-2/main/pull/135[#135]
+*** Contributed to forum discussions (examples:  https://github.com/nus-cs2103-AY1819S2/forum/issues/5[5], https://github.com/nus-cs2103-AY1819S2/forum/issues/17[17], https://github.com/nus-cs2103-AY1819S2/forum/issues/21[21], https://github.com/nus-cs2103-AY1819S2/forum/issues/67[67])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** The displaying of html files in browser panel that I added was adopted by a group from last semester's CS2103 (https://github.com/CS2103-AY1819S1-W16-1/main/blob/master/src/main/java/seedu/address/ui/BrowserPanel.java[1])
+** Tools:
+*** Set up the team repository
+*** Set up Travis CI integration
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=listexpense]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=listingfeature]
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+

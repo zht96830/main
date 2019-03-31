@@ -1,0 +1,11 @@
+{
+  "guiSettings" : {
+    "windowWidth" : 1429.0,
+    "windowHeight" : 979.0,
+    "windowCoordinates" : {
+      "x" : 84,
+      "y" : 71
+    }
+  },
+  "financeTrackerFilePath" : "data/financetracker.json"
+}
