@@ -1,0 +1,232 @@
+{
+  "expenses" : [ {
+    "name" : "Char Kuey Teow",
+    "amount" : "1000",
+    "date" : "13-01-2020",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "james",
+    "amount" : "100",
+    "date" : "30-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "james",
+    "amount" : "100",
+    "date" : "30-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "james",
+    "amount" : "100",
+    "date" : "30-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "james",
+    "amount" : "40",
+    "date" : "30-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "james",
+    "amount" : "0.5",
+    "date" : "30-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "james",
+    "amount" : "0.55",
+    "date" : "30-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "james",
+    "amount" : "0.55",
+    "date" : "30-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "james",
+    "amount" : "0.55",
+    "date" : "30-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "ckt",
+    "amount" : "3.55",
+    "date" : "30-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "james",
+    "amount" : "100",
+    "date" : "27-03-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  }, {
+    "name" : "chapati",
+    "amount" : "10",
+    "date" : "27-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "10",
+    "date" : "26-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "26-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "26-03-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "26-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "26-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "26-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "26-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "26-03-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "150",
+    "date" : "26-03-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  }, {
+    "name" : "food",
+    "amount" : "155",
+    "date" : "26-03-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  }, {
+    "name" : "BRAZIL",
+    "amount" : "100",
+    "date" : "16-03-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  }, {
+    "name" : "MRT",
+    "amount" : "100",
+    "date" : "16-03-2019",
+    "category" : "TRANSPORT",
+    "remarks" : ""
+  }, {
+    "name" : "Repair",
+    "amount" : "100",
+    "date" : "16-03-2019",
+    "category" : "OTHERS",
+    "remarks" : ""
+  }, {
+    "name" : "Water Bottle",
+    "amount" : "100",
+    "date" : "16-03-2019",
+    "category" : "SHOPPING",
+    "remarks" : ""
+  }, {
+    "name" : "Sofa",
+    "amount" : "100",
+    "date" : "16-03-2019",
+    "category" : "UTILITIES",
+    "remarks" : ""
+  }, {
+    "name" : "Laptop",
+    "amount" : "100",
+    "date" : "16-03-2019",
+    "category" : "WORK",
+    "remarks" : ""
+  }, {
+    "name" : "Medicine",
+    "amount" : "100",
+    "date" : "16-03-2019",
+    "category" : "HEALTHCARE",
+    "remarks" : ""
+  } ],
+  "debts" : [ {
+    "personOwed" : "james",
+    "amount" : "100",
+    "deadline" : "13-11-2020",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "personOwed" : "james",
+    "amount" : "100",
+    "deadline" : "13-05-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  } ],
+  "budgets" : [ {
+    "amount" : "100",
+    "category" : "FOOD",
+    "startDate" : "22-03-2019",
+    "endDate" : "13-03-2020",
+    "remarks" : "",
+    "totalSpent" : "355",
+    "percentage" : "3.55"
+  }, {
+    "amount" : "1000",
+    "category" : "TRAVEL",
+    "startDate" : "22-03-2019",
+    "endDate" : "11-11-2019",
+    "remarks" : "",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  } ],
+  "recurrings" : [ {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "22-03-2019",
+    "category" : "FOOD",
+    "remarks" : "",
+    "frequency" : "m",
+    "occurrence" : "20"
+  }, {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "22-03-2019",
+    "category" : "FOOD",
+    "remarks" : "",
+    "frequency" : "m",
+    "occurrence" : "22"
+  }, {
+    "name" : "food",
+    "amount" : "100",
+    "date" : "25-03-2019",
+    "category" : "FOOD",
+    "remarks" : "",
+    "frequency" : "m",
+    "occurrence" : "22"
+  } ]
+}
