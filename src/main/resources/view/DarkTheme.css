@@ -367,6 +367,6 @@
     -fx-alignment: center;
     -fx-text-alignment: center;
     -fx-padding: 0 0 10 0;
-    -fx-font-weight: 10;
+    -fx-font-weight: bold;
     -fx-font-family: "Bw Quinta Pro";
 }
