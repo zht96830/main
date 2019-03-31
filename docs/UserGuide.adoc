@@ -5,7 +5,6 @@
 :toc-placement: preamble
 :sectnums:
 :imagesDir: images
-include::UserGuide.adoc[tags=listexpense]
 :stylesDir: stylesheets
 :xrefstyle: full
 :experimental:
@@ -100,7 +99,7 @@ Shortcut: `le v/VIEW`
 ** v/day: displays list of expenses added since a day ago
 ** v/month: displays list of expenses added since a month ago
 ** v/year: displays list of expenses added since a year ago
-** v/CATEGORY: displays list of expenses with CATEGORY
+** v/CATEGORY: displays list of expenses with CATEGORY such as “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive
 ** v/$10, v/$100, v/$1000: display list of expenses with amount greater than $10, $100 or $1000
 ====
 
