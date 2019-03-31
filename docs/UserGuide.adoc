@@ -5,6 +5,7 @@
 :toc-placement: preamble
 :sectnums:
 :imagesDir: images
+include::UserGuide.adoc[tags=listexpense]
 :stylesDir: stylesheets
 :xrefstyle: full
 :experimental:
@@ -86,6 +87,7 @@ e.g. When adding an expense, instead of inputting an entire line of command such
 
 Format: `help`
 
+// tag::listexpense[]
 === Listing expenses : `listexpense`
 
 Shows a list of expenses in the finance tracker according to the view specified. +
@@ -101,6 +103,8 @@ Shortcut: `le v/VIEW`
 ** v/CATEGORY: displays list of expenses with CATEGORY
 ** v/$10, v/$100, v/$1000: display list of expenses with amount greater than $10, $100 or $1000
 ====
+
+// end::listexpense[]
 
 === Adding an expense: `addexpense`
 
