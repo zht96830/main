@@ -253,7 +253,7 @@ Step 2. The user executes `deleteexpense 5` command to delete the 5th expense in
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `addexpense n/BKT ...` to add a new expense. The `add` command also calls `Model#commitFinanceTracker()`, causing another modified finance tracker state to be saved into the `financeTrackerStateList`.
+Step 3. The user executes `addexpense n/BKT ...` to add a new expense. The `addexpense` command also calls `Model#commitFinanceTracker()`, causing another modified finance tracker state to be saved into the `financeTrackerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
@@ -276,7 +276,7 @@ The `redo` command does the opposite -- it calls `Model#redoFinanceTracker()`, w
 [NOTE]
 If the `currentStatePointer` is at index `financeTrackerStateList.size() - 1`, pointing to the latest finance tracker state, then there are no undone finance tracker states to restore. The `redo` command uses `Model#canRedoFinanceTracker()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the finance tracker, such as `list`, will usually not call `Model#commitFinanceTracker()`, `Model#undoFInanceTracker()` or `Model#redoFinanceTracker()`. Thus, the `financeTrackerStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listexpense v/all`. Commands that do not modify the finance tracker, such as `listexpense`, will usually not call `Model#commitFinanceTracker()`, `Model#undoFInanceTracker()` or `Model#redoFinanceTracker()`. Thus, the `financeTrackerStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
