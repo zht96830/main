@@ -79,7 +79,7 @@ public class BudgetListPanelTest extends GuiUnitTest {
             Date startDate = new Date("13-03-2019");
             Date endDate = new Date("13-03-2020");
             Category category = Category.FOOD;
-            Budget budget = new Budget(category, amount, startDate, endDate, null);
+            Budget budget = new Budget(category, amount, startDate, endDate, null, 0, 0);
             backingList.add(budget);
         }
         return backingList;

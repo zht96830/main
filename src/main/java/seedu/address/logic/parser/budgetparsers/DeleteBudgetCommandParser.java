@@ -33,6 +33,13 @@ public class DeleteBudgetCommandParser implements Parser<DeleteBudgetCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBudgetCommand.MESSAGE_USAGE));
         }
+
+
+        String[] toCheck = args.split(" ");
+        if (toCheck.length > 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBudgetCommand.MESSAGE_USAGE));
+        }
+
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         return new DeleteBudgetCommand(category);
     }

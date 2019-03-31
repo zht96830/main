@@ -34,7 +34,7 @@ public enum View {
         case WEEK:
         case MONTH:
         case YEAR:
-            return "Since last " + this.toString();
+            return "Within a " + this.toString();
         case FOOD:
         case TRANSPORT:
         case TRAVEL:

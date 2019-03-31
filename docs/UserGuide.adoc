@@ -5,6 +5,7 @@
 :toc-placement: preamble
 :sectnums:
 :imagesDir: images
+include::UserGuide.adoc[tags=listexpense]
 :stylesDir: stylesheets
 :xrefstyle: full
 :experimental:
@@ -31,6 +32,11 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Some example commands you can try:
+* **`listexpense`**`v/all` : lists all contacts
+* **`addexpense`**`n/Sofa $/200 c/HOME` : adds an expense named `Sofa` of amount `$200` and category of `HOME` to the Finance Tracker.
+* **`deleteexpense`**`3` : deletes the 3rd expense shown in the current list
+* *`exit`* : exits the app
 .  Refer to <<Commands>> for details of each command.
 
 == Features
@@ -79,6 +85,7 @@ These statistics will help you better understand your expenses and make effectiv
 
 Format: `help`
 
+// tag::listexpense[]
 === Listing expenses : `listexpense`
 
 Shows a list of expenses in the finance tracker according to the view specified. +
@@ -92,7 +99,10 @@ Shortcut: `le v/VIEW`
 ** v/month: displays list of expenses added since a month ago
 ** v/year: displays list of expenses added since a year ago
 ** v/CATEGORY: displays list of expenses with CATEGORY
+** v/$10, v/$100, v/$1000: display list of expenses with amount greater than $10, $100 or $1000
 ====
+
+// end::listexpense[]
 
 === Adding an expense: `addexpense`
 
@@ -150,7 +160,7 @@ Shortcut: `de INDEX`
 
 Examples:
 
-* `list` +
+* `listexpense v/all` +
 `deleteexpense 2` +
 Deletes the 2nd expense in the finance tracker.
 
@@ -213,8 +223,14 @@ Shortcut: `ld v/VIEW`
 
 ====
 * The VIEW specifies how the list of debts is displayed.
-** v/DEADLINE: display list of debts showing nearest DEADLINE first. Debts without deadlines will be at the bottom of the list.
-** v/CATEGORY: displays list of expenses with CATEGORY
+** v/all: displays entire list of debts
+** v/day: displays list of debts with deadline in a day
+** v/week: displays list of debts with deadline in a week
+** v/month: displays list of debts with deadline in a month
+** v/year: displays list of debts with deadline in a year
+** v/CATEGORY: displays list of debts with CATEGORY
+** v/$10, v/$100, v/$1000: display list of debts with amount greater than $10, $100 or $1000
+
 ====
 
 === Adding a debt: `adddebt`
@@ -271,7 +287,7 @@ Shortcut: `dd INDEX`
 
 Examples:
 
-* `listdebt` +
+* `listdebt v/all` +
  `deletedebt 5` +
  Deletes the 5th debt in the finance tracker.
 
@@ -295,7 +311,7 @@ Shortcut: `pd INDEX [d/DATE]`
 
 Examples:
 
-* `listdebt` +
+* `listdebt v/all` +
 `paydebt 3` +
 Converts the 3rd debt in the finance tracker into an expense.
 
@@ -381,7 +397,7 @@ You can omit (optional) parameters by leaving them empty. If all parameters are 
 
 Examples:
 
-* `listrecurring` +
+* `listrecurring v/all` +
 `deleterecurring 2 p/N` +
 Deletes the 2nd recurring in the finance tracker, without deleting old expenses already added by this recurring.
 
@@ -510,19 +526,19 @@ Undoable commands: those commands that modify the finance tracker's content (`ad
 
 Examples:
 
-* `delete 1` +
-`list` +
+* `deleteexpense 1` +
+`listexpense v/all` +
 `undo` (reverses the `delete 1` command) +
 
 * `select 1` +
-`list` +
+`listexpense v/all` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+* `deleteexpense 1` +
+`clearexpense` +
+`undo` (reverses the `clearexpense` command) +
+`undo` (reverses the `deleteexpense 1` command) +
 
 === Redoing the previously undone command : `redo`
 
@@ -531,26 +547,26 @@ Format: `redo`
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+* `deleteexpense 1` +
+`undo` (reverses the `deleteexpense 1` command) +
+`redo` (reapplies the `deleteexpense 1` command) +
 
 * `delete 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
+* `deleteexpense 1` +
+`clearexpense` +
+`undo` (reverses the `clearexpense` command) +
+`undo` (reverses the `deleteexpense 1` command) +
+`redo` (reapplies the `deleteexpense 1` command) +
+`redo` (reapplies the `clearexpense` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clearing all expense entries : `clearexpense`
 
-Clears all entries from the finance tracker. +
-Format: `clear`
+Clears all expense entries from the finance tracker. +
+Format: `clearexpense`
 
 === Exiting the program : `exit`
 
@@ -603,7 +619,7 @@ Examples:
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *List expenses* : `listexpense`
+* *List expenses* : `listexpense v/VIEW`
 * *Add an expense* `addexpense n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]` +
 e.g. `addexpense n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake`
 * *Edit an expense* : `editexpense INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/DATE] [r/REMARK]` +
@@ -617,7 +633,7 @@ e.g. `addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
 e.g. `editbudget c/others $/5000 sd/1-1-2019 ed/31-3-2019`
 * *Delete a budget* : `deletebudget c/CATEGORY` +
 e.g. `deletebudget c/food`
-* *List debts* : `listdebt [v/VIEW]`
+* *List debts* : `listdebt v/VIEW`
 * *Add a debt* : `adddebt n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY [due/DEADLINE] [r/REMARK]` +
 e.g. `adddebt n/Jane Doe $/200 c/FOOD`
 * *Edit a debt* : `editdebt INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] [r/REMARK]` +

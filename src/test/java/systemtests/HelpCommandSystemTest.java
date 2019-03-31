@@ -64,7 +64,8 @@ public class HelpCommandSystemTest extends FinanceTrackerSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());
-        assertNotEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
+        assertNotEquals(BrowserPanel.DEBT_PAGE_TITLE, getBrowserPanel().getLoadedUrlTitle());
+        // assertNotEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
         assertListMatching(getExpenseListPanel(), getModel().getFilteredExpenseList());
 
         // assert that the status bar too is updated correctly while the help window is open

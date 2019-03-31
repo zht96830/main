@@ -56,12 +56,11 @@ public class AddBudgetCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add to empty finance tracker -> added */
-        // implement clearbudget command first
-        /*deleteAllBudgets();
-        command = "   " + AddExpenseCommand.COMMAND_WORD + "  " + NAME_DESC_EXPENSE + "  " + AMOUNT_DESC_EXPENSE + " "
-                + CATEGORY_DESC_EXPENSE + "   " + DATE_DESC_EXPENSE + "   " + REMARKS_DESC_EXPENSE + " ";
+        deleteAllBudgets();
+        command = "   " + AddBudgetCommand.COMMAND_WORD + "  " + CATEGORY_DESC_BUDGET + " " + AMOUNT_DESC_BUDGET + " "
+                + STARTDATE_DESC_BUDGET + "   " + ENDDATE_DESC_BUDGET + " " + REMARKS_DESC_BUDGET + " ";
         assertCommandSuccess(command, toAdd);
-*/
+
         /* ------------------------ Perform add operation while a expense card is selected -------------------------- */
         // implement selectbudget command first
         /* Case: selects first card in the expense list, add a expense -> added, card selection remains unchanged */

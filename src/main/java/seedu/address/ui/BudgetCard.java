@@ -32,7 +32,7 @@ public class BudgetCard extends UiPart<Region> {
     @FXML
     private Label budgetDuration;
     @FXML
-    private Label budgetPercentage;
+    private Label budgetSpent;
 
 
     public BudgetCard(Budget budget) {
@@ -41,7 +41,8 @@ public class BudgetCard extends UiPart<Region> {
         budgetCategory.setText(budget.getCategory().name());
         budgetAmount.setText("$" + budget.getAmount().toString());
         budgetDuration.setText(budget.getStartDate().toString() + " till " + budget.getEndDate().toString());
-        budgetPercentage.setText(budget.getPercentage() + "% spent");
+        budgetSpent.setText("$" + (double) budget.getTotalSpent() / 100 + " ("
+                + budget.getPercentage() + "%) spent");
     }
 
     @Override

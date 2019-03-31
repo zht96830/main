@@ -23,25 +23,25 @@ public class DeleteBudgetCommandSystemTest extends FinanceTrackerSystemTest {
     public void delete() {
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
 
-        /* Case: delete the food budget in the list, command with leading spaces and trailing spaces -> deleted */
-        /*Category category = FOOD;
+        /* Case: delete the travel budget in the list, command with leading spaces and trailing spaces -> deleted */
+        /*Category category = TRAVEL;
         Model expectedModel = getModel();
-        Model modelBeforeDeletingFood = getModel();
+        Model modelBeforeDeletingTravel = getModel();
         String command = "     " + DeleteBudgetCommand.COMMAND_WORD + "     " + CATEGORY_DESC_BUDGET + "       ";
         Budget deletedBudget = removeBudget(expectedModel, category);
         String expectedResultMessage = String.format(MESSAGE_DELETE_BUDGET_SUCCESS, deletedBudget);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
-        /* Case: undo deleting the food budget in the list -> food budget restored */
+        /* Case: undo deleting the travel budget in the list -> travel budget restored */
         /*command = UndoCommand.COMMAND_WORD;
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
-        assertCommandSuccess(command, modelBeforeDeletingFood, expectedResultMessage);
+        assertCommandSuccess(command, modelBeforeDeletingTravel, expectedResultMessage);
 
-        /* Case: redo deleting the food budget in the list -> food budget deleted again */
+        /* Case: redo deleting the travel budget in the list -> travel budget deleted again */
         /*command = RedoCommand.COMMAND_WORD;
-        removeBudget(modelBeforeDeletingFood, category);
+        removeBudget(modelBeforeDeletingTravel, category);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        assertCommandSuccess(command, modelBeforeDeletingFood, expectedResultMessage);
+        assertCommandSuccess(command, modelBeforeDeletingTravel, expectedResultMessage);
 
         /* --------------------- Performing delete operation while a budget card is selected ---------------------- */
         //implement selectbudget first
@@ -83,8 +83,8 @@ public class DeleteBudgetCommandSystemTest extends FinanceTrackerSystemTest {
                 MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: invalid arguments (extra argument) -> rejected */
-        /*assertCommandFailure(DeleteBudgetCommand.COMMAND_WORD + CATEGORY_DESC_BUDGET + " 1 abc",
-                MESSAGE_INVALID_DELETE_COMMAND_FORMAT);*/
+        assertCommandFailure(DeleteBudgetCommand.COMMAND_WORD + CATEGORY_DESC_BUDGET + " 1 abc",
+                MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("DelETEbudGEt" + CATEGORY_DESC_BUDGET, MESSAGE_UNKNOWN_COMMAND);

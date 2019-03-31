@@ -82,6 +82,6 @@ public class BudgetBuilder {
     }
 
     public Budget build() {
-        return new Budget(category, amount, startDate, endDate, remarks);
+        return new Budget(category, amount, startDate, endDate, remarks, 0, 0);
     }
 }
