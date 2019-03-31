@@ -1,98 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"></meta-charset>
-        <title>Selected Debt Page</title>
-
-        <script type="text/javascript">
-            function getJsonFromUrl() {
-                var query = location.search.substr(1);
-                var result = {};
-                query.split("&").forEach(function(part) {
-                    var item = part.split("=");
-                    result[item[0]] = decodeURIComponent(item[1]);
-                });
-                return result;
-            }
-            document.addEventListener("DOMContentLoaded", function(event) {
-                document.getElementById("personowed").textContent = "Owed to: " +  getJsonFromUrl().personowed;
-
-                var img = document.createElement("img");
-                var path = "../images/"
-                var categoryDiv = document.getElementById("category");
-                switch (getJsonFromUrl().category) {
-                    case "FOOD":
-                        img.src = path + "food.png"
-                        break;
-                    case "TRANSPORT":
-                        img.src = path + "transport.png"
-                        break;
-                    case "TRAVEL":
-                        img.src = path + "travel.png"
-                        break;
-                    case "UTILITIES":
-                        img.src = path + "utilities.png"
-                        break;
-                    case "OTHERS":
-                        img.src = path + "others.png"
-                        break;
-                    case "SHOPPING":
-                        img.src = path + "shopping.png"
-                        break;
-                    case "WORK":
-                        img.src = path + "work.png"
-                        break;
-                    case "HEALTHCARE":
-                        img.src = path + "healthcare.png"
-                        break;
-                    case "ENTERTAINMENT":
-                        img.src = path + "entertainment.png"
-                        break;
-                    default:
-                }
-                categoryDiv.append(img);
-
-                document.getElementById("amount").textContent = "Debt Amount: " + getJsonFromUrl().amount;
-                document.getElementById("deadline").textContent = "Deadline: " + getJsonFromUrl().deadline;
-                document.getElementById("remarks").textContent = "Remarks: " + getJsonFromUrl().remarks;
-            });
-        </script>
-
-        <style>
-            body {
-                background-color: #383838;
-                -fx-font-family: "Segoe UI Semibold";
-            }
-
-            h1 {
-                color: white;
-                text-align: center;
-                font-style: italic;
-                font-weight: bold;
-                text-shadow: 2px 2px 3px darkgrey;
-            }
-
-            div {
-                color: white;
-                /* overflow-wrap breaks sentence into next lines if too long */
-                overflow-wrap: break-word;
-                text-align: center;
-            }
-        </style>
-
-    </head>
-    <body>
-        <h1>Selected Debt</h1>
-        <h3>
-            <div id="personowed"></div>
-            <br>
-            <div id="category"></div>
-            <br>
-            <div id="amount"></div>
-            <br>
-            <div id="deadline"></div>
-            <br>
-            <div id="remarks"></div>
-        </h3>
-    </body>
+<head>
+    <meta charset="utf-8"></meta-charset>
+    <title>Selected Debt Page</title>
+</head>
+<body style="background-color: #383838; color: white; text-align: center;">
+<div class="container">
+    <div class="row row-space">
+        <div class="col-sm">
+            <h1><b>Selected Debt</b></h1>
+            <p>Person Owed: $personowed</p>
+            <p>Category: $category</p>
+            <p>Amount: $amount</p>
+            <p>Deadline: $deadline</p>
+            <p>Remarks: <br />$remarks</p>
+        </div>
+    </div>
+</div>
+</body>
 </html>

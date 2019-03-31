@@ -48,12 +48,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true if it is within the range of current date */
+    /** {@code Predicate} that always evaluate to true if deadline is within range */
     // needs to be implemented
-    Predicate<Debt> PREDICATE_SHOW_DAY_DEBTS = p -> p.getDeadline().isWithinDuration("day");
-    Predicate<Debt> PREDICATE_SHOW_WEEK_DEBTS = p -> p.getDeadline().isWithinDuration("week");
-    Predicate<Debt> PREDICATE_SHOW_MONTH_DEBTS = p -> p.getDeadline().isWithinDuration("month");
-    Predicate<Debt> PREDICATE_SHOW_YEAR_DEBTS = p -> p.getDeadline().isWithinDuration("year");
+    Predicate<Debt> PREDICATE_SHOW_DAY_DEBTS = p -> p.getDeadline().isWithinDurationAfter("day");
+    Predicate<Debt> PREDICATE_SHOW_WEEK_DEBTS = p -> p.getDeadline().isWithinDurationAfter("week");
+    Predicate<Debt> PREDICATE_SHOW_MONTH_DEBTS = p -> p.getDeadline().isWithinDurationAfter("month");
+    Predicate<Debt> PREDICATE_SHOW_YEAR_DEBTS = p -> p.getDeadline().isWithinDurationAfter("year");
 
     /** {@code Predicate} that always evaluate to true if expense is in the specified category */
     Predicate<Debt> PREDICATE_SHOW_FOOD_DEBTS = p -> p.getCategory().equals(Category.FOOD);
