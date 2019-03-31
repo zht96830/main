@@ -1,0 +1,44 @@
+{
+  "expenses" : [ {
+    "name" : "future",
+    "amount" : "11.2",
+    "date" : "30-09-2020",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "d",
+    "amount" : "4.85",
+    "date" : "20-06-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "a",
+    "amount" : "1",
+    "date" : "15-06-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "c",
+    "amount" : "3",
+    "date" : "18-05-2019",
+    "category" : "WORK",
+    "remarks" : ""
+  }, {
+    "name" : "b",
+    "amount" : "2",
+    "date" : "12-05-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  } ],
+  "debts" : [ ],
+  "budgets" : [ {
+    "amount" : "1000",
+    "category" : "FOOD",
+    "startDate" : "30-03-2019",
+    "endDate" : "30-06-2019",
+    "remarks" : "",
+    "totalSpent" : "585",
+    "percentage" : "0.585"
+  } ],
+  "recurrings" : [ ]
+}
