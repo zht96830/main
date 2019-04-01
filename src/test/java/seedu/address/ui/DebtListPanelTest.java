@@ -79,7 +79,7 @@ public class DebtListPanelTest extends GuiUnitTest {
         ObservableList<Debt> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < debtCount; i++) {
             Name name = new Name(i + "a");
-            Amount amount = new Amount("000");
+            Amount amount = new Amount("0.01");
             Date date = new Date("13-03-2019");
             Category category = Category.FOOD;
             Debt debt = new Debt(name, amount, date, category, null);

@@ -53,9 +53,15 @@ public class LogicManager implements Logic {
         try {
             Command command = financeTrackerParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
-        } finally {
-            history.add(commandText);
+        } catch (CommandException ce) {
+            //commandResult = new CommandResult(ce.getMessage(), false, false);
+            throw new CommandException(ce.getMessage());
+        } catch (ParseException pe) {
+            //commandResult = new CommandResult(pe.getMessage(), false, false);
+            throw new ParseException(pe.getMessage());
         }
+        history.add(commandText);
+
 
         if (financeTrackerModified) {
             logger.info("Finance Tracker modified, saving to file.");

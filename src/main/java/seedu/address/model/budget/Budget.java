@@ -19,8 +19,8 @@ public class Budget {
     public static final String MESSAGE_CONSTRAINTS_END_DATE =
             "Start date has to be before end date.";
     public static final String MESSAGE_CONSTRAINTS_END_DATE_AFTER_TODAY =
-            "You are trying to set a budget in the past, you may enter 'deletebudget c/CATEGORY' to delete the budget" +
-                    " if you no longer need it.";
+            "You are trying to set a budget in the past, you may enter 'deletebudget c/CATEGORY' to delete the budget"
+                    + " if you no longer need it.";
     private int index;
     private Category category;
     private Amount amount;
