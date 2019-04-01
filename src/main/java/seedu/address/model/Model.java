@@ -7,6 +7,7 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
@@ -371,4 +372,10 @@ public interface Model {
      * Sets the selected recurring in the filtered recurring list.
      */
     void setSelectedRecurring(Recurring recurring);
+
+    /**
+     * Calculates statistics for the range {@code startDate} to {@code endDate}
+     * for the chosen {@code category)
+     */
+    void calculateStatistics(Date startDate, Date endDate, Category category);
 }
