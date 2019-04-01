@@ -16,7 +16,7 @@ public class Date implements Comparable<Date> {
     public static final String MESSAGE_CONSTRAINTS =
             "Date should only be dd-mm-yyyy format and year must be in between 2000 and 2099.";
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-            "Deadline must not be a localDate that has already passed.";
+            "Deadline must not be a date that has already passed.";
     public static final String MESSAGE_DATE_DOES_NOT_EXIST = "Date does not exist.";
     private static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-(20)\\d{2}";
     private LocalDate localDate;

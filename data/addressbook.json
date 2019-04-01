@@ -1,0 +1,24 @@
+{
+  "expenses" : [ {
+    "name" : "Paid Debt to john",
+    "amount" : "500",
+    "date" : "31-03-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  }, {
+    "name" : "Paid Debt to boy",
+    "amount" : "600",
+    "date" : "31-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  } ],
+  "debts" : [ {
+    "personOwed" : "john",
+    "amount" : "500",
+    "deadline" : "05-05-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  } ],
+  "budgets" : [ ],
+  "recurrings" : [ ]
+}

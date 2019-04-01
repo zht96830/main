@@ -16,7 +16,7 @@ public class ClearDebtCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyFinanceTracker_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
         expectedModel.commitFinanceTracker();
@@ -26,7 +26,7 @@ public class ClearDebtCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyFinanceTracker_success() {
         Model model = new ModelManager(getTypicalFinanceTrackerWithDebts(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalFinanceTrackerWithDebts(), new UserPrefs());
         expectedModel.setFinanceTracker(new FinanceTracker());
@@ -35,6 +35,4 @@ public class ClearDebtCommandTest {
         assertCommandSuccess(new ClearDebtCommand(), model, commandHistory, ClearDebtCommand.MESSAGE_SUCCESS,
                 expectedModel);
     }
-
-
 }
