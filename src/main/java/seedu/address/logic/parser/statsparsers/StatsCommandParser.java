@@ -59,12 +59,7 @@ public class StatsCommandParser {
         else {
             if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()){
                 startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
-                if (startDate.isWithinDuration("month")){
-                    endDate = new Date(dtf.format(LocalDate.now()));
-                }
-                else {
-                    endDate = new Date(dtf.format(startDate.getLocalDate().plusMonths(1)));
-                }
+                endDate = new Date(dtf.format(startDate.getLocalDate().plusMonths(1)));
             }
             else{
                 endDate = new Date(dtf.format(LocalDate.now()));

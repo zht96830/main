@@ -52,7 +52,19 @@ public class StatsCommand extends Command {
         requireNonNull(model);
 
         /* Execution */
-        return new CommandResult(MESSAGE_SUCCESS);
+        model.calculateStatistics(startDate, endDate, category);
+        /* End Execution*/
+
+        String categoryString = " Category: ";
+        if (category == null){
+            categoryString = categoryString + "NULL";
+        }
+        else {
+            categoryString = categoryString + category;
+        }
+        String returnMessage = MESSAGE_SUCCESS + "\nsd: " + startDate.toString() + " ed: " + endDate.toString()
+                + categoryString;
+        return new CommandResult(returnMessage);
     }
 
     @Override
