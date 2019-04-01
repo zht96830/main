@@ -19,12 +19,6 @@
     "remarks" : ""
   }, {
     "name" : "james",
-    "amount" : "100",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "james",
     "amount" : "40",
     "date" : "30-03-2019",
     "category" : "FOOD",
@@ -176,7 +170,7 @@
   } ],
   "debts" : [ {
     "personOwed" : "james",
-    "amount" : "100",
+    "amount" : "17",
     "deadline" : "13-11-2020",
     "category" : "FOOD",
     "remarks" : ""
@@ -186,20 +180,34 @@
     "deadline" : "13-05-2019",
     "category" : "FOOD",
     "remarks" : ""
+  }, {
+    "personOwed" : "gg",
+    "amount" : "5000",
+    "deadline" : "01-04-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
   } ],
   "budgets" : [ {
     "amount" : "100",
     "category" : "FOOD",
     "startDate" : "22-03-2019",
-    "endDate" : "30-04-2019",
+    "endDate" : "31-12-2019",
     "remarks" : "",
-    "totalSpent" : "355",
-    "percentage" : "3.55"
+    "totalSpent" : "-9645",
+    "percentage" : "-96.45"
   }, {
-    "amount" : "1000",
+    "amount" : "5000",
     "category" : "TRAVEL",
     "startDate" : "22-03-2019",
-    "endDate" : "11-11-2019",
+    "endDate" : "31-03-2019",
+    "remarks" : "",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "50",
+    "category" : "WORK",
+    "startDate" : "01-04-2019",
+    "endDate" : "31-12-2019",
     "remarks" : "",
     "totalSpent" : "0",
     "percentage" : "0.0"
@@ -228,5 +236,37 @@
     "remarks" : "",
     "frequency" : "m",
     "occurrence" : "22"
+  }, {
+    "name" : "eat everyday",
+    "amount" : "15",
+    "date" : "01-04-2019",
+    "category" : "FOOD",
+    "remarks" : "",
+    "frequency" : "d",
+    "occurrence" : "365"
+  }, {
+    "name" : "daily thingy",
+    "amount" : "2",
+    "date" : "01-04-2019",
+    "category" : "ENTERTAINMENT",
+    "remarks" : "",
+    "frequency" : "d",
+    "occurrence" : "14"
+  }, {
+    "name" : "daily thingy",
+    "amount" : "2",
+    "date" : "01-04-2019",
+    "category" : "ENTERTAINMENT",
+    "remarks" : "",
+    "frequency" : "d",
+    "occurrence" : "14"
+  }, {
+    "name" : "monthly donation",
+    "amount" : "100",
+    "date" : "01-01-2019",
+    "category" : "OTHERS",
+    "remarks" : "",
+    "frequency" : "m",
+    "occurrence" : "12"
   } ]
 }
