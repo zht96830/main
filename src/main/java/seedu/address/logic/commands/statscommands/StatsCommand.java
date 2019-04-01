@@ -55,9 +55,9 @@ public class StatsCommand extends Command {
         model.calculateStatistics(startDate, endDate, category);
         /* End Execution*/
 
-        String categoryString = " Category: ";
+        String categoryString = " Category Specified: ";
         if (category == null){
-            categoryString = categoryString + "NULL";
+            categoryString = categoryString + "False";
         }
         else {
             categoryString = categoryString + category;
