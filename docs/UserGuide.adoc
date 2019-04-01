@@ -189,6 +189,12 @@ Examples:
 `deleteexpense 2` +
 Deletes the 2nd expense in the finance tracker.
 
+=== Clearing all expense entries : `clearexpense`
+
+Clears all expense entries from the finance tracker. +
+Format: `clearexpense` +
+Shortcut: `ce`
+
 === Adding a budget : `addbudget`
 
 Adds a budget with a time frame to the tracker. +
@@ -263,6 +269,12 @@ Examples:
 
 * `deletebudget c/food`
 
+=== Clearing all budgets: `clearbudget`
+
+Clears all budgets from the finance tracker. +
+Format: `clearbudget` +
+Shortcut: `cb`
+
 === Listing debts: `listdebt`
 Shows a list of debts in the finance tracker according to the view specified.
 Format: `listdebt v/VIEW` +
@@ -280,6 +292,7 @@ Shortcut: `ld v/VIEW`
 
 ====
 
+// tag::debt[]
 === Adding a debt: `adddebt`
 
 Adds a debt to the finance tracker.
@@ -363,6 +376,11 @@ Examples:
  `deletedebt 5` +
  Deletes the 5th debt in the finance tracker.
 
+=== Clearing all debts: `cleardebt`
+Clears all debts from the finance tracker. +
+Format: `cleardebt` +
+Shortcut: `cd`
+
 === Paying off a debt: `paydebt`
 Converts the specified debt into an expense.
 
@@ -382,6 +400,7 @@ Examples:
 * `listdebt v/all` +
 `paydebt 3` +
 Converts the 3rd debt in the finance tracker into an expense.
+// end::debt[]
 
 === Adding a recurring: `addrecurring`
 Adds a recurring payment to the finance tracker.
@@ -482,6 +501,12 @@ Examples:
 * `listrecurring v/all` +
 `deleterecurring 2 p/N` +
 Deletes the 2nd recurring in the finance tracker, without deleting old expenses already added by this recurring.
+
+=== Clearing all recurrings: `clearrecurring`
+
+Clears all recurrings from the finance tracker. +
+Format: `clearrecurring` +
+Shortcut: `cr`
 
 === Viewing Statistics - Summary: `stats`
 Produces statistics regarding the user's finance. +
@@ -644,11 +669,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `deleteexpense 1` command) +
 `redo` (reapplies the `clearexpense` command) +
 // end::undoredo[]
-
-=== Clearing all expense entries : `clearexpense`
-
-Clears all expense entries from the finance tracker. +
-Format: `clearexpense`
 
 === Exiting the program : `exit`
 
