@@ -79,8 +79,8 @@ public class ExpenseListPanelTest extends GuiUnitTest {
         ObservableList<Expense> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < expenseCount; i++) {
             Name name = new Name(i + "a");
-            Amount amount = new Amount("000");
-            Date date = new Date("13-01-1996");
+            Amount amount = new Amount("0.01");
+            Date date = new Date("13-01-2020");
             Category category = Category.FOOD;
             Expense expense = new Expense(name, amount, date, category, null);
             backingList.add(expense);

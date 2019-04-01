@@ -47,7 +47,7 @@ public class DateTest {
 
         // valid dates
         assertSame("valid", Date.isValidDate("01-01-2019"));
-        assertSame("valid", Date.isValidDate("31-12-1999"));
+        assertSame("valid", Date.isValidDate("31-12-2009"));
     }
 
     @Test
