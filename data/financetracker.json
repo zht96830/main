@@ -1,232 +1,152 @@
 {
   "expenses" : [ {
-    "name" : "Char Kuey Teow",
-    "amount" : "1000",
-    "date" : "13-01-2020",
+    "name" : "Bak Kut Teh",
+    "amount" : "0.01",
+    "date" : "01-04-2019",
     "category" : "FOOD",
     "remarks" : ""
   }, {
-    "name" : "james",
-    "amount" : "100",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "james",
-    "amount" : "100",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "james",
-    "amount" : "100",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "james",
-    "amount" : "40",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "james",
-    "amount" : "0.5",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "james",
-    "amount" : "0.55",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "james",
-    "amount" : "0.55",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "james",
-    "amount" : "0.55",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "ckt",
-    "amount" : "3.55",
-    "date" : "30-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "james",
-    "amount" : "100",
-    "date" : "27-03-2019",
-    "category" : "TRAVEL",
-    "remarks" : ""
-  }, {
-    "name" : "chapati",
-    "amount" : "10",
-    "date" : "27-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "10",
-    "date" : "26-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "26-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "26-03-2019",
-    "category" : "TRAVEL",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "26-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "26-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "26-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "26-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "26-03-2019",
-    "category" : "TRAVEL",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "150",
-    "date" : "26-03-2019",
-    "category" : "TRAVEL",
-    "remarks" : ""
-  }, {
-    "name" : "food",
-    "amount" : "155",
-    "date" : "26-03-2019",
-    "category" : "TRAVEL",
-    "remarks" : ""
-  }, {
-    "name" : "BRAZIL",
-    "amount" : "100",
-    "date" : "16-03-2019",
-    "category" : "TRAVEL",
-    "remarks" : ""
-  }, {
-    "name" : "MRT",
-    "amount" : "100",
-    "date" : "16-03-2019",
+    "name" : "Top up EZ link card",
+    "amount" : "2000",
+    "date" : "03-03-2019",
     "category" : "TRANSPORT",
-    "remarks" : ""
+    "remarks" : "Topped up at KR MRT"
   }, {
-    "name" : "Repair",
-    "amount" : "100",
-    "date" : "16-03-2019",
-    "category" : "OTHERS",
-    "remarks" : ""
-  }, {
-    "name" : "Water Bottle",
-    "amount" : "100",
-    "date" : "16-03-2019",
-    "category" : "SHOPPING",
-    "remarks" : ""
-  }, {
-    "name" : "Sofa",
-    "amount" : "100",
-    "date" : "16-03-2019",
+    "name" : "Telephone bills",
+    "amount" : "2510",
+    "date" : "28-02-2019",
     "category" : "UTILITIES",
-    "remarks" : ""
+    "remarks" : "Exceeded limit by 1 GB"
   }, {
-    "name" : "Laptop",
-    "amount" : "100",
-    "date" : "16-03-2019",
-    "category" : "WORK",
-    "remarks" : ""
-  }, {
-    "name" : "Medicine",
-    "amount" : "100",
-    "date" : "16-03-2019",
+    "name" : "See doctor",
+    "amount" : "6520",
+    "date" : "26-02-2019",
     "category" : "HEALTHCARE",
+    "remarks" : "For fever at UHC"
+  }, {
+    "name" : "Laksa",
+    "amount" : "520",
+    "date" : "03-02-2019",
+    "category" : "FOOD",
     "remarks" : ""
+  }, {
+    "name" : "Japan Ticket",
+    "amount" : "62040",
+    "date" : "21-01-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  }, {
+    "name" : "Chicken Rice",
+    "amount" : "1021",
+    "date" : "11-12-2018",
+    "category" : "FOOD",
+    "remarks" : "Bishan Chicken Rice"
   } ],
   "debts" : [ {
-    "personOwed" : "james",
-    "amount" : "100",
-    "deadline" : "13-11-2020",
+    "personOwed" : "Amy",
+    "amount" : "3.5",
+    "deadline" : "01-12-2020",
     "category" : "FOOD",
-    "remarks" : ""
+    "remarks" : "for duck rice last week"
+  }, {
+    "personOwed" : "Bob",
+    "amount" : "17.2",
+    "deadline" : "05-12-2019",
+    "category" : "TRANSPORT",
+    "remarks" : "taxi from NUS to Home"
+  }, {
+    "personOwed" : "Charlie",
+    "amount" : "57.3",
+    "deadline" : "08-08-2019",
+    "category" : "SHOPPING",
+    "remarks" : "groceries: fish, eggs, chicken, beef, oyster sauce"
   }, {
     "personOwed" : "james",
     "amount" : "100",
-    "deadline" : "13-05-2019",
+    "deadline" : "13-01-2099",
     "category" : "FOOD",
     "remarks" : ""
   } ],
   "budgets" : [ {
-    "amount" : "100",
+    "amount" : "600",
     "category" : "FOOD",
-    "startDate" : "22-03-2019",
-    "endDate" : "13-03-2020",
-    "remarks" : "",
-    "totalSpent" : "355",
-    "percentage" : "3.55"
+    "startDate" : "01-10-2019",
+    "endDate" : "31-10-2019",
+    "remarks" : "eat less save more",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
   }, {
-    "amount" : "1000",
+    "amount" : "300",
+    "category" : "TRANSPORT",
+    "startDate" : "01-07-2019",
+    "endDate" : "31-12-2019",
+    "remarks" : "only for school and back",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "200",
+    "category" : "SHOPPING",
+    "startDate" : "01-06-2019",
+    "endDate" : "30-06-2019",
+    "remarks" : "only for grocery shopping",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "100",
+    "category" : "WORK",
+    "startDate" : "13-05-2019",
+    "endDate" : "02-08-2019",
+    "remarks" : "internship stuff",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "450",
+    "category" : "UTILITIES",
+    "startDate" : "01-05-2019",
+    "endDate" : "31-05-2019",
+    "remarks" : "take shorter showers",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "100",
+    "category" : "HEALTHCARE",
+    "startDate" : "01-06-2019",
+    "endDate" : "15-06-2019",
+    "remarks" : "stress may make me feel sick",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "900",
+    "category" : "ENTERTAINMENT",
+    "startDate" : "11-05-2019",
+    "endDate" : "11-08-2019",
+    "remarks" : "yay summer vacation",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "7000",
     "category" : "TRAVEL",
-    "startDate" : "22-03-2019",
-    "endDate" : "11-11-2019",
-    "remarks" : "",
+    "startDate" : "01-01-2020",
+    "endDate" : "31-12-2020",
+    "remarks" : "grad trip and family trip",
     "totalSpent" : "0",
     "percentage" : "0.0"
   } ],
   "recurrings" : [ {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "22-03-2019",
-    "category" : "FOOD",
-    "remarks" : "",
-    "frequency" : "m",
-    "occurrence" : "20"
+    "name" : "Phone Bill",
+    "amount" : "50",
+    "date" : "23-02-2019",
+    "category" : "UTILITIES",
+    "remarks" : "Signed a new 2 year plan.",
+    "frequency" : "M",
+    "occurrence" : "24"
   }, {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "22-03-2019",
-    "category" : "FOOD",
-    "remarks" : "",
-    "frequency" : "m",
-    "occurrence" : "22"
-  }, {
-    "name" : "food",
-    "amount" : "100",
-    "date" : "25-03-2019",
-    "category" : "FOOD",
-    "remarks" : "",
-    "frequency" : "m",
-    "occurrence" : "22"
+    "name" : "Spotify Subscription",
+    "amount" : "20",
+    "date" : "24-09-2019",
+    "category" : "UTILITIES",
+    "remarks" : "Spotify for a year!",
+    "frequency" : "M",
+    "occurrence" : "12"
   } ]
 }
