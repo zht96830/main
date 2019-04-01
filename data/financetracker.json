@@ -186,6 +186,12 @@
     "deadline" : "01-04-2019",
     "category" : "TRAVEL",
     "remarks" : ""
+  }, {
+    "personOwed" : "bob",
+    "amount" : "1",
+    "deadline" : "31-12-2019",
+    "category" : "FOOD",
+    "remarks" : ""
   } ],
   "budgets" : [ {
     "amount" : "100",
