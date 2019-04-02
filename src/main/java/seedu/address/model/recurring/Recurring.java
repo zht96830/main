@@ -3,6 +3,7 @@ package seedu.address.model.recurring;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.PriorityQueue;
 
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
@@ -20,6 +21,7 @@ public class Recurring extends Expense {
     // Additional fields
     private Frequency frequency;
     private Occurrence occurrence;
+    private PriorityQueue<Expense> recurringListOfExpenses;
 
     /**
      * Initializes a newly created Recurring object that contains only the compulsory fields.
@@ -30,6 +32,13 @@ public class Recurring extends Expense {
         requireAllNonNull(frequency, occurrence);
         this.frequency = frequency;
         this.occurrence = occurrence;
+        for (int i=0; i < occurrence.value; i++) {
+            Date newDate = new Date(date);
+            newDate.setLocalDate(date.getLocalDate().plusMonths(i));
+            Expense toAdd = new Expense(name, amount, newDate, category, remarks);
+            recurringListOfExpenses.add(toAdd);
+            //System.out.println(toAdd);
+        }
     }
 
     public Frequency getFrequency() {

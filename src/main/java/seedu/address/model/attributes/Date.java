@@ -33,6 +33,15 @@ public class Date implements Comparable<Date> {
                 .withResolverStyle(ResolverStyle.STRICT));
     }
 
+    /**
+     * Constructs a {@code Date}.
+     * @param date An existing Date.
+     */
+    public Date(Date date) {
+        requireNonNull(date);
+        this.localDate = date.localDate;
+    }
+
     public LocalDate getLocalDate() {
         return this.localDate;
     }
@@ -40,6 +49,10 @@ public class Date implements Comparable<Date> {
     public void setLocalDate(String localDate) {
         this.localDate = LocalDate.parse(localDate, DateTimeFormatter.ofPattern("dd-MM-uuuu")
                 .withResolverStyle(ResolverStyle.STRICT));
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
     public void setLocalDate(Date date) {
