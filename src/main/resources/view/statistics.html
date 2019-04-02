@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Statistics Page</title>
+
+        <script type="text/javascript">
+            function getJsonFromUrl() {
+                var query = location.search.substr(1);
+                var result = {};
+                query.split("&").forEach(function(part) {
+                    var item = part.split("=");
+                    result[item[0]] = decodeURIComponent(item[1]);
+                });
+                return result;
+            }
+            document.addEventListener("DOMContentLoaded", function(event) {
+                document.getElementById("timeFrame").textContent = "From: " + getJsonFromUrl().startDate
+                    + " To: " + getJsonFromUrl().endDate;
+                document.getElementById("expenseSummary").textContent = "Expense Summary:\n" + getJsonFromUrl().expenseSummary;
+            });
+        </script>
+
+
+    <style>
+            body {
+                background-color: #383838;
+                -fx-font-family: "Segoe UI Semibold";
+            }
+
+            h1 {
+                color: white;
+                text-align: center;
+                font-style: italic;
+                font-weight: bold;
+                text-shadow: 2px 2px 3px darkgrey;
+            }
+
+            div {
+                color: white;
+                /* overflow-wrap breaks sentence into next lines if too long */
+                overflow-wrap: break-word;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Statistics</h1>
+        <h2>
+            <div id="timeFrame"></div>
+            <br>
+            <div id="expenseSummary"></div>
+        </h2>
+    </body>
+</html>
