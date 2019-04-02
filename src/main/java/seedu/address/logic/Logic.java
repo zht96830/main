@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFinanceTracker;
+import seedu.address.model.statistics.Statistics;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
@@ -126,4 +127,20 @@ public interface Logic {
      * @see seedu.address.model.Model#setSelectedRecurring(Recurring)
      */
     void setSelectedRecurring(Recurring recurring);
+
+    /**
+     * Selected Statistics
+     * null if no Statistics has been generated.
+     *
+     * @see seedu.address.model.Model#statisticsProperty()
+     */
+    ReadOnlyProperty<Statistics> statisticsProperty();
+
+    /**
+     * Sets the selected statistics
+     *
+     * @see seedu.address.model.Model#setStatistics(Statistics)
+     */
+    void setStatistics(Statistics statistics);
+
 }

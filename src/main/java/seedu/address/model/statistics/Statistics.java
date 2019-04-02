@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.statistics;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.attributes.Category;
@@ -64,7 +64,7 @@ public class Statistics {
             }
         }
 
-        System.out.println("Considered List:");
+        //System.out.println("Considered List:");
         for (Expense expense: consideredExpenses) {
             System.out.println(expense.toString());
         }

@@ -26,6 +26,8 @@ import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.model.recurring.RecurringNotFoundException;
+import seedu.address.model.statistics.Statistics;
+import seedu.address.model.statistics.exceptions.StatisticsNotFoundException;
 
 
 /**
@@ -44,6 +46,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Budget> selectedBudget = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Debt> selectedDebt = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Recurring> selectedRecurring = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Statistics> statistics = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given financeTracker and userPrefs.
@@ -124,7 +127,23 @@ public class ModelManager implements Model {
         FilteredList<Expense> statsExpenses = new FilteredList<>(versionedFinanceTracker.getExpenseList());
         FilteredList<Debt> statsDebts = new FilteredList<>(versionedFinanceTracker.getDebtList());
         FilteredList<Budget> statsBudgets = new FilteredList<>(versionedFinanceTracker.getBudgetList());
-        Statistics.calculateStats(startDate, endDate, category, statsExpenses,statsDebts, statsBudgets);
+        Statistics statistics = new Statistics();
+        statistics.calculateStats(startDate, endDate, category, statsExpenses,statsDebts, statsBudgets);
+
+        this.setStatistics(statistics);
+    }
+
+    @Override
+    public ReadOnlyProperty<Statistics> statisticsProperty() {
+        return statistics;
+    }
+
+    @Override
+    public void setStatistics(Statistics statistics) {
+        if (statistics == null) {
+            throw new StatisticsNotFoundException();
+        }
+        this.statistics.setValue(statistics);
     }
 
     //=========== Expenses ======================================================================================

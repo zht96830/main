@@ -12,6 +12,7 @@ import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
+import seedu.address.model.statistics.Statistics;
 
 /**
  * The API of the Model component.
@@ -378,4 +379,15 @@ public interface Model {
      * for the chosen {@code category)
      */
     void calculateStatistics(Date startDate, Date endDate, Category category);
+
+    /**
+     * Selected Statistics
+     * null if no Statistics has been generated.
+     */
+    ReadOnlyProperty<Statistics> statisticsProperty();
+
+    /**
+     * Sets the selected Statistics.
+     */
+    void setStatistics(Statistics statistics);
 }

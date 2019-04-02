@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.statistics.Statistics;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
@@ -36,6 +37,8 @@ public class BrowserPanel extends UiPart<Region> {
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "selectedbudget.html"));
     public static final URL RECURRINGS_PAGE_URL =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "selectedrecurring.html"));
+    public static final URL STATISTICS_PAGE_URL =
+            requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "statistics.html"));
 
     public static final String QUERY_NAME = "name=";
     public static final String QUERY_CATEGORY = "&category=";
@@ -60,7 +63,8 @@ public class BrowserPanel extends UiPart<Region> {
     private WebView browser;
 
     public BrowserPanel(ObservableValue<Expense> selectedExpense, ObservableValue<Debt> selectedDebt,
-                        ObservableValue<Budget> selectedBudget, ObservableValue<Recurring> selectedRecurring) {
+                        ObservableValue<Budget> selectedBudget, ObservableValue<Recurring> selectedRecurring,
+                        ObservableValue<Statistics> selectedStatistic) {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
