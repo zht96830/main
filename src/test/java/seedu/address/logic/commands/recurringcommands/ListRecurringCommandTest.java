@@ -42,18 +42,51 @@ public class ListRecurringCommandTest {
                 String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.ALL.getMessage()), expectedModel);
     }
 
+    // Tests that involves Category
     @Test
     public void execute_listIsNotFiltered_showsHealthCareCategory() {
-        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_HEALTHCARE_RECURRING);
-        assertCommandSuccess(new ListRecurringCommand(View.HEALTHCARE), model, commandHistory,
-                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
+        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_TRAVEL_RECURRING);
+        assertCommandSuccess(new ListRecurringCommand(View.TRAVEL), model, commandHistory,
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.TRAVEL.getMessage()), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsHealthCareCategory() {
-        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_HEALTHCARE_RECURRING);
+        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_TRAVEL_RECURRING);
         showRecurringAtIndex(model, INDEX_FIRST_EXPENSE);
-        assertCommandSuccess(new ListRecurringCommand(View.HEALTHCARE), model, commandHistory,
-                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
+        assertCommandSuccess(new ListRecurringCommand(View.TRAVEL), model, commandHistory,
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.TRAVEL.getMessage()), expectedModel);
+    }
+
+    // Tests that involves Date
+    @Test
+    public void execute_listIsNotFiltered_showsRecurringWithinLastYear() {
+        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_YEAR_RECURRING);
+        assertCommandSuccess(new ListRecurringCommand(View.YEAR), model, commandHistory,
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.YEAR.getMessage()), expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsRecurringWithinLastYear() {
+        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_YEAR_RECURRING);
+        showRecurringAtIndex(model, INDEX_FIRST_EXPENSE);
+        assertCommandSuccess(new ListRecurringCommand(View.YEAR), model, commandHistory,
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.YEAR.getMessage()), expectedModel);
+    }
+
+    // Tests that involves Amount
+    @Test
+    public void execute_listIsNotFiltered_showsRecurringWithAmountOver10() {
+        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS);
+        assertCommandSuccess(new ListRecurringCommand(View.$10), model, commandHistory,
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.$10.getMessage()), expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsRecurringWithAmountOver10() {
+        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS);
+        showRecurringAtIndex(model, INDEX_FIRST_EXPENSE);
+        assertCommandSuccess(new ListRecurringCommand(View.$10), model, commandHistory,
+                String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.$10.getMessage()), expectedModel);
     }
 }

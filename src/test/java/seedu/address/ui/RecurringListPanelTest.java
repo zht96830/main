@@ -82,8 +82,8 @@ public class RecurringListPanelTest extends GuiUnitTest {
         ObservableList<Recurring> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < recurringCount; i++) {
             Name name = new Name(i + "a");
-            Amount amount = new Amount("000");
-            Date date = new Date("13-01-1996");
+            Amount amount = new Amount("0.11");
+            Date date = new Date("13-01-2020");
             Frequency frequency = new Frequency("m");
             Occurrence occurrence = new Occurrence("5");
             Category category = Category.FOOD;

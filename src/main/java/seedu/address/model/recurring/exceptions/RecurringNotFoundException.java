@@ -1,4 +1,4 @@
-package seedu.address.model.recurring;
+package seedu.address.model.recurring.exceptions;
 
 /**
  * Signals that the operation is unable to find the specified buget.

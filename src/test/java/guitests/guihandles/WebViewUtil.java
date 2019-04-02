@@ -23,6 +23,13 @@ public class WebViewUtil {
     }
 
     /**
+     * Returns the title of the currently loaded page in the {@code webView}
+     */
+    public static String getLoadedUrlTitle(WebView webView) {
+        return webView.getEngine().getTitle();
+    }
+
+    /**
      * If the {@code browserPanelHandle}'s {@code WebView} is loading, sleeps the thread till it is successfully loaded.
      */
     public static void waitUntilBrowserLoaded(BrowserPanelHandle browserPanelHandle) {

@@ -1,0 +1,54 @@
+= Goh Yin Hao - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Personal Finance Tracker
+
+---
+
+== Overview
+This portfolio aims to document the contributions made by Goh Yin Hao to the Personal Finance Tracker.
+
+Personal Finance Tracker is a desktop finance tracker application used for tracking personal finances such as daily expenses, recurring expenses such as monthly electricity bills, budgets and debts owed to another party. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 30 kLoC. The product was morphed from an https://github.com/nus-cs2103-AY1819S2/addressbook-level4[Address Book] over a period of 8 weeks under the constraints described https://nus-cs2103-ay1819s2.github.io/cs2103-website/admin/project-constraints.html[here].
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to manage debts in the finance tracker application*
+** What it does: allows the user to add, edit, delete debts, as well as easily convert these debts into an expense once the debt is cleared. Integrated to work with current undo/redo, history and list commands.
+** Justification: This feature improves the product significantly because a user can now easily and conveniently keep track of their debts owed to other entities.
+** Highlights: This enhancement is a core feature of any typical finance tracker. It required adjustments and integration with the existing model, logic, UI components and builds the foundation for any future enhancements involving debts.
+
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=gohyinhao&sort=displayName&since=2019-02-10&until=2019-03-26&timeframe=day&reverse=false&repoSort=true[code collated by reposense]]
+
+* *Other contributions*:
+
+** Project management:
+*** Check all pull requests done by group mates
+*** Create issues for tracking in GitHub Issue Tracker
+*** In charge of code in model component
+** Documentation:
+*** Update model component in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/112[#112])
+*** Added the implementation of debts in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/221[#221])
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S2-W15-2/main/pull/22[#22], https://github.com/CS2103-AY1819S2-W15-2/main/pull/81[#81]
+*** Contributed to forum discussions (example:  https://github.com/nus-cs2103-AY1819S2/forum/issues/11[#11])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=debt]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=design-model]
+
+include::../DeveloperGuide.adoc[tag=debt]

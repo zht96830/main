@@ -3,6 +3,8 @@ package seedu.address.model.budget;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.text.DecimalFormat;
+
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
@@ -16,6 +18,9 @@ public class Budget {
             "Start date has to be today or later.";
     public static final String MESSAGE_CONSTRAINTS_END_DATE =
             "Start date has to be before end date.";
+    public static final String MESSAGE_CONSTRAINTS_END_DATE_AFTER_TODAY =
+            "You are trying to set a budget in the past, you may enter 'deletebudget c/CATEGORY' to delete the budget"
+                    + " if you no longer need it.";
     private int index;
     private Category category;
     private Amount amount;
@@ -27,7 +32,8 @@ public class Budget {
     private boolean isAboutToExceed; // when percentage reaches 90
 
     // constructor
-    public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks) {
+    public Budget(Category category, Amount amount, Date startDate, Date endDate, String remarks, int totalSpent,
+                  double percentage) {
         requireAllNonNull(category, amount, endDate);
         this.category = category;
         this.amount = amount;
@@ -40,8 +46,8 @@ public class Budget {
         } else {
             this.remarks = remarks;
         }
-        totalSpent = 0;
-        percentage = (((double) totalSpent) / amount.value) * 100;
+        this.totalSpent = totalSpent;
+        this.percentage = (((double) totalSpent) / amount.value) * 100;
         isAboutToExceed = false;
     }
     public Budget(Budget toCopy) {
@@ -80,12 +86,21 @@ public class Budget {
         return remarks;
     }
 
-    public double getTotalSpent() {
+    public int getTotalSpent() {
         return totalSpent;
     }
 
+    public String getTotalSpentString() {
+        return Integer.toString(totalSpent);
+    }
+
     public double getPercentage() {
-        return percentage;
+        DecimalFormat percentageFormat = new DecimalFormat("#.##");
+        return Double.parseDouble(percentageFormat.format(percentage));
+    }
+
+    public String getPercentageString() {
+        return Double.toString(percentage);
     }
 
     public boolean getIsAboutToExceed() {

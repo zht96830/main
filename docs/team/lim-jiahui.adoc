@@ -1,0 +1,50 @@
+= Lim Jiahui - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Personal Finance Tracker
+
+---
+
+== Overview
+This portfolio aims to document the contributions made by Lim Jiahui to the Personal Finance Tracker.
+
+Personal Finance Tracker is a desktop finance tracker application used for tracking personal finances such as daily expenses, recurring expenses such as monthly electricity bills, budgets and debts owed to another party. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 30 kLoC. The product was morphed from an https://github.com/nus-cs2103-AY1819S2/addressbook-level4[Address Book] over a period of 8 weeks under the constraints described https://nus-cs2103-ay1819s2.github.io/cs2103-website/admin/project-constraints.html[here].
+
+== Summary of contributions
+
+* *Major enhancement*: added the feature that *lets users to manage their budgets in the finance tracker application*
+** What it does: allows the user to add, edit and delete budgets while helping the user to keep track of how much the user has spent for each category of budget. Integrated to work with current undo/redo and history commands.
+** Justification: This feature improves the product significantly because it is now simpler for a user to track how much they are spending relative to how much they allocate to a particular category.
+** Highlights: The implementation of this feature required making significant changes to existing codes, and integrating them together. It provides a platform for any future enhancements to the finance tracker like the ability to add a recurring budget.
+
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=lim-jiahui&sort=displayName&since=2019-02-10&until=2019-03-26&timeframe=day&reverse=false&repoSort=true[code collated by reposense]]
+
+* *Other contributions*:
+
+** Project management:
+*** Reviewed pull requests of team mates
+*** Consolidated tasks during meeting for easier reference in future
+** Documentation:
+*** Added user stories and use cases to Developer Guide (Pull requests https://github.com/CS2103-AY1819S2-W15-2/main/pull/28[#28] and https://github.com/CS2103-AY1819S2-W15-2/main/pull/55[#55])
+*** Checked through Developer Guide and made any necessary changes (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/222[#222])
+** Enhancements to existing features:
+*** Added clear command for budgets, debts and recurring expenses (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/201[#201])
+*** Updated history command to display only valid commands (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/222[#222])
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=budget]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=budget]

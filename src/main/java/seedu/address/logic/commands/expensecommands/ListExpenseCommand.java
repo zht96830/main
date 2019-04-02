@@ -78,8 +78,11 @@ public class ListExpenseCommand extends Command {
         return view.equals(e.view);
     }
 
+    /** Returns a {@code Predicate<Expense>} object specified by the {@code view} for filtering of expenses */
     public Predicate<Expense> getPredicate(View view) {
         switch (view) {
+        case ALL:
+            return PREDICATE_SHOW_ALL_EXPENSES;
         case DAY:
             return PREDICATE_SHOW_DAY_EXPENSES;
         case WEEK:
@@ -113,7 +116,7 @@ public class ListExpenseCommand extends Command {
         case HEALTHCARE:
             return PREDICATE_SHOW_HEALTHCARE_EXPENSES;
         default:
-            return PREDICATE_SHOW_ALL_EXPENSES;
+            throw new IllegalArgumentException("Invalid View");
         }
     }
 }

@@ -108,6 +108,8 @@ public class CommandTestUtil {
     public static final String INVALID_ENDDATE_DESC_FORMAT = " " + PREFIX_ENDDATE + "291-02-23021"; //does not exist
     public static final String INVALID_STARTDATE_DESC_EXIST = " " + PREFIX_STARTDATE + "29-02-2019"; //does not exist
     public static final String INVALID_ENDDATE_DESC_EXIST = " " + PREFIX_ENDDATE + "31-06-2019"; //does not exist
+    public static final String INVALID_STARTDATE_DESC_BEFORE_TODAY = " " + PREFIX_STARTDATE + "01-02-2019"; // past
+    public static final String INVALID_ENDDATE_DESC_BEFORE_TODAY = " " + PREFIX_ENDDATE + "01-03-2019"; // past
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

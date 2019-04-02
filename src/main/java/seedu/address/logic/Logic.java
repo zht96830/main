@@ -13,6 +13,7 @@ import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
+import seedu.address.model.statistics.Statistics;
 
 /**
  * API of the Logic component
@@ -126,4 +127,20 @@ public interface Logic {
      * @see seedu.address.model.Model#setSelectedRecurring(Recurring)
      */
     void setSelectedRecurring(Recurring recurring);
+
+    /**
+     * Selected Statistics
+     * null if no Statistics has been generated.
+     *
+     * @see seedu.address.model.Model#statisticsProperty()
+     */
+    ReadOnlyProperty<Statistics> statisticsProperty();
+
+    /**
+     * Sets the selected statistics
+     *
+     * @see seedu.address.model.Model#setStatistics(Statistics)
+     */
+    void setStatistics(Statistics statistics);
+
 }

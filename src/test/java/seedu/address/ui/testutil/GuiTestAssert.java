@@ -5,12 +5,14 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import guitests.guihandles.BudgetCardHandle;
+import guitests.guihandles.BudgetListPanelHandle;
 import guitests.guihandles.DebtCardHandle;
+import guitests.guihandles.DebtListPanelHandle;
 import guitests.guihandles.ExpenseCardHandle;
 import guitests.guihandles.ExpenseListPanelHandle;
 import guitests.guihandles.RecurringCardHandle;
+import guitests.guihandles.RecurringListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
-
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
@@ -35,7 +37,7 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
      */
     public static void assertCardEquals(BudgetCardHandle expectedCard, BudgetCardHandle actualCard) {
-        assertEquals(expectedCard.getPercentage(), actualCard.getPercentage());
+        assertEquals(expectedCard.getSpent(), actualCard.getSpent());
         assertEquals(expectedCard.getAmount(), actualCard.getAmount());
         assertEquals(expectedCard.getDuration(), actualCard.getDuration());
         assertEquals(expectedCard.getCategory(), actualCard.getCategory());
@@ -90,7 +92,8 @@ public class GuiTestAssert {
         assertEquals("$" + expectedBudget.getAmount(), actualCard.getAmount());
         assertEquals(expectedBudget.getCategory().toString(), actualCard.getCategory());
         assertEquals(expectedBudget.getDuration(), actualCard.getDuration());
-        assertEquals(expectedBudget.getPercentage() + "% spent", actualCard.getPercentage());
+        assertEquals("$" + (double) expectedBudget.getTotalSpent() / 100 + " ("
+                + expectedBudget.getPercentage() + "%) spent", actualCard.getSpent());
     }
 
     /**
@@ -115,6 +118,39 @@ public class GuiTestAssert {
     }
 
     /**
+     * Asserts that the list in {@code budgetListPanelHandle} displays the details of {@code budgets} correctly and
+     * in the correct order.
+     */
+    public static void assertListMatching(BudgetListPanelHandle budgetListPanelHandle, Budget... budgets) {
+        for (int i = 0; i < budgets.length; i++) {
+            budgetListPanelHandle.navigateToCard(i);
+            assertCardDisplaysBudget(budgets[i], budgetListPanelHandle.getBudgetCardHandle(i));
+        }
+    }
+
+    /**
+     * Asserts that the list in {@code debtListPanelHandle} displays the details of {@code debts} correctly and
+     * in the correct order.
+     */
+    public static void assertListMatching(DebtListPanelHandle debtListPanelHandle, Debt... debts) {
+        for (int i = 0; i < debts.length; i++) {
+            debtListPanelHandle.navigateToCard(i);
+            assertCardDisplaysDebt(debts[i], debtListPanelHandle.getDebtCardHandle(i));
+        }
+    }
+
+    /**
+     * Asserts that the list in {@code recurringListPanelHandle} displays the details of {@code recurrings} correctly
+     * and in the correct order.
+     */
+    public static void assertListMatching(RecurringListPanelHandle recurringListPanelHandle, Recurring... recurrings) {
+        for (int i = 0; i < recurrings.length; i++) {
+            recurringListPanelHandle.navigateToCard(i);
+            assertCardDisplaysRecurring(recurrings[i], recurringListPanelHandle.getRecurringCardHandle(i));
+        }
+    }
+
+    /**
      * Asserts that the list in {@code expenseListPanelHandle} displays the details of {@code expenses} correctly and
      * in the correct order.
      */
@@ -123,11 +159,60 @@ public class GuiTestAssert {
     }
 
     /**
+     * Asserts that the list in {@code budgetListPanelHandle} displays the details of {@code budgets} correctly and
+     * in the correct order.
+     */
+    public static void assertListMatching(BudgetListPanelHandle budgetListPanelHandle, List<Budget> budgets) {
+        assertListMatching(budgetListPanelHandle, budgets.toArray(new Budget[0]));
+    }
+
+    /**
+     * Asserts that the list in {@code debtListPanelHandle} displays the details of {@code debts} correctly and
+     * in the correct order.
+     */
+    public static void assertListMatching(DebtListPanelHandle debtListPanelHandle, List<Debt> debts) {
+        assertListMatching(debtListPanelHandle, debts.toArray(new Debt[0]));
+    }
+
+    /**
+     * Asserts that the list in {@code recurringListPanelHandle} displays the details of {@code recurrings} correctly
+     * and in the correct order.
+     */
+    public static void assertListMatching(RecurringListPanelHandle recurringListPanelHandle,
+                                          List<Recurring> recurrings) {
+        assertListMatching(recurringListPanelHandle, recurrings.toArray(new Recurring[0]));
+    }
+
+    /**
      * Asserts the size of the list in {@code expenseListPanelHandle} equals to {@code size}.
      */
     public static void assertListSize(ExpenseListPanelHandle expenseListPanelHandle, int size) {
-        int numberOfPeople = expenseListPanelHandle.getListSize();
-        assertEquals(size, numberOfPeople);
+        int numberOfExpenses = expenseListPanelHandle.getListSize();
+        assertEquals(size, numberOfExpenses);
+    }
+
+    /**
+     * Asserts the size of the list in {@code budgetListPanelHandle} equals to {@code size}.
+     */
+    public static void assertListSize(BudgetListPanelHandle budgetListPanelHandle, int size) {
+        int numberOfBudgets = budgetListPanelHandle.getListSize();
+        assertEquals(size, numberOfBudgets);
+    }
+
+    /**
+     * Asserts the size of the list in {@code debtListPanelHandle} equals to {@code size}.
+     */
+    public static void assertListSize(DebtListPanelHandle debtListPanelHandle, int size) {
+        int numberOfDebts = debtListPanelHandle.getListSize();
+        assertEquals(size, numberOfDebts);
+    }
+
+    /**
+     * Asserts the size of the list in {@code recurringListPanelHandle} equals to {@code size}.
+     */
+    public static void assertListSize(RecurringListPanelHandle recurringListPanelHandle, int size) {
+        int numberOfRecurrings = recurringListPanelHandle.getListSize();
+        assertEquals(size, numberOfRecurrings);
     }
 
     /**

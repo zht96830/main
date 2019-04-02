@@ -40,6 +40,10 @@ public class BrowserPanelHandle extends NodeHandle<Node> {
         return WebViewUtil.getLoadedUrl(getChildNode(BROWSER_ID));
     }
 
+    public String getLoadedUrlTitle() {
+        return WebViewUtil.getLoadedUrlTitle(getChildNode(BROWSER_ID));
+    }
+
     /**
      * Remembers the {@code URL} of the currently loaded page.
      */

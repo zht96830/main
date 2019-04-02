@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         browserPanel = new BrowserPanel(logic.selectedExpenseProperty(), logic.selectedDebtProperty(),
-                logic.selectedBudgetProperty(), logic.selectedRecurringProperty());
+                logic.selectedBudgetProperty(), logic.selectedRecurringProperty(), logic.statisticsProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(), logic.selectedExpenseProperty(),
@@ -195,10 +195,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-    }
-
-    public ExpenseListPanel getExpenseListPanel() {
-        return expenseListPanel;
     }
 
     /**

@@ -1,0 +1,32 @@
+{
+  "expenses" : [ {
+    "name" : "bkt",
+    "amount" : "5",
+    "date" : "23-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "idk",
+    "amount" : "12",
+    "date" : "23-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "idk",
+    "amount" : "12",
+    "date" : "23-03-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
+  } ],
+  "debts" : [ ],
+  "budgets" : [ {
+    "amount" : "500",
+    "category" : "FOOD",
+    "startDate" : "01-04-2019",
+    "endDate" : "30-04-2019",
+    "remarks" : "",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  } ],
+  "recurrings" : [ ]
+}
