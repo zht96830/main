@@ -3,6 +3,7 @@ package seedu.address.logic.commands.debtcommands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showDebtAtIndex;
 import static seedu.address.testutil.TypicalDebts.getTypicalFinanceTrackerWithDebts;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DEBT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Before;
@@ -42,19 +43,52 @@ public class ListDebtCommandTest {
                 String.format(ListDebtCommand.MESSAGE_SUCCESS, View.ALL.getMessage()), expectedModel);
     }
 
+    // Tests that involves Category
     @Test
-    public void execute_listIsNotFiltered_showsHealthCareCategory() {
-        expectedModel.updateFilteredDebtList(Model.PREDICATE_SHOW_HEALTHCARE_DEBTS);
-        assertCommandSuccess(new ListDebtCommand(View.HEALTHCARE), model, commandHistory,
-                String.format(ListDebtCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
+    public void execute_listIsNotFiltered_showsDebtsWithFoodCategory() {
+        expectedModel.updateFilteredDebtList(Model.PREDICATE_SHOW_FOOD_DEBTS);
+        assertCommandSuccess(new ListDebtCommand(View.FOOD), model, commandHistory,
+                String.format(ListDebtCommand.MESSAGE_SUCCESS, View.FOOD.getMessage()), expectedModel);
     }
 
     @Test
-    public void execute_listIsFiltered_showsHealthCareCategory() {
-        expectedModel.updateFilteredDebtList(Model.PREDICATE_SHOW_HEALTHCARE_DEBTS);
-        showDebtAtIndex(model, INDEX_FIRST_EXPENSE);
-        assertCommandSuccess(new ListDebtCommand(View.HEALTHCARE), model, commandHistory,
-                String.format(ListDebtCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
+    public void execute_listIsFiltered_showsDebtsWithFoodCategory() {
+        expectedModel.updateFilteredDebtList(Model.PREDICATE_SHOW_FOOD_DEBTS);
+        showDebtAtIndex(model, INDEX_FIRST_DEBT);
+        assertCommandSuccess(new ListDebtCommand(View.FOOD), model, commandHistory,
+                String.format(ListDebtCommand.MESSAGE_SUCCESS, View.FOOD.getMessage()), expectedModel);
+    }
+
+    // Tests that involves Date
+    @Test
+    public void execute_listIsNotFiltered_showsDebtsDueInOneWeek() {
+        expectedModel.updateFilteredDebtList(Model.PREDICATE_SHOW_WEEK_DEBTS);
+        assertCommandSuccess(new ListDebtCommand(View.WEEK), model, commandHistory,
+                String.format(ListDebtCommand.MESSAGE_SUCCESS, View.WEEK.getMessage()), expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsDebtsDueInOneWeek() {
+        expectedModel.updateFilteredDebtList(Model.PREDICATE_SHOW_WEEK_DEBTS);
+        showDebtAtIndex(model, INDEX_FIRST_DEBT);
+        assertCommandSuccess(new ListDebtCommand(View.WEEK), model, commandHistory,
+                String.format(ListDebtCommand.MESSAGE_SUCCESS, View.WEEK.getMessage()), expectedModel);
+    }
+
+    // Tests that involves Amount
+    @Test
+    public void execute_listIsNotFiltered_showsDebtsWithAmountOver1000() {
+        expectedModel.updateFilteredDebtList(Model.PREDICATE_SHOW_AMOUNT_OVER_1000_DEBTS);
+        assertCommandSuccess(new ListDebtCommand(View.$1000), model, commandHistory,
+                String.format(ListDebtCommand.MESSAGE_SUCCESS, View.$1000.getMessage()), expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsDebtsWithAmountOver1000() {
+        expectedModel.updateFilteredDebtList(Model.PREDICATE_SHOW_AMOUNT_OVER_1000_DEBTS);
+        showDebtAtIndex(model, INDEX_FIRST_DEBT);
+        assertCommandSuccess(new ListDebtCommand(View.$1000), model, commandHistory,
+                String.format(ListDebtCommand.MESSAGE_SUCCESS, View.$1000.getMessage()), expectedModel);
     }
 
 }

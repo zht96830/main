@@ -15,17 +15,23 @@ public class ListDebtCommandParserTest {
 
     @Test
     public void parse_validArgs_success() {
-        assertParseSuccess(parser, " v/all", new ListDebtCommand(View.ALL));
+        assertParseSuccess(parser, " v/$100", new ListDebtCommand(View.$100));
     }
 
     @Test
     public void parse_invalidArgs_failure() {
-        assertParseFailure(parser, " v/alla", View.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " v/100", View.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_invalidPrefix_failure() {
-        assertParseFailure(parser, " ve/alla", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, " ve/$100", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListDebtCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyString_throwsParseException() {
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ListDebtCommand.MESSAGE_USAGE));
     }
 }
