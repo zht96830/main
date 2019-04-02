@@ -25,7 +25,7 @@ import seedu.address.model.debt.exceptions.DebtNotFoundException;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 import seedu.address.model.recurring.Recurring;
-import seedu.address.model.recurring.RecurringNotFoundException;
+import seedu.address.model.recurring.exceptions.RecurringNotFoundException;
 import seedu.address.model.statistics.Statistics;
 import seedu.address.model.statistics.exceptions.StatisticsNotFoundException;
 

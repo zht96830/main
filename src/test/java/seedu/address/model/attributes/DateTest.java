@@ -21,10 +21,13 @@ public class DateTest {
     public static final String INVALID_DATE_1 = "29-02-2019";
     public static final String INVALID_DATE_2 = "32-05-2021";
 
+    /*
     @Test
+
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Date(null));
     }
+    */
 
     @Test
     public void constructor_invalidDate_throwsDateTimeParseException() {

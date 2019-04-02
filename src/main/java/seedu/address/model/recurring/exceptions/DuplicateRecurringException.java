@@ -1,4 +1,4 @@
-package seedu.address.model.recurring;
+package seedu.address.model.recurring.exceptions;
 
 /**
  * Signals that the operation is unable to be performed because it will result in a duplicate recurring.
