@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.statscommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
@@ -26,11 +25,9 @@ public class StatsCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_STARTDATE + "START DATE] "
             + "[" + PREFIX_ENDDATE + "END DATE] "
-            //+ "[" + PREFIX_CATEGORY + "CATEGORY] "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STARTDATE + "13-01-1996 "
             + PREFIX_ENDDATE + "13-02-1996 ";
-            //+ PREFIX_CATEGORY + "food";
 
     public static final String MESSAGE_SUCCESS = "Statistics Calculated!";
 
@@ -57,10 +54,9 @@ public class StatsCommand extends Command {
         /* End Execution*/
 
         String categoryString = " Category Specified: ";
-        if (category == null){
+        if (category == null) {
             categoryString = categoryString + "False";
-        }
-        else {
+        } else {
             categoryString = categoryString + category;
         }
         String returnMessage = MESSAGE_SUCCESS;
@@ -68,7 +64,7 @@ public class StatsCommand extends Command {
     }
 
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         return other == this //short circuit if same object
                 || (other instanceof StatsCommand // instance of handles nulls
                 && startDate.equals(((StatsCommand) other).startDate)

@@ -18,11 +18,11 @@ import javafx.scene.web.WebView;
 
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.statistics.Statistics;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
+import seedu.address.model.statistics.Statistics;
 
 
 
@@ -173,7 +173,7 @@ public class BrowserPanel extends UiPart<Region> {
 
             html = html.replace("$startDate", ((Statistics) object).getStartDate().toString());
             html = html.replace("$endDate", ((Statistics) object).getEndDate().toString());
-            html = html.replace("$table", ((Statistics) object).getHTMLTable());
+            html = html.replace("$table", ((Statistics) object).getHtmlTable());
 
         }
         loadPage(html);

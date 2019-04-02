@@ -128,7 +128,7 @@ public class ModelManager implements Model {
         FilteredList<Debt> statsDebts = new FilteredList<>(versionedFinanceTracker.getDebtList());
         FilteredList<Budget> statsBudgets = new FilteredList<>(versionedFinanceTracker.getBudgetList());
         Statistics statistics = new Statistics(startDate, endDate, category);
-        statistics.calculateStats(statsExpenses,statsDebts, statsBudgets);
+        statistics.calculateStats(statsExpenses, statsDebts, statsBudgets);
 
         this.setStatistics(statistics);
     }

@@ -3,22 +3,18 @@ package seedu.address.logic.parser.statsparsers;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.logic.commands.statscommands.StatsCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.stream.Stream;
-
 
 /**
  * Parses input arguments and creates a new StatsCommand object
@@ -47,21 +43,18 @@ public class StatsCommandParser {
         }
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()){
+        if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()) {
             endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get());
-            if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()){
+            if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
                 startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
-            }
-            else {
+            } else {
                 startDate = new Date(dtf.format(endDate.getLocalDate().minusMonths(1)));
             }
-        }
-        else {
-            if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()){
+        } else {
+            if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
                 startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
                 endDate = new Date(dtf.format(startDate.getLocalDate().plusMonths(1)));
-            }
-            else{
+            } else {
                 endDate = new Date(dtf.format(LocalDate.now()));
                 startDate = new Date(dtf.format(endDate.getLocalDate().minusMonths(1)));
             }
@@ -69,13 +62,4 @@ public class StatsCommandParser {
 
         return new StatsCommand(startDate, endDate, category);
     }
-/*
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-/*    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-*/
 }

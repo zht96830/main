@@ -376,7 +376,6 @@ public interface Model {
 
     /**
      * Calculates statistics for the range {@code startDate} to {@code endDate}
-     * for the chosen {@code category)
      */
     void calculateStatistics(Date startDate, Date endDate, Category category);
 
