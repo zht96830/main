@@ -372,17 +372,13 @@ Examples:
 === Editing a recurring : `editrecurring`
 
 Edits an existing recurring in the finance tracker. +
-Format: `editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
-Shortcut: `er INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]`
+Format: `editrecurring INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
+Shortcut: `er INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]`
 
 ====
 * Edits the recurring at the specified `INDEX`.
 * The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.
 * At least one of the optional fields must be provided.
-* EDITPASTOPTION should only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be edited to reflect the new changes.
-** Agreeing (Y) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while also changing old expenses already added by this recurring.
-** Disagreeing (N) will edit the recurring, such that new expenses made by this recurring from this time on will reflect the new changes, while old expenses already added by this recurring will not be changed.
-* If EDITPASTOPTION is omitted, it defaults to N.
 * Existing values will be updated to the input values.
 ====
 [TIP]
@@ -391,22 +387,18 @@ You can omit (optional) parameters by leaving them empty. If all parameters are 
 Examples:
 
 * `editrecurring 9 $/450 c/food` +
-Edits the amount and category of the 9th recurring to be `450` and `food` respectively. No changes will be made to old expenses already added by this recurring.
+Edits the amount and category of the 9th recurring to be `450` and `food` respectively.
 
 === Deleting a recurring: `deleterecurring`
 
 Deletes the specified recurring from the finance tracker. +
-Format: `deleterecurring INDEX [p/DELETEPASTOPTION]` +
-Shortcut: `dr INDEX [p/DELETEPASTOPTION]`
+Format: `deleterecurring INDEX` +
+Shortcut: `dr INDEX`
 
 ====
 * Deletes the recurring at the specified `INDEX`.
 * The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.
 * At least one of the optional fields must be provided.
-* The DELETEPASTOPTION should only be 'Y' or 'N'. This prompts user if expenses previously added by this recurring should be deleted.
-** Agreeing (Y) will delete the recurring, and delete all old expenses already added by this recurring.
-** Disagreeing (N) will delete the recurring, but does not delete old expenses already added by this recurring.
-* If DELETEPASTOPTION is omitted, it defaults to N.
 ====
 [TIP]
 You can omit (optional) parameters by leaving them empty. If all parameters are empty, no edits will occur.
@@ -414,8 +406,8 @@ You can omit (optional) parameters by leaving them empty. If all parameters are 
 Examples:
 
 * `listrecurring v/all` +
-`deleterecurring 2 p/N` +
-Deletes the 2nd recurring in the finance tracker, without deleting old expenses already added by this recurring.
+`deleterecurring 2` +
+Deletes the 2nd recurring in the finance tracker.
 
 === Clearing all recurrings: `clearrecurring`
 
