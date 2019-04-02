@@ -21,15 +21,16 @@ public class StatsCommand extends Command {
 
     public static final String COMMAND_WORD_SHORTCUT = "st";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Calculates statistics"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Calculates statistics between the Start Date and End Date "
             + "Parameters: "
             + "[" + PREFIX_STARTDATE + "START DATE] "
             + "[" + PREFIX_ENDDATE + "END DATE] "
-            + "[" + PREFIX_CATEGORY + "CATEGORY] "
-            + "Example: " + COMMAND_WORD + " "
+            //+ "[" + PREFIX_CATEGORY + "CATEGORY] "
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STARTDATE + "13-01-1996 "
-            + PREFIX_ENDDATE + "13-02-1996 "
-            + PREFIX_CATEGORY + "food";
+            + PREFIX_ENDDATE + "13-02-1996 ";
+            //+ PREFIX_CATEGORY + "food";
 
     public static final String MESSAGE_SUCCESS = "Statistics Calculated!";
 
@@ -62,8 +63,7 @@ public class StatsCommand extends Command {
         else {
             categoryString = categoryString + category;
         }
-        String returnMessage = MESSAGE_SUCCESS + "\nsd: " + startDate.toString() + " ed: " + endDate.toString()
-                + categoryString;
+        String returnMessage = MESSAGE_SUCCESS;
         return new CommandResult(returnMessage);
     }
 

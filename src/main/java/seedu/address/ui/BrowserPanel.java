@@ -173,6 +173,7 @@ public class BrowserPanel extends UiPart<Region> {
 
             html = html.replace("$startDate", ((Statistics) object).getStartDate().toString());
             html = html.replace("$endDate", ((Statistics) object).getEndDate().toString());
+            html = html.replace("$table", ((Statistics) object).getHTMLTable());
 
         }
         loadPage(html);
