@@ -26,6 +26,7 @@ class JsonAdaptedRecurring {
     private final String remarks;
     private final String frequency;
     private final String occurrence;
+    private final String lastConvertedDate;
 
     /**
      * Constructs a {@code JsonAdaptedRecurring} with the given recurring details.
@@ -34,7 +35,8 @@ class JsonAdaptedRecurring {
     public JsonAdaptedRecurring(@JsonProperty("name") String name, @JsonProperty("amount") String amount,
                                 @JsonProperty("date") String date, @JsonProperty("category") String category,
                                 @JsonProperty("remarks") String remarks, @JsonProperty("frequency") String frequency,
-                                @JsonProperty("occurrence") String occurrence) {
+                                @JsonProperty("occurrence") String occurrence,
+                                @JsonProperty("lastConvertedDate") String lastConvertedDate) {
         this.name = name;
         this.amount = amount;
         this.category = category;
@@ -42,6 +44,7 @@ class JsonAdaptedRecurring {
         this.remarks = remarks;
         this.frequency = frequency;
         this.occurrence = occurrence;
+        this.lastConvertedDate = lastConvertedDate;
     }
 
     /**
@@ -55,6 +58,7 @@ class JsonAdaptedRecurring {
         remarks = source.getRemarks();
         frequency = source.getFrequency().toString();
         occurrence = source.getOccurrence().toString();
+        lastConvertedDate = source.getLastConvertedDate().toString();
     }
 
     /**
@@ -116,8 +120,10 @@ class JsonAdaptedRecurring {
         }
         final Occurrence modelOccurrence = new Occurrence(occurrence);
 
+        final String modelLastConvertedDate = lastConvertedDate;
+
         return new Recurring(modelName, modelAmount, modelDate, modelCategory, modelRemarks, modelFrequency,
-                modelOccurrence);
+                modelOccurrence, modelLastConvertedDate);
     }
 
 }

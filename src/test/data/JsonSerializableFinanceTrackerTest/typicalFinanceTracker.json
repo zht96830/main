@@ -158,7 +158,8 @@
     "category" : "utilities",
     "remarks" : "Signed a new 2 year plan.",
     "frequency" : "m",
-    "occurrence" : "24"
+    "occurrence" : "24",
+    "lastConvertedDate" : "2019-04-03"
   }, {
     "name" : "Daily Lunch",
     "amount" : "5.00",
@@ -166,7 +167,8 @@
     "category" : "FOOD",
     "remarks" : "Eat the same $5 meal everyday for a year.",
     "frequency" : "d",
-    "occurrence" : "365"
+    "occurrence" : "365",
+    "lastConvertedDate" : "2019-04-03"
   }, {
     "name" : "Spotify Subscription",
     "amount" : "20.00",
@@ -174,6 +176,7 @@
     "category" : "FOOD",
     "remarks" : "Spotify for a year!",
     "frequency" : "m",
-    "occurrence" : "12"
+    "occurrence" : "12",
+    "lastConvertedDate" : "2019-04-03"
   } ]
 }

@@ -2,6 +2,7 @@ package seedu.address.model.recurring;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,6 +22,7 @@ public class Recurring extends Expense {
     // Additional fields
     private Frequency frequency;
     private Occurrence occurrence;
+    private LocalDate lastConvertedDate;
     private ArrayList<Expense> recurringListOfExpenses;
 
     /**
@@ -32,8 +34,38 @@ public class Recurring extends Expense {
         requireAllNonNull(frequency, occurrence);
         this.frequency = frequency;
         this.occurrence = occurrence;
+        this.lastConvertedDate = date.getLocalDate().minusDays(1);
         this.recurringListOfExpenses = new ArrayList<>(occurrence.value);
-        for (int i=0; i < occurrence.value; i++) {
+        for (int i = 0; i < occurrence.value; i++) {
+            Name newName = new Name(name.name + " (Recurring)");
+
+            Date newDate = new Date(date);
+            if (frequency.value.equals("D")) {
+                newDate.setLocalDate(date.getLocalDate().plusDays(i));
+            } else if (frequency.value.equals("M")) {
+                newDate.setLocalDate(date.getLocalDate().plusMonths(i));
+            } else if (frequency.value.equals("Y")) {
+                newDate.setLocalDate(date.getLocalDate().plusYears(i));
+            }
+
+            Expense toAdd = new Expense(newName, amount, newDate, category, remarks);
+            //System.out.println(toAdd);
+            this.recurringListOfExpenses.add(toAdd);
+        }
+    }
+
+    /**
+     * Initializes a Recurring object from Jackson.
+     */
+    public Recurring(Name name, Amount amount, Date date, Category category, String remarks, Frequency frequency,
+                     Occurrence occurrence, String localDate) {
+        super(name, amount, date, category, remarks);
+        requireAllNonNull(frequency, occurrence);
+        this.frequency = frequency;
+        this.occurrence = occurrence;
+        this.lastConvertedDate = LocalDate.parse(localDate);
+        this.recurringListOfExpenses = new ArrayList<>(occurrence.value);
+        for (int i = 0; i < occurrence.value; i++) {
             Name newName = new Name(name.name + " (Recurring)");
 
             Date newDate = new Date(date);
@@ -43,7 +75,7 @@ public class Recurring extends Expense {
                 newDate.setLocalDate(date.getLocalDate().plusMonths(i));
             } else if (frequency.value == "Y") {
                 newDate.setLocalDate(date.getLocalDate().plusYears(i));
-            } else {System.out.println(frequency);}
+            }
 
             Expense toAdd = new Expense(newName, amount, newDate, category, remarks);
             //System.out.println(toAdd);
@@ -57,6 +89,18 @@ public class Recurring extends Expense {
 
     public Occurrence getOccurrence() {
         return occurrence;
+    }
+
+    public LocalDate getLastConvertedDate() {
+        return lastConvertedDate;
+    }
+
+    public ArrayList<Expense> getRecurringListOfExpenses() {
+        return recurringListOfExpenses;
+    }
+
+    public void setLastConvertedDate(LocalDate date) {
+        this.lastConvertedDate = date;
     }
 
     /**
