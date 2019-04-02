@@ -11,11 +11,29 @@ import java.util.ArrayList;
 
 public class Statistics {
 
-    public static void calculateStats(Date startDate, Date endDate, Category category
-            , FilteredList<Expense> statsExpenses, FilteredList<Debt> statsDebts
+    protected Date startDate;
+    protected Date endDate;
+    protected Category category;
+
+    public Statistics(Date startDate, Date endDate, Category category) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.category = category;
+        System.out.println("Created");
+    }
+
+    public Date getStartDate() {
+        System.out.println("getStartDate method called");
+        return startDate;
+    }
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void calculateStats(FilteredList<Expense> statsExpenses, FilteredList<Debt> statsDebts
             , FilteredList<Budget> statsBudgets){
 
-        boolean isCategoryNull = (category == null);
+        boolean isCategoryNull = (this.category == null);
 
         ArrayList<Expense> foodExpenses = new ArrayList<>();
         ArrayList<Expense> transportExpenses = new ArrayList<>();
