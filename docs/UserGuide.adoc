@@ -257,7 +257,7 @@ Shortcut: `ad n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]`
 * The PERSON_OWED should only contain alphanumeric characters and spaces, and it should not be blank.
 * The AMOUNT_OWED should only contain positive numbers and reflect the value in dollars. Values accepted are in the range of $0.01 to $9,999,999.99. A maximum of 2 decimal places are allowed.
 * The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.
-* The DEADLINE should be in dd-mm-yyyy format.
+* The DEADLINE should be in dd-mm-yyyy format and should not be a date before today's date.
 * If REMARK is omitted, no remarks will be stored.
 ====
 
@@ -277,7 +277,7 @@ Shortcut: `ed INDEX [n/PERSON_OWED] [$/AMOUNT_OWED] [c/CATEGORY] [due/DEADLINE] 
 
 ====
 * Edits the debt at the specified `INDEX`.
-* The index refers to the index number shown in the displayed expense list. The index must be a positive integer.
+* The index refers to the index number shown in the displayed debt list. The index must be a positive integer.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 ====
@@ -286,8 +286,8 @@ You can omit [optional] parameters by leaving them empty. If all parameters are 
 
 Examples:
 
-* `editdebt 5 n/Tommy $/60` +
-Edits expense owed and amount owed of the 5th debt to be `Tommy` and `$60` respectively.
+* `editdebt 5 n/Tommy $/60`
+Edits debt owed and amount owed of the 5th debt to be `Tommy` and `$60` respectively.
 
 === Deleting a debt: `deletedebt`
 Deletes the specified debt from the finance tracker.
@@ -296,7 +296,7 @@ Shortcut: `dd INDEX`
 
 ====
 * Deletes the debt at the specified `INDEX`.
-* The index refers to the index number shown in the displayed expense list. The index must be a positive integer.
+* The index refers to the index number shown in the displayed debt list. The index must be a positive integer.
 ====
 
 Examples:
