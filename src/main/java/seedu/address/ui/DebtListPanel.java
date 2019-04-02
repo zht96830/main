@@ -37,7 +37,7 @@ public class DebtListPanel extends UiPart<Region> {
             logger.fine("Selected debt changed to: " + newValue);
 
             // Don't modify selection if we are already selecting the selected debt,
-            // otherwise we wouldgi have an infinite loop.
+            // otherwise we would have an infinite loop.
             if (Objects.equals(debtListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
             }

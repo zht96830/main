@@ -25,7 +25,13 @@ public class ListExpenseCommandParserTest {
 
     @Test
     public void parse_invalidPrefix_throwsParseException() {
-        assertParseFailure(parser, " ve/alla", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, " ve/all", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListExpenseCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyString_throwsParseException() {
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ListExpenseCommand.MESSAGE_USAGE));
     }
 }

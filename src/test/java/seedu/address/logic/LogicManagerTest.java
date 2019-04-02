@@ -62,14 +62,12 @@ public class LogicManagerTest {
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
-        assertHistoryCorrect(invalidCommand);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "deleteexpense 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
-        assertHistoryCorrect(deleteCommand);
     }
 
     @Test
@@ -101,7 +99,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredExpenseList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         logic.getFilteredExpenseList().remove(0);
     }

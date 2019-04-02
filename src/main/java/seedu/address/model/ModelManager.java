@@ -310,6 +310,16 @@ public class ModelManager implements Model {
 
     @Override
     public void addBudget(Budget budget) {
+        int sum = 0;
+        for (Expense expense : filteredExpenses) {
+            if (expense.getCategory() == budget.getCategory()
+                    && expense.getDate().getLocalDate().isAfter(budget.getStartDate().getLocalDate())
+                    && expense.getDate().getLocalDate().isBefore(budget.getEndDate().getLocalDate())) {
+                sum += expense.getAmount().value;
+            }
+        }
+        budget.setTotalSpent(sum);
+        budget.updatePercentage();
         versionedFinanceTracker.addBudget(budget);
         updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
     }

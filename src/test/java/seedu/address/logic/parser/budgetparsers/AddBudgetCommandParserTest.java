@@ -11,9 +11,11 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_EXIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_BEFORE_TODAY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_EXIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.STARTDATE_DESC_BUDGET;
@@ -46,9 +48,9 @@ public class AddBudgetCommandParserTest {
         Budget expectedBudget = new BudgetBuilder(BUDGET).build();
 
         // whitespace only preamble
-        //assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
-        //                + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
-        //        new AddBudgetCommand(expectedBudget));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
+                        + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
+                new AddBudgetCommand(expectedBudget));
 
         // multiple categories - last category accepted
         assertParseSuccess(parser, CATEGORY_DESC_DEBT + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
@@ -76,7 +78,6 @@ public class AddBudgetCommandParserTest {
                 new AddBudgetCommand(expectedBudget));
     }
 
-
     @Test
     public void parse_optionalFieldsMissing_success() {
         //Budget expectedBudget = new BudgetBuilder(BUDGET_WITH_TODAYS_DATE).build();
@@ -88,7 +89,6 @@ public class AddBudgetCommandParserTest {
                 + ENDDATE_DESC_BUDGET, new AddBudgetCommand(expectedBudget));
     }
 
-    // pass
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBudgetCommand.MESSAGE_USAGE);
@@ -145,5 +145,15 @@ public class AddBudgetCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
                         + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBudgetCommand.MESSAGE_USAGE));
+
+        // start date before today
+        assertParseFailure(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
+                + INVALID_STARTDATE_DESC_BEFORE_TODAY + ENDDATE_DESC_BUDGET_2 + REMARKS_DESC_BUDGET,
+                Budget.MESSAGE_CONSTRAINTS_START_DATE);
+
+        // end date before start date
+        assertParseFailure(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + STARTDATE_DESC_BUDGET
+                + ENDDATE_DESC_BUDGET_2 + REMARKS_DESC_BUDGET, Budget.MESSAGE_CONSTRAINTS_END_DATE);
+
     }
 }

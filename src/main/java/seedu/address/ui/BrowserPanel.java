@@ -6,6 +6,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -32,8 +33,6 @@ public class BrowserPanel extends UiPart<Region> {
     public static final URL DEFAULT_PAGE =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
 
-    public static final String SEARCH_PAGE_URL = "https://se-education.org/dummy-search-page/";
-
     public static final URL EXPENSES_PAGE_URL =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "selectedexpense.html"));
     public static final URL DEBTS_PAGE_URL =
@@ -48,22 +47,6 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String DEBT_PAGE_TITLE = "Selected Debt Page";
     public static final String BUDGET_PAGE_TITLE = "Selected Budget Page";
     public static final String RECURRING_PAGE_TITLE = "Selected Recurring Page";
-    public static final String DEFAULT_PAGE_TITLE = "Default Page";
-
-    public static final String QUERY_NAME = "name=";
-    public static final String QUERY_CATEGORY = "category=";
-    public static final String QUERY_AMOUNT = "amount=";
-    public static final String QUERY_DATE = "date=";
-    public static final String QUERY_STARTDATE = "startdate=";
-    public static final String QUERY_PERSONOWED = "personowed=";
-    public static final String QUERY_DEADLINE = "deadline=";
-    public static final String QUERY_ENDDATE = "enddate=";
-    public static final String QUERY_REMARK = "remarks=";
-    public static final String QUERY_FREQUENCY = "frequency=";
-    public static final String QUERY_OCCURENCE = "occurrence=";
-    public static final String QUESTION_MARK = "?";
-    public static final String AND = "&";
-    public static final String DOLLAR_SIGN = "$";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -178,6 +161,7 @@ public class BrowserPanel extends UiPart<Region> {
      * @param html represents the html content in string format
      */
     public void loadPage(String html) {
+        logger.log(Level.INFO, "Loading item page...");
         Platform.runLater(() -> browser.getEngine().loadContent(html));
     }
 
@@ -185,6 +169,7 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads a default HTML file with a background that matches the general theme.
      */
     private void loadDefaultPage() {
+        logger.log(Level.INFO, "Loading default page...");
         Platform.runLater(() -> browser.getEngine().load(DEFAULT_PAGE.toExternalForm()));
     }
 
@@ -195,7 +180,7 @@ public class BrowserPanel extends UiPart<Region> {
         StringBuilder sb = new StringBuilder();
         try {
             byte[] contents = new byte[4096];
-            int bytesRead = 0;
+            int bytesRead;
             while ((bytesRead = bis.read(contents)) != -1) {
                 sb.append(new String(contents, 0, bytesRead));
             }

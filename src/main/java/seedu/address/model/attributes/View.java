@@ -28,6 +28,7 @@ public enum View {
         return false;
     }
 
+    /** Get the output message of views */
     public String getMessage() {
         switch (this) {
         case DAY:
