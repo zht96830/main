@@ -28,8 +28,10 @@ public class ListExpenseCommandParser implements Parser<ListExpenseCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_VIEW);
 
         if (argMultimap.getValue(PREFIX_VIEW).isPresent()) {
-            View view = ParserUtil.parseView(argMultimap.getValue(PREFIX_VIEW).get());
+            String stringView = argMultimap.getValue(PREFIX_VIEW).get();
+            View view = ParserUtil.parseView(stringView);
             return new ListExpenseCommand(view);
+
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpenseCommand.MESSAGE_USAGE));
         }

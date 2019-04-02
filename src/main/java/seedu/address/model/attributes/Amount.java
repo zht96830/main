@@ -13,7 +13,6 @@ public class Amount {
     public static final String MESSAGE_CONSTRAINTS = "Amount should only contain positive numbers, "
             + "reflect the value in dollars and it should be at least 1 digit long, "
             + "but not more than 7 digits in dollars.\nMaximum of two decimal places allowed.";
-    // public static final String VALIDATION_REGEX = "[1-9]\\d{0,6}(\\.\\d{1,2})?";
     public static final String VALIDATION_REGEX = "([0]\\.([0][1-9]|[1-9]\\d{0,1})|[1-9]\\d{0,6}(\\.\\d{1,2})?)";
     public final int value;
 

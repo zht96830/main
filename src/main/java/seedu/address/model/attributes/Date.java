@@ -27,8 +27,6 @@ public class Date implements Comparable<Date> {
      */
     public Date(String date) throws DateTimeParseException {
         requireNonNull(date);
-        //checkArgument((isValidDate(localDate)=="format"), MESSAGE_CONSTRAINTS);
-        //checkArgument((isValidDate(localDate)=="exist"), MESSAGE_DATE_DOES_NOT_EXIST);
         this.localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
                 .withResolverStyle(ResolverStyle.STRICT));
     }
@@ -122,7 +120,7 @@ public class Date implements Comparable<Date> {
      * @param duration is the duration before current date
      * @return true if localDate is within the duration
      */
-    public boolean isWithinDuration(String duration) {
+    public boolean isWithinDurationBeforeToday(String duration) {
         // get today's date
         LocalDate currentDate = LocalDate.now();
 
@@ -156,10 +154,9 @@ public class Date implements Comparable<Date> {
      * @param duration is the duration after current date
      * @return true if localDate is within the duration
      */
-    public boolean isWithinDurationAfter(String duration) {
+    public boolean isWithinDurationAfterToday(String duration) {
         // get today's date
         LocalDate currentDate = LocalDate.now();
-
         // auto return true if same date
         if (currentDate.equals(localDate)) {
             return true;
