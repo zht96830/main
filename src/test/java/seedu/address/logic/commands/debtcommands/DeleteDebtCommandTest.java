@@ -24,7 +24,7 @@ import seedu.address.model.debt.Debt;
 
 /**
  * Only contain integration test for interaction with the Model.
- * Does not contain integration tests for UndoCommand and RedoComman for now.
+ * Includes integration tests for UndoCommand and RedoCommand for now.
  * Only contain unit tests for {@code DeleteDebtCommand} for now.
  */
 public class DeleteDebtCommandTest {

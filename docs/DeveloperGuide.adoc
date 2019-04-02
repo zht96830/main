@@ -192,6 +192,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `deleteexpense 1` Command
 image::DeleteExpenseSdForLogic.png[width="800"]
 
+// tag::design-model[]
 [[Design-Model]]
 === Model component
 
@@ -206,6 +207,7 @@ The `Model`,
 * stores the Finance Tracker data.
 * exposes unmodifiable `ObservableList<Expense>`, `ObservableList<Recurring>`, `ObservableList<Debt>`, `ObservableList<Budget>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+// end::design-model[]
 
 [[Design-Storage]]
 === Storage component
@@ -253,7 +255,7 @@ Step 2. The user executes `deleteexpense 5` command to delete the 5th expense in
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `addexpense n/BKT ...` to add a new expense. The `add` command also calls `Model#commitFinanceTracker()`, causing another modified finance tracker state to be saved into the `financeTrackerStateList`.
+Step 3. The user executes `addexpense n/BKT ...` to add a new expense. The `addexpense` command also calls `Model#commitFinanceTracker()`, causing another modified finance tracker state to be saved into the `financeTrackerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
@@ -276,7 +278,7 @@ The `redo` command does the opposite -- it calls `Model#redoFinanceTracker()`, w
 [NOTE]
 If the `currentStatePointer` is at index `financeTrackerStateList.size() - 1`, pointing to the latest finance tracker state, then there are no undone finance tracker states to restore. The `redo` command uses `Model#canRedoFinanceTracker()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the finance tracker, such as `list`, will usually not call `Model#commitFinanceTracker()`, `Model#undoFInanceTracker()` or `Model#redoFinanceTracker()`. Thus, the `financeTrackerStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listexpense v/all`. Commands that do not modify the finance tracker, such as `listexpense`, will usually not call `Model#commitFinanceTracker()`, `Model#undoFInanceTracker()` or `Model#redoFinanceTracker()`. Thus, the `financeTrackerStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
@@ -392,26 +394,73 @@ Upon each launch of the MainApp, a check is done against the array of every recu
 
 Work in progress.
 
-=== Pay Debt Function
+// tag::debt[]
+=== Debt Feature
 
-This feature is currently not implemented. Will be implemented by v1.3. +
+The Debt feature consists of `adddebt`, `editdebt`, `listdebt`, `deletedebt`, `cleardebt` and `paydebt`. +
+
+This feature allows users to add debts to the finance tracker and be able to constantly keep track of them. This is done by calling `Logic#execute` which creates an `AddDebtCommand`. This command then calls `Model#addDebt`, adding the specified debt into the debt list. +
+
+Editing, deleting and clearing of debts work in a similar manner.
+
+==== Pay Debt Feature
 
 The purpose of this feature is to provide the convenience for users to indicate that they have paid off a particular debt and seamlessly convert that into an expense. +
 
-How the software does it is to sieve out the following relevant information from the Debt entry: +
+===== Current Implementation
+
+Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `paydebt`.
+
+image::PayDebtSequenceDiagram.png[width="800"]
+
+1. User enters the command `paydebt 1`, to convert the first listed debt on the user interface into an expense. This command is executed by `LogicManager`, which calls `FinanceTrackerParser#parseCommand("paydebt 1")`. This creates a new `PayDebtCommandParser` object which will help parse the input by the user.
+
+2. The newly created object calls `parse("1")` which in turns calls `ArgumentTokenizer#tokenize("1", "d/")` to split the arguments into its preamble(the index) and the date(if inputted by the user). This returns an `argMultiMap` containing the split input.
+
+3. The `PayDebtCommandParser` object then calls `ParserUtil#parseIndex(argMultiMap.getPreamble())` and `ParserUtil#parseDate(argMultiMap.getValue("d/").get())` to parse the arguments into the index and date into its correct form respectively. If the user does not input a date, the program will use the local date on the system's clock. A `PayDebtCommand` object containing the index and date is then created and returned to the `LogicManager`.
+
+4. The `LogicManager` calls `PayDebtCommand#execute()`, which will call `Model#getFilteredDebtList()` to retrieve the list of debts stored in the finance tracker. The method `get(index)` is then called to retrieve the `debt` the user was intending to convert.
+
+5. An expense is then created by retrieving out the following relevant information from the `debt` entry: +
 
 * `Person Owed`
 * `Amount`
 * `Category`
 * `Remarks`
 
-The software then take this information and create a new Expense with the following fields: +
+6. The programme then take this information and creates a new Expense `convertedExpense` with the following fields: +
 
 * `Name` : Paid Debt to `Person Owed`
 * `Amount` : Same amount will be used
 * `Category` : Same category will be used
-* `Date` : There is no need for the user to key in the date. The program will use the local date in the system's clock
+* `Date` : Based on user's input on when the debt is paid, else the program will use the local date in the system's clock
 * `Remarks` : Same remarks will be used
+
+7. `Model#deleteDebt(debt)` and `Model#addExpense(convertedExpense)` are then called to delete the targeted `debt` from the debt list and add the `convertedExpense` into the expense list accordingly.
+
+8. The command result is then returned to the `LogicManager` which then returns it to the `UI` where the changes are then reflected on the user interface.
+
+==== Debt Notifications (Coming in v2.0)
+
+This is still a work in progress. +
+
+The purpose of this feature is to alert users when the deadline for their debts is approaching. These alerts come in the form of either a pop-up notification or an email alert. +
+
+It is up to the user on when they would like to receive this notification. Currently, there are plans to implement the following options: +
+
+* `1 month` before debt deadline
+* `1 week` before debt deadline
+* `3 days` before debt deadline
+* `1 day` before debt deadline
+
+===== Future Implementation
+
+Once the `duration` option is set, each time the main application loads, the programme will go through every debt in `Model#getFilteredDebtList()`, deduct `duration` from each `Debt#getDeadline()` to get its `notificationDate` and add them to a new list `notificationDates`. +
+
+Each `notificationDate` is then checked against `LocalDate#now()`. If `notificationDate` is before or equals to `LocalDate#now`, they are then added to a new list `notificationsToBeAlerted`. +
+
+Every item in `notificationsToBeAlerted` is then printed on an alert box, reminding the user of the upcoming deadlines for their debts.
+// end::debt[]
 
 === Statistics Feature
 
