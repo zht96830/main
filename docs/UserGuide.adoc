@@ -328,6 +328,7 @@ Examples:
 Converts the 3rd debt in the finance tracker into an expense.
 // end::debt[]
 
+// tag::recurring[]
 === Listing recurrings : `listrecurring`
 
 Shows a list of recurrings in the finance tracker according to the view specified. +
@@ -419,6 +420,13 @@ Deletes the 2nd recurring in the finance tracker, without deleting old expenses 
 Clears all recurrings from the finance tracker. +
 Format: `clearrecurring` +
 Shortcut: `cr`
+
+=== Converting outstanding expenses from all recurrings: `convertrecurring`
+
+Converts all outstanding expenses from all recurrings in the finance tracker. +
+Format: `convertrecurring` +
+Shortcut: `cre`
+// end::recurring[]
 
 === Viewing Statistics - Summary: `stats`
 Produces statistics regarding the user's finance. +
