@@ -375,7 +375,7 @@ This feature can be implemented in different ways in terms of how the specified 
 // tag::recurringfeature[]
 === Recurring Feature
 
-The Recurring feature consists of `addrecurring`, `editrecurring`, `listrecurring`, `deleterecurring` `clearrecurring`, and `convertrecurringtoexpense`. +
+The Recurring feature consists of `addrecurring`, `editrecurring`, `listrecurring`, `deleterecurring` `clearrecurring`, and `convertrecurring`. +
 
 Recurring expenses are expenses that are periodic and have a fixed frequency and a defined number of occurrences. Examples of these recurring expenses are bills or subscription fees. +
 
@@ -385,10 +385,33 @@ This feature also simplifies the deletion and editing of these recurring expense
 
 ==== Convert Recurring To Expense Feature
 
-The purpose of this feature is to provide the convenience for users by adding outstanding expenses from all their recurring expenses into the expense list. After adding recurring expenses into the Finance Tracker, th
+The purpose of this feature is to provide the convenience for users by adding outstanding expenses from all their recurring expenses into the expense list. After adding recurring expenses into the Finance Tracker, the user can call `convertrecurring` to make the conversion.
 
-==== Current Implementation
-c
+===== Current Implementation
+
+Below is a step-by=step explanation of an example usage scenario for `convertrecurring`.
+
+1. User enters the command `convertrecurring`, to add outstanding expenses from all their recurring expenses into the expense list. This command is executed by `LogicManager`, which calls `FinanceTrackerParser#parseCommand("convertrecurring")`. This creates a `ConvertRecurringToExpenseCommand` object and returned to the `LogicManager`.
+
+2. The `LogicManager` calls `ConvertRecurringToExpenseCommand#execute`, which will call Model#getFilteredRecurringList() to retrieve the list of recurrings in the financetracker.
+
+3. The programme then iterates through the recurring list, and for each recurring, checks the recurring's `lastConvertedDate`, which is the last time the recurring has gone through a `convertrecurring` check.
+
+4. If the recurring's `lastConvertedDate` is before the current date, this recurring will have to be checked again for outstanding expenses that can potentially be added.
+
+5. The programme then calls Recurring#getRecurringListofExpenses to retrieve the list of expenses that are supposed to be added by this recurring, and iterates through this expense list.
+
+6. If the expense's date is before or equals to the current date, and after the `lastConvertedDate`, this recurring expense will have to be converted into an expense and added into the FinanceTracker. This is done by calling Model#addExpense(recurringListOfExpenses.get(j)).
+
+7. This is done for each expense of the recurring. After the iteration, the recurring's `lastConvertedDate` is set to the current date.
+
+8. This is done for each recurring in the list.
+
+=== Delete and Edit Recurring deletes the associated Expense (coming in v1.4)
+
+This is still a work in progress. +
+
+The purpose of this feature is to delete or edit expenses already added by a recurring that the user wishes to delete or edit.
 
 // end::recurringfeature[]
 
