@@ -22,6 +22,7 @@ import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
+import seedu.address.model.statistics.Statistics;
 
 
 
@@ -41,6 +42,8 @@ public class BrowserPanel extends UiPart<Region> {
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "selectedbudget.html"));
     public static final URL RECURRINGS_PAGE_URL =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "selectedrecurring.html"));
+    public static final URL STATISTICS_PAGE_URL =
+            requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "statistics.html"));
 
     // Page titles for testing purposes
     public static final String EXPENSE_PAGE_TITLE = "Selected Expense Page";
@@ -56,7 +59,8 @@ public class BrowserPanel extends UiPart<Region> {
     private WebView browser;
 
     public BrowserPanel(ObservableValue<Expense> selectedExpense, ObservableValue<Debt> selectedDebt,
-                        ObservableValue<Budget> selectedBudget, ObservableValue<Recurring> selectedRecurring) {
+                        ObservableValue<Budget> selectedBudget, ObservableValue<Recurring> selectedRecurring,
+                        ObservableValue<Statistics> statistics) {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
@@ -91,6 +95,15 @@ public class BrowserPanel extends UiPart<Region> {
 
         // Load recurring page when selected recurring changes.
         selectedRecurring.addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                loadDefaultPage();
+                return;
+            }
+            loadObjectPage(newValue);
+        });
+
+        // Load expense page when selected expense changes.
+        statistics.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 loadDefaultPage();
                 return;
@@ -141,7 +154,7 @@ public class BrowserPanel extends UiPart<Region> {
             html = html.replace("$amount", ((Debt) object).getAmount().toString());
             html = html.replace("$deadline", ((Debt) object).getDeadline().toString());
             html = html.replace("$remarks", ((Debt) object).getRemarks());
-        } else {
+        } else if (object instanceof Expense) {
 
             BufferedInputStream bis = new BufferedInputStream(convertUrlToInputStream(EXPENSES_PAGE_URL));
 
@@ -152,6 +165,16 @@ public class BrowserPanel extends UiPart<Region> {
             html = html.replace("$amount", ((Expense) object).getAmount().toString());
             html = html.replace("$date", ((Expense) object).getDate().toString());
             html = html.replace("$remarks", ((Expense) object).getRemarks());
+        } else if (object instanceof Statistics) {
+
+            BufferedInputStream bis = new BufferedInputStream(convertUrlToInputStream(STATISTICS_PAGE_URL));
+
+            html = convertInputStreamToString(bis);
+
+            html = html.replace("$startDate", ((Statistics) object).getStartDate().toString());
+            html = html.replace("$endDate", ((Statistics) object).getEndDate().toString());
+            html = html.replace("$table", ((Statistics) object).getHtmlTable());
+
         }
         loadPage(html);
     }
