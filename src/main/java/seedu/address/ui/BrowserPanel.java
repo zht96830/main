@@ -154,7 +154,7 @@ public class BrowserPanel extends UiPart<Region> {
             html = html.replace("$amount", ((Debt) object).getAmount().toString());
             html = html.replace("$deadline", ((Debt) object).getDeadline().toString());
             html = html.replace("$remarks", ((Debt) object).getRemarks());
-        } else {
+        } else if (object instanceof Expense) {
 
             BufferedInputStream bis = new BufferedInputStream(convertUrlToInputStream(EXPENSES_PAGE_URL));
 
@@ -165,6 +165,15 @@ public class BrowserPanel extends UiPart<Region> {
             html = html.replace("$amount", ((Expense) object).getAmount().toString());
             html = html.replace("$date", ((Expense) object).getDate().toString());
             html = html.replace("$remarks", ((Expense) object).getRemarks());
+        } else if (object instanceof Statistics) {
+
+            BufferedInputStream bis = new BufferedInputStream(convertUrlToInputStream(STATISTICS_PAGE_URL));
+
+            html = convertInputStreamToString(bis);
+
+            html = html.replace("$startDate", ((Statistics) object).getStartDate().toString());
+            html = html.replace("$endDate", ((Statistics) object).getEndDate().toString());
+
         }
         loadPage(html);
     }
