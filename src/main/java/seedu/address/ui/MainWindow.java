@@ -197,10 +197,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ExpenseListPanel getExpenseListPanel() {
-        return expenseListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *

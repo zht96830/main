@@ -9,8 +9,6 @@ import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -23,19 +21,26 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.BudgetListPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.DebtListPanelHandle;
 import guitests.guihandles.ExpenseCardHandle;
 import guitests.guihandles.ExpenseListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.RecurringListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.budgetcommands.ClearBudgetCommand;
+import seedu.address.logic.commands.debtcommands.ClearDebtCommand;
 import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
 import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
+import seedu.address.logic.commands.recurringcommands.ClearRecurringCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.attributes.View;
@@ -105,6 +110,18 @@ public abstract class FinanceTrackerSystemTest {
         return mainWindowHandle.getExpenseListPanel();
     }
 
+    public BudgetListPanelHandle getBudgetListPanel() {
+        return mainWindowHandle.getBudgetListPanel();
+    }
+
+    public DebtListPanelHandle getDebtListPanel() {
+        return mainWindowHandle.getDebtListPanel();
+    }
+
+    public RecurringListPanelHandle getRecurringListPanel() {
+        return mainWindowHandle.getRecurringListPanel();
+    }
+
     public MainMenuHandle getMainMenu() {
         return mainWindowHandle.getMainMenu();
     }
@@ -171,6 +188,30 @@ public abstract class FinanceTrackerSystemTest {
     }
 
     /**
+     * Deletes all budgets in the finance tracker.
+     */
+    protected void deleteAllBudgets() {
+        executeCommand(ClearBudgetCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getFinanceTracker().getBudgetList().size());
+    }
+
+    /**
+     * Deletes all debts in the finance tracker.
+     */
+    protected void deleteAllDebts() {
+        executeCommand(ClearDebtCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getFinanceTracker().getDebtList().size());
+    }
+
+    /**
+     * Deletes all recurring expenses in the finance tracker.
+     */
+    protected void deleteAllRecurrings() {
+        executeCommand(ClearRecurringCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getFinanceTracker().getRecurringList().size());
+    }
+
+    /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
      * {@code expectedResultMessage}, the storage contains the same expense objects as {@code expectedModel}
      * and the expense list panel displays the expenses in the model correctly.
@@ -181,6 +222,9 @@ public abstract class FinanceTrackerSystemTest {
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new FinanceTracker(expectedModel.getFinanceTracker()), testApp.readStorageAddressBook());
         assertListMatching(getExpenseListPanel(), expectedModel.getFilteredExpenseList());
+        assertListMatching(getBudgetListPanel(), expectedModel.getFilteredBudgetList());
+        assertListMatching(getDebtListPanel(), expectedModel.getFilteredDebtList());
+        assertListMatching(getRecurringListPanel(), expectedModel.getFilteredRecurringList());
     }
 
     /**
@@ -189,10 +233,13 @@ public abstract class FinanceTrackerSystemTest {
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
-        getBrowserPanel().rememberUrl();
+        // getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
         getExpenseListPanel().rememberSelectedExpenseCard();
+        getBudgetListPanel().rememberSelectedBudgetCard();
+        getDebtListPanel().rememberSelectedDebtCard();
+        getRecurringListPanel().rememberSelectedRecurringCard();
     }
 
     /**
@@ -203,6 +250,9 @@ public abstract class FinanceTrackerSystemTest {
     protected void assertSelectedCardDeselected() {
         assertEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
         assertFalse(getExpenseListPanel().isAnyCardSelected());
+        assertFalse(getBudgetListPanel().isAnyCardSelected());
+        assertFalse(getDebtListPanel().isAnyCardSelected());
+        assertFalse(getRecurringListPanel().isAnyCardSelected());
     }
 
     /**
@@ -215,27 +265,15 @@ public abstract class FinanceTrackerSystemTest {
         getExpenseListPanel().navigateToCard(getExpenseListPanel().getSelectedCardIndex());
         ExpenseCardHandle selectedCard = getExpenseListPanel().getHandleToSelectedCard();
 
-        String query = BrowserPanel.QUESTION_MARK + BrowserPanel.QUERY_NAME + selectedCard.getName()
-                + BrowserPanel.QUERY_CATEGORY + selectedCard.getCategory()
-                + BrowserPanel.QUERY_AMOUNT + selectedCard.getAmount()
-                + BrowserPanel.QUERY_DATE + selectedCard.getDate() + BrowserPanel.QUERY_REMARK;
+        // URL expectedUrl;
+        // URL actualUrl;
+        // expectedUrl = BrowserPanel.EXPENSES_PAGE_URL;
+        // actualUrl = BrowserPanel.getCurrentObjectPageUrl();
+        String expectedPageTitle = BrowserPanel.EXPENSE_PAGE_TITLE;
+        String actualPageTitle = getBrowserPanel().getLoadedUrlTitle();
 
-        String url = BrowserPanel.EXPENSES_PAGE_URL + query.replaceAll(" ", "%20");
-        int urlLength = url.length();
-
-        // since selected will not have remarks, we only get substring without remarks
-        String browserUrl = getBrowserPanel().getLoadedUrl().toExternalForm().substring(0, urlLength);
-
-        URL expectedUrl;
-        URL actualUrl;
-        try {
-            expectedUrl = new URL(url);
-            actualUrl = new URL(browserUrl);
-
-        } catch (MalformedURLException mue) {
-            throw new AssertionError("URL expected to be valid.", mue);
-        }
-        assertEquals(expectedUrl, actualUrl);
+        // assertEquals(expectedUrl, actualUrl);
+        assertEquals(expectedPageTitle, actualPageTitle);
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getExpenseListPanel().getSelectedCardIndex());
     }
@@ -246,7 +284,7 @@ public abstract class FinanceTrackerSystemTest {
      * @see ExpenseListPanelHandle#isSelectedExpenseCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
-        assertFalse(getBrowserPanel().isUrlChanged());
+        // assertFalse(getBrowserPanel().isUrlChanged());
         assertFalse(getExpenseListPanel().isSelectedExpenseCardChanged());
     }
 

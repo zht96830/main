@@ -63,6 +63,9 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
                     throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
                 }
             }
+            if (!ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()).isEqualOrAfterToday()) {
+                throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE_AFTER_TODAY);
+            }
             editBudgetDescriptor.setEndDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()));
         }
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {

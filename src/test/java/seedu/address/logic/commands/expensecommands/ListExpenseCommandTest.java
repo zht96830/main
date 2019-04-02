@@ -42,19 +42,51 @@ public class ListExpenseCommandTest {
                 String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.ALL.getMessage()), expectedModel);
     }
 
+    // Tests that involves Category
     @Test
-    public void execute_listIsNotFiltered_showsHealthCareCategory() {
+    public void execute_listIsNotFiltered_showsExpensesWithHealthCareCategory() {
         expectedModel.updateFilteredExpenseList(Model.PREDICATE_SHOW_HEALTHCARE_EXPENSES);
         assertCommandSuccess(new ListExpenseCommand(View.HEALTHCARE), model, commandHistory,
                 String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
     }
 
     @Test
-    public void execute_listIsFiltered_showsHealthCareCategory() {
+    public void execute_listIsFiltered_showsExpensesWithHealthCareCategory() {
         expectedModel.updateFilteredExpenseList(Model.PREDICATE_SHOW_HEALTHCARE_EXPENSES);
         showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
         assertCommandSuccess(new ListExpenseCommand(View.HEALTHCARE), model, commandHistory,
                 String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.HEALTHCARE.getMessage()), expectedModel);
     }
 
+    // Tests that involves Date
+    @Test
+    public void execute_listIsNotFiltered_showsExpensesWithinLastMonth() {
+        expectedModel.updateFilteredExpenseList(Model.PREDICATE_SHOW_MONTH_EXPENSES);
+        assertCommandSuccess(new ListExpenseCommand(View.MONTH), model, commandHistory,
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.MONTH.getMessage()), expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsExpensesWithinLastMonth() {
+        expectedModel.updateFilteredExpenseList(Model.PREDICATE_SHOW_MONTH_EXPENSES);
+        showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
+        assertCommandSuccess(new ListExpenseCommand(View.MONTH), model, commandHistory,
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.MONTH.getMessage()), expectedModel);
+    }
+
+    // Tests that involves Amount
+    @Test
+    public void execute_listIsNotFiltered_showsExpensesWithAmountOver100() {
+        expectedModel.updateFilteredExpenseList(Model.PREDICATE_SHOW_AMOUNT_OVER_100_EXPENSES);
+        assertCommandSuccess(new ListExpenseCommand(View.$100), model, commandHistory,
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.$100.getMessage()), expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsExpensesWithAmountOver100() {
+        expectedModel.updateFilteredExpenseList(Model.PREDICATE_SHOW_AMOUNT_OVER_100_EXPENSES);
+        showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
+        assertCommandSuccess(new ListExpenseCommand(View.$100), model, commandHistory,
+                String.format(ListExpenseCommand.MESSAGE_SUCCESS, View.$100.getMessage()), expectedModel);
+    }
 }

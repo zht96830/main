@@ -21,6 +21,8 @@ class JsonAdaptedBudget {
     private final String startDate;
     private final String endDate;
     private final String remarks;
+    private final String totalSpent;
+    private final String percentage;
 
     /**
      * Constructs a {@code JsonAdaptedBudget} with the given budget details.
@@ -28,12 +30,15 @@ class JsonAdaptedBudget {
     @JsonCreator
     public JsonAdaptedBudget(@JsonProperty("amount") String amount, @JsonProperty("category") String category,
                              @JsonProperty("startDate") String startDate, @JsonProperty("endDate") String endDate,
-                             @JsonProperty("remarks") String remarks) {
+                             @JsonProperty("remarks") String remarks, @JsonProperty("totalSpent") String totalSpent,
+                             @JsonProperty("percentage") String percentage) {
         this.startDate = startDate;
         this.amount = amount;
         this.category = category;
         this.endDate = endDate;
         this.remarks = remarks;
+        this.totalSpent = totalSpent;
+        this.percentage = percentage;
     }
 
     /**
@@ -45,6 +50,8 @@ class JsonAdaptedBudget {
         startDate = source.getStartDate().toString();
         endDate = source.getEndDate().toString();
         remarks = source.getRemarks();
+        totalSpent = source.getTotalSpentString();
+        percentage = source.getPercentageString();
     }
 
     /**
@@ -82,7 +89,12 @@ class JsonAdaptedBudget {
 
         final String modelRemarks = remarks;
 
-        return new Budget(modelCategory, modelAmount, modelStartDate, modelEndDate, modelRemarks);
+        final int modelTotalSpent = Integer.parseInt(totalSpent);
+
+        final double modelPercentage = Double.parseDouble(percentage);
+
+        return new Budget(modelCategory, modelAmount, modelStartDate, modelEndDate, modelRemarks, modelTotalSpent,
+                modelPercentage);
     }
 
 }

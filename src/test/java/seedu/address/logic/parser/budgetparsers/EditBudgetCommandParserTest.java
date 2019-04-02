@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.ENDDATE_DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_BEFORE_TODAY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_EXIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_EXIST;
@@ -26,6 +28,7 @@ import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
+import seedu.address.model.budget.Budget;
 import seedu.address.testutil.EditBudgetDescriptorBuilder;
 
 public class EditBudgetCommandParserTest {
@@ -54,11 +57,11 @@ public class EditBudgetCommandParserTest {
                 EditBudgetCommand.MESSAGE_USAGE));
     }
 
-    /*@Test
+    @Test
     public void parse_invalidPreamble_failure() {
         // invalid category
         assertParseFailure(parser, INVALID_CATEGORY_DESC + AMOUNT_DESC_BUDGET, Category.MESSAGE_CONSTRAINTS);
-    }*/
+    }
 
     @Test
     public void parse_invalidValue_failure() {
@@ -76,6 +79,9 @@ public class EditBudgetCommandParserTest {
         //invalid end date
         assertParseFailure(parser, CATEGORY_DESC_BUDGET + INVALID_ENDDATE_DESC_EXIST,
                 Date.MESSAGE_DATE_DOES_NOT_EXIST);
+        //invalid end date before today
+        assertParseFailure(parser, CATEGORY_DESC_BUDGET + INVALID_ENDDATE_DESC_BEFORE_TODAY,
+                Budget.MESSAGE_CONSTRAINTS_END_DATE_AFTER_TODAY);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, CATEGORY_DESC_BUDGET + INVALID_AMOUNT_DESC + INVALID_STARTDATE_DESC_FORMAT

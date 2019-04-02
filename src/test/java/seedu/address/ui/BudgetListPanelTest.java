@@ -75,11 +75,11 @@ public class BudgetListPanelTest extends GuiUnitTest {
     private ObservableList<Budget> createBackingList(int budgetCount) {
         ObservableList<Budget> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < budgetCount; i++) {
-            Amount amount = new Amount("000");
+            Amount amount = new Amount("1.0");
             Date startDate = new Date("13-03-2019");
             Date endDate = new Date("13-03-2020");
             Category category = Category.FOOD;
-            Budget budget = new Budget(category, amount, startDate, endDate, null);
+            Budget budget = new Budget(category, amount, startDate, endDate, null, 0, 0);
             backingList.add(budget);
         }
         return backingList;

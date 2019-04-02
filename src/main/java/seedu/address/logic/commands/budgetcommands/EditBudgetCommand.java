@@ -82,9 +82,9 @@ public class EditBudgetCommand extends Command {
 
         Budget budgetToEdit = lastShownList.get(index);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDescriptor);
-        if (!(editedBudget.getStartDate().isEqualOrAfterToday())) {
+        /*if (!(editedBudget.getStartDate().isEqualOrAfterToday())) {
             throw new CommandException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
-        }
+        }*/
         if (!(editedBudget.getEndDate().getLocalDate().isAfter(editedBudget.getStartDate().getLocalDate()))
                 || !(editedBudget.getEndDate().getLocalDate().isAfter(budgetToEdit.getStartDate().getLocalDate()))) {
             throw new CommandException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
@@ -109,24 +109,22 @@ public class EditBudgetCommand extends Command {
 
         Amount updatedAmount = editBudgetDescriptor.getAmount().orElse(budgetToEdit.getAmount());
         Date updatedStartDate = editBudgetDescriptor.getStartDate().orElse(budgetToEdit.getStartDate());
-        if (!(updatedStartDate.isEqualOrAfterToday())) {
+        /*if (!(updatedStartDate.isEqualOrAfterToday())) {
             throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
-        }
-        Date updatedEndDate = editBudgetDescriptor.getEndDate().orElse(budgetToEdit.getEndDate());
-        /*if (!(updatedEndDate.getLocalDate().isAfter(updatedStartDate.getLocalDate()))) {
-            throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
         }*/
+        Date updatedEndDate = editBudgetDescriptor.getEndDate().orElse(budgetToEdit.getEndDate());
         String updatedRemarks = editBudgetDescriptor.getRemarks().orElse(budgetToEdit.getRemarks());
-
-        return new Budget(budgetToEdit.getCategory(), updatedAmount, updatedStartDate, updatedEndDate, updatedRemarks);
+        double updatedPercentage = 100 * budgetToEdit.getTotalSpent() / updatedAmount.value * 100;
+        return new Budget(budgetToEdit.getCategory(), updatedAmount, updatedStartDate, updatedEndDate, updatedRemarks,
+                budgetToEdit.getTotalSpent(), updatedPercentage);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditBudgetCommand // instanceof handles nulls
-                && category.equals(((EditBudgetCommand) other).category))
-                && editBudgetDescriptor.equals(((EditBudgetCommand) other).editBudgetDescriptor);
+                && category.equals(((EditBudgetCommand) other).category)
+                && editBudgetDescriptor.equals(((EditBudgetCommand) other).editBudgetDescriptor));
     }
 
     /**
@@ -138,6 +136,9 @@ public class EditBudgetCommand extends Command {
         private Date startDate;
         private Date endDate;
         private String remarks;
+        private int totalSpent;
+        private double percentage;
+
 
         public EditBudgetDescriptor() {}
 
@@ -151,6 +152,8 @@ public class EditBudgetCommand extends Command {
             setStartDate(toCopy.startDate);
             setEndDate(toCopy.endDate);
             setRemarks(toCopy.remarks);
+            setTotalSpent(toCopy.totalSpent);
+            setPercentage(toCopy.percentage);
         }
 
         /**
@@ -193,6 +196,22 @@ public class EditBudgetCommand extends Command {
             return Optional.ofNullable(remarks);
         }
 
+        public void setTotalSpent(int totalSpent) {
+            this.totalSpent = totalSpent;
+        }
+
+        public Optional<Integer> getTotalSpent() {
+            return Optional.ofNullable(totalSpent);
+        }
+
+        public void setPercentage(double percentage) {
+            this.percentage = percentage;
+        }
+
+        public Optional<Double> getPercentage() {
+            return Optional.ofNullable(percentage);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -211,7 +230,9 @@ public class EditBudgetCommand extends Command {
             return getAmount().equals(e.getAmount())
                     && getStartDate().equals(e.getStartDate())
                     && getEndDate().equals(e.getEndDate())
-                    && getRemarks().equals(e.getRemarks());
+                    && getRemarks().equals(e.getRemarks())
+                    && getTotalSpent().equals(e.getTotalSpent())
+                    && getPercentage().equals(e.getPercentage());
         }
     }
 

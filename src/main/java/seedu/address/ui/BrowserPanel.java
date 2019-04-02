@@ -2,7 +2,11 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -11,6 +15,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
+
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.statistics.Statistics;
@@ -19,6 +24,8 @@ import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
 
+
+
 /**
  * The Browser Panel of the App.
  */
@@ -26,8 +33,6 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final URL DEFAULT_PAGE =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
-
-    public static final String SEARCH_PAGE_URL = "https://se-education.org/dummy-search-page/";
 
     public static final URL EXPENSES_PAGE_URL =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "selectedexpense.html"));
@@ -40,20 +45,11 @@ public class BrowserPanel extends UiPart<Region> {
     public static final URL STATISTICS_PAGE_URL =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "statistics.html"));
 
-    public static final String QUERY_NAME = "name=";
-    public static final String QUERY_CATEGORY = "&category=";
-    public static final String QUERY_AMOUNT = "&amount=";
-    public static final String QUERY_DATE = "&date=";
-    public static final String QUERY_STARTDATE = "&startdate=";
-    public static final String QUERY_PERSONOWED = "&personowed=";
-    public static final String QUERY_DEADLINE = "&deadline=";
-    public static final String QUERY_ENDDATE = "&enddate=";
-    public static final String QUERY_REMARK = "&remarks=";
-    public static final String QUERY_FREQUENCY = "&frequency=";
-    public static final String QUERY_OCCURENCE = "&occurrence=";
-    public static final String QUESTION_MARK = "?";
-    public static final String DOLLAR_SIGN = "$";
-
+    // Page titles for testing purposes
+    public static final String EXPENSE_PAGE_TITLE = "Selected Expense Page";
+    public static final String DEBT_PAGE_TITLE = "Selected Debt Page";
+    public static final String BUDGET_PAGE_TITLE = "Selected Budget Page";
+    public static final String RECURRING_PAGE_TITLE = "Selected Recurring Page";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -122,61 +118,101 @@ public class BrowserPanel extends UiPart<Region> {
      * Runs load page with url that is set based on object
      */
     private void loadObjectPage(Object object) {
+        String html = "";
 
-        String url;
-        if (object instanceof Recurring) {
-            url = RECURRINGS_PAGE_URL.toExternalForm()
-                    + QUESTION_MARK
-                    + QUERY_NAME + ((Recurring) object).getName().name
-                    + QUERY_CATEGORY + ((Recurring) object).getCategory().toString()
-                    + QUERY_AMOUNT + DOLLAR_SIGN + ((Recurring) object).getAmount().toString()
-                    + QUERY_DATE + ((Recurring) object).getDate().toString()
-                    + QUERY_FREQUENCY + ((Recurring) object).getFrequency().toString()
-                    + QUERY_OCCURENCE + ((Recurring) object).getOccurrence().toString()
-                    + QUERY_REMARK + ((Recurring) object).getRemarks();
-        } else if (object instanceof Budget) {
-            url = BUDGETS_PAGE_URL.toExternalForm()
-                    + QUESTION_MARK
-                    + QUERY_CATEGORY + ((Budget) object).getCategory().toString()
-                    + QUERY_AMOUNT + DOLLAR_SIGN + ((Budget) object).getAmount().toString()
-                    + QUERY_STARTDATE + ((Budget) object).getStartDate().toString()
-                    + QUERY_ENDDATE + ((Budget) object).getEndDate().toString()
-                    + QUERY_REMARK + ((Budget) object).getRemarks();
+        if (object instanceof Budget) {
+
+            BufferedInputStream bis = new BufferedInputStream(convertUrlToInputStream(BUDGETS_PAGE_URL));
+            html = convertInputStreamToString(bis);
+
+            html = html.replace("$category", ((Budget) object).getCategory().toString());
+            html = html.replace("$amount", ((Budget) object).getAmount().toString());
+            html = html.replace("$duration", ((Budget) object).getDuration());
+            html = html.replace("$totalspent", Double.toString(((Budget) object).getTotalSpent()));
+            html = html.replace("$percentage", Double.toString(((Budget) object).getPercentage()));
+            html = html.replace("$remarks", ((Budget) object).getRemarks());
+        } else if (object instanceof Recurring) {
+
+            BufferedInputStream bis = new BufferedInputStream(convertUrlToInputStream(RECURRINGS_PAGE_URL));
+
+            html = convertInputStreamToString(bis);
+
+            html = html.replace("$name", ((Recurring) object).getName().name);
+            html = html.replace("$category", ((Recurring) object).getCategory().toString());
+            html = html.replace("$amount", ((Recurring) object).getAmount().toString());
+            html = html.replace("$date", ((Recurring) object).getDate().toString());
+            html = html.replace("$frequency", ((Recurring) object).getFrequency().toString());
+            html = html.replace("$occurrence", ((Recurring) object).getOccurrence().toString());
+            html = html.replace("$remarks", ((Recurring) object).getRemarks());
         } else if (object instanceof Debt) {
-            url = DEBTS_PAGE_URL.toExternalForm()
-                    + QUESTION_MARK
-                    + QUERY_PERSONOWED + ((Debt) object).getPersonOwed().name
-                    + QUERY_CATEGORY + ((Debt) object).getCategory().toString()
-                    + QUERY_AMOUNT + DOLLAR_SIGN + ((Debt) object).getAmount().toString()
-                    + QUERY_DEADLINE + ((Debt) object).getDeadline().toString()
-                    + QUERY_REMARK + ((Debt) object).getRemarks();
-        } else if (object instanceof Expense){
-            url = EXPENSES_PAGE_URL.toExternalForm()
-                    + QUESTION_MARK
-                    + QUERY_NAME + ((Expense) object).getName().name
-                    + QUERY_CATEGORY + ((Expense) object).getCategory().toString()
-                    + QUERY_AMOUNT + DOLLAR_SIGN + ((Expense) object).getAmount().toString()
-                    + QUERY_DATE + ((Expense) object).getDate().toString()
-                    + QUERY_REMARK + ((Expense) object).getRemarks();
-        } else if (object instanceof Statistics){
-            url = STATISTICS_PAGE_URL.toExternalForm();
+
+            BufferedInputStream bis = new BufferedInputStream(convertUrlToInputStream(DEBTS_PAGE_URL));
+            html = convertInputStreamToString(bis);
+
+            html = html.replace("$personowed", ((Debt) object).getPersonOwed().name);
+            html = html.replace("$category", ((Debt) object).getCategory().toString());
+            html = html.replace("$amount", ((Debt) object).getAmount().toString());
+            html = html.replace("$deadline", ((Debt) object).getDeadline().toString());
+            html = html.replace("$remarks", ((Debt) object).getRemarks());
         } else {
-            url = "";
+
+            BufferedInputStream bis = new BufferedInputStream(convertUrlToInputStream(EXPENSES_PAGE_URL));
+
+            html = convertInputStreamToString(bis);
+
+            html = html.replace("$name", ((Expense) object).getName().name);
+            html = html.replace("$category", ((Expense) object).getCategory().toString());
+            html = html.replace("$amount", ((Expense) object).getAmount().toString());
+            html = html.replace("$date", ((Expense) object).getDate().toString());
+            html = html.replace("$remarks", ((Expense) object).getRemarks());
         }
-
-
-        loadPage(url);
+        loadPage(html);
     }
 
-    public void loadPage(String url) {
-        Platform.runLater(() -> browser.getEngine().load(url));
+    /**
+     * Loads an HTML file in terms of string format
+     * @param html represents the html content in string format
+     */
+    public void loadPage(String html) {
+        logger.log(Level.INFO, "Loading item page...");
+        Platform.runLater(() -> browser.getEngine().loadContent(html));
     }
 
     /**
      * Loads a default HTML file with a background that matches the general theme.
      */
     private void loadDefaultPage() {
-        loadPage(DEFAULT_PAGE.toExternalForm());
+        logger.log(Level.INFO, "Loading default page...");
+        Platform.runLater(() -> browser.getEngine().load(DEFAULT_PAGE.toExternalForm()));
     }
 
+    /**
+     * Converts the content of buffered input stream to string format
+     */
+    private String convertInputStreamToString(BufferedInputStream bis) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            byte[] contents = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = bis.read(contents)) != -1) {
+                sb.append(new String(contents, 0, bytesRead));
+            }
+            bis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Converts the url to input stream format
+     */
+    private InputStream convertUrlToInputStream(URL url) {
+        try {
+            return url.openStream();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }

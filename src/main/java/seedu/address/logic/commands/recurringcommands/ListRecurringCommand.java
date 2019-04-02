@@ -61,8 +61,11 @@ public class ListRecurringCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.view.getMessage()));
     }
 
+    /** Returns a {@code Predicate<Recurring>} object specified by the {@code view} for filtering of recurrings */
     private Predicate<Recurring> getPredicate(View view) {
         switch (view) {
+        case ALL:
+            return PREDICATE_SHOW_ALL_RECURRING;
         case DAY:
             return PREDICATE_SHOW_DAY_RECURRING;
         case WEEK:
@@ -96,7 +99,7 @@ public class ListRecurringCommand extends Command {
         case $1000:
             return PREDICATE_SHOW_AMOUNT_OVER_1000_RECURRINGS;
         default:
-            return PREDICATE_SHOW_ALL_RECURRING;
+            throw new IllegalArgumentException("Invalid View.");
         }
     }
 }

@@ -35,7 +35,7 @@ import seedu.address.testutil.EditDebtDescriptorBuilder;
 /**
  * Contains unit tests for EditDebtCommand.
  * Also includes integration tests that has interaction with the Model.
- * Does not include integration tests with UndoCommand and RedoCommand.
+ * Include integration tests with UndoCommand and RedoCommand.
  */
 public class EditDebtCommandTest {
     private Model model = new ModelManager(getTypicalFinanceTrackerWithDebts(), new UserPrefs());

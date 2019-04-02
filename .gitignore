@@ -10,11 +10,10 @@ lib/*
 *.csv
 config.json
 src/test/data/sandbox/
-preferences.json
+financetracker.json
 .DS_Store
 ./screenshot*.png
 classes/
-/data/
 /bin/
 src/main/resources/docs/
 out/

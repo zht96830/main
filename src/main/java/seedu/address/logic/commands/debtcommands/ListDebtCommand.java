@@ -78,8 +78,11 @@ public class ListDebtCommand extends Command {
         return view.equals(e.view);
     }
 
+    /** Returns a {@code Predicate<Debt>} object specified by the {@code view} for filtering of debts */
     public Predicate<Debt> getPredicate(View view) {
         switch (view) {
+        case ALL:
+            return PREDICATE_SHOW_ALL_DEBTS;
         case DAY:
             return PREDICATE_SHOW_DAY_DEBTS;
         case WEEK:
@@ -113,7 +116,7 @@ public class ListDebtCommand extends Command {
         case $1000:
             return PREDICATE_SHOW_AMOUNT_OVER_1000_DEBTS;
         default:
-            return PREDICATE_SHOW_ALL_DEBTS;
+            throw new IllegalArgumentException("Invalid View.");
         }
     }
 }

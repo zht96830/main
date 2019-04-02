@@ -23,10 +23,10 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true if it is within the range of current date */
     // needs to be implemented
-    Predicate<Expense> PREDICATE_SHOW_DAY_EXPENSES = p -> p.getDate().isWithinDuration("day");
-    Predicate<Expense> PREDICATE_SHOW_WEEK_EXPENSES = p -> p.getDate().isWithinDuration("week");
-    Predicate<Expense> PREDICATE_SHOW_MONTH_EXPENSES = p -> p.getDate().isWithinDuration("month");
-    Predicate<Expense> PREDICATE_SHOW_YEAR_EXPENSES = p -> p.getDate().isWithinDuration("year");
+    Predicate<Expense> PREDICATE_SHOW_DAY_EXPENSES = p -> p.getDate().isWithinDurationBeforeToday("day");
+    Predicate<Expense> PREDICATE_SHOW_WEEK_EXPENSES = p -> p.getDate().isWithinDurationBeforeToday("week");
+    Predicate<Expense> PREDICATE_SHOW_MONTH_EXPENSES = p -> p.getDate().isWithinDurationBeforeToday("month");
+    Predicate<Expense> PREDICATE_SHOW_YEAR_EXPENSES = p -> p.getDate().isWithinDurationBeforeToday("year");
 
     /** {@code Predicate} that always evaluate to true if expense is in the specified category */
     Predicate<Expense> PREDICATE_SHOW_FOOD_EXPENSES = p -> p.getCategory().equals(Category.FOOD);
@@ -50,12 +50,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Debt> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true if it is within the range of current date */
+    /** {@code Predicate} that always evaluate to true if deadline is within range */
     // needs to be implemented
-    Predicate<Debt> PREDICATE_SHOW_DAY_DEBTS = p -> p.getDeadline().isWithinDuration("day");
-    Predicate<Debt> PREDICATE_SHOW_WEEK_DEBTS = p -> p.getDeadline().isWithinDuration("week");
-    Predicate<Debt> PREDICATE_SHOW_MONTH_DEBTS = p -> p.getDeadline().isWithinDuration("month");
-    Predicate<Debt> PREDICATE_SHOW_YEAR_DEBTS = p -> p.getDeadline().isWithinDuration("year");
+    Predicate<Debt> PREDICATE_SHOW_DAY_DEBTS = p -> p.getDeadline().isWithinDurationAfterToday("day");
+    Predicate<Debt> PREDICATE_SHOW_WEEK_DEBTS = p -> p.getDeadline().isWithinDurationAfterToday("week");
+    Predicate<Debt> PREDICATE_SHOW_MONTH_DEBTS = p -> p.getDeadline().isWithinDurationAfterToday("month");
+    Predicate<Debt> PREDICATE_SHOW_YEAR_DEBTS = p -> p.getDeadline().isWithinDurationAfterToday("year");
 
     /** {@code Predicate} that always evaluate to true if expense is in the specified category */
     Predicate<Debt> PREDICATE_SHOW_FOOD_DEBTS = p -> p.getCategory().equals(Category.FOOD);
@@ -82,10 +82,10 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true if it is within the range of current date */
     // needs to be implemented
-    Predicate<Recurring> PREDICATE_SHOW_DAY_RECURRING = p -> p.getDate().isWithinDuration("day");
-    Predicate<Recurring> PREDICATE_SHOW_WEEK_RECURRING = p -> p.getDate().isWithinDuration("week");
-    Predicate<Recurring> PREDICATE_SHOW_MONTH_RECURRING = p -> p.getDate().isWithinDuration("month");
-    Predicate<Recurring> PREDICATE_SHOW_YEAR_RECURRING = p -> p.getDate().isWithinDuration("year");
+    Predicate<Recurring> PREDICATE_SHOW_DAY_RECURRING = p -> p.getDate().isWithinDurationBeforeToday("day");
+    Predicate<Recurring> PREDICATE_SHOW_WEEK_RECURRING = p -> p.getDate().isWithinDurationBeforeToday("week");
+    Predicate<Recurring> PREDICATE_SHOW_MONTH_RECURRING = p -> p.getDate().isWithinDurationBeforeToday("month");
+    Predicate<Recurring> PREDICATE_SHOW_YEAR_RECURRING = p -> p.getDate().isWithinDurationBeforeToday("year");
 
     /** {@code Predicate} that always evaluate to true if expense is in the specified category */
     Predicate<Recurring> PREDICATE_SHOW_FOOD_RECURRING = p -> p.getCategory().equals(Category.FOOD);

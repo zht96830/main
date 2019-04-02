@@ -70,7 +70,7 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
             remarks = "";
         }
 
-        Budget budget = new Budget(category, amount, startDate, endDate, remarks);
+        Budget budget = new Budget(category, amount, startDate, endDate, remarks, 0, 0);
 
         return new AddBudgetCommand(budget);
     }

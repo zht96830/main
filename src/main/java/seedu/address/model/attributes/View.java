@@ -28,13 +28,14 @@ public enum View {
         return false;
     }
 
+    /** Get the output message of views */
     public String getMessage() {
         switch (this) {
         case DAY:
         case WEEK:
         case MONTH:
         case YEAR:
-            return "Since last " + this.toString();
+            return "Within a " + this.toString();
         case FOOD:
         case TRANSPORT:
         case TRAVEL:

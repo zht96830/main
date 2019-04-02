@@ -165,6 +165,10 @@ public class ModelManager implements Model {
         }
         if (index != -1) {
             Budget targetBudget = filteredBudgets.get(index);
+            if (target.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || target.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate())) {
+                return;
+            }
             Budget updatedBudget = filteredBudgets.get(index);
             double diff = 0 - target.getAmount().value;
             updatedBudget.updateTotalSpent(diff);
@@ -185,6 +189,10 @@ public class ModelManager implements Model {
         }
         if (index != -1) {
             Budget targetBudget = filteredBudgets.get(index);
+            if (expense.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || expense.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate())) {
+                return;
+            }
             Budget updatedBudget = filteredBudgets.get(index);
             updatedBudget.updateTotalSpent(expense.getAmount().value);
             updatedBudget.updatePercentage();
@@ -196,20 +204,100 @@ public class ModelManager implements Model {
     public void setExpense(Expense target, Expense editedExpense) {
         requireAllNonNull(target, editedExpense);
         versionedFinanceTracker.setExpense(target, editedExpense);
+
+        // find budget of initial category
         int index = -1;
         for (Budget budget : filteredBudgets) {
             if (budget.getCategory() == target.getCategory()) {
                 index = filteredBudgets.indexOf(budget);
+                break;
             }
         }
-        if (index != -1) {
-            double diff = target.getAmount().value - editedExpense.getAmount().value;
-            Budget targetBudget = filteredBudgets.get(index);
-            Budget updatedBudget = filteredBudgets.get(index);
+        // find budget of edited category
+        int index2 = -1;
+        for (Budget budget : filteredBudgets) {
+            if (budget.getCategory() == editedExpense.getCategory()) {
+                index2 = filteredBudgets.indexOf(budget);
+                break;
+            }
+        }
+
+        if ((index == -1 && index2 == -1) || (target.getAmount() == editedExpense.getAmount())
+                && target.getCategory() == editedExpense.getCategory()
+                && target.getDate() == editedExpense.getDate()) {
+            return;
+        }
+
+        // NOW YOU KNOW THAT AT LEAST ONE OF AMOUNT, CATEGORY AND DATE HAS BEEN CHANGED
+
+        Budget targetBudget = filteredBudgets.get(index);
+        Budget updatedBudget = filteredBudgets.get(index);
+        Budget targetBudget2 = filteredBudgets.get(index2);
+        Budget updatedBudget2 = filteredBudgets.get(index2);
+
+        // only amount changed. index != -1, index1 == -1.
+        if (target.getAmount() != editedExpense.getAmount()
+                && target.getCategory() == editedExpense.getCategory()
+                && target.getDate() == editedExpense.getDate()) {
+            double diff = editedExpense.getAmount().value - target.getAmount().value;
             updatedBudget.updateTotalSpent(diff);
             updatedBudget.updatePercentage();
-            versionedFinanceTracker.setBudget(targetBudget, updatedBudget);
         }
+
+        // date changed, category unchanged. index != -1, index1 == -1.
+        if (target.getDate() != editedExpense.getDate() && target.getCategory() == editedExpense.getCategory()) {
+            // initial date and edited date both not within budget's time frame
+            if ((target.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || target.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate()))
+                    && (editedExpense.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || editedExpense.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate()))) {
+                return;
+            }
+            // initial date not within budget time frame but edited date is, add to totalSpent
+            if ((target.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || target.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate()))
+                    && !(editedExpense.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || editedExpense.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate()))) {
+                updatedBudget.updateTotalSpent(editedExpense.getAmount().value);
+                updatedBudget.updatePercentage();
+            } else if (!(target.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || target.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate()))
+                    && (editedExpense.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || editedExpense.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate()))) {
+                // initial date is within budget time frame but edited date is no longer within budget's duration
+                updatedBudget.updateTotalSpent(0 - target.getAmount().value);
+                updatedBudget.updatePercentage();
+            } else if (!(target.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || target.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate()))
+                    && !(editedExpense.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                    || editedExpense.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate()))) {
+                // initial date and edited date are both within budget time frame
+                double diff = editedExpense.getAmount().value - target.getAmount().value;
+                updatedBudget.updateTotalSpent(diff);
+                updatedBudget.updatePercentage();
+            }
+        }
+
+        // category changed
+        if (target.getCategory() != editedExpense.getCategory()) {
+            if (index != -1) {
+                // check if initial date is within budget1 time frame
+                if (!(target.getDate().getLocalDate().isBefore(targetBudget.getStartDate().getLocalDate())
+                        || target.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate()))) {
+                    updatedBudget.updateTotalSpent(0 - target.getAmount().value);
+                    updatedBudget.updatePercentage();
+                }
+            }
+            if (index2 != -1) {
+                if (!(editedExpense.getDate().getLocalDate().isBefore(targetBudget2.getStartDate().getLocalDate())
+                        || editedExpense.getDate().getLocalDate().isAfter(targetBudget2.getEndDate().getLocalDate()))) {
+                    updatedBudget2.updateTotalSpent(editedExpense.getAmount().value);
+                    updatedBudget2.updatePercentage();
+                }
+            }
+        }
+        versionedFinanceTracker.setBudget(targetBudget, updatedBudget);
+        versionedFinanceTracker.setBudget(targetBudget2, updatedBudget2);
     }
 
     //=========== Debts ========================================================================================
@@ -253,6 +341,16 @@ public class ModelManager implements Model {
 
     @Override
     public void addBudget(Budget budget) {
+        int sum = 0;
+        for (Expense expense : filteredExpenses) {
+            if (expense.getCategory() == budget.getCategory()
+                    && expense.getDate().getLocalDate().isAfter(budget.getStartDate().getLocalDate())
+                    && expense.getDate().getLocalDate().isBefore(budget.getEndDate().getLocalDate())) {
+                sum += expense.getAmount().value;
+            }
+        }
+        budget.setTotalSpent(sum);
+        budget.updatePercentage();
         versionedFinanceTracker.addBudget(budget);
         updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
     }

@@ -14,11 +14,11 @@ import java.time.format.ResolverStyle;
 public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should only be dd-mm-yyyy format.";
+            "Date should only be dd-mm-yyyy format and year must be in between 2000 and 2099.";
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-            "Deadline must not be a localDate that has already passed.";
+            "Deadline must not be a date that has already passed.";
     public static final String MESSAGE_DATE_DOES_NOT_EXIST = "Date does not exist.";
-    private static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-\\d{4}";
+    private static final String VALIDATION_REGEX = "\\d{2}-\\d{2}-(20)\\d{2}";
     private LocalDate localDate;
 
     /**
@@ -27,8 +27,6 @@ public class Date implements Comparable<Date> {
      */
     public Date(String date) throws DateTimeParseException {
         requireNonNull(date);
-        //checkArgument((isValidDate(localDate)=="format"), MESSAGE_CONSTRAINTS);
-        //checkArgument((isValidDate(localDate)=="exist"), MESSAGE_DATE_DOES_NOT_EXIST);
         this.localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-uuuu")
                 .withResolverStyle(ResolverStyle.STRICT));
     }
@@ -122,7 +120,7 @@ public class Date implements Comparable<Date> {
      * @param duration is the duration before current date
      * @return true if localDate is within the duration
      */
-    public boolean isWithinDuration(String duration) {
+    public boolean isWithinDurationBeforeToday(String duration) {
         // get today's date
         LocalDate currentDate = LocalDate.now();
 
@@ -146,6 +144,38 @@ public class Date implements Comparable<Date> {
             // get date is one year before today's date
             LocalDate lastYearDate = currentDate.minusYears(1);
             return (localDate.isAfter(lastYearDate) && localDate.isBefore(currentDate));
+        default:
+            return false;
+        }
+    }
+
+    /**
+     *
+     * @param duration is the duration after current date
+     * @return true if localDate is within the duration
+     */
+    public boolean isWithinDurationAfterToday(String duration) {
+        // get today's date
+        LocalDate currentDate = LocalDate.now();
+        // auto return true if same date
+        if (currentDate.equals(localDate)) {
+            return true;
+        }
+        switch (duration) {
+        case "day":
+            return currentDate.equals(localDate);
+        case "week":
+            // get date is one week after today's date
+            LocalDate nextWeekDate = currentDate.plusWeeks(1);
+            return (localDate.isBefore(nextWeekDate) && localDate.isAfter(currentDate));
+        case "month":
+            // get date is one month after today's date
+            LocalDate nextMonthDate = currentDate.plusMonths(1);
+            return (localDate.isBefore(nextMonthDate) && localDate.isAfter(currentDate));
+        case "year":
+            // get date is one year after today's date
+            LocalDate lastYearDate = currentDate.plusYears(1);
+            return (localDate.isBefore(lastYearDate) && localDate.isAfter(currentDate));
         default:
             return false;
         }

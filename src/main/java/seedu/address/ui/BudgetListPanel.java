@@ -37,7 +37,7 @@ public class BudgetListPanel extends UiPart<Region> {
             logger.fine("Selected budget changed to: " + newValue);
 
             // Don't modify selection if we are already selecting the selected Budget,
-            // otherwise we wouldgi have an infinite loop.
+            // otherwise we would have an infinite loop.
             if (Objects.equals(budgetListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
             }
