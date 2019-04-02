@@ -16,6 +16,8 @@ import javafx.collections.transformation.FilteredList;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.budget.BudgetNotFoundException;
 import seedu.address.model.debt.Debt;
@@ -24,6 +26,8 @@ import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.model.recurring.exceptions.RecurringNotFoundException;
+import seedu.address.model.statistics.Statistics;
+import seedu.address.model.statistics.exceptions.StatisticsNotFoundException;
 
 
 /**
@@ -42,6 +46,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Budget> selectedBudget = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Debt> selectedDebt = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Recurring> selectedRecurring = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Statistics> statistics = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given financeTracker and userPrefs.
@@ -113,6 +118,32 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyFinanceTracker getFinanceTracker() {
         return versionedFinanceTracker;
+    }
+
+    //=========== Statistics ====================================================================================
+
+    @Override
+    public void calculateStatistics(Date startDate, Date endDate, Category category) {
+        FilteredList<Expense> statsExpenses = new FilteredList<>(versionedFinanceTracker.getExpenseList());
+        FilteredList<Debt> statsDebts = new FilteredList<>(versionedFinanceTracker.getDebtList());
+        FilteredList<Budget> statsBudgets = new FilteredList<>(versionedFinanceTracker.getBudgetList());
+        Statistics statistics = new Statistics(startDate, endDate, category);
+        statistics.calculateStats(statsExpenses, statsDebts, statsBudgets);
+
+        this.setStatistics(statistics);
+    }
+
+    @Override
+    public ReadOnlyProperty<Statistics> statisticsProperty() {
+        return statistics;
+    }
+
+    @Override
+    public void setStatistics(Statistics statistics) {
+        if (statistics == null) {
+            throw new StatisticsNotFoundException();
+        }
+        this.statistics.setValue(statistics);
     }
 
     //=========== Expenses ======================================================================================

@@ -11,6 +11,7 @@ lib/*
 config.json
 src/test/data/sandbox/
 financetracker.json
+preferences.json
 .DS_Store
 ./screenshot*.png
 classes/
