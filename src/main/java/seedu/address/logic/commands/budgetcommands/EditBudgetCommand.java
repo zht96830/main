@@ -82,9 +82,9 @@ public class EditBudgetCommand extends Command {
 
         Budget budgetToEdit = lastShownList.get(index);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDescriptor);
-        if (!(editedBudget.getStartDate().isEqualOrAfterToday())) {
+        /*if (!(editedBudget.getStartDate().isEqualOrAfterToday())) {
             throw new CommandException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
-        }
+        }*/
         if (!(editedBudget.getEndDate().getLocalDate().isAfter(editedBudget.getStartDate().getLocalDate()))
                 || !(editedBudget.getEndDate().getLocalDate().isAfter(budgetToEdit.getStartDate().getLocalDate()))) {
             throw new CommandException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
@@ -109,9 +109,9 @@ public class EditBudgetCommand extends Command {
 
         Amount updatedAmount = editBudgetDescriptor.getAmount().orElse(budgetToEdit.getAmount());
         Date updatedStartDate = editBudgetDescriptor.getStartDate().orElse(budgetToEdit.getStartDate());
-        if (!(updatedStartDate.isEqualOrAfterToday())) {
+        /*if (!(updatedStartDate.isEqualOrAfterToday())) {
             throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
-        }
+        }*/
         Date updatedEndDate = editBudgetDescriptor.getEndDate().orElse(budgetToEdit.getEndDate());
         String updatedRemarks = editBudgetDescriptor.getRemarks().orElse(budgetToEdit.getRemarks());
         double updatedPercentage = 100 * budgetToEdit.getTotalSpent() / updatedAmount.value * 100;
