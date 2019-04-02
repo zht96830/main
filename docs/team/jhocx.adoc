@@ -1,0 +1,48 @@
+= Johnson Ho Chong Xiang - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Personal Finance Tracker
+
+---
+
+== Overview
+This portfolio aims to document the contributions made by Johnson Ho Chong Xiang to the Personal Finance Tracker.
+
+Personal Finance Tracker is a desktop finance tracker application used for tracking personal finances such as daily expenses, recurring expenses such as monthly electricity bills, budgets and debts owed to another party. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 30 kLoC. The product was morphed from an https://github.com/nus-cs2103-AY1819S2/addressbook-level4[Address Book] over a period of 8 weeks under the constraints described https://nus-cs2103-ay1819s2.github.io/cs2103-website/admin/project-constraints.html[here].
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to manage recurring expenses in the finance tracker application*
+** What it does: allows the user to add, edit, delete recurrings, as well as easily convert these recurrings into an expense at appropriate times. Integrated to work with current undo/redo, history and list commands.
+** Justification: This feature improves the product significantly because a user can now easily and conveniently keep track of their recurring expenses, expenses that are periodic and have a fixed frequency and a defined number of occurrences. Examples of these recurring expenses are bills or subscription fees.
+** Highlights: This enhancement is a core feature of any typical finance tracker. It required adjustments and integration with the existing model, logic, UI components and builds the foundation for any future enhancements involving recurring expenses.
+
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=jhocx&sort=displayName&since=2019-02-10&until=2019-03-26&timeframe=day&reverse=false&repoSort=true[code collated by reposense]]
+
+* *Other contributions*:
+
+** Project management:
+*** Check all pull requests done by group mates
+*** Create issues for tracking in GitHub Issue Tracker
+*** In charge of code in storage component
+** Documentation:
+*** Update storage component in Developer's Guide
+*** Added the implementation of recurrings in Developer's Guide
+*** In charge of UserGuide in general.
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=recurring]
+
+== Contributions to the Developer Guide
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=recurring]
