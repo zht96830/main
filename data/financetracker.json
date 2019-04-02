@@ -5,6 +5,18 @@
     "date" : "23-03-2019",
     "category" : "FOOD",
     "remarks" : ""
+  }, {
+    "name" : "idk",
+    "amount" : "12",
+    "date" : "23-03-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "idk",
+    "amount" : "12",
+    "date" : "23-03-2019",
+    "category" : "TRAVEL",
+    "remarks" : ""
   } ],
   "debts" : [ ],
   "budgets" : [ {

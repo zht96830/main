@@ -514,43 +514,41 @@ Shortcut: `cr`
 Produces statistics regarding the user's finance. +
 The statistics include the frequency of entries, the total amount of money spent +
 The user may choose the time frame to be considered for the statistic by entering the start date and end date. +
-The user may also choose to display only the results in a specific category. +
-The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table.
+The user may also choose to display only the results in a specific category. [Coming in v1.4] +
+The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table. [Coming in v1.4]
 
 Table Example:
 [width="50%"]
 |==========================
-|Category       |Total Amount   |Entries
-|FOOD           |$302           |38
-|TRANSPORT      |$205           |4
-|SHOPPING       |$1702          |8
-|WORK           |$52            |1
-|OTHERS         |$40            |1
+|Category       |Total Amount   |Entries    |Percentage
+|FOOD           |$302           |38         |13.12%
+|TRANSPORT      |$205           |4          |8.90%
+|SHOPPING       |$1702          |8          |73.96%
+|WORK           |$52            |1          |2.25%
+|OTHERS         |$40            |1          |1.92
+|Total          |$2301          |52         |1.73%
 |==========================
 
 
 Format:
-`stats [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]`
+`stats [sd/START_DATE] [ed/END_DATE]`
 
 [NOTE]
 ====
-* If category is selected in MODE, CATEGORY field will be unavailable
 * If START_DATE is empty but END_DATE is specified, statistics will be calculated from the one month before END_DATE
 to END_DATE
-* If START_DATE is specified but END_DATE is empty, statistics will be calculated from START_DATE to the earlier of
-one month after START_DATE or the current date
+* If START_DATE is specified but END_DATE is empty, statistics will be calculated from START_DATE to one month
+ after START_DATE
 * If both START_DATE and END_DATE are empty, statistics will be calculated from one month before to the current date
-* If VISUAL_REPRESENTATION field is left empty, vr options will be displayed
 ====
 
 Examples:
 
 * `stats`
-* `stats vr/pie`
 * `stats sd/12-02-2018`
-* `stats sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
+* `stats sd/01-01-2019 ed/01-02-2019`
 
-=== Viewing Statistics - Trend: `statstrend`
+=== Viewing Statistics - Trend: `statstrend [Coming in v1.4]`
 Produces statistics regarding the user's finance over a period of time to show trends. +
 The statistics include the total amount of money spent on different categories and the frequency of entries in those categories. +
 The user must choose the time frame to be considered for the statistic by entering the start date and end date. +
@@ -581,7 +579,7 @@ Examples:
 * `statstrend sd/01-01-2018 ed/01-01-2018 p/14`
 * `statstrend sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
 
-=== Viewing Statistics - Compare: `statscompare`
+=== Viewing Statistics - Compare: `statscompare [Coming in v1.4]`
 Produces and displays statistics regarding the user's finance for 2 to 4 time periods.
 The statistics include the total amount of money spent on different categories and the frequency of entries in those categories. +
 The user must specify at least 2 and not more than 4 time periods by specifying the starting dates and the desired period length. +

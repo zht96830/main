@@ -19,6 +19,7 @@ import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
+import seedu.address.model.statistics.Statistics;
 import seedu.address.storage.Storage;
 
 /**
@@ -160,5 +161,15 @@ public class LogicManager implements Logic {
     @Override
     public void setSelectedRecurring(Recurring recurring) {
         model.setSelectedRecurring(recurring);
+    }
+
+    @Override
+    public ReadOnlyProperty<Statistics> statisticsProperty() {
+        return model.statisticsProperty();
+    }
+
+    @Override
+    public void setStatistics(Statistics statistics) {
+        model.setStatistics(statistics);
     }
 }
