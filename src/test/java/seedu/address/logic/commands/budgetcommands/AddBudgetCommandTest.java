@@ -23,10 +23,13 @@ import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFinanceTracker;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
+import seedu.address.model.statistics.Statistics;
 import seedu.address.testutil.BudgetBuilder;
 
 public class AddBudgetCommandTest {
@@ -338,6 +341,21 @@ public class AddBudgetCommandTest {
 
         @Override
         public void setSelectedRecurring(Recurring recurring) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStatistics(Statistics statistics) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Statistics> statisticsProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void calculateStatistics(Date startDate, Date endDate, Category category) {
             throw new AssertionError("This method should not be called.");
         }
     }

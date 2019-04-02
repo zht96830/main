@@ -17,12 +17,14 @@ import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
+import seedu.address.model.statistics.Statistics;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Debt> selectedDebt = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Budget> selectedBudget = new SimpleObjectProperty<>();
     private SimpleObjectProperty<Recurring> selectedRecurring = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Statistics> statistics = new SimpleObjectProperty<>();
 
     private BrowserPanel browserPanel;
     private BrowserPanelHandle browserPanelHandle;
@@ -30,7 +32,7 @@ public class BrowserPanelTest extends GuiUnitTest {
     @Before
     public void setUp() {
         guiRobot.interact(() -> browserPanel = new BrowserPanel(selectedExpense, selectedDebt, selectedBudget,
-                selectedRecurring));
+                selectedRecurring, statistics));
         uiPartRule.setUiPart(browserPanel);
 
         browserPanelHandle = new BrowserPanelHandle(browserPanel.getRoot());
