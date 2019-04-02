@@ -661,15 +661,17 @@ e.g. `payDebt 2`
 * *List recurrings* : `listrecurring`
 * *Add a recurring* : `addrecurring n/NAME $/AMOUNT c/CATEGORY [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
 e.g. `addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24` +
-* *Edit a recurring* : `editrecurring INDEX [p/EDITPASTOPTION] [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
-e.g. `editrecurring 9 p/N $/450 c/food` +
-* *Delete a recurring* : `deleterecurring INDEX [p/DELETEPASTOPTION]` +
-e.g. `deleterecurring 2 p/N` +
-* *Viewing statistics* : `stats [m/MODE] [vr/VISUAL_REPRESENTATION] [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]` +
-e.g. `stats c/frequency sd/01-01-2019 ed/01-02-2019 vr/bar c/food`
-* *Viewing Macro Statistic Trend* : `stats_mt sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION]
+* *Edit a recurring* : `editrecurring INDEX [n/NAME] [$/AMOUNT] [c/CATEGORY] [d/STARTDATE] [r/REMARK] [f/FREQUENCY] [o/OCCURRENCE]` +
+e.g. `editrecurring 9 $/450 c/food` +
+* *Delete a recurring* : `deleterecurring INDEX` +
+e.g. `deleterecurring 2` +
+* *Converting outstanding expenses from all recurrings* : `convertrecurring` +
+e.g. `convertrecurring` +
+* *Viewing statistics* : `stats [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]` +
+e.g. `stats c/frequency sd/01-01-2019 ed/01-02-2019`
+* *Viewing Macro Statistic Trend* [Coming in v1.4]: `stats_mt sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION]
 [c/CATEGORY]` +
 e.g. `stats_mt sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
-* *Viewing Macro Statistic Comparison* : `stats_mc d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD
+* *Viewing Macro Statistic Comparison* [Coming in v1.4]: `stats_mc d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD
 [vr/VISUAL_REPRESENTATION] [c/CATEGORY]` +
 e.g. `stats_mc d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food`
