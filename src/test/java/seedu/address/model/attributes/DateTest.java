@@ -56,16 +56,16 @@ public class DateTest {
         Date withinMonthDate1 = new Date(VALID_DATE_5);
 
         // not within the same year -> returns false
-        assertFalse(notWithinAnyDurationDate1.isWithinDuration("year"));
+        assertFalse(notWithinAnyDurationDate1.isWithinDurationBeforeToday("year"));
 
         // not within the same day -> returns false
-        assertFalse(withinMonthDate1.isWithinDuration("day"));
+        assertFalse(withinMonthDate1.isWithinDurationBeforeToday("day"));
 
         // not within the same week -> returns false
-        assertFalse(withinMonthDate1.isWithinDuration("week"));
+        assertFalse(withinMonthDate1.isWithinDurationBeforeToday("week"));
 
         // within the same year -> return true
-        assertTrue(withinMonthDate1.isWithinDuration("year"));
+        assertTrue(withinMonthDate1.isWithinDurationBeforeToday("year"));
     }
 
     @Test

@@ -37,44 +37,36 @@ public class BrowserPanelTest extends GuiUnitTest {
     }
 
     @Test
-    public void display() throws Exception {
+    public void display() {
         // default web page
         assertEquals(BrowserPanel.DEFAULT_PAGE, browserPanelHandle.getLoadedUrl());
 
         // associated web page of an expense
         guiRobot.interact(() -> selectedExpense.set(DUCK_RICE));
-        // URL expectedExpenseUrl = BrowserPanel.EXPENSES_PAGE_URL;
         String expectedExpenseTitle = BrowserPanel.EXPENSE_PAGE_TITLE;
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedExpenseTitle, browserPanelHandle.getLoadedUrlTitle());
-        // assertEquals(expectedExpenseUrl, BrowserPanel.getCurrentObjectPageUrl());
 
         // associated web page of a debt
         guiRobot.interact(() -> selectedDebt.set(AMY));
-        // URL expectedDebtUrl = BrowserPanel.DEBTS_PAGE_URL;
         String expectedDebtTitle = BrowserPanel.DEBT_PAGE_TITLE;
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedDebtTitle, browserPanelHandle.getLoadedUrlTitle());
-        // assertEquals(expectedDebtUrl, BrowserPanel.getCurrentObjectPageUrl());
 
         // associated web page of a debt
         guiRobot.interact(() -> selectedBudget.set(FOOD_BUDGET));
-        // URL expectedBudgetUrl = BrowserPanel.BUDGETS_PAGE_URL;
         String expectedBudgetTitle = BrowserPanel.BUDGET_PAGE_TITLE;
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedBudgetTitle, browserPanelHandle.getLoadedUrlTitle());
-        // assertEquals(expectedBudgetUrl, BrowserPanel.getCurrentObjectPageUrl());
 
         // associated web page of a recurring
         guiRobot.interact(() -> selectedRecurring.set(PHONE_BILL));
-        // URL expectedRecurringUrl = BrowserPanel.RECURRINGS_PAGE_URL;
         String expectedRecurringTitle = BrowserPanel.RECURRING_PAGE_TITLE;
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedRecurringTitle, browserPanelHandle.getLoadedUrlTitle());
-        // assertEquals(expectedRecurringUrl, BrowserPanel.getCurrentObjectPageUrl());
     }
 }

@@ -35,8 +35,6 @@ public class FinanceTracker implements ReadOnlyFinanceTracker {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
-
-
     public FinanceTracker() {
         expenses = new ExpenseList();
         debts = new DebtList();
