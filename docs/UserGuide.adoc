@@ -510,6 +510,7 @@ Clears all recurrings from the finance tracker. +
 Format: `clearrecurring` +
 Shortcut: `cr`
 
+// tag::stats[]
 === Viewing Statistics - Summary: `stats`
 Produces statistics regarding the user's finance. +
 The statistics include the frequency of entries, the total amount of money spent +
@@ -609,6 +610,7 @@ Examples:
 * `statscompare d1/01-01-2019 d2/01-02-2019 p/month`
 * `statscompare d1/01-01-2019 d2/07-01-2019 d3/07-01-2019 d4/13-02-2019 p/7`
 * `statscompare d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food`
+// end::stats[]
 
 === Listing entered commands : `history`
 
