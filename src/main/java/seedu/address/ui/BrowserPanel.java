@@ -64,7 +64,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public BrowserPanel(ObservableValue<Expense> selectedExpense, ObservableValue<Debt> selectedDebt,
                         ObservableValue<Budget> selectedBudget, ObservableValue<Recurring> selectedRecurring,
-                        ObservableValue<Statistics> selectedStatistic) {
+                        ObservableValue<Statistics> statistics) {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
@@ -99,6 +99,15 @@ public class BrowserPanel extends UiPart<Region> {
 
         // Load recurring page when selected recurring changes.
         selectedRecurring.addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                loadDefaultPage();
+                return;
+            }
+            loadObjectPage(newValue);
+        });
+
+        // Load expense page when selected expense changes.
+        statistics.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 loadDefaultPage();
                 return;
@@ -141,7 +150,7 @@ public class BrowserPanel extends UiPart<Region> {
                     + QUERY_AMOUNT + DOLLAR_SIGN + ((Debt) object).getAmount().toString()
                     + QUERY_DEADLINE + ((Debt) object).getDeadline().toString()
                     + QUERY_REMARK + ((Debt) object).getRemarks();
-        } else {
+        } else if (object instanceof Expense){
             url = EXPENSES_PAGE_URL.toExternalForm()
                     + QUESTION_MARK
                     + QUERY_NAME + ((Expense) object).getName().name
@@ -149,7 +158,12 @@ public class BrowserPanel extends UiPart<Region> {
                     + QUERY_AMOUNT + DOLLAR_SIGN + ((Expense) object).getAmount().toString()
                     + QUERY_DATE + ((Expense) object).getDate().toString()
                     + QUERY_REMARK + ((Expense) object).getRemarks();
+        } else if (object instanceof Statistics){
+            url = STATISTICS_PAGE_URL.toExternalForm();
+        } else {
+            url = "";
         }
+
 
         loadPage(url);
     }
