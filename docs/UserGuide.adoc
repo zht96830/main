@@ -111,7 +111,7 @@ Shortcut: `ae n/NAME $/AMOUNT c/CATEGORY [d/DATE] [r/REMARK]`
 
 ====
 * The NAME should only contain alphanumeric characters and spaces, and it should not be blank.
-* The AMOUNT should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.
+* The AMOUNT should only contain positive numbers and reflect the value in dollars. Values accepted are in the range of $0.01 to $9,999,999.99. A maximum of 2 decimal places are allowed.
 * The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.
 * The DATE should be in dd-mm-yyyy format.
 * If DATE is omitted, current date will be used.
@@ -253,7 +253,7 @@ Shortcut: `ad n/PERSON_OWED $/AMOUNT_OWED c/CATEGORY due/DEADLINE [r/REMARK]`
 
 ====
 * The PERSON_OWED should only contain alphanumeric characters and spaces, and it should not be blank.
-* The AMOUNT_OWED should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.
+* The AMOUNT_OWED should only contain positive numbers and reflect the value in dollars. Values accepted are in the range of $0.01 to $9,999,999.99. A maximum of 2 decimal places are allowed.
 * The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.
 * The DEADLINE should be in dd-mm-yyyy format.
 * If REMARK is omitted, no remarks will be stored.
@@ -350,7 +350,7 @@ Shortcut: `ar n/NAME $/AMOUNT c/CATEGORY [d/START_DATE] [r/REMARK] f/FREQUENCY o
 
 ====
 * The NAME should only contain alphanumeric characters and spaces, and it should not be blank.
-* The AMOUNT should only contain numbers, reflect the value in dollars and it should be at least 1 digit long.
+* The AMOUNT should only contain positive numbers and reflect the value in dollars. Values accepted are in the range of $0.01 to $9,999,999.99. A maximum of 2 decimal places are allowed.
 * The CATEGORY is case insensitive and should only be one of the following: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS.
 * The START_DATE should be in dd-mm-yyyy format.
 * If START_DATE is omitted, current date will be used.

@@ -2,8 +2,8 @@ package seedu.address.model.recurring;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.PriorityQueue;
 
 import seedu.address.model.attributes.Amount;
 import seedu.address.model.attributes.Category;
@@ -21,7 +21,7 @@ public class Recurring extends Expense {
     // Additional fields
     private Frequency frequency;
     private Occurrence occurrence;
-    private PriorityQueue<Expense> recurringListOfExpenses;
+    private ArrayList<Expense> recurringListOfExpenses;
 
     /**
      * Initializes a newly created Recurring object that contains only the compulsory fields.
@@ -32,12 +32,22 @@ public class Recurring extends Expense {
         requireAllNonNull(frequency, occurrence);
         this.frequency = frequency;
         this.occurrence = occurrence;
+        this.recurringListOfExpenses = new ArrayList<>(occurrence.value);
         for (int i=0; i < occurrence.value; i++) {
+            Name newName = new Name(name.name + " (Recurring)");
+
             Date newDate = new Date(date);
-            newDate.setLocalDate(date.getLocalDate().plusMonths(i));
-            Expense toAdd = new Expense(name, amount, newDate, category, remarks);
-            recurringListOfExpenses.add(toAdd);
+            if (frequency.value == "D") {
+                newDate.setLocalDate(date.getLocalDate().plusDays(i));
+            } else if (frequency.value.equals("M")) {
+                newDate.setLocalDate(date.getLocalDate().plusMonths(i));
+            } else if (frequency.value == "Y") {
+                newDate.setLocalDate(date.getLocalDate().plusYears(i));
+            } else {System.out.println(frequency);}
+
+            Expense toAdd = new Expense(newName, amount, newDate, category, remarks);
             //System.out.println(toAdd);
+            this.recurringListOfExpenses.add(toAdd);
         }
     }
 

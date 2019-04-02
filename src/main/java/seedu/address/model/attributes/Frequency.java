@@ -23,7 +23,7 @@ public class Frequency {
     public Frequency(String frequency) {
         requireNonNull(frequency);
         checkArgument(isValidFrequency(frequency), MESSAGE_CONSTRAINTS);
-        value = frequency;
+        value = frequency.toUpperCase();
     }
 
     /**
