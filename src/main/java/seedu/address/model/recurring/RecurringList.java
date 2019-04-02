@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.recurring.exceptions.DuplicateRecurringException;
+import seedu.address.model.recurring.exceptions.RecurringNotFoundException;
 
 /**
  * A list of recurring expenses that does not allow nulls. Duplicates are not allowed.
