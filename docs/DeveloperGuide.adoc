@@ -498,6 +498,7 @@ Below is the UML sequence diagram and a step-by-step explanation of an example u
 
 Work in Progress
 
+// tag::budget[]
 === Budget feature
 
 This feature allows users to set budgets for different categories so they can limit the amount spent for each category.
@@ -538,7 +539,7 @@ This method was included with the idea of allowing the user to add multiple budg
 
 Another possible enhancement would be to allow the user to set a recurring budget.
 For example, if a user wants to limit their daily spending to $20, maybe an `addrecurringbudget c/food $/20 f/d` command, similar to the recurring expense command, could be implemented so that the user does not have to add a budget everyday.
-
+// end::budget[]
 
 == Documentation
 

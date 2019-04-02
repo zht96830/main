@@ -195,6 +195,7 @@ Clears all expense entries from the finance tracker. +
 Format: `clearexpense` +
 Shortcut: `ce`
 
+// tag::budget[]
 === Adding a budget : `addbudget`
 
 Adds a budget with a time frame to the tracker. +
@@ -211,8 +212,8 @@ Shortcut: `ab $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]`
 
 Examples:
 
-* `addbudget c/food $/400  sd/1-2-2019 ed/28-2-2019`
-* `ab c/others $/12000 sd/1-1-2019 ed/31-12-2019`
+* `addbudget c/food $/400  sd/01-02-2019 ed/28-02-2019`
+* `ab c/others $/12000 sd/01-01-2019 ed/31-12-2019`
 
 Format 2: `addbudget` +
 Shortcut: `ab`
@@ -222,8 +223,8 @@ Examples:
 * `addbudget` +
 `Please enter the category of the budget: food` +
 `Please enter the amount of the budget: 400` +
-`Please enter the start date of budget: 01-2-2019` +
-`Please enter the end date of budget: 28-2-2019`
+`Please enter the start date of budget: 01-02-2019` +
+`Please enter the end date of budget: 28-02-2019`
 
 === Editing a budget: `editbudget`
 
@@ -240,8 +241,8 @@ Shortcut: `eb c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]`
 
 Examples:
 
-* `editbudget c/shopping ed/31-3-2019`
-* `eb c/others $/5000 sd/1-1-2019 ed/31-3-2019`
+* `editbudget c/shopping ed/31-03-2019`
+* `eb c/others $/5000 sd/01-01-2019 ed/31-03-2019`
 
 Format 2: `editbudget` +
 Shortcut: `eb`
@@ -274,6 +275,7 @@ Examples:
 Clears all budgets from the finance tracker. +
 Format: `clearbudget` +
 Shortcut: `cb`
+// end::budget[]
 
 === Listing debts: `listdebt`
 Shows a list of debts in the finance tracker according to the view specified.
