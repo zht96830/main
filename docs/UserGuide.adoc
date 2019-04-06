@@ -78,6 +78,7 @@ These statistics will help you better understand your expenses and make effectiv
 ** `n/Hamburger r/lunch`
 ** `n/Hamburger`
 * Parameters can be in any order e.g. if the command specifies `n/NAME $/AMOUNT c/CATEGORY`, `$/AMOUNT c/CATEGORY n/NAME` is also acceptable.
+* Repeated parameters e.g. n/NAME n/NAME $/AMOUNT c/CATEGORY is not acceptable.
 ====
 
 === Viewing help : `help`

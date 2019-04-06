@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.expenseparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_REPEATED_PREFIX_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_EXPENSE;
@@ -144,36 +145,12 @@ public class EditExpenseCommandParserTest {
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast() {
+    public void parse_multipleRepeatedFields_failure() {
         Index targetIndex = INDEX_FIRST_EXPENSE;
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE + AMOUNT_DESC_EXPENSE + DATE_DESC_EXPENSE + CATEGORY_DESC_EXPENSE
                 + REMARKS_DESC_EXPENSE;
 
-        EditExpenseCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
-                .withAmount(VALID_AMOUNT_EXPENSE).withCategory(VALID_CATEGORY_EXPENSE)
-                .withDate(VALID_DATE_EXPENSE).withRemarks(VALID_REMARKS_EXPENSE).build();
-        EditExpenseCommand expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_invalidValueFollowedByValidValue_success() {
-        // no other valid values specified
-        Index targetIndex = INDEX_FIRST_EXPENSE;
-        String userInput = targetIndex.getOneBased() + INVALID_AMOUNT_DESC + AMOUNT_DESC_EXPENSE;
-        EditExpenseCommand.EditExpenseDescriptor descriptor = new EditExpenseDescriptorBuilder()
-                .withAmount(VALID_AMOUNT_EXPENSE).build();
-        EditExpenseCommand expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // other valid values specified
-        userInput = targetIndex.getOneBased() + CATEGORY_DESC_EXPENSE + INVALID_AMOUNT_DESC + DATE_DESC_EXPENSE
-                + AMOUNT_DESC_EXPENSE;
-        descriptor = new EditExpenseDescriptorBuilder().withAmount(VALID_AMOUNT_EXPENSE)
-                .withCategory(VALID_CATEGORY_EXPENSE).withDate(VALID_DATE_EXPENSE).build();
-        expectedCommand = new EditExpenseCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, MESSAGE_REPEATED_PREFIX_COMMAND);
     }
 }
