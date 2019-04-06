@@ -2,6 +2,7 @@ package seedu.address.logic.parser.budgetparsers;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_REPEATED_PREFIX_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
@@ -40,6 +41,11 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditBudgetCommand.MESSAGE_USAGE));
+        }
+
+        if (hasRepeatedPrefixes(argMultimap, PREFIX_AMOUNT, PREFIX_CATEGORY,
+                PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_REMARKS)) {
+            throw new ParseException(MESSAGE_REPEATED_PREFIX_COMMAND);
         }
 
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
@@ -89,5 +95,13 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true at least one prefix have more than to one value
+     * {@code ArgumentMultiMap}.
+     */
+    private static boolean hasRepeatedPrefixes(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return !(Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getAllValues(prefix).size() <= 1));
     }
 }
