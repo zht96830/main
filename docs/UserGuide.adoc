@@ -33,7 +33,7 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 * **`listexpense`**`v/all` : lists all contacts
-* **`addexpense`**`n/Sofa $/200 c/HOME` : adds an expense named `Sofa` of amount `$200` and category of `HOME` to the Finance Tracker.
+* **`addexpense`**`n/Sofa $/200 c/UTILITIES` : adds an expense named `Sofa` of amount `$200` and category of `UTILITIES` to the Finance Tracker.
 * **`deleteexpense`**`3` : deletes the 3rd expense shown in the current list
 * *`exit`* : exits the app
 .  Refer to <<Commands>> for details of each command.
@@ -98,7 +98,7 @@ Shortcut: `le v/VIEW`
 ** v/month: displays list of expenses added since a month ago
 ** v/year: displays list of expenses added since a year ago
 ** v/CATEGORY: displays list of expenses with CATEGORY such as “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive
-** v/$10, v/$100, v/$1000: display list of expenses with amount greater than $10, $100 or $1000
+** v/$10, v/$100, v/$1000: display list of expenses with amount greater than or equal to $10, $100 or $1000
 ====
 
 // end::listexpense[]
@@ -123,8 +123,8 @@ You can omit [optional] parameters by leaving them empty.
 
 Examples:
 
-* `addexpense n/BKT $/3.00 c/food d/13-01-1996 r/My weekly bak kut teh intake.`
-* `ae n/Sofa $/200 c/HOME`
+* `addexpense n/BKT $/3.00 c/food d/13-01-2019 r/My weekly bak kut teh intake.`
+* `ae n/Sofa $/200 c/UTILITIES`
 
 === Editing an expense : `editexpense`
 
@@ -204,7 +204,7 @@ Shortcut: `eb c/CATEGORY [$/AMOUNT] [sd/NEW_START_DATE] [ed/NEW_END_DATE]`
 
 Examples:
 
-* `editbudget c/shopping ed/31-03-2019`
+* `editbudget c/food ed/31-03-2019`
 * `eb c/others $/5000 sd/01-01-2019 ed/31-03-2019`
 
 === Deleting a budget: `deletebudget`
@@ -366,7 +366,7 @@ You can omit (optional) parameters by leaving them empty.
 
 Examples:
 
-* `addrecurring n/Phone Bill $/50.00 c/utilities d/23-2-2019 r/Signed a new 2 year contract. f/M o/24` +
+* `addrecurring n/Phone Bill $/50.00 c/utilities d/23-02-2019 r/Signed a new 2 year contract. f/M o/24` +
 * `ar n/Magazine Subscription $/20 c/utilities f/M o/12`
 
 === Editing a recurring : `editrecurring`
