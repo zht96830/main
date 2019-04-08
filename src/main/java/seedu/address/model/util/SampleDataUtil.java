@@ -39,12 +39,30 @@ public class SampleDataUtil {
             new Expense(new Name("See doctor"), new Amount("6520"), new Date("26-02-2019"),
                 HEALTHCARE, "For fever at UHC"),
             new Expense(new Name("Telephone bills"), new Amount("2510"), new Date("28-02-2019"),
-                Category.UTILITIES, "Exceeded limit by 1 GB")
+                Category.UTILITIES, "Exceeded limit by 1 GB"),
+            new Expense(new Name("Car Repairs"), new Amount("100.50"), new Date("13-04-2019"),
+                UTILITIES, "Car was not feeling okay"),
+            new Expense(new Name("North Korea Air Tickets"), new Amount("530"), new Date("08-04-2019"),
+                    UTILITIES, "Wanted to see Kim Jong Un"),
+            new Expense(new Name("Double McSpicy from McDonalds"), new Amount("6.90"), new Date("08-04-2019"),
+                    UTILITIES, "My ass gon be on fyreee"),
+            new Expense(new Name("Cab to work"), new Amount("10.50"), new Date("08-04-2019"),
+                    UTILITIES, "I was late so I took the cab to work"),
+            new Expense(new Name("doctor consultation"), new Amount("30.50"), new Date("15-01-2019"),
+                    UTILITIES, "I was not feeling okay")
         };
     }
 
     public static Expense[] getSortedSampleExpenses() {
         return new Expense[] {
+            new Expense(new Name("Car Repairs"), new Amount("100.50"), new Date("13-04-2019"),
+                    UTILITIES, "Car was not feeling okay"),
+            new Expense(new Name("Cab to work"), new Amount("10.50"), new Date("08-04-2019"),
+                    UTILITIES, "I was late so I took the cab to work"),
+            new Expense(new Name("Double McSpicy from McDonalds"), new Amount("6.90"), new Date("08-04-2019"),
+                    UTILITIES, "My ass gon be on fyreee"),
+            new Expense(new Name("North Korea Air Tickets"), new Amount("530"), new Date("08-04-2019"),
+                    UTILITIES, "Wanted to see Kim Jong Un"),
             new Expense(new Name("Top up EZ link card"), new Amount("2000"), new Date("03-03-2019"),
                     TRANSPORT, "Topped up at KR MRT"),
             new Expense(new Name("Telephone bills"), new Amount("2510"), new Date("28-02-2019"),
@@ -55,6 +73,8 @@ public class SampleDataUtil {
                     FOOD, null),
             new Expense(new Name("Japan Ticket"), new Amount("62040"), new Date("21-01-2019"),
                     Category.TRAVEL, null),
+            new Expense(new Name("doctor consultation"), new Amount("30.50"), new Date("15-01-2019"),
+                    UTILITIES, "I was not feeling okay"),
             new Expense(new Name("Chicken Rice"), new Amount("1021"), new Date("11-12-2018"),
                     FOOD, "Bishan Chicken Rice")
         };
@@ -86,8 +106,14 @@ public class SampleDataUtil {
                     "for duck rice last week"),
             new Debt(new Name("Bob"), new Amount("17.20"), new Date("05-12-2019"), TRANSPORT,
                     "taxi from NUS to Home"),
-            new Debt(new Name("Charlie"), new Amount("57.30"), new Date("08-08-2019"), SHOPPING,
-                    "groceries: fish, eggs, chicken, beef, oyster sauce")
+            new Debt(new Name("Charlie"), new Amount("27.30"), new Date("08-08-2019"), SHOPPING,
+                    "groceries: fish, eggs, chicken, beef, oyster sauce"),
+            new Debt(new Name("Debbie"), new Amount("1027.30"), new Date("03-08-2019"), WORK,
+                    "money for my work laptop"),
+            new Debt(new Name("Evan"), new Amount("47.30"), new Date("01-08-2019"), UTILITIES,
+                    "for lending me to pay my bills"),
+            new Debt(new Name("Frank"), new Amount("17.30"), new Date("07-08-2019"), ENTERTAINMENT,
+                    "Frank paid for my movie tickets")
         };
     }
 
@@ -96,7 +122,14 @@ public class SampleDataUtil {
             new Recurring(new Name("Phone Bill"), new Amount("50.00"), new Date("23-02-2019"),
                     UTILITIES, "Signed a new 2 year plan.", new Frequency("M"), new Occurrence("24")),
             new Recurring(new Name("Spotify Subscription"), new Amount("20.00"), new Date("24-09-2019"),
-                    UTILITIES, "Spotify for a year!", new Frequency("M"), new Occurrence("12"))
+                    UTILITIES, "Spotify for a year!", new Frequency("M"), new Occurrence("12")),
+            new Recurring(new Name("Daily Lunch"), new Amount("5.00"), new Date("08-04-2019"),
+                    UTILITIES, "Every day lunch for the year", new Frequency("D"), new Occurrence("365")),
+            new Recurring(new Name("Electricity Bill"), new Amount("20.00"), new Date("08-04-2019"),
+                    UTILITIES, "Monthly electricity bill", new Frequency("M"), new Occurrence("12")),
+            new Recurring(new Name("Insurance"), new Amount("200.00"), new Date("08-04-2019"),
+                    UTILITIES, "Yearly insurance expense for 10 years", new Frequency("Y"),
+                    new Occurrence("10"))
         };
     }
 

@@ -49,7 +49,7 @@ public enum View {
         case $10:
         case $100:
         case $1000:
-            return "With amount greater than " + this.toString();
+            return "With amount greater than or equal to " + this.toString();
         default:
             return this.toString();
         }
