@@ -14,9 +14,28 @@ public class ListDebtCommandParserTest {
 
     private ListDebtCommandParser parser = new ListDebtCommandParser();
 
+    // Test that involves all
     @Test
-    public void parse_validArgs_success() {
+    public void parse_validArgs_all_returnsListDebtCommand() {
+        assertParseSuccess(parser, " v/all", new ListDebtCommand(View.ALL));
+    }
+
+    // Test that involves Date
+    @Test
+    public void parse_validArgs_month_returnsListDebtCommand() {
+        assertParseSuccess(parser, " v/month", new ListDebtCommand(View.MONTH));
+    }
+
+    // Test that involves Amount
+    @Test
+    public void parse_validArgs$100_returnsListDebtCommand() {
         assertParseSuccess(parser, " v/$100", new ListDebtCommand(View.$100));
+    }
+
+    // Test that involves Category
+    @Test
+    public void parse_validArgs_food_returnsListDebtCommand() {
+        assertParseSuccess(parser, " v/food", new ListDebtCommand(View.FOOD));
     }
 
     @Test

@@ -21,18 +21,9 @@ public class DateTest {
     public static final String INVALID_DATE_1 = "29-02-2019";
     public static final String INVALID_DATE_2 = "32-05-2021";
 
-    /*
     @Test
-
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Date(null));
-    }
-    */
-
-    @Test
-    public void constructor_invalidDate_throwsDateTimeParseException() {
-        Assert.assertThrows(DateTimeParseException.class, () -> new Date(INVALID_DATE_1));
-        Assert.assertThrows(DateTimeParseException.class, () -> new Date(INVALID_DATE_2));
+        Assert.assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
     }
 
     @Test
@@ -47,6 +38,8 @@ public class DateTest {
         assertSame("format", Date.isValidDate("01-01-18")); // need 4 numbers for year, e.g. 2018
         assertSame("format", Date.isValidDate("01-01-2018a")); // alphabets not allowed
         assertSame("format", Date.isValidDate("date")); // non-numeric
+        assertSame("does not exist", Date.isValidDate("29-02-2019")); // invalid day
+        assertSame("does not exist", Date.isValidDate("29-13-2019")); // invalid month
 
         // valid dates
         assertSame("valid", Date.isValidDate("01-01-2019"));
