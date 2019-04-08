@@ -56,16 +56,14 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
-            if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).isEqualOrAfterToday())) {
-                throw new ParseException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
-            }
             editBudgetDescriptor.setStartDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()));
+            editBudgetDescriptor.isStartDateEdited = true;
         }
 
         if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()) {
             if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) { // already checked start date
-                if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()).getLocalDate()
-                        .isAfter(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).getLocalDate()))) {
+                if (ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get()).getLocalDate()
+                        .isBefore(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).getLocalDate())) {
                     throw new ParseException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
                 }
             }

@@ -344,8 +344,10 @@ public class ModelManager implements Model {
         int sum = 0;
         for (Expense expense : filteredExpenses) {
             if (expense.getCategory() == budget.getCategory()
-                    && expense.getDate().getLocalDate().isAfter(budget.getStartDate().getLocalDate())
-                    && expense.getDate().getLocalDate().isBefore(budget.getEndDate().getLocalDate())) {
+                    && (expense.getDate().getLocalDate().isAfter(budget.getStartDate().getLocalDate())
+                    || expense.getDate().getLocalDate().isEqual(budget.getStartDate().getLocalDate()))
+                    && (expense.getDate().getLocalDate().isBefore(budget.getEndDate().getLocalDate())
+                    || expense.getDate().getLocalDate().isEqual(budget.getEndDate().getLocalDate()))) {
                 sum += expense.getAmount().value;
             }
         }
