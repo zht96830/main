@@ -29,7 +29,7 @@ import seedu.address.model.Model;
 import seedu.address.model.attributes.View;
 import seedu.address.model.debt.Debt;
 
-
+//@@author jamessspanggg
 /**
  * Lists all debts in the Finance Tracker to the user.
  */

@@ -2,11 +2,14 @@ package seedu.address.logic.parser.debtparsers;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_REPEATED_PREFIX_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
@@ -14,6 +17,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -63,6 +67,19 @@ public class EditDebtCommandParser implements Parser<EditDebtCommand> {
             throw new ParseException(EditDebtCommand.MESSAGE_NOT_EDITED);
         }
 
+        if (hasRepeatedPrefixes(argMultimap, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_CATEGORY,
+                PREFIX_DUE, PREFIX_REMARKS)) {
+            throw new ParseException(MESSAGE_REPEATED_PREFIX_COMMAND);
+        }
+
         return new EditDebtCommand(index, editDebtDescriptor);
+    }
+
+    /**
+     * Returns true at least one prefix have more than to one value
+     * {@code ArgumentMultiMap}.
+     */
+    private static boolean hasRepeatedPrefixes(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return !(Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getAllValues(prefix).size() <= 1));
     }
 }
