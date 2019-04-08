@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -13,7 +14,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.attributes.Category;
@@ -42,6 +42,7 @@ public class ModelManager implements Model {
     private final FilteredList<Debt> filteredDebts;
     private final FilteredList<Recurring> filteredRecurrings;
     private final FilteredList<Budget> filteredBudgets;
+    private List<Expense> unfilteredExpenses;
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Budget> selectedBudget = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Debt> selectedDebt = new SimpleObjectProperty<>();
@@ -67,6 +68,7 @@ public class ModelManager implements Model {
         filteredBudgets.addListener(this::ensureSelectedBudgetIsValid);
         filteredRecurrings = new FilteredList<>(versionedFinanceTracker.getRecurringList());
         filteredRecurrings.addListener(this::ensureSelectedRecurringIsValid);
+        unfilteredExpenses = financeTracker.getExpenseList();
     }
 
     public ModelManager() {
@@ -181,6 +183,7 @@ public class ModelManager implements Model {
     public void addExpense(Expense expense) {
         versionedFinanceTracker.addExpense(expense);
         updateFilteredExpenseList(PREDICATE_SHOW_ALL_EXPENSES);
+        unfilteredExpenses = versionedFinanceTracker.getExpenseList();
         int index = -1;
         for (Budget budget : filteredBudgets) {
             if (budget.getCategory() == expense.getCategory()) {
@@ -198,13 +201,14 @@ public class ModelManager implements Model {
             updatedBudget.updatePercentage();
             versionedFinanceTracker.setBudget(targetBudget, updatedBudget);
         }
+        updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
     }
 
     @Override
     public void setExpense(Expense target, Expense editedExpense) {
         requireAllNonNull(target, editedExpense);
         versionedFinanceTracker.setExpense(target, editedExpense);
-
+        unfilteredExpenses = versionedFinanceTracker.getExpenseList();
         // find budget of initial category
         int index = -1;
         for (Budget budget : filteredBudgets) {
@@ -341,13 +345,12 @@ public class ModelManager implements Model {
 
     @Override
     public void addBudget(Budget budget) {
+        unfilteredExpenses = versionedFinanceTracker.getExpenseList();
         int sum = 0;
-        for (Expense expense : filteredExpenses) {
+        for (Expense expense : unfilteredExpenses) {
             if (expense.getCategory() == budget.getCategory()
-                    && (expense.getDate().getLocalDate().isAfter(budget.getStartDate().getLocalDate())
-                    || expense.getDate().getLocalDate().isEqual(budget.getStartDate().getLocalDate()))
-                    && (expense.getDate().getLocalDate().isBefore(budget.getEndDate().getLocalDate())
-                    || expense.getDate().getLocalDate().isEqual(budget.getEndDate().getLocalDate()))) {
+                    && !(expense.getDate().getLocalDate().isBefore(budget.getStartDate().getLocalDate()))
+                    && !(expense.getDate().getLocalDate().isAfter(budget.getEndDate().getLocalDate()))) {
                 sum += expense.getAmount().value;
             }
         }
@@ -360,6 +363,18 @@ public class ModelManager implements Model {
     @Override
     public void setBudget(Budget target, Budget editedBudget) {
         requireAllNonNull(target, editedBudget);
+        editedBudget.setTotalSpent(0);
+        unfilteredExpenses = versionedFinanceTracker.getExpenseList();
+        int sum = 0;
+        for (Expense expense : unfilteredExpenses) {
+            if (expense.getCategory() == editedBudget.getCategory()
+                    && !(expense.getDate().getLocalDate().isBefore(editedBudget.getStartDate().getLocalDate()))
+                    && !(expense.getDate().getLocalDate().isAfter(editedBudget.getEndDate().getLocalDate()))) {
+                sum += expense.getAmount().value;
+            }
+        }
+        editedBudget.setTotalSpent(sum);
+        editedBudget.updatePercentage();
         versionedFinanceTracker.setBudget(target, editedBudget);
     }
 

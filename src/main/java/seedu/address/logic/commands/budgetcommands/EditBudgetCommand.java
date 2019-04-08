@@ -136,7 +136,7 @@ public class EditBudgetCommand extends Command {
         private String remarks;
         private int totalSpent;
         private double percentage;
-        public boolean isStartDateEdited;
+        private boolean isStartDateEdited;
 
         public EditBudgetDescriptor() {}
 
@@ -209,6 +209,14 @@ public class EditBudgetCommand extends Command {
 
         public Optional<Double> getPercentage() {
             return Optional.ofNullable(percentage);
+        }
+
+        public void setIsStartDateEdited(boolean isStartDateEdited) {
+            this.isStartDateEdited = isStartDateEdited;
+        }
+
+        public Optional<Boolean> getIsStartDateEdited() {
+            return Optional.ofNullable(isStartDateEdited);
         }
 
         @Override
