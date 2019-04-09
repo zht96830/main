@@ -82,12 +82,13 @@ public class EditBudgetCommand extends Command {
 
         Budget budgetToEdit = lastShownList.get(index);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDescriptor);
-        /*if (!(editedBudget.getStartDate().isEqualOrAfterToday())) {
-            throw new CommandException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
-        }*/
-        if (!(editedBudget.getEndDate().getLocalDate().isAfter(editedBudget.getStartDate().getLocalDate()))
-                || !(editedBudget.getEndDate().getLocalDate().isAfter(budgetToEdit.getStartDate().getLocalDate()))) {
+        if (editedBudget.getEndDate().getLocalDate().isBefore(editedBudget.getStartDate().getLocalDate())) {
             throw new CommandException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+        }
+        if (!editBudgetDescriptor.isStartDateEdited) {
+            if (editedBudget.getEndDate().getLocalDate().isBefore(budgetToEdit.getStartDate().getLocalDate())) {
+                throw new CommandException(Budget.MESSAGE_CONSTRAINTS_END_DATE);
+            }
         }
 
         model.setBudget(budgetToEdit, editedBudget);
@@ -109,9 +110,6 @@ public class EditBudgetCommand extends Command {
 
         Amount updatedAmount = editBudgetDescriptor.getAmount().orElse(budgetToEdit.getAmount());
         Date updatedStartDate = editBudgetDescriptor.getStartDate().orElse(budgetToEdit.getStartDate());
-        /*if (!(updatedStartDate.isEqualOrAfterToday())) {
-            throw new IllegalArgumentException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
-        }*/
         Date updatedEndDate = editBudgetDescriptor.getEndDate().orElse(budgetToEdit.getEndDate());
         String updatedRemarks = editBudgetDescriptor.getRemarks().orElse(budgetToEdit.getRemarks());
         double updatedPercentage = 100 * budgetToEdit.getTotalSpent() / updatedAmount.value * 100;
@@ -138,7 +136,7 @@ public class EditBudgetCommand extends Command {
         private String remarks;
         private int totalSpent;
         private double percentage;
-
+        private boolean isStartDateEdited;
 
         public EditBudgetDescriptor() {}
 
@@ -154,6 +152,7 @@ public class EditBudgetCommand extends Command {
             setRemarks(toCopy.remarks);
             setTotalSpent(toCopy.totalSpent);
             setPercentage(toCopy.percentage);
+            this.isStartDateEdited = toCopy.isStartDateEdited;
         }
 
         /**
@@ -210,6 +209,14 @@ public class EditBudgetCommand extends Command {
 
         public Optional<Double> getPercentage() {
             return Optional.ofNullable(percentage);
+        }
+
+        public void setIsStartDateEdited(boolean isStartDateEdited) {
+            this.isStartDateEdited = isStartDateEdited;
+        }
+
+        public Optional<Boolean> getIsStartDateEdited() {
+            return Optional.ofNullable(isStartDateEdited);
         }
 
         @Override

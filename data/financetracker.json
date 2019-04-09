@@ -1,32 +1,60 @@
 {
   "expenses" : [ {
-    "name" : "bkt",
-    "amount" : "5",
-    "date" : "23-03-2019",
+    "name" : "meow",
+    "amount" : "10",
+    "date" : "09-04-2019",
+    "category" : "OTHERS",
+    "remarks" : ""
+  }, {
+    "name" : "woof",
+    "amount" : "25",
+    "date" : "09-04-2019",
+    "category" : "OTHERS",
+    "remarks" : ""
+  }, {
+    "name" : "caifan",
+    "amount" : "3",
+    "date" : "09-04-2019",
     "category" : "FOOD",
     "remarks" : ""
   }, {
-    "name" : "idk",
-    "amount" : "12",
-    "date" : "23-03-2019",
-    "category" : "FOOD",
-    "remarks" : ""
-  }, {
-    "name" : "idk",
-    "amount" : "12",
-    "date" : "23-03-2019",
+    "name" : "jb",
+    "amount" : "300",
+    "date" : "09-04-2019",
     "category" : "TRAVEL",
+    "remarks" : ""
+  }, {
+    "name" : "wanton mee",
+    "amount" : "3",
+    "date" : "09-04-2019",
+    "category" : "FOOD",
     "remarks" : ""
   } ],
   "debts" : [ ],
   "budgets" : [ {
-    "amount" : "500",
+    "amount" : "450",
     "category" : "FOOD",
     "startDate" : "01-04-2019",
-    "endDate" : "30-04-2019",
+    "endDate" : "20-04-2019",
     "remarks" : "",
-    "totalSpent" : "0",
-    "percentage" : "0.0"
+    "totalSpent" : "600",
+    "percentage" : "1.3333333333333335"
+  }, {
+    "amount" : "200",
+    "category" : "OTHERS",
+    "startDate" : "08-04-2019",
+    "endDate" : "08-04-2019",
+    "remarks" : "",
+    "totalSpent" : "2000",
+    "percentage" : "10.0"
+  }, {
+    "amount" : "5000",
+    "category" : "TRAVEL",
+    "startDate" : "01-01-2019",
+    "endDate" : "21-12-2019",
+    "remarks" : "",
+    "totalSpent" : "30000",
+    "percentage" : "6.0"
   } ],
   "recurrings" : [ ]
 }
