@@ -64,7 +64,7 @@ public class Date implements Comparable<Date> {
         if (!test.matches(VALIDATION_REGEX)) {
             return "format";
         } else if (!doesDateExist(test)) {
-            return "exist";
+            return "does not exist";
         }
         return "valid";
     }

@@ -29,6 +29,8 @@ public class AmountTest {
         assertFalse(Amount.isValidAmount("")); // empty string
         assertFalse(Amount.isValidAmount(" ")); // spaces only
         assertFalse(Amount.isValidAmount("amount")); // non-numeric
+        assertFalse(Amount.isValidAmount("0")); // 0 value
+        assertFalse(Amount.isValidAmount("-1")); // negative value
         assertFalse(Amount.isValidAmount("91p041")); // alphabets within digits
         assertFalse(Amount.isValidAmount("12345678")); // more than 7 digits in dollars
         assertFalse(Amount.isValidAmount("1.")); // . without decimal places
