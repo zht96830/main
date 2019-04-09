@@ -418,11 +418,11 @@ The purpose of this feature is to delete or edit expenses already added by a rec
 // tag::debt[]
 === Debt Feature
 
-The Debt feature consists of `adddebt`, `editdebt`, `listdebt`, `deletedebt`, `cleardebt` and `paydebt`. +
+The Debt feature consists of `adddebt`, `editdebt`, `listdebt`, `deletedebt`, `selectdebt`, `cleardebt` and `paydebt`. +
 
 This feature allows users to add debts to the finance tracker and be able to constantly keep track of them. This is done by calling `Logic#execute` which creates an `AddDebtCommand`. This command then calls `Model#addDebt`, adding the specified debt into the debt list. +
 
-Editing, deleting and clearing of debts work in a similar manner.
+Editing, deleting, selecting and clearing of debts work in a similar manner.
 
 ==== Pay Debt Feature
 
