@@ -30,6 +30,7 @@ public class ListRecurringCommandTest {
         expectedModel = new ModelManager(model.getFinanceTracker(), new UserPrefs());
     }
 
+    // Tests that involves listing ALL
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListRecurringCommand(View.ALL), model, commandHistory,

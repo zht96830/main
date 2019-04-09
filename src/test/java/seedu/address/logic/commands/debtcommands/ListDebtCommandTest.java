@@ -31,6 +31,7 @@ public class ListDebtCommandTest {
         expectedModel = new ModelManager(model.getFinanceTracker(), new UserPrefs());
     }
 
+    // Tests that involves listing ALL
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListDebtCommand(View.ALL), model, commandHistory,

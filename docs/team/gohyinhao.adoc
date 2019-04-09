@@ -15,7 +15,7 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to manage debts in the finance tracker application*
-** What it does: allows the user to add, edit, delete debts, as well as easily convert these debts into an expense once the debt is cleared. Integrated to work with current undo/redo, history and list commands.
+** What it does: allows the user to add, edit, delete, select debts, as well as easily convert these debts into an expense once the debt is cleared. Integrated to work with current undo/redo, history and list commands.
 ** Justification: This feature improves the product significantly because a user can now easily and conveniently keep track of their debts owed to other entities.
 ** Highlights: This enhancement is a core feature of any typical finance tracker. It required adjustments and integration with the existing model, logic, UI components and builds the foundation for any future enhancements involving debts.
 

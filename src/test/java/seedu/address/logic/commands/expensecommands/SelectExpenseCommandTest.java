@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.expensecommands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -20,9 +20,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
+ * Contains integration tests (interaction with the Model) for {@code SelectExpenseCommand}.
  */
-public class SelectCommandTest {
+public class SelectExpenseCommandTest {
     private Model model = new ModelManager(getTypicalFinanceTrackerWithExpenses(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalFinanceTrackerWithExpenses(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -65,14 +65,14 @@ public class SelectCommandTest {
 
     @Test
     public void equals() {
-        SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_EXPENSE);
-        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_EXPENSE);
+        SelectExpenseCommand selectFirstCommand = new SelectExpenseCommand(INDEX_FIRST_EXPENSE);
+        SelectExpenseCommand selectSecondCommand = new SelectExpenseCommand(INDEX_SECOND_EXPENSE);
 
         // same object -> returns true
         assertTrue(selectFirstCommand.equals(selectFirstCommand));
 
         // same values -> returns true
-        SelectCommand selectFirstCommandCopy = new SelectCommand(INDEX_FIRST_EXPENSE);
+        SelectExpenseCommand selectFirstCommandCopy = new SelectExpenseCommand(INDEX_FIRST_EXPENSE);
         assertTrue(selectFirstCommand.equals(selectFirstCommandCopy));
 
         // different types -> returns false
@@ -86,23 +86,23 @@ public class SelectCommandTest {
     }
 
     /**
-     * Executes a {@code SelectCommand} with the given {@code index},
+     * Executes a {@code SelectExpenseCommand} with the given {@code index},
      * and checks that the model's selected expense is set to the expense at {@code index} in the filtered expense list.
      */
     private void assertExecutionSuccess(Index index) {
-        SelectCommand selectCommand = new SelectCommand(index);
-        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        SelectExpenseCommand selectExpenseCommand = new SelectExpenseCommand(index);
+        String expectedMessage = String.format(SelectExpenseCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
         expectedModel.setSelectedExpense(model.getFilteredExpenseList().get(index.getZeroBased()));
 
-        assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(selectExpenseCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     /**
-     * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
+     * Executes a {@code SelectExpenseCommand} with the given {@code index}, and checks that a {@code CommandException}
      * is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
-        SelectCommand selectCommand = new SelectCommand(index);
-        assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
+        SelectExpenseCommand selectExpenseCommand = new SelectExpenseCommand(index);
+        assertCommandFailure(selectExpenseCommand, model, commandHistory, expectedMessage);
     }
 }

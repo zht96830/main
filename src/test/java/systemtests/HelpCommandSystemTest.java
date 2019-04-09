@@ -11,8 +11,8 @@ import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
+import seedu.address.logic.commands.expensecommands.SelectExpenseCommand;
 import seedu.address.logic.commands.generalcommands.HelpCommand;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.StatusBarFooter;
@@ -60,7 +60,7 @@ public class HelpCommandSystemTest extends FinanceTrackerSystemTest {
         getMainWindowHandle().focus();
 
         // assert that while the help window is open the UI updates correctly for a command execution
-        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased());
+        executeCommand(SelectExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased());
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());

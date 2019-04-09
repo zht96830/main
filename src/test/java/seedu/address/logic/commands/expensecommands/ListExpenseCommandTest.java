@@ -30,6 +30,7 @@ public class ListExpenseCommandTest {
         expectedModel = new ModelManager(model.getFinanceTracker(), new UserPrefs());
     }
 
+    // Tests that involves listing ALL
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListExpenseCommand(View.ALL), model, commandHistory,
