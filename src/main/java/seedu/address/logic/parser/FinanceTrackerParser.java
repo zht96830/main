@@ -11,6 +11,7 @@ import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
 import seedu.address.logic.commands.budgetcommands.ClearBudgetCommand;
 import seedu.address.logic.commands.budgetcommands.DeleteBudgetCommand;
 import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
+import seedu.address.logic.commands.budgetcommands.SelectBudgetCommand;
 import seedu.address.logic.commands.debtcommands.AddDebtCommand;
 import seedu.address.logic.commands.debtcommands.ClearDebtCommand;
 import seedu.address.logic.commands.debtcommands.DeleteDebtCommand;
@@ -40,6 +41,7 @@ import seedu.address.logic.commands.statscommands.StatsCommand;
 import seedu.address.logic.parser.budgetparsers.AddBudgetCommandParser;
 import seedu.address.logic.parser.budgetparsers.DeleteBudgetCommandParser;
 import seedu.address.logic.parser.budgetparsers.EditBudgetCommandParser;
+import seedu.address.logic.parser.budgetparsers.SelectBudgetCommandParser;
 import seedu.address.logic.parser.debtparsers.AddDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.DeleteDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.EditDebtCommandParser;
@@ -128,6 +130,10 @@ public class FinanceTrackerParser {
         case SelectDebtCommand.COMMAND_WORD:
         case SelectDebtCommand.COMMAND_WORD_SHORTCUT:
             return new SelectDebtCommandParser().parse(arguments);
+
+        case SelectBudgetCommand.COMMAND_WORD:
+        case SelectBudgetCommand.COMMAND_WORD_SHORTCUT:
+            return new SelectBudgetCommandParser().parse(arguments);
 
         case DeleteExpenseCommand.COMMAND_WORD:
         case DeleteExpenseCommand.COMMAND_WORD_SHORTCUT:

@@ -15,7 +15,7 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 == Summary of contributions
 
 * *Major enhancement*: added the feature that *lets users to manage their budgets in the finance tracker application*
-** What it does: allows the user to add, edit and delete budgets while helping the user to keep track of how much the user has spent for each category of budget. Integrated to work with current undo/redo and history commands.
+** What it does: allows the user to add, edit, delete, select and clear all budgets while helping the user to keep track of how much the user has spent for each category of budget. Integrated to work with current undo/redo and history commands.
 ** Justification: This feature improves the product significantly because it is now simpler for a user to track how much they are spending relative to how much they allocate to a particular category.
 ** Highlights: The implementation of this feature required making significant changes to existing codes, and integrating them together. It provides a platform for any future enhancements to the finance tracker like the ability to add a recurring budget.
 

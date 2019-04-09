@@ -240,6 +240,21 @@ Examples:
 
 * `deletebudget c/food`
 
+=== Selecting a budget: `selectbudget`
+
+Selects a budget in the finance tracker.
+
+====
+* Selects the budget of the specified `CATEGORY`.
+====
+
+Format: `selectbudget c/CATEGORY` +
+Shortcut: `sb c/CATEGORY`
+
+Examples:
+
+* `selectbudget c/work`
+
 === Clearing all budgets: `clearbudget`
 
 Clears all budgets from the finance tracker. +
