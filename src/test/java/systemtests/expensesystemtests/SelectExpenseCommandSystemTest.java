@@ -1,10 +1,10 @@
-package systemtests;
+package systemtests.expensesystemtests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
+import static seedu.address.logic.commands.expensecommands.SelectExpenseCommand.MESSAGE_SELECT_PERSON_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TypicalExpenses.KEYWORD_MATCHING_LAPTOP;
@@ -13,12 +13,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.expensecommands.SelectExpenseCommand;
 import seedu.address.logic.commands.generalcommands.RedoCommand;
 import seedu.address.logic.commands.generalcommands.UndoCommand;
 import seedu.address.model.Model;
+import systemtests.FinanceTrackerSystemTest;
 
-public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
+public class SelectExpenseCommandSystemTest extends FinanceTrackerSystemTest {
     @Test
     public void select() {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
@@ -26,12 +27,12 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
         /* Case: select the first card in the expense list, command with leading spaces and trailing spaces
          * -> selected
          */
-        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased() + "   ";
+        String command = "   " + SelectExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased() + "   ";
         assertCommandSuccess(command, INDEX_FIRST_EXPENSE);
 
         /* Case: select the last card in the expense list -> selected */
         Index expenseCount = getLastIndex(getModel());
-        command = SelectCommand.COMMAND_WORD + " " + expenseCount.getOneBased();
+        command = SelectExpenseCommand.COMMAND_WORD + " " + expenseCount.getOneBased();
         assertCommandSuccess(command, expenseCount);
 
         /* Case: undo previous selection -> rejected */
@@ -46,7 +47,7 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: select the middle card in the expense list -> selected */
         Index middleIndex = getMidIndex(getModel());
-        command = SelectCommand.COMMAND_WORD + " " + middleIndex.getOneBased();
+        command = SelectExpenseCommand.COMMAND_WORD + " " + middleIndex.getOneBased();
         assertCommandSuccess(command, middleIndex);
 
         /* Case: select the current selected card -> selected */
@@ -59,43 +60,45 @@ public class SelectCommandSystemTest extends FinanceTrackerSystemTest {
          */
         showExpensesWithName(KEYWORD_MATCHING_LAPTOP);
         int invalidIndex = getModel().getFinanceTracker().getExpenseList().size();
-        command = SelectCommand.COMMAND_WORD + " " + invalidIndex;
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+        command = SelectExpenseCommand.COMMAND_WORD + " " + invalidIndex;
+        assertCommandFailure(SelectExpenseCommand.COMMAND_WORD + " " + invalidIndex,
+                MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* Case: filtered expense list, select index within bounds of address book and expense list -> selected */
         Index validIndex = INDEX_FIRST_EXPENSE;
         assertTrue(validIndex.getZeroBased() < getModel().getFilteredExpenseList().size());
-        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
+        command = SelectExpenseCommand.COMMAND_WORD + " " + validIndex.getOneBased();
         assertCommandSuccess(command, validIndex);
 
         /* ----------------------------------- Perform invalid select operations ------------------------------------ */
 
         /* Case: invalid index (0) -> rejected */
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + 0,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertCommandFailure(SelectExpenseCommand.COMMAND_WORD + " " + 0,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectExpenseCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (-1) -> rejected */
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + -1,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertCommandFailure(SelectExpenseCommand.COMMAND_WORD + " " + -1,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectExpenseCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredExpenseList().size() + 1;
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
+        assertCommandFailure(SelectExpenseCommand.COMMAND_WORD + " " + invalidIndex,
+                MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " abc",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertCommandFailure(SelectExpenseCommand.COMMAND_WORD + " abc",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectExpenseCommand.MESSAGE_USAGE));
 
         /* Case: invalid arguments (extra argument) -> rejected */
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " 1 abc",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertCommandFailure(SelectExpenseCommand.COMMAND_WORD + " 1 abc",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectExpenseCommand.MESSAGE_USAGE));
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: select from empty finance tracker -> rejected */
         deleteAllExpenses();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased(),
+        assertCommandFailure(SelectExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased(),
                 MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
     }
 

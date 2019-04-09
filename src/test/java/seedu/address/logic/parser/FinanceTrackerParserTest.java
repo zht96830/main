@@ -15,12 +15,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
 import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
 import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
+import seedu.address.logic.commands.expensecommands.SelectExpenseCommand;
 import seedu.address.logic.commands.generalcommands.ExitCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.generalcommands.HelpCommand;
@@ -115,9 +115,9 @@ public class FinanceTrackerParserTest {
 
     @Test
     public void parseCommand_select() throws Exception {
-        SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST_EXPENSE), command);
+        SelectExpenseCommand command = (SelectExpenseCommand) parser.parseCommand(
+                SelectExpenseCommand.COMMAND_WORD + " " + INDEX_FIRST_EXPENSE.getOneBased());
+        assertEquals(new SelectExpenseCommand(INDEX_FIRST_EXPENSE), command);
     }
 
     @Test
