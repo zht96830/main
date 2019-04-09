@@ -16,25 +16,25 @@ public class ListExpenseCommandParserTest {
 
     // Test that involves all
     @Test
-    public void parse_validArgs_all_returnsListExpenseCommand() {
+    public void parse_validArgsAll_returnsListExpenseCommand() {
         assertParseSuccess(parser, " v/all", new ListExpenseCommand(View.ALL));
     }
 
     // Test that involves Date
     @Test
-    public void parse_validArgs_month_returnsListExpenseCommand() {
+    public void parse_validArgsMonth_returnsListExpenseCommand() {
         assertParseSuccess(parser, " v/month", new ListExpenseCommand(View.MONTH));
     }
 
     // Test that involves Amount
     @Test
-    public void parse_validArgs_$100_returnsListExpenseCommand() {
+    public void parse_validArgs100_returnsListExpenseCommand() {
         assertParseSuccess(parser, " v/$100", new ListExpenseCommand(View.$100));
     }
 
     // Test that involves Category
     @Test
-    public void parse_validArgs_food_returnsListExpenseCommand() {
+    public void parse_validArgsFood_returnsListExpenseCommand() {
         assertParseSuccess(parser, " v/food", new ListExpenseCommand(View.FOOD));
     }
 

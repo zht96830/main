@@ -10,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_EXIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_BEFORE_TODAY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_EXIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -122,11 +121,6 @@ public class AddBudgetCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
                         + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBudgetCommand.MESSAGE_USAGE));
-
-        // start date before today
-        assertParseFailure(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
-                + INVALID_STARTDATE_DESC_BEFORE_TODAY + ENDDATE_DESC_BUDGET_2 + REMARKS_DESC_BUDGET,
-                Budget.MESSAGE_CONSTRAINTS_START_DATE);
 
         // end date before start date
         assertParseFailure(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + STARTDATE_DESC_BUDGET

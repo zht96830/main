@@ -53,10 +53,6 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Date startDate;
         if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
-            // check if is before today
-            if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).isEqualOrAfterToday())) {
-                throw new ParseException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
-            }
             startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
         } else {
             // If date is not present, initialise to the current date

@@ -15,7 +15,7 @@ image::jamessspanggg.png[width="150", align="left"]
 {empty}[https://github.com/jamessspanggg[github]]
 
 Role: Team Lead +
-Responsibilities: List view of expenses. +
+Responsibilities: List view of expenses, budgets and recurring. +
 JavaFx Expert +
 In charge of UI.
 

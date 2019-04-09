@@ -76,7 +76,7 @@ public class ParserUtil {
         switch (Date.isValidDate(trimmedDate)) {
         case "format":
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-        case "exist":
+        case "does not exist":
             throw new ParseException(Date.MESSAGE_DATE_DOES_NOT_EXIST);
         default:
             break;
