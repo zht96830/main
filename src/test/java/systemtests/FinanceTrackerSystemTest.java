@@ -34,11 +34,11 @@ import guitests.guihandles.StatusBarFooterHandle;
 
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.budgetcommands.ClearBudgetCommand;
 import seedu.address.logic.commands.debtcommands.ClearDebtCommand;
 import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
 import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
+import seedu.address.logic.commands.expensecommands.SelectExpenseCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.recurringcommands.ClearRecurringCommand;
 import seedu.address.model.FinanceTracker;
@@ -175,7 +175,7 @@ public abstract class FinanceTrackerSystemTest {
      * Selects the expense at {@code index} of the displayed list.
      */
     protected void selectExpense(Index index) {
-        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
+        executeCommand(SelectExpenseCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getExpenseListPanel().getSelectedCardIndex());
     }
 
