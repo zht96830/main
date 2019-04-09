@@ -11,9 +11,13 @@ import java.math.BigDecimal;
 public class Amount {
 
     public static final String MESSAGE_CONSTRAINTS = "Amount should only contain positive numbers, "
-            + "reflect the value in dollars and it should be at least 1 digit long, "
-            + "but not more than 7 digits in dollars.\nMaximum of two decimal places allowed.";
-    public static final String VALIDATION_REGEX = "([0]\\.([0][1-9]|[1-9]\\d{0,1})|[1-9]\\d{0,6}(\\.\\d{1,2})?)";
+            + "reflect the value in dollars, and it should be at least 1 digit long,\n"
+            + "but not more than 7 digits before the decimal point. Maximum of two decimal places allowed.";
+    public static final String VALIDATION_REGEX =
+            "([0]{1,7}\\.([0][1-9]|[1-9]\\d{0,1}))|([1-9]\\d{0,6}(\\.\\d{1,2})?)|"
+            + "([0]{0,1}[1-9]\\d{0,5}(\\.\\d{1,2})?)|([0]{0,2}[1-9]\\d{0,4}(\\.\\d{1,2})?)|"
+            + "([0]{0,3}[1-9]\\d{0,3}(\\.\\d{1,2})?)|([0]{0,4}[1-9]\\d{0,2}(\\.\\d{1,2})?)|"
+            + "([0]{0,5}[1-9]\\d{0,1}(\\.\\d{1,2})?)|([0]{0,6}[1-9](\\.\\d{1,2})?)";
     public final int value;
 
     /**
