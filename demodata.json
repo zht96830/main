@@ -1,0 +1,235 @@
+{
+  "expenses" : [ {
+    "name" : "Car Repairs",
+    "amount" : "100.50",
+    "date" : "13-04-2019",
+    "category" : "UTILITIES",
+    "remarks" : "Car was not feeling okay"
+  },{
+    "name" : "North Korea Air Tickets",
+    "amount" : "530",
+    "date" : "08-04-2019",
+    "category" : "TRAVEL",
+    "remarks" : "I wanted to see Kim Jong Un"
+  },{
+    "name" : "Double McSpicy from McDonalds",
+    "amount" : "6.90",
+    "date" : "08-04-2019",
+    "category" : "FOOD",
+    "remarks" : "ohhhhh my ass gon be on fyre"
+  },{
+    "name" : "Cab to work",
+    "amount" : "10.50",
+    "date" : "08-04-2019",
+    "category" : "WORK",
+    "remarks" : "I was late so I took the cab to work"
+  },{
+    "name" : "Paid Debt to Amy",
+    "amount" : "3.5",
+    "date" : "08-04-2019",
+    "category" : "FOOD",
+    "remarks" : "for duck rice last week"
+  }, {
+    "name" : "Daily Lunch (Recurring)",
+    "amount" : "5",
+    "date" : "08-04-2019",
+    "category" : "FOOD",
+    "remarks" : "Daily lunch for the year"
+  }, {
+    "name" : "Phone Bill (Recurring)",
+    "amount" : "50",
+    "date" : "23-03-2019",
+    "category" : "UTILITIES",
+    "remarks" : "Signed a new 2 year plan."
+  }, {
+    "name" : "Phone bills",
+    "amount" : "20",
+    "date" : "31-01-2019",
+    "category" : "UTILITIES",
+    "remarks" : ""
+  }, {
+    "name" : "doctor consultation",
+    "amount" : "30.5",
+    "date" : "15-01-2019",
+    "category" : "HEALTHCARE",
+    "remarks" : "down with flu"
+  }, {
+    "name" : "Groceries from NTUC",
+    "amount" : "57.3",
+    "date" : "08-01-2019",
+    "category" : "SHOPPING",
+    "remarks" : "fish, eggs, chicken, beef, oyster sauce"
+  }, {
+    "name" : "Taxi",
+    "amount" : "17.2",
+    "date" : "05-01-2019",
+    "category" : "TRANSPORT",
+    "remarks" : "from NUS to Home"
+  }, {
+    "name" : "Duck Rice",
+    "amount" : "3.5",
+    "date" : "01-01-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "new ASUS laptop",
+    "amount" : "1300",
+    "date" : "15-12-2018",
+    "category" : "WORK",
+    "remarks" : "may get reimbursed"
+  }, {
+    "name" : "new Panasonic TV",
+    "amount" : "750",
+    "date" : "21-07-2017",
+    "category" : "ENTERTAINMENT",
+    "remarks" : ""
+  } ],
+  "debts" : [ {
+    "personOwed" : "Bob",
+    "amount" : "17.2",
+    "deadline" : "05-12-2019",
+    "category" : "TRANSPORT",
+    "remarks" : "taxi from NUS to Home"
+  }, {
+    "personOwed" : "Charlie",
+    "amount" : "57.3",
+    "deadline" : "08-08-2019",
+    "category" : "SHOPPING",
+    "remarks" : "groceries: fish, eggs, chicken, beef, oyster sauce"
+  }, {
+    "personOwed" : "Debbie",
+    "amount" : "1300",
+    "deadline" : "15-12-2019",
+    "category" : "WORK",
+    "remarks" : "money for my work laptop"
+  }, {
+    "personOwed" : "Evan",
+    "amount" : "20",
+    "deadline" : "27-03-2020",
+    "category" : "UTILITIES",
+    "remarks" : "for lending me money to pay my phone bills"
+  }, {
+    "personOwed" : "Frank",
+    "amount" : "30.5",
+    "deadline" : "16-07-2020",
+    "category" : "HEALTHCARE",
+    "remarks" : "money borrowed to see the doctor"
+  }, {
+    "personOwed" : "George",
+    "amount" : "750",
+    "deadline" : "21-07-2020",
+    "category" : "ENTERTAINMENT",
+    "remarks" : "borrowed money to get a new GEORGE"
+  } ],
+  "budgets" : [ {
+    "amount" : "600",
+    "category" : "FOOD",
+    "startDate" : "01-10-2019",
+    "endDate" : "31-10-2019",
+    "remarks" : "eat less save more",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "300",
+    "category" : "TRANSPORT",
+    "startDate" : "01-07-2019",
+    "endDate" : "31-12-2019",
+    "remarks" : "only for school and back",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "200",
+    "category" : "SHOPPING",
+    "startDate" : "01-06-2019",
+    "endDate" : "30-06-2019",
+    "remarks" : "only for grocery shopping",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "100",
+    "category" : "WORK",
+    "startDate" : "13-05-2019",
+    "endDate" : "02-08-2019",
+    "remarks" : "internship stuff",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "450",
+    "category" : "UTILITIES",
+    "startDate" : "01-05-2019",
+    "endDate" : "31-05-2020",
+    "remarks" : "take shorter showers",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "100",
+    "category" : "HEALTHCARE",
+    "startDate" : "01-06-2019",
+    "endDate" : "15-06-2019",
+    "remarks" : "stress may make me feel sick",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "900",
+    "category" : "ENTERTAINMENT",
+    "startDate" : "11-05-2019",
+    "endDate" : "11-08-2019",
+    "remarks" : "",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  }, {
+    "amount" : "7000",
+    "category" : "TRAVEL",
+    "startDate" : "01-01-2020",
+    "endDate" : "31-12-2020",
+    "remarks" : "grad trip and family trip",
+    "totalSpent" : "0",
+    "percentage" : "0.0"
+  } ],
+  "recurrings" : [ {
+    "name" : "Phone Bill",
+    "amount" : "50",
+    "date" : "23-02-2019",
+    "category" : "UTILITIES",
+    "remarks" : "Signed a new 2 year plan.",
+    "frequency" : "M",
+    "occurrence" : "24",
+    "lastConvertedDate" : "2019-04-08"
+  }, {
+    "name" : "Spotify Subscription",
+    "amount" : "20",
+    "date" : "24-09-2019",
+    "category" : "UTILITIES",
+    "remarks" : "Spotify for a year!",
+    "frequency" : "M",
+    "occurrence" : "12",
+    "lastConvertedDate" : "2019-04-08"
+  }, {
+    "name" : "Daily Lunch",
+    "amount" : "5",
+    "date" : "08-04-2019",
+    "category" : "FOOD",
+    "remarks" : "Daily lunch for the year",
+    "frequency" : "D",
+    "occurrence" : "365",
+    "lastConvertedDate" : "2019-04-08"
+  }, {
+    "name" : "Electricity Bill",
+    "amount" : "50",
+    "date" : "08-04-2019",
+    "category" : "UTILITIES",
+    "remarks" : "Monthly electricity bills",
+    "frequency" : "M",
+    "occurrence" : "12",
+    "lastConvertedDate" : "2019-04-08"
+  }, {
+    "name" : "Insurance",
+    "amount" : "100",
+    "date" : "08-04-2019",
+    "category" : "OTHERS",
+    "remarks" : "Yearly insurance fee for 10 years",
+    "frequency" : "Y",
+    "occurrence" : "10",
+    "lastConvertedDate" : "2019-04-08"
+  } ]
+}
