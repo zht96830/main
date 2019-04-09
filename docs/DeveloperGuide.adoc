@@ -5,7 +5,6 @@
 :toc-placement: preamble
 :sectnums:
 :imagesDir: images
-include::DeveloperGuide.adoc[tags=listingfeature,undoredo]
 :stylesDir: stylesheets
 :xrefstyle: full
 ifdef::env-github[]
@@ -147,9 +146,9 @@ image::LogicClassDiagram.png[width="800"]
 [discrete]
 ==== How the architecture components interact with each other
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `deleteexpense 1`.
 
-.Component interactions for `delete 1` command
+.Component interactions for `deleteexpense 1` command
 image::SDforDeleteExpense.png[width="800"]
 
 The sections below give more details of each component.
@@ -187,7 +186,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteexpense 1")` API call.
 
 .Interactions Inside the Logic Component for the `deleteexpense 1` Command
 image::DeleteExpenseSdForLogic.png[width="800"]
@@ -418,11 +417,11 @@ The purpose of this feature is to delete or edit expenses already added by a rec
 // tag::debt[]
 === Debt Feature
 
-The Debt feature consists of `adddebt`, `editdebt`, `listdebt`, `deletedebt`, `cleardebt` and `paydebt`. +
+The Debt feature consists of `adddebt`, `editdebt`, `listdebt`, `deletedebt`, `selectdebt`, `cleardebt` and `paydebt`. +
 
 This feature allows users to add debts to the finance tracker and be able to constantly keep track of them. This is done by calling `Logic#execute` which creates an `AddDebtCommand`. This command then calls `Model#addDebt`, adding the specified debt into the debt list. +
 
-Editing, deleting and clearing of debts work in a similar manner.
+Editing, deleting, selecting and clearing of debts work in a similar manner.
 
 ==== Pay Debt Feature
 
@@ -527,6 +526,8 @@ This feature allows users to set budgets for different categories so they can li
 
 It stores all budgets added by the user and keeps track of the expenses added within the user-specified time frame.
 
+This feature includes `addbudget`, `editbudget`, `deletebudget`, `selectbudget` and `clearbudget`.
+
 The implementation of the budget feature is under the Logic and Model components.
 
 ==== Current implementation
@@ -540,11 +541,16 @@ User enters the command word `editbudget`, followed by the category for which th
 ===== Deleting an existing budget:
 User enters the command word `deletebudget`, followed by the category for which they wish to delete the budget for.
 
-For all three actions, the user command gets parsed by the respective parsers: `AddBudgetCommandParser`, `EditBudgetCommandParser` and `DeleteBudgetCommandParser`, which handle the execution of the commands.
+===== Selecting an existing budget:
+User enters the command word `selectbudget`, followed by the category for which they wish to select the budget for viewing.
+
+For all four actions, the user command gets parsed by the respective parsers: `AddBudgetCommandParser`, `EditBudgetCommandParser`, `DeleteBudgetCommandParser` and `SelectBudgetCommandParser`, which handle the execution of the commands.
 
 Below is the UML sequence diagram of a scenario for the `addbudget` command.
 
 image::AddBudgetSequenceDiagram.png[width="800"]
+
+Editing, deleting and selecting budgets work similarly to adding budgets.
 
 ===== Updating of budgets:
 * When a new budget is added, the model checks the expense list for any expenses of that category which fall within the time frame of the added budget

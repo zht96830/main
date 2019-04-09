@@ -15,6 +15,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.attributes.View;
 
+//@@author jamessspanggg
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListDebtCommand.
  */
@@ -30,6 +31,7 @@ public class ListDebtCommandTest {
         expectedModel = new ModelManager(model.getFinanceTracker(), new UserPrefs());
     }
 
+    // Tests that involves listing ALL
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListDebtCommand(View.ALL), model, commandHistory,

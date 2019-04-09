@@ -7,22 +7,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.budgetcommands.AddBudgetCommand;
 import seedu.address.logic.commands.budgetcommands.ClearBudgetCommand;
 import seedu.address.logic.commands.budgetcommands.DeleteBudgetCommand;
 import seedu.address.logic.commands.budgetcommands.EditBudgetCommand;
+import seedu.address.logic.commands.budgetcommands.SelectBudgetCommand;
 import seedu.address.logic.commands.debtcommands.AddDebtCommand;
 import seedu.address.logic.commands.debtcommands.ClearDebtCommand;
 import seedu.address.logic.commands.debtcommands.DeleteDebtCommand;
 import seedu.address.logic.commands.debtcommands.EditDebtCommand;
 import seedu.address.logic.commands.debtcommands.ListDebtCommand;
 import seedu.address.logic.commands.debtcommands.PayDebtCommand;
+import seedu.address.logic.commands.debtcommands.SelectDebtCommand;
 import seedu.address.logic.commands.expensecommands.AddExpenseCommand;
 import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
 import seedu.address.logic.commands.expensecommands.DeleteExpenseCommand;
 import seedu.address.logic.commands.expensecommands.EditExpenseCommand;
 import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
+import seedu.address.logic.commands.expensecommands.SelectExpenseCommand;
 import seedu.address.logic.commands.generalcommands.ExitCommand;
 import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.generalcommands.HelpCommand;
@@ -39,16 +41,19 @@ import seedu.address.logic.commands.statscommands.StatsCommand;
 import seedu.address.logic.parser.budgetparsers.AddBudgetCommandParser;
 import seedu.address.logic.parser.budgetparsers.DeleteBudgetCommandParser;
 import seedu.address.logic.parser.budgetparsers.EditBudgetCommandParser;
+import seedu.address.logic.parser.budgetparsers.SelectBudgetCommandParser;
 import seedu.address.logic.parser.debtparsers.AddDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.DeleteDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.EditDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.ListDebtCommandParser;
 import seedu.address.logic.parser.debtparsers.PayDebtCommandParser;
+import seedu.address.logic.parser.debtparsers.SelectDebtCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.expenseparsers.AddExpenseCommandParser;
 import seedu.address.logic.parser.expenseparsers.DeleteExpenseCommandParser;
 import seedu.address.logic.parser.expenseparsers.EditExpenseCommandParser;
 import seedu.address.logic.parser.expenseparsers.ListExpenseCommandParser;
+import seedu.address.logic.parser.expenseparsers.SelectExpenseCommandParser;
 import seedu.address.logic.parser.recurringparsers.AddRecurringCommandParser;
 import seedu.address.logic.parser.recurringparsers.DeleteRecurringCommandParser;
 import seedu.address.logic.parser.recurringparsers.EditRecurringCommandParser;
@@ -118,8 +123,17 @@ public class FinanceTrackerParser {
         case EditBudgetCommand.COMMAND_WORD_SHORTCUT:
             return new EditBudgetCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+        case SelectExpenseCommand.COMMAND_WORD:
+        case SelectExpenseCommand.COMMAND_WORD_SHORTCUT:
+            return new SelectExpenseCommandParser().parse(arguments);
+
+        case SelectDebtCommand.COMMAND_WORD:
+        case SelectDebtCommand.COMMAND_WORD_SHORTCUT:
+            return new SelectDebtCommandParser().parse(arguments);
+
+        case SelectBudgetCommand.COMMAND_WORD:
+        case SelectBudgetCommand.COMMAND_WORD_SHORTCUT:
+            return new SelectBudgetCommandParser().parse(arguments);
 
         case DeleteExpenseCommand.COMMAND_WORD:
         case DeleteExpenseCommand.COMMAND_WORD_SHORTCUT:

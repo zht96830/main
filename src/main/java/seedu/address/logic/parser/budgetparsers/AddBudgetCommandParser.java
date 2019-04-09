@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.budgetparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_REPEATED_PREFIX_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
@@ -43,14 +44,15 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBudgetCommand.MESSAGE_USAGE));
         }
 
+        if (hasRepeatedPrefixes(argMultimap, PREFIX_CATEGORY, PREFIX_AMOUNT, PREFIX_ENDDATE, PREFIX_STARTDATE,
+                PREFIX_REMARKS)) {
+            throw new ParseException(MESSAGE_REPEATED_PREFIX_COMMAND);
+        }
+
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Date startDate;
         if (argMultimap.getValue(PREFIX_STARTDATE).isPresent()) {
-            // check if is before today
-            if (!(ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get()).isEqualOrAfterToday())) {
-                throw new ParseException(Budget.MESSAGE_CONSTRAINTS_START_DATE);
-            }
             startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
         } else {
             // If date is not present, initialise to the current date
@@ -83,5 +85,12 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Returns true at least one prefix have more than to one value
+     * {@code ArgumentMultiMap}.
+     */
+    private static boolean hasRepeatedPrefixes(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return !(Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getAllValues(prefix).size() <= 1));
+    }
 }
 

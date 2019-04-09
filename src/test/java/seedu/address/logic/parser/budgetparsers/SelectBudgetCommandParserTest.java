@@ -9,22 +9,27 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.budgetcommands.DeleteBudgetCommand;
+import seedu.address.logic.commands.budgetcommands.SelectBudgetCommand;
 import seedu.address.model.attributes.Category;
 
-public class DeleteBudgetCommandParserTest {
-    private DeleteBudgetCommandParser parser = new DeleteBudgetCommandParser();
+/**
+ * Test scope: similar to {@code DeleteBudgetCommandParserTest}.
+ * @see DeleteBudgetCommandParserTest
+ */
+public class SelectBudgetCommandParserTest {
+
+    private SelectBudgetCommandParser parser = new SelectBudgetCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, CATEGORY_DESC_BUDGET, new DeleteBudgetCommand(Category.valueOf(VALID_CATEGORY_BUDGET
+    public void parse_validArgs_returnsSelectCommand() {
+        assertParseSuccess(parser, CATEGORY_DESC_BUDGET, new SelectBudgetCommand(Category.valueOf(VALID_CATEGORY_BUDGET
                 .toUpperCase())));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteBudgetCommand.MESSAGE_USAGE));
+                SelectBudgetCommand.MESSAGE_USAGE));
     }
 
     @Test

@@ -29,6 +29,7 @@ import seedu.address.model.Model;
 import seedu.address.model.attributes.View;
 import seedu.address.model.recurring.Recurring;
 
+//@@author jamessspanggg
 /**
  * Lists all recurring in the Finance Tracker to the user.
  */

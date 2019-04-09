@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.debtparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_REPEATED_PREFIX_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
@@ -16,14 +17,10 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_DEBT_2;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DEBT;
@@ -156,36 +153,13 @@ public class EditDebtCommandParserTest {
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast() throws ParseException {
+    public void parse_multipleRepeatedFields_failure() throws ParseException {
         Index targetIndex = INDEX_FIRST_DEBT;
         String userInput = targetIndex.getOneBased() + AMOUNT_DESC_DEBT + DEADLINE_DESC_DEBT + CATEGORY_DESC_DEBT
                 + REMARKS_DESC_DEBT + AMOUNT_DESC_DEBT_2 + DEADLINE_DESC_DEBT_2 + CATEGORY_DESC_DEBT_2
                 + REMARKS_DESC_DEBT_2;
 
-        EditDebtCommand.EditDebtDescriptor descriptor = new EditDebtDescriptorBuilder()
-                .withAmount(VALID_AMOUNT_DEBT_2).withCategory(VALID_CATEGORY_DEBT_2)
-                .withDeadline(VALID_DEADLINE_DEBT_2).withRemarks(VALID_REMARKS_DEBT_2).build();
-        EditDebtCommand expectedCommand = new EditDebtCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, MESSAGE_REPEATED_PREFIX_COMMAND);
     }
 
-    @Test
-    public void parse_invalidValueFollowedByValidValue_success() throws ParseException {
-        // no other valid values specified
-        Index targetIndex = INDEX_FIRST_DEBT;
-        String userInput = targetIndex.getOneBased() + INVALID_AMOUNT_DESC + AMOUNT_DESC_DEBT;
-        EditDebtCommand.EditDebtDescriptor descriptor = new EditDebtDescriptorBuilder()
-                .withAmount(VALID_AMOUNT_DEBT).build();
-        EditDebtCommand expectedCommand = new EditDebtCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // other valid values specified
-        userInput = targetIndex.getOneBased() + CATEGORY_DESC_DEBT + INVALID_AMOUNT_DESC + DEADLINE_DESC_DEBT
-                + AMOUNT_DESC_DEBT;
-        descriptor = new EditDebtDescriptorBuilder().withAmount(VALID_AMOUNT_DEBT)
-                .withCategory(VALID_CATEGORY_DEBT).withDeadline(VALID_DEADLINE_DEBT).build();
-        expectedCommand = new EditDebtCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
 }

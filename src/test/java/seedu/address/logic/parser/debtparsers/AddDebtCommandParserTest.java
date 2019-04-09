@@ -1,8 +1,8 @@
 package seedu.address.logic.parser.debtparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_REPEATED_PREFIX_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT;
-import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DEBT;
@@ -49,23 +49,8 @@ public class AddDebtCommandParserTest {
                 new AddDebtCommand(expectedDebt));
 
         // multiple amounts - last amount accepted
-        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT_2 + AMOUNT_DESC_DEBT
+        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT
                         + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
-                new AddDebtCommand(expectedDebt));
-
-        // multiple categories - last category accepted
-        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT_2
-                        + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
-                new AddDebtCommand(expectedDebt));
-
-        // multiple deadlines - last deadline accepted
-        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
-                        + DEADLINE_DESC_DEBT_2 + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
-                new AddDebtCommand(expectedDebt));
-
-        // multiple remarks - last remark accepted
-        assertParseSuccess(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
-                        + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT_2 + REMARKS_DESC_DEBT,
                 new AddDebtCommand(expectedDebt));
     }
 
@@ -118,13 +103,11 @@ public class AddDebtCommandParserTest {
 
         // invalid date format
         assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
-                + INVALID_DEADLINE_DESC_FORMAT + REMARKS_DESC_DEBT
-                + REMARKS_DESC_DEBT, Date.MESSAGE_CONSTRAINTS);
+                + INVALID_DEADLINE_DESC_FORMAT + REMARKS_DESC_DEBT, Date.MESSAGE_CONSTRAINTS);
 
         // invalid date value
         assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
-                + INVALID_DEADLINE_DESC_DATE + REMARKS_DESC_DEBT
-                + REMARKS_DESC_DEBT, Date.MESSAGE_DEADLINE_CONSTRAINTS);
+                + INVALID_DEADLINE_DESC_DATE + REMARKS_DESC_DEBT, Date.MESSAGE_DEADLINE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
@@ -132,7 +115,25 @@ public class AddDebtCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_DEBT + AMOUNT_DESC_DEBT
-                        + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT + REMARKS_DESC_DEBT,
+                        + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDebtCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_repeatedPrefix_failure() {
+        // multiple remarks - not accepted
+        assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
+                        + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT_2 + REMARKS_DESC_DEBT,
+                MESSAGE_REPEATED_PREFIX_COMMAND);
+
+        // multiple categories - not accepted
+        assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT_2
+                        + CATEGORY_DESC_DEBT + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
+                MESSAGE_REPEATED_PREFIX_COMMAND);
+
+        // multiple deadlines - not accepted
+        assertParseFailure(parser, NAME_DESC_DEBT + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
+                        + DEADLINE_DESC_DEBT_2 + DEADLINE_DESC_DEBT + REMARKS_DESC_DEBT,
+                MESSAGE_REPEATED_PREFIX_COMMAND);
     }
 }

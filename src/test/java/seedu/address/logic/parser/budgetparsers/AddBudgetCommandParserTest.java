@@ -1,25 +1,22 @@
 package seedu.address.logic.parser.budgetparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_REPEATED_PREFIX_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_BUDGET;
-import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_BUDGET;
-import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_DEBT;
 import static seedu.address.logic.commands.CommandTestUtil.ENDDATE_DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.ENDDATE_DESC_BUDGET_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_EXIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDDATE_DESC_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_BEFORE_TODAY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_EXIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_BUDGET;
-import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_DEBT_2;
 import static seedu.address.logic.commands.CommandTestUtil.STARTDATE_DESC_BUDGET;
-import static seedu.address.logic.commands.CommandTestUtil.STARTDATE_DESC_BUDGET_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ENDDATE_BUDGET;
@@ -52,29 +49,8 @@ public class AddBudgetCommandParserTest {
                         + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
                 new AddBudgetCommand(expectedBudget));
 
-        // multiple categories - last category accepted
-        assertParseSuccess(parser, CATEGORY_DESC_DEBT + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
+        assertParseSuccess(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
                         + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
-                new AddBudgetCommand(expectedBudget));
-
-        // multiple amounts - last amount accepted
-        assertParseSuccess(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_EXPENSE + AMOUNT_DESC_BUDGET
-                        + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
-                new AddBudgetCommand(expectedBudget));
-
-        // multiple start dates - last start date accepted
-        assertParseSuccess(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + STARTDATE_DESC_BUDGET_2
-                        + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
-                new AddBudgetCommand(expectedBudget));
-
-        // multiple end dates - last end date accepted
-        assertParseSuccess(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + STARTDATE_DESC_BUDGET
-                        + ENDDATE_DESC_BUDGET_2 + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
-                new AddBudgetCommand(expectedBudget));
-
-        // multiple remarks - last remarks accepted
-        assertParseSuccess(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + STARTDATE_DESC_BUDGET
-                        + ENDDATE_DESC_BUDGET + REMARKS_DESC_EXPENSE + REMARKS_DESC_BUDGET,
                 new AddBudgetCommand(expectedBudget));
     }
 
@@ -146,14 +122,27 @@ public class AddBudgetCommandParserTest {
                         + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET + REMARKS_DESC_BUDGET,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBudgetCommand.MESSAGE_USAGE));
 
-        // start date before today
-        assertParseFailure(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
-                + INVALID_STARTDATE_DESC_BEFORE_TODAY + ENDDATE_DESC_BUDGET_2 + REMARKS_DESC_BUDGET,
-                Budget.MESSAGE_CONSTRAINTS_START_DATE);
-
         // end date before start date
         assertParseFailure(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + STARTDATE_DESC_BUDGET
                 + ENDDATE_DESC_BUDGET_2 + REMARKS_DESC_BUDGET, Budget.MESSAGE_CONSTRAINTS_END_DATE);
 
+    }
+
+    @Test
+    public void parse_repeatedPrefix_failure() {
+        // multiple remarks - not accepted
+        assertParseFailure(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + STARTDATE_DESC_BUDGET
+                        + ENDDATE_DESC_BUDGET_2 + REMARKS_DESC_BUDGET + REMARKS_DESC_DEBT_2,
+                MESSAGE_REPEATED_PREFIX_COMMAND);
+
+        // multiple categories - not accepted
+        assertParseFailure(parser, CATEGORY_DESC_BUDGET + CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET
+                        + STARTDATE_DESC_BUDGET + ENDDATE_DESC_BUDGET_2 + REMARKS_DESC_BUDGET,
+                MESSAGE_REPEATED_PREFIX_COMMAND);
+
+        // multiple end dates - not accepted
+        assertParseFailure(parser, CATEGORY_DESC_BUDGET + AMOUNT_DESC_BUDGET + STARTDATE_DESC_BUDGET
+                        + ENDDATE_DESC_BUDGET_2 + ENDDATE_DESC_BUDGET + REMARKS_DESC_DEBT_2,
+                MESSAGE_REPEATED_PREFIX_COMMAND);
     }
 }

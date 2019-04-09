@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.budgetparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_REPEATED_PREFIX_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_BUDGET;
@@ -146,30 +147,9 @@ public class EditBudgetCommandParserTest {
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast() {
-        Category targetCategory = Category.valueOf(VALID_CATEGORY_BUDGET.toUpperCase());
+    public void parse_multipleRepeatedFields_failure() {
         String userInput = CATEGORY_DESC_BUDGET + AMOUNT_DESC_EXPENSE + AMOUNT_DESC_BUDGET;
-        EditBudgetCommand.EditBudgetDescriptor descriptor = new EditBudgetDescriptorBuilder()
-                .withAmount(VALID_AMOUNT_BUDGET).build();
-        EditBudgetCommand expectedCommand = new EditBudgetCommand(targetCategory, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
 
-    @Test
-    public void parse_invalidValueFollowedByValidValue_success() {
-        // no other valid values specified
-        Category targetCategory = Category.valueOf(VALID_CATEGORY_BUDGET.toUpperCase());
-        String userInput = CATEGORY_DESC_BUDGET + INVALID_AMOUNT_DESC + AMOUNT_DESC_BUDGET;
-        EditBudgetCommand.EditBudgetDescriptor descriptor = new EditBudgetDescriptorBuilder()
-                .withAmount(VALID_AMOUNT_BUDGET).build();
-        EditBudgetCommand expectedCommand = new EditBudgetCommand(targetCategory, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // other valid values specified
-        userInput = CATEGORY_DESC_BUDGET + INVALID_AMOUNT_DESC + STARTDATE_DESC_BUDGET + AMOUNT_DESC_BUDGET;
-        descriptor = new EditBudgetDescriptorBuilder()
-                .withAmount(VALID_AMOUNT_BUDGET).withStartDate(VALID_STARTDATE_BUDGET).build();
-        expectedCommand = new EditBudgetCommand(targetCategory, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, MESSAGE_REPEATED_PREFIX_COMMAND);
     }
 }
