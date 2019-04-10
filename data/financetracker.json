@@ -1,29 +1,29 @@
 {
   "expenses" : [ {
     "name" : "Car Repairs",
-    "amount" : "100.50",
+    "amount" : "100.5",
     "date" : "13-04-2019",
     "category" : "UTILITIES",
     "remarks" : "Car was not feeling okay"
-  },{
+  }, {
     "name" : "North Korea Air Tickets",
     "amount" : "530",
     "date" : "08-04-2019",
     "category" : "TRAVEL",
     "remarks" : "I wanted to see Kim Jong Un"
-  },{
+  }, {
     "name" : "Double McSpicy from McDonalds",
-    "amount" : "6.90",
+    "amount" : "6.9",
     "date" : "08-04-2019",
     "category" : "FOOD",
     "remarks" : "ohhhhh my ass gon be on fyre"
-  },{
+  }, {
     "name" : "Cab to work",
-    "amount" : "10.50",
+    "amount" : "10.5",
     "date" : "08-04-2019",
     "category" : "WORK",
     "remarks" : "I was late so I took the cab to work"
-  },{
+  }, {
     "name" : "Paid Debt to Amy",
     "amount" : "3.5",
     "date" : "08-04-2019",
