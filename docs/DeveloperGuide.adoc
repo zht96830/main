@@ -371,7 +371,7 @@ This feature can be implemented in different ways in terms of how the specified 
 
 // end::listingfeature[]
 
-// tag::recurringfeature[]
+// tag::recurring[]
 === Recurring Feature
 
 The Recurring feature consists of `addrecurring`, `editrecurring`, `listrecurring`, `deleterecurring` `clearrecurring`, and `convertrecurring`. +
@@ -412,7 +412,7 @@ This is still a work in progress. +
 
 The purpose of this feature is to delete or edit expenses already added by a recurring that the user wishes to delete or edit.
 
-// end::recurringfeature[]
+// end::recurring[]
 
 // tag::debt[]
 === Debt Feature
@@ -519,6 +519,7 @@ Below is the UML sequence diagram and a step-by-step explanation of an example u
 
 Work in Progress
 // end::stats[]
+
 // tag::budget[]
 === Budget feature
 
