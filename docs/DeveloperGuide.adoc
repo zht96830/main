@@ -371,7 +371,7 @@ This feature can be implemented in different ways in terms of how the specified 
 
 // end::listingfeature[]
 
-// tag::recurringfeature[]
+// tag::recurring[]
 === Recurring Feature
 
 The Recurring feature consists of `addrecurring`, `editrecurring`, `listrecurring`, `deleterecurring` `clearrecurring`, and `convertrecurring`. +
@@ -412,7 +412,7 @@ This is still a work in progress. +
 
 The purpose of this feature is to delete or edit expenses already added by a recurring that the user wishes to delete or edit.
 
-// end::recurringfeature[]
+// end::recurring[]
 
 // tag::debt[]
 === Debt Feature
@@ -519,6 +519,7 @@ Below is the UML sequence diagram and a step-by-step explanation of an example u
 
 Work in Progress
 // end::stats[]
+
 // tag::budget[]
 === Budget feature
 
@@ -1456,10 +1457,14 @@ Use case ends.
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should respond to most commands within 2 seconds.
+.  Should work on 32-bit and 64-bit environments.
+.  Should be backwards compatible with data produced by the earlier versions of the system.
 .  Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  A user with below average to average typing speed for regular English text should be able to accomplish most of the tasks using commands as easily as using the mouse.
-.  User interface should be easily understood and navigated in.
+.  Size of program should be less than 15MBs.
+.  User interface should be intuitive enough for users who are not IT-savvy.
+.  User interface should be responsive based on different screen sizes.
 
 [appendix]
 == Glossary
@@ -1469,23 +1474,6 @@ Windows, Linux, Unix, OS-X
 
 [[complex-command]] Complex command::
  A command in which both the command as well as the compulsory parameters are entered in the same command line
-
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing

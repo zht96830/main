@@ -487,6 +487,22 @@ public class ModelManager implements Model {
     @Override
     public void undoFinanceTracker() {
         versionedFinanceTracker.undo();
+        for (Budget budget : filteredBudgets) {
+            Budget editedBudget = new Budget(budget);
+            editedBudget.setTotalSpent(0);
+            unfilteredExpenses = versionedFinanceTracker.getExpenseList();
+            int sum = 0;
+            for (Expense expense : unfilteredExpenses) {
+                if (expense.getCategory() == editedBudget.getCategory()
+                        && !(expense.getDate().getLocalDate().isBefore(budget.getStartDate().getLocalDate()))
+                        && !(expense.getDate().getLocalDate().isAfter(budget.getEndDate().getLocalDate()))) {
+                    sum += expense.getAmount().value;
+                }
+            }
+            editedBudget.setTotalSpent(sum);
+            editedBudget.updatePercentage();
+            versionedFinanceTracker.setBudget(budget, editedBudget);
+        }
     }
 
     @Override
