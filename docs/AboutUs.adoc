@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === James Pang
 image::jamessspanggg.png[width="150", align="left"]
-{empty}[https://github.com/jamessspanggg[github]]
+{empty}[https://github.com/jamessspanggg[github]][<<jamesssspanggg#,portfolio>>]
 
 Role: Team Lead +
 Responsibilities: List view of expenses, budgets and recurring. +
@@ -23,7 +23,7 @@ In charge of UI.
 
 === Johnson Ho
 image::jhocx.png[width="150", align="left"]
-{empty}[http://github.com/jhocx[github]]
+{empty}[http://github.com/jhocx[github]][<<jhocx#,portfolio>>]
 
 Role: Developer +
 Responsibilities: Bill control. +
@@ -34,7 +34,7 @@ In charge of Storage.
 
 === Goh Yin Hao
 image::gohyinhao.png[width="150", align="left"]
-{empty}[http://github.com/gohyinhao[github]]
+{empty}[http://github.com/gohyinhao[github]][<<gohyinhao#,portfolio>>]
 
 Role: Developer +
 Responsibilities: Debt control. +
@@ -45,7 +45,7 @@ In charge of Model.
 
 === Lim Jiahui
 image::lim-jiahui.png[width="150", align="left"]
-{empty}[http://github.com/lim-jiahui[github]]
+{empty}[http://github.com/lim-jiahui[github]][<<lim-jiahui#,portfolio>>]
 
 Role: Developer +
 Responsibilities: Budget control. +
@@ -56,7 +56,7 @@ In charge of Commons.
 
 === Teoh Zhi Hui
 image::zht96830.png[width="150", align="left"]
-{empty}[http://github.com/zht96830[github]]
+{empty}[http://github.com/zht96830[github]][<<zht96830#,portfolio>>]
 
 Role: Developer +
 Responsibilities: Expense statistics. +
