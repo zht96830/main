@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === James Pang
 image::jamessspanggg.png[width="150", align="left"]
-{empty}[https://github.com/jamessspanggg[github]][<<jamesssspanggg#,portfolio>>]
+{empty}[https://github.com/jamessspanggg[github]][<<jamessspanggg#,portfolio>>]
 
 Role: Team Lead +
 Responsibilities: List view of expenses, budgets and recurring. +
