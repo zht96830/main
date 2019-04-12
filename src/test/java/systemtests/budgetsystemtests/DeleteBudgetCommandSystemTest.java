@@ -107,14 +107,14 @@ public class DeleteBudgetCommandSystemTest extends FinanceTrackerSystemTest {
      * and performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
      * @see DeleteBudgetCommandSystemTest#assertCommandSuccess(String, Model, String)
      */
-    private void assertCommandSuccess(Category toDelete) {
+    /*private void assertCommandSuccess(Category toDelete) {
         Model expectedModel = getModel();
         Budget deletedBudget = removeBudget(expectedModel, toDelete);
         String expectedResultMessage = String.format(MESSAGE_DELETE_BUDGET_SUCCESS, deletedBudget);
 
         assertCommandSuccess(
                 DeleteBudgetCommand.COMMAND_WORD + " c/" + toDelete, expectedModel, expectedResultMessage);
-    }
+    }*/
 
     /**
      * Executes {@code command} and in addition,<br>
