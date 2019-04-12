@@ -38,6 +38,22 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * *`exit`* : exits the app
 .  Refer to <<Commands>> for details of each command.
 
+// tag::gui[]
+
+== GUI Components
+
+Personal Finance Tracker GUI consists of 5 main components that you can interact with:
+
+image::GUI.png[width="790"]
+
+. Menu Bar: Contains exit and help window function.
+. Command Box: Textbox that receives your input commands.
+. Command Result Display: Panel that displays the result of inputted commands.
+. List Panels: Individual List Panels that displays the list of expenses, recurring expenses, debts and budgets that are added by you.
+. Display Panel: Panel displaying additional information for a selected entry as well as statistical information on expenses.
+
+// end::gui[]
+
 == Features
 
 === Expense
