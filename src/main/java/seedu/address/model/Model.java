@@ -102,9 +102,9 @@ public interface Model {
      * {@code Predicate} that always evaluate to true if recurring amount is within range, note that the range
      *  is in terms of cents
      **/
-    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS = p -> p.getAmount().value >= 1000;
-    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_100_RECURRINGS = p -> p.getAmount().value >= 10000;
-    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_1000_RECURRINGS = p -> p.getAmount().value >= 100000;
+    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_10_RECURRING = p -> p.getAmount().value >= 1000;
+    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_100_RECURRING = p -> p.getAmount().value >= 10000;
+    Predicate<Recurring> PREDICATE_SHOW_AMOUNT_OVER_1000_RECURRING = p -> p.getAmount().value >= 100000;
 
 
     /** {@code Predicate} that always evaluate to true */
