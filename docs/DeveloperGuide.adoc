@@ -570,7 +570,10 @@ If the added expense is during the time of the budget, the totalSpent variable i
 The Budget class has a boolean method `overlaps(Budget other)` which returns true if two budgets of the same category have overlapping time frames.
 This method was included with the idea of allowing the user to add multiple budgets for the same category but for different time frames.
 
-Another possible enhancement would be to allow the user to set a recurring budget.
+Another future enhancement would be to notify the user when a certain budget is about to exceed. For example, if the percentage spent within the time frame reaches say 90% of the budget amount, the user will receive an e-mail or notification of some sort to alert the user.
+Another notification can also be sent when the budget is actually exceeded.
+
+Yet another possible enhancement would be to allow the user to set a recurring budget.
 For example, if a user wants to limit their daily spending to $20, maybe an `addrecurringbudget c/food $/20 f/d` command, similar to the recurring expense command, could be implemented so that the user does not have to add a budget everyday.
 // end::budget[]
 
