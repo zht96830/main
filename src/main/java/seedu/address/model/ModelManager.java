@@ -40,7 +40,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Expense> filteredExpenses;
     private final FilteredList<Debt> filteredDebts;
-    private final FilteredList<Recurring> filteredRecurrings;
+    private final FilteredList<Recurring> filteredRecurring;
     private final FilteredList<Budget> filteredBudgets;
     private List<Expense> unfilteredExpenses;
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
@@ -66,8 +66,8 @@ public class ModelManager implements Model {
         filteredDebts.addListener(this::ensureSelectedDebtIsValid);
         filteredBudgets = new FilteredList<>(versionedFinanceTracker.getBudgetList());
         filteredBudgets.addListener(this::ensureSelectedBudgetIsValid);
-        filteredRecurrings = new FilteredList<>(versionedFinanceTracker.getRecurringList());
-        filteredRecurrings.addListener(this::ensureSelectedRecurringIsValid);
+        filteredRecurring = new FilteredList<>(versionedFinanceTracker.getRecurringList());
+        filteredRecurring.addListener(this::ensureSelectedRecurringIsValid);
         unfilteredExpenses = financeTracker.getExpenseList();
     }
 
@@ -463,13 +463,13 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Recurring> getFilteredRecurringList() {
-        return filteredRecurrings;
+        return filteredRecurring;
     }
 
     @Override
     public void updateFilteredRecurringList(Predicate<Recurring> predicate) {
         requireNonNull(predicate);
-        filteredRecurrings.setPredicate(predicate);
+        filteredRecurring.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -569,7 +569,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setSelectedRecurring(Recurring recurring) {
-        if (recurring != null && !filteredRecurrings.contains(recurring)) {
+        if (recurring != null && !filteredRecurring.contains(recurring)) {
             throw new RecurringNotFoundException();
         }
         selectedRecurring.setValue(recurring);
@@ -711,7 +711,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredExpenses.equals(other.filteredExpenses)
                 && filteredDebts.equals(other.filteredDebts)
-                && filteredRecurrings.equals(other.filteredRecurrings)
+                && filteredRecurring.equals(other.filteredRecurring)
                 && filteredBudgets.equals(other.filteredBudgets)
                 && Objects.equals(selectedExpense.get(), other.selectedExpense.get())
                 && Objects.equals(selectedDebt.get(), other.selectedDebt.get())

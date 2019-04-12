@@ -79,14 +79,14 @@ public class ListRecurringCommandTest {
     // Tests that involves Amount
     @Test
     public void execute_listIsNotFiltered_showsRecurringWithAmountOver10() {
-        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS);
+        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_AMOUNT_OVER_10_RECURRING);
         assertCommandSuccess(new ListRecurringCommand(View.$10), model, commandHistory,
                 String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.$10.getMessage()), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsRecurringWithAmountOver10() {
-        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_AMOUNT_OVER_10_RECURRINGS);
+        expectedModel.updateFilteredRecurringList(Model.PREDICATE_SHOW_AMOUNT_OVER_10_RECURRING);
         showRecurringAtIndex(model, INDEX_FIRST_EXPENSE);
         assertCommandSuccess(new ListRecurringCommand(View.$10), model, commandHistory,
                 String.format(ListRecurringCommand.MESSAGE_SUCCESS, View.$10.getMessage()), expectedModel);

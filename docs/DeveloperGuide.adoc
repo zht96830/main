@@ -153,15 +153,17 @@ image::SDforDeleteExpense.png[width="800"]
 
 The sections below give more details of each component.
 
+// tag::ui[]
+
 [[Design-Ui]]
 === UI component
 
 .Structure of the UI Component
-image::UiClassDiagram.png[width="800"]
+image::UiComponentClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ExpenseListPanel`, `BudgetListPanel`, `DebtListPanel`, `RecurringListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ExpenseListPanel`, `BudgetListPanel`, `DebtListPanel`, `RecurringExpenseListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class. Each individual `ListPanel` consists of their respective `Card`.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -169,6 +171,8 @@ The `UI` component,
 
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
+
+// end::ui[]
 
 [[Design-Logic]]
 === Logic component
@@ -339,7 +343,7 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 This feature allows users to filter out specific items based on the view specified. Only expenses that are under those views will be shown on the respective list panels.
 
-Listing feature consists of `listexpense`, `listrecurring` and `listdebt`.
+Listing feature consists of commands such as `listexpense`, `listrecurring` and `listdebt`.
 
 This implementation is under Logic and Model components.
 
@@ -525,7 +529,7 @@ Work in Progress
 // end::stats[]
 
 // tag::budget[]
-=== Budget feature
+=== Budget Feature
 
 This feature allows users to set budgets for different categories so they can limit the amount spent for each category.
 
@@ -1458,6 +1462,7 @@ Use case ends.
 +
 Use case ends.
 
+// tag::nfr[]
 
 [appendix]
 == Non Functional Requirements
@@ -1474,6 +1479,9 @@ Use case ends.
 .  User interface should be responsive based on different screen sizes.
 
 [appendix]
+
+// end::nfr[]
+
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
@@ -1530,10 +1538,6 @@ Expected: No budget is created. Error message that budget already exists for tha
 .. Test case: adding a budget for a new category without specifying the amount allocated for that budget +
 Command: `addbudget c/travel ed/31-12-2020`
 Expected: No budget is created. Error message that command format is invalid  shown in status message.
-
-.. Test case: adding a budget with start date before today's date +
-Command: `addbudget c/work $/100 sd/01-01-2019 ed/31-12-2019` +
-Expected: No budget is created. Error message for invalid start date is shown in status message.
 
 .. Test case: adding a budget with end date before start date +
 Command: `addbudget c/food $/250 sd/01-01-2020 ed/30-06-2019` +

@@ -14,7 +14,7 @@
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          title="Finance Tracker" minWidth="1280" minHeight="720" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/financetrackericon.png" />
   </icons>
   <scene>
     <Scene>
