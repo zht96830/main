@@ -1459,6 +1459,7 @@ Use case ends.
 +
 Use case ends.
 
+// tag::nfr[]
 
 [appendix]
 == Non Functional Requirements
@@ -1475,6 +1476,9 @@ Use case ends.
 .  User interface should be responsive based on different screen sizes.
 
 [appendix]
+
+// end::nfr[]
+
 == Glossary
 
 [[mainstream-os]] Mainstream OS::
