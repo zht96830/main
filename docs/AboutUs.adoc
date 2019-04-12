@@ -10,7 +10,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
-=== James Pang
+=== James Pang Mun Wai
 image::jamessspanggg.png[width="150", align="left"]
 {empty}[https://github.com/jamessspanggg[github]]
 
@@ -21,7 +21,7 @@ In charge of UI.
 
 '''
 
-=== Johnson Ho
+=== Johnson Ho Chong Xiang
 image::jhocx.png[width="150", align="left"]
 {empty}[http://github.com/jhocx[github]]
 
