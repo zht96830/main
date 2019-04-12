@@ -46,11 +46,11 @@ Personal Finance Tracker GUI consists of 5 main components that you can interact
 
 image::GUI.png[width="790"]
 
-. Menu Bar: Contains exit and help window function.
-. Command Box: Textbox that receives your input commands.
-. Command Result Display: Panel that displays the result of inputted commands.
-. List Panels: Individual List Panels that displays the list of expenses, recurring expenses, debts and budgets that are added by you.
-. Display Panel: Panel displaying additional information for a selected entry as well as statistical information on expenses.
+. Menu Bar: contains exit and help window function.
+. Command Box: textbox that receives your input commands.
+. Command Result Display: panel that displays the result of inputted commands.
+. Multiple List Panels: list panels that displays the list of expenses, recurring expenses, debts and budgets that are added by you.
+. Display Panel: panel displaying additional information for a selected entry as well as statistical information on expenses.
 
 // end::gui[]
 
@@ -94,7 +94,7 @@ These statistics will help you better understand your expenses and make effectiv
 ** `n/Hamburger r/lunch`
 ** `n/Hamburger`
 * Parameters can be in any order e.g. if the command specifies `n/NAME $/AMOUNT c/CATEGORY`, `$/AMOUNT c/CATEGORY n/NAME` is also acceptable.
-* Repeated parameters e.g. n/NAME n/NAME $/AMOUNT c/CATEGORY is not acceptable.
+* Repeated parameters e.g. n/NAME n/NAME $/AMOUNT c/CATEGORY are not acceptable.
 ====
 
 === Viewing help : `help`
@@ -110,12 +110,12 @@ Shortcut: `le v/VIEW`
 
 ====
 * The VIEW specifies how the list of expenses are displayed.
-** v/all: displays entire list of expenses
-** v/day: displays list of expenses added since a day ago
-** v/month: displays list of expenses added since a month ago
-** v/year: displays list of expenses added since a year ago
-** v/CATEGORY: displays list of expenses with CATEGORY such as “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”, “entertainment” and “others” which are case insensitive
-** v/$10, v/$100, v/$1000: display list of expenses with amount greater than or equal to $10, $100 or $1000
+** v/all: displays entire list of expenses.
+** v/day: displays list of expenses with date within a day ago.
+** v/month: displays list of expenses with date within a month ago.
+** v/year: displays list of expenses with date within a year ago.
+** v/CATEGORY: displays list of expenses with CATEGORY such as FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS which are case insensitive.
+** v/$10, v/$100, v/$1000: display list of expenses with amount greater than or equal to $10, $100 or $1000.
 ====
 
 // end::listexpense[]
@@ -211,8 +211,7 @@ Format: `addbudget $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]` 
 Shortcut: `ab $/AMOUNT c/CATEGORY [sd/START_DATE] ed/END_DATE [r/REMARKS]`
 
 ====
-* The categories include: “food”, “shopping”, “work”, “transport”, “utilities”, “healthcare”,
-“entertainment” and “others” which are case insensitive.
+* The categories include: FOOD, TRANSPORT, SHOPPING, WORK, UTILITIES, HEALTHCARE, ENTERTAINMENT, TRAVEL, OTHERS which are case insensitive.
 * The program only limits one budget for each category.
 * START_DATE and END_DATE must be in dd-mm-yyyy format.
 * If START_DATE is omitted, current date will be used.
@@ -291,7 +290,7 @@ Shortcut: `ld v/VIEW`
 ** v/month: displays list of debts with deadline in a month
 ** v/year: displays list of debts with deadline in a year
 ** v/CATEGORY: displays list of debts with CATEGORY
-** v/$10, v/$100, v/$1000: display list of debts with amount greater than $10, $100 or $1000
+** v/$10, v/$100, v/$1000: display list of debts with amount greater than or equal $10, $100 or $1000
 
 ====
 
@@ -405,9 +404,9 @@ Shortcut: `lr v/VIEW`
 ====
 * The VIEW specifies how the list of recurrings are displayed.
 ** v/all: displays entire list of recurrings
-** v/day: displays list of recurrings added since a day ago
-** v/month: displays list of recurrings added since a month ago
-** v/year: displays list of recurrings added since a year ago
+** v/day: displays list of recurrings with date within a day ago
+** v/month: displays list of recurrings with date within a month ago
+** v/year: displays list of recurrings with date within a year ago
 ** v/CATEGORY: displays list of recurrings with CATEGORY
 ====
 
@@ -490,7 +489,7 @@ Shortcut: `cre`
 // tag::stats[]
 === Viewing Statistics - Summary: `stats`
 Produces statistics regarding the user's finance. +
-The statistics include the frequency of entries, the total amount of money spent +
+The statistics include the frequency of entries, the total amount of money spent. +
 The user may choose the time frame to be considered for the statistic by entering the start date and end date. +
 The user may also choose to display only the results in a specific category. [Coming in v1.4] +
 The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table. [Coming in v1.4]
