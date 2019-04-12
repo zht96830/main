@@ -38,6 +38,7 @@ public class SelectDebtCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        model.setSelectedDebt(null);
 
         List<Debt> filteredDebtList = model.getFilteredDebtList();
 

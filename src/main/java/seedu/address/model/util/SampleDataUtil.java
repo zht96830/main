@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import static seedu.address.model.attributes.Category.ENTERTAINMENT;
 import static seedu.address.model.attributes.Category.FOOD;
 import static seedu.address.model.attributes.Category.HEALTHCARE;
+import static seedu.address.model.attributes.Category.OTHERS;
 import static seedu.address.model.attributes.Category.SHOPPING;
 import static seedu.address.model.attributes.Category.TRANSPORT;
 import static seedu.address.model.attributes.Category.TRAVEL;
@@ -81,7 +82,7 @@ public class SampleDataUtil {
     }
     public static Budget[] getSampleBudgets() {
         return new Budget[] {
-            new Budget(FOOD, new Amount("600"), new Date("01-10-2019"), new Date("31-10-2019"),
+            new Budget(FOOD, new Amount("600"), new Date("01-04-2019"), new Date("30-04-2019"),
                     "eat less save more", 0, 0),
             new Budget(TRANSPORT, new Amount("300"), new Date("01-07-2019"), new Date("31-12-2019"),
                     "only for school and back", 0, 0),
@@ -120,11 +121,11 @@ public class SampleDataUtil {
     public static Recurring[] getSampleRecurrings() {
         return new Recurring[]{
             new Recurring(new Name("Phone Bill"), new Amount("50.00"), new Date("23-02-2019"),
-                    UTILITIES, "Signed a new 2 year plan.", new Frequency("M"), new Occurrence("24")),
+                    OTHERS, "Signed a new 2 year plan.", new Frequency("M"), new Occurrence("24")),
             new Recurring(new Name("Spotify Subscription"), new Amount("20.00"), new Date("24-09-2019"),
-                    UTILITIES, "Spotify for a year!", new Frequency("M"), new Occurrence("12")),
-            new Recurring(new Name("Daily Lunch"), new Amount("5.00"), new Date("08-04-2019"),
-                    UTILITIES, "Every day lunch for the year", new Frequency("D"), new Occurrence("365")),
+                    OTHERS, "Spotify for a year!", new Frequency("M"), new Occurrence("12")),
+            new Recurring(new Name("Daily Lunch"), new Amount("5.00"), new Date("15-04-2019"),
+                    FOOD, "Every day lunch for the year", new Frequency("D"), new Occurrence("365")),
             new Recurring(new Name("Electricity Bill"), new Amount("20.00"), new Date("08-04-2019"),
                     UTILITIES, "Monthly electricity bill", new Frequency("M"), new Occurrence("12")),
             new Recurring(new Name("Insurance"), new Amount("200.00"), new Date("08-04-2019"),
