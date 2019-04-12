@@ -65,6 +65,6 @@ include::../UserGuide.adoc[tag=listexpense]
 
 include::../DeveloperGuide.adoc[tag=listingfeature]
 
-include::../DeveloperGuide.adoc[tag=logicsd]
+include::../DeveloperGuide.adoc[tag=ui]
 
 
