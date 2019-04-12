@@ -52,14 +52,13 @@ public class ConvertRecurringToExpenseCommand extends Command {
                     if ((date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now()))
                             && date.isAfter(lastConvertedDate)) {
                         model.addExpense(recurringListOfExpenses.get(j));
-                        model.commitFinanceTracker();
                         numAdded++;
                     }
                 }
             }
             recurring.setLastConvertedDate(LocalDate.now());
         }
-
+        model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_CONVERT_RECURRING_SUCCESS + numAdded + "."));
     }
 }
