@@ -40,7 +40,7 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S2-W15-2/main/pull/81[#81], https://github.com/CS2103-AY1819S2-W15-2/main/pull/119[#119], https://github.com/CS2103-AY1819S2-W15-2/main/pull/175[#175], https://github.com/CS2103-AY1819S2-W15-2/main/pull/135[#135]
 *** Contributed to forum discussions (examples:  https://github.com/nus-cs2103-AY1819S2/forum/issues/5[5], https://github.com/nus-cs2103-AY1819S2/forum/issues/17[17], https://github.com/nus-cs2103-AY1819S2/forum/issues/21[21], https://github.com/nus-cs2103-AY1819S2/forum/issues/67[67])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/54[1], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/354[2], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/449[3], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/494[4], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/537[5], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/620[6], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/685[7], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/739[8])
 *** The displaying of html files in browser panel that I added was adopted by a group from last semester's CS2103 (https://github.com/CS2103-AY1819S1-W16-1/main/blob/master/src/main/java/seedu/address/ui/BrowserPanel.java[1])
 ** Tools:
 *** Set up the team repository
@@ -53,6 +53,8 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=gui]
+
 include::../UserGuide.adoc[tag=listexpense]
 
 == Contributions to the Developer Guide
@@ -63,6 +65,6 @@ include::../UserGuide.adoc[tag=listexpense]
 
 include::../DeveloperGuide.adoc[tag=listingfeature]
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=logicsd]
 
 
