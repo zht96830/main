@@ -341,7 +341,7 @@ public abstract class FinanceTrackerSystemTest {
      */
     protected void assertSelectedBudgetCardChanged(Category expectedSelectedCardCategory) {
         getBudgetListPanel().navigateToCard(getBudgetListPanel().getSelectedCardCategory());
-        BudgetCardHandle selectedCard = getBudgetListPanel().getHandleToSelectedCard();
+        //BudgetCardHandle selectedCard = getBudgetListPanel().getHandleToSelectedCard();
 
         // URL expectedUrl;
         // URL actualUrl;
