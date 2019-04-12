@@ -4,6 +4,7 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -21,6 +22,7 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.BudgetCardHandle;
 import guitests.guihandles.BudgetListPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.DebtListPanelHandle;
@@ -35,6 +37,7 @@ import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.budgetcommands.ClearBudgetCommand;
+import seedu.address.logic.commands.budgetcommands.SelectBudgetCommand;
 import seedu.address.logic.commands.debtcommands.ClearDebtCommand;
 import seedu.address.logic.commands.expensecommands.ClearExpenseCommand;
 import seedu.address.logic.commands.expensecommands.ListExpenseCommand;
@@ -43,8 +46,9 @@ import seedu.address.logic.commands.generalcommands.FindCommand;
 import seedu.address.logic.commands.recurringcommands.ClearRecurringCommand;
 import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
+import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.View;
-import seedu.address.testutil.TypicalExpenses;
+import seedu.address.testutil.TypicalFinanceTracker;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
@@ -88,7 +92,7 @@ public abstract class FinanceTrackerSystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected FinanceTracker getInitialData() {
-        return TypicalExpenses.getTypicalFinanceTrackerWithExpenses();
+        return TypicalFinanceTracker.getTypicalFinanceTracker();
     }
 
     /**
@@ -163,6 +167,15 @@ public abstract class FinanceTrackerSystemTest {
     }
 
     /**
+     * Displays all budgets in the finance tracker.
+     */
+    protected void showAllBudgets() {
+        executeCommand(ListExpenseCommand.COMMAND_WORD + " " + PREFIX_VIEW + View.ALL);
+        assertEquals(getModel().getFinanceTracker().getExpenseList().size(),
+                getModel().getFilteredExpenseList().size());
+    }
+
+    /**
      * Displays all expenses with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showExpensesWithName(String keyword) {
@@ -177,6 +190,14 @@ public abstract class FinanceTrackerSystemTest {
     protected void selectExpense(Index index) {
         executeCommand(SelectExpenseCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getExpenseListPanel().getSelectedCardIndex());
+    }
+
+    /**
+     * Selects the budget of {@code category} of the displayed list.
+     */
+    protected void selectBudget(Category category) {
+        executeCommand(SelectBudgetCommand.COMMAND_WORD + " " + PREFIX_CATEGORY + category.toString());
+        assertEquals(category, getBudgetListPanel().getSelectedCardCategory());
     }
 
     /**
@@ -261,7 +282,7 @@ public abstract class FinanceTrackerSystemTest {
      * @see BrowserPanelHandle#isUrlChanged()
      * @see ExpenseListPanelHandle#isSelectedExpenseCardChanged()
      */
-    protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
+    protected void assertSelectedExpenseCardChanged(Index expectedSelectedCardIndex) {
         getExpenseListPanel().navigateToCard(getExpenseListPanel().getSelectedCardIndex());
         ExpenseCardHandle selectedCard = getExpenseListPanel().getHandleToSelectedCard();
 
@@ -286,6 +307,53 @@ public abstract class FinanceTrackerSystemTest {
     protected void assertSelectedCardUnchanged() {
         // assertFalse(getBrowserPanel().isUrlChanged());
         assertFalse(getExpenseListPanel().isSelectedExpenseCardChanged());
+        assertFalse(getBudgetListPanel().isSelectedBudgetCardChanged());
+    }
+
+    /**
+     * Asserts that the browser's url is changed to display the details of the budget in the budget list panel at
+     * {@code expectedSelectedCardCategory}, and only the card of {@code expectedSelectedCardCategory} is selected.
+     * @see BrowserPanelHandle#isUrlChanged()
+     * @see BudgetListPanelHandle#isSelectedBudgetCardChanged()
+     */
+    protected void assertSelectedBudgetCardChanged(Index expectedSelectedCardIndex) {
+        getBudgetListPanel().navigateToCard(getBudgetListPanel().getSelectedCardIndex());
+        BudgetCardHandle selectedCard = getBudgetListPanel().getHandleToSelectedCard();
+
+        // URL expectedUrl;
+        // URL actualUrl;
+        // expectedUrl = BrowserPanel.EXPENSES_PAGE_URL;
+        // actualUrl = BrowserPanel.getCurrentObjectPageUrl();
+        String expectedPageTitle = BrowserPanel.BUDGET_PAGE_TITLE;
+        String actualPageTitle = getBrowserPanel().getLoadedUrlTitle();
+
+        // assertEquals(expectedUrl, actualUrl);
+        assertEquals(expectedPageTitle, actualPageTitle);
+
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getExpenseListPanel().getSelectedCardIndex());
+    }
+
+    /**
+     * Asserts that the browser's url is changed to display the details of the budget in the budget list panel at
+     * {@code expectedSelectedCardCategory}, and only the card of {@code expectedSelectedCardCategory} is selected.
+     * @see BrowserPanelHandle#isUrlChanged()
+     * @see BudgetListPanelHandle#isSelectedBudgetCardChanged()
+     */
+    protected void assertSelectedBudgetCardChanged(Category expectedSelectedCardCategory) {
+        getBudgetListPanel().navigateToCard(getBudgetListPanel().getSelectedCardCategory());
+        BudgetCardHandle selectedCard = getBudgetListPanel().getHandleToSelectedCard();
+
+        // URL expectedUrl;
+        // URL actualUrl;
+        // expectedUrl = BrowserPanel.EXPENSES_PAGE_URL;
+        // actualUrl = BrowserPanel.getCurrentObjectPageUrl();
+        String expectedPageTitle = BrowserPanel.BUDGET_PAGE_TITLE;
+        String actualPageTitle = getBrowserPanel().getLoadedUrlTitle();
+
+        // assertEquals(expectedUrl, actualUrl);
+        assertEquals(expectedPageTitle, actualPageTitle);
+
+        assertEquals(expectedSelectedCardCategory, getBudgetListPanel().getSelectedCardCategory());
     }
 
     /**

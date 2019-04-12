@@ -227,7 +227,7 @@ public class EditExpenseCommandSystemTest extends FinanceTrackerSystemTest {
      * Verifications 1 and 2 are performed by
      * {@code FinanceTrackerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see FinanceTrackerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see FinanceTrackerSystemTest#assertSelectedCardChanged(Index)
+     * @see FinanceTrackerSystemTest#assertSelectedExpenseCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
@@ -236,7 +236,7 @@ public class EditExpenseCommandSystemTest extends FinanceTrackerSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
-            assertSelectedCardChanged(expectedSelectedCardIndex);
+            assertSelectedExpenseCardChanged(expectedSelectedCardIndex);
         } else {
             assertSelectedCardUnchanged();
         }

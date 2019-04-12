@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.budgetparsers;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
@@ -25,7 +26,7 @@ public class DeleteBudgetCommandParser implements Parser<DeleteBudgetCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteBudgetCommand parse(String args) throws ParseException {
-
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY);
 
@@ -34,7 +35,7 @@ public class DeleteBudgetCommandParser implements Parser<DeleteBudgetCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBudgetCommand.MESSAGE_USAGE));
         }
 
-        String[] toCheck = args.split(" ");
+        String[] toCheck = args.split("/");
         if (toCheck.length > 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBudgetCommand.MESSAGE_USAGE));
         }

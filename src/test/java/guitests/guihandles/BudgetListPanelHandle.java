@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
+import seedu.address.model.attributes.Category;
 import seedu.address.model.budget.Budget;
 
 /**
@@ -50,6 +51,13 @@ public class BudgetListPanelHandle extends NodeHandle<ListView<Budget>> {
     }
 
     /**
+     * Returns the category of the selected card.
+     */
+    public Category getSelectedCardCategory() {
+        return Category.valueOf(getHandleToSelectedCard().getCategory().toUpperCase());
+    }
+
+    /**
      * Returns true if a card is currently selected.
      */
     public boolean isAnyCardSelected() {
@@ -91,9 +99,53 @@ public class BudgetListPanelHandle extends NodeHandle<ListView<Budget>> {
     }
 
     /**
+     * Navigates the listview to {@code category}.
+     */
+    public void navigateToCard(Category category) {
+        int index = -1;
+        for (int i = 0; i < getRootNode().getItems().size(); i++) {
+            Budget budget = getRootNode().getItems().get(i);
+            if (budget.getCategory() == category) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            throw new IllegalArgumentException("No such budget");
+        }
+
+        final int idx = index;
+
+        guiRobot.interact(() -> {
+            getRootNode().scrollTo(idx);
+        });
+        guiRobot.pauseForHuman();
+    }
+
+    /**
      * Selects the {@code BudgetCard} at {@code index} in the list.
      */
     public void select(int index) {
+        getRootNode().getSelectionModel().select(index);
+    }
+
+    /**
+     * Selects the {@code BudgetCard} of {@code category}.
+     */
+    public void select(Category category) {
+        int index = -1;
+        for (int i = 0; i < getRootNode().getItems().size(); i++) {
+            Budget budget = getRootNode().getItems().get(i);
+            if (budget.getCategory() == category) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            throw new IllegalArgumentException("No such budget");
+        }
         getRootNode().getSelectionModel().select(index);
     }
 
@@ -109,7 +161,52 @@ public class BudgetListPanelHandle extends NodeHandle<ListView<Budget>> {
                 .orElseThrow(IllegalStateException::new);
     }
 
+    /**
+     * Returns the budget card handle of a budget associated with the {@code index} in the list.
+     * @throws IllegalStateException if the selected card is currently not in the scene graph.
+     */
+    public BudgetCardHandle getBudgetCardHandle(Category category) {
+        int index = -1;
+        for (int i = 0; i < getRootNode().getItems().size(); i++) {
+            Budget budget = getRootNode().getItems().get(i);
+            if (budget.getCategory() == category) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            throw new IllegalArgumentException("No such budget");
+        }
+
+        final int idx = index;
+
+        return getAllCardNodes().stream()
+                .map(BudgetCardHandle::new)
+                .filter(handle -> handle.equals(getBudget(idx)))
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
+    }
+
+
     private Budget getBudget(int index) {
+        return getRootNode().getItems().get(index);
+    }
+
+    private Budget getBudget(Category category) {
+        int index = -1;
+        for (int i = 0; i < getRootNode().getItems().size(); i++) {
+            Budget budget = getRootNode().getItems().get(i);
+            if (budget.getCategory() == category) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            throw new IllegalArgumentException("No such budget");
+        }
+
         return getRootNode().getItems().get(index);
     }
 

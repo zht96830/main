@@ -1,5 +1,7 @@
 package guitests.guihandles;
 
+import java.text.DecimalFormat;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import seedu.address.model.budget.Budget;
@@ -47,10 +49,11 @@ public class BudgetCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code budget}.
      */
     public boolean equals(Budget budget) {
+        DecimalFormat totalSpentFormat = new DecimalFormat("0.00");
         return getAmount().equals("$" + budget.getAmount().toString())
                 && getCategory().equals(budget.getCategory().toString())
                 && getDuration().equals(budget.getDuration())
-                && getSpent().equals("$" + (double) budget.getTotalSpent() / 100 + " ("
+                && getSpent().equals("$" + totalSpentFormat.format((double) budget.getTotalSpent() / 100) + " ("
                 + budget.getPercentage() + "%) spent");
     }
 }

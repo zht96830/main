@@ -171,7 +171,7 @@ public class ModelManager implements Model {
                     || target.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate())) {
                 return;
             }
-            Budget updatedBudget = filteredBudgets.get(index);
+            Budget updatedBudget = new Budget(filteredBudgets.get(index));
             double diff = 0 - target.getAmount().value;
             updatedBudget.updateTotalSpent(diff);
             updatedBudget.updatePercentage();
@@ -196,7 +196,7 @@ public class ModelManager implements Model {
                     || expense.getDate().getLocalDate().isAfter(targetBudget.getEndDate().getLocalDate())) {
                 return;
             }
-            Budget updatedBudget = filteredBudgets.get(index);
+            Budget updatedBudget = new Budget(filteredBudgets.get(index));
             updatedBudget.updateTotalSpent(expense.getAmount().value);
             updatedBudget.updatePercentage();
             versionedFinanceTracker.setBudget(targetBudget, updatedBudget);
@@ -235,9 +235,9 @@ public class ModelManager implements Model {
         // NOW YOU KNOW THAT AT LEAST ONE OF AMOUNT, CATEGORY AND DATE HAS BEEN CHANGED
 
         Budget targetBudget = filteredBudgets.get(index);
-        Budget updatedBudget = filteredBudgets.get(index);
+        Budget updatedBudget = new Budget(filteredBudgets.get(index));
         Budget targetBudget2 = filteredBudgets.get(index2);
-        Budget updatedBudget2 = filteredBudgets.get(index2);
+        Budget updatedBudget2 = new Budget(filteredBudgets.get(index2));
 
         // only amount changed. index != -1, index1 == -1.
         if (target.getAmount() != editedExpense.getAmount()
@@ -487,22 +487,6 @@ public class ModelManager implements Model {
     @Override
     public void undoFinanceTracker() {
         versionedFinanceTracker.undo();
-        for (Budget budget : filteredBudgets) {
-            Budget editedBudget = new Budget(budget);
-            editedBudget.setTotalSpent(0);
-            unfilteredExpenses = versionedFinanceTracker.getExpenseList();
-            int sum = 0;
-            for (Expense expense : unfilteredExpenses) {
-                if (expense.getCategory() == editedBudget.getCategory()
-                        && !(expense.getDate().getLocalDate().isBefore(budget.getStartDate().getLocalDate()))
-                        && !(expense.getDate().getLocalDate().isAfter(budget.getEndDate().getLocalDate()))) {
-                    sum += expense.getAmount().value;
-                }
-            }
-            editedBudget.setTotalSpent(sum);
-            editedBudget.updatePercentage();
-            versionedFinanceTracker.setBudget(budget, editedBudget);
-        }
     }
 
     @Override

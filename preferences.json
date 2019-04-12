@@ -7,5 +7,5 @@
       "y" : -6
     }
   },
-  "financeTrackerFilePath" : "data/financetracker.json"
+  "financeTrackerFilePath" : "data\\financetracker.json"
 }

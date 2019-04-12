@@ -6,6 +6,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +24,6 @@ import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.model.statistics.Statistics;
-
 
 
 /**
@@ -103,13 +103,13 @@ public class BrowserPanel extends UiPart<Region> {
         });
 
         // Load expense page when selected expense changes.
-        statistics.addListener((observable, oldValue, newValue) -> {
+        /*statistics.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 loadDefaultPage();
                 return;
             }
             loadObjectPage(newValue);
-        });
+        });*/
 
         loadDefaultPage();
     }
@@ -128,7 +128,9 @@ public class BrowserPanel extends UiPart<Region> {
             html = html.replace("$category", ((Budget) object).getCategory().toString());
             html = html.replace("$amount", ((Budget) object).getAmount().toString());
             html = html.replace("$duration", ((Budget) object).getDuration());
-            html = html.replace("$totalspent", Double.toString(((Budget) object).getTotalSpent()));
+            DecimalFormat totalSpentFormat = new DecimalFormat("0.00");
+            html = html.replace("$totalspent", ("$" + totalSpentFormat.format((double) ((Budget) object)
+                    .getTotalSpent() / 100)));
             html = html.replace("$percentage", Double.toString(((Budget) object).getPercentage()));
             html = html.replace("$remarks", ((Budget) object).getRemarks());
         } else if (object instanceof Recurring) {
