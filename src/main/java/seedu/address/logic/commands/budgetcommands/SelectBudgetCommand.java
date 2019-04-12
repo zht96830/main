@@ -38,6 +38,7 @@ public class SelectBudgetCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        model.setSelectedBudget(null);
 
         List<Budget> filteredBudgetList = model.getFilteredBudgetList();
 

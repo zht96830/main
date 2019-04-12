@@ -186,10 +186,14 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
+// tag::logicsd[]
+
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteexpense 1")` API call.
 
 .Interactions Inside the Logic Component for the `deleteexpense 1` Command
 image::DeleteExpenseSdForLogic.png[width="800"]
+
+// end::logicsd[]
 
 // tag::design-model[]
 [[Design-Model]]
@@ -1457,10 +1461,14 @@ Use case ends.
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should respond to most commands within 2 seconds.
+.  Should work on 32-bit and 64-bit environments.
+.  Should be backwards compatible with data produced by the earlier versions of the system.
 .  Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  A user with below average to average typing speed for regular English text should be able to accomplish most of the tasks using commands as easily as using the mouse.
-.  User interface should be easily understood and navigated in.
+.  Size of program should be less than 15MBs.
+.  User interface should be intuitive enough for users who are not IT-savvy.
+.  User interface should be responsive based on different screen sizes.
 
 [appendix]
 == Glossary
@@ -1470,23 +1478,6 @@ Windows, Linux, Unix, OS-X
 
 [[complex-command]] Complex command::
  A command in which both the command as well as the compulsory parameters are entered in the same command line
-
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing
