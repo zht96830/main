@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
@@ -26,37 +27,44 @@ public class Statistics {
     protected Date startDate;
     protected Date endDate;
     protected Category category;
-    protected String tableHtml;
+    protected String html;
+    protected FilteredList<Expense> statsExpenses;
 
     /**
      * Every field except category must be present and not null.
      */
-    public Statistics(Date startDate, Date endDate, Category category) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.category = category;
+    public Statistics(FilteredList<Expense> statsExpenses) {
+        this.statsExpenses = statsExpenses;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-    public Date getEndDate() {
-        return endDate;
-    }
-    public String getHtmlTable() {
-        return tableHtml;
+
+    /**
+     * This function returns the HTML code specifying the results of statistics commands
+     * @return
+     */
+    public String getHtml() {
+        return html;
     }
 
     /**
      * Calculates Statistics with data from model
      */
-    public void calculateStats(FilteredList<Expense> statsExpenses, FilteredList<Debt> statsDebts,
-                               FilteredList<Budget> statsBudgets) {
+    public void calculateStats(String command, Date d1, Date d2, Frequency frequency) {
+        switch (command) {
+            case "stats":
+                basicStats(d1, d2);
+            case "compare":
+                compareStats(d1, d2, frequency);
+            case "trend":
+                trendStats(d1, d2, frequency);
+            default:
+        }
+    }
 
-        boolean isCategoryNull = (this.category == null);
+    private void basicStats(Date startDate, Date endDate){
         ArrayList<ArrayList<Expense>> data = new ArrayList<>();
         for (int i = 0; i <= ALL; i++) {
-            data.add(new ArrayList<Expense>());
+            data.add(new ArrayList<>());
         }
 
         for (Expense expense : statsExpenses) {
@@ -69,9 +77,12 @@ public class Statistics {
         }
 
         for (Expense expense: data.get(TRANSPORT)) {
-            System.out.println(expense.toString());
+        //    System.out.println(expense.toString());
         }
-        this.tableHtml = htmlTableBuilder(data);
+
+        this.html = "Statistics Summary <br>\n"
+                + "From: " + startDate.toString() + " To: " + endDate.toString() + "\n";
+        this.html = html + htmlTableBuilder(data);
     }
 
     /**
@@ -152,6 +163,13 @@ public class Statistics {
                 + "  </tr>\n";
         table = table + "</table>";
         return table;
+    }
+
+    private void compareStats(Date startDate, Date endDate, Frequency frequency){
+
+    }
+    private void trendStats(Date startDate, Date endDate, Frequency frequency){
+
     }
 
 }

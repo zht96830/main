@@ -13,7 +13,6 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 
 /**
@@ -36,11 +35,6 @@ public class StatsCommandParser {
 
         Date startDate;
         Date endDate;
-        Category category = null;
-
-        if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-        }
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (argMultimap.getValue(PREFIX_ENDDATE).isPresent()) {
@@ -60,6 +54,6 @@ public class StatsCommandParser {
             }
         }
 
-        return new StatsCommand(startDate, endDate, category);
+        return new StatsCommand(startDate, endDate);
     }
 }
