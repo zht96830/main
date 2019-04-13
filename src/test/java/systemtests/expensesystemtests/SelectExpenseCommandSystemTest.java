@@ -114,7 +114,7 @@ public class SelectExpenseCommandSystemTest extends FinanceTrackerSystemTest {
      * Verifications 1, 3 and 4 are performed by
      * {@code FinanceTrackerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see FinanceTrackerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see FinanceTrackerSystemTest#assertSelectedCardChanged(Index)
+     * @see FinanceTrackerSystemTest#assertSelectedExpenseCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
@@ -128,7 +128,7 @@ public class SelectExpenseCommandSystemTest extends FinanceTrackerSystemTest {
         if (preExecutionSelectedCardIndex == expectedSelectedCardIndex.getZeroBased()) {
             assertSelectedCardUnchanged();
         } else {
-            assertSelectedCardChanged(expectedSelectedCardIndex);
+            assertSelectedExpenseCardChanged(expectedSelectedCardIndex);
         }
 
         assertCommandBoxShowsDefaultStyle();

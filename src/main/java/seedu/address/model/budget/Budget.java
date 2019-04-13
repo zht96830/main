@@ -19,7 +19,7 @@ public class Budget {
     public static final String MESSAGE_CONSTRAINTS_END_DATE =
             "Start date has to be before end date.";
     public static final String MESSAGE_CONSTRAINTS_END_DATE_AFTER_TODAY =
-            "You are trying to set a budget in the past, you may enter 'deletebudget c/CATEGORY' to delete the budget"
+            "You are trying to set a budget in the past, you may enter 'deletebudget c/CATEGORY' to delete a budget"
                     + " if you no longer need it.";
     private int index;
     private Category category;
@@ -37,9 +37,7 @@ public class Budget {
         requireAllNonNull(category, amount, endDate);
         this.category = category;
         this.amount = amount;
-        //checkArgument(startDate.isEqualOrAfterToday(), MESSAGE_CONSTRAINTS_START_DATE);
         this.startDate = startDate;
-        //checkArgument(startDate.getLocalDate().isBefore(endDate.getLocalDate()));
         this.endDate = endDate;
         if (remarks == null) {
             this.remarks = "";

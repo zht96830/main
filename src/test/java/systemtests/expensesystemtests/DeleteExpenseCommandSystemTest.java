@@ -159,7 +159,7 @@ public class DeleteExpenseCommandSystemTest extends FinanceTrackerSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
      * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
      * @see DeleteExpenseCommandSystemTest#assertCommandSuccess(String, Model, String)
-     * @see FinanceTrackerSystemTest#assertSelectedCardChanged(Index)
+     * @see FinanceTrackerSystemTest#assertSelectedExpenseCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
@@ -167,7 +167,7 @@ public class DeleteExpenseCommandSystemTest extends FinanceTrackerSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
 
         if (expectedSelectedCardIndex != null) {
-            assertSelectedCardChanged(expectedSelectedCardIndex);
+            assertSelectedExpenseCardChanged(expectedSelectedCardIndex);
         } else {
             assertSelectedCardUnchanged();
         }

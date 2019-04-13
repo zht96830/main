@@ -13,7 +13,9 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DES
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTDATE_DESC_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.STARTDATE_DESC_BUDGET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_BUDGET;
 import static seedu.address.testutil.TypicalBudgets.BUDGET;
+import static seedu.address.testutil.TypicalBudgets.FOOD_BUDGET;
 
 import org.junit.Test;
 
@@ -40,9 +42,11 @@ public class AddBudgetCommandSystemTest extends FinanceTrackerSystemTest {
          * -> added
          */
         Budget toAdd = BUDGET;
-        String command = "   " + AddBudgetCommand.COMMAND_WORD + "  " + CATEGORY_DESC_BUDGET + "  " + AMOUNT_DESC_BUDGET
-                + " " + STARTDATE_DESC_BUDGET + "   " + ENDDATE_DESC_BUDGET + "   " + REMARKS_DESC_BUDGET + "  ";
+        toAdd.setCategory(Category.OTHERS);
+        String command = "   " + AddBudgetCommand.COMMAND_WORD + "  c/others  " + AMOUNT_DESC_BUDGET
+                + " " + STARTDATE_DESC_BUDGET + "   " + ENDDATE_DESC_BUDGET + "   " + REMARKS_DESC_BUDGET + "   ";
         assertCommandSuccess(command, toAdd);
+
 
         /* Case: undo adding budget to the list -> budget deleted */
         command = UndoCommand.COMMAND_WORD;
@@ -57,16 +61,16 @@ public class AddBudgetCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: add to empty finance tracker -> added */
         deleteAllBudgets();
+        toAdd.setCategory(Category.valueOf(VALID_CATEGORY_BUDGET.toUpperCase()));
         command = "   " + AddBudgetCommand.COMMAND_WORD + "  " + CATEGORY_DESC_BUDGET + " " + AMOUNT_DESC_BUDGET + " "
                 + STARTDATE_DESC_BUDGET + "   " + ENDDATE_DESC_BUDGET + " " + REMARKS_DESC_BUDGET + " ";
         assertCommandSuccess(command, toAdd);
 
-        /* ------------------------ Perform add operation while a expense card is selected -------------------------- */
-        // implement selectbudget command first
-        /* Case: selects first card in the expense list, add a expense -> added, card selection remains unchanged */
-        /*selectExpense(Index.fromOneBased(1));
-        assertCommandSuccess(GROCERIES);
-*/
+        /* ------------------------ Perform add operation while a budget card is selected -------------------------- */
+        /* Case: selects food budget card in the budget list, add a budget -> added, card selection remains unchanged */
+        selectBudget(Category.valueOf(VALID_CATEGORY_BUDGET.toUpperCase()));
+        assertCommandSuccess(FOOD_BUDGET);
+
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
         /* Case:

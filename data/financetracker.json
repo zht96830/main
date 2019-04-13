@@ -1,100 +1,58 @@
 {
   "expenses" : [ {
-    "name" : "Car Repairs",
-    "amount" : "100.5",
-    "date" : "13-04-2019",
-    "category" : "UTILITIES",
-    "remarks" : "Car was not feeling okay"
-  }, {
-    "name" : "North Korea Air Tickets",
-    "amount" : "530",
-    "date" : "08-04-2019",
+    "name" : "flight tix",
+    "amount" : "1500",
+    "date" : "10-05-2020",
     "category" : "TRAVEL",
-    "remarks" : "I wanted to see Kim Jong Un"
+    "remarks" : ""
   }, {
-    "name" : "Double McSpicy from McDonalds",
-    "amount" : "6.9",
-    "date" : "08-04-2019",
-    "category" : "FOOD",
-    "remarks" : "ohhhhh my ass gon be on fyre"
-  }, {
-    "name" : "Cab to work",
-    "amount" : "10.5",
-    "date" : "08-04-2019",
-    "category" : "WORK",
-    "remarks" : "I was late so I took the cab to work"
-  }, {
-    "name" : "Paid Debt to Amy",
-    "amount" : "3.5",
-    "date" : "08-04-2019",
-    "category" : "FOOD",
-    "remarks" : "for duck rice last week"
-  }, {
-    "name" : "Daily Lunch (Recurring)",
-    "amount" : "5",
-    "date" : "08-04-2019",
-    "category" : "FOOD",
-    "remarks" : "Daily lunch for the year"
-  }, {
-    "name" : "Phone Bill (Recurring)",
+    "name" : "top up ezlin",
     "amount" : "50",
-    "date" : "23-03-2019",
-    "category" : "UTILITIES",
-    "remarks" : "Signed a new 2 year plan."
-  }, {
-    "name" : "Phone bills",
-    "amount" : "20",
-    "date" : "31-01-2019",
-    "category" : "UTILITIES",
+    "date" : "12-04-2019",
+    "category" : "TRANSPORT",
     "remarks" : ""
   }, {
-    "name" : "doctor consultation",
-    "amount" : "30.5",
-    "date" : "15-01-2019",
-    "category" : "HEALTHCARE",
-    "remarks" : "down with flu"
-  }, {
-    "name" : "Groceries from NTUC",
-    "amount" : "57.3",
-    "date" : "08-01-2019",
-    "category" : "SHOPPING",
-    "remarks" : "fish, eggs, chicken, beef, oyster sauce"
-  }, {
-    "name" : "Taxi",
-    "amount" : "17.2",
-    "date" : "05-01-2019",
+    "name" : "taxi to school",
+    "amount" : "11",
+    "date" : "12-04-2019",
     "category" : "TRANSPORT",
-    "remarks" : "from NUS to Home"
+    "remarks" : ""
   }, {
-    "name" : "Duck Rice",
+    "name" : "caifan",
     "amount" : "3.5",
-    "date" : "01-01-2019",
+    "date" : "12-04-2019",
     "category" : "FOOD",
     "remarks" : ""
   }, {
-    "name" : "new ASUS laptop",
-    "amount" : "1300",
-    "date" : "15-12-2018",
-    "category" : "WORK",
-    "remarks" : "may get reimbursed"
+    "name" : "new fridge",
+    "amount" : "1100",
+    "date" : "05-04-2019",
+    "category" : "UTILITIES",
+    "remarks" : ""
   }, {
-    "name" : "new Panasonic TV",
-    "amount" : "750",
-    "date" : "21-07-2017",
-    "category" : "ENTERTAINMENT",
+    "name" : "caifan",
+    "amount" : "3",
+    "date" : "01-04-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
+    "name" : "new uniqlo jeans",
+    "amount" : "39.9",
+    "date" : "27-12-2018",
+    "category" : "SHOPPING",
     "remarks" : ""
   } ],
   "debts" : [ {
     "personOwed" : "Bob",
-    "amount" : "17.2",
+    "amount" : "15",
     "deadline" : "05-12-2019",
     "category" : "TRANSPORT",
     "remarks" : "taxi from NUS to Home"
   }, {
     "personOwed" : "Charlie",
-    "amount" : "57.3",
+    "amount" : "55.5",
     "deadline" : "08-08-2019",
-    "category" : "SHOPPING",
+    "category" : "FOOD",
     "remarks" : "groceries: fish, eggs, chicken, beef, oyster sauce"
   }, {
     "personOwed" : "Debbie",
@@ -120,25 +78,23 @@
     "deadline" : "21-07-2020",
     "category" : "ENTERTAINMENT",
     "remarks" : "borrowed money to get a new GEORGE"
+  }, {
+    "personOwed" : "jiahui",
+    "amount" : "10",
+    "deadline" : "10-10-2019",
+    "category" : "FOOD",
+    "remarks" : ""
   } ],
   "budgets" : [ {
-    "amount" : "600",
-    "category" : "FOOD",
-    "startDate" : "01-10-2019",
-    "endDate" : "31-10-2019",
-    "remarks" : "eat less save more",
-    "totalSpent" : "0",
-    "percentage" : "0.0"
-  }, {
-    "amount" : "300",
+    "amount" : "500",
     "category" : "TRANSPORT",
-    "startDate" : "01-07-2019",
+    "startDate" : "01-01-2019",
     "endDate" : "31-12-2019",
     "remarks" : "only for school and back",
-    "totalSpent" : "0",
-    "percentage" : "0.0"
+    "totalSpent" : "6100",
+    "percentage" : "12.2"
   }, {
-    "amount" : "200",
+    "amount" : "150",
     "category" : "SHOPPING",
     "startDate" : "01-06-2019",
     "endDate" : "30-06-2019",
@@ -156,11 +112,11 @@
   }, {
     "amount" : "450",
     "category" : "UTILITIES",
-    "startDate" : "01-05-2019",
-    "endDate" : "31-05-2020",
+    "startDate" : "01-01-2019",
+    "endDate" : "31-12-2019",
     "remarks" : "take shorter showers",
-    "totalSpent" : "0",
-    "percentage" : "0.0"
+    "totalSpent" : "110000",
+    "percentage" : "244.44444444444446"
   }, {
     "amount" : "100",
     "category" : "HEALTHCARE",
@@ -178,13 +134,21 @@
     "totalSpent" : "0",
     "percentage" : "0.0"
   }, {
-    "amount" : "7000",
+    "amount" : "5000",
     "category" : "TRAVEL",
-    "startDate" : "01-01-2020",
-    "endDate" : "31-12-2020",
+    "startDate" : "01-05-2020",
+    "endDate" : "30-06-2020",
     "remarks" : "grad trip and family trip",
-    "totalSpent" : "0",
-    "percentage" : "0.0"
+    "totalSpent" : "150000",
+    "percentage" : "30.0"
+  }, {
+    "amount" : "450",
+    "category" : "FOOD",
+    "startDate" : "01-04-2019",
+    "endDate" : "30-04-2019",
+    "remarks" : "",
+    "totalSpent" : "650",
+    "percentage" : "1.4444444444444444"
   } ],
   "recurrings" : [ {
     "name" : "Phone Bill",
@@ -194,25 +158,25 @@
     "remarks" : "Signed a new 2 year plan.",
     "frequency" : "M",
     "occurrence" : "24",
-    "lastConvertedDate" : "2019-04-08"
+    "lastConvertedDate" : "2019-04-12"
   }, {
     "name" : "Spotify Subscription",
     "amount" : "20",
-    "date" : "24-09-2019",
+    "date" : "01-01-2019",
     "category" : "UTILITIES",
     "remarks" : "Spotify for a year!",
     "frequency" : "M",
     "occurrence" : "12",
-    "lastConvertedDate" : "2019-04-08"
+    "lastConvertedDate" : "2019-04-12"
   }, {
     "name" : "Daily Lunch",
     "amount" : "5",
-    "date" : "08-04-2019",
+    "date" : "01-04-2019",
     "category" : "FOOD",
     "remarks" : "Daily lunch for the year",
     "frequency" : "D",
     "occurrence" : "365",
-    "lastConvertedDate" : "2019-04-08"
+    "lastConvertedDate" : "2019-04-12"
   }, {
     "name" : "Electricity Bill",
     "amount" : "50",
@@ -221,7 +185,7 @@
     "remarks" : "Monthly electricity bills",
     "frequency" : "M",
     "occurrence" : "12",
-    "lastConvertedDate" : "2019-04-08"
+    "lastConvertedDate" : "2019-04-12"
   }, {
     "name" : "Insurance",
     "amount" : "100",
@@ -230,6 +194,6 @@
     "remarks" : "Yearly insurance fee for 10 years",
     "frequency" : "Y",
     "occurrence" : "10",
-    "lastConvertedDate" : "2019-04-08"
+    "lastConvertedDate" : "2019-04-12"
   } ]
 }

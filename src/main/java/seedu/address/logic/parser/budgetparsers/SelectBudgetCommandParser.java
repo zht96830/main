@@ -18,6 +18,7 @@ import seedu.address.model.attributes.Category;
  * Parses input arguments and creates a new SelectBudgetCommand object
  */
 public class SelectBudgetCommandParser implements Parser<SelectBudgetCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand
      * and returns an SelectCommand object for execution.

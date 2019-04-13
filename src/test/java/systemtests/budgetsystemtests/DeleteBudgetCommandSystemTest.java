@@ -3,6 +3,8 @@ package systemtests.budgetsystemtests;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_BUDGET;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static seedu.address.logic.commands.budgetcommands.DeleteBudgetCommand.MESSAGE_DELETE_BUDGET_SUCCESS;
+import static seedu.address.model.attributes.Category.TRAVEL;
 import static seedu.address.testutil.TestUtil.getBudget;
 
 import org.junit.Test;
@@ -24,7 +26,7 @@ public class DeleteBudgetCommandSystemTest extends FinanceTrackerSystemTest {
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
 
         /* Case: delete the travel budget in the list, command with leading spaces and trailing spaces -> deleted */
-        /*Category category = TRAVEL;
+        Category category = TRAVEL;
         Model expectedModel = getModel();
         Model modelBeforeDeletingTravel = getModel();
         String command = "     " + DeleteBudgetCommand.COMMAND_WORD + "     " + CATEGORY_DESC_BUDGET + "       ";
@@ -84,7 +86,7 @@ public class DeleteBudgetCommandSystemTest extends FinanceTrackerSystemTest {
 
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(DeleteBudgetCommand.COMMAND_WORD + CATEGORY_DESC_BUDGET + " 1 abc",
-                MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
+                Category.MESSAGE_CONSTRAINTS);
 
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("DelETEbudGEt" + CATEGORY_DESC_BUDGET, MESSAGE_UNKNOWN_COMMAND);
@@ -112,7 +114,7 @@ public class DeleteBudgetCommandSystemTest extends FinanceTrackerSystemTest {
 
         assertCommandSuccess(
                 DeleteBudgetCommand.COMMAND_WORD + " c/" + toDelete, expectedModel, expectedResultMessage);
-    }
+    }*/
 
     /**
      * Executes {@code command} and in addition,<br>
@@ -125,7 +127,8 @@ public class DeleteBudgetCommandSystemTest extends FinanceTrackerSystemTest {
      * {@code FinanceTrackerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
      * @see FinanceTrackerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    /*private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
+    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
+
         assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
     }
 
@@ -133,22 +136,22 @@ public class DeleteBudgetCommandSystemTest extends FinanceTrackerSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
      * and selected card are expected to update accordingly depending on card at {@code expectedSelectedCardCategory}.
      * @see DeleteBudgetCommandSystemTest#assertCommandSuccess(String, Model, String)
-     * @see FinanceTrackerSystemTest#assertSelectedBudgetCardChanged(Index)
+     * @see FinanceTrackerSystemTest#assertSelectedBudgetCardChanged(Category)
      */
-    /*private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
+    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Category expectedSelectedCardCategory) {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
 
-        /*if (expectedSelectedCardCategory != null) {
+        if (expectedSelectedCardCategory != null) {
             assertSelectedBudgetCardChanged(expectedSelectedCardCategory);
         } else {
-            assertSelectedBudgetCardUnchanged();
-        }*/
+            assertSelectedCardUnchanged();
+        }
 
-    /*assertCommandBoxShowsDefaultStyle();
+        assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchangedExceptSyncStatus();
-    }*/
+    }
 
     /**
      * Executes {@code command} and in addition,<br>
@@ -169,6 +172,4 @@ public class DeleteBudgetCommandSystemTest extends FinanceTrackerSystemTest {
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }
-
-
 }
