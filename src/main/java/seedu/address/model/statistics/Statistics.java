@@ -14,6 +14,10 @@ import seedu.address.model.expense.Expense;
  */
 public class Statistics {
 
+
+    public static final String MESSAGE_CONSTRAINTS_END_DATE =
+            "Start date has to be before end date.";
+
     public static final int FOOD = 0;
     public static final int TRANSPORT = 1;
     public static final int SHOPPING = 2;
@@ -166,6 +170,7 @@ public class Statistics {
     }
 
     private void compareStats(Date startDate, Date endDate, Frequency frequency){
+        System.out.println("I'm here");
 
     }
     private void trendStats(Date startDate, Date endDate, Frequency frequency){

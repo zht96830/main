@@ -25,8 +25,8 @@ public class StatsCommand extends Command {
             + "[" + PREFIX_STARTDATE + "START DATE] "
             + "[" + PREFIX_ENDDATE + "END DATE] "
             + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_STARTDATE + "13-01-1996 "
-            + PREFIX_ENDDATE + "13-02-1996 ";
+            + PREFIX_STARTDATE + "13-01-2000 "
+            + PREFIX_ENDDATE + "13-02-2000 ";
 
     public static final String MESSAGE_SUCCESS = "Statistics Calculated!";
 
@@ -48,7 +48,7 @@ public class StatsCommand extends Command {
 
         /* Execution */
         model.calculateStatistics("stats" ,startDate, endDate, null);
-        /* End Execution*/
+        /* End of Execution*/
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
@@ -58,6 +58,6 @@ public class StatsCommand extends Command {
         return other == this //short circuit if same object
                 || (other instanceof StatsCommand // instance of handles nulls
                 && startDate.equals(((StatsCommand) other).startDate)
-                && endDate.equals(((StatsCommand) other).endDate)); /*Have to handle null category*/
+                && endDate.equals(((StatsCommand) other).endDate));
     }
 }
