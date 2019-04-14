@@ -512,15 +512,15 @@ Below is the UML sequence diagram and a step-by-step explanation of an example u
 
 2. `Logic Manager` will call the `execute` method of the `StatsCommand` object which calls the `calculateStatistics("stats', 01-01-2019, 01-02-2019, null)` method in `Model`. The `Model Manager` will handle this command and duplicate the `Expense` list held in the Financial Tracker, creating a snapshot. The `Model Manager` will instantiate a `Statistics` object and call the `calculateStatistics("stats', 01-01-2019, 01-02-2019, null)` method.
 
-4. The `calculateStatistics` method in `Statistics` is a wrapper that will call the appropriate method `basicStats(01-01-2019, 01-02-2019)` after reading the String `"stats"` that was passed in.
+3. The `calculateStatistics` method in `Statistics` is a wrapper that will call the appropriate method `basicStats(01-01-2019, 01-02-2019)` after reading the String `"stats"` that was passed in.
 
-5.  `basicStats` calls the method `extractRelevantExpense(01-01-2019, 01-02-2019)` which takes only the `Expenses` that lie within the time range and adds them to a new `Expense` list `data`. These relevant `Expenses` are then processed by the `generateSummary(data)` method. This method will return a table of relevant statistics.
+4.  `basicStats` calls the method `extractRelevantExpense(01-01-2019, 01-02-2019)` which takes only the `Expenses` that lie within the time range and adds them to a new `Expense` list `data`. These relevant `Expenses` are then processed by the `generateSummary(data)` method. This method will return a table of relevant statistics.
 
-6. The methods `trimTable(table)`, `convertDataToString(trimmedtable)` are called to process this table. `htmlTableBuilder(header, table)` is called to generate the HTML code required to show the Statistics in the BrowserPanel.
+5. The methods `trimTable(table)`, `convertDataToString(trimmedtable)` are called to process this table. `htmlTableBuilder(header, table)` is called to generate the HTML code required to show the Statistics in the BrowserPanel.
 
-7. `Model Manager` calls `setStatistics(statistics)` which sets the observable `Statistics` in `ModelManager`.
+6. `Model Manager` calls `setStatistics(statistics)` which sets the observable `Statistics` in `ModelManager`.
 
-8. The listerner in `BrowserPanel` will detect the change and display the HTML page showing the statistics
+7. The listener in `BrowserPanel` will detect the change and display the HTML page showing the statistics
 
 ===== Future Implementation
 Users will be given the option to choose a Visual Representation method.
