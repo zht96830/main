@@ -16,6 +16,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
+import seedu.address.model.statistics.Statistics;
 
 /**
  * Parses input arguments and creates a new StatsCommand object
@@ -43,6 +44,11 @@ public class StatsTrendCommandParser {
 
         Date startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
         Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_ENDDATE).get());
+
+        if (endDate.getLocalDate().isBefore(startDate.getLocalDate())) {
+            throw new ParseException(Statistics.MESSAGE_CONSTRAINTS_END_DATE);
+        }
+
         Frequency frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get());
 
         System.out.println(startDate.toString() + endDate.toString() + frequency.toString());
