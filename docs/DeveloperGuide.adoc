@@ -468,6 +468,20 @@ image::PayDebtSequenceDiagram.png[width="800"]
 
 8. The command result is then returned to the `LogicManager` which then returns it to the `UI` where the changes are then reflected on the user interface.
 
+==== Design Consideration
+
+This feature can be implemented in different ways in terms of the architecture of the Model component. The alternative ways of implementation are shown below.
+
+* Alternative 1 (current choice): Debt and Expense classes do not inherit from a common Interface. Container objects such as expense list and debt list, will be initialized to hold objects of their own individual classes.
+** Pros: Lower level of coupling between Expense and Debt classes.
+** Cons: Slower and less flexibility. Conversion between classes, e.g. from Debt to Expense, requires extracting information from debt, creating a new expense, then deleting the old debt.
+
+* Alternative 2: Debt and Expense classes inherit from a common Interface. Container objects such as expense list and debt list, will be initialized to hold objects of this common Interface.
+** Pros: Greater flexibility. Polymorphism allows for easy conversion between different types of entries, such as from debt to expense, simply by moving them across different lists. This will be useful considering that our Finance Tracker will need significant amounts of conversion between different objects.
+** Cons: Higher level of coupling between Expense and Debt classes.
+
+Ultimately, the first option was chosen because a lower level of coupling will allow for easier maintenance, integration and testing. Also, it is not significantly slower thus the Finance Tracker will still be able to complete debt-related commands within 2 seconds, which is one of our non-functional requirements.
+
 ==== Debt Notifications (Coming in v2.0)
 
 This is still a work in progress. +
@@ -556,11 +570,23 @@ User enters the command word `selectbudget`, followed by the category for which 
 
 For all four actions, the user command gets parsed by the respective parsers: `AddBudgetCommandParser`, `EditBudgetCommandParser`, `DeleteBudgetCommandParser` and `SelectBudgetCommandParser`, which handle the execution of the commands.
 
-Below is the UML sequence diagram of a scenario for the `addbudget` command.
+Below is the UML sequence diagram of a scenario for the `addbudget` command. Editing, deleting and selecting budgets work similarly to adding budgets.
 
 image::AddBudgetSequenceDiagram.png[width="800"]
 
-Editing, deleting and selecting budgets work similarly to adding budgets.
+1. User enters the command `addbudget c/food $/1000 ed/30-06-2019`, to add a new budget for the `FOOD` category.
+This command is executed by `LogicManager`, which calls `FinanceTrackerParser#parseCommand("addbudget c/food $/1000 ed/30-06-2019")`.
+This creates a new `AddBudgetCommandParser` object which will help parse the input by the user.
+
+2. The newly created object calls `parse("c/food $/1000 ed/30-06-2019")` which in turn calls `ArgumentTokenizer#tokenize("c/food $/1000 ed/30-06-2019", "/c", "$/", "sd/", "ed/", "r/")` to split the arguments into the different parameters of a budget. This returns an `argMultiMap` containing the split input.
+
+3. The `AddBudgetCommandParser` object then calls `ParserUtil#parseCategory(argMultiMap.getValue("c/").get())` `ParserUtil#parseAmount(argMultiMap.getValue("$/").get())` and `ParserUtil#parseDate(argMultiMap.getValue("ed/").get())` to parse the arguments provided by the user into the correct formats of the relevant parameters. As the user does not specify a start date in this case, the programme will use the local date on the system's clock. An `AddBudgetCommand` object containing the parameter values provided and today's date as the start date is then created and returned to the `LogicManager`.
+
+4. The `LogicManager` calls `AddBudgetCommand#execute()`, which will call `Model#updateFilteredBudgetList(Predicate<Budget>)` to update the list of budgets stored in the finance tracker.
+
+7. `Model#addBudget(budget)` is then called to add the `budget` into the budget list.
+
+8. The command result is then returned to the `LogicManager` which then returns it to the `UI` where the changes are then reflected on the user interface.
 
 ===== Updating of budgets:
 * When a new budget is added, the model checks the expense list for any expenses of that category which fall within the time frame of the added budget
@@ -780,6 +806,7 @@ Suggested path for new programmers:
 
 2. Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components.
 
+// tag::product[]
 [appendix]
 == Product Scope
 
@@ -1462,7 +1489,7 @@ Use case ends.
 2. PFT closes itself and exits
 +
 Use case ends.
-
+//end::product
 // tag::nfr[]
 
 [appendix]
@@ -1492,6 +1519,7 @@ Windows, Linux, Unix, OS-X
  A command in which both the command as well as the compulsory parameters are entered in the same command line
 
 [appendix]
+
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.

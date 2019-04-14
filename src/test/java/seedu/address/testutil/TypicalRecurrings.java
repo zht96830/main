@@ -21,10 +21,18 @@ public class TypicalRecurrings {
             .withAmount("20.00").withCategory("entertainment").withDate("24-09-2019").withFrequency("M")
             .withOccurrence("12").withRemarks("Spotify for a year!").build();
 
+    public static final Recurring RECURRING = new RecurringBuilder().withName("EPL Subscription")
+            .withAmount("40").withCategory("utilities").withDate("01-01-2019").withFrequency("M")
+            .withOccurrence("12").withRemarks("Football").build();
+
+    public static final Recurring RECURRING_WITHOUT_REMARKS = new RecurringBuilder().withName("EPL Subscription")
+            .withAmount("40").withCategory("utilities").withDate("01-01-2019").withFrequency("M")
+            .withOccurrence("12").build();
+
     private TypicalRecurrings() {} // prevents instantiation
 
     /**
-     * Returns an {@code FinanceTracker} with all the typical expenses.
+     * Returns an {@code FinanceTracker} with all the typical recurrings.
      */
     public static FinanceTracker getTypicalFinanceTrackerWithRecurrings() {
         FinanceTracker ft = new FinanceTracker();

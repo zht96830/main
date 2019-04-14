@@ -66,6 +66,14 @@ public class EditRecurringCommandParser implements Parser<EditRecurringCommand> 
         if (argMultimap.getValue(PREFIX_REMARKS).isPresent()) {
             editRecurringDescriptor.setRemarks(argMultimap.getValue(PREFIX_REMARKS).get());
         }
+        if (argMultimap.getValue(PREFIX_FREQUENCY).isPresent()) {
+            editRecurringDescriptor.setFrequency(ParserUtil.parseFrequency(argMultimap
+                    .getValue(PREFIX_FREQUENCY).get()));
+        }
+        if (argMultimap.getValue(PREFIX_OCCURRENCE).isPresent()) {
+            editRecurringDescriptor.setOccurrence(ParserUtil.parseOccurrence(argMultimap
+                    .getValue(PREFIX_OCCURRENCE).get()));
+        }
 
 
         if (!editRecurringDescriptor.isAnyFieldEdited()) {
