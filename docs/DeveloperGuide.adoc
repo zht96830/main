@@ -779,6 +779,7 @@ Suggested path for new programmers:
 
 2. Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components.
 
+// tag::product[]
 [appendix]
 == Product Scope
 
@@ -1461,7 +1462,7 @@ Use case ends.
 2. PFT closes itself and exits
 +
 Use case ends.
-
+//end::product
 // tag::nfr[]
 
 [appendix]

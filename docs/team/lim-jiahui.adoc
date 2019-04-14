@@ -14,7 +14,7 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 
 == Summary of contributions
 
-* *Major enhancement*: added the feature that *lets users to manage their budgets in the finance tracker application*
+* *Major enhancement*: added the feature that *lets users manage their budgets in the finance tracker application*
 ** What it does: allows the user to add, edit, delete, select and clear all budgets while helping the user to keep track of how much the user has spent for each category of budget. Integrated to work with current undo/redo and history commands.
 ** Justification: This feature improves the product significantly because it is now simpler for a user to track how much they are spending relative to how much they allocate to a particular category.
 ** Highlights: The implementation of this feature required making significant changes to existing codes, and integrating them together. It provides a platform for any future enhancements to the finance tracker like the ability to add a recurring budget.
@@ -30,8 +30,10 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 *** Added user stories and use cases to Developer Guide (Pull requests https://github.com/CS2103-AY1819S2-W15-2/main/pull/28[#28] and https://github.com/CS2103-AY1819S2-W15-2/main/pull/55[#55])
 *** Checked through Developer Guide and made any necessary changes (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/222[#222])
 ** Enhancements to existing features:
+*** Added validation checks for Date class (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/175[#175])
 *** Added clear command for budgets, debts and recurring expenses (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/201[#201])
 *** Updated history command to display only valid commands (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/222[#222])
+
 
 == Contributions to the User Guide
 
@@ -48,3 +50,5 @@ include::../UserGuide.adoc[tag=budget]
 |===
 
 include::../DeveloperGuide.adoc[tag=budget]
+
+include::../DeveloperGuide.adoc[tag=product]
