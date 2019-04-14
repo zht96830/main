@@ -519,8 +519,7 @@ This implementation is under Logic and Model components.
 
 Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `stats`.
 
-(UML here)
-
+image::StatCommandSequenceDiagram.png[width="800"]
 
 1. User enters command `stats sd/01-01-2019`. The command is received by `FinanceTrackerParser`, which then creates a `StatsCommandParser` object. The created object then calls `StatsCommandParser.parse("stats sd/01-01-2019")` method. A `StatsCommand` object is then created with `StatsCommand(01-01-2019, 01-02-2019)` and returned to the `LogicManager`
 
