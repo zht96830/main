@@ -106,12 +106,12 @@ public class AddRecurringCommandParserTest {
         // invalid occurrence
         assertParseFailure(parser, NAME_DESC_RECURRING + AMOUNT_DESC_RECURRING + CATEGORY_DESC_RECURRING
                 + DATE_DESC_RECURRING + REMARKS_DESC_RECURRING + FREQUENCY_DESC_RECURRING
-                + INVALID_OCCURRENCE_DESC, Frequency.MESSAGE_CONSTRAINTS);
+                + INVALID_OCCURRENCE_DESC, Occurrence.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + AMOUNT_DESC_DEBT + CATEGORY_DESC_DEBT
                 + FREQUENCY_DESC_RECURRING + OCCURRENCE_DESC_RECURRING + INVALID_DEADLINE_DESC_FORMAT,
-                Occurrence.MESSAGE_CONSTRAINTS);
+                Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_RECURRING + AMOUNT_DESC_RECURRING
