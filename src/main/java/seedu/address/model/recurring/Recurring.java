@@ -69,11 +69,39 @@ public class Recurring extends Expense {
             Name newName = new Name(name.name + " (Recurring)");
 
             Date newDate = new Date(date);
-            if (frequency.value == "D") {
+            if (frequency.value.equals("D")) {
                 newDate.setLocalDate(date.getLocalDate().plusDays(i));
             } else if (frequency.value.equals("M")) {
                 newDate.setLocalDate(date.getLocalDate().plusMonths(i));
-            } else if (frequency.value == "Y") {
+            } else if (frequency.value.equals("Y")) {
+                newDate.setLocalDate(date.getLocalDate().plusYears(i));
+            }
+
+            Expense toAdd = new Expense(newName, amount, newDate, category, remarks);
+            //System.out.println(toAdd);
+            this.recurringListOfExpenses.add(toAdd);
+        }
+    }
+
+    /**
+     * Initializes a newly created Recurring object from another Recurring object.
+     */
+    public Recurring(Recurring recurring) {
+        super(recurring.getName(), recurring.getAmount(), recurring.getDate(), recurring.getCategory(),
+                recurring.getRemarks());
+        this.frequency = recurring.getFrequency();
+        this.occurrence = recurring.getOccurrence();
+        this.lastConvertedDate = LocalDate.now();
+        this.recurringListOfExpenses = new ArrayList<>(occurrence.value);
+        for (int i = 0; i < occurrence.value; i++) {
+            Name newName = new Name(name.name + " (Recurring)");
+
+            Date newDate = new Date(date);
+            if (frequency.value.equals("D")) {
+                newDate.setLocalDate(date.getLocalDate().plusDays(i));
+            } else if (frequency.value.equals("M")) {
+                newDate.setLocalDate(date.getLocalDate().plusMonths(i));
+            } else if (frequency.value.equals("Y")) {
                 newDate.setLocalDate(date.getLocalDate().plusYears(i));
             }
 
@@ -97,10 +125,6 @@ public class Recurring extends Expense {
 
     public ArrayList<Expense> getRecurringListOfExpenses() {
         return recurringListOfExpenses;
-    }
-
-    public void setLastConvertedDate(LocalDate date) {
-        this.lastConvertedDate = date;
     }
 
     /**
@@ -173,7 +197,6 @@ public class Recurring extends Expense {
                 .append(frequency)
                 .append(" Occurrence: ")
                 .append(occurrence);
-
         return builder.toString();
     }
 }

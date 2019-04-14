@@ -1,45 +1,21 @@
 {
   "expenses" : [ {
-    "name" : "flight tix",
-    "amount" : "1500",
-    "date" : "10-05-2020",
-    "category" : "TRAVEL",
-    "remarks" : ""
-  }, {
-    "name" : "top up ezlin",
-    "amount" : "50",
-    "date" : "12-04-2019",
-    "category" : "TRANSPORT",
-    "remarks" : ""
-  }, {
-    "name" : "taxi to school",
-    "amount" : "11",
-    "date" : "12-04-2019",
-    "category" : "TRANSPORT",
-    "remarks" : ""
-  }, {
-    "name" : "caifan",
-    "amount" : "3.5",
-    "date" : "12-04-2019",
+    "name" : "2nd (Recurring)",
+    "amount" : "1",
+    "date" : "02-01-2019",
     "category" : "FOOD",
     "remarks" : ""
   }, {
-    "name" : "new fridge",
-    "amount" : "1100",
-    "date" : "05-04-2019",
-    "category" : "UTILITIES",
-    "remarks" : ""
-  }, {
-    "name" : "caifan",
-    "amount" : "3",
-    "date" : "01-04-2019",
+    "name" : "start (Recurring)",
+    "amount" : "1",
+    "date" : "01-01-2019",
     "category" : "FOOD",
     "remarks" : ""
   }, {
-    "name" : "new uniqlo jeans",
-    "amount" : "39.9",
-    "date" : "27-12-2018",
-    "category" : "SHOPPING",
+    "name" : "2nd (Recurring)",
+    "amount" : "1",
+    "date" : "02-01-2018",
+    "category" : "FOOD",
     "remarks" : ""
   } ],
   "debts" : [ {
@@ -91,8 +67,8 @@
     "startDate" : "01-01-2019",
     "endDate" : "31-12-2019",
     "remarks" : "only for school and back",
-    "totalSpent" : "6100",
-    "percentage" : "12.2"
+    "totalSpent" : "0",
+    "percentage" : "0.0"
   }, {
     "amount" : "150",
     "category" : "SHOPPING",
@@ -115,8 +91,8 @@
     "startDate" : "01-01-2019",
     "endDate" : "31-12-2019",
     "remarks" : "take shorter showers",
-    "totalSpent" : "110000",
-    "percentage" : "244.44444444444446"
+    "totalSpent" : "0",
+    "percentage" : "0.0"
   }, {
     "amount" : "100",
     "category" : "HEALTHCARE",
@@ -139,61 +115,34 @@
     "startDate" : "01-05-2020",
     "endDate" : "30-06-2020",
     "remarks" : "grad trip and family trip",
-    "totalSpent" : "150000",
-    "percentage" : "30.0"
+    "totalSpent" : "0",
+    "percentage" : "0.0"
   }, {
     "amount" : "450",
     "category" : "FOOD",
     "startDate" : "01-04-2019",
     "endDate" : "30-04-2019",
     "remarks" : "",
-    "totalSpent" : "650",
-    "percentage" : "1.4444444444444444"
+    "totalSpent" : "0",
+    "percentage" : "0.0"
   } ],
   "recurrings" : [ {
-    "name" : "Phone Bill",
-    "amount" : "50",
-    "date" : "23-02-2019",
-    "category" : "UTILITIES",
-    "remarks" : "Signed a new 2 year plan.",
-    "frequency" : "M",
-    "occurrence" : "24",
-    "lastConvertedDate" : "2019-04-12"
-  }, {
-    "name" : "Spotify Subscription",
-    "amount" : "20",
+    "name" : "start",
+    "amount" : "1",
     "date" : "01-01-2019",
-    "category" : "UTILITIES",
-    "remarks" : "Spotify for a year!",
-    "frequency" : "M",
-    "occurrence" : "12",
-    "lastConvertedDate" : "2019-04-12"
-  }, {
-    "name" : "Daily Lunch",
-    "amount" : "5",
-    "date" : "01-04-2019",
     "category" : "FOOD",
-    "remarks" : "Daily lunch for the year",
-    "frequency" : "D",
-    "occurrence" : "365",
-    "lastConvertedDate" : "2019-04-12"
-  }, {
-    "name" : "Electricity Bill",
-    "amount" : "50",
-    "date" : "08-04-2019",
-    "category" : "UTILITIES",
-    "remarks" : "Monthly electricity bills",
-    "frequency" : "M",
-    "occurrence" : "12",
-    "lastConvertedDate" : "2019-04-12"
-  }, {
-    "name" : "Insurance",
-    "amount" : "100",
-    "date" : "08-04-2019",
-    "category" : "OTHERS",
-    "remarks" : "Yearly insurance fee for 10 years",
+    "remarks" : "",
     "frequency" : "Y",
-    "occurrence" : "10",
-    "lastConvertedDate" : "2019-04-12"
+    "occurrence" : "2",
+    "lastConvertedDate" : "2019-04-14"
+  }, {
+    "name" : "2nd",
+    "amount" : "1",
+    "date" : "02-01-2018",
+    "category" : "FOOD",
+    "remarks" : "",
+    "frequency" : "Y",
+    "occurrence" : "5",
+    "lastConvertedDate" : "2019-04-14"
   } ]
 }
