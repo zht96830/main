@@ -1,6 +1,6 @@
 package seedu.address.logic.commands.recurringcommands;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.Test;
 
@@ -8,7 +8,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.attributes.Date;
 import seedu.address.model.recurring.Recurring;
 import seedu.address.testutil.RecurringBuilder;
 
@@ -24,7 +23,7 @@ public class ConvertRecurringToExpenseCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_EmptyRecurringUnfilteredList_success() {
+    public void execute_emptyRecurringUnfilteredList_success() {
         ConvertRecurringToExpenseCommand convertRecurringToExpenseCommand = new ConvertRecurringToExpenseCommand();
 
         String expectedMessage = ConvertRecurringToExpenseCommand.MESSAGE_CONVERT_RECURRING_SUCCESS + "0.";
