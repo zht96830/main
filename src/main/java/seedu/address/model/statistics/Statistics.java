@@ -35,12 +35,12 @@ public class Statistics {
     protected FilteredList<Expense> statsExpenses;
 
     /**
+     * Constructor
      * statsExpense must be present and not null.
      */
     public Statistics(FilteredList<Expense> statsExpenses) {
         this.statsExpenses = statsExpenses;
     }
-
 
     /**
      * This function returns the HTML code specifying the results of statistics commands
@@ -54,13 +54,17 @@ public class Statistics {
      * Calculates Statistics with data from model
      */
     public void calculateStats(String command, Date d1, Date d2, Frequency frequency) {
+
         switch (command) {
             case "stats":
                 basicStats(d1, d2);
+                break;
             case "compare":
                 compareStats(d1, d2, frequency);
+                break;
             case "trend":
                 trendStats(d1, d2, frequency);
+                break;
             default:
         }
     }
@@ -85,6 +89,118 @@ public class Statistics {
         String table = htmlTableBuilder(header, dataInString);
         this.html = html + table;
 
+    }
+
+    private void compareStats(Date date1, Date date2, Frequency frequency){ Date startDate1 = date1;
+        Date startDate2 = date2;
+
+        Date endDate1;
+        Date endDate2;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        switch (frequency.toString()){
+            case "D":
+                endDate1 = startDate1;
+                endDate2 = startDate2;
+                break;
+            case "W":
+                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusWeeks(1)));
+                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusWeeks(1)));
+                break;
+            case "Y":
+                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusYears(1)));
+                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusYears(1)));
+                break;
+            case "M":
+            default:
+                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusMonths(1)));
+                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusMonths(1)));
+        }
+
+        this.html = "Statistics Compare <br>\n"
+                + "From: " + startDate1.toString() + " To: " + endDate1.toString() + "\n";
+
+        ArrayList<String> header = new ArrayList<>();
+        header.add("Categories");
+        header.add("Amount Spent");
+        header.add("Entry Counts");
+        header.add("Percentage");
+
+        // Time Range 1
+        ArrayList<ArrayList<Expense>> data = extractRelevantExpenses(startDate1, endDate1);
+        ArrayList<ArrayList<Object>> tableData = generateSummary(data);
+        tableData = trimTable(tableData);
+
+        ArrayList<ArrayList<String>> dataInString = convertDataToString(tableData);
+
+        String table = htmlTableBuilder(header, dataInString);
+        this.html = html + table;
+
+        // Time Range 2
+        this.html = html + "<br>";
+        this.html = html + "From: " + startDate2.toString() + " To: " + endDate2.toString() + "\n";
+
+        ArrayList<ArrayList<Expense>> datac = extractRelevantExpenses(startDate2, endDate2);
+        ArrayList<ArrayList<Object>> tableDatac = generateSummary(datac);
+        tableDatac = trimTable(tableDatac);
+
+        ArrayList<ArrayList<String>> dataInStringc = convertDataToString(tableDatac);
+
+        String tablec = htmlTableBuilder(header, dataInStringc);
+        this.html = html + tablec;
+
+    }
+
+    private void trendStats(Date startDate, Date endDate, Frequency frequency){
+
+        ArrayList<ArrayList<ArrayList<Expense>>> data = new ArrayList<>();
+        Date dateTracker = startDate;
+        Date currentDate = dateTracker;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        ArrayList<String> header = new ArrayList<>();
+        header.add("Period Starting (" + frequency.toString() + ") :");
+
+        while (dateTracker.compareTo(endDate) < 0){
+            currentDate = dateTracker;
+            header.add(currentDate.toString());
+            switch (frequency.toString()) {
+                case "D":
+                    dateTracker =  new Date(dtf.format(dateTracker.getLocalDate().plusDays(1)));
+                case "W":
+                    dateTracker =  new Date(dtf.format(dateTracker.getLocalDate().plusWeeks(1)));
+                case "Y":
+                    dateTracker =  new Date(dtf.format(dateTracker.getLocalDate().plusYears(1)));
+                case "M":
+                default:
+                    dateTracker =  new Date(dtf.format(dateTracker.getLocalDate().plusMonths(1)));
+            }
+
+            ArrayList<ArrayList<Expense>> onePeriodData = extractRelevantExpenses(currentDate, dateTracker);
+            data.add(onePeriodData);
+            System.out.println("Current Date: " + currentDate.toString());
+            System.out.println("Date Tracker " + dateTracker.toString());
+        }
+        int index = header.size();
+        String temp = header.remove(index - 1);
+        header.add(temp + " till End");
+
+        ArrayList<ArrayList<ArrayList<Object>>> tablesData = generateSummaryTrend(data);
+
+        ArrayList<ArrayList<String>> tableAmountInString = convertDataToString(tablesData.get(0));
+        ArrayList<ArrayList<String>> tableCountInString = convertDataToString(tablesData.get(1));
+
+
+        String tableAmountString = htmlTableBuilder(header, tableAmountInString);
+        String tableCountString = htmlTableBuilder(header, tableCountInString);
+
+        this.html = "Statistics Trend <br>\n"
+                + "From: " + startDate.toString() + " To: " + endDate.toString()
+                + "Period Length: " + frequency.toString() + "<br>\n";
+
+        this.html = html + "Amount: <br>"
+                + tableAmountString
+                + "Counts: <br>"
+                + tableCountString;
     }
 
     private ArrayList<ArrayList<String>> convertDataToString(ArrayList<ArrayList<Object>> tableData) {
@@ -148,6 +264,43 @@ public class Statistics {
         }
 
         return tableData;
+    }
+
+    private ArrayList<ArrayList<ArrayList<Object>>> generateSummaryTrend(ArrayList<ArrayList<ArrayList<Expense>>> data) {
+        ArrayList<ArrayList<ArrayList<Object>>> tablesData = new ArrayList<>();
+        ArrayList<ArrayList<Object>> tableAmount = new ArrayList<>();
+        for (int i = 0; i <= ALL; i++) {
+            tableAmount.add(new ArrayList<>());
+            String categoryString = convertIntegerCategoryToString(i);
+            tableAmount.get(i).add(categoryString);
+        }
+        ArrayList<ArrayList<Object>> tableCount = new ArrayList<>();
+        for (int i = 0; i <= ALL; i++) {
+            tableCount.add(new ArrayList<>());
+            String categoryString = convertIntegerCategoryToString(i);
+            tableCount.get(i).add(categoryString);
+        }
+
+        for (ArrayList<ArrayList<Expense>> period : data) {
+            for (int i = 0; i <= ALL; i++) {
+                ArrayList<Expense> list = period.get(i);
+                double categoryTotal = 0;
+                int categoryCount = 0;
+                if (!list.isEmpty()) {
+                    for (Expense e : list) {
+                        categoryTotal += e.getAmount().value / 100;
+                        categoryCount++;
+                    }
+                }
+                tableAmount.get(i).add(categoryTotal);
+                tableCount.get(i).add(categoryCount);
+            }
+        }
+
+        tablesData.add(tableAmount);
+        tablesData.add(tableCount);
+
+        return tablesData;
     }
 
     private ArrayList<ArrayList<Expense>> extractRelevantExpenses(Date startDate, Date endDate) {
@@ -244,76 +397,11 @@ public class Statistics {
             }
             table = table + "  </tr>\n";
         }
-
         table = table + "</table>";
 
         return table;
     }
 
-    private void compareStats(Date date1, Date date2, Frequency frequency){ Date startDate1 = date1;
-        Date startDate2 = date2;
-
-        Date endDate1;
-        Date endDate2;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        switch (frequency.toString()){
-            case "D":
-                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusDays(1)));
-                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusDays(1)));
-                break;
-            case "W":
-                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusWeeks(1)));
-                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusWeeks(1)));
-                break;
-            case "Y":
-                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusYears(1)));
-                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusYears(1)));
-                break;
-            case "M":
-                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusMonths(1)));
-                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusMonths(1)));
-                break;
-            default:
-                endDate1 = null;
-                endDate2 = null;
-        }
-
-        this.html = "Statistics Compare <br>\n"
-                + "From: " + startDate1.toString() + " To: " + endDate1.toString() + "\n";
-
-        ArrayList<String> header = new ArrayList<>();
-        header.add("Categories");
-        header.add("Amount Spent");
-        header.add("Entry Counts");
-        header.add("Percentage");
-
-        // Time Range 1
-        ArrayList<ArrayList<Expense>> data = extractRelevantExpenses(startDate1, endDate1);
-        ArrayList<ArrayList<Object>> tableData = generateSummary(data);
-        tableData = trimTable(tableData);
-
-        ArrayList<ArrayList<String>> dataInString = convertDataToString(tableData);
-
-        String table = htmlTableBuilder(header, dataInString);
-        this.html = html + table;
-
-        // Time Range 2
-        this.html = html + "<br>";
-        this.html = html + "From: " + startDate2.toString() + " To: " + endDate2.toString() + "\n";
-
-        ArrayList<ArrayList<Expense>> datac = extractRelevantExpenses(startDate2, endDate2);
-        ArrayList<ArrayList<Object>> tableDatac = generateSummary(datac);
-        tableDatac = trimTable(tableDatac);
-
-        ArrayList<ArrayList<String>> dataInStringc = convertDataToString(tableDatac);
-
-        String tablec = htmlTableBuilder(header, dataInStringc);
-        this.html = html + tablec;
-
-    }
-    private void trendStats(Date startDate, Date endDate, Frequency frequency){
-
-    }
 
 }
 

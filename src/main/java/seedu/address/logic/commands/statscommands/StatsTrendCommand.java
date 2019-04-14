@@ -32,7 +32,7 @@ public class StatsTrendCommand extends Command {
             + PREFIX_ENDDATE + "13-02-2000 "
             + PREFIX_FREQUENCY + "M";
 
-    public static final String MESSAGE_SUCCESS = "Comparison Statistics Calculated!";
+    public static final String MESSAGE_SUCCESS = "Trend Statistics Calculated!";
 
     private final Date startDate;
     private final Date endDate;
