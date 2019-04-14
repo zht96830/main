@@ -27,9 +27,15 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 *** Check all pull requests done by group mates
 *** Create issues for tracking in GitHub Issue Tracker
 *** In charge of code in model component
+
 ** Documentation:
 *** Update model component in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/112[#112])
 *** Added the implementation of debts in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/221[#221])
+
+** Enhancements to existing features:
+*** Refactored and cleaned up initial tests from AddressBook4 to FinanceTracker (Pull Requests https://github.com/CS2103-AY1819S2-W15-2/main/pull/109[#109], https://github.com/CS2103-AY1819S2-W15-2/main/pull/117[#117])
+*** Update validation checks for Name and Amount classes (Pull Requests https://github.com/CS2103-AY1819S2-W15-2/main/pull/207[#207], https://github.com/CS2103-AY1819S2-W15-2/main/pull/264[#264])
+
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S2-W15-2/main/pull/22[#22], https://github.com/CS2103-AY1819S2-W15-2/main/pull/81[#81]
 *** Contributed to forum discussions (example:  https://github.com/nus-cs2103-AY1819S2/forum/issues/11[#11])
