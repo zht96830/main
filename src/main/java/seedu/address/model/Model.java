@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
@@ -377,7 +378,7 @@ public interface Model {
     /**
      * Calculates statistics for the range {@code startDate} to {@code endDate}
      */
-    void calculateStatistics(Date startDate, Date endDate, Category category);
+    void calculateStatistics(String command, Date date1, Date date2, Frequency frequency);
 
     /**
      * Selected Statistics

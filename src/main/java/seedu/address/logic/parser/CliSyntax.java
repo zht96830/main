@@ -18,6 +18,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_FREQUENCY = new Prefix("f/");
     public static final Prefix PREFIX_OCCURRENCE = new Prefix("o/");
     public static final Prefix PREFIX_RECURRINGOPTION = new Prefix("p/");
-    public static final Prefix PREFIX_MODE = new Prefix("m/");
+    public static final Prefix PREFIX_STARTDATE1 = new Prefix("sd1/");
+    public static final Prefix PREFIX_STARTDATE2 = new Prefix("sd2/");
+
 
 }

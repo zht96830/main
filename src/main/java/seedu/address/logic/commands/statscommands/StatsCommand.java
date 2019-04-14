@@ -8,7 +8,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 
 /**
@@ -23,26 +22,24 @@ public class StatsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Calculates statistics between the Start Date and End Date "
             + "Parameters: "
-            + "[" + PREFIX_STARTDATE + "START DATE] "
-            + "[" + PREFIX_ENDDATE + "END DATE] "
+            + "[" + PREFIX_STARTDATE + "START_DATE] "
+            + "[" + PREFIX_ENDDATE + "END_DATE] "
             + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_STARTDATE + "13-01-1996 "
-            + PREFIX_ENDDATE + "13-02-1996 ";
+            + PREFIX_STARTDATE + "13-01-2000 "
+            + PREFIX_ENDDATE + "13-02-2000 ";
 
     public static final String MESSAGE_SUCCESS = "Statistics Calculated!";
 
     private final Date startDate;
     private final Date endDate;
-    private final Category category;
 
 
-    public StatsCommand(Date startDate, Date endDate, Category category) {
+    public StatsCommand(Date startDate, Date endDate) {
         requireNonNull(startDate);
         requireNonNull(endDate);
 
         this.startDate = startDate;
         this.endDate = endDate;
-        this.category = category;
     }
 
     @Override
@@ -50,17 +47,10 @@ public class StatsCommand extends Command {
         requireNonNull(model);
 
         /* Execution */
-        model.calculateStatistics(startDate, endDate, category);
-        /* End Execution*/
+        model.calculateStatistics("stats" , startDate, endDate, null);
+        /* End of Execution*/
 
-        String categoryString = " Category Specified: ";
-        if (category == null) {
-            categoryString = categoryString + "False";
-        } else {
-            categoryString = categoryString + category;
-        }
-        String returnMessage = MESSAGE_SUCCESS;
-        return new CommandResult(returnMessage);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
@@ -68,7 +58,6 @@ public class StatsCommand extends Command {
         return other == this //short circuit if same object
                 || (other instanceof StatsCommand // instance of handles nulls
                 && startDate.equals(((StatsCommand) other).startDate)
-                && endDate.equals(((StatsCommand) other).endDate)
-                && category.equals(((StatsCommand) other).category)); /*Have to handle null category*/
+                && endDate.equals(((StatsCommand) other).endDate));
     }
 }

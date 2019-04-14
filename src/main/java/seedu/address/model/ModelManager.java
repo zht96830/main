@@ -16,8 +16,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.budget.BudgetNotFoundException;
 import seedu.address.model.debt.Debt;
@@ -125,12 +125,11 @@ public class ModelManager implements Model {
     //=========== Statistics ====================================================================================
 
     @Override
-    public void calculateStatistics(Date startDate, Date endDate, Category category) {
+    public void calculateStatistics(String command, Date date1, Date date2, Frequency frequency) {
+
         FilteredList<Expense> statsExpenses = new FilteredList<>(versionedFinanceTracker.getExpenseList());
-        FilteredList<Debt> statsDebts = new FilteredList<>(versionedFinanceTracker.getDebtList());
-        FilteredList<Budget> statsBudgets = new FilteredList<>(versionedFinanceTracker.getBudgetList());
-        Statistics statistics = new Statistics(startDate, endDate, category);
-        statistics.calculateStats(statsExpenses, statsDebts, statsBudgets);
+        Statistics statistics = new Statistics(statsExpenses);
+        statistics.calculateStats(command, date1, date2, frequency);
 
         this.setStatistics(statistics);
     }

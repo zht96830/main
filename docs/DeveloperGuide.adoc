@@ -521,25 +521,26 @@ Below is the UML sequence diagram and a step-by-step explanation of an example u
 
 (UML here)
 
-1. User enters command `stats c/food`. The command is received by `FinanceTrackerParser`, which then creates a `StatsCommandParser` object. The created object then calls `StatsCommandParser.parse("v/food")` method.
 
-2. `StatsCommandParser.parse("v/food")` method calls the `ArgumentTokenizer.tokenize()` to tokenize the input `v/food` and stores it in an `ArgumentMultiMap` object.
+1. User enters command `stats sd/01-01-2019`. The command is received by `FinanceTrackerParser`, which then creates a `StatsCommandParser` object. The created object then calls `StatsCommandParser.parse("stats sd/01-01-2019")` method. A `StatsCommand` object is then created with `StatsCommand(01-01-2019, 01-02-2019)` and returned to the `LogicManager`
 
-3. `StatsCommandParse.parse("v/food")` method then calls `ParserUtil.parseCategory(argMultiMap.getCategory(PREFIX_Category).get())` and gets a `Category` object in return.
+2. `Logic Manager` will call the `execute` method of the `StatsCommand` object which calls the `calculateStatistics("stats', 01-01-2019, 01-02-2019, null)` method in `Model`. The `Model Manager` will handle this command and duplicate the `Expense` list held in the Financial Tracker, creating a snapshot. The `Model Manager` will instantiate a `Statistics` object and call the `calculateStatistics("stats', 01-01-2019, 01-02-2019, null)` method.
 
-4. `StatsCommandParser` will then create a relevant `Statistic` object.
+3. The `calculateStatistics` method in `Statistics` is a wrapper that will call the appropriate method `basicStats(01-01-2019, 01-02-2019)` after reading the String `"stats"` that was passed in.
 
-5.  After that, a `StatsCommand` object is created with the `Statistic` object as parameter and return to `LogicManager`.
+4.  `basicStats` calls the method `extractRelevantExpense(01-01-2019, 01-02-2019)` which takes only the `Expenses` that lie within the time range and adds them to a new `Expense` list `data`. These relevant `Expenses` are then processed by the `generateSummary(data)` method. This method will return a table of relevant statistics.
 
-6. `LogicManager` then calls `StatsCommand.execute()`, which calls `Model.getStatistics(Statistics)` using the `Statistic` object created in step 3
+5. The methods `trimTable(table)`, `convertDataToString(trimmedtable)` are called to process this table. `htmlTableBuilder(header, table)` is called to generate the HTML code required to show the Statistics in the BrowserPanel.
 
-7. `Model.getStatistics(Statistics)` will call `Statistics.calculate` which will generate the appropriate results
+6. `Model Manager` calls `setStatistics(statistics)` which sets the observable `Statistics` in `ModelManager`.
 
-8.  The result will be shown on the UI
+7. The listener in `BrowserPanel` will detect the change and display the HTML page showing the statistics
 
-===== Design Consideration
+===== Future Implementation
+Users will be given the option to choose a Visual Representation method.
+This will determine the output format of the statistics. Currently, statistics can only be displayed in table format. However, in the future a feature will be implemented to show the statistics in graphical or pictorial formats.
+These could include pie charts, bar charts, line graphs, etc.
 
-Work in Progress
 // end::stats[]
 
 // tag::budget[]

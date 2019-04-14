@@ -24,8 +24,8 @@ import seedu.address.model.FinanceTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFinanceTracker;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
 import seedu.address.model.budget.Budget;
 import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
@@ -101,7 +101,7 @@ public class AddRecurringCommandTest {
         }
 
         @Override
-        public void calculateStatistics(Date startDate, Date endDate, Category category) {
+        public void calculateStatistics(String command, Date date1, Date date2, Frequency frequency) {
             throw new AssertionError("This method should not be called.");
         }
 
