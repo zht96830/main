@@ -2,14 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,6 +62,13 @@ public class CommandTestUtil {
     public static final String VALID_REMARKS_RECURRING = "Signed up for new 2 month phone contract.";
     public static final String VALID_FREQUENCY_RECURRING = "M";
     public static final String VALID_OCCURRENCE_RECURRING = "24";
+    public static final String VALID_NAME_RECURRING_2 = "EPL Subscription";
+    public static final String VALID_AMOUNT_RECURRING_2 = "40";
+    public static final String VALID_CATEGORY_RECURRING_2 = "utilities";
+    public static final String VALID_DATE_RECURRING_2 = "01-01-2019";
+    public static final String VALID_FREQUENCY_RECURRING_2 = "M";
+    public static final String VALID_OCCURRENCE_RECURRING_2 = "12";
+    public static final String VALID_REMARKS_RECURRING_2 = "Football!";
 
     public static final String NAME_DESC_EXPENSE = " " + PREFIX_NAME + VALID_NAME_EXPENSE;
     public static final String NAME_DESC_DEBT = " " + PREFIX_NAME + VALID_NAME_DEBT;
@@ -93,6 +93,14 @@ public class CommandTestUtil {
     public static final String REMARKS_DESC_DEBT = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT;
     public static final String REMARKS_DESC_DEBT_2 = " " + PREFIX_REMARKS + VALID_REMARKS_DEBT_2;
     public static final String REMARKS_DESC_BUDGET = " " + PREFIX_REMARKS + VALID_REMARKS_BUDGET;
+
+    public static final String NAME_DESC_RECURRING = " " + PREFIX_NAME + VALID_NAME_RECURRING_2;
+    public static final String AMOUNT_DESC_RECURRING = " " + PREFIX_AMOUNT + VALID_AMOUNT_RECURRING_2;
+    public static final String CATEGORY_DESC_RECURRING = " " + PREFIX_CATEGORY + VALID_CATEGORY_RECURRING_2;
+    public static final String DATE_DESC_RECURRING = " " + PREFIX_DATE + VALID_DATE_RECURRING_2;
+    public static final String FREQUENCY_DESC_RECURRING = " " + PREFIX_FREQUENCY + VALID_FREQUENCY_RECURRING_2;
+    public static final String OCCURRENCE_DESC_RECURRING = " " + PREFIX_OCCURRENCE + VALID_OCCURRENCE_RECURRING_2;
+    public static final String REMARKS_DESC_RECURRING = " " + PREFIX_REMARKS + VALID_REMARKS_RECURRING_2;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // ' ' not allowed as a name
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "911a"; // 'a' not allowed in amount
