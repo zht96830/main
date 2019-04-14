@@ -1,5 +1,3 @@
-
-
 package seedu.address.logic.commands.recurringcommands;
 
 import static java.util.Objects.requireNonNull;
@@ -11,7 +9,6 @@ import java.util.List;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.recurring.Recurring;
@@ -36,9 +33,11 @@ public class ConvertRecurringToExpenseCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         List<Recurring> lastShownRecurringList = model.getFilteredRecurringList();
+        List<Recurring> deleteThese = new ArrayList<>();
+        List<Recurring> addThese = new ArrayList<>();
         int numAdded = 0;
 
         for (int i = 0; i < lastShownRecurringList.size(); i++) {
@@ -56,7 +55,15 @@ public class ConvertRecurringToExpenseCommand extends Command {
                     }
                 }
             }
-            recurring.setLastConvertedDate(LocalDate.now());
+            Recurring recurringWithUpdatedLastConvertedDate = new Recurring(recurring);
+            deleteThese.add(recurring);
+            addThese.add(recurringWithUpdatedLastConvertedDate);
+        }
+        for (int i = 0; i < deleteThese.size(); i++) {
+            model.deleteRecurring(deleteThese.get(i));
+        }
+        for (int i = 0; i < addThese.size(); i++) {
+            model.addRecurring(addThese.get(i));
         }
         model.commitFinanceTracker();
         return new CommandResult(String.format(MESSAGE_CONVERT_RECURRING_SUCCESS + numAdded + "."));

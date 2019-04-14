@@ -62,6 +62,23 @@ public class ListRecurringCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.view.getMessage()));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListRecurringCommand)) {
+            return false;
+        }
+
+        // state check
+        ListRecurringCommand e = (ListRecurringCommand) other;
+        return view.equals(e.view);
+    }
+
     /** Returns a {@code Predicate<Recurring>} object specified by the {@code view} for filtering of recurrings */
     private Predicate<Recurring> getPredicate(View view) {
         switch (view) {

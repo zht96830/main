@@ -16,7 +16,7 @@ public class RecurringBuilder {
     public static final String DEFAULT_AMOUNT = "50.00";
     public static final String DEFAULT_CATEGORY = "utilities";
     public static final String DEFAULT_DATE = "23-02-2019";
-    public static final String DEFAULT_REMARKS = "Signed a new 2 year contract.";
+    public static final String DEFAULT_REMARKS = "";
     public static final String DEFAULT_FREQUENCY = "M";
     public static final String DEFAULT_OCCURRENCE = "24";
 

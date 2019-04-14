@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.recurringcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRINGOPTION;
 
 import java.util.List;
 
@@ -25,10 +24,8 @@ public class DeleteRecurringCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the recurring identified by the index number used in the displayed recurring list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_RECURRINGOPTION + "DELETEPASTOPTION\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_RECURRINGOPTION + "Y";
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_DELETE_RECURRING_SUCCESS = "Deleted Recurring:\n%1$s";
 
