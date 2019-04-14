@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.recurringcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRINGOPTION;
 
 import java.util.List;
 

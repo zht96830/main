@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRINGOPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECURRING;
 
@@ -43,7 +42,6 @@ public class EditRecurringCommand extends Command {
             + "by the index number used in the displayed recurring list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_RECURRINGOPTION + "EDITPASTOPTION] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
             + "[" + PREFIX_CATEGORY + "CATEGORY] "
@@ -52,7 +50,6 @@ public class EditRecurringCommand extends Command {
             + "[" + PREFIX_FREQUENCY + "FREQUENCY] "
             + "[" + PREFIX_OCCURRENCE + "OCCURRENCE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_RECURRINGOPTION + "N "
             + PREFIX_NAME + "Phone Bill Latest "
             + PREFIX_AMOUNT + "51 ";
 

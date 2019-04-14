@@ -127,14 +127,14 @@
     "percentage" : "0.0"
   } ],
   "recurrings" : [ {
-    "name" : "start",
+    "name" : "startt",
     "amount" : "1",
     "date" : "01-01-2019",
     "category" : "FOOD",
-    "remarks" : "",
-    "frequency" : "Y",
+    "remarks" : "12",
+    "frequency" : "M",
     "occurrence" : "2",
-    "lastConvertedDate" : "2019-04-14"
+    "lastConvertedDate" : "2018-12-31"
   }, {
     "name" : "2nd",
     "amount" : "1",

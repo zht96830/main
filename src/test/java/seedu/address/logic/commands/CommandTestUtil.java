@@ -68,7 +68,7 @@ public class CommandTestUtil {
     public static final String VALID_DATE_RECURRING_2 = "01-01-2019";
     public static final String VALID_FREQUENCY_RECURRING_2 = "M";
     public static final String VALID_OCCURRENCE_RECURRING_2 = "12";
-    public static final String VALID_REMARKS_RECURRING_2 = "Football!";
+    public static final String VALID_REMARKS_RECURRING_2 = "Football";
 
     public static final String NAME_DESC_EXPENSE = " " + PREFIX_NAME + VALID_NAME_EXPENSE;
     public static final String NAME_DESC_DEBT = " " + PREFIX_NAME + VALID_NAME_DEBT;
@@ -118,6 +118,8 @@ public class CommandTestUtil {
     public static final String INVALID_ENDDATE_DESC_EXIST = " " + PREFIX_ENDDATE + "31-06-2019"; //does not exist
     public static final String INVALID_STARTDATE_DESC_BEFORE_TODAY = " " + PREFIX_STARTDATE + "01-02-2019"; // past
     public static final String INVALID_ENDDATE_DESC_BEFORE_TODAY = " " + PREFIX_ENDDATE + "01-03-2019"; // past
+    public static final String INVALID_FREQUENCY_DESC = " " + PREFIX_FREQUENCY + "z"; // 'z' not allowed as a name
+    public static final String INVALID_OCCURRENCE_DESC = " " + PREFIX_OCCURRENCE + "a"; // 'a' not allowed as a occurrence
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
