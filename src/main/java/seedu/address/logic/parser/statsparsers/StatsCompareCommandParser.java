@@ -45,8 +45,6 @@ public class StatsCompareCommandParser {
         Date startDate2 = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE2).get());
         Frequency frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get());
 
-        System.out.println(startDate1.toString() + startDate2.toString() + frequency.toString());
-
         return new StatsCompareCommand(startDate1, startDate2, frequency);
     }
 

@@ -133,8 +133,6 @@ public class ModelManager implements Model {
         statistics.calculateStats(command, date1, date2, frequency);
 
         this.setStatistics(statistics);
-
-        System.out.println("test1");
     }
 
     @Override

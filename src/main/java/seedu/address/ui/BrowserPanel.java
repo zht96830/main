@@ -169,8 +169,6 @@ public class BrowserPanel extends UiPart<Region> {
             html = html.replace("$remarks", ((Expense) object).getRemarks());
         } else if (object instanceof Statistics) {
 
-            System.out.println("test2");
-
             BufferedInputStream bis = new BufferedInputStream(convertUrlToInputStream(STATISTICS_PAGE_URL));
 
             html = convertInputStreamToString(bis);
