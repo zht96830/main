@@ -102,14 +102,14 @@ public class BrowserPanel extends UiPart<Region> {
             loadObjectPage(newValue);
         });
 
-        // Load expense page when selected expense changes.
-        /*statistics.addListener((observable, oldValue, newValue) -> {
+        //Load statistics page when selected statistics changes.
+        statistics.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 loadDefaultPage();
                 return;
             }
             loadObjectPage(newValue);
-        });*/
+        });
 
         loadDefaultPage();
     }
@@ -173,9 +173,7 @@ public class BrowserPanel extends UiPart<Region> {
 
             html = convertInputStreamToString(bis);
 
-            html = html.replace("$startDate", ((Statistics) object).getStartDate().toString());
-            html = html.replace("$endDate", ((Statistics) object).getEndDate().toString());
-            html = html.replace("$table", ((Statistics) object).getHtmlTable());
+            html = html.replace("$result", ((Statistics) object).getHtml());
 
         }
         loadPage(html);
