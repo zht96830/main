@@ -29,11 +29,12 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 *** Checked all pull requests done by group mates
 *** Managed release for `v1.3` on GitHub
 ** Enhancements to existing features:
+*** Refactored `Person` classes from AddressBook4 to `Expense` classes (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/174[#174])
+*** Updated `ExpenseList` to always be sorted in descending order of date (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/174[#174])
+*** Updated the storage to allow read and write of Debt, Budget and Recurring data (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/199[#199])
 *** Updated the GUI to have Debt, Budget and Recurring Lists (Pull requests https://github.com/CS2103-AY1819S2-W15-2/main/pull/111[#111], https://github.com/CS2103-AY1819S2-W15-2/main/pull/115[#115])
 *** Updated the GUI to display selected individual list items in Browser Panel (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/174[#174])
-*** Updated the storage to allow read and write of Debt, Budget and Recurring data (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/199[#199])
 *** Wrote additional tests for existing features to increase coverage from 74.04% to 80.56% (Pull request https://github.com/CS2103-AY1819S2-W15-2/main/pull/194[#194])
-*** Refactored `Person` classes from AddressBook4 to `Expense` classes
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/22[#22])
 *** Added the implementation of listing in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/176[#176])
@@ -42,7 +43,7 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 *** Contributed to forum discussions (examples:  https://github.com/nus-cs2103-AY1819S2/forum/issues/5[5], https://github.com/nus-cs2103-AY1819S2/forum/issues/17[17], https://github.com/nus-cs2103-AY1819S2/forum/issues/21[21], https://github.com/nus-cs2103-AY1819S2/forum/issues/67[67])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/54[1], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/354[2], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/449[3], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/494[4], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/537[5], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/620[6], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/685[7], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/739[8])
 *** The displaying of html files in browser panel that I added was adopted by a group from last semester's CS2103 (https://github.com/CS2103-AY1819S1-W16-1/main/blob/master/src/main/java/seedu/address/ui/BrowserPanel.java[1])
-** Tools:
+** Tools:s
 *** Set up the team repository
 *** Set up Travis CI integration
 
