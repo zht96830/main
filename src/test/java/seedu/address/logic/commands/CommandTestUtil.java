@@ -56,10 +56,10 @@ public class CommandTestUtil {
     public static final String VALID_REMARKS_DEBT = "fan";
     public static final String VALID_REMARKS_DEBT_2 = "chicken";
     public static final String VALID_REMARKS_BUDGET = "eat more for christmas yay";
-    public static final String VALID_AMOUNT_RECURRING = "50";
+    public static final String VALID_AMOUNT_RECURRING = "50.00";
     public static final String VALID_CATEGORY_RECURRING = "utilities";
-    public static final String VALID_DATE_RECURRING = "12-03-2019";
-    public static final String VALID_REMARKS_RECURRING = "Signed up for new 2 month phone contract.";
+    public static final String VALID_DATE_RECURRING = "23-02-2019";
+    public static final String VALID_REMARKS_RECURRING = "Signed a new 2 year plan.";
     public static final String VALID_FREQUENCY_RECURRING = "M";
     public static final String VALID_OCCURRENCE_RECURRING = "24";
     public static final String VALID_NAME_RECURRING_2 = "EPL Subscription";
