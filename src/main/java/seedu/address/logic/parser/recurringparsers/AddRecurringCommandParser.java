@@ -50,8 +50,8 @@ public class AddRecurringCommandParser implements Parser<AddRecurringCommand> {
                     AddRecurringCommand.MESSAGE_USAGE));
         }
 
-        if (hasRepeatedPrefixes(argMultimap, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_CATEGORY, PREFIX_OCCURRENCE,
-                PREFIX_FREQUENCY, PREFIX_REMARKS)) {
+        if (hasRepeatedPrefixes(argMultimap, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_DATE, PREFIX_CATEGORY,
+                PREFIX_OCCURRENCE, PREFIX_FREQUENCY, PREFIX_REMARKS)) {
             throw new ParseException(MESSAGE_REPEATED_PREFIX_COMMAND);
         }
 

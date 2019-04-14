@@ -12,6 +12,12 @@
     "category" : "FOOD",
     "remarks" : ""
   }, {
+    "name" : "start",
+    "amount" : "1",
+    "date" : "01-01-2019",
+    "category" : "FOOD",
+    "remarks" : ""
+  }, {
     "name" : "2nd (Recurring)",
     "amount" : "1",
     "date" : "02-01-2018",
@@ -144,5 +150,14 @@
     "frequency" : "Y",
     "occurrence" : "5",
     "lastConvertedDate" : "2019-04-14"
+  }, {
+    "name" : "start",
+    "amount" : "1",
+    "date" : "01-01-2019",
+    "category" : "FOOD",
+    "remarks" : "",
+    "frequency" : "M",
+    "occurrence" : "12",
+    "lastConvertedDate" : "2018-12-31"
   } ]
 }

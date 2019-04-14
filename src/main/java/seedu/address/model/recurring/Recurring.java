@@ -159,13 +159,35 @@ public class Recurring extends Expense {
         }
 
         Recurring otherRecurring = (Recurring) other;
+        if (otherRecurring.getName().equals(getName())) {
+            System.out.println("Name ok");
+        } else System.out.println("Name fucked");
+        if (otherRecurring.getAmount().equals(getAmount())) {
+            System.out.println("Amount ok");
+        } else System.out.println("Amount fucked");
+        if (otherRecurring.getDate().equals(getDate())) {
+            System.out.println("Date ok");
+        } else System.out.println("Date fucked");
+        if (otherRecurring.getCategory().equals(getCategory())) {
+            System.out.println("Category ok");
+        } else System.out.println("Category fucked");
+        if (otherRecurring.getRemarks().equals(getRemarks())) {
+            System.out.println("Remarks ok");
+        } else System.out.println("Remarks fucked");
+        if (otherRecurring.getFrequency().equals(getFrequency())) {
+            System.out.println("Freq ok");
+        } else System.out.println("Freq fucked");
+        if (otherRecurring.getOccurrence().equals(getOccurrence())) {
+            System.out.println("Occurrence ok");
+        } else System.out.println("Occurrence fucked");
+
         return otherRecurring.getName().equals(getName())
                 && otherRecurring.getAmount().equals(getAmount())
                 && otherRecurring.getDate().equals(getDate())
                 && otherRecurring.getCategory().equals(getCategory())
                 && otherRecurring.getRemarks().equals(getRemarks())
                 && otherRecurring.getFrequency().equals(getFrequency())
-                && otherRecurring.getOccurrence() == (getOccurrence());
+                && otherRecurring.getOccurrence().equals(getOccurrence());
     }
 
     @Override
