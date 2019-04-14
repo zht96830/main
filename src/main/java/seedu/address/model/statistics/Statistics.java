@@ -1,6 +1,5 @@
 package seedu.address.model.statistics;
 
-import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -8,8 +7,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
-import seedu.address.model.budget.Budget;
-import seedu.address.model.debt.Debt;
 import seedu.address.model.expense.Expense;
 /**
  * Statistics
@@ -51,25 +48,29 @@ public class Statistics {
     }
 
     /**
-     * Calculates Statistics with data from model
+     * Calculates Statistics with data from model (Wrapper)
      */
     public void calculateStats(String command, Date d1, Date d2, Frequency frequency) {
 
         switch (command) {
-            case "stats":
-                basicStats(d1, d2);
-                break;
-            case "compare":
-                compareStats(d1, d2, frequency);
-                break;
-            case "trend":
-                trendStats(d1, d2, frequency);
-                break;
-            default:
+        case "stats":
+            basicStats(d1, d2);
+            break;
+        case "compare":
+            compareStats(d1, d2, frequency);
+            break;
+        case "trend":
+            trendStats(d1, d2, frequency);
+            break;
+        default:
         }
     }
 
-    private void basicStats(Date startDate, Date endDate){
+    /**
+     * Calculates basic statistics
+     * All parameters must be present and not null.
+     */
+    private void basicStats(Date startDate, Date endDate) {
 
         ArrayList<ArrayList<Expense>> data = extractRelevantExpenses(startDate, endDate);
         ArrayList<ArrayList<Object>> tableData = generateSummary(data);
@@ -91,29 +92,34 @@ public class Statistics {
 
     }
 
-    private void compareStats(Date date1, Date date2, Frequency frequency){ Date startDate1 = date1;
+    /**
+     * Calculates comparison statistics
+     * All parameters must be present and not null.
+     */
+    private void compareStats(Date date1, Date date2, Frequency frequency) {
+        Date startDate1 = date1;
         Date startDate2 = date2;
 
         Date endDate1;
         Date endDate2;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        switch (frequency.toString()){
-            case "D":
-                endDate1 = startDate1;
-                endDate2 = startDate2;
-                break;
-            case "W":
-                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusWeeks(1)));
-                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusWeeks(1)));
-                break;
-            case "Y":
-                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusYears(1)));
-                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusYears(1)));
-                break;
-            case "M":
-            default:
-                endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusMonths(1)));
-                endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusMonths(1)));
+        switch (frequency.toString()) {
+        case "D":
+            endDate1 = startDate1;
+            endDate2 = startDate2;
+            break;
+        case "W":
+            endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusWeeks(1)));
+            endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusWeeks(1)));
+            break;
+        case "Y":
+            endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusYears(1)));
+            endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusYears(1)));
+            break;
+        case "M":
+        default:
+            endDate1 = new Date(dtf.format(startDate1.getLocalDate().plusMonths(1)));
+            endDate2 = new Date(dtf.format(startDate2.getLocalDate().plusMonths(1)));
         }
 
         this.html = "Statistics Compare <br>\n"
@@ -150,29 +156,36 @@ public class Statistics {
 
     }
 
-    private void trendStats(Date startDate, Date endDate, Frequency frequency){
+    /**
+     * Calculates trend statistics
+     * All parameters must be present and not null.
+     */
+    private void trendStats(Date startDate, Date endDate, Frequency frequency) {
 
         ArrayList<ArrayList<ArrayList<Expense>>> data = new ArrayList<>();
         Date dateTracker = startDate;
-        Date currentDate = dateTracker;
+        Date currentDate;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         ArrayList<String> header = new ArrayList<>();
         header.add("Period Starting (" + frequency.toString() + ") :");
 
-        while (dateTracker.compareTo(endDate) < 0){
+        while (dateTracker.compareTo(endDate) < 0) {
             currentDate = dateTracker;
             header.add(currentDate.toString());
             switch (frequency.toString()) {
-                case "D":
-                    dateTracker =  new Date(dtf.format(dateTracker.getLocalDate().plusDays(1)));
-                case "W":
-                    dateTracker =  new Date(dtf.format(dateTracker.getLocalDate().plusWeeks(1)));
-                case "Y":
-                    dateTracker =  new Date(dtf.format(dateTracker.getLocalDate().plusYears(1)));
-                case "M":
-                default:
-                    dateTracker =  new Date(dtf.format(dateTracker.getLocalDate().plusMonths(1)));
+            case "D":
+                dateTracker = new Date(dtf.format(dateTracker.getLocalDate().plusDays(1)));
+                break;
+            case "W":
+                dateTracker = new Date(dtf.format(dateTracker.getLocalDate().plusWeeks(1)));
+                break;
+            case "Y":
+                dateTracker = new Date(dtf.format(dateTracker.getLocalDate().plusYears(1)));
+                break;
+            case "M":
+            default:
+                dateTracker = new Date(dtf.format(dateTracker.getLocalDate().plusMonths(1)));
             }
 
             ArrayList<ArrayList<Expense>> onePeriodData = extractRelevantExpenses(currentDate, dateTracker);
@@ -203,6 +216,9 @@ public class Statistics {
                 + tableCountString;
     }
 
+    /**
+     * This method converts the data in a 2D array to string
+     */
     private ArrayList<ArrayList<String>> convertDataToString(ArrayList<ArrayList<Object>> tableData) {
         ArrayList<ArrayList<String>> dataInString = new ArrayList<>();
         for (ArrayList<Object> list : tableData) {
@@ -210,11 +226,9 @@ public class Statistics {
             for (Object data : list) {
                 if (data instanceof Double) {
                     row.add(String.format("%.2f", (Double) data));
-                }
-                else if (data instanceof String){
+                } else if (data instanceof String) {
                     row.add((String) data);
-                }
-                else if (data instanceof Integer) {
+                } else if (data instanceof Integer) {
                     row.add(((Integer) data).toString());
                 }
             }
@@ -224,6 +238,9 @@ public class Statistics {
         return dataInString;
     }
 
+    /**
+     * This method trims rows in data table by checking count == 0
+     */
     private ArrayList<ArrayList<Object>> trimTable(ArrayList<ArrayList<Object>> data) {
         ArrayList<ArrayList<Object>> tableData = new ArrayList<>();
         for (ArrayList<Object> row : data) {
@@ -234,6 +251,9 @@ public class Statistics {
         return tableData;
     }
 
+    /**
+     * Summarizes data in the Expenses lists provided into a 2D array form
+     */
     private ArrayList<ArrayList<Object>> generateSummary(ArrayList<ArrayList<Expense>> data) {
 
         ArrayList<ArrayList<Object>> tableData = new ArrayList<>();
@@ -266,7 +286,11 @@ public class Statistics {
         return tableData;
     }
 
-    private ArrayList<ArrayList<ArrayList<Object>>> generateSummaryTrend(ArrayList<ArrayList<ArrayList<Expense>>> data) {
+    /**
+     * Summarizes data in the Expenses lists provided into 2 2D arrays
+     */
+    private ArrayList<ArrayList<ArrayList<Object>>> generateSummaryTrend(
+            ArrayList<ArrayList<ArrayList<Expense>>> data) {
         ArrayList<ArrayList<ArrayList<Object>>> tablesData = new ArrayList<>();
         ArrayList<ArrayList<Object>> tableAmount = new ArrayList<>();
         for (int i = 0; i <= ALL; i++) {
@@ -303,6 +327,10 @@ public class Statistics {
         return tablesData;
     }
 
+    /**
+     * Given a date range defined by the start and end date, this method scours the expense list the class is
+     * initialised with and extracts only expenses in the range
+     */
     private ArrayList<ArrayList<Expense>> extractRelevantExpenses(Date startDate, Date endDate) {
         ArrayList<ArrayList<Expense>> data = new ArrayList<>();
         for (int i = 0; i <= ALL; i++) {
@@ -321,7 +349,7 @@ public class Statistics {
     }
 
     /**
-     * Converts String Category into Numerical Category
+     * Converts String Category into Int Category
      */
     protected int convertCategoryToInteger(String categoryInString) {
         switch (categoryInString) {
@@ -350,29 +378,32 @@ public class Statistics {
         return -1;
     }
 
+    /**
+     * Converts Int Category into String Category
+     */
     protected String convertIntegerCategoryToString(int categoryInInteger) {
         switch (categoryInInteger) {
-            case FOOD:
-                return "FOOD";
-            case TRANSPORT:
-                return "TRANSPORT";
-            case SHOPPING:
-                return "SHOPPING";
-            case WORK:
-                return "WORK";
-            case UTILITIES:
-                return "UTILITIES";
-            case HEALTHCARE:
-                return "HEALTHCARE";
-            case ENTERTAINMENT:
-                return "ENTERTAINMENT";
-            case TRAVEL:
-                return "TRAVEL";
-            case OTHERS:
-                return "OTHERS";
-            case ALL:
-                return "ALL";
-            default:
+        case FOOD:
+            return "FOOD";
+        case TRANSPORT:
+            return "TRANSPORT";
+        case SHOPPING:
+            return "SHOPPING";
+        case WORK:
+            return "WORK";
+        case UTILITIES:
+            return "UTILITIES";
+        case HEALTHCARE:
+            return "HEALTHCARE";
+        case ENTERTAINMENT:
+            return "ENTERTAINMENT";
+        case TRAVEL:
+            return "TRAVEL";
+        case OTHERS:
+            return "OTHERS";
+        case ALL:
+            return "ALL";
+        default:
         }
         return "";
     }

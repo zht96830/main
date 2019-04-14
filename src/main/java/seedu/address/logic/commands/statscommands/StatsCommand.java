@@ -47,7 +47,7 @@ public class StatsCommand extends Command {
         requireNonNull(model);
 
         /* Execution */
-        model.calculateStatistics("stats" ,startDate, endDate, null);
+        model.calculateStatistics("stats" , startDate, endDate, null);
         /* End of Execution*/
 
         return new CommandResult(MESSAGE_SUCCESS);

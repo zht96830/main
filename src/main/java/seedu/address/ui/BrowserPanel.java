@@ -102,7 +102,7 @@ public class BrowserPanel extends UiPart<Region> {
             loadObjectPage(newValue);
         });
 
-         //Load statistics page when selected statistics changes.
+        //Load statistics page when selected statistics changes.
         statistics.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 loadDefaultPage();

@@ -24,7 +24,7 @@ public class StatsTrendCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows statistics trends for regular periods between the Start Date and End Date "
             + "Parameters: "
-            + PREFIX_STARTDATE+ "START DATE "
+            + PREFIX_STARTDATE + "START DATE "
             + PREFIX_ENDDATE + "END DATE "
             + PREFIX_FREQUENCY + "FREQUENCY "
             + "\nExample: " + COMMAND_WORD + " "
@@ -54,7 +54,7 @@ public class StatsTrendCommand extends Command {
         requireNonNull(model);
 
         /* Execution */
-        model.calculateStatistics("trend" ,startDate, endDate, frequency);
+        model.calculateStatistics("trend" , startDate, endDate, frequency);
         /* End of Execution*/
 
         return new CommandResult(MESSAGE_SUCCESS);

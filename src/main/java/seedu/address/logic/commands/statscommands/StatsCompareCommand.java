@@ -24,7 +24,7 @@ public class StatsCompareCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Compares statistics between two time ranges."
             + "Parameters: "
-            + PREFIX_STARTDATE1+ "START DATE 1 "
+            + PREFIX_STARTDATE1 + "START DATE 1 "
             + PREFIX_STARTDATE2 + "START DATE 2 "
             + PREFIX_FREQUENCY + "FREQUENCY "
             + "\nExample: " + COMMAND_WORD + " "
@@ -54,7 +54,7 @@ public class StatsCompareCommand extends Command {
         requireNonNull(model);
 
         /* Execution */
-        model.calculateStatistics("compare" ,startDate1, startDate2, frequency);
+        model.calculateStatistics("compare" , startDate1, startDate2, frequency);
         /* End of Execution*/
 
         return new CommandResult(MESSAGE_SUCCESS);
