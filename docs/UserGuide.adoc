@@ -76,7 +76,6 @@ Want to keep track of monthly bills in the expense tracker as well? +
 The Recurring feature simplifies the process of adding periodic expenses such as phone bills or Netflix subscriptions. +
 Instead of manually adding the same expense repetitively, just add a Recurring and the Finance Tracker will automatically
 add the expense for you periodically at your specified frequency and for your specified duration! +
-The Recurring feature also simplifies the deletion and editing of these recurring expenses!
 
 === Stats
 Want to see trends and statistics of your expenses? +
@@ -473,6 +472,23 @@ Examples:
 `deleterecurring 2` +
 Deletes the 2nd recurring in the finance tracker.
 
+=== Selecting a recurring : `selectrecurring`
+
+Select the specified recurring from the finance tracker. +
+Format: `selectrecurring INDEX` +
+Shortcut: `sr INDEX`
+
+====
+* Selects the recurring at the specified `INDEX`.
+* The index refers to the index number shown in the displayed recurring list. The index must be a positive integer.
+====
+
+Examples:
+
+* `listrecurring v/all` +
+`selectrecurring 2` +
+Selects the 2nd recurring in the finance tracker.
+
 === Clearing all recurrings: `clearrecurring`
 
 Clears all recurrings from the finance tracker. +
@@ -760,6 +776,8 @@ e.g. `editrecurring 9 $/450 c/food` +
 e.g. `deleterecurring 2` +
 * *Converting outstanding expenses from all recurrings* : `convertrecurring` +
 e.g. `convertrecurring` +
+* *Select a recurring* : `selectrecurring INDEX` +
+e.g. `selectrecurring 1`
 * *Clear recurrings* : `clearrecurring`
 * *Viewing Statistics - Summary:* `stats [sd/START_DATE] [ed/END_DATE]` +
 e.g. `stats sd/01-01-2019 ed/01-02-2019`
