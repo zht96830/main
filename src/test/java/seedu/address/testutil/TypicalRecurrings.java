@@ -32,7 +32,7 @@ public class TypicalRecurrings {
     private TypicalRecurrings() {} // prevents instantiation
 
     /**
-     * Returns an {@code FinanceTracker} with all the typical expenses.
+     * Returns an {@code FinanceTracker} with all the typical recurrings.
      */
     public static FinanceTracker getTypicalFinanceTrackerWithRecurrings() {
         FinanceTracker ft = new FinanceTracker();
