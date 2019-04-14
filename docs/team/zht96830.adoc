@@ -8,7 +8,7 @@
 ---
 
 == Overview
-This portfolio aims to document the contributions made by Goh Yin Hao to the Personal Finance Tracker.
+This portfolio aims to document the contributions made by Teoh ZhiHui to the Personal Finance Tracker.
 
 Personal Finance Tracker is a desktop finance tracker application used for tracking personal finances such as daily expenses, recurring expenses such as monthly electricity bills, budgets and debts owed to another party. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 30 kLoC. The product was morphed from an https://github.com/nus-cs2103-AY1819S2/addressbook-level4[Address Book] over a period of 8 weeks under the constraints described https://nus-cs2103-ay1819s2.github.io/cs2103-website/admin/project-constraints.html[here].
 
@@ -36,7 +36,7 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 ** Enhancements to existing features:
 *** Update logic component in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/108[108], https://github.com/CS2103-AY1819S2-W15-2/main/pull/110[110])
 *** Update commands to work for the Financial Tracker (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/83[83], https://githubcom/CS2103-AY1819S2-W15-2/main/pull/88[88], https://github.com/CS2103-AY1819S2-W15-2/main/pull/96[96],...)
-*** Added the implementation of statistics in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/225[225])
+*** Added the implementation of statistics in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/225[225], https://github.com/CS2103-AY1819S2-W15-2/main/pull/281[281])
 
 == Contributions to the User Guide
 
