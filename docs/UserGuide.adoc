@@ -516,6 +516,7 @@ to END_DATE
  after START_DATE
 * If both START_DATE and END_DATE are empty, statistics will be calculated from one month before to the current date
 * START_DATE should be before END_DATE
+* The statistics displayed are only correct at the time of command execution. If any commands which modify the state of the Financial Tracker are added, the command has to be activated again for accurate statistics to be shown
 ====
 
 Examples:
@@ -556,6 +557,7 @@ Format: `statstrend sd/START_DATE ed/END_DATE f/FREQUENCY`
 [NOTE]
 ====
 * START_DATE should be before END_DATE
+* The statistics displayed are only correct at the time of command execution. If any commands which modify the state of the Financial Tracker are added, the command has to be activated again for accurate statistics to be shown
 ====
 
 Examples:
@@ -593,6 +595,11 @@ From: 02-02-2019 To: 02-02-2020
 |==========================
 
 Format: `statscompare sd1/START_DATE_1 sd2/START_DATE_2 f/FREQUENCY`
+
+[NOTE]
+====
+* The statistics displayed are only correct at the time of command execution. If any commands which modify the state of the Financial Tracker are added, the command has to be activated again for accurate statistics to be shown
+====
 
 Examples:
 
