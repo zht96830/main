@@ -2,8 +2,13 @@ package seedu.address.model.recurring;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalRecurrings.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OCCURRENCE_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_RECURRING_2;
+import static seedu.address.testutil.TypicalRecurrings.DAILY_LUNCH;
+import static seedu.address.testutil.TypicalRecurrings.PHONE_BILL;
 
 import org.junit.Rule;
 import org.junit.Test;

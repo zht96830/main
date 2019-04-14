@@ -3,10 +3,10 @@ package seedu.address.model.recurring;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalRecurrings.PHONE_BILL;
-import static seedu.address.testutil.TypicalRecurrings.RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_RECURRING;
 import static seedu.address.testutil.TypicalRecurrings.DAILY_LUNCH;
+import static seedu.address.testutil.TypicalRecurrings.PHONE_BILL;
 
 import java.util.Collections;
 import java.util.Iterator;

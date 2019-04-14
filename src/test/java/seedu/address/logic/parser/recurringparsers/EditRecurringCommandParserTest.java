@@ -1,9 +1,31 @@
 package seedu.address.logic.parser.recurringparsers;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.commons.core.Messages.MESSAGE_REPEATED_PREFIX_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.FREQUENCY_DESC_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FREQUENCY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_OCCURRENCE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.OCCURRENCE_DESC_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.REMARKS_DESC_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FREQUENCY_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_RECURRING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OCCURRENCE_RECURRING_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARKS_RECURRING_2;
+
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECURRING;
@@ -15,8 +37,12 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.recurringcommands.EditRecurringCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.attributes.*;
-import seedu.address.testutil.EditDebtDescriptorBuilder;
+import seedu.address.model.attributes.Amount;
+import seedu.address.model.attributes.Category;
+import seedu.address.model.attributes.Date;
+import seedu.address.model.attributes.Frequency;
+import seedu.address.model.attributes.Name;
+import seedu.address.model.attributes.Occurrence;
 import seedu.address.testutil.EditRecurringDescriptorBuilder;
 
 public class EditRecurringCommandParserTest {
@@ -150,9 +176,9 @@ public class EditRecurringCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_failure() throws ParseException {
         Index targetIndex = INDEX_FIRST_RECURRING;
-        String userInput = targetIndex.getOneBased() + AMOUNT_DESC_RECURRING + DATE_DESC_RECURRING + CATEGORY_DESC_RECURRING
-                + REMARKS_DESC_RECURRING + AMOUNT_DESC_RECURRING + DATE_DESC_RECURRING + CATEGORY_DESC_RECURRING
-                + REMARKS_DESC_RECURRING;
+        String userInput = targetIndex.getOneBased() + AMOUNT_DESC_RECURRING + DATE_DESC_RECURRING
+                + CATEGORY_DESC_RECURRING + REMARKS_DESC_RECURRING + AMOUNT_DESC_RECURRING + DATE_DESC_RECURRING
+                + CATEGORY_DESC_RECURRING + REMARKS_DESC_RECURRING;
 
         assertParseFailure(parser, userInput, MESSAGE_REPEATED_PREFIX_COMMAND);
     }

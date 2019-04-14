@@ -2,7 +2,16 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -119,7 +128,8 @@ public class CommandTestUtil {
     public static final String INVALID_STARTDATE_DESC_BEFORE_TODAY = " " + PREFIX_STARTDATE + "01-02-2019"; // past
     public static final String INVALID_ENDDATE_DESC_BEFORE_TODAY = " " + PREFIX_ENDDATE + "01-03-2019"; // past
     public static final String INVALID_FREQUENCY_DESC = " " + PREFIX_FREQUENCY + "z"; // 'z' not allowed as a name
-    public static final String INVALID_OCCURRENCE_DESC = " " + PREFIX_OCCURRENCE + "a"; // 'a' not allowed as a occurrence
+    public static final String INVALID_OCCURRENCE_DESC = " " + PREFIX_OCCURRENCE + "a";
+    // 'a' not allowed as a occurrence
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
