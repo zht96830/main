@@ -396,7 +396,9 @@ The purpose of this feature is to provide the convenience for users by adding ou
 
 ===== Current Implementation
 
-Below is a step-by=step explanation of an example usage scenario for `convertrecurring`.
+Below is the UML sequence diagram and a step-by-step explanation of an example usage scenario for `convertrecurring`.
+
+image::ConvertRecurringSequenceDiagram.png[width="800"]
 
 1. User enters the command `convertrecurring`, to add outstanding expenses from all their recurring expenses into the expense list. This command is executed by `LogicManager`, which calls `FinanceTrackerParser#parseCommand("convertrecurring")`. This creates a `ConvertRecurringToExpenseCommand` object and returned to the `LogicManager`.
 
@@ -414,11 +416,13 @@ Below is a step-by=step explanation of an example usage scenario for `convertrec
 
 8. This is done for each recurring in the list.
 
-=== Delete and Edit Recurring deletes the associated Expense (coming in v1.4)
+==== Advanced Delete and Edit Recurring (coming in v2.0)
 
-This is still a work in progress. +
+This is still a work in progress.
 
-The purpose of this feature is to delete or edit expenses already added by a recurring that the user wishes to delete or edit.
+Currently, `deleterecurring` does not delete expenses already added by the deleted recurring, and `editrecurring` does not edit expenses already added by the edited recurring. +
+
+The purpose of this feature is to make `deleterecurring` and `editrecurring` more advanced such that the expenses already added by the recurring to be deleted or edited will also reflect the new changes. +
 
 // end::recurring[]
 
