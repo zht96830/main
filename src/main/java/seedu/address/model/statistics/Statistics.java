@@ -83,9 +83,9 @@ public class Statistics {
 
         ArrayList<String> header = new ArrayList<>();
         header.add("Categories");
-        header.add("Amount Spent");
+        header.add("Amount Spent ($)");
         header.add("Entry Counts");
-        header.add("Percentage");
+        header.add("Percentage (%)");
 
         String table = htmlTableBuilder(header, dataInString);
         this.html = html + table;
@@ -127,9 +127,9 @@ public class Statistics {
 
         ArrayList<String> header = new ArrayList<>();
         header.add("Categories");
-        header.add("Amount Spent");
+        header.add("Amount Spent ($)");
         header.add("Entry Counts");
-        header.add("Percentage");
+        header.add("Percentage (%)");
 
         // Time Range 1
         ArrayList<ArrayList<Expense>> data = extractRelevantExpenses(startDate1, endDate1);
@@ -190,8 +190,6 @@ public class Statistics {
 
             ArrayList<ArrayList<Expense>> onePeriodData = extractRelevantExpenses(currentDate, dateTracker);
             data.add(onePeriodData);
-            System.out.println("Current Date: " + currentDate.toString());
-            System.out.println("Date Tracker " + dateTracker.toString());
         }
         int index = header.size();
         String temp = header.remove(index - 1);
@@ -210,8 +208,10 @@ public class Statistics {
                 + "From: " + startDate.toString() + " To: " + endDate.toString()
                 + "Period Length: " + frequency.toString() + "<br>\n";
 
-        this.html = html + "Amount: <br>"
+        this.html = html + "<br>"
+                + "Amount Spent ($): <br>"
                 + tableAmountString
+                + "<br>"
                 + "Counts: <br>"
                 + tableCountString;
     }

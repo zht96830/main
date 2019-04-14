@@ -51,8 +51,6 @@ public class StatsTrendCommandParser {
 
         Frequency frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get());
 
-        System.out.println(startDate.toString() + endDate.toString() + frequency.toString());
-
         return new StatsTrendCommand(startDate, endDate, frequency);
     }
 

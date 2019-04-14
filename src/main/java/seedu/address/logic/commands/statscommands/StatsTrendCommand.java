@@ -24,8 +24,8 @@ public class StatsTrendCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows statistics trends for regular periods between the Start Date and End Date "
             + "Parameters: "
-            + PREFIX_STARTDATE + "START DATE "
-            + PREFIX_ENDDATE + "END DATE "
+            + PREFIX_STARTDATE + "START_DATE "
+            + PREFIX_ENDDATE + "END_DATE "
             + PREFIX_FREQUENCY + "FREQUENCY "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STARTDATE + "13-01-2000 "

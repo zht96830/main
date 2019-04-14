@@ -489,21 +489,19 @@ Shortcut: `cre`
 // tag::stats[]
 === Viewing Statistics - Summary: `stats`
 Produces statistics regarding the user's finance. +
-The statistics include the frequency of entries, the total amount of money spent. +
-The user may choose the time frame to be considered for the statistic by entering the start date and end date. +
-The user may also choose to display only the results in a specific category. [Coming in v1.4] +
-The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table. [Coming in v1.4]
+The statistics include the frequency of entries, the total amount of money spent, and the percentage composition of the total. +
+The user may choose the time frame to be considered for the statistic by entering the start date and end date.
 
 Table Example:
 [width="50%"]
 |==========================
-|Category       |Total Amount   |Entries    |Percentage
-|FOOD           |$302           |38         |13.12%
-|TRANSPORT      |$205           |4          |8.90%
-|SHOPPING       |$1702          |8          |73.96%
-|WORK           |$52            |1          |2.25%
-|OTHERS         |$40            |1          |1.92
-|Total          |$2301          |52         |1.73%
+|Category       |Amount Spent ($)   |Entry Count   |Percentage(%)
+|FOOD           |302                |38             |13.12
+|TRANSPORT      |205                |4              |8.90
+|SHOPPING       |1702               |8              |73.96
+|WORK           |52                 |1              |2.25
+|OTHERS         |40                 |1              |1.92
+|Total          |2301               |52             |100
 |==========================
 
 
@@ -517,6 +515,7 @@ to END_DATE
 * If START_DATE is specified but END_DATE is empty, statistics will be calculated from START_DATE to one month
  after START_DATE
 * If both START_DATE and END_DATE are empty, statistics will be calculated from one month before to the current date
+* START_DATE should be before END_DATE
 ====
 
 Examples:
@@ -525,67 +524,80 @@ Examples:
 * `stats sd/12-02-2018`
 * `stats sd/01-01-2019 ed/01-02-2019`
 
-=== Viewing Statistics - Trend: `statstrend [Coming in v1.4]`
+=== Viewing Statistics - Trend: `statstrend`
 Produces statistics regarding the user's finance over a period of time to show trends. +
 The statistics include the total amount of money spent on different categories and the frequency of entries in those categories. +
-The user must choose the time frame to be considered for the statistic by entering the start date and end date. +
-The user may also choose to display only the results in a specific category. +
-The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table.
+The user must choose the time frame to be considered for the statistic by entering the start date and end date.
 
-Table Example:
-[width="50%"]
+Table Example: +
+Amount ($):
+[width="100%"]
 |==========================
-|Month starting:    |01-01-2019     |01-02-2019     |01-03-2019
-|FOOD               |A:$302, E:38   |A:$23,  E:1   |A:$782,  E:64
-|TRANSPORT          |A:$123, E:2    |A:$0,   E:0   |A:$140,  E:2
-|SHOPPING           |A:$324, E:1    |A:$0,   E:0   |A:$200,  E:1
-|WORK               |A:$0,   E:0    |A:$401, E:2   |A:$0,    E:0
-|TOTAL              |A:$749, E:41   |A:$424, E:3   |A:$1122, E:67
+|Period Starting (M)    |01-01-2019     |01-02-2019     |01-03-2019 till End
+|FOOD                   |302            |23             |782
+|TRANSPORT              |123            |0              |140
+|SHOPPING               |324            |0              |$200
+|WORK                   |0              |401            |0
+|TOTAL                  |749            |424            |1122
+|==========================
+Count:
+[width="100%"]
+|==========================
+|Period Starting (M)    |01-01-2019     |01-02-2019     |01-03-2019 till End
+|FOOD                   |20             |2              |30
+|TRANSPORT              |2              |0              |3
+|SHOPPING               |3              |0              |1
+|WORK                   |0              |3              |0
+|TOTAL                  |25             |5              |34
 |==========================
 
-Format: `statstrend sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
+Format: `statstrend sd/START_DATE ed/END_DATE f/FREQUENCY`
 
 [NOTE]
 ====
-If VISUAL_REPRESENTATION field is left empty, vr options will be displayed.
+* START_DATE should be before END_DATE
 ====
 
 Examples:
 
-* `statstrend sd/01-01-2018 ed/01-01-2018 p/month`
-* `statstrend sd/01-01-2018 ed/01-01-2018 p/14`
-* `statstrend sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
+* `statstrend sd/01-01-2018 ed/01-01-2019 f/M`
+* `statstrend sd/01-01-2018 ed/01-02-2018 f/W`
 
-=== Viewing Statistics - Compare: `statscompare [Coming in v1.4]`
-Produces and displays statistics regarding the user's finance for 2 to 4 time periods.
-The statistics include the total amount of money spent on different categories and the frequency of entries in those categories. +
-The user must specify at least 2 and not more than 4 time periods by specifying the starting dates and the desired period length. +
-The user may also choose to display only the results in a specific category. +
-The user may also choose the way he wants the information expressed. Options: Pie Chart, Bar Chart, Table.
+=== Viewing Statistics - Compare: `statscompare`
+Produces and displays statistics regarding the user's finance for 2 time periods.
+The statistics include the total amount of money spent on different categories, the frequency of entries, and the percentage composition of the total. +
+The user must specify 2 time periods by specifying the starting dates and the desired period length.
 
-Table Example:
+Table Example: +
+From: 01-01-2020 To: 01-01-2021
 [width="50%"]
 |==========================
-|Fortnight starting:    |01-01-2019     |02-01-2019     |01-03-2019     |13-03-2019
-|FOOD                   |A:$302, E:38   |A:$23,  E:1   |A:$782,  E:64   |A:$23, E:5
-|TRANSPORT              |A:$123, E:2    |A:$0,   E:0   |A:$140,  E:2    |A:$0,  E:0
-|SHOPPING               |A:$324, E:1    |A:$0,   E:0   |A:$200,  E:1    |A:$0,  E:0
-|WORK                   |A:$0,   E:0    |A:$401, E:2   |A:$0,    E:0    |A:$0,  E:0
-|TOTAL                  |A:$749, E:41   |A:$424, E:3   |A:$1122, E:67   |A:$23, E:5
+|Category       |Amount Spent ($)   |Entrie Count   |Percentage(%)
+|FOOD           |302                |38             |13.12
+|TRANSPORT      |205                |4              |8.90
+|SHOPPING       |1702               |8              |73.96
+|WORK           |52                 |1              |2.25
+|OTHERS         |40                 |1              |1.92
+|Total          |2301               |52             |100
+|==========================
+From: 02-02-2019 To: 02-02-2020
+[width="50%"]
+|==========================
+|Category       |Amount Spent ($)   |Entrie Count   |Percentage(%)
+|FOOD           |508                |20             |27.16
+|TRANSPORT      |722                |8              |30.88
+|SHOPPING       |1003               |32             |42.89
+|WORK           |85                 |2              |3.63
+|OTHERS         |20                 |1              |0.85
+|Total          |2338               |63             |100
 |==========================
 
-Format: `statscompare d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD [vr/VISUAL_REPRESENTATION] [c/CATEGORY]`
-
-[NOTE]
-====
-If VISUAL_REPRESENTATION field is left empty, vr options will be displayed
-====
+Format: `statscompare sd1/START_DATE_1 sd2/START_DATE_2 f/FREQUENCY`
 
 Examples:
 
-* `statscompare d1/01-01-2019 d2/01-02-2019 p/month`
-* `statscompare d1/01-01-2019 d2/07-01-2019 d3/07-01-2019 d4/13-02-2019 p/7`
-* `statscompare d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food`
+* `statscompare sd1/01-01-2019 sd2/01-02-2019 f/M`
+* `statscompare sd1/01-01-2018 sd2/01-01-2018 f/D`
 // end::stats[]
 
 === Listing entered commands : `history`
@@ -688,6 +700,10 @@ Examples:
  `Please enter the start date of the recurring to be updated (optional):` +
  `Please enter the remark of the expense to be updated (optional):`
 
+=== Statistics Visual Representation
+Allows the user to view their statistics in Graphical or Pictorial formats +
+e.g. Pie Chart, Bar Chart
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -738,11 +754,9 @@ e.g. `deleterecurring 2` +
 * *Converting outstanding expenses from all recurrings* : `convertrecurring` +
 e.g. `convertrecurring` +
 * *Clear recurrings* : `clearrecurring`
-* *Viewing statistics* : `stats [sd/START_DATE] [ed/END_DATE] [c/CATEGORY]` +
-e.g. `stats c/frequency sd/01-01-2019 ed/01-02-2019`
-* *Viewing Macro Statistic Trend* [Coming in v1.4]: `stats_mt sd/START_DATE ed/END_DATE p/PERIOD [vr/VISUAL_REPRESENTATION]
-[c/CATEGORY]` +
-e.g. `stats_mt sd/01-01-2018 ed/01-01-2018 p/month vr/line c/food`
-* *Viewing Macro Statistic Comparison* [Coming in v1.4]: `stats_mc d1/DATE_1 d2/DATE_2 [d#/DATE#] p/PERIOD
-[vr/VISUAL_REPRESENTATION] [c/CATEGORY]` +
-e.g. `stats_mc d1/01-01-2018 d2/01-01-2018 p/month vr/pie c/food`
+* *Viewing Statistics - Summary:* `stats [sd/START_DATE] [ed/END_DATE]` +
+e.g. `stats sd/01-01-2019 ed/01-02-2019`
+* *Viewing Statistics - Compare:* `statscompare sd1/START_DATE_1 sd2/START_DATE_2 f/FREQUENCY`
+e.g. `statscompare sd1/01-01-2019 sd2/01-02-2019 f/M`
+* *Viewing Statistics - Trend:* `statstrend sd/START_DATE ed/END_DATE f/PERIOD`
+e.g. `statstrend sd/01-01-2018 ed/01-01-2019 f/M`

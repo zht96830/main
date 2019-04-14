@@ -22,8 +22,8 @@ public class StatsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Calculates statistics between the Start Date and End Date "
             + "Parameters: "
-            + "[" + PREFIX_STARTDATE + "START DATE] "
-            + "[" + PREFIX_ENDDATE + "END DATE] "
+            + "[" + PREFIX_STARTDATE + "START_DATE] "
+            + "[" + PREFIX_ENDDATE + "END_DATE] "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STARTDATE + "13-01-2000 "
             + PREFIX_ENDDATE + "13-02-2000 ";

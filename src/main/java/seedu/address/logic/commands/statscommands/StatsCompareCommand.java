@@ -24,8 +24,8 @@ public class StatsCompareCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Compares statistics between two time ranges."
             + "Parameters: "
-            + PREFIX_STARTDATE1 + "START DATE 1 "
-            + PREFIX_STARTDATE2 + "START DATE 2 "
+            + PREFIX_STARTDATE1 + "START_DATE_1 "
+            + PREFIX_STARTDATE2 + "START_DATE_2 "
             + PREFIX_FREQUENCY + "FREQUENCY "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STARTDATE1 + "13-01-2000 "
