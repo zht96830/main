@@ -1,5 +1,7 @@
 package seedu.address.model.statistics;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -7,8 +9,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
 import seedu.address.model.expense.Expense;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Statistics
