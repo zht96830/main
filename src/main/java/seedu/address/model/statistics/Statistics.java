@@ -180,7 +180,8 @@ public class Statistics {
         ArrayList<String> header = new ArrayList<>();
         header.add("Period Starting (" + frequency.toString() + ") :");
 
-        while (dateTracker.compareTo(endDate) < 0) {
+        int intervalCount = 0;
+        while (dateTracker.compareTo(endDate) < 0 && intervalCount < 50) {
             currentDate = dateTracker;
             header.add(currentDate.toString());
             switch (frequency.toString()) {
@@ -200,6 +201,7 @@ public class Statistics {
 
             ArrayList<ArrayList<Expense>> onePeriodData = extractRelevantExpenses(currentDate, dateTracker);
             data.add(onePeriodData);
+            intervalCount++;
         }
         int index = header.size();
         String temp = header.remove(index - 1);
@@ -216,7 +218,13 @@ public class Statistics {
 
         this.html = "Statistics Trend <br>\n"
                 + "From: " + startDate.toString() + " To: " + endDate.toString()
-                + "Period Length: " + frequency.toString() + "<br>\n";
+                + " Period Length: " + frequency.toString() + "<br>\n";
+
+        System.out.println(intervalCount);
+        if (intervalCount == 50) {
+            this.html = html + "<br>\n"
+                + "Maximum periods of 50 reached! <br>";
+        }
 
         this.html = html + "<br>"
                 + "Amount Spent ($): <br>"
@@ -224,6 +232,8 @@ public class Statistics {
                 + "<br>"
                 + "Counts: <br>"
                 + tableCountString;
+
+
     }
 
     /**

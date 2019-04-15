@@ -22,7 +22,7 @@ public class StatsCompareCommand extends Command {
     public static final String COMMAND_WORD_SHORTCUT = "stc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Compares statistics between two time ranges."
+            + ": Compares statistics between two time ranges. "
             + "Parameters: "
             + PREFIX_STARTDATE1 + "START_DATE_1 "
             + PREFIX_STARTDATE2 + "START_DATE_2 "
