@@ -37,6 +37,7 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 *** Update logic component in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/108[108], https://github.com/CS2103-AY1819S2-W15-2/main/pull/110[110])
 *** Update commands to work for the Financial Tracker (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/83[83], https://githubcom/CS2103-AY1819S2-W15-2/main/pull/88[88], https://github.com/CS2103-AY1819S2-W15-2/main/pull/96[96],...)
 *** Added the implementation of statistics in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/225[225], https://github.com/CS2103-AY1819S2-W15-2/main/pull/281[281])
+*** Added test cases for Statistics class (https://github.com/CS2103-AY1819S2-W15-2/main/pull/287[287])
 
 == Contributions to the User Guide
 
