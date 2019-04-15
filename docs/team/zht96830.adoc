@@ -19,7 +19,7 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 ** Justification: This feature improves the product significantly because a user can now understand their spending habits at a glance
 ** Highlights: This feature allows a user to see what percentage of their expenses are spent on a particular category. The user can also quickly see how often they are spending through the expense counts.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=zht96&sort=displayName&since=2019-02-10&until=2019-03-26&timeframe=day&reverse=false&repoSort=true[code collated by reposense]]
+* *Code contributed*: https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=zht968&sort=displayName&since=2019-02-10&until=2019-04-15&timeframe=day&reverse=false&repoSort=true[code collated by reposense]]
 
 * *Other contributions*:
 
