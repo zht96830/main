@@ -15,11 +15,11 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to manage recurring expenses in the finance tracker application*
-** What it does: allows the user to add, edit, delete recurrings, as well as easily convert these recurrings into an expense at appropriate times. Integrated to work with current undo/redo, history and list commands.
+** What it does: allows the user to add, edit, delete recurring expenses, as well as easily convert these recurring expenses into expenses at appropriate times. Integrated to work with current undo/redo, history and list commands.
 ** Justification: This feature improves the product significantly because a user can now easily and conveniently keep track of their recurring expenses, expenses that are periodic and have a fixed frequency and a defined number of occurrences. Examples of these recurring expenses are bills or subscription fees.
-** Highlights: This enhancement is a core feature of any typical finance tracker. It required adjustments and integration with the existing model, logic, UI components and builds the foundation for any future enhancements involving recurring expenses.
+** Highlights: Recurring expenses form a significant portion of a user's expenses and thus tracking recurring expenses is a core feature of a finance tracker. It required adjustments and integration with the existing model, logic, UI components and builds the foundation for any future enhancements involving recurring expenses.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=jhocx&sort=displayName&since=2019-02-10&until=2019-03-26&timeframe=day&reverse=false&repoSort=true[code collated by reposense]]
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=jhocx&sort=displayName&since=2019-02-10&until=2019-04-10&timeframe=day&reverse=false&repoSort=true[code collated by reposense]]
 
 * *Other contributions*:
 
@@ -29,8 +29,11 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 *** In charge of code in storage component
 ** Documentation:
 *** Update storage component in Developer's Guide
-*** Added the implementation of recurrings in Developer's Guide
-*** In charge of UserGuide in general.
+*** Added the implementation of recurrings in Developer's Guide (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/227[#227])
+*** In charge of UserGuide in general. (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/227[#227])
+** Enhancement to existing features:
+*** Refactored code to transform from AddressBook4 to FinanceTracker. (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/69/[#69])
+*** Refactored code in storage to transform from AddressBook4 to FinanceTracker. (Pull Request https://github.com/CS2103-AY1819S2-W15-2/main/pull/66[#66])
 
 == Contributions to the User Guide
 
