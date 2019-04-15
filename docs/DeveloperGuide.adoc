@@ -412,7 +412,7 @@ image::ConvertRecurringSequenceDiagram.png[width="800"]
 
 6. If the expense's date is before or equals to the current date, and after the `lastConvertedDate`, this recurring expense will have to be converted into an expense and added into the FinanceTracker. This is done by calling Model#addExpense(recurringListOfExpenses.get(j)).
 
-7. This is done for each expense of the recurring. After the iteration, the recurring's `lastConvertedDate` is set to the current date.
+7. This is done for every expense that is supposed to be added by this recurring to determine which has to be added into the expense list. After the iteration, the recurring's `lastConvertedDate` is set to the current date.
 
 8. This is done for each recurring in the list.
 

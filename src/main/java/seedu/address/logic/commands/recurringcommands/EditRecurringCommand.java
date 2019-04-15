@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECURRING;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -98,6 +99,8 @@ public class EditRecurringCommand extends Command {
                                                    EditRecurringDescriptor editRecurringDescriptor) {
         assert recurringToEdit != null;
 
+        LocalDate lastConvertedDate = recurringToEdit.getLastConvertedDate();
+
         Name updatedName = editRecurringDescriptor.getName().orElse(recurringToEdit.getName());
         Amount updatedAmount = editRecurringDescriptor.getAmount().orElse(recurringToEdit.getAmount());
         Category updatedCategory = editRecurringDescriptor.getCategory().orElse(recurringToEdit.getCategory());
@@ -107,7 +110,7 @@ public class EditRecurringCommand extends Command {
         Occurrence updatedOccurrence = editRecurringDescriptor.getOccurrence().orElse(recurringToEdit.getOccurrence());
 
         return new Recurring(updatedName, updatedAmount, updatedDate, updatedCategory, updatedRemarks,
-                updatedFrequency, updatedOccurrence);
+                updatedFrequency, updatedOccurrence, lastConvertedDate);
     }
 
     @Override

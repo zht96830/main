@@ -55,6 +55,35 @@ public class Recurring extends Expense {
     }
 
     /**
+     * Initializes a newly created Recurring object that contains the compulsory fields and the lastConvertedDate.
+     */
+    public Recurring(Name name, Amount amount, Date date, Category category, String remarks, Frequency frequency,
+                     Occurrence occurrence, LocalDate lastConvertedDate) {
+        super(name, amount, date, category, remarks);
+        requireAllNonNull(frequency, occurrence);
+        this.frequency = frequency;
+        this.occurrence = occurrence;
+        this.lastConvertedDate = lastConvertedDate;
+        this.recurringListOfExpenses = new ArrayList<>(occurrence.value);
+        for (int i = 0; i < occurrence.value; i++) {
+            Name newName = new Name(name.name + " (Recurring)");
+
+            Date newDate = new Date(date);
+            if (frequency.value.equals("D")) {
+                newDate.setLocalDate(date.getLocalDate().plusDays(i));
+            } else if (frequency.value.equals("M")) {
+                newDate.setLocalDate(date.getLocalDate().plusMonths(i));
+            } else if (frequency.value.equals("Y")) {
+                newDate.setLocalDate(date.getLocalDate().plusYears(i));
+            }
+
+            Expense toAdd = new Expense(newName, amount, newDate, category, remarks);
+            //System.out.println(toAdd);
+            this.recurringListOfExpenses.add(toAdd);
+        }
+    }
+
+    /**
      * Initializes a Recurring object from Jackson.
      */
     public Recurring(Name name, Amount amount, Date date, Category category, String remarks, Frequency frequency,
