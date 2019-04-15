@@ -573,6 +573,7 @@ Format: `statstrend sd/START_DATE ed/END_DATE f/FREQUENCY`
 [NOTE]
 ====
 * START_DATE should be before END_DATE
+* A maximum of 10 periods will be displayed. Please enter different variables to see Statistics that are truncated.
 * The statistics displayed are only correct at the time of command execution. If any commands which modify the state of the Financial Tracker are added, the command has to be activated again for accurate statistics to be shown
 ====
 

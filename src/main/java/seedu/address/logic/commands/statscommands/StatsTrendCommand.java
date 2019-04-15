@@ -22,7 +22,7 @@ public class StatsTrendCommand extends Command {
     public static final String COMMAND_WORD_SHORTCUT = "stt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows statistics trends for regular periods between the Start Date and End Date "
+            + ": Shows statistics trends for regular periods between the Start Date and End Date. "
             + "Parameters: "
             + PREFIX_STARTDATE + "START_DATE "
             + PREFIX_ENDDATE + "END_DATE "

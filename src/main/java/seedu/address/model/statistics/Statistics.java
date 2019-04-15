@@ -1,13 +1,15 @@
 package seedu.address.model.statistics;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javafx.collections.transformation.FilteredList;
-import seedu.address.model.attributes.Category;
 import seedu.address.model.attributes.Date;
 import seedu.address.model.attributes.Frequency;
 import seedu.address.model.expense.Expense;
+
 /**
  * Statistics
  */
@@ -26,8 +28,6 @@ public class Statistics {
     public static final int OTHERS = 8;
     public static final int ALL = 9;
 
-
-    protected Category category;
     protected String html;
     protected FilteredList<Expense> statsExpenses;
 
@@ -36,6 +36,7 @@ public class Statistics {
      * statsExpense must be present and not null.
      */
     public Statistics(FilteredList<Expense> statsExpenses) {
+        requireNonNull(statsExpenses);
         this.statsExpenses = statsExpenses;
     }
 
@@ -71,6 +72,8 @@ public class Statistics {
      * All parameters must be present and not null.
      */
     private void basicStats(Date startDate, Date endDate) {
+        requireNonNull(startDate);
+        requireNonNull(endDate);
 
         ArrayList<ArrayList<Expense>> data = extractRelevantExpenses(startDate, endDate);
         ArrayList<ArrayList<Object>> tableData = generateSummary(data);
@@ -97,6 +100,10 @@ public class Statistics {
      * All parameters must be present and not null.
      */
     private void compareStats(Date date1, Date date2, Frequency frequency) {
+        requireNonNull(date1);
+        requireNonNull(date2);
+        requireNonNull(frequency);
+
         Date startDate1 = date1;
         Date startDate2 = date2;
 
@@ -161,6 +168,9 @@ public class Statistics {
      * All parameters must be present and not null.
      */
     private void trendStats(Date startDate, Date endDate, Frequency frequency) {
+        requireNonNull(startDate);
+        requireNonNull(endDate);
+        requireNonNull(frequency);
 
         ArrayList<ArrayList<ArrayList<Expense>>> data = new ArrayList<>();
         Date dateTracker = startDate;
@@ -170,7 +180,8 @@ public class Statistics {
         ArrayList<String> header = new ArrayList<>();
         header.add("Period Starting (" + frequency.toString() + ") :");
 
-        while (dateTracker.compareTo(endDate) < 0) {
+        int intervalCount = 0;
+        while (dateTracker.compareTo(endDate) < 0 && intervalCount < 10) {
             currentDate = dateTracker;
             header.add(currentDate.toString());
             switch (frequency.toString()) {
@@ -190,6 +201,7 @@ public class Statistics {
 
             ArrayList<ArrayList<Expense>> onePeriodData = extractRelevantExpenses(currentDate, dateTracker);
             data.add(onePeriodData);
+            intervalCount++;
         }
         int index = header.size();
         String temp = header.remove(index - 1);
@@ -206,7 +218,12 @@ public class Statistics {
 
         this.html = "Statistics Trend <br>\n"
                 + "From: " + startDate.toString() + " To: " + endDate.toString()
-                + "Period Length: " + frequency.toString() + "<br>\n";
+                + " Period Length: " + frequency.toString() + "<br>\n";
+
+        if (intervalCount == 10) {
+            this.html = html + "<br>\n"
+                + "Maximum periods of 10 reached! <br>";
+        }
 
         this.html = html + "<br>"
                 + "Amount Spent ($): <br>"
@@ -352,6 +369,8 @@ public class Statistics {
      * Converts String Category into Int Category
      */
     protected int convertCategoryToInteger(String categoryInString) {
+        requireNonNull(categoryInString);
+
         switch (categoryInString) {
         case "FOOD":
             return FOOD;
@@ -382,6 +401,7 @@ public class Statistics {
      * Converts Int Category into String Category
      */
     protected String convertIntegerCategoryToString(int categoryInInteger) {
+        requireNonNull(categoryInInteger);
         switch (categoryInInteger) {
         case FOOD:
             return "FOOD";
@@ -412,6 +432,9 @@ public class Statistics {
      * Builds table for display
      */
     private String htmlTableBuilder(ArrayList<String> header, ArrayList<ArrayList<String>> data) {
+        requireNonNull(header);
+        requireNonNull(data);
+
         String table;
         table = "<table style=\"width:100%\">\n";
 
