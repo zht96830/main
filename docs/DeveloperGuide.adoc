@@ -587,9 +587,9 @@ This creates a new `AddBudgetCommandParser` object which will help parse the inp
 
 4. The `LogicManager` calls `AddBudgetCommand#execute()`, which will call `Model#updateFilteredBudgetList(Predicate<Budget>)` to update the list of budgets stored in the finance tracker.
 
-7. `Model#addBudget(budget)` is then called to add the `budget` into the budget list.
+5. `Model#addBudget(budget)` is then called to add the `budget` into the budget list.
 
-8. The command result is then returned to the `LogicManager` which then returns it to the `UI` where the changes are then reflected on the user interface.
+6. The command result is then returned to the `LogicManager` which then returns it to the `UI` where the changes are then reflected on the user interface.
 
 ===== Updating of budgets:
 * When a new budget is added, the model checks the expense list for any expenses of that category which fall within the time frame of the added budget
@@ -825,6 +825,9 @@ Suggested path for new programmers:
 *Value proposition*: manage finances faster than a typical mouse/GUI driven app
 
 [appendix]
+
+// end::product[]
+
 == User Stories
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
