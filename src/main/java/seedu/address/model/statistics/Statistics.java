@@ -222,7 +222,7 @@ public class Statistics {
 
         if (intervalCount == 10) {
             this.html = html + "<br>\n"
-                + "Maximum periods of 10 reached! <br>";
+                + "Maximum periods of 10 reached! Only the first 10 periods will be shown. <br>";
         }
 
         this.html = html + "<br>"
