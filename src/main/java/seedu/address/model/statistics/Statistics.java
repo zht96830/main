@@ -181,7 +181,7 @@ public class Statistics {
         header.add("Period Starting (" + frequency.toString() + ") :");
 
         int intervalCount = 0;
-        while (dateTracker.compareTo(endDate) < 0 && intervalCount < 50) {
+        while (dateTracker.compareTo(endDate) < 0 && intervalCount < 10) {
             currentDate = dateTracker;
             header.add(currentDate.toString());
             switch (frequency.toString()) {
@@ -220,10 +220,9 @@ public class Statistics {
                 + "From: " + startDate.toString() + " To: " + endDate.toString()
                 + " Period Length: " + frequency.toString() + "<br>\n";
 
-        System.out.println(intervalCount);
-        if (intervalCount == 50) {
+        if (intervalCount == 10) {
             this.html = html + "<br>\n"
-                + "Maximum periods of 50 reached! <br>";
+                + "Maximum periods of 10 reached! <br>";
         }
 
         this.html = html + "<br>"
@@ -232,8 +231,6 @@ public class Statistics {
                 + "<br>"
                 + "Counts: <br>"
                 + tableCountString;
-
-
     }
 
     /**
