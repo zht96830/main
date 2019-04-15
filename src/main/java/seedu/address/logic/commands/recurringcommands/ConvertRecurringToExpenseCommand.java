@@ -43,7 +43,6 @@ public class ConvertRecurringToExpenseCommand extends Command {
         for (int i = 0; i < lastShownRecurringList.size(); i++) {
             Recurring recurring = lastShownRecurringList.get(i);
             LocalDate lastConvertedDate = recurring.getLastConvertedDate();
-            // If the recurring's lastConvertedDate is before today, check if it has outstanding expenses to be added.
             if (lastConvertedDate.isBefore(LocalDate.now())) {
                 ArrayList<Expense> recurringListOfExpenses = recurring.getRecurringListOfExpenses();
                 for (int j = 0; j < recurringListOfExpenses.size(); j++) {
