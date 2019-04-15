@@ -19,7 +19,7 @@ Personal Finance Tracker is a desktop finance tracker application used for track
 ** Justification: This feature improves the product significantly because a user can now easily and conveniently keep track of their debts owed to other entities.
 ** Highlights: This enhancement is a core feature of any typical finance tracker. It required adjustments and integration with the existing model, logic, UI components and builds the foundation for any future enhancements involving debts.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=gohyinhao&sort=displayName&since=2019-02-10&until=2019-04-10&timeframe=day&reverse=false&repoSort=true[code collated by reposense]]
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=gohyinhao&sort=displayName&since=2019-02-10&until=2019-04-16&timeframe=day&reverse=false&repoSort=true[code collated by reposense]]
 
 * *Other contributions*:
 
